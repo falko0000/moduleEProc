@@ -1,0 +1,9 @@
+Bundle-Name: SAPPServices-api
+Bundle-SymbolicName: tj.sapp.services.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.sapp.services.exception,\
+	tj.sapp.services.model,\
+	tj.sapp.services.service,\
+	tj.sapp.services.service.persistence
+-includeresource: META-INF/service.xml=../SAPPServices-service/service.xml

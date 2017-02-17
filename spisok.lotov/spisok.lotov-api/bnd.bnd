@@ -1,0 +1,9 @@
+Bundle-Name: spisok.lotov-api
+Bundle-SymbolicName: tj.spisok.lotov.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.spisok.lotov.exception,\
+	tj.spisok.lotov.model,\
+	tj.spisok.lotov.service,\
+	tj.spisok.lotov.service.persistence
+-includeresource: META-INF/service.xml=../spisok.lotov-service/service.xml

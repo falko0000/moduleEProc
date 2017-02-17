@@ -1,0 +1,5 @@
+Bundle-Name: SAPPServices-service
+Bundle-SymbolicName: tj.sapp.services.service
+Bundle-Version: 1.0.0
+Liferay-Require-SchemaVersion: 1.0.0
+Liferay-Service: true

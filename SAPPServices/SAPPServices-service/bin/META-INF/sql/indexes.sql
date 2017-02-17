@@ -1,0 +1,1 @@
+create index IX_49032711 on sapp.rajony (nazvanie[$COLUMN_LENGTH:75$]);

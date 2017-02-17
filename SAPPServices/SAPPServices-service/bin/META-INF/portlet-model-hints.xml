@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.sapp.services.model.OKGZ">
+		<field name="okgz_id" type="long" />
+		<field name="kod" type="String" />
+		<field name="naimenovanie" type="String" />
+	</model>
+	<model name="tj.sapp.services.model.Rajony">
+		<field name="rajony_id" type="long" />
+		<field name="oblast_id" type="long" />
+		<field name="nazvanie" type="String" />
+		<field name="kod_vbk" type="long" />
+	</model>
+	<model name="tj.sapp.services.model.VBK">
+		<field name="id_" type="long" />
+		<field name="kod" type="String" />
+		<field name="nazvanie_tj" type="String" />
+		<field name="nazvanie_ru" type="String" />
+	</model>
+	<model name="tj.sapp.services.model.VW_Izvewenija">
+		<field name="izvewenija_id" type="long" />
+		<field name="sostojanie_id" type="long" />
+		<field name="status_id" type="long" />
+		<field name="tip_izvewenija_id" type="long" />
+		<field name="organizacija_id" type="long" />
+		<field name="vyshestojawaja_organizacija_id" type="long" />
+		<field name="naimenovanie" type="String" />
+		<field name="sozdal" type="long" />
+		<field name="izmenil" type="long" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="data_izmenenija" type="Date" />
+		<field name="kod_id" type="long" />
+		<field name="put_a" type="int" />
+		<field name="put_b" type="int" />
+		<field name="put_c" type="String" />
+		<field name="kontaktnoe_lico" type="String" />
+		<field name="je_pochta" type="String" />
+		<field name="kontaktnyj_telefon" type="String" />
+		<field name="data_publikacii" type="Date" />
+		<field name="data_podvedenija_itogov" type="Date" />
+		<field name="po_istecheniju_dnej" type="int" />
+	</model>
+</model-hints>

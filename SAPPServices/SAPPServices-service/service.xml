@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.sapp.services">
+	<namespace>SAPPServices</namespace>
+    <entity human-name="Rajony" name="Rajony" table="sapp.rajony" local-service="true">
+        <column id-param="seq_rajony" id-type="sequence" name="rajony_id" primary="true" type="long"></column>
+        <column name="oblast_id" type="long"></column>
+        <column name="nazvanie" type="String"></column>
+        <column name="kod_vbk" type="long"></column>
+        <finder name="All" return-type="Collection">
+            <finder-column name="nazvanie"></finder-column>
+        </finder>
+    </entity>
+    <entity name="VBK" table="klassifikatory.vbk" local-service="true">
+        <column name="id_" type="long" primary="true"></column>
+        <column name="kod" type="String"></column>
+        <column name="nazvanie_tj" type="String"></column>
+        <column name="nazvanie_ru" type="String"></column>
+    </entity>
+    <entity name="VW_Izvewenija" local-service="true"
+    	table="sapp.vw_izvewenija">
+
+    	<!-- PK fields -->
+
+    	<column name="izvewenija_id" type="long" primary="true" id-type="sequence" id-param="seq_izvewenija"></column>
+
+    	<!-- Group instance -->
+
+    	<column name="sostojanie_id" type="long"></column>
+
+    	<!-- Audit fields -->
+
+    	<column name="status_id" type="long"></column>
+    	<column name="tip_izvewenija_id" type="long"></column>
+    	<column name="organizacija_id" type="long"></column>
+    	<column name="vyshestojawaja_organizacija_id" type="long"></column>
+    	<column name="naimenovanie" type="String"></column>
+        <column name="sozdal" type="long"></column>
+        <column name="izmenil" type="long"></column>
+        <column name="data_sozdanija" type="Date"></column>
+        <column name="data_izmenenija" type="Date"></column>
+        <column name="kod_id" type="long"></column>
+        <column name="put_a" type="int"></column>
+        <column name="put_b" type="int"></column>
+        <column name="put_c" type="String"></column>
+        <column name="kontaktnoe_lico" type="String"></column>
+        <column name="je_pochta" type="String"></column>
+        <column name="kontaktnyj_telefon" type="String"></column>
+        <column name="data_publikacii" type="Date"></column>
+        <column name="data_podvedenija_itogov" type="Date"></column>
+        <column name="po_istecheniju_dnej" type="int"></column>
+    </entity>
+    <entity name="OKGZ" local-service="true" table="sapp.okgz">
+        <column name="okgz_id" type="long" primary="true"></column>
+        <column name="kod" type="String"></column>
+        <column name="naimenovanie" type="String"></column>
+    </entity>
+</service-builder>
