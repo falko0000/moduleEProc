@@ -8,5 +8,16 @@
 %>
 
 <h1>Bid info:</h1>
-<br> Name: ${izvewenije.naimenovanie}
+ <aui:row>
+  <aui:col cssClass="col-md-4">
+   <span>
+    Организатор
+   </span>
+ </aui:col>
+ <aui:col cssClass="col-md-8">
+  <span>
+  <%=izvewenije.getNaimenovanie() %>
+  </span>
+ </aui:col>
+</aui:row> 
 

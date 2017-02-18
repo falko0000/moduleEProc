@@ -4,7 +4,7 @@
     PortletURL viewUrl = renderResponse.createRenderURL();
 	viewUrl.setParameter("mvcPath", EQuotationConstants.VIEW_TEMPLATE);
 	
-	SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
+
 
 %>	
 <liferay-ui:search-container
@@ -40,19 +40,17 @@
 				 	orderable="<%= true %>" 
 				 	href="${rowURL}"
 				 />
-				 <liferay-ui:search-container-column-text 
-				 	property="data_publikacii" 
-				 	name="date_publish"  
-				 	value=""
-				 	orderable="<%= true %>" 
-				 	href="${rowURL}"
-				 />
-				 <liferay-ui:search-container-column-text
-				 	property="data_podvedenija_itogov" 
-				 	name="date_final"  
-				 	orderable="<%= true %>" 
-				 	href="${rowURL}"
-				 />						 				 
+				 <liferay-ui:search-container-column-text name="date_publish" >
+				 <fmt:formatDate value="<%= vwizvewenija.getData_publikacii() %>"
+                                  pattern="dd/MM/yyyy H:mm" />
+
+				 </liferay-ui:search-container-column-text>
+				
+				   <liferay-ui:search-container-column-text name="date_final"  >
+				    <fmt:formatDate value="<%= vwizvewenija.getData_podvedenija_itogov() %>"
+                                  pattern="dd/MM/yyyy H:mm" />
+				   </liferay-ui:search-container-column-text>						 				 
+				
 				 <liferay-ui:search-container-column-jsp 
 				 	valign="middle"
 				 	name="actions_bid"  

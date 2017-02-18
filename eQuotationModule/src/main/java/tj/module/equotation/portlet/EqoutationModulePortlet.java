@@ -8,6 +8,8 @@ import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import tj.module.equotation.constants.EQuotationConstants;
+import tj.sapp.services.model.VW_Izvewenija;
+
 import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -65,7 +67,8 @@ public class EqoutationModulePortlet extends MVCPortlet {
 			String naimenovanie = ParamUtil.getString(actionRequest, "naimenovanie");
 			// get the companyId
 			long companyId = PortalUtil.getCompanyId(actionRequest);
-
+		//	VW_Izvewenija t= new VW_Izvewenija();
+		
 			// get the current User's name
 			User currentUser = PortalUtil.getUser(actionRequest); //.getUser(actionRequest);
 			String currentName = currentUser.getFullName();
