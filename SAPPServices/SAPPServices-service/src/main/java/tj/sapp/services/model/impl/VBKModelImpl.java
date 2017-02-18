@@ -61,7 +61,7 @@ public class VBKModelImpl extends BaseModelImpl<VBK> implements VBKModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a v b k model instance should use the {@link VBK} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a vbk model instance should use the {@link VBK} interface instead.
 	 */
 	public static final String TABLE_NAME = "klassifikatory.vbk";
 	public static final Object[][] TABLE_COLUMNS = {

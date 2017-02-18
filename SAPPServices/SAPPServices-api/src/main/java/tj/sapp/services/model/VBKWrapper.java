@@ -137,9 +137,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Returns the kod of this v b k.
+	* Returns the kod of this vbk.
 	*
-	* @return the kod of this v b k
+	* @return the kod of this vbk
 	*/
 	@Override
 	public java.lang.String getKod() {
@@ -147,9 +147,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Returns the nazvanie_ru of this v b k.
+	* Returns the nazvanie_ru of this vbk.
 	*
-	* @return the nazvanie_ru of this v b k
+	* @return the nazvanie_ru of this vbk
 	*/
 	@Override
 	public java.lang.String getNazvanie_ru() {
@@ -157,9 +157,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Returns the nazvanie_tj of this v b k.
+	* Returns the nazvanie_tj of this vbk.
 	*
-	* @return the nazvanie_tj of this v b k
+	* @return the nazvanie_tj of this vbk
 	*/
 	@Override
 	public java.lang.String getNazvanie_tj() {
@@ -177,9 +177,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Returns the id_ of this v b k.
+	* Returns the id_ of this vbk.
 	*
-	* @return the id_ of this v b k
+	* @return the id_ of this vbk
 	*/
 	@Override
 	public long getId_() {
@@ -187,9 +187,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Returns the primary key of this v b k.
+	* Returns the primary key of this vbk.
 	*
-	* @return the primary key of this v b k
+	* @return the primary key of this vbk
 	*/
 	@Override
 	public long getPrimaryKey() {
@@ -233,9 +233,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Sets the id_ of this v b k.
+	* Sets the id_ of this vbk.
 	*
-	* @param id_ the id_ of this v b k
+	* @param id_ the id_ of this vbk
 	*/
 	@Override
 	public void setId_(long id_) {
@@ -243,9 +243,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Sets the kod of this v b k.
+	* Sets the kod of this vbk.
 	*
-	* @param kod the kod of this v b k
+	* @param kod the kod of this vbk
 	*/
 	@Override
 	public void setKod(java.lang.String kod) {
@@ -253,9 +253,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Sets the nazvanie_ru of this v b k.
+	* Sets the nazvanie_ru of this vbk.
 	*
-	* @param nazvanie_ru the nazvanie_ru of this v b k
+	* @param nazvanie_ru the nazvanie_ru of this vbk
 	*/
 	@Override
 	public void setNazvanie_ru(java.lang.String nazvanie_ru) {
@@ -263,9 +263,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Sets the nazvanie_tj of this v b k.
+	* Sets the nazvanie_tj of this vbk.
 	*
-	* @param nazvanie_tj the nazvanie_tj of this v b k
+	* @param nazvanie_tj the nazvanie_tj of this vbk
 	*/
 	@Override
 	public void setNazvanie_tj(java.lang.String nazvanie_tj) {
@@ -278,9 +278,9 @@ public class VBKWrapper implements VBK, ModelWrapper<VBK> {
 	}
 
 	/**
-	* Sets the primary key of this v b k.
+	* Sets the primary key of this vbk.
 	*
-	* @param primaryKey the primary key of this v b k
+	* @param primaryKey the primary key of this vbk
 	*/
 	@Override
 	public void setPrimaryKey(long primaryKey) {

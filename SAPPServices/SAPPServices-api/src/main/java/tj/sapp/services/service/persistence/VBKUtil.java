@@ -29,7 +29,7 @@ import tj.sapp.services.model.VBK;
 import java.util.List;
 
 /**
- * The persistence utility for the v b k service. This utility wraps {@link tj.sapp.services.service.persistence.impl.VBKPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the vbk service. This utility wraps {@link tj.sapp.services.service.persistence.impl.VBKPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -109,39 +109,39 @@ public class VBKUtil {
 	}
 
 	/**
-	* Caches the v b k in the entity cache if it is enabled.
+	* Caches the vbk in the entity cache if it is enabled.
 	*
-	* @param vbk the v b k
+	* @param vbk the vbk
 	*/
 	public static void cacheResult(VBK vbk) {
 		getPersistence().cacheResult(vbk);
 	}
 
 	/**
-	* Caches the v b ks in the entity cache if it is enabled.
+	* Caches the vbks in the entity cache if it is enabled.
 	*
-	* @param vbks the v b ks
+	* @param vbks the vbks
 	*/
 	public static void cacheResult(List<VBK> vbks) {
 		getPersistence().cacheResult(vbks);
 	}
 
 	/**
-	* Creates a new v b k with the primary key. Does not add the v b k to the database.
+	* Creates a new vbk with the primary key. Does not add the vbk to the database.
 	*
-	* @param id_ the primary key for the new v b k
-	* @return the new v b k
+	* @param id_ the primary key for the new vbk
+	* @return the new vbk
 	*/
 	public static VBK create(long id_) {
 		return getPersistence().create(id_);
 	}
 
 	/**
-	* Removes the v b k with the primary key from the database. Also notifies the appropriate model listeners.
+	* Removes the vbk with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param id_ the primary key of the v b k
-	* @return the v b k that was removed
-	* @throws NoSuchVBKException if a v b k with the primary key could not be found
+	* @param id_ the primary key of the vbk
+	* @return the vbk that was removed
+	* @throws NoSuchVBKException if a vbk with the primary key could not be found
 	*/
 	public static VBK remove(long id_)
 		throws tj.sapp.services.exception.NoSuchVBKException {
@@ -153,11 +153,11 @@ public class VBKUtil {
 	}
 
 	/**
-	* Returns the v b k with the primary key or throws a {@link NoSuchVBKException} if it could not be found.
+	* Returns the vbk with the primary key or throws a {@link NoSuchVBKException} if it could not be found.
 	*
-	* @param id_ the primary key of the v b k
-	* @return the v b k
-	* @throws NoSuchVBKException if a v b k with the primary key could not be found
+	* @param id_ the primary key of the vbk
+	* @return the vbk
+	* @throws NoSuchVBKException if a vbk with the primary key could not be found
 	*/
 	public static VBK findByPrimaryKey(long id_)
 		throws tj.sapp.services.exception.NoSuchVBKException {
@@ -165,10 +165,10 @@ public class VBKUtil {
 	}
 
 	/**
-	* Returns the v b k with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the vbk with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param id_ the primary key of the v b k
-	* @return the v b k, or <code>null</code> if a v b k with the primary key could not be found
+	* @param id_ the primary key of the vbk
+	* @return the vbk, or <code>null</code> if a vbk with the primary key could not be found
 	*/
 	public static VBK fetchByPrimaryKey(long id_) {
 		return getPersistence().fetchByPrimaryKey(id_);
@@ -180,40 +180,40 @@ public class VBKUtil {
 	}
 
 	/**
-	* Returns all the v b ks.
+	* Returns all the vbks.
 	*
-	* @return the v b ks
+	* @return the vbks
 	*/
 	public static List<VBK> findAll() {
 		return getPersistence().findAll();
 	}
 
 	/**
-	* Returns a range of all the v b ks.
+	* Returns a range of all the vbks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of v b ks
-	* @param end the upper bound of the range of v b ks (not inclusive)
-	* @return the range of v b ks
+	* @param start the lower bound of the range of vbks
+	* @param end the upper bound of the range of vbks (not inclusive)
+	* @return the range of vbks
 	*/
 	public static List<VBK> findAll(int start, int end) {
 		return getPersistence().findAll(start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the v b ks.
+	* Returns an ordered range of all the vbks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of v b ks
-	* @param end the upper bound of the range of v b ks (not inclusive)
+	* @param start the lower bound of the range of vbks
+	* @param end the upper bound of the range of vbks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of v b ks
+	* @return the ordered range of vbks
 	*/
 	public static List<VBK> findAll(int start, int end,
 		OrderByComparator<VBK> orderByComparator) {
@@ -221,17 +221,17 @@ public class VBKUtil {
 	}
 
 	/**
-	* Returns an ordered range of all the v b ks.
+	* Returns an ordered range of all the vbks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of v b ks
-	* @param end the upper bound of the range of v b ks (not inclusive)
+	* @param start the lower bound of the range of vbks
+	* @param end the upper bound of the range of vbks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of v b ks
+	* @return the ordered range of vbks
 	*/
 	public static List<VBK> findAll(int start, int end,
 		OrderByComparator<VBK> orderByComparator, boolean retrieveFromCache) {
@@ -240,16 +240,16 @@ public class VBKUtil {
 	}
 
 	/**
-	* Removes all the v b ks from the database.
+	* Removes all the vbks from the database.
 	*/
 	public static void removeAll() {
 		getPersistence().removeAll();
 	}
 
 	/**
-	* Returns the number of v b ks.
+	* Returns the number of vbks.
 	*
-	* @return the number of v b ks
+	* @return the number of vbks
 	*/
 	public static int countAll() {
 		return getPersistence().countAll();

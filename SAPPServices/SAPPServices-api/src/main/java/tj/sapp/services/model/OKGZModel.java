@@ -43,64 +43,64 @@ public interface OKGZModel extends BaseModel<OKGZ> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. All methods that expect a o k g z model instance should use the {@link OKGZ} interface instead.
+	 * Never modify or reference this interface directly. All methods that expect a okgz model instance should use the {@link OKGZ} interface instead.
 	 */
 
 	/**
-	 * Returns the primary key of this o k g z.
+	 * Returns the primary key of this okgz.
 	 *
-	 * @return the primary key of this o k g z
+	 * @return the primary key of this okgz
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this o k g z.
+	 * Sets the primary key of this okgz.
 	 *
-	 * @param primaryKey the primary key of this o k g z
+	 * @param primaryKey the primary key of this okgz
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the okgz_id of this o k g z.
+	 * Returns the okgz_id of this okgz.
 	 *
-	 * @return the okgz_id of this o k g z
+	 * @return the okgz_id of this okgz
 	 */
 	public long getOkgz_id();
 
 	/**
-	 * Sets the okgz_id of this o k g z.
+	 * Sets the okgz_id of this okgz.
 	 *
-	 * @param okgz_id the okgz_id of this o k g z
+	 * @param okgz_id the okgz_id of this okgz
 	 */
 	public void setOkgz_id(long okgz_id);
 
 	/**
-	 * Returns the kod of this o k g z.
+	 * Returns the kod of this okgz.
 	 *
-	 * @return the kod of this o k g z
+	 * @return the kod of this okgz
 	 */
 	@AutoEscape
 	public String getKod();
 
 	/**
-	 * Sets the kod of this o k g z.
+	 * Sets the kod of this okgz.
 	 *
-	 * @param kod the kod of this o k g z
+	 * @param kod the kod of this okgz
 	 */
 	public void setKod(String kod);
 
 	/**
-	 * Returns the naimenovanie of this o k g z.
+	 * Returns the naimenovanie of this okgz.
 	 *
-	 * @return the naimenovanie of this o k g z
+	 * @return the naimenovanie of this okgz
 	 */
 	@AutoEscape
 	public String getNaimenovanie();
 
 	/**
-	 * Sets the naimenovanie of this o k g z.
+	 * Sets the naimenovanie of this okgz.
 	 *
-	 * @param naimenovanie the naimenovanie of this o k g z
+	 * @param naimenovanie the naimenovanie of this okgz
 	 */
 	public void setNaimenovanie(String naimenovanie);
 

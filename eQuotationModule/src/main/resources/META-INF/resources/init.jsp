@@ -31,8 +31,8 @@
 <!--TRS -->
 <%@page import="tj.spisok.lotov.model.spisok_lotov"%>
 <%@page import="tj.spisok.lotov.service.spisok_lotovLocalServiceUtil"%>
-
-
+<%@page import="tj.module.equotation.constants.EQuotationConstants" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
@@ -48,3 +48,4 @@ boolean canAddNew = permissionChecker.hasPermission(groupId, name, primKey, acti
 
 
 %>
+

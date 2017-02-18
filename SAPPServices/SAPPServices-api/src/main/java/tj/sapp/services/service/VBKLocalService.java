@@ -58,7 +58,7 @@ public interface VBKLocalService extends BaseLocalService,
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link VBKLocalServiceUtil} to access the v b k local service. Add custom service methods to {@link tj.sapp.services.service.impl.VBKLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link VBKLocalServiceUtil} to access the vbk local service. Add custom service methods to {@link tj.sapp.services.service.impl.VBKLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -81,9 +81,9 @@ public interface VBKLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Returns the number of v b ks.
+	* Returns the number of vbks.
 	*
-	* @return the number of v b ks
+	* @return the number of vbks
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getVBKsCount();
@@ -135,15 +135,15 @@ public interface VBKLocalService extends BaseLocalService,
 		int end, OrderByComparator<T> orderByComparator);
 
 	/**
-	* Returns a range of all the v b ks.
+	* Returns a range of all the vbks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link tj.sapp.services.model.impl.VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of v b ks
-	* @param end the upper bound of the range of v b ks (not inclusive)
-	* @return the range of v b ks
+	* @param start the lower bound of the range of vbks
+	* @param end the upper bound of the range of vbks (not inclusive)
+	* @return the range of vbks
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<VBK> getVBKs(int start, int end);
@@ -167,37 +167,37 @@ public interface VBKLocalService extends BaseLocalService,
 		Projection projection);
 
 	/**
-	* Adds the v b k to the database. Also notifies the appropriate model listeners.
+	* Adds the vbk to the database. Also notifies the appropriate model listeners.
 	*
-	* @param vbk the v b k
-	* @return the v b k that was added
+	* @param vbk the vbk
+	* @return the vbk that was added
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public VBK addVBK(VBK vbk);
 
 	/**
-	* Creates a new v b k with the primary key. Does not add the v b k to the database.
+	* Creates a new vbk with the primary key. Does not add the vbk to the database.
 	*
-	* @param id_ the primary key for the new v b k
-	* @return the new v b k
+	* @param id_ the primary key for the new vbk
+	* @return the new vbk
 	*/
 	public VBK createVBK(long id_);
 
 	/**
-	* Deletes the v b k with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the vbk with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param id_ the primary key of the v b k
-	* @return the v b k that was removed
-	* @throws PortalException if a v b k with the primary key could not be found
+	* @param id_ the primary key of the vbk
+	* @return the vbk that was removed
+	* @throws PortalException if a vbk with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	public VBK deleteVBK(long id_) throws PortalException;
 
 	/**
-	* Deletes the v b k from the database. Also notifies the appropriate model listeners.
+	* Deletes the vbk from the database. Also notifies the appropriate model listeners.
 	*
-	* @param vbk the v b k
-	* @return the v b k that was removed
+	* @param vbk the vbk
+	* @return the vbk that was removed
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	public VBK deleteVBK(VBK vbk);
@@ -206,20 +206,20 @@ public interface VBKLocalService extends BaseLocalService,
 	public VBK fetchVBK(long id_);
 
 	/**
-	* Returns the v b k with the primary key.
+	* Returns the vbk with the primary key.
 	*
-	* @param id_ the primary key of the v b k
-	* @return the v b k
-	* @throws PortalException if a v b k with the primary key could not be found
+	* @param id_ the primary key of the vbk
+	* @return the vbk
+	* @throws PortalException if a vbk with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public VBK getVBK(long id_) throws PortalException;
 
 	/**
-	* Updates the v b k in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the vbk in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param vbk the v b k
-	* @return the v b k that was updated
+	* @param vbk the vbk
+	* @return the vbk that was updated
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public VBK updateVBK(VBK vbk);

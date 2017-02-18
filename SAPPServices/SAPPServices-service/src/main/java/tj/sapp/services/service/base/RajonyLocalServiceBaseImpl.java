@@ -312,18 +312,18 @@ public abstract class RajonyLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the o k g z local service.
+	 * Returns the okgz local service.
 	 *
-	 * @return the o k g z local service
+	 * @return the okgz local service
 	 */
 	public tj.sapp.services.service.OKGZLocalService getOKGZLocalService() {
 		return okgzLocalService;
 	}
 
 	/**
-	 * Sets the o k g z local service.
+	 * Sets the okgz local service.
 	 *
-	 * @param okgzLocalService the o k g z local service
+	 * @param okgzLocalService the okgz local service
 	 */
 	public void setOKGZLocalService(
 		tj.sapp.services.service.OKGZLocalService okgzLocalService) {
@@ -331,18 +331,18 @@ public abstract class RajonyLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the o k g z persistence.
+	 * Returns the okgz persistence.
 	 *
-	 * @return the o k g z persistence
+	 * @return the okgz persistence
 	 */
 	public OKGZPersistence getOKGZPersistence() {
 		return okgzPersistence;
 	}
 
 	/**
-	 * Sets the o k g z persistence.
+	 * Sets the okgz persistence.
 	 *
-	 * @param okgzPersistence the o k g z persistence
+	 * @param okgzPersistence the okgz persistence
 	 */
 	public void setOKGZPersistence(OKGZPersistence okgzPersistence) {
 		this.okgzPersistence = okgzPersistence;
@@ -385,18 +385,18 @@ public abstract class RajonyLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the v b k local service.
+	 * Returns the vbk local service.
 	 *
-	 * @return the v b k local service
+	 * @return the vbk local service
 	 */
 	public tj.sapp.services.service.VBKLocalService getVBKLocalService() {
 		return vbkLocalService;
 	}
 
 	/**
-	 * Sets the v b k local service.
+	 * Sets the vbk local service.
 	 *
-	 * @param vbkLocalService the v b k local service
+	 * @param vbkLocalService the vbk local service
 	 */
 	public void setVBKLocalService(
 		tj.sapp.services.service.VBKLocalService vbkLocalService) {
@@ -404,36 +404,36 @@ public abstract class RajonyLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the v b k persistence.
+	 * Returns the vbk persistence.
 	 *
-	 * @return the v b k persistence
+	 * @return the vbk persistence
 	 */
 	public VBKPersistence getVBKPersistence() {
 		return vbkPersistence;
 	}
 
 	/**
-	 * Sets the v b k persistence.
+	 * Sets the vbk persistence.
 	 *
-	 * @param vbkPersistence the v b k persistence
+	 * @param vbkPersistence the vbk persistence
 	 */
 	public void setVBKPersistence(VBKPersistence vbkPersistence) {
 		this.vbkPersistence = vbkPersistence;
 	}
 
 	/**
-	 * Returns the v w_ izvewenija local service.
+	 * Returns the vw_ izvewenija local service.
 	 *
-	 * @return the v w_ izvewenija local service
+	 * @return the vw_ izvewenija local service
 	 */
 	public tj.sapp.services.service.VW_IzvewenijaLocalService getVW_IzvewenijaLocalService() {
 		return vw_IzvewenijaLocalService;
 	}
 
 	/**
-	 * Sets the v w_ izvewenija local service.
+	 * Sets the vw_ izvewenija local service.
 	 *
-	 * @param vw_IzvewenijaLocalService the v w_ izvewenija local service
+	 * @param vw_IzvewenijaLocalService the vw_ izvewenija local service
 	 */
 	public void setVW_IzvewenijaLocalService(
 		tj.sapp.services.service.VW_IzvewenijaLocalService vw_IzvewenijaLocalService) {
@@ -441,18 +441,18 @@ public abstract class RajonyLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the v w_ izvewenija persistence.
+	 * Returns the vw_ izvewenija persistence.
 	 *
-	 * @return the v w_ izvewenija persistence
+	 * @return the vw_ izvewenija persistence
 	 */
 	public VW_IzvewenijaPersistence getVW_IzvewenijaPersistence() {
 		return vw_IzvewenijaPersistence;
 	}
 
 	/**
-	 * Sets the v w_ izvewenija persistence.
+	 * Sets the vw_ izvewenija persistence.
 	 *
-	 * @param vw_IzvewenijaPersistence the v w_ izvewenija persistence
+	 * @param vw_IzvewenijaPersistence the vw_ izvewenija persistence
 	 */
 	public void setVW_IzvewenijaPersistence(
 		VW_IzvewenijaPersistence vw_IzvewenijaPersistence) {

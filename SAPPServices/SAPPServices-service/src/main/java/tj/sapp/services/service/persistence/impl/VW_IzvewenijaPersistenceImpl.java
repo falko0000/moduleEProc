@@ -47,7 +47,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The persistence implementation for the v w_ izvewenija service.
+ * The persistence implementation for the vw_ izvewenija service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -64,7 +64,7 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link VW_IzvewenijaUtil} to access the v w_ izvewenija persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link VW_IzvewenijaUtil} to access the vw_ izvewenija persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = VW_IzvewenijaImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
@@ -88,9 +88,9 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Caches the v w_ izvewenija in the entity cache if it is enabled.
+	 * Caches the vw_ izvewenija in the entity cache if it is enabled.
 	 *
-	 * @param vw_Izvewenija the v w_ izvewenija
+	 * @param vw_Izvewenija the vw_ izvewenija
 	 */
 	@Override
 	public void cacheResult(VW_Izvewenija vw_Izvewenija) {
@@ -102,9 +102,9 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Caches the v w_ izvewenijas in the entity cache if it is enabled.
+	 * Caches the vw_ izvewenijas in the entity cache if it is enabled.
 	 *
-	 * @param vw_Izvewenijas the v w_ izvewenijas
+	 * @param vw_Izvewenijas the vw_ izvewenijas
 	 */
 	@Override
 	public void cacheResult(List<VW_Izvewenija> vw_Izvewenijas) {
@@ -121,7 +121,7 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Clears the cache for all v w_ izvewenijas.
+	 * Clears the cache for all vw_ izvewenijas.
 	 *
 	 * <p>
 	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
@@ -137,7 +137,7 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Clears the cache for the v w_ izvewenija.
+	 * Clears the cache for the vw_ izvewenija.
 	 *
 	 * <p>
 	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
@@ -164,10 +164,10 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Creates a new v w_ izvewenija with the primary key. Does not add the v w_ izvewenija to the database.
+	 * Creates a new vw_ izvewenija with the primary key. Does not add the vw_ izvewenija to the database.
 	 *
-	 * @param izvewenija_id the primary key for the new v w_ izvewenija
-	 * @return the new v w_ izvewenija
+	 * @param izvewenija_id the primary key for the new vw_ izvewenija
+	 * @return the new vw_ izvewenija
 	 */
 	@Override
 	public VW_Izvewenija create(long izvewenija_id) {
@@ -180,11 +180,11 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Removes the v w_ izvewenija with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the vw_ izvewenija with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param izvewenija_id the primary key of the v w_ izvewenija
-	 * @return the v w_ izvewenija that was removed
-	 * @throws NoSuchVW_IzvewenijaException if a v w_ izvewenija with the primary key could not be found
+	 * @param izvewenija_id the primary key of the vw_ izvewenija
+	 * @return the vw_ izvewenija that was removed
+	 * @throws NoSuchVW_IzvewenijaException if a vw_ izvewenija with the primary key could not be found
 	 */
 	@Override
 	public VW_Izvewenija remove(long izvewenija_id)
@@ -193,11 +193,11 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Removes the v w_ izvewenija with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the vw_ izvewenija with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the v w_ izvewenija
-	 * @return the v w_ izvewenija that was removed
-	 * @throws NoSuchVW_IzvewenijaException if a v w_ izvewenija with the primary key could not be found
+	 * @param primaryKey the primary key of the vw_ izvewenija
+	 * @return the vw_ izvewenija that was removed
+	 * @throws NoSuchVW_IzvewenijaException if a vw_ izvewenija with the primary key could not be found
 	 */
 	@Override
 	public VW_Izvewenija remove(Serializable primaryKey)
@@ -342,11 +342,11 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns the v w_ izvewenija with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the vw_ izvewenija with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the v w_ izvewenija
-	 * @return the v w_ izvewenija
-	 * @throws NoSuchVW_IzvewenijaException if a v w_ izvewenija with the primary key could not be found
+	 * @param primaryKey the primary key of the vw_ izvewenija
+	 * @return the vw_ izvewenija
+	 * @throws NoSuchVW_IzvewenijaException if a vw_ izvewenija with the primary key could not be found
 	 */
 	@Override
 	public VW_Izvewenija findByPrimaryKey(Serializable primaryKey)
@@ -366,11 +366,11 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns the v w_ izvewenija with the primary key or throws a {@link NoSuchVW_IzvewenijaException} if it could not be found.
+	 * Returns the vw_ izvewenija with the primary key or throws a {@link NoSuchVW_IzvewenijaException} if it could not be found.
 	 *
-	 * @param izvewenija_id the primary key of the v w_ izvewenija
-	 * @return the v w_ izvewenija
-	 * @throws NoSuchVW_IzvewenijaException if a v w_ izvewenija with the primary key could not be found
+	 * @param izvewenija_id the primary key of the vw_ izvewenija
+	 * @return the vw_ izvewenija
+	 * @throws NoSuchVW_IzvewenijaException if a vw_ izvewenija with the primary key could not be found
 	 */
 	@Override
 	public VW_Izvewenija findByPrimaryKey(long izvewenija_id)
@@ -379,10 +379,10 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns the v w_ izvewenija with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the vw_ izvewenija with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the v w_ izvewenija
-	 * @return the v w_ izvewenija, or <code>null</code> if a v w_ izvewenija with the primary key could not be found
+	 * @param primaryKey the primary key of the vw_ izvewenija
+	 * @return the vw_ izvewenija, or <code>null</code> if a vw_ izvewenija with the primary key could not be found
 	 */
 	@Override
 	public VW_Izvewenija fetchByPrimaryKey(Serializable primaryKey) {
@@ -427,10 +427,10 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns the v w_ izvewenija with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the vw_ izvewenija with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param izvewenija_id the primary key of the v w_ izvewenija
-	 * @return the v w_ izvewenija, or <code>null</code> if a v w_ izvewenija with the primary key could not be found
+	 * @param izvewenija_id the primary key of the vw_ izvewenija
+	 * @return the vw_ izvewenija, or <code>null</code> if a vw_ izvewenija with the primary key could not be found
 	 */
 	@Override
 	public VW_Izvewenija fetchByPrimaryKey(long izvewenija_id) {
@@ -532,9 +532,9 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns all the v w_ izvewenijas.
+	 * Returns all the vw_ izvewenijas.
 	 *
-	 * @return the v w_ izvewenijas
+	 * @return the vw_ izvewenijas
 	 */
 	@Override
 	public List<VW_Izvewenija> findAll() {
@@ -542,15 +542,15 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns a range of all the v w_ izvewenijas.
+	 * Returns a range of all the vw_ izvewenijas.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VW_IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of v w_ izvewenijas
-	 * @param end the upper bound of the range of v w_ izvewenijas (not inclusive)
-	 * @return the range of v w_ izvewenijas
+	 * @param start the lower bound of the range of vw_ izvewenijas
+	 * @param end the upper bound of the range of vw_ izvewenijas (not inclusive)
+	 * @return the range of vw_ izvewenijas
 	 */
 	@Override
 	public List<VW_Izvewenija> findAll(int start, int end) {
@@ -558,16 +558,16 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns an ordered range of all the v w_ izvewenijas.
+	 * Returns an ordered range of all the vw_ izvewenijas.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VW_IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of v w_ izvewenijas
-	 * @param end the upper bound of the range of v w_ izvewenijas (not inclusive)
+	 * @param start the lower bound of the range of vw_ izvewenijas
+	 * @param end the upper bound of the range of vw_ izvewenijas (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of v w_ izvewenijas
+	 * @return the ordered range of vw_ izvewenijas
 	 */
 	@Override
 	public List<VW_Izvewenija> findAll(int start, int end,
@@ -576,17 +576,17 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns an ordered range of all the v w_ izvewenijas.
+	 * Returns an ordered range of all the vw_ izvewenijas.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VW_IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of v w_ izvewenijas
-	 * @param end the upper bound of the range of v w_ izvewenijas (not inclusive)
+	 * @param start the lower bound of the range of vw_ izvewenijas
+	 * @param end the upper bound of the range of vw_ izvewenijas (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of v w_ izvewenijas
+	 * @return the ordered range of vw_ izvewenijas
 	 */
 	@Override
 	public List<VW_Izvewenija> findAll(int start, int end,
@@ -675,7 +675,7 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Removes all the v w_ izvewenijas from the database.
+	 * Removes all the vw_ izvewenijas from the database.
 	 *
 	 */
 	@Override
@@ -686,9 +686,9 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Returns the number of v w_ izvewenijas.
+	 * Returns the number of vw_ izvewenijas.
 	 *
-	 * @return the number of v w_ izvewenijas
+	 * @return the number of vw_ izvewenijas
 	 */
 	@Override
 	public int countAll() {
@@ -728,7 +728,7 @@ public class VW_IzvewenijaPersistenceImpl extends BasePersistenceImpl<VW_Izvewen
 	}
 
 	/**
-	 * Initializes the v w_ izvewenija persistence.
+	 * Initializes the vw_ izvewenija persistence.
 	 */
 	public void afterPropertiesSet() {
 	}

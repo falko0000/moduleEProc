@@ -3,12 +3,12 @@
 
 	 <portlet:renderURL var="infoURL" windowState="<%=LiferayWindowState.NORMAL.toString()%>" > 
 		 <portlet:param name="id_" value="${rajony.id_}" /> 
-		 <portlet:param name="mvcPath" value="/info.jsp"/>
+		 <portlet:param name="mvcPath" value="<%=EQuotationConstants.PAGE_INFO%>"/>
 	 </portlet:renderURL>
 	 
 	 <portlet:renderURL var="deleteURL" windowState="<%=LiferayWindowState.NORMAL.toString()%>" > 
 		 <portlet:param name="id_" value="${rajony.id_}" /> 
-		 <portlet:param name="mvcPath" value="/delete.jsp"/>
+		 <portlet:param name="mvcPath" value="<%=EQuotationConstants.PAGE_DELETE %>"/>
 	 </portlet:renderURL>
 	 
     <liferay-ui:icon-menu>

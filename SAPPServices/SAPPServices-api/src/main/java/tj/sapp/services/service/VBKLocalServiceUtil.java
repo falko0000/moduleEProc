@@ -69,9 +69,9 @@ public class VBKLocalServiceUtil {
 	}
 
 	/**
-	* Returns the number of v b ks.
+	* Returns the number of vbks.
 	*
-	* @return the number of v b ks
+	* @return the number of vbks
 	*/
 	public static int getVBKsCount() {
 		return getService().getVBKsCount();
@@ -137,15 +137,15 @@ public class VBKLocalServiceUtil {
 	}
 
 	/**
-	* Returns a range of all the v b ks.
+	* Returns a range of all the vbks.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link tj.sapp.services.model.impl.VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of v b ks
-	* @param end the upper bound of the range of v b ks (not inclusive)
-	* @return the range of v b ks
+	* @param start the lower bound of the range of vbks
+	* @param end the upper bound of the range of vbks (not inclusive)
+	* @return the range of vbks
 	*/
 	public static java.util.List<tj.sapp.services.model.VBK> getVBKs(
 		int start, int end) {
@@ -177,10 +177,10 @@ public class VBKLocalServiceUtil {
 	}
 
 	/**
-	* Adds the v b k to the database. Also notifies the appropriate model listeners.
+	* Adds the vbk to the database. Also notifies the appropriate model listeners.
 	*
-	* @param vbk the v b k
-	* @return the v b k that was added
+	* @param vbk the vbk
+	* @return the vbk that was added
 	*/
 	public static tj.sapp.services.model.VBK addVBK(
 		tj.sapp.services.model.VBK vbk) {
@@ -188,21 +188,21 @@ public class VBKLocalServiceUtil {
 	}
 
 	/**
-	* Creates a new v b k with the primary key. Does not add the v b k to the database.
+	* Creates a new vbk with the primary key. Does not add the vbk to the database.
 	*
-	* @param id_ the primary key for the new v b k
-	* @return the new v b k
+	* @param id_ the primary key for the new vbk
+	* @return the new vbk
 	*/
 	public static tj.sapp.services.model.VBK createVBK(long id_) {
 		return getService().createVBK(id_);
 	}
 
 	/**
-	* Deletes the v b k with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the vbk with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param id_ the primary key of the v b k
-	* @return the v b k that was removed
-	* @throws PortalException if a v b k with the primary key could not be found
+	* @param id_ the primary key of the vbk
+	* @return the vbk that was removed
+	* @throws PortalException if a vbk with the primary key could not be found
 	*/
 	public static tj.sapp.services.model.VBK deleteVBK(long id_)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -210,10 +210,10 @@ public class VBKLocalServiceUtil {
 	}
 
 	/**
-	* Deletes the v b k from the database. Also notifies the appropriate model listeners.
+	* Deletes the vbk from the database. Also notifies the appropriate model listeners.
 	*
-	* @param vbk the v b k
-	* @return the v b k that was removed
+	* @param vbk the vbk
+	* @return the vbk that was removed
 	*/
 	public static tj.sapp.services.model.VBK deleteVBK(
 		tj.sapp.services.model.VBK vbk) {
@@ -225,11 +225,11 @@ public class VBKLocalServiceUtil {
 	}
 
 	/**
-	* Returns the v b k with the primary key.
+	* Returns the vbk with the primary key.
 	*
-	* @param id_ the primary key of the v b k
-	* @return the v b k
-	* @throws PortalException if a v b k with the primary key could not be found
+	* @param id_ the primary key of the vbk
+	* @return the vbk
+	* @throws PortalException if a vbk with the primary key could not be found
 	*/
 	public static tj.sapp.services.model.VBK getVBK(long id_)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -237,10 +237,10 @@ public class VBKLocalServiceUtil {
 	}
 
 	/**
-	* Updates the v b k in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the vbk in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param vbk the v b k
-	* @return the v b k that was updated
+	* @param vbk the vbk
+	* @return the vbk that was updated
 	*/
 	public static tj.sapp.services.model.VBK updateVBK(
 		tj.sapp.services.model.VBK vbk) {

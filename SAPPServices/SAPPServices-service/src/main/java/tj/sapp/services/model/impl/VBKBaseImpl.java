@@ -36,7 +36,7 @@ public abstract class VBKBaseImpl extends VBKModelImpl implements VBK {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a v b k model instance should use the {@link VBK} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a vbk model instance should use the {@link VBK} interface instead.
 	 */
 	@Override
 	public void persist() {

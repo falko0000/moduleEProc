@@ -36,7 +36,7 @@ public abstract class OKGZBaseImpl extends OKGZModelImpl implements OKGZ {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a o k g z model instance should use the {@link OKGZ} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a okgz model instance should use the {@link OKGZ} interface instead.
 	 */
 	@Override
 	public void persist() {

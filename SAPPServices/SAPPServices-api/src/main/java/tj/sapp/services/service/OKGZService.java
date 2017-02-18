@@ -47,7 +47,7 @@ public interface OKGZService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link OKGZServiceUtil} to access the o k g z remote service. Add custom service methods to {@link tj.sapp.services.service.impl.OKGZServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link OKGZServiceUtil} to access the okgz remote service. Add custom service methods to {@link tj.sapp.services.service.impl.OKGZServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**

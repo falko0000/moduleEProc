@@ -43,79 +43,79 @@ public interface VBKModel extends BaseModel<VBK> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. All methods that expect a v b k model instance should use the {@link VBK} interface instead.
+	 * Never modify or reference this interface directly. All methods that expect a vbk model instance should use the {@link VBK} interface instead.
 	 */
 
 	/**
-	 * Returns the primary key of this v b k.
+	 * Returns the primary key of this vbk.
 	 *
-	 * @return the primary key of this v b k
+	 * @return the primary key of this vbk
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this v b k.
+	 * Sets the primary key of this vbk.
 	 *
-	 * @param primaryKey the primary key of this v b k
+	 * @param primaryKey the primary key of this vbk
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the id_ of this v b k.
+	 * Returns the id_ of this vbk.
 	 *
-	 * @return the id_ of this v b k
+	 * @return the id_ of this vbk
 	 */
 	public long getId_();
 
 	/**
-	 * Sets the id_ of this v b k.
+	 * Sets the id_ of this vbk.
 	 *
-	 * @param id_ the id_ of this v b k
+	 * @param id_ the id_ of this vbk
 	 */
 	public void setId_(long id_);
 
 	/**
-	 * Returns the kod of this v b k.
+	 * Returns the kod of this vbk.
 	 *
-	 * @return the kod of this v b k
+	 * @return the kod of this vbk
 	 */
 	@AutoEscape
 	public String getKod();
 
 	/**
-	 * Sets the kod of this v b k.
+	 * Sets the kod of this vbk.
 	 *
-	 * @param kod the kod of this v b k
+	 * @param kod the kod of this vbk
 	 */
 	public void setKod(String kod);
 
 	/**
-	 * Returns the nazvanie_tj of this v b k.
+	 * Returns the nazvanie_tj of this vbk.
 	 *
-	 * @return the nazvanie_tj of this v b k
+	 * @return the nazvanie_tj of this vbk
 	 */
 	@AutoEscape
 	public String getNazvanie_tj();
 
 	/**
-	 * Sets the nazvanie_tj of this v b k.
+	 * Sets the nazvanie_tj of this vbk.
 	 *
-	 * @param nazvanie_tj the nazvanie_tj of this v b k
+	 * @param nazvanie_tj the nazvanie_tj of this vbk
 	 */
 	public void setNazvanie_tj(String nazvanie_tj);
 
 	/**
-	 * Returns the nazvanie_ru of this v b k.
+	 * Returns the nazvanie_ru of this vbk.
 	 *
-	 * @return the nazvanie_ru of this v b k
+	 * @return the nazvanie_ru of this vbk
 	 */
 	@AutoEscape
 	public String getNazvanie_ru();
 
 	/**
-	 * Sets the nazvanie_ru of this v b k.
+	 * Sets the nazvanie_ru of this vbk.
 	 *
-	 * @param nazvanie_ru the nazvanie_ru of this v b k
+	 * @param nazvanie_ru the nazvanie_ru of this vbk
 	 */
 	public void setNazvanie_ru(String nazvanie_ru);
 

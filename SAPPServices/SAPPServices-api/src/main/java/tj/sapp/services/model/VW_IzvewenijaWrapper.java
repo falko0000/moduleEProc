@@ -247,9 +247,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the po_istecheniju_dnej of this v w_ izvewenija.
+	* Returns the po_istecheniju_dnej of this vw_ izvewenija.
 	*
-	* @return the po_istecheniju_dnej of this v w_ izvewenija
+	* @return the po_istecheniju_dnej of this vw_ izvewenija
 	*/
 	@Override
 	public int getPo_istecheniju_dnej() {
@@ -257,9 +257,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the put_a of this v w_ izvewenija.
+	* Returns the put_a of this vw_ izvewenija.
 	*
-	* @return the put_a of this v w_ izvewenija
+	* @return the put_a of this vw_ izvewenija
 	*/
 	@Override
 	public int getPut_a() {
@@ -267,9 +267,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the put_b of this v w_ izvewenija.
+	* Returns the put_b of this vw_ izvewenija.
 	*
-	* @return the put_b of this v w_ izvewenija
+	* @return the put_b of this vw_ izvewenija
 	*/
 	@Override
 	public int getPut_b() {
@@ -292,9 +292,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the je_pochta of this v w_ izvewenija.
+	* Returns the je_pochta of this vw_ izvewenija.
 	*
-	* @return the je_pochta of this v w_ izvewenija
+	* @return the je_pochta of this vw_ izvewenija
 	*/
 	@Override
 	public java.lang.String getJe_pochta() {
@@ -302,9 +302,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the kontaktnoe_lico of this v w_ izvewenija.
+	* Returns the kontaktnoe_lico of this vw_ izvewenija.
 	*
-	* @return the kontaktnoe_lico of this v w_ izvewenija
+	* @return the kontaktnoe_lico of this vw_ izvewenija
 	*/
 	@Override
 	public java.lang.String getKontaktnoe_lico() {
@@ -312,9 +312,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the kontaktnyj_telefon of this v w_ izvewenija.
+	* Returns the kontaktnyj_telefon of this vw_ izvewenija.
 	*
-	* @return the kontaktnyj_telefon of this v w_ izvewenija
+	* @return the kontaktnyj_telefon of this vw_ izvewenija
 	*/
 	@Override
 	public java.lang.String getKontaktnyj_telefon() {
@@ -322,9 +322,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the naimenovanie of this v w_ izvewenija.
+	* Returns the naimenovanie of this vw_ izvewenija.
 	*
-	* @return the naimenovanie of this v w_ izvewenija
+	* @return the naimenovanie of this vw_ izvewenija
 	*/
 	@Override
 	public java.lang.String getNaimenovanie() {
@@ -332,9 +332,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the put_c of this v w_ izvewenija.
+	* Returns the put_c of this vw_ izvewenija.
 	*
-	* @return the put_c of this v w_ izvewenija
+	* @return the put_c of this vw_ izvewenija
 	*/
 	@Override
 	public java.lang.String getPut_c() {
@@ -352,9 +352,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the data_izmenenija of this v w_ izvewenija.
+	* Returns the data_izmenenija of this vw_ izvewenija.
 	*
-	* @return the data_izmenenija of this v w_ izvewenija
+	* @return the data_izmenenija of this vw_ izvewenija
 	*/
 	@Override
 	public Date getData_izmenenija() {
@@ -362,9 +362,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the data_podvedenija_itogov of this v w_ izvewenija.
+	* Returns the data_podvedenija_itogov of this vw_ izvewenija.
 	*
-	* @return the data_podvedenija_itogov of this v w_ izvewenija
+	* @return the data_podvedenija_itogov of this vw_ izvewenija
 	*/
 	@Override
 	public Date getData_podvedenija_itogov() {
@@ -372,9 +372,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the data_publikacii of this v w_ izvewenija.
+	* Returns the data_publikacii of this vw_ izvewenija.
 	*
-	* @return the data_publikacii of this v w_ izvewenija
+	* @return the data_publikacii of this vw_ izvewenija
 	*/
 	@Override
 	public Date getData_publikacii() {
@@ -382,9 +382,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the data_sozdanija of this v w_ izvewenija.
+	* Returns the data_sozdanija of this vw_ izvewenija.
 	*
-	* @return the data_sozdanija of this v w_ izvewenija
+	* @return the data_sozdanija of this vw_ izvewenija
 	*/
 	@Override
 	public Date getData_sozdanija() {
@@ -392,9 +392,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the izmenil of this v w_ izvewenija.
+	* Returns the izmenil of this vw_ izvewenija.
 	*
-	* @return the izmenil of this v w_ izvewenija
+	* @return the izmenil of this vw_ izvewenija
 	*/
 	@Override
 	public long getIzmenil() {
@@ -402,9 +402,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the izvewenija_id of this v w_ izvewenija.
+	* Returns the izvewenija_id of this vw_ izvewenija.
 	*
-	* @return the izvewenija_id of this v w_ izvewenija
+	* @return the izvewenija_id of this vw_ izvewenija
 	*/
 	@Override
 	public long getIzvewenija_id() {
@@ -412,9 +412,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the kod_id of this v w_ izvewenija.
+	* Returns the kod_id of this vw_ izvewenija.
 	*
-	* @return the kod_id of this v w_ izvewenija
+	* @return the kod_id of this vw_ izvewenija
 	*/
 	@Override
 	public long getKod_id() {
@@ -422,9 +422,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the organizacija_id of this v w_ izvewenija.
+	* Returns the organizacija_id of this vw_ izvewenija.
 	*
-	* @return the organizacija_id of this v w_ izvewenija
+	* @return the organizacija_id of this vw_ izvewenija
 	*/
 	@Override
 	public long getOrganizacija_id() {
@@ -432,9 +432,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the primary key of this v w_ izvewenija.
+	* Returns the primary key of this vw_ izvewenija.
 	*
-	* @return the primary key of this v w_ izvewenija
+	* @return the primary key of this vw_ izvewenija
 	*/
 	@Override
 	public long getPrimaryKey() {
@@ -442,9 +442,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the sostojanie_id of this v w_ izvewenija.
+	* Returns the sostojanie_id of this vw_ izvewenija.
 	*
-	* @return the sostojanie_id of this v w_ izvewenija
+	* @return the sostojanie_id of this vw_ izvewenija
 	*/
 	@Override
 	public long getSostojanie_id() {
@@ -452,9 +452,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the sozdal of this v w_ izvewenija.
+	* Returns the sozdal of this vw_ izvewenija.
 	*
-	* @return the sozdal of this v w_ izvewenija
+	* @return the sozdal of this vw_ izvewenija
 	*/
 	@Override
 	public long getSozdal() {
@@ -462,9 +462,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the status_id of this v w_ izvewenija.
+	* Returns the status_id of this vw_ izvewenija.
 	*
-	* @return the status_id of this v w_ izvewenija
+	* @return the status_id of this vw_ izvewenija
 	*/
 	@Override
 	public long getStatus_id() {
@@ -472,9 +472,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the tip_izvewenija_id of this v w_ izvewenija.
+	* Returns the tip_izvewenija_id of this vw_ izvewenija.
 	*
-	* @return the tip_izvewenija_id of this v w_ izvewenija
+	* @return the tip_izvewenija_id of this vw_ izvewenija
 	*/
 	@Override
 	public long getTip_izvewenija_id() {
@@ -482,9 +482,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Returns the vyshestojawaja_organizacija_id of this v w_ izvewenija.
+	* Returns the vyshestojawaja_organizacija_id of this vw_ izvewenija.
 	*
-	* @return the vyshestojawaja_organizacija_id of this v w_ izvewenija
+	* @return the vyshestojawaja_organizacija_id of this vw_ izvewenija
 	*/
 	@Override
 	public long getVyshestojawaja_organizacija_id() {
@@ -512,9 +512,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the data_izmenenija of this v w_ izvewenija.
+	* Sets the data_izmenenija of this vw_ izvewenija.
 	*
-	* @param data_izmenenija the data_izmenenija of this v w_ izvewenija
+	* @param data_izmenenija the data_izmenenija of this vw_ izvewenija
 	*/
 	@Override
 	public void setData_izmenenija(Date data_izmenenija) {
@@ -522,9 +522,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the data_podvedenija_itogov of this v w_ izvewenija.
+	* Sets the data_podvedenija_itogov of this vw_ izvewenija.
 	*
-	* @param data_podvedenija_itogov the data_podvedenija_itogov of this v w_ izvewenija
+	* @param data_podvedenija_itogov the data_podvedenija_itogov of this vw_ izvewenija
 	*/
 	@Override
 	public void setData_podvedenija_itogov(Date data_podvedenija_itogov) {
@@ -532,9 +532,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the data_publikacii of this v w_ izvewenija.
+	* Sets the data_publikacii of this vw_ izvewenija.
 	*
-	* @param data_publikacii the data_publikacii of this v w_ izvewenija
+	* @param data_publikacii the data_publikacii of this vw_ izvewenija
 	*/
 	@Override
 	public void setData_publikacii(Date data_publikacii) {
@@ -542,9 +542,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the data_sozdanija of this v w_ izvewenija.
+	* Sets the data_sozdanija of this vw_ izvewenija.
 	*
-	* @param data_sozdanija the data_sozdanija of this v w_ izvewenija
+	* @param data_sozdanija the data_sozdanija of this vw_ izvewenija
 	*/
 	@Override
 	public void setData_sozdanija(Date data_sozdanija) {
@@ -568,9 +568,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the izmenil of this v w_ izvewenija.
+	* Sets the izmenil of this vw_ izvewenija.
 	*
-	* @param izmenil the izmenil of this v w_ izvewenija
+	* @param izmenil the izmenil of this vw_ izvewenija
 	*/
 	@Override
 	public void setIzmenil(long izmenil) {
@@ -578,9 +578,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the izvewenija_id of this v w_ izvewenija.
+	* Sets the izvewenija_id of this vw_ izvewenija.
 	*
-	* @param izvewenija_id the izvewenija_id of this v w_ izvewenija
+	* @param izvewenija_id the izvewenija_id of this vw_ izvewenija
 	*/
 	@Override
 	public void setIzvewenija_id(long izvewenija_id) {
@@ -588,9 +588,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the je_pochta of this v w_ izvewenija.
+	* Sets the je_pochta of this vw_ izvewenija.
 	*
-	* @param je_pochta the je_pochta of this v w_ izvewenija
+	* @param je_pochta the je_pochta of this vw_ izvewenija
 	*/
 	@Override
 	public void setJe_pochta(java.lang.String je_pochta) {
@@ -598,9 +598,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the kod_id of this v w_ izvewenija.
+	* Sets the kod_id of this vw_ izvewenija.
 	*
-	* @param kod_id the kod_id of this v w_ izvewenija
+	* @param kod_id the kod_id of this vw_ izvewenija
 	*/
 	@Override
 	public void setKod_id(long kod_id) {
@@ -608,9 +608,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the kontaktnoe_lico of this v w_ izvewenija.
+	* Sets the kontaktnoe_lico of this vw_ izvewenija.
 	*
-	* @param kontaktnoe_lico the kontaktnoe_lico of this v w_ izvewenija
+	* @param kontaktnoe_lico the kontaktnoe_lico of this vw_ izvewenija
 	*/
 	@Override
 	public void setKontaktnoe_lico(java.lang.String kontaktnoe_lico) {
@@ -618,9 +618,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the kontaktnyj_telefon of this v w_ izvewenija.
+	* Sets the kontaktnyj_telefon of this vw_ izvewenija.
 	*
-	* @param kontaktnyj_telefon the kontaktnyj_telefon of this v w_ izvewenija
+	* @param kontaktnyj_telefon the kontaktnyj_telefon of this vw_ izvewenija
 	*/
 	@Override
 	public void setKontaktnyj_telefon(java.lang.String kontaktnyj_telefon) {
@@ -628,9 +628,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the naimenovanie of this v w_ izvewenija.
+	* Sets the naimenovanie of this vw_ izvewenija.
 	*
-	* @param naimenovanie the naimenovanie of this v w_ izvewenija
+	* @param naimenovanie the naimenovanie of this vw_ izvewenija
 	*/
 	@Override
 	public void setNaimenovanie(java.lang.String naimenovanie) {
@@ -643,9 +643,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the organizacija_id of this v w_ izvewenija.
+	* Sets the organizacija_id of this vw_ izvewenija.
 	*
-	* @param organizacija_id the organizacija_id of this v w_ izvewenija
+	* @param organizacija_id the organizacija_id of this vw_ izvewenija
 	*/
 	@Override
 	public void setOrganizacija_id(long organizacija_id) {
@@ -653,9 +653,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the po_istecheniju_dnej of this v w_ izvewenija.
+	* Sets the po_istecheniju_dnej of this vw_ izvewenija.
 	*
-	* @param po_istecheniju_dnej the po_istecheniju_dnej of this v w_ izvewenija
+	* @param po_istecheniju_dnej the po_istecheniju_dnej of this vw_ izvewenija
 	*/
 	@Override
 	public void setPo_istecheniju_dnej(int po_istecheniju_dnej) {
@@ -663,9 +663,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the primary key of this v w_ izvewenija.
+	* Sets the primary key of this vw_ izvewenija.
 	*
-	* @param primaryKey the primary key of this v w_ izvewenija
+	* @param primaryKey the primary key of this vw_ izvewenija
 	*/
 	@Override
 	public void setPrimaryKey(long primaryKey) {
@@ -678,9 +678,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the put_a of this v w_ izvewenija.
+	* Sets the put_a of this vw_ izvewenija.
 	*
-	* @param put_a the put_a of this v w_ izvewenija
+	* @param put_a the put_a of this vw_ izvewenija
 	*/
 	@Override
 	public void setPut_a(int put_a) {
@@ -688,9 +688,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the put_b of this v w_ izvewenija.
+	* Sets the put_b of this vw_ izvewenija.
 	*
-	* @param put_b the put_b of this v w_ izvewenija
+	* @param put_b the put_b of this vw_ izvewenija
 	*/
 	@Override
 	public void setPut_b(int put_b) {
@@ -698,9 +698,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the put_c of this v w_ izvewenija.
+	* Sets the put_c of this vw_ izvewenija.
 	*
-	* @param put_c the put_c of this v w_ izvewenija
+	* @param put_c the put_c of this vw_ izvewenija
 	*/
 	@Override
 	public void setPut_c(java.lang.String put_c) {
@@ -708,9 +708,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the sostojanie_id of this v w_ izvewenija.
+	* Sets the sostojanie_id of this vw_ izvewenija.
 	*
-	* @param sostojanie_id the sostojanie_id of this v w_ izvewenija
+	* @param sostojanie_id the sostojanie_id of this vw_ izvewenija
 	*/
 	@Override
 	public void setSostojanie_id(long sostojanie_id) {
@@ -718,9 +718,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the sozdal of this v w_ izvewenija.
+	* Sets the sozdal of this vw_ izvewenija.
 	*
-	* @param sozdal the sozdal of this v w_ izvewenija
+	* @param sozdal the sozdal of this vw_ izvewenija
 	*/
 	@Override
 	public void setSozdal(long sozdal) {
@@ -728,9 +728,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the status_id of this v w_ izvewenija.
+	* Sets the status_id of this vw_ izvewenija.
 	*
-	* @param status_id the status_id of this v w_ izvewenija
+	* @param status_id the status_id of this vw_ izvewenija
 	*/
 	@Override
 	public void setStatus_id(long status_id) {
@@ -738,9 +738,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the tip_izvewenija_id of this v w_ izvewenija.
+	* Sets the tip_izvewenija_id of this vw_ izvewenija.
 	*
-	* @param tip_izvewenija_id the tip_izvewenija_id of this v w_ izvewenija
+	* @param tip_izvewenija_id the tip_izvewenija_id of this vw_ izvewenija
 	*/
 	@Override
 	public void setTip_izvewenija_id(long tip_izvewenija_id) {
@@ -748,9 +748,9 @@ public class VW_IzvewenijaWrapper implements VW_Izvewenija,
 	}
 
 	/**
-	* Sets the vyshestojawaja_organizacija_id of this v w_ izvewenija.
+	* Sets the vyshestojawaja_organizacija_id of this vw_ izvewenija.
 	*
-	* @param vyshestojawaja_organizacija_id the vyshestojawaja_organizacija_id of this v w_ izvewenija
+	* @param vyshestojawaja_organizacija_id the vyshestojawaja_organizacija_id of this vw_ izvewenija
 	*/
 	@Override
 	public void setVyshestojawaja_organizacija_id(

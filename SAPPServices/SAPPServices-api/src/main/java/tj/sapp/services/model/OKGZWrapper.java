@@ -130,9 +130,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Returns the kod of this o k g z.
+	* Returns the kod of this okgz.
 	*
-	* @return the kod of this o k g z
+	* @return the kod of this okgz
 	*/
 	@Override
 	public java.lang.String getKod() {
@@ -140,9 +140,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Returns the naimenovanie of this o k g z.
+	* Returns the naimenovanie of this okgz.
 	*
-	* @return the naimenovanie of this o k g z
+	* @return the naimenovanie of this okgz
 	*/
 	@Override
 	public java.lang.String getNaimenovanie() {
@@ -160,9 +160,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Returns the okgz_id of this o k g z.
+	* Returns the okgz_id of this okgz.
 	*
-	* @return the okgz_id of this o k g z
+	* @return the okgz_id of this okgz
 	*/
 	@Override
 	public long getOkgz_id() {
@@ -170,9 +170,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Returns the primary key of this o k g z.
+	* Returns the primary key of this okgz.
 	*
-	* @return the primary key of this o k g z
+	* @return the primary key of this okgz
 	*/
 	@Override
 	public long getPrimaryKey() {
@@ -216,9 +216,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Sets the kod of this o k g z.
+	* Sets the kod of this okgz.
 	*
-	* @param kod the kod of this o k g z
+	* @param kod the kod of this okgz
 	*/
 	@Override
 	public void setKod(java.lang.String kod) {
@@ -226,9 +226,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Sets the naimenovanie of this o k g z.
+	* Sets the naimenovanie of this okgz.
 	*
-	* @param naimenovanie the naimenovanie of this o k g z
+	* @param naimenovanie the naimenovanie of this okgz
 	*/
 	@Override
 	public void setNaimenovanie(java.lang.String naimenovanie) {
@@ -241,9 +241,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Sets the okgz_id of this o k g z.
+	* Sets the okgz_id of this okgz.
 	*
-	* @param okgz_id the okgz_id of this o k g z
+	* @param okgz_id the okgz_id of this okgz
 	*/
 	@Override
 	public void setOkgz_id(long okgz_id) {
@@ -251,9 +251,9 @@ public class OKGZWrapper implements OKGZ, ModelWrapper<OKGZ> {
 	}
 
 	/**
-	* Sets the primary key of this o k g z.
+	* Sets the primary key of this okgz.
 	*
-	* @param primaryKey the primary key of this o k g z
+	* @param primaryKey the primary key of this okgz
 	*/
 	@Override
 	public void setPrimaryKey(long primaryKey) {

@@ -47,7 +47,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The persistence implementation for the v b k service.
+ * The persistence implementation for the vbk service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -64,7 +64,7 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link VBKUtil} to access the v b k persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link VBKUtil} to access the vbk persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = VBKImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
@@ -86,9 +86,9 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Caches the v b k in the entity cache if it is enabled.
+	 * Caches the vbk in the entity cache if it is enabled.
 	 *
-	 * @param vbk the v b k
+	 * @param vbk the vbk
 	 */
 	@Override
 	public void cacheResult(VBK vbk) {
@@ -99,9 +99,9 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Caches the v b ks in the entity cache if it is enabled.
+	 * Caches the vbks in the entity cache if it is enabled.
 	 *
-	 * @param vbks the v b ks
+	 * @param vbks the vbks
 	 */
 	@Override
 	public void cacheResult(List<VBK> vbks) {
@@ -117,7 +117,7 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Clears the cache for all v b ks.
+	 * Clears the cache for all vbks.
 	 *
 	 * <p>
 	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
@@ -133,7 +133,7 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Clears the cache for the v b k.
+	 * Clears the cache for the vbk.
 	 *
 	 * <p>
 	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
@@ -160,10 +160,10 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Creates a new v b k with the primary key. Does not add the v b k to the database.
+	 * Creates a new vbk with the primary key. Does not add the vbk to the database.
 	 *
-	 * @param id_ the primary key for the new v b k
-	 * @return the new v b k
+	 * @param id_ the primary key for the new vbk
+	 * @return the new vbk
 	 */
 	@Override
 	public VBK create(long id_) {
@@ -176,11 +176,11 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Removes the v b k with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the vbk with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param id_ the primary key of the v b k
-	 * @return the v b k that was removed
-	 * @throws NoSuchVBKException if a v b k with the primary key could not be found
+	 * @param id_ the primary key of the vbk
+	 * @return the vbk that was removed
+	 * @throws NoSuchVBKException if a vbk with the primary key could not be found
 	 */
 	@Override
 	public VBK remove(long id_) throws NoSuchVBKException {
@@ -188,11 +188,11 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Removes the v b k with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the vbk with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the v b k
-	 * @return the v b k that was removed
-	 * @throws NoSuchVBKException if a v b k with the primary key could not be found
+	 * @param primaryKey the primary key of the vbk
+	 * @return the vbk that was removed
+	 * @throws NoSuchVBKException if a vbk with the primary key could not be found
 	 */
 	@Override
 	public VBK remove(Serializable primaryKey) throws NoSuchVBKException {
@@ -316,11 +316,11 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns the v b k with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the vbk with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the v b k
-	 * @return the v b k
-	 * @throws NoSuchVBKException if a v b k with the primary key could not be found
+	 * @param primaryKey the primary key of the vbk
+	 * @return the vbk
+	 * @throws NoSuchVBKException if a vbk with the primary key could not be found
 	 */
 	@Override
 	public VBK findByPrimaryKey(Serializable primaryKey)
@@ -340,11 +340,11 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns the v b k with the primary key or throws a {@link NoSuchVBKException} if it could not be found.
+	 * Returns the vbk with the primary key or throws a {@link NoSuchVBKException} if it could not be found.
 	 *
-	 * @param id_ the primary key of the v b k
-	 * @return the v b k
-	 * @throws NoSuchVBKException if a v b k with the primary key could not be found
+	 * @param id_ the primary key of the vbk
+	 * @return the vbk
+	 * @throws NoSuchVBKException if a vbk with the primary key could not be found
 	 */
 	@Override
 	public VBK findByPrimaryKey(long id_) throws NoSuchVBKException {
@@ -352,10 +352,10 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns the v b k with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the vbk with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the v b k
-	 * @return the v b k, or <code>null</code> if a v b k with the primary key could not be found
+	 * @param primaryKey the primary key of the vbk
+	 * @return the vbk, or <code>null</code> if a vbk with the primary key could not be found
 	 */
 	@Override
 	public VBK fetchByPrimaryKey(Serializable primaryKey) {
@@ -399,10 +399,10 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns the v b k with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the vbk with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param id_ the primary key of the v b k
-	 * @return the v b k, or <code>null</code> if a v b k with the primary key could not be found
+	 * @param id_ the primary key of the vbk
+	 * @return the vbk, or <code>null</code> if a vbk with the primary key could not be found
 	 */
 	@Override
 	public VBK fetchByPrimaryKey(long id_) {
@@ -504,9 +504,9 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns all the v b ks.
+	 * Returns all the vbks.
 	 *
-	 * @return the v b ks
+	 * @return the vbks
 	 */
 	@Override
 	public List<VBK> findAll() {
@@ -514,15 +514,15 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns a range of all the v b ks.
+	 * Returns a range of all the vbks.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of v b ks
-	 * @param end the upper bound of the range of v b ks (not inclusive)
-	 * @return the range of v b ks
+	 * @param start the lower bound of the range of vbks
+	 * @param end the upper bound of the range of vbks (not inclusive)
+	 * @return the range of vbks
 	 */
 	@Override
 	public List<VBK> findAll(int start, int end) {
@@ -530,16 +530,16 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns an ordered range of all the v b ks.
+	 * Returns an ordered range of all the vbks.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of v b ks
-	 * @param end the upper bound of the range of v b ks (not inclusive)
+	 * @param start the lower bound of the range of vbks
+	 * @param end the upper bound of the range of vbks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of v b ks
+	 * @return the ordered range of vbks
 	 */
 	@Override
 	public List<VBK> findAll(int start, int end,
@@ -548,17 +548,17 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns an ordered range of all the v b ks.
+	 * Returns an ordered range of all the vbks.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link VBKModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of v b ks
-	 * @param end the upper bound of the range of v b ks (not inclusive)
+	 * @param start the lower bound of the range of vbks
+	 * @param end the upper bound of the range of vbks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of v b ks
+	 * @return the ordered range of vbks
 	 */
 	@Override
 	public List<VBK> findAll(int start, int end,
@@ -644,7 +644,7 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Removes all the v b ks from the database.
+	 * Removes all the vbks from the database.
 	 *
 	 */
 	@Override
@@ -655,9 +655,9 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Returns the number of v b ks.
+	 * Returns the number of vbks.
 	 *
-	 * @return the number of v b ks
+	 * @return the number of vbks
 	 */
 	@Override
 	public int countAll() {
@@ -697,7 +697,7 @@ public class VBKPersistenceImpl extends BasePersistenceImpl<VBK>
 	}
 
 	/**
-	 * Initializes the v b k persistence.
+	 * Initializes the vbk persistence.
 	 */
 	public void afterPropertiesSet() {
 	}

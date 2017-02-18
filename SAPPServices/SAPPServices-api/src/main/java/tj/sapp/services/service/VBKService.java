@@ -47,7 +47,7 @@ public interface VBKService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link VBKServiceUtil} to access the v b k remote service. Add custom service methods to {@link tj.sapp.services.service.impl.VBKServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link VBKServiceUtil} to access the vbk remote service. Add custom service methods to {@link tj.sapp.services.service.impl.VBKServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**

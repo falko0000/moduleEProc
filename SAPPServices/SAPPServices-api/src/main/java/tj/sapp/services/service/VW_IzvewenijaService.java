@@ -47,7 +47,7 @@ public interface VW_IzvewenijaService extends BaseService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link VW_IzvewenijaServiceUtil} to access the v w_ izvewenija remote service. Add custom service methods to {@link tj.sapp.services.service.impl.VW_IzvewenijaServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link VW_IzvewenijaServiceUtil} to access the vw_ izvewenija remote service. Add custom service methods to {@link tj.sapp.services.service.impl.VW_IzvewenijaServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**

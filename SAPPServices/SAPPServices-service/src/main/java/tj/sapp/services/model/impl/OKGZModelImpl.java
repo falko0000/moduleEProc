@@ -61,7 +61,7 @@ public class OKGZModelImpl extends BaseModelImpl<OKGZ> implements OKGZModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a o k g z model instance should use the {@link OKGZ} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a okgz model instance should use the {@link OKGZ} interface instead.
 	 */
 	public static final String TABLE_NAME = "sapp.okgz";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -45,320 +45,320 @@ public interface VW_IzvewenijaModel extends BaseModel<VW_Izvewenija> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. All methods that expect a v w_ izvewenija model instance should use the {@link VW_Izvewenija} interface instead.
+	 * Never modify or reference this interface directly. All methods that expect a vw_ izvewenija model instance should use the {@link VW_Izvewenija} interface instead.
 	 */
 
 	/**
-	 * Returns the primary key of this v w_ izvewenija.
+	 * Returns the primary key of this vw_ izvewenija.
 	 *
-	 * @return the primary key of this v w_ izvewenija
+	 * @return the primary key of this vw_ izvewenija
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this v w_ izvewenija.
+	 * Sets the primary key of this vw_ izvewenija.
 	 *
-	 * @param primaryKey the primary key of this v w_ izvewenija
+	 * @param primaryKey the primary key of this vw_ izvewenija
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the izvewenija_id of this v w_ izvewenija.
+	 * Returns the izvewenija_id of this vw_ izvewenija.
 	 *
-	 * @return the izvewenija_id of this v w_ izvewenija
+	 * @return the izvewenija_id of this vw_ izvewenija
 	 */
 	public long getIzvewenija_id();
 
 	/**
-	 * Sets the izvewenija_id of this v w_ izvewenija.
+	 * Sets the izvewenija_id of this vw_ izvewenija.
 	 *
-	 * @param izvewenija_id the izvewenija_id of this v w_ izvewenija
+	 * @param izvewenija_id the izvewenija_id of this vw_ izvewenija
 	 */
 	public void setIzvewenija_id(long izvewenija_id);
 
 	/**
-	 * Returns the sostojanie_id of this v w_ izvewenija.
+	 * Returns the sostojanie_id of this vw_ izvewenija.
 	 *
-	 * @return the sostojanie_id of this v w_ izvewenija
+	 * @return the sostojanie_id of this vw_ izvewenija
 	 */
 	public long getSostojanie_id();
 
 	/**
-	 * Sets the sostojanie_id of this v w_ izvewenija.
+	 * Sets the sostojanie_id of this vw_ izvewenija.
 	 *
-	 * @param sostojanie_id the sostojanie_id of this v w_ izvewenija
+	 * @param sostojanie_id the sostojanie_id of this vw_ izvewenija
 	 */
 	public void setSostojanie_id(long sostojanie_id);
 
 	/**
-	 * Returns the status_id of this v w_ izvewenija.
+	 * Returns the status_id of this vw_ izvewenija.
 	 *
-	 * @return the status_id of this v w_ izvewenija
+	 * @return the status_id of this vw_ izvewenija
 	 */
 	public long getStatus_id();
 
 	/**
-	 * Sets the status_id of this v w_ izvewenija.
+	 * Sets the status_id of this vw_ izvewenija.
 	 *
-	 * @param status_id the status_id of this v w_ izvewenija
+	 * @param status_id the status_id of this vw_ izvewenija
 	 */
 	public void setStatus_id(long status_id);
 
 	/**
-	 * Returns the tip_izvewenija_id of this v w_ izvewenija.
+	 * Returns the tip_izvewenija_id of this vw_ izvewenija.
 	 *
-	 * @return the tip_izvewenija_id of this v w_ izvewenija
+	 * @return the tip_izvewenija_id of this vw_ izvewenija
 	 */
 	public long getTip_izvewenija_id();
 
 	/**
-	 * Sets the tip_izvewenija_id of this v w_ izvewenija.
+	 * Sets the tip_izvewenija_id of this vw_ izvewenija.
 	 *
-	 * @param tip_izvewenija_id the tip_izvewenija_id of this v w_ izvewenija
+	 * @param tip_izvewenija_id the tip_izvewenija_id of this vw_ izvewenija
 	 */
 	public void setTip_izvewenija_id(long tip_izvewenija_id);
 
 	/**
-	 * Returns the organizacija_id of this v w_ izvewenija.
+	 * Returns the organizacija_id of this vw_ izvewenija.
 	 *
-	 * @return the organizacija_id of this v w_ izvewenija
+	 * @return the organizacija_id of this vw_ izvewenija
 	 */
 	public long getOrganizacija_id();
 
 	/**
-	 * Sets the organizacija_id of this v w_ izvewenija.
+	 * Sets the organizacija_id of this vw_ izvewenija.
 	 *
-	 * @param organizacija_id the organizacija_id of this v w_ izvewenija
+	 * @param organizacija_id the organizacija_id of this vw_ izvewenija
 	 */
 	public void setOrganizacija_id(long organizacija_id);
 
 	/**
-	 * Returns the vyshestojawaja_organizacija_id of this v w_ izvewenija.
+	 * Returns the vyshestojawaja_organizacija_id of this vw_ izvewenija.
 	 *
-	 * @return the vyshestojawaja_organizacija_id of this v w_ izvewenija
+	 * @return the vyshestojawaja_organizacija_id of this vw_ izvewenija
 	 */
 	public long getVyshestojawaja_organizacija_id();
 
 	/**
-	 * Sets the vyshestojawaja_organizacija_id of this v w_ izvewenija.
+	 * Sets the vyshestojawaja_organizacija_id of this vw_ izvewenija.
 	 *
-	 * @param vyshestojawaja_organizacija_id the vyshestojawaja_organizacija_id of this v w_ izvewenija
+	 * @param vyshestojawaja_organizacija_id the vyshestojawaja_organizacija_id of this vw_ izvewenija
 	 */
 	public void setVyshestojawaja_organizacija_id(
 		long vyshestojawaja_organizacija_id);
 
 	/**
-	 * Returns the naimenovanie of this v w_ izvewenija.
+	 * Returns the naimenovanie of this vw_ izvewenija.
 	 *
-	 * @return the naimenovanie of this v w_ izvewenija
+	 * @return the naimenovanie of this vw_ izvewenija
 	 */
 	@AutoEscape
 	public String getNaimenovanie();
 
 	/**
-	 * Sets the naimenovanie of this v w_ izvewenija.
+	 * Sets the naimenovanie of this vw_ izvewenija.
 	 *
-	 * @param naimenovanie the naimenovanie of this v w_ izvewenija
+	 * @param naimenovanie the naimenovanie of this vw_ izvewenija
 	 */
 	public void setNaimenovanie(String naimenovanie);
 
 	/**
-	 * Returns the sozdal of this v w_ izvewenija.
+	 * Returns the sozdal of this vw_ izvewenija.
 	 *
-	 * @return the sozdal of this v w_ izvewenija
+	 * @return the sozdal of this vw_ izvewenija
 	 */
 	public long getSozdal();
 
 	/**
-	 * Sets the sozdal of this v w_ izvewenija.
+	 * Sets the sozdal of this vw_ izvewenija.
 	 *
-	 * @param sozdal the sozdal of this v w_ izvewenija
+	 * @param sozdal the sozdal of this vw_ izvewenija
 	 */
 	public void setSozdal(long sozdal);
 
 	/**
-	 * Returns the izmenil of this v w_ izvewenija.
+	 * Returns the izmenil of this vw_ izvewenija.
 	 *
-	 * @return the izmenil of this v w_ izvewenija
+	 * @return the izmenil of this vw_ izvewenija
 	 */
 	public long getIzmenil();
 
 	/**
-	 * Sets the izmenil of this v w_ izvewenija.
+	 * Sets the izmenil of this vw_ izvewenija.
 	 *
-	 * @param izmenil the izmenil of this v w_ izvewenija
+	 * @param izmenil the izmenil of this vw_ izvewenija
 	 */
 	public void setIzmenil(long izmenil);
 
 	/**
-	 * Returns the data_sozdanija of this v w_ izvewenija.
+	 * Returns the data_sozdanija of this vw_ izvewenija.
 	 *
-	 * @return the data_sozdanija of this v w_ izvewenija
+	 * @return the data_sozdanija of this vw_ izvewenija
 	 */
 	public Date getData_sozdanija();
 
 	/**
-	 * Sets the data_sozdanija of this v w_ izvewenija.
+	 * Sets the data_sozdanija of this vw_ izvewenija.
 	 *
-	 * @param data_sozdanija the data_sozdanija of this v w_ izvewenija
+	 * @param data_sozdanija the data_sozdanija of this vw_ izvewenija
 	 */
 	public void setData_sozdanija(Date data_sozdanija);
 
 	/**
-	 * Returns the data_izmenenija of this v w_ izvewenija.
+	 * Returns the data_izmenenija of this vw_ izvewenija.
 	 *
-	 * @return the data_izmenenija of this v w_ izvewenija
+	 * @return the data_izmenenija of this vw_ izvewenija
 	 */
 	public Date getData_izmenenija();
 
 	/**
-	 * Sets the data_izmenenija of this v w_ izvewenija.
+	 * Sets the data_izmenenija of this vw_ izvewenija.
 	 *
-	 * @param data_izmenenija the data_izmenenija of this v w_ izvewenija
+	 * @param data_izmenenija the data_izmenenija of this vw_ izvewenija
 	 */
 	public void setData_izmenenija(Date data_izmenenija);
 
 	/**
-	 * Returns the kod_id of this v w_ izvewenija.
+	 * Returns the kod_id of this vw_ izvewenija.
 	 *
-	 * @return the kod_id of this v w_ izvewenija
+	 * @return the kod_id of this vw_ izvewenija
 	 */
 	public long getKod_id();
 
 	/**
-	 * Sets the kod_id of this v w_ izvewenija.
+	 * Sets the kod_id of this vw_ izvewenija.
 	 *
-	 * @param kod_id the kod_id of this v w_ izvewenija
+	 * @param kod_id the kod_id of this vw_ izvewenija
 	 */
 	public void setKod_id(long kod_id);
 
 	/**
-	 * Returns the put_a of this v w_ izvewenija.
+	 * Returns the put_a of this vw_ izvewenija.
 	 *
-	 * @return the put_a of this v w_ izvewenija
+	 * @return the put_a of this vw_ izvewenija
 	 */
 	public int getPut_a();
 
 	/**
-	 * Sets the put_a of this v w_ izvewenija.
+	 * Sets the put_a of this vw_ izvewenija.
 	 *
-	 * @param put_a the put_a of this v w_ izvewenija
+	 * @param put_a the put_a of this vw_ izvewenija
 	 */
 	public void setPut_a(int put_a);
 
 	/**
-	 * Returns the put_b of this v w_ izvewenija.
+	 * Returns the put_b of this vw_ izvewenija.
 	 *
-	 * @return the put_b of this v w_ izvewenija
+	 * @return the put_b of this vw_ izvewenija
 	 */
 	public int getPut_b();
 
 	/**
-	 * Sets the put_b of this v w_ izvewenija.
+	 * Sets the put_b of this vw_ izvewenija.
 	 *
-	 * @param put_b the put_b of this v w_ izvewenija
+	 * @param put_b the put_b of this vw_ izvewenija
 	 */
 	public void setPut_b(int put_b);
 
 	/**
-	 * Returns the put_c of this v w_ izvewenija.
+	 * Returns the put_c of this vw_ izvewenija.
 	 *
-	 * @return the put_c of this v w_ izvewenija
+	 * @return the put_c of this vw_ izvewenija
 	 */
 	@AutoEscape
 	public String getPut_c();
 
 	/**
-	 * Sets the put_c of this v w_ izvewenija.
+	 * Sets the put_c of this vw_ izvewenija.
 	 *
-	 * @param put_c the put_c of this v w_ izvewenija
+	 * @param put_c the put_c of this vw_ izvewenija
 	 */
 	public void setPut_c(String put_c);
 
 	/**
-	 * Returns the kontaktnoe_lico of this v w_ izvewenija.
+	 * Returns the kontaktnoe_lico of this vw_ izvewenija.
 	 *
-	 * @return the kontaktnoe_lico of this v w_ izvewenija
+	 * @return the kontaktnoe_lico of this vw_ izvewenija
 	 */
 	@AutoEscape
 	public String getKontaktnoe_lico();
 
 	/**
-	 * Sets the kontaktnoe_lico of this v w_ izvewenija.
+	 * Sets the kontaktnoe_lico of this vw_ izvewenija.
 	 *
-	 * @param kontaktnoe_lico the kontaktnoe_lico of this v w_ izvewenija
+	 * @param kontaktnoe_lico the kontaktnoe_lico of this vw_ izvewenija
 	 */
 	public void setKontaktnoe_lico(String kontaktnoe_lico);
 
 	/**
-	 * Returns the je_pochta of this v w_ izvewenija.
+	 * Returns the je_pochta of this vw_ izvewenija.
 	 *
-	 * @return the je_pochta of this v w_ izvewenija
+	 * @return the je_pochta of this vw_ izvewenija
 	 */
 	@AutoEscape
 	public String getJe_pochta();
 
 	/**
-	 * Sets the je_pochta of this v w_ izvewenija.
+	 * Sets the je_pochta of this vw_ izvewenija.
 	 *
-	 * @param je_pochta the je_pochta of this v w_ izvewenija
+	 * @param je_pochta the je_pochta of this vw_ izvewenija
 	 */
 	public void setJe_pochta(String je_pochta);
 
 	/**
-	 * Returns the kontaktnyj_telefon of this v w_ izvewenija.
+	 * Returns the kontaktnyj_telefon of this vw_ izvewenija.
 	 *
-	 * @return the kontaktnyj_telefon of this v w_ izvewenija
+	 * @return the kontaktnyj_telefon of this vw_ izvewenija
 	 */
 	@AutoEscape
 	public String getKontaktnyj_telefon();
 
 	/**
-	 * Sets the kontaktnyj_telefon of this v w_ izvewenija.
+	 * Sets the kontaktnyj_telefon of this vw_ izvewenija.
 	 *
-	 * @param kontaktnyj_telefon the kontaktnyj_telefon of this v w_ izvewenija
+	 * @param kontaktnyj_telefon the kontaktnyj_telefon of this vw_ izvewenija
 	 */
 	public void setKontaktnyj_telefon(String kontaktnyj_telefon);
 
 	/**
-	 * Returns the data_publikacii of this v w_ izvewenija.
+	 * Returns the data_publikacii of this vw_ izvewenija.
 	 *
-	 * @return the data_publikacii of this v w_ izvewenija
+	 * @return the data_publikacii of this vw_ izvewenija
 	 */
 	public Date getData_publikacii();
 
 	/**
-	 * Sets the data_publikacii of this v w_ izvewenija.
+	 * Sets the data_publikacii of this vw_ izvewenija.
 	 *
-	 * @param data_publikacii the data_publikacii of this v w_ izvewenija
+	 * @param data_publikacii the data_publikacii of this vw_ izvewenija
 	 */
 	public void setData_publikacii(Date data_publikacii);
 
 	/**
-	 * Returns the data_podvedenija_itogov of this v w_ izvewenija.
+	 * Returns the data_podvedenija_itogov of this vw_ izvewenija.
 	 *
-	 * @return the data_podvedenija_itogov of this v w_ izvewenija
+	 * @return the data_podvedenija_itogov of this vw_ izvewenija
 	 */
 	public Date getData_podvedenija_itogov();
 
 	/**
-	 * Sets the data_podvedenija_itogov of this v w_ izvewenija.
+	 * Sets the data_podvedenija_itogov of this vw_ izvewenija.
 	 *
-	 * @param data_podvedenija_itogov the data_podvedenija_itogov of this v w_ izvewenija
+	 * @param data_podvedenija_itogov the data_podvedenija_itogov of this vw_ izvewenija
 	 */
 	public void setData_podvedenija_itogov(Date data_podvedenija_itogov);
 
 	/**
-	 * Returns the po_istecheniju_dnej of this v w_ izvewenija.
+	 * Returns the po_istecheniju_dnej of this vw_ izvewenija.
 	 *
-	 * @return the po_istecheniju_dnej of this v w_ izvewenija
+	 * @return the po_istecheniju_dnej of this vw_ izvewenija
 	 */
 	public int getPo_istecheniju_dnej();
 
 	/**
-	 * Sets the po_istecheniju_dnej of this v w_ izvewenija.
+	 * Sets the po_istecheniju_dnej of this vw_ izvewenija.
 	 *
-	 * @param po_istecheniju_dnej the po_istecheniju_dnej of this v w_ izvewenija
+	 * @param po_istecheniju_dnej the po_istecheniju_dnej of this vw_ izvewenija
 	 */
 	public void setPo_istecheniju_dnej(int po_istecheniju_dnej);
 

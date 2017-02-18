@@ -58,7 +58,7 @@ public interface VW_IzvewenijaLocalService extends BaseLocalService,
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link VW_IzvewenijaLocalServiceUtil} to access the v w_ izvewenija local service. Add custom service methods to {@link tj.sapp.services.service.impl.VW_IzvewenijaLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link VW_IzvewenijaLocalServiceUtil} to access the vw_ izvewenija local service. Add custom service methods to {@link tj.sapp.services.service.impl.VW_IzvewenijaLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -81,9 +81,9 @@ public interface VW_IzvewenijaLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Returns the number of v w_ izvewenijas.
+	* Returns the number of vw_ izvewenijas.
 	*
-	* @return the number of v w_ izvewenijas
+	* @return the number of vw_ izvewenijas
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getVW_IzvewenijasCount();
@@ -135,15 +135,15 @@ public interface VW_IzvewenijaLocalService extends BaseLocalService,
 		int end, OrderByComparator<T> orderByComparator);
 
 	/**
-	* Returns a range of all the v w_ izvewenijas.
+	* Returns a range of all the vw_ izvewenijas.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link tj.sapp.services.model.impl.VW_IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of v w_ izvewenijas
-	* @param end the upper bound of the range of v w_ izvewenijas (not inclusive)
-	* @return the range of v w_ izvewenijas
+	* @param start the lower bound of the range of vw_ izvewenijas
+	* @param end the upper bound of the range of vw_ izvewenijas (not inclusive)
+	* @return the range of vw_ izvewenijas
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<VW_Izvewenija> getVW_Izvewenijas(int start, int end);
@@ -167,38 +167,38 @@ public interface VW_IzvewenijaLocalService extends BaseLocalService,
 		Projection projection);
 
 	/**
-	* Adds the v w_ izvewenija to the database. Also notifies the appropriate model listeners.
+	* Adds the vw_ izvewenija to the database. Also notifies the appropriate model listeners.
 	*
-	* @param vw_Izvewenija the v w_ izvewenija
-	* @return the v w_ izvewenija that was added
+	* @param vw_Izvewenija the vw_ izvewenija
+	* @return the vw_ izvewenija that was added
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public VW_Izvewenija addVW_Izvewenija(VW_Izvewenija vw_Izvewenija);
 
 	/**
-	* Creates a new v w_ izvewenija with the primary key. Does not add the v w_ izvewenija to the database.
+	* Creates a new vw_ izvewenija with the primary key. Does not add the vw_ izvewenija to the database.
 	*
-	* @param izvewenija_id the primary key for the new v w_ izvewenija
-	* @return the new v w_ izvewenija
+	* @param izvewenija_id the primary key for the new vw_ izvewenija
+	* @return the new vw_ izvewenija
 	*/
 	public VW_Izvewenija createVW_Izvewenija(long izvewenija_id);
 
 	/**
-	* Deletes the v w_ izvewenija with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the vw_ izvewenija with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param izvewenija_id the primary key of the v w_ izvewenija
-	* @return the v w_ izvewenija that was removed
-	* @throws PortalException if a v w_ izvewenija with the primary key could not be found
+	* @param izvewenija_id the primary key of the vw_ izvewenija
+	* @return the vw_ izvewenija that was removed
+	* @throws PortalException if a vw_ izvewenija with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	public VW_Izvewenija deleteVW_Izvewenija(long izvewenija_id)
 		throws PortalException;
 
 	/**
-	* Deletes the v w_ izvewenija from the database. Also notifies the appropriate model listeners.
+	* Deletes the vw_ izvewenija from the database. Also notifies the appropriate model listeners.
 	*
-	* @param vw_Izvewenija the v w_ izvewenija
-	* @return the v w_ izvewenija that was removed
+	* @param vw_Izvewenija the vw_ izvewenija
+	* @return the vw_ izvewenija that was removed
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	public VW_Izvewenija deleteVW_Izvewenija(VW_Izvewenija vw_Izvewenija);
@@ -207,21 +207,21 @@ public interface VW_IzvewenijaLocalService extends BaseLocalService,
 	public VW_Izvewenija fetchVW_Izvewenija(long izvewenija_id);
 
 	/**
-	* Returns the v w_ izvewenija with the primary key.
+	* Returns the vw_ izvewenija with the primary key.
 	*
-	* @param izvewenija_id the primary key of the v w_ izvewenija
-	* @return the v w_ izvewenija
-	* @throws PortalException if a v w_ izvewenija with the primary key could not be found
+	* @param izvewenija_id the primary key of the vw_ izvewenija
+	* @return the vw_ izvewenija
+	* @throws PortalException if a vw_ izvewenija with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public VW_Izvewenija getVW_Izvewenija(long izvewenija_id)
 		throws PortalException;
 
 	/**
-	* Updates the v w_ izvewenija in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the vw_ izvewenija in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param vw_Izvewenija the v w_ izvewenija
-	* @return the v w_ izvewenija that was updated
+	* @param vw_Izvewenija the vw_ izvewenija
+	* @return the vw_ izvewenija that was updated
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public VW_Izvewenija updateVW_Izvewenija(VW_Izvewenija vw_Izvewenija);

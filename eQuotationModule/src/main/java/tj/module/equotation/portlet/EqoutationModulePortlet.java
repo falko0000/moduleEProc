@@ -7,7 +7,7 @@ import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
 //import com.liferay.portal.kernel.service.ResourceLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
-
+import tj.module.equotation.constants.EQuotationConstants;
 import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -21,12 +21,12 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.portlet.display-category=eProcurement",
+		"com.liferay.portlet.display-category="+EQuotationConstants.PORTLRT_DISPLAY_CATEGORY,
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=eQuotation Module",
-		"javax.portlet.name=eQuotation",
+		"javax.portlet.display-name="+EQuotationConstants.PORTLET_DISPLAY_NAME,
+		"javax.portlet.name="+EQuotationConstants.PORTLET_NAME,
 		"javax.portlet.init-param.template-path=/",
-		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.init-param.view-template="+EQuotationConstants.VIEW_TEMPLATE,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user"
 	},
@@ -44,6 +44,8 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		// TODO Auto-generated method stub
+		
+
 		super.doEdit(renderRequest, renderResponse);
 	}
 	
