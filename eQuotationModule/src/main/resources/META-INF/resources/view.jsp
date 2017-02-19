@@ -16,6 +16,7 @@
     String tab = ParamUtil.getString(request, "myParam","preparation");
 %>
 
+
 			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="myParam" > 
  
     			<c:if test='<%= tab.equalsIgnoreCase("preparation")%>' >      
