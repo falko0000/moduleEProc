@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.sapp.services.model.OKGZ" />
+	<import class="tj.sapp.services.model.Rajony" />
+	<import class="tj.sapp.services.model.VBK" />
+	<import class="tj.sapp.services.model.VW_Izvewenija" />
+	<class name="tj.sapp.services.model.impl.OKGZImpl" table="sapp.okgz">
+		<id name="okgz_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="kod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="naimenovanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="tj.sapp.services.model.impl.RajonyImpl" table="sapp.rajony">
+		<id name="rajony_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">seq_rajony</param>
+			</generator>
+		</id>
+		<property name="oblast_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nazvanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kod_vbk" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="tj.sapp.services.model.impl.VBKImpl" table="klassifikatory.vbk">
+		<id name="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="kod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nazvanie_tj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nazvanie_ru" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="tj.sapp.services.model.impl.VW_IzvewenijaImpl" table="sapp.vw_izvewenija">
+		<id name="izvewenija_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">seq_izvewenija</param>
+			</generator>
+		</id>
+		<property name="sostojanie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="status_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tip_izvewenija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organizacija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="vyshestojawaja_organizacija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="naimenovanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="kod_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="put_a" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="put_b" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="put_c" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kontaktnoe_lico" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="je_pochta" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kontaktnyj_telefon" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="data_publikacii" type="org.hibernate.type.TimestampType" />
+		<property name="data_podvedenija_itogov" type="org.hibernate.type.TimestampType" />
+		<property name="po_istecheniju_dnej" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+</hibernate-mapping>

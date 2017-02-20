@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="tj.sapp.services.service.impl.OKGZLocalServiceImpl" id="tj.sapp.services.service.OKGZLocalService" />
+	<bean class="tj.sapp.services.service.impl.OKGZServiceImpl" id="tj.sapp.services.service.OKGZService" />
+	<bean class="tj.sapp.services.service.persistence.impl.OKGZPersistenceImpl" id="tj.sapp.services.service.persistence.OKGZPersistence" parent="basePersistence" />
+	<bean class="tj.sapp.services.service.impl.RajonyLocalServiceImpl" id="tj.sapp.services.service.RajonyLocalService" />
+	<bean class="tj.sapp.services.service.impl.RajonyServiceImpl" id="tj.sapp.services.service.RajonyService" />
+	<bean class="tj.sapp.services.service.persistence.impl.RajonyPersistenceImpl" id="tj.sapp.services.service.persistence.RajonyPersistence" parent="basePersistence" />
+	<bean class="tj.sapp.services.service.impl.VBKLocalServiceImpl" id="tj.sapp.services.service.VBKLocalService" />
+	<bean class="tj.sapp.services.service.impl.VBKServiceImpl" id="tj.sapp.services.service.VBKService" />
+	<bean class="tj.sapp.services.service.persistence.impl.VBKPersistenceImpl" id="tj.sapp.services.service.persistence.VBKPersistence" parent="basePersistence" />
+	<bean class="tj.sapp.services.service.impl.VW_IzvewenijaLocalServiceImpl" id="tj.sapp.services.service.VW_IzvewenijaLocalService" />
+	<bean class="tj.sapp.services.service.impl.VW_IzvewenijaServiceImpl" id="tj.sapp.services.service.VW_IzvewenijaService" />
+	<bean class="tj.sapp.services.service.persistence.impl.VW_IzvewenijaPersistenceImpl" id="tj.sapp.services.service.persistence.VW_IzvewenijaPersistence" parent="basePersistence" />
+</beans>
