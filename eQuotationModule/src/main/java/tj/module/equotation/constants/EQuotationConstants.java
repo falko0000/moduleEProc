@@ -14,6 +14,7 @@ public interface EQuotationConstants  {
 	static final String PAGE_ACTIONS = "/actions.jsp";
 	static final String PAGE_DELETE = "/delete.jsp";
 	static final String PAGE_INFO = "/info.jsp";
+	static final String PAGE_EDIT = "/edit.jsp";
 	static final String PAGE_PREPARATION = "/tabitems/preparation.jsp";
 	static final String PAGE_SUBMISSION = "/tabitems/submission.jsp";
 	static final String PAGE_EVALUATION = "/tabitems/evaluation.jsp";

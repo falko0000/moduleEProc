@@ -11,12 +11,12 @@
  <aui:row>
   <aui:col md="3" style="border:1px solid red;">
   
-    info page
+    edit page€
    
  </aui:col>
  <aui:col md="7" style="border:1px solid red;">
   
-	info page
+    edit page‚
  </aui:col>
 </aui:row>
 
