@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.module.access.model.AccessModule">
+		<field name="uuid" type="String" />
+		<field name="dostup_id" type="long" />
+		<field name="izvewenije_id" type="long" />
+		<field name="user_id" type="long" />
+		<field name="createdby" type="long" />
+		<field name="created" type="Date" />
+		<field name="updatedby" type="long" />
+		<field name="updated" type="Date" />
+	</model>
+</model-hints>

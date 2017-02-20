@@ -1,0 +1,1 @@
+create index IX_2311B627 on sapp.dostup (uuid_[$COLUMN_LENGTH:75$]);
