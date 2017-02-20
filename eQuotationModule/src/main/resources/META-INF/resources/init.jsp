@@ -7,6 +7,8 @@
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
+<%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
+
 <%@ page import="com.liferay.portal.kernel.service.permission.PortletPermissionUtil" %>
 <%@ page import="com.liferay.portal.kernel.security.permission.ActionKeys" %>
 
@@ -50,6 +52,8 @@ boolean canAddNew = permissionChecker.hasPermission(groupId, name, primKey, acti
 
 
 %>
+
+
 
 
 

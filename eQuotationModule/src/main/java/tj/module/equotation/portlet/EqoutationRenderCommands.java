@@ -23,8 +23,12 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		renderRequest.setAttribute("editnametabs", "one,two,three,four,five");
+		System.out.println(EQuotationConstants.PAGE_EDIT);
+		
+		return EQuotationConstants.PAGE_EDIT;
 	}
 
 }

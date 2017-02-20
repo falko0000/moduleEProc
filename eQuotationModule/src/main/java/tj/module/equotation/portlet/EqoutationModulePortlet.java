@@ -38,7 +38,9 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		// TODO Auto-generated method stub
+		
+		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
+		renderRequest.setAttribute("editnametabs", names);
 		super.doView(renderRequest, renderResponse);
 	}
 	
