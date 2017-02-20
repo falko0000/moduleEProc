@@ -1,0 +1,9 @@
+Bundle-Name: AccessModule-api
+Bundle-SymbolicName: tj.module.access.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.module.access.exception,\
+	tj.module.access.model,\
+	tj.module.access.service,\
+	tj.module.access.service.persistence
+-includeresource: META-INF/service.xml=../AccessModule-service/service.xml
