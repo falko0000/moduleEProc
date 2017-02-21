@@ -9,12 +9,12 @@
 
 <h1>Bid info:</h1>
  <aui:row>
-  <aui:col md="3" style="border:1px solid red;">
+  <aui:col md="3" cssClass="col-border">
   
     info page
    
  </aui:col>
- <aui:col md="7" style="border:1px solid red;">
+ <aui:col md="7" cssClass="col-border">
   
 	info page
  </aui:col>

@@ -24,9 +24,10 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 		
+		String names = "bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots";
+		renderRequest.setAttribute("editnametabs", names);
 		
-		renderRequest.setAttribute("editnametabs", "one,two,three,four,five");
-		System.out.println(EQuotationConstants.PAGE_EDIT);
+		
 		
 		return EQuotationConstants.PAGE_EDIT;
 	}
