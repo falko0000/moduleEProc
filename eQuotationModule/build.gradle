@@ -7,4 +7,5 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.compendium", version: "5.0.0"
 	compile project (":modules:SAPPServices:SAPPServices-api")
 	compile project (":modules:spisok.lotov:spisok.lotov-api")
+	compile project (":modules:tipy.izvewenij:tipy.izvewenij-api")
 }

@@ -1,16 +1,25 @@
 package tj.module.equotation.portlet;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.service.OrganizationServiceUtil;
 import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserServiceUtil;
 //import com.liferay.portal.kernel.service.ResourceLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import tj.module.equotation.constants.EQuotationConstants;
-import tj.sapp.services.model.VW_Izvewenija;
+
+
+import tj.tipy.izvewenij.model.TipyIzvewenij;
+import tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil;
+
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
@@ -39,6 +48,18 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		
+		
+		try {
+			List<Organization> org = UserServiceUtil.getCurrentUser().getOrganizations();
+	
+			for(Organization o : org)
+				
+			System.out.println(o.getName());
+		} catch (PortalException e) {
+			System.out.println("org is null");
+			e.printStackTrace();
+		}
+	
 		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
 		renderRequest.setAttribute("editnametabs", names);
 		super.doView(renderRequest, renderResponse);

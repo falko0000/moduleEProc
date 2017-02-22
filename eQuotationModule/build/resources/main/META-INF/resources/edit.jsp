@@ -6,9 +6,9 @@
 
 <%
     String names =(String) request.getAttribute("editnametabs");
-    String param = names.substring(names.lastIndexOf(",")+1,names.length());
  
-    String tab = ParamUtil.getString(request, "myParam",param);
+ 
+    String tab = ParamUtil.getString(request, "myParam","bid_generalinfo");
 %>
 
 
