@@ -21,11 +21,12 @@ Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  ion="[6.3,7)",com.liferay.portal.kernel.theme;version="[1.0,2)",com.l
  iferay.portal.kernel.upload;version="[6.3,7)",com.liferay.portal.kern
  el.util;version="[7.0,8)",javax.portlet;version="[2.0,3)",javax.servl
- et;version="[3.0,4)",javax.servlet.http;version="[3.0,4)",tj.sapp.ser
- vices.model;version="[1.0,2)",tj.sapp.services.service;version="[1.0,
- 2)",tj.spisok.lotov.model;version="[1.0,2)",tj.spisok.lotov.service;v
- ersion="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.tipy.iz
- vewenij.service;version="[1.0,2)"
+ et;version="[3.0,4)",javax.servlet.http;version="[3.0,4)",tj.orgindex
+ .model;version="[1.0,2)",tj.orgindex.service;version="[1.0,2)",tj.sap
+ p.services.model;version="[1.0,2)",tj.sapp.services.service;version="
+ [1.0,2)",tj.spisok.lotov.model;version="[1.0,2)",tj.spisok.lotov.serv
+ ice;version="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.ti
+ py.izvewenij.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

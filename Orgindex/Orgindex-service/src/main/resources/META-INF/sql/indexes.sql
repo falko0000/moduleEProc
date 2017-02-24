@@ -1,0 +1,1 @@
+create index IX_2A02BFC3 on sapp.orgindex (organization_id);

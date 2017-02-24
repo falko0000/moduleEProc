@@ -1,0 +1,9 @@
+Bundle-Name: tipy.izvewenij-api
+Bundle-SymbolicName: tj.tipy.izvewenij.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.tipy.izvewenij.exception,\
+	tj.tipy.izvewenij.model,\
+	tj.tipy.izvewenij.service,\
+	tj.tipy.izvewenij.service.persistence
+-includeresource: META-INF/service.xml=../tipy.izvewenij-service/service.xml

@@ -1,0 +1,9 @@
+Bundle-Name: Orgindex-api
+Bundle-SymbolicName: tj.orgindex.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.orgindex.exception,\
+	tj.orgindex.model,\
+	tj.orgindex.service,\
+	tj.orgindex.service.persistence
+-includeresource: META-INF/service.xml=../Orgindex-service/service.xml

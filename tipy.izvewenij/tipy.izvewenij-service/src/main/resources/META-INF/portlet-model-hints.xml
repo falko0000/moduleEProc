@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.tipy.izvewenij.model.TipyIzvewenij">
+		<field name="tip" type="String" />
+		<field name="tipy_izvewenij_id" type="long" />
+	</model>
+</model-hints>

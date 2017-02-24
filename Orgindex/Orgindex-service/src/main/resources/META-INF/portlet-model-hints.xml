@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.orgindex.model.Orgindex">
+		<field name="orgindex_id" type="long" />
+		<field name="organization_id" type="long" />
+		<field name="subdivision_index" type="int" />
+		<field name="sozdal" type="long" />
+		<field name="izmenil" type="long" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="data_izmenenija" type="Date" />
+		<field name="name" type="String" />
+	</model>
+</model-hints>
