@@ -6,7 +6,7 @@
 	<class name="tj.orgindex.model.impl.OrgindexImpl" table="sapp.orgindex">
 		<id name="orgindex_id" type="long">
 			<generator class="sequence">
-				<param name="sequence">seq_sapp_orgindex</param>
+				<param name="sequence">sapp.seq_sapp_orgindex</param>
 			</generator>
 		</id>
 		<property name="organization_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />

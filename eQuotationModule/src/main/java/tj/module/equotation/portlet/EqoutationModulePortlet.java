@@ -1,6 +1,8 @@
 package tj.module.equotation.portlet;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -13,19 +15,21 @@ import com.liferay.portal.kernel.service.persistence.UserUtil;
 import tj.orgindex.model.Orgindex;
 
 import tj.orgindex.service.OrgindexLocalServiceUtil;
-import tj.orgindex.service.persistence.OrgindexUtil;
+
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import com.liferay.portal.kernel.language.LanguageUtil;
 
-
+import com.liferay.taglib.aui.FieldsetTag;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+//import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -55,63 +59,8 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		
-		System.out.println("inport...............");
-		Map<Integer,String> map = new HashMap<Integer,String>();
+
 		
-		map.put(1, "1 ОРЗРБ");
-		map.put(2, "2 ОРЗМБ");	
-		map.put(3,"3 ОРЗРУ");
-		map.put(4,"4 ГБАО");
-		map.put(5,"5 СУГД");
-		map.put(6,"6 ХАТЛОН");
-		map.put(7,"7 КУЛЯБ");
-		map.put(8,"8 РАШТ");
-		map.put(9,"9 ОЭЗ");
-		map.put(10,"10 ОАК и ИО");
-		map.put(11,"11 Минобразование");
-		map.put(12,"12 Минздрав");
-		map.put(13,"13 Минюст");
-		map.put(14,"14 Минсельхоз");
-		map.put(15,"15 Минпром");
-		map.put(16,"16 Госкоминвест");
-		map.put(17,"17 МОГВ города Душанбе");
-		map.put(18,"18 Минтруд");
-		map.put(19,"19 ТНУ");
-		map.put(20,"20 Минэкономразвития ");
-		map.put(27,"27 МОГВ города Вахдат");
-		map.put(29,"29");
-		map.put(37,"37");
-		map.put(41,"41 НБТ");
-		map.put(43,"43 Счетная палата");
-		map.put(44,"44 Минтранс");
-		map.put(46,"46 ОАХК Барки Точик");
-		
-		Orgindex org = null; 
-		
-		for (Map.Entry<Integer, String> entry : map.entrySet()) {
-			
-			//org = OrgindexLocalServiceUtil.
-			try {
-				org.setOrganization_id(UserServiceUtil.getCurrentUser().getOrganizations().get(0).getOrganizationId());
-			} catch (PortalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			org.setSubdivision_index(entry.getKey());
-			org.setName(entry.getValue());
-			org.setData_izmenenija(new Date());
-			try {
-				org.setIzmenil(UserServiceUtil.getCurrentUser().getUserId());
-				org.setSozdal(UserServiceUtil.getCurrentUser().getUserId());
-			} catch (PortalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			OrgindexLocalServiceUtil.addOrgindex(org);
-		}
-		
-		//
 		
 		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
 		renderRequest.setAttribute("editnametabs", names);

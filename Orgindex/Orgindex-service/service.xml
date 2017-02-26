@@ -4,7 +4,7 @@
 <service-builder package-path="tj.orgindex">
 	<namespace>Orgindex</namespace>
     <entity name="Orgindex" table="sapp.orgindex" remote-service="false" local-service="true">
-        <column name="orgindex_id" type="long" primary="true" id-type="sequence" id-param="seq_sapp_orgindex"></column>
+        <column name="orgindex_id" type="long" primary="true" id-type="sequence" id-param="sapp.seq_sapp_orgindex"></column>
         <column name="organization_id" type="long"></column>
         <column name="subdivision_index" type="int"></column>
         <column name="sozdal" type="long"></column>

@@ -1,37 +1,44 @@
+<%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@ include file="/init.jsp" %>
 
-<portlet:renderURL var="tabs" >
-<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
-</portlet:renderURL>
-
 <%
-    String names =(String) request.getAttribute("editnametabs");
+/*    String names =(String) request.getAttribute("editnametabs");
  
  
     String tab = ParamUtil.getString(request, "myParam","bid_generalinfo");
+  
+  */
+  String backURL = "";
+  
+  String[] CAT_NAMES = {"bid_generalinfo","bid_opening","bid_aboutinfo","bid_listlots"};
+   
+  String[] generalinfo = {"generalinfo"};
+  String[] opening ={"opening"};
+  String[] aboutinfo = {"aboutinfo"};
+  String[] listlots = {"listlots"};
+  
+  String[][] CAT_SECTION = {generalinfo, opening, aboutinfo, listlots};
+  
+/*  String redirect = ParamUtil.getString(request, "redirect");
+
+    String backURL = ParamUtil.getString(request, "backURL", redirect);
+    */
 %>
 
+<portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT %>" var="editEntryURL" >
+	<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT %>" />
+</portlet:actionURL>
 
-<liferay-ui:tabs names="<%=names %>" url="<%=tabs.toString()%>" param="myParam" > 
+
+<aui:form action="<%=editEntryURL.toString()%>" method="post" name="fm">
  
-    			<c:if test='<%= tab.equalsIgnoreCase("bid_generalinfo")%>' >      
-        			<jsp:include page="<%=EQuotationConstants.PAGE_GENERALINFO%>" flush="true" />
-    			</c:if>
-     
-    			<c:if test='<%= tab.equalsIgnoreCase("bid_opening")%>' >     
-        			<jsp:include page="<%=EQuotationConstants.PAGE_OPENING%>" flush="true" />
-    			</c:if>
-     
-    			<c:if test='<%= tab.equalsIgnoreCase("bid_aboutinfo")%>' >     
-        			<jsp:include page="<%=EQuotationConstants.PAGE_ABOUTINFO%>" flush="true" />
-    			</c:if>
-                
-                <c:if test='<%= tab.equalsIgnoreCase("bid_listlots")%>' >     
-        			<jsp:include page="<%=EQuotationConstants.PAGE_LISTLOTS%>" flush="true" />
-    			</c:if>
-    			
-    			
- 
-			</liferay-ui:tabs>
+ <liferay-ui:form-navigator 
+ backURL="<%=backURL %>"
+ categoryNames="<%= CAT_NAMES %>"
+ categorySections="<%= CAT_SECTION %>"
+ formName="fm"
+ jspPath="/bid/"
+ />
+</aui:form>
 
 

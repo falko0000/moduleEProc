@@ -34,7 +34,7 @@ public interface EQuotationConstants  {
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
     static final String ACTION_COMMAND_NAME_NEW  = "new";    
 	//Render commands name
-    static final String RENDER_COMMAND_NAME_EDIT = "/hello/edit_entry";
+    static final String RENDER_COMMAND_NAME_EDIT = "/edit_entry";
 	
 	//Resource command name
     static final String RESOURCE_COMMAND_NAME_LIST = "/hello/edit_entry";

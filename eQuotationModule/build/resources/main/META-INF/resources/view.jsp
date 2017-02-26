@@ -6,7 +6,6 @@
  */
 --%>
 
-
 <%@ include file="/init.jsp" %>
 
 <portlet:renderURL var="tabURL" />
@@ -19,6 +18,9 @@
      String tab = ParamUtil.getString(request, "my","preparation");
     String currentURL = themeDisplay.getURLCurrent();
 %>
+
+  
+
 
      <liferay-frontend:add-menu>
 	

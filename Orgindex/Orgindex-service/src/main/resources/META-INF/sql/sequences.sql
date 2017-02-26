@@ -1,1 +1,1 @@
-create sequence seq_sapp_orgindex;
+create sequence sapp.seq_sapp_orgindex;
