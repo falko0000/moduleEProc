@@ -27,7 +27,7 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		String names = "bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots";
 		renderRequest.setAttribute("editnametabs", names);
 		
-		
+		System.out.println(renderRequest.getServerName());
 		
 		return EQuotationConstants.PAGE_EDIT;
 	}

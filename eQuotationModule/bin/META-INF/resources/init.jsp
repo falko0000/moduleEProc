@@ -37,6 +37,19 @@
 <%@page import="tj.spisok.lotov.service.spisok_lotovLocalServiceUtil"%>
 <%@page import="tj.module.equotation.constants.EQuotationConstants" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+
+<%@page import="tj.tipy.izvewenij.model.TipyIzvewenij"%>
+<%@page import="tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Organization"%>
+<%@page import="com.liferay.portal.kernel.service.UserServiceUtil"%>
+
+<%@ page import="tj.orgindex.model.Orgindex" %>
+<%@ page import="tj.orgindex.service.OrgindexLocalServiceUtil" %>
+<%@ page import = "com.liferay.portal.kernel.model.Address" %>
+<%@ page import = "java.util.Date" %>
+<%@ page import = "java.util.Calendar" %>
+<%@ page import ="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
+<%@ page import ="com.liferay.portal.kernel.util.DateUtil" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

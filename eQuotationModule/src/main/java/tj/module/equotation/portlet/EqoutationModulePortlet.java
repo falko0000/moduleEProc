@@ -10,11 +10,13 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserServiceUtil;
 import com.liferay.portal.kernel.service.persistence.UserUtil;
+import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntryUtil;
 
 //import com.liferay.portal.kernel.service.ResourceLocalServiceUtil;
 import tj.orgindex.model.Orgindex;
 
 import tj.orgindex.service.OrgindexLocalServiceUtil;
+
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -24,6 +26,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.taglib.aui.FieldsetTag;
 
 import java.io.IOException;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +61,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
+		
 		
 
 		
