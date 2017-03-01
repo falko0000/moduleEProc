@@ -6,6 +6,7 @@ import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
 
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 
@@ -26,7 +27,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	@Override
 	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		
-	//	actionRequest.getParameter()
+		
 			
 	}
 

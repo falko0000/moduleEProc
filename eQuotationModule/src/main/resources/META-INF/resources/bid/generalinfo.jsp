@@ -3,12 +3,12 @@
 
 <%
  String[] CAT_NAMES = new String[]{"bid_state_info","bid_general_info","bid_contact_information"};
- String[] details = new String[]{"bidstateinfo"};
- String[] education = new String[]{"bidgeneralinfo"};
- String[] experience = new String[]{"bidcontactinformation"};
+ String[] stateinfo = new String[]{"bidstateinfo"};
+ String[] generalinfo = new String[]{"bidgeneralinfo"};
+ String[] contactinformation = new String[]{"bidcontactinformation"};
 
  
- String[][] CAT_SECTION = {details, education, experience};
+ String[][] CAT_SECTION = {stateinfo, generalinfo, contactinformation};
 %>
 
 <portlet:actionURL var="updateStudentVar" name="updateStudent" />
