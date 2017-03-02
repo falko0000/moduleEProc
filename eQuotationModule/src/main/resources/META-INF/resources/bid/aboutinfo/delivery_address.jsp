@@ -2,16 +2,17 @@
 
 <aui:field-wrapper label="bid_delivery_address">
 
-<div class="flex-container">
+<div class="radio">
 
 
-<aui:input name="zlot" type="radio" value="1" label="bid_task_each"  inlineLabel="right" />
+<aui:input name="delivery_address" type="radio" value="1" label="bid_task_each"  inlineLabel="right" inlineField="true" />
 
-<aui:input name="zlot" type="radio" value="2" label="bid_task_whole" inlineLabel="right" inlineField="false"/>
+<aui:input name="delivery_address" type="radio" value="2" label="bid_task_whole" inlineLabel="right" inlineField="false" checked="true"/>
 
+</div>
 
 <aui:input name=" " type="textarea" value=""  placeholder="bid_delivery_address" />
 
-</div>
+
 
 </aui:field-wrapper>

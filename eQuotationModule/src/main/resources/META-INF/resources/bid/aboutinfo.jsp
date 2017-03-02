@@ -3,13 +3,17 @@
 
 
 <%
- String[] CAT_NAMES = new String[]{"bid_title_delivery_address"};
+ String[] CAT_NAMES = new String[]{"bid_title_delivery_address",
+		                            "bid_title_delivery_time",
+		                            "bid_validity_tenders"};
+
  String[] deliveryaddress = new String[]{"delivery_address"};
- //String[] summarizing = new String[]{"bidsummarizing"};
+ String[] deliverytime = new String[]{"delivery_time"};
+ String[] validity = new String[]{"validity"};
 
 
  
- String[][] CAT_SECTION = {deliveryaddress};
+ String[][] CAT_SECTION = {deliveryaddress,deliverytime,validity};
 %>
 
 <portlet:actionURL var="updateStudentVar" name="updateStudent" />
