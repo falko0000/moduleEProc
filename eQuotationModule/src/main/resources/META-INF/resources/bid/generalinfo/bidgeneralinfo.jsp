@@ -1,40 +1,47 @@
 <%@ include file="/init.jsp" %>
 <%
-List<TipyIzvewenij> typeizvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenijs(0,TipyIzvewenijLocalServiceUtil.getTipyIzvewenijsCount()); 
-Organization org = UserServiceUtil.getCurrentUser().getOrganizations().get(0);
 
-List<Orgindex> orgindex = OrgindexLocalServiceUtil.getOrgindexs(0, OrgindexLocalServiceUtil.getOrgindexsCount());
+	List<TipyIzvewenij> typeizvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenijs(0,TipyIzvewenijLocalServiceUtil.getTipyIzvewenijsCount()); 
 
-String state = "Формирование извещения";
-String orgName = org.getName();
+	Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
 
-Address address = UserServiceUtil.getCurrentUser().getAddresses().get(0);
+	List<Orgindex> orgindex = OrgindexLocalServiceUtil.getOrgindexs(0, OrgindexLocalServiceUtil.getOrgindexsCount());
 
+	Organization authorized_body_org = (Organization) request.getAttribute("authorized_body_org");
 
-
-String fulladdress = address.getCity()+" "+address.getStreet1();
-
-if(org.getType().equalsIgnoreCase("contracting_authority"))
-  
-	orgName = "155 Администрация Центрального Аппарата по государственным закупкам товаров, работ и услуг при Правителестве Республики Таджикистан"; 
+	IzveweniePut izvewenieput = null;
+	
+	if(izvewenija != null)
+		izvewenieput = IzveweniePutUtil.findByIzvewenieId(izvewenija.getIzvewenija_id()).get(0);
 %>
 
-      <aui:input id="bid_number"   type="text"      name = "bid_number"   value="<%=LanguageUtil.get(request,"bid_number_value")%>" />
+      <aui:input 
+      id="bid_number" 
+      type="text"     
+      name = "bid_number"  
+      value="<%=(izvewenija!= null)? String.valueOf(izvewenija.getIzvewenija_id()) 
+    		                       : LanguageUtil.get(request,"bid_number_value")%>"
+      disabled="true"
+       />
 
-      <aui:select id="bid_method" label="bid_method" name="bid_method" >
-       <%for(TipyIzvewenij type : typeizvewenij) { %>
+      <aui:select id="bid_method" label="bid_method" name="bid_method" disabled="true">
+       
+       <%for(TipyIzvewenij type : typeizvewenij) 
+         { %>
+      
       <aui:option value = "<%=type.getTipy_izvewenij_id()%>" label="<%=type.getTip()%>"></aui:option>
+      
        <%} %>
       </aui:select> 
 
       
-      <aui:input id="bid_related_conditions" type="text"  name="bid_related_conditions" value= "<%=LanguageUtil.get(request,"bid_related_conditions_value")%>" />
+      <aui:input id="bid_related_conditions" type="text"  name="bid_related_conditions" value= "<%=LanguageUtil.get(request,"bid_related_conditions_value")%>" disabled="true"/>
      
-      <aui:input id="bid_approval_publication" type="text"  name="bid_approval_publication" value= "<%=LanguageUtil.get(request,"bid_approval_publication_value")%>" />
+      <aui:input id="bid_approval_publication" type="text"  name="bid_approval_publication" value= "<%=LanguageUtil.get(request,"bid_approval_publication_value")%>" disabled="true"/>
       
-      <aui:input id="bid_authorized_body" type="text"  name="bid_authorized_body" value= "<%=orgName%>" />
+      <aui:input id="bid_authorized_body" type="text"  name="bid_authorized_body" value= "<%=authorized_body_org.getName()%>" disabled="true"/>
       
-      <aui:input id="bid_name_notification" type="text"  name="bid_name_notification"  >
+      <aui:input id="bid_name_notification" type="text"  name="bid_name_notification"  value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : ""  %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
       
@@ -44,7 +51,7 @@ if(org.getType().equalsIgnoreCase("contracting_authority"))
      
       <aui:col md="3">
       
-      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="text">
+      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="text" >
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      
@@ -54,16 +61,29 @@ if(org.getType().equalsIgnoreCase("contracting_authority"))
       <aui:col md="6">
 
         <aui:select id="bid_number_IFB_B" label="(B)" name=" " >
-       <%for(Orgindex orgind : orgindex) { %>
-      <aui:option value = "<%=orgind.getOrgindex_id()%>" label="<%=orgind.getName()%>"></aui:option>
+      <c:if test="<%= izvewenieput != null %>">
+       <%for(Orgindex orgind : orgindex) 
+         { %>
+      		
+      		<aui:option value = "<%=orgind.getOrgindex_id()%>" label="<%=orgind.getName()%>" selected ="<%=orgind.getOrgindex_id() ==  izvewenieput.getPut_b()%>" ></aui:option>
+       
        <%} %>
+       </c:if>
+       <c:if test="<%= izvewenieput == null %>">
+       <%for(Orgindex orgind : orgindex) 
+         { %>
+      		
+      		<aui:option value = "<%=orgind.getOrgindex_id()%>" label="<%=orgind.getName()%>" ></aui:option>
+       
+       <%} %>
+       </c:if>
         </aui:select> 
       </aui:col>
       
       <aui:col md="3">
       
     
-      <aui:input id="bid_number_IFB_C" name ="(C)" type="text">
+      <aui:input id="bid_number_IFB_C" name ="(C)" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_c() : ""%>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      

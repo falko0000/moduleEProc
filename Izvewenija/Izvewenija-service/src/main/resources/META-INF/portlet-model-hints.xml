@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.izvewenija.model.Izvewenija">
+		<field name="data_izmenenija" type="Date" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="izmenil" type="long" />
+		<field name="izvewenija_id" type="long" />
+		<field name="kod_id" type="long" />
+		<field name="naimenovanie" type="String" />
+		<field name="organizacija_id" type="long" />
+		<field name="sostojanie_id" type="long" />
+		<field name="sozdal" type="long" />
+		<field name="status_id" type="long" />
+		<field name="tip_izvewenija_id" type="long" />
+		<field name="vyshestojawaja_organizacija_id" type="long" />
+	</model>
+</model-hints>

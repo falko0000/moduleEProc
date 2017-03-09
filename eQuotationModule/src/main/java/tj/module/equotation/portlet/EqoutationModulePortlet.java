@@ -1,36 +1,35 @@
 package tj.module.equotation.portlet;
 
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Address;
-import com.liferay.portal.kernel.model.Organization;
+
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
+import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserServiceUtil;
-import com.liferay.portal.kernel.service.persistence.UserUtil;
-import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntryUtil;
+import com.liferay.portal.kernel.service.persistence.OrganizationUtil;
 
 //import com.liferay.portal.kernel.service.ResourceLocalServiceUtil;
-import tj.orgindex.model.Orgindex;
 
-import tj.orgindex.service.OrgindexLocalServiceUtil;
 
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
-import tj.module.equotation.constants.EQuotationConstants;
-import com.liferay.portal.kernel.language.LanguageUtil;
 
-import com.liferay.taglib.aui.FieldsetTag;
+import tj.izvewenieput.model.IzveweniePut;
+import tj.izvewenieput.service.IzveweniePutLocalService;
+import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
+import tj.izvewenieput.service.persistence.IzveweniePutUtil;
+import tj.izvewenija.model.Izvewenija;
+import tj.module.equotation.constants.EQuotationConstants;
+import tj.orgindex.service.persistence.OrgindexUtil;
+import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
+import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.porjadok.raboty.komissii.service.persistence.PorjadokRabotyKomissiiUtil;
 
 import java.io.IOException;
-
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 
@@ -42,6 +41,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+
 
 @Component(
 	immediate = true,
@@ -61,10 +61,19 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
+	
 		
-		
+	try {
+		PorjadokRabotyKomissii por = PorjadokRabotyKomissiiLocalServiceUtil.getPorjadokRabotyKomissii(116);
 
-		
+		/* Date date = por.getData_podvedenija_itogov()
+		 
+		 System.out.println(date);
+*/
+	} catch (PortalException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		
 		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
 		renderRequest.setAttribute("editnametabs", names);
@@ -88,29 +97,5 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		System.out.println("==>" + iNum + ", " + naimenovanie );
 	}
 
-	@Override
-	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
-		try 
-		{
-			String iNum = ParamUtil.getString(actionRequest, "iNum");
-			String naimenovanie = ParamUtil.getString(actionRequest, "naimenovanie");
-			// get the companyId
-			long companyId = PortalUtil.getCompanyId(actionRequest);
-		//VW_Izvewenija t= new VW_Izvewenija();
-		
-			// get the current User's name
-			User currentUser = PortalUtil.getUser(actionRequest); //.getUser(actionRequest);
-			String currentName = currentUser.getFullName();
-			System.out.println("===>resource: " + ResourceActionLocalServiceUtil.getResourceActions("eQuotation") ); //getResourceActions(0, ResourceActionLocalServiceUtil.getResourceActionsCount()-1));
-			//System.out.println("==>" + iNum + ", " + naimenovanie + ", userId = " + UserLocalServiceUtil.getDefaultUserId(PortalUtil.getDefaultCompanyId()) );
-			System.out.println("==>" + iNum + ", " + naimenovanie + ", user = " + currentName + ", companyId = " + companyId );
-		} catch (PortalException e) {
-				e.printStackTrace();
-		}
 
-		
-	}
-	
-	
 }

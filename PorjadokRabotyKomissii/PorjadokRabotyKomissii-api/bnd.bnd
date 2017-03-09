@@ -1,0 +1,9 @@
+Bundle-Name: PorjadokRabotyKomissii-api
+Bundle-SymbolicName: tj.porjadok.raboty.komissii.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.porjadok.raboty.komissii.exception,\
+	tj.porjadok.raboty.komissii.model,\
+	tj.porjadok.raboty.komissii.service,\
+	tj.porjadok.raboty.komissii.service.persistence
+-includeresource: META-INF/service.xml=../PorjadokRabotyKomissii-service/service.xml

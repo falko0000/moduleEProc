@@ -1,29 +1,35 @@
 <%@ include file="/init.jsp" %>
 <%
-List<TipyIzvewenij> typeizvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenijs(0,TipyIzvewenijLocalServiceUtil.getTipyIzvewenijsCount()); 
-Organization org = UserServiceUtil.getCurrentUser().getOrganizations().get(0);
 
-List<Orgindex> orgindex = OrgindexLocalServiceUtil.getOrgindexs(0, OrgindexLocalServiceUtil.getOrgindexsCount());
+    Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+    Organization bidorg = (Organization) request.getAttribute("bidorg");
+    User biduser = (User) request.getAttribute("biduser");
 
-String state = "Формирование извещения";
-String orgName = org.getName();
+	
+	String state = "Формирование извещения";
+	
+	String orgName = "";
+	
+	if(bidorg != null)
+		orgName = bidorg.getName();
+	if(biduser == null)
+		biduser = UserServiceUtil.getCurrentUser();
 
-Address address = UserServiceUtil.getCurrentUser().getAddresses().get(0);
-
-
-
-String fulladdress = address.getCity()+" "+address.getStreet1();
-
-if(org.getType().equalsIgnoreCase("contracting_authority"))
-  
-	orgName = "155 Администрация Центрального Аппарата по государственным закупкам товаров, работ и услуг при Правителестве Республики Таджикистан"; 
+	
 %>
 
 
+      
+      <aui:input id="bid_state"   type="text"      name = "bid_state"   value= "<%=LanguageUtil.get(request,"bid_state_value")%>" disabled="true"/>
 
-      <aui:input id="bid_state"   type="text"      name = "bid_state"   value= "<%=LanguageUtil.get(request,"bid_state_value")%>" />
-
-      <aui:input id="bid_organizer" type="text"  name="bid_organizer" value="<%=orgName%>" />
+      <aui:input id="bid_organizer" type="text"  name="bid_organizer" value="<%=orgName%>" disabled="true"/>
      
-      <aui:input id="bid_created" type="text"  name="bid_created" value="<%=UserServiceUtil.getCurrentUser().getFullName()%>" />
+   
+      <aui:input id="bid_created" type="text"  name="bid_created" value="<%=biduser.getFullName()%>" disabled="true"/>
+      
+      <c:if test="<%= izvewenija!= null  %>">
+      
+      <aui:input id="bid_last_modified" type="text"  name="bid_last_modified" value="<%=izvewenija.getData_izmenenija()%>" disabled="true"/>
+      
+      </c:if>
       

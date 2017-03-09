@@ -26,7 +26,7 @@
 	
 		<portlet:renderURL var="addMessageURL">
 			<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
-		   
+		   <portlet:param name="izvewenie_id" value="0"/>
 		</portlet:renderURL>
 
 		<liferay-frontend:add-menu-item title='ADD' url="<%= addMessageURL.toString() %>" />
@@ -35,25 +35,26 @@
 	
 			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="my" > 
  
-    			<c:if test='<%= tab.equalsIgnoreCase("preparation")%>' >      
-        			<jsp:include page="<%=EQuotationConstants.PAGE_PREPARATION%>" flush="true" />
-    			</c:if>
+             <liferay-ui:section>
+    		    <jsp:include page="<%=EQuotationConstants.PAGE_PREPARATION%>" flush="true" />
+    		</liferay-ui:section>
+    		
      
-    			<c:if test='<%= tab.equalsIgnoreCase("submission_of_proposals")%>' >     
+    			 <liferay-ui:section>     
         			<jsp:include page="<%=EQuotationConstants.PAGE_SUBMISSION%>" flush="true" />
-    			</c:if>
+    		</liferay-ui:section>
      
-    			<c:if test='<%= tab.equalsIgnoreCase("evaluation_and_awarding")%>' >     
+    			 <liferay-ui:section>    
         			<jsp:include page="<%=EQuotationConstants.PAGE_EVALUATION%>" flush="true" />
-    			</c:if>
+    			</liferay-ui:section>
                 
-                <c:if test='<%= tab.equalsIgnoreCase("unfulfilled_tenders")%>' >     
+                 <liferay-ui:section>     
         			<jsp:include page="<%=EQuotationConstants.PAGE_UNFULFILLED%>" flush="true" />
-    			</c:if>
+    			</liferay-ui:section>
     			
-    			 <c:if test='<%= tab.equalsIgnoreCase("completed_tenders")%>' >     
+    			  <liferay-ui:section>  
         			<jsp:include page="<%=EQuotationConstants.PAGE_COMPLETED%>" flush="true" />
-    			</c:if>
+    			</liferay-ui:section>
     			
  
 			</liferay-ui:tabs>

@@ -40,5 +40,7 @@ public interface EQuotationConstants  {
     static final String RESOURCE_COMMAND_NAME_LIST = "/hello/edit_entry";
 	
 	
-
+    //Forms name 
+    
+    static final String FORM_GENERAL_INFO = "generalinfo";
 }

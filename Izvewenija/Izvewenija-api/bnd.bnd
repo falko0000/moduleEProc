@@ -1,0 +1,9 @@
+Bundle-Name: Izvewenija-api
+Bundle-SymbolicName: tj.izvewenija.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.izvewenija.exception,\
+	tj.izvewenija.model,\
+	tj.izvewenija.service,\
+	tj.izvewenija.service.persistence
+-includeresource: META-INF/service.xml=../Izvewenija-service/service.xml

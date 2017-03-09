@@ -3,6 +3,17 @@
 <%
 Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
+PorjadokRabotyKomissii porjadok_raboty_komissii = null;
+
+Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+
+
+if(izvewenija != null)
+	porjadok_raboty_komissii = PorjadokRabotyKomissiiUtil.findByIzvewenieId(izvewenija.getIzvewenija_id()).get(0);
+
+if(porjadok_raboty_komissii != null)
+   cal.setTime(porjadok_raboty_komissii.getData_podvedenija_itogov());
+
 int endAmPm = ParamUtil.get(request, "schedulerEndDateAmPm", cal.get(Calendar.AM_PM));
 int endDay = ParamUtil.get(request, "schedulerEndDateDay", cal.get(Calendar.DATE));
 

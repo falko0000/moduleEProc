@@ -2,6 +2,7 @@
 
 
 <%
+
  String[] CAT_NAMES = new String[]{"bid_state_info","bid_general_info","bid_contact_information"};
  String[] stateinfo = new String[]{"bidstateinfo"};
  String[] generalinfo = new String[]{"bidgeneralinfo"};
@@ -9,10 +10,24 @@
 
  
  String[][] CAT_SECTION = {stateinfo, generalinfo, contactinformation};
+ 
+ Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+ 
 %>
 
-<portlet:actionURL var="updateStudentVar" name="updateStudent" />
-<aui:form action="<%=updateStudentVar%>" method="post" name="fm">
+<liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="editgeneralinfo">
+<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
+		   <portlet:param name="izvewenie_id" value="0"/>
+</liferay-portlet:actionURL>
+
+
+<aui:form action="<%=editgeneralinfo%>" cssClass="container-fluid-1280" method="post" name="fm"> 
+
+<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (izvewenija == null) ? Constants.ADD : Constants.UPDATE %>" />
+
+<aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_GENERAL_INFO %>" />
+
+
  
  <liferay-ui:form-navigator 
  categoryNames="<%= CAT_NAMES %>"

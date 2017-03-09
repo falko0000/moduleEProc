@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii" />
+	<class name="tj.porjadok.raboty.komissii.model.impl.PorjadokRabotyKomissiiImpl" table="sapp.porjadok_raboty_komissii">
+		<id name="porjadok_raboty_komissii_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.porjadok_raboty_komissii_id_seq</param>
+			</generator>
+		</id>
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="data_podvedenija_itogov" type="org.hibernate.type.TimestampType" />
+		<property name="data_publikacii" type="org.hibernate.type.TimestampType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="po_istecheniju_dnej" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

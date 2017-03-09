@@ -8,6 +8,8 @@ dependencies {
 	compile project (":modules:SAPPServices:SAPPServices-api")
 	compile project (":modules:spisok.lotov:spisok.lotov-api")
 	compile project (":modules:tipy.izvewenij:tipy.izvewenij-api")
+	compile project (":modules:Izvewenija:Izvewenija-api")
 	compile project (":modules:Orgindex:Orgindex-api")
-   compileOnly project(":modules:Orgindex:Orgindex-service")
+	 compile project (":modules:IzveweniePut:IzveweniePut-api")
+	 compile project (":modules:PorjadokRabotyKomissii:PorjadokRabotyKomissii-api")
 }

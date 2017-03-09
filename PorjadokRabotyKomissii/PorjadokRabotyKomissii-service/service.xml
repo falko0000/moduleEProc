@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.porjadok.raboty.komissii">
+<namespace>porjadok_raboty_komissii</namespace>
+	
+    <entity name="PorjadokRabotyKomissii" local-service="true" table="sapp.porjadok_raboty_komissii" remote-service="false">
+        <column name="data_izmenenija" type="Date"></column>
+        <column name="data_podvedenija_itogov" type="Date"></column>
+        <column name="data_publikacii" type="Date"></column>
+        <column name="data_sozdanija" type="Date"></column>
+        <column name="izmenil" type="long"></column>
+        <column name="izvewenie_id" type="long"></column>
+        <column name="po_istecheniju_dnej" type="long"></column>
+        <column name="porjadok_raboty_komissii_id" type="long" primary="true" id-type="sequence" id-param="sapp.porjadok_raboty_komissii_id_seq"></column>
+        <column name="sozdal" type="long"></column>
+   
+    <finder return-type="Collection" name="IzvewenieId">
+    <finder-column name="izvewenie_id"></finder-column>
+    </finder>
+   
+    </entity>
+    
+</service-builder>

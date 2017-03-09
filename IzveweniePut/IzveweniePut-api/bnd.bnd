@@ -1,0 +1,9 @@
+Bundle-Name: IzveweniePut-api
+Bundle-SymbolicName: tj.izvewenieput.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.izvewenieput.exception,\
+	tj.izvewenieput.model,\
+	tj.izvewenieput.service,\
+	tj.izvewenieput.service.persistence
+-includeresource: META-INF/service.xml=../IzveweniePut-service/service.xml

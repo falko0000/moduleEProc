@@ -5,15 +5,16 @@
 <%
  String[] CAT_NAMES = new String[]{"bid_title_delivery_address",
 		                            "bid_title_delivery_time",
-		                            "bid_validity_tenders"};
+		                            "bid_validity_tenders",
+		                             "bid_software_application"};
 
  String[] deliveryaddress = new String[]{"delivery_address"};
  String[] deliverytime = new String[]{"delivery_time"};
  String[] validity = new String[]{"validity"};
-
+ String[] softwareapplication = new String[]{"software_application"};
 
  
- String[][] CAT_SECTION = {deliveryaddress,deliverytime,validity};
+ String[][] CAT_SECTION = {deliveryaddress,deliverytime,validity,softwareapplication};
 %>
 
 <portlet:actionURL var="updateStudentVar" name="updateStudent" />
