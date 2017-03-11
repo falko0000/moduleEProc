@@ -36,9 +36,16 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		   
 	      updateGeneralInfo( actionRequest , actionResponse);
 	   
-	   
+	   if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO))
+		   
+		      updateAboutInfo( actionRequest , actionResponse); 
 			
 	
+	}
+
+	private void updateAboutInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void updateGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
