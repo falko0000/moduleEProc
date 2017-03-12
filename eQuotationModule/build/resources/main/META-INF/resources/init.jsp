@@ -32,7 +32,7 @@
  <%@page import="com.liferay.portal.kernel.util.WebKeys" %>
  <%@ page import ="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
 <%@ page import ="com.liferay.portal.kernel.util.DateUtil" %>
- 
+<%@page import="com.liferay.portal.kernel.util.StringPool" %> 
 
 <%@page import="com.liferay.portal.kernel.portlet.PortletURLFactoryUtil"%>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
@@ -82,6 +82,9 @@
 <%@page import="tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil" %>
 <%@page import="tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii" %>
 <%@page import="tj.porjadok.raboty.komissii.service.persistence.PorjadokRabotyKomissiiUtil" %>
+
+
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

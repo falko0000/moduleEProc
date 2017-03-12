@@ -1,6 +1,6 @@
 <%@ include file="/init.jsp" %>
 
-<aui:field-wrapper label="bid_delivery_address">
+<aui:field-wrapper label="delivery_address">
 
 <div class="radio">
 
@@ -11,7 +11,7 @@
 
 </div>
 
-<aui:input name=" " type="textarea" value=""  placeholder="bid_delivery_address" />
+<aui:input name=" " type="textarea" value=""  placeholder="delivery_address" />
 
 
 

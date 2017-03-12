@@ -1,6 +1,6 @@
 <%@ include file="/init.jsp" %>
 
-<aui:field-wrapper label="bid_delivery_time">
+<aui:field-wrapper label=" ">
 
 <div class="radio">
 
