@@ -43,4 +43,7 @@ public interface EQuotationConstants  {
     //Forms name 
     
     static final String FORM_GENERAL_INFO = "generalinfo";
+    static final String FORM_ABOUT_INFO = "aboutinfo";
+    static final String FORM_OPENING = "opening";
+    
 }

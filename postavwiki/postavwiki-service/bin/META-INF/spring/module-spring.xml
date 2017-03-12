@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean class="tj.postavwiki.service.impl.PostavwikiLocalServiceImpl" id="tj.postavwiki.service.PostavwikiLocalService" />
-	<bean class="tj.postavwiki.service.impl.PostavwikiServiceImpl" id="tj.postavwiki.service.PostavwikiService" />
-	<bean class="tj.postavwiki.service.persistence.impl.PostavwikiPersistenceImpl" id="tj.postavwiki.service.persistence.PostavwikiPersistence" parent="basePersistence" />
-</beans>
