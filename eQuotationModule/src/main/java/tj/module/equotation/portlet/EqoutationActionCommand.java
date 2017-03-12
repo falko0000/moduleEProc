@@ -10,7 +10,8 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import tj.status.izvewenij.service.StatusIzvewenijLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 
 @Component(
@@ -45,8 +46,15 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 		
+		long  izvewenie = 0;
 		
+		long state = StatusIzvewenijLocalServiceUtil.getStatusIzvewenijs(0,1).get(0).getPrimaryKey();
 		
+		System.out.println("PK --->" + state);
+	//	if(cmd.equals(Constants.ADD))
+			
+			
+	
 	}
 
 }

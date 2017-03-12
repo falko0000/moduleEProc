@@ -33,10 +33,11 @@ Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  i.service;version="[1.0,2)",tj.porjadok.raboty.komissii.service.persi
  stence;version="[1.0,2)",tj.sapp.services.model;version="[1.0,2)",tj.
  sapp.services.service;version="[1.0,2)",tj.spisok.lotov.model;version
- ="[1.0,2)",tj.spisok.lotov.service;version="[1.0,2)",tj.tipy.izveweni
- j.exception;version="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2
- )",tj.tipy.izvewenij.service;version="[1.0,2)",tj.tipy.izvewenij.serv
- ice.persistence;version="[1.0,2)"
+ ="[1.0,2)",tj.spisok.lotov.service;version="[1.0,2)",tj.status.izvewe
+ nij.model;version="[1.0,2)",tj.status.izvewenij.service;version="[1.0
+ ,2)",tj.tipy.izvewenij.exception;version="[1.0,2)",tj.tipy.izvewenij.
+ model;version="[1.0,2)",tj.tipy.izvewenij.service;version="[1.0,2)",t
+ j.tipy.izvewenij.service.persistence;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

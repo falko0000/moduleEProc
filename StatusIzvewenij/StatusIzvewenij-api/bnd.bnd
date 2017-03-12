@@ -1,0 +1,9 @@
+Bundle-Name: StatusIzvewenij-api
+Bundle-SymbolicName: tj.status.izvewenij.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.status.izvewenij.exception,\
+	tj.status.izvewenij.model,\
+	tj.status.izvewenij.service,\
+	tj.status.izvewenij.service.persistence
+-includeresource: META-INF/service.xml=../StatusIzvewenij-service/service.xml
