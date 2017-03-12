@@ -17,7 +17,7 @@
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="editgeneralinfo">
 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
-		   <portlet:param name="izvewenie_id" value="<%= (izvewenija == null) ? 0 : izvewenija.getIzvewenija_id() %>"/>
+		   <portlet:param name="izvewenie_id" value="<%= (izvewenija == null) ? "0" : String.valueOf(izvewenija.getIzvewenija_id()) %>"/>
 </liferay-portlet:actionURL>
 
 

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: spisok.lotov-api
 Bundle-SymbolicName: tj.spisok.lotov.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_112 (Oracle Corporation)
 Export-Package: tj.spisok.lotov.exception;uses:="com.liferay.portal.ke
  rnel.exception";version="1.0.0",tj.spisok.lotov.model;uses:="com.life
  ray.expando.kernel.model,com.liferay.portal.kernel.annotation,com.lif
