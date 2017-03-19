@@ -2,8 +2,8 @@
 
 <model-hints>
 	<model name="tj.izvewenija.model.Izvewenija">
-		<field name="data_izmenenija" type="Date" />
-		<field name="data_sozdanija" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="createDate" type="Date" />
 		<field name="izmenil" type="long" />
 		<field name="izvewenija_id" type="long" />
 		<field name="kod_id" type="long" />
@@ -14,5 +14,9 @@
 		<field name="status_id" type="long" />
 		<field name="tip_izvewenija_id" type="long" />
 		<field name="vyshestojawaja_organizacija_id" type="long" />
+		<field name="userId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="UserName" type="String" />
 	</model>
 </model-hints>

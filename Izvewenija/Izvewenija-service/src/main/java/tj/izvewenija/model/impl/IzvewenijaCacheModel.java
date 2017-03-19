@@ -66,12 +66,12 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(33);
 
-		sb.append("{data_izmenenija=");
-		sb.append(data_izmenenija);
-		sb.append(", data_sozdanija=");
-		sb.append(data_sozdanija);
+		sb.append("{modifiedDate=");
+		sb.append(modifiedDate);
+		sb.append(", createDate=");
+		sb.append(createDate);
 		sb.append(", izmenil=");
 		sb.append(izmenil);
 		sb.append(", izvewenija_id=");
@@ -92,6 +92,14 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 		sb.append(tip_izvewenija_id);
 		sb.append(", vyshestojawaja_organizacija_id=");
 		sb.append(vyshestojawaja_organizacija_id);
+		sb.append(", userId=");
+		sb.append(userId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
+		sb.append(", UserName=");
+		sb.append(UserName);
 		sb.append("}");
 
 		return sb.toString();
@@ -101,18 +109,18 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 	public Izvewenija toEntityModel() {
 		IzvewenijaImpl izvewenijaImpl = new IzvewenijaImpl();
 
-		if (data_izmenenija == Long.MIN_VALUE) {
-			izvewenijaImpl.setData_izmenenija(null);
+		if (modifiedDate == Long.MIN_VALUE) {
+			izvewenijaImpl.setModifiedDate(null);
 		}
 		else {
-			izvewenijaImpl.setData_izmenenija(new Date(data_izmenenija));
+			izvewenijaImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (data_sozdanija == Long.MIN_VALUE) {
-			izvewenijaImpl.setData_sozdanija(null);
+		if (createDate == Long.MIN_VALUE) {
+			izvewenijaImpl.setCreateDate(null);
 		}
 		else {
-			izvewenijaImpl.setData_sozdanija(new Date(data_sozdanija));
+			izvewenijaImpl.setCreateDate(new Date(createDate));
 		}
 
 		izvewenijaImpl.setIzmenil(izmenil);
@@ -132,6 +140,16 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 		izvewenijaImpl.setStatus_id(status_id);
 		izvewenijaImpl.setTip_izvewenija_id(tip_izvewenija_id);
 		izvewenijaImpl.setVyshestojawaja_organizacija_id(vyshestojawaja_organizacija_id);
+		izvewenijaImpl.setUserId(userId);
+		izvewenijaImpl.setGroupId(groupId);
+		izvewenijaImpl.setCompanyId(companyId);
+
+		if (UserName == null) {
+			izvewenijaImpl.setUserName(StringPool.BLANK);
+		}
+		else {
+			izvewenijaImpl.setUserName(UserName);
+		}
 
 		izvewenijaImpl.resetOriginalValues();
 
@@ -140,8 +158,8 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		data_izmenenija = objectInput.readLong();
-		data_sozdanija = objectInput.readLong();
+		modifiedDate = objectInput.readLong();
+		createDate = objectInput.readLong();
 
 		izmenil = objectInput.readLong();
 
@@ -161,13 +179,20 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 		tip_izvewenija_id = objectInput.readLong();
 
 		vyshestojawaja_organizacija_id = objectInput.readLong();
+
+		userId = objectInput.readLong();
+
+		groupId = objectInput.readLong();
+
+		companyId = objectInput.readLong();
+		UserName = objectInput.readUTF();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		objectOutput.writeLong(data_izmenenija);
-		objectOutput.writeLong(data_sozdanija);
+		objectOutput.writeLong(modifiedDate);
+		objectOutput.writeLong(createDate);
 
 		objectOutput.writeLong(izmenil);
 
@@ -193,10 +218,23 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 		objectOutput.writeLong(tip_izvewenija_id);
 
 		objectOutput.writeLong(vyshestojawaja_organizacija_id);
+
+		objectOutput.writeLong(userId);
+
+		objectOutput.writeLong(groupId);
+
+		objectOutput.writeLong(companyId);
+
+		if (UserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(UserName);
+		}
 	}
 
-	public long data_izmenenija;
-	public long data_sozdanija;
+	public long modifiedDate;
+	public long createDate;
 	public long izmenil;
 	public long izvewenija_id;
 	public long kod_id;
@@ -207,4 +245,8 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 	public long status_id;
 	public long tip_izvewenija_id;
 	public long vyshestojawaja_organizacija_id;
+	public long userId;
+	public long groupId;
+	public long companyId;
+	public String UserName;
 }

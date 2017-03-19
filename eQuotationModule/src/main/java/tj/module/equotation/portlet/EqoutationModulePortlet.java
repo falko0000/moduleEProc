@@ -21,6 +21,7 @@ import tj.izvewenieput.service.IzveweniePutLocalService;
 import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
 import tj.izvewenieput.service.persistence.IzveweniePutUtil;
 import tj.izvewenija.model.Izvewenija;
+import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.orgindex.service.persistence.OrgindexUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
@@ -62,7 +63,9 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 	
+
 		
+	
 	try {
 		PorjadokRabotyKomissii por = PorjadokRabotyKomissiiLocalServiceUtil.getPorjadokRabotyKomissii(116);
 

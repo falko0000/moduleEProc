@@ -6,12 +6,16 @@ import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import tj.status.izvewenij.service.StatusIzvewenijLocalServiceUtil;
+import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 
 @Component(
@@ -52,6 +56,20 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	private void updateGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		
+		String name = ParamUtil.getString(actionRequest, "bid_name_notification");
+		
+       ServiceContext serviceContext = null;
+       
+       try {
+		serviceContext = ServiceContextFactory.getInstance(actionRequest);
+	} catch (PortalException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+		IzvewenijaLocalServiceUtil.insertIzvewenija(1, 100, 1,
+				38548, name, serviceContext);
 		
 		long  izvewenie = 0;
 		

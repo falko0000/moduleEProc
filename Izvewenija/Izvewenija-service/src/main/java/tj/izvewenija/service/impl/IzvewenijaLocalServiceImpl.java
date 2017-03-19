@@ -14,10 +14,20 @@
 
 package tj.izvewenija.service.impl;
 
+import java.util.Date;
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.PortalUtil;
+
 import aQute.bnd.annotation.ProviderType;
 
 import tj.izvewenija.service.base.IzvewenijaLocalServiceBaseImpl;
-
+import tj.izvewenija.model.Izvewenija;
+import tj.izvewenija.model.impl.IzvewenijaImpl;
+import tj.izvewenija.service.persistence.IzvewenijaPersistence;
 /**
  * The implementation of the izvewenija local service.
  *
@@ -34,9 +44,53 @@ import tj.izvewenija.service.base.IzvewenijaLocalServiceBaseImpl;
  */
 @ProviderType
 public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link tj.izvewenija.service.IzvewenijaLocalServiceUtil} to access the izvewenija local service.
-	 */
+
+	public Izvewenija insertIzvewenija( long sostojanie_id, long status_id, long tip_izvewenija_id, 
+			                            long organizacija_id, String naimenovanie, ServiceContext serviceContext )
+	{
+		Izvewenija izvewenija = new IzvewenijaImpl();
+		
+		izvewenija.setSostojanie_id(sostojanie_id);
+		izvewenija.setStatus_id(status_id);
+		izvewenija.setTip_izvewenija_id(tip_izvewenija_id);
+		izvewenija.setOrganizacija_id(organizacija_id);
+		izvewenija.setNaimenovanie(naimenovanie);
+		
+		izvewenija.setCreateDate(new Date());
+		izvewenija.setModifiedDate(new Date());
+		
+		izvewenija.setSozdal(serviceContext.getUserId());
+		izvewenija.setIzmenil(serviceContext.getUserId());
+		
+		izvewenija.setCompanyId(serviceContext.getCompanyId());
+		izvewenija.setGroupId(serviceContext.getScopeGroupId());
+		izvewenija.setUserId(serviceContext.getUserId());
+		izvewenija.setUserName(PortalUtil.getUserName(serviceContext.getUserId(), "Valiqul"));
+	    
+		izvewenija = addIzvewenija(izvewenija);
+		
+		System.out.println(izvewenija);
+		try {
+			resourceLocalService.addModelResources(izvewenija, serviceContext);
+			} catch (PortalException e) {
+			e.printStackTrace();
+			} catch (SystemException e) {
+			e.printStackTrace();
+			}
+		
+		return izvewenija;
+	}
+	
+	public List<Izvewenija> getIzvewenija( long companyId, long groupId) 
+			throws SystemException {
+		
+		return izvewenijaPersistence.findByCompanyId_GroupId(companyId, groupId);
+	}
+	
+	public int getCountIzvewenija(long companyId, long groupId)
+	{
+		
+		return izvewenijaPersistence.countByCompanyId_GroupId(companyId, groupId);
+	}
+	
 }

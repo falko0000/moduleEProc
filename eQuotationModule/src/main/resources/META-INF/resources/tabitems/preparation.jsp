@@ -4,22 +4,26 @@
     PortletURL viewUrl = renderResponse.createRenderURL();
 	viewUrl.setParameter("mvcPath", EQuotationConstants.VIEW_TEMPLATE);
 	
+	long companyId = PortalUtil.getCompanyId(request);
+	long groupId = PortalUtil.getScopeGroupId(request);
+	
+	System.out.println(companyId+ " " + groupId );
 
-
+    
 %>	
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
 				delta = "<%=5%>"
 				iteratorURL="<%=viewUrl %>" 
-				total="<%=VW_IzvewenijaLocalServiceUtil.getVW_IzvewenijasCount() %>"
+				total="<%=IzvewenijaLocalServiceUtil.getCountIzvewenija(companyId, groupId) %>"
 				rowChecker="<%= new RowChecker(renderResponse) %>"
 			> 
 			 <liferay-ui:search-container-results 
-		     results="<%= VW_IzvewenijaLocalServiceUtil.getVW_Izvewenijas(searchContainer.getStart(),searchContainer.getEnd()) %>">
+		     results="<%= IzvewenijaLocalServiceUtil.getIzvewenija(companyId , groupId ) %>">
 		  
 		 	</liferay-ui:search-container-results>
 		 
-		  	<liferay-ui:search-container-row className="tj.sapp.services.model.VW_Izvewenija" modelVar="vwizvewenija" keyProperty="izvewenija_id" > 
+		  	<liferay-ui:search-container-row className="tj.izvewenija.model.Izvewenija" modelVar="vwizvewenija" keyProperty="izvewenija_id" > 
 		 
 				 <portlet:renderURL var="rowURL" windowState="<%=LiferayWindowState.NORMAL.toString()%>" > 
 					 <portlet:param name="izvewenija_id" value="${vwizvewenija.izvewenija_id}" /> 
@@ -40,17 +44,7 @@
 				 	orderable="<%= true %>" 
 				 	href="${rowURL}"
 				 />
-				 <liferay-ui:search-container-column-text name="date_publish" >
-				 <fmt:formatDate value="<%= vwizvewenija.getData_publikacii() %>"
-                                  pattern="dd/MM/yyyy H:mm" />
-
-				 </liferay-ui:search-container-column-text>
-				
-				   <liferay-ui:search-container-column-text name="date_final"  >
-				    <fmt:formatDate value="<%= vwizvewenija.getData_podvedenija_itogov() %>"
-                                  pattern="dd/MM/yyyy H:mm" />
-				   </liferay-ui:search-container-column-text>						 				 
-				
+			
 				 <liferay-ui:search-container-column-jsp 
 				 	valign="middle"
 				 	name="actions_bid"  
@@ -60,3 +54,9 @@
 		  </liferay-ui:search-container-row>
 		 <liferay-ui:search-iterator />
 		</liferay-ui:search-container>
+		
+		<aui:field-wrapper label="Permissions">
+          <liferay-ui:input-permissions
+        modelName="<%= Izvewenija.class.getName() %>" />
+        
+       </aui:field-wrapper>

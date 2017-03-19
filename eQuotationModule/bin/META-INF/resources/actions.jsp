@@ -4,7 +4,7 @@
  
  <%
 	ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-    VW_Izvewenija izvewenie = (VW_Izvewenija)row.getObject();
+    Izvewenija izvewenie = (Izvewenija)row.getObject();
    %>
 
 
@@ -18,10 +18,18 @@
 		 <portlet:param name="mvcPath" value="<%=EQuotationConstants.PAGE_DELETE %>"/>
 	 </portlet:renderURL>
 	 
+	 <liferay-security:permissionsURL
+			modelResource="<%= Izvewenija.class.getName() %>"
+			modelResourceDescription="<%= izvewenie.getNaimenovanie() %>"
+			resourcePrimKey="<%= Long.toString(izvewenie.getIzvewenija_id()) %>"
+			var="permissionsURL" />
+	 
     <liferay-ui:icon-menu>
     	<liferay-ui:icon iconCssClass="icon-edit" message="Edit" url="<%= infoURL.toString() %>" />  
         <liferay-ui:icon iconCssClass="icon-info-sign" message="Info" url="<%= infoURL.toString() %>" />
         <liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
+        <liferay-ui:icon image="permissions" message="Permissions" url="<%= permissionsURL %>" />
     </liferay-ui:icon-menu>
+    
     
     

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -79,6 +80,9 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCountIzvewenija(long companyId, long groupId);
 
 	/**
 	* Returns the number of izvewenijas.
@@ -133,6 +137,10 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 	*/
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Izvewenija> getIzvewenija(long companyId, long groupId)
+		throws SystemException;
 
 	/**
 	* Returns a range of all the izvewenijas.
@@ -216,6 +224,10 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Izvewenija getIzvewenija(long izvewenija_id)
 		throws PortalException;
+
+	public Izvewenija insertIzvewenija(long sostojanie_id, long status_id,
+		long tip_izvewenija_id, long organizacija_id,
+		java.lang.String naimenovanie, ServiceContext serviceContext);
 
 	/**
 	* Updates the izvewenija in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

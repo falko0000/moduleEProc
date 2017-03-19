@@ -6,6 +6,7 @@
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 
 <%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
 
@@ -91,15 +92,17 @@
 
 <%
 
+/*
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionADD_NEW = "NEW";
 
 boolean canAddNew = permissionChecker.hasPermission(groupId, name, primKey, actionADD_NEW);
-
+*/
 
 %>
+
 
 
 
