@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SAPPServices-api
 Bundle-SymbolicName: tj.sapp.services.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_112 (Oracle Corporation)
 Export-Package: tj.sapp.services.exception;uses:="com.liferay.portal.k
  ernel.exception";version="1.0.0",tj.sapp.services.model;uses:="com.li
  feray.expando.kernel.model,com.liferay.portal.kernel.annotation,com.l

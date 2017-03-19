@@ -16,7 +16,7 @@
   
   User biduser = null;
   
-  Organization authorized_body_org = OrganizationLocalServiceUtil.getOrganization(94344);
+  Organization authorized_body_org = OrganizationLocalServiceUtil.getOrganization(EQuotationConstants.AUTHORIZED_BODY_ID);
 		  
   if(izvewenie_id != 0)
 	  izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenie_id);
