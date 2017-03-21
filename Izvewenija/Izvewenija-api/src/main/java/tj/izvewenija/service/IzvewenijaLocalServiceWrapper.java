@@ -65,6 +65,11 @@ public class IzvewenijaLocalServiceWrapper implements IzvewenijaLocalService,
 		return _izvewenijaLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public int getCountIzvewenija(long companyId, long groupId) {
+		return _izvewenijaLocalService.getCountIzvewenija(companyId, groupId);
+	}
+
 	/**
 	* Returns the number of izvewenijas.
 	*
@@ -136,6 +141,13 @@ public class IzvewenijaLocalServiceWrapper implements IzvewenijaLocalService,
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
 		return _izvewenijaLocalService.dynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
+	}
+
+	@Override
+	public java.util.List<tj.izvewenija.model.Izvewenija> getIzvewenija(
+		long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _izvewenijaLocalService.getIzvewenija(companyId, groupId);
 	}
 
 	/**
@@ -246,6 +258,16 @@ public class IzvewenijaLocalServiceWrapper implements IzvewenijaLocalService,
 	public tj.izvewenija.model.Izvewenija getIzvewenija(long izvewenija_id)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _izvewenijaLocalService.getIzvewenija(izvewenija_id);
+	}
+
+	@Override
+	public tj.izvewenija.model.Izvewenija insertIzvewenija(long sostojanie_id,
+		long status_id, long tip_izvewenija_id, long organizacija_id,
+		java.lang.String naimenovanie,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext) {
+		return _izvewenijaLocalService.insertIzvewenija(sostojanie_id,
+			status_id, tip_izvewenija_id, organizacija_id, naimenovanie,
+			serviceContext);
 	}
 
 	/**

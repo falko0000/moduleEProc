@@ -1,6 +1,6 @@
 create table sapp.izvewenija (
-	data_izmenenija DATE null,
-	data_sozdanija DATE null,
+	modifiedDate DATE null,
+	createDate DATE null,
 	izmenil LONG,
 	izvewenija_id LONG not null primary key,
 	kod_id LONG,
@@ -10,5 +10,9 @@ create table sapp.izvewenija (
 	sozdal LONG,
 	status_id LONG,
 	tip_izvewenija_id LONG,
-	vyshestojawaja_organizacija_id LONG
+	vyshestojawaja_organizacija_id LONG,
+	userId LONG,
+	groupId LONG,
+	companyId LONG,
+	UserName VARCHAR(75) null
 );

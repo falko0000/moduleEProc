@@ -57,8 +57,8 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("data_izmenenija", getData_izmenenija());
-		attributes.put("data_sozdanija", getData_sozdanija());
+		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createDate", getCreateDate());
 		attributes.put("izmenil", getIzmenil());
 		attributes.put("izvewenija_id", getIzvewenija_id());
 		attributes.put("kod_id", getKod_id());
@@ -70,22 +70,26 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 		attributes.put("tip_izvewenija_id", getTip_izvewenija_id());
 		attributes.put("vyshestojawaja_organizacija_id",
 			getVyshestojawaja_organizacija_id());
+		attributes.put("userId", getUserId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("UserName", getUserName());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Date data_izmenenija = (Date)attributes.get("data_izmenenija");
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
 
-		if (data_izmenenija != null) {
-			setData_izmenenija(data_izmenenija);
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
 		}
 
-		Date data_sozdanija = (Date)attributes.get("data_sozdanija");
+		Date createDate = (Date)attributes.get("createDate");
 
-		if (data_sozdanija != null) {
-			setData_sozdanija(data_sozdanija);
+		if (createDate != null) {
+			setCreateDate(createDate);
 		}
 
 		Long izmenil = (Long)attributes.get("izmenil");
@@ -148,6 +152,30 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 		if (vyshestojawaja_organizacija_id != null) {
 			setVyshestojawaja_organizacija_id(vyshestojawaja_organizacija_id);
 		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String UserName = (String)attributes.get("UserName");
+
+		if (UserName != null) {
+			setUserName(UserName);
+		}
 	}
 
 	@Override
@@ -205,6 +233,26 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 		return _izvewenija.getNaimenovanie();
 	}
 
+	/**
+	* Returns the user name of this izvewenija.
+	*
+	* @return the user name of this izvewenija
+	*/
+	@Override
+	public java.lang.String getUserName() {
+		return _izvewenija.getUserName();
+	}
+
+	/**
+	* Returns the user uuid of this izvewenija.
+	*
+	* @return the user uuid of this izvewenija
+	*/
+	@Override
+	public java.lang.String getUserUuid() {
+		return _izvewenija.getUserUuid();
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _izvewenija.toString();
@@ -216,23 +264,43 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	}
 
 	/**
-	* Returns the data_izmenenija of this izvewenija.
+	* Returns the create date of this izvewenija.
 	*
-	* @return the data_izmenenija of this izvewenija
+	* @return the create date of this izvewenija
 	*/
 	@Override
-	public Date getData_izmenenija() {
-		return _izvewenija.getData_izmenenija();
+	public Date getCreateDate() {
+		return _izvewenija.getCreateDate();
 	}
 
 	/**
-	* Returns the data_sozdanija of this izvewenija.
+	* Returns the modified date of this izvewenija.
 	*
-	* @return the data_sozdanija of this izvewenija
+	* @return the modified date of this izvewenija
 	*/
 	@Override
-	public Date getData_sozdanija() {
-		return _izvewenija.getData_sozdanija();
+	public Date getModifiedDate() {
+		return _izvewenija.getModifiedDate();
+	}
+
+	/**
+	* Returns the company ID of this izvewenija.
+	*
+	* @return the company ID of this izvewenija
+	*/
+	@Override
+	public long getCompanyId() {
+		return _izvewenija.getCompanyId();
+	}
+
+	/**
+	* Returns the group ID of this izvewenija.
+	*
+	* @return the group ID of this izvewenija
+	*/
+	@Override
+	public long getGroupId() {
+		return _izvewenija.getGroupId();
 	}
 
 	/**
@@ -326,6 +394,16 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	}
 
 	/**
+	* Returns the user ID of this izvewenija.
+	*
+	* @return the user ID of this izvewenija
+	*/
+	@Override
+	public long getUserId() {
+		return _izvewenija.getUserId();
+	}
+
+	/**
 	* Returns the vyshestojawaja_organizacija_id of this izvewenija.
 	*
 	* @return the vyshestojawaja_organizacija_id of this izvewenija
@@ -356,23 +434,23 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	}
 
 	/**
-	* Sets the data_izmenenija of this izvewenija.
+	* Sets the company ID of this izvewenija.
 	*
-	* @param data_izmenenija the data_izmenenija of this izvewenija
+	* @param companyId the company ID of this izvewenija
 	*/
 	@Override
-	public void setData_izmenenija(Date data_izmenenija) {
-		_izvewenija.setData_izmenenija(data_izmenenija);
+	public void setCompanyId(long companyId) {
+		_izvewenija.setCompanyId(companyId);
 	}
 
 	/**
-	* Sets the data_sozdanija of this izvewenija.
+	* Sets the create date of this izvewenija.
 	*
-	* @param data_sozdanija the data_sozdanija of this izvewenija
+	* @param createDate the create date of this izvewenija
 	*/
 	@Override
-	public void setData_sozdanija(Date data_sozdanija) {
-		_izvewenija.setData_sozdanija(data_sozdanija);
+	public void setCreateDate(Date createDate) {
+		_izvewenija.setCreateDate(createDate);
 	}
 
 	@Override
@@ -389,6 +467,16 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_izvewenija.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the group ID of this izvewenija.
+	*
+	* @param groupId the group ID of this izvewenija
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_izvewenija.setGroupId(groupId);
 	}
 
 	/**
@@ -419,6 +507,16 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	@Override
 	public void setKod_id(long kod_id) {
 		_izvewenija.setKod_id(kod_id);
+	}
+
+	/**
+	* Sets the modified date of this izvewenija.
+	*
+	* @param modifiedDate the modified date of this izvewenija
+	*/
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		_izvewenija.setModifiedDate(modifiedDate);
 	}
 
 	/**
@@ -499,6 +597,36 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	@Override
 	public void setTip_izvewenija_id(long tip_izvewenija_id) {
 		_izvewenija.setTip_izvewenija_id(tip_izvewenija_id);
+	}
+
+	/**
+	* Sets the user ID of this izvewenija.
+	*
+	* @param userId the user ID of this izvewenija
+	*/
+	@Override
+	public void setUserId(long userId) {
+		_izvewenija.setUserId(userId);
+	}
+
+	/**
+	* Sets the user name of this izvewenija.
+	*
+	* @param UserName the user name of this izvewenija
+	*/
+	@Override
+	public void setUserName(java.lang.String UserName) {
+		_izvewenija.setUserName(UserName);
+	}
+
+	/**
+	* Sets the user uuid of this izvewenija.
+	*
+	* @param userUuid the user uuid of this izvewenija
+	*/
+	@Override
+	public void setUserUuid(java.lang.String userUuid) {
+		_izvewenija.setUserUuid(userUuid);
 	}
 
 	/**

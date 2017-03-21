@@ -33,8 +33,8 @@ public class IzvewenijaSoap implements Serializable {
 	public static IzvewenijaSoap toSoapModel(Izvewenija model) {
 		IzvewenijaSoap soapModel = new IzvewenijaSoap();
 
-		soapModel.setData_izmenenija(model.getData_izmenenija());
-		soapModel.setData_sozdanija(model.getData_sozdanija());
+		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setIzmenil(model.getIzmenil());
 		soapModel.setIzvewenija_id(model.getIzvewenija_id());
 		soapModel.setKod_id(model.getKod_id());
@@ -45,6 +45,10 @@ public class IzvewenijaSoap implements Serializable {
 		soapModel.setStatus_id(model.getStatus_id());
 		soapModel.setTip_izvewenija_id(model.getTip_izvewenija_id());
 		soapModel.setVyshestojawaja_organizacija_id(model.getVyshestojawaja_organizacija_id());
+		soapModel.setUserId(model.getUserId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setUserName(model.getUserName());
 
 		return soapModel;
 	}
@@ -97,20 +101,20 @@ public class IzvewenijaSoap implements Serializable {
 		setIzvewenija_id(pk);
 	}
 
-	public Date getData_izmenenija() {
-		return _data_izmenenija;
+	public Date getModifiedDate() {
+		return _modifiedDate;
 	}
 
-	public void setData_izmenenija(Date data_izmenenija) {
-		_data_izmenenija = data_izmenenija;
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
 	}
 
-	public Date getData_sozdanija() {
-		return _data_sozdanija;
+	public Date getCreateDate() {
+		return _createDate;
 	}
 
-	public void setData_sozdanija(Date data_sozdanija) {
-		_data_sozdanija = data_sozdanija;
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
 	}
 
 	public long getIzmenil() {
@@ -194,8 +198,40 @@ public class IzvewenijaSoap implements Serializable {
 		_vyshestojawaja_organizacija_id = vyshestojawaja_organizacija_id;
 	}
 
-	private Date _data_izmenenija;
-	private Date _data_sozdanija;
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public String getUserName() {
+		return _UserName;
+	}
+
+	public void setUserName(String UserName) {
+		_UserName = UserName;
+	}
+
+	private Date _modifiedDate;
+	private Date _createDate;
 	private long _izmenil;
 	private long _izvewenija_id;
 	private long _kod_id;
@@ -206,4 +242,8 @@ public class IzvewenijaSoap implements Serializable {
 	private long _status_id;
 	private long _tip_izvewenija_id;
 	private long _vyshestojawaja_organizacija_id;
+	private long _userId;
+	private long _groupId;
+	private long _companyId;
+	private String _UserName;
 }

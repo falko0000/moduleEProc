@@ -19,8 +19,10 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -41,7 +43,7 @@ import java.util.Date;
  * @generated
  */
 @ProviderType
-public interface IzvewenijaModel extends BaseModel<Izvewenija> {
+public interface IzvewenijaModel extends AuditedModel,BaseModel<Izvewenija>, ShardedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -63,32 +65,32 @@ public interface IzvewenijaModel extends BaseModel<Izvewenija> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the data_izmenenija of this izvewenija.
+	 * Returns the modified date of this izvewenija.
 	 *
-	 * @return the data_izmenenija of this izvewenija
+	 * @return the modified date of this izvewenija
 	 */
-	public Date getData_izmenenija();
+	public Date getModifiedDate();
 
 	/**
-	 * Sets the data_izmenenija of this izvewenija.
+	 * Sets the modified date of this izvewenija.
 	 *
-	 * @param data_izmenenija the data_izmenenija of this izvewenija
+	 * @param modifiedDate the modified date of this izvewenija
 	 */
-	public void setData_izmenenija(Date data_izmenenija);
+	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the data_sozdanija of this izvewenija.
+	 * Returns the create date of this izvewenija.
 	 *
-	 * @return the data_sozdanija of this izvewenija
+	 * @return the create date of this izvewenija
 	 */
-	public Date getData_sozdanija();
+	public Date getCreateDate();
 
 	/**
-	 * Sets the data_sozdanija of this izvewenija.
+	 * Sets the create date of this izvewenija.
 	 *
-	 * @param data_sozdanija the data_sozdanija of this izvewenija
+	 * @param createDate the create date of this izvewenija
 	 */
-	public void setData_sozdanija(Date data_sozdanija);
+	public void setCreateDate(Date createDate);
 
 	/**
 	 * Returns the izmenil of this izvewenija.
@@ -231,6 +233,79 @@ public interface IzvewenijaModel extends BaseModel<Izvewenija> {
 	 */
 	public void setVyshestojawaja_organizacija_id(
 		long vyshestojawaja_organizacija_id);
+
+	/**
+	 * Returns the user ID of this izvewenija.
+	 *
+	 * @return the user ID of this izvewenija
+	 */
+	public long getUserId();
+
+	/**
+	 * Sets the user ID of this izvewenija.
+	 *
+	 * @param userId the user ID of this izvewenija
+	 */
+	public void setUserId(long userId);
+
+	/**
+	 * Returns the user uuid of this izvewenija.
+	 *
+	 * @return the user uuid of this izvewenija
+	 */
+	public String getUserUuid();
+
+	/**
+	 * Sets the user uuid of this izvewenija.
+	 *
+	 * @param userUuid the user uuid of this izvewenija
+	 */
+	public void setUserUuid(String userUuid);
+
+	/**
+	 * Returns the group ID of this izvewenija.
+	 *
+	 * @return the group ID of this izvewenija
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this izvewenija.
+	 *
+	 * @param groupId the group ID of this izvewenija
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this izvewenija.
+	 *
+	 * @return the company ID of this izvewenija
+	 */
+	@Override
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this izvewenija.
+	 *
+	 * @param companyId the company ID of this izvewenija
+	 */
+	@Override
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the user name of this izvewenija.
+	 *
+	 * @return the user name of this izvewenija
+	 */
+	@AutoEscape
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this izvewenija.
+	 *
+	 * @param UserName the user name of this izvewenija
+	 */
+	public void setUserName(String UserName);
 
 	@Override
 	public boolean isNew();

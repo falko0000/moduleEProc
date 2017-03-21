@@ -9,8 +9,8 @@
 				<param name="sequence">sapp.izvewenija_id_seq</param>
 			</generator>
 		</id>
-		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
-		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="kod_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="naimenovanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -20,5 +20,9 @@
 		<property name="status_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="tip_izvewenija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="vyshestojawaja_organizacija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="UserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

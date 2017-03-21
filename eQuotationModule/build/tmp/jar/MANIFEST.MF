@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eQuotationModule
 Bundle-SymbolicName: tj.module.equotation
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_112 (Oracle Corporation)
 Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  )",com.liferay.expando.kernel.model;version="[1.0,2)",com.liferay.exp
  ortimport.kernel.lar;version="[1.0,2)",com.liferay.portal.kernel.anno
@@ -57,9 +57,11 @@ Require-Capability: osgi.extender;filter:="(&(osgi.extender=jsp.taglib
  er;filter:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/f
  rontend))",osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=ht
  tp://liferay.com/tld/portlet))",osgi.extender;filter:="(&(osgi.extend
- er=jsp.taglib)(uri=http://liferay.com/tld/theme))",osgi.extender;filt
- er:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/ui))",os
- gi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+ er=jsp.taglib)(uri=http://liferay.com/tld/security))",osgi.extender;f
+ ilter:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/theme
+ ))",osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://li
+ feray.com/tld/ui))",osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))
+ "
 Service-Component: OSGI-INF/tj.module.equotation.portlet.EQuotationRes
  ourceCommand.xml,OSGI-INF/tj.module.equotation.portlet.EqoutationActi
  onCommand.xml,OSGI-INF/tj.module.equotation.portlet.EqoutationModuleP

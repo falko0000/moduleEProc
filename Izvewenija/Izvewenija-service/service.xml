@@ -7,8 +7,8 @@
 
 	  <entity name="Izvewenija" local-service="true" table="sapp.izvewenija" remote-service="false">
        
-        <column name="data_izmenenija" type="Date"></column>
-        <column name="data_sozdanija" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+        <column name="createDate" type="Date"></column>
         <column name="izmenil" type="long"></column>
         <column name="izvewenija_id" type="long" primary="true" id-type="sequence" id-param="sapp.izvewenija_id_seq"></column>
         <column name="kod_id" type="long"></column>
@@ -19,6 +19,22 @@
         <column name="status_id" type="long"></column>
         <column name="tip_izvewenija_id" type="long"></column>
         <column name="vyshestojawaja_organizacija_id" type="long"></column>
-  
+        <column name="userId" type="long"></column>
+        <column name="groupId" type="long"></column>
+       <column name="companyId" type="long"></column>
+        <column name="UserName" type="String"></column>
+        <order by="asc">
+            <order-column name="izvewenija_id" order-by="asc"></order-column>
+        </order>
+      <finder return-type="Collection" name="CompanyId_GroupId">
+     	 <finder-column name="companyId"></finder-column>
+      	<finder-column name="groupId"></finder-column>
+      </finder>
+       <finder name="IzvewenijaId" return-type="Collection">
+            <finder-column name="izvewenija_id"></finder-column>
+            <finder-column name="sozdal"></finder-column>
+       </finder>
+  	
 	</entity>
+	
 </service-builder>

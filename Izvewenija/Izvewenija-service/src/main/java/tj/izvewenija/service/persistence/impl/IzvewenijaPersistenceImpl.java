@@ -20,10 +20,17 @@ import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
+import com.liferay.portal.kernel.service.persistence.CompanyProvider;
+import com.liferay.portal.kernel.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -41,6 +48,7 @@ import tj.izvewenija.service.persistence.IzvewenijaPersistence;
 import java.io.Serializable;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -82,6 +90,1326 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
 			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID_GROUPID =
+		new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, IzvewenijaImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCompanyId_GroupId",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID_GROUPID =
+		new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, IzvewenijaImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCompanyId_GroupId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			IzvewenijaModelImpl.COMPANYID_COLUMN_BITMASK |
+			IzvewenijaModelImpl.GROUPID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID_GROUPID = new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCompanyId_GroupId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the izvewenijas where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByCompanyId_GroupId(long companyId, long groupId) {
+		return findByCompanyId_GroupId(companyId, groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the izvewenijas where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @return the range of matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByCompanyId_GroupId(long companyId,
+		long groupId, int start, int end) {
+		return findByCompanyId_GroupId(companyId, groupId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the izvewenijas where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByCompanyId_GroupId(long companyId,
+		long groupId, int start, int end,
+		OrderByComparator<Izvewenija> orderByComparator) {
+		return findByCompanyId_GroupId(companyId, groupId, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the izvewenijas where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByCompanyId_GroupId(long companyId,
+		long groupId, int start, int end,
+		OrderByComparator<Izvewenija> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID_GROUPID;
+			finderArgs = new Object[] { companyId, groupId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_COMPANYID_GROUPID;
+			finderArgs = new Object[] {
+					companyId, groupId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Izvewenija> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<Izvewenija>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Izvewenija izvewenija : list) {
+					if ((companyId != izvewenija.getCompanyId()) ||
+							(groupId != izvewenija.getGroupId())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_IZVEWENIJA_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_GROUPID_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_COMPANYID_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(IzvewenijaModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(groupId);
+
+				if (!pagination) {
+					list = (List<Izvewenija>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<Izvewenija>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first izvewenija in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching izvewenija
+	 * @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija findByCompanyId_GroupId_First(long companyId,
+		long groupId, OrderByComparator<Izvewenija> orderByComparator)
+		throws NoSuchIzvewenijaException {
+		Izvewenija izvewenija = fetchByCompanyId_GroupId_First(companyId,
+				groupId, orderByComparator);
+
+		if (izvewenija != null) {
+			return izvewenija;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchIzvewenijaException(msg.toString());
+	}
+
+	/**
+	 * Returns the first izvewenija in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija fetchByCompanyId_GroupId_First(long companyId,
+		long groupId, OrderByComparator<Izvewenija> orderByComparator) {
+		List<Izvewenija> list = findByCompanyId_GroupId(companyId, groupId, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last izvewenija in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching izvewenija
+	 * @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija findByCompanyId_GroupId_Last(long companyId,
+		long groupId, OrderByComparator<Izvewenija> orderByComparator)
+		throws NoSuchIzvewenijaException {
+		Izvewenija izvewenija = fetchByCompanyId_GroupId_Last(companyId,
+				groupId, orderByComparator);
+
+		if (izvewenija != null) {
+			return izvewenija;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", groupId=");
+		msg.append(groupId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchIzvewenijaException(msg.toString());
+	}
+
+	/**
+	 * Returns the last izvewenija in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija fetchByCompanyId_GroupId_Last(long companyId,
+		long groupId, OrderByComparator<Izvewenija> orderByComparator) {
+		int count = countByCompanyId_GroupId(companyId, groupId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Izvewenija> list = findByCompanyId_GroupId(companyId, groupId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the izvewenijas before and after the current izvewenija in the ordered set where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param izvewenija_id the primary key of the current izvewenija
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next izvewenija
+	 * @throws NoSuchIzvewenijaException if a izvewenija with the primary key could not be found
+	 */
+	@Override
+	public Izvewenija[] findByCompanyId_GroupId_PrevAndNext(
+		long izvewenija_id, long companyId, long groupId,
+		OrderByComparator<Izvewenija> orderByComparator)
+		throws NoSuchIzvewenijaException {
+		Izvewenija izvewenija = findByPrimaryKey(izvewenija_id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Izvewenija[] array = new IzvewenijaImpl[3];
+
+			array[0] = getByCompanyId_GroupId_PrevAndNext(session, izvewenija,
+					companyId, groupId, orderByComparator, true);
+
+			array[1] = izvewenija;
+
+			array[2] = getByCompanyId_GroupId_PrevAndNext(session, izvewenija,
+					companyId, groupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Izvewenija getByCompanyId_GroupId_PrevAndNext(Session session,
+		Izvewenija izvewenija, long companyId, long groupId,
+		OrderByComparator<Izvewenija> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_IZVEWENIJA_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(IzvewenijaModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(izvewenija);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Izvewenija> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the matching izvewenijas that the user has permission to view
+	 */
+	@Override
+	public List<Izvewenija> filterFindByCompanyId_GroupId(long companyId,
+		long groupId) {
+		return filterFindByCompanyId_GroupId(companyId, groupId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @return the range of matching izvewenijas that the user has permission to view
+	 */
+	@Override
+	public List<Izvewenija> filterFindByCompanyId_GroupId(long companyId,
+		long groupId, int start, int end) {
+		return filterFindByCompanyId_GroupId(companyId, groupId, start, end,
+			null);
+	}
+
+	/**
+	 * Returns an ordered range of all the izvewenijas that the user has permissions to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching izvewenijas that the user has permission to view
+	 */
+	@Override
+	public List<Izvewenija> filterFindByCompanyId_GroupId(long companyId,
+		long groupId, int start, int end,
+		OrderByComparator<Izvewenija> orderByComparator) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByCompanyId_GroupId(companyId, groupId, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 2));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IZVEWENIJA_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_IZVEWENIJA_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IZVEWENIJA_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IzvewenijaModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IzvewenijaModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Izvewenija.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IzvewenijaImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IzvewenijaImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(groupId);
+
+			return (List<Izvewenija>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the izvewenijas before and after the current izvewenija in the ordered set of izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param izvewenija_id the primary key of the current izvewenija
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next izvewenija
+	 * @throws NoSuchIzvewenijaException if a izvewenija with the primary key could not be found
+	 */
+	@Override
+	public Izvewenija[] filterFindByCompanyId_GroupId_PrevAndNext(
+		long izvewenija_id, long companyId, long groupId,
+		OrderByComparator<Izvewenija> orderByComparator)
+		throws NoSuchIzvewenijaException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByCompanyId_GroupId_PrevAndNext(izvewenija_id,
+				companyId, groupId, orderByComparator);
+		}
+
+		Izvewenija izvewenija = findByPrimaryKey(izvewenija_id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Izvewenija[] array = new IzvewenijaImpl[3];
+
+			array[0] = filterGetByCompanyId_GroupId_PrevAndNext(session,
+					izvewenija, companyId, groupId, orderByComparator, true);
+
+			array[1] = izvewenija;
+
+			array[2] = filterGetByCompanyId_GroupId_PrevAndNext(session,
+					izvewenija, companyId, groupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Izvewenija filterGetByCompanyId_GroupId_PrevAndNext(
+		Session session, Izvewenija izvewenija, long companyId, long groupId,
+		OrderByComparator<Izvewenija> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IZVEWENIJA_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_IZVEWENIJA_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IZVEWENIJA_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IzvewenijaModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IzvewenijaModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Izvewenija.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, IzvewenijaImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, IzvewenijaImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(izvewenija);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Izvewenija> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the izvewenijas where companyId = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 */
+	@Override
+	public void removeByCompanyId_GroupId(long companyId, long groupId) {
+		for (Izvewenija izvewenija : findByCompanyId_GroupId(companyId,
+				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(izvewenija);
+		}
+	}
+
+	/**
+	 * Returns the number of izvewenijas where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the number of matching izvewenijas
+	 */
+	@Override
+	public int countByCompanyId_GroupId(long companyId, long groupId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID_GROUPID;
+
+		Object[] finderArgs = new Object[] { companyId, groupId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_IZVEWENIJA_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_GROUPID_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_COMPANYID_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param groupId the group ID
+	 * @return the number of matching izvewenijas that the user has permission to view
+	 */
+	@Override
+	public int filterCountByCompanyId_GroupId(long companyId, long groupId) {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByCompanyId_GroupId(companyId, groupId);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_IZVEWENIJA_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_COMPANYID_GROUPID_GROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Izvewenija.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_COMPANYID_GROUPID_COMPANYID_2 = "izvewenija.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_COMPANYID_GROUPID_GROUPID_2 = "izvewenija.groupId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIJAID =
+		new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, IzvewenijaImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByIzvewenijaId",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIJAID =
+		new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, IzvewenijaImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByIzvewenijaId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			IzvewenijaModelImpl.IZVEWENIJA_ID_COLUMN_BITMASK |
+			IzvewenijaModelImpl.SOZDAL_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_IZVEWENIJAID = new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByIzvewenijaId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the izvewenijas where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @return the matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByIzvewenijaId(long izvewenija_id, long sozdal) {
+		return findByIzvewenijaId(izvewenija_id, sozdal, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the izvewenijas where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @return the range of matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByIzvewenijaId(long izvewenija_id, long sozdal,
+		int start, int end) {
+		return findByIzvewenijaId(izvewenija_id, sozdal, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the izvewenijas where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByIzvewenijaId(long izvewenija_id, long sozdal,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator) {
+		return findByIzvewenijaId(izvewenija_id, sozdal, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the izvewenijas where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @param start the lower bound of the range of izvewenijas
+	 * @param end the upper bound of the range of izvewenijas (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching izvewenijas
+	 */
+	@Override
+	public List<Izvewenija> findByIzvewenijaId(long izvewenija_id, long sozdal,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIJAID;
+			finderArgs = new Object[] { izvewenija_id, sozdal };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIJAID;
+			finderArgs = new Object[] {
+					izvewenija_id, sozdal,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Izvewenija> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<Izvewenija>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Izvewenija izvewenija : list) {
+					if ((izvewenija_id != izvewenija.getIzvewenija_id()) ||
+							(sozdal != izvewenija.getSozdal())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_IZVEWENIJA_WHERE);
+
+			query.append(_FINDER_COLUMN_IZVEWENIJAID_IZVEWENIJA_ID_2);
+
+			query.append(_FINDER_COLUMN_IZVEWENIJAID_SOZDAL_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(IzvewenijaModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(izvewenija_id);
+
+				qPos.add(sozdal);
+
+				if (!pagination) {
+					list = (List<Izvewenija>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<Izvewenija>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first izvewenija in the ordered set where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching izvewenija
+	 * @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija findByIzvewenijaId_First(long izvewenija_id, long sozdal,
+		OrderByComparator<Izvewenija> orderByComparator)
+		throws NoSuchIzvewenijaException {
+		Izvewenija izvewenija = fetchByIzvewenijaId_First(izvewenija_id,
+				sozdal, orderByComparator);
+
+		if (izvewenija != null) {
+			return izvewenija;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("izvewenija_id=");
+		msg.append(izvewenija_id);
+
+		msg.append(", sozdal=");
+		msg.append(sozdal);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchIzvewenijaException(msg.toString());
+	}
+
+	/**
+	 * Returns the first izvewenija in the ordered set where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija fetchByIzvewenijaId_First(long izvewenija_id,
+		long sozdal, OrderByComparator<Izvewenija> orderByComparator) {
+		List<Izvewenija> list = findByIzvewenijaId(izvewenija_id, sozdal, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last izvewenija in the ordered set where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching izvewenija
+	 * @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija findByIzvewenijaId_Last(long izvewenija_id, long sozdal,
+		OrderByComparator<Izvewenija> orderByComparator)
+		throws NoSuchIzvewenijaException {
+		Izvewenija izvewenija = fetchByIzvewenijaId_Last(izvewenija_id, sozdal,
+				orderByComparator);
+
+		if (izvewenija != null) {
+			return izvewenija;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("izvewenija_id=");
+		msg.append(izvewenija_id);
+
+		msg.append(", sozdal=");
+		msg.append(sozdal);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchIzvewenijaException(msg.toString());
+	}
+
+	/**
+	 * Returns the last izvewenija in the ordered set where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija fetchByIzvewenijaId_Last(long izvewenija_id, long sozdal,
+		OrderByComparator<Izvewenija> orderByComparator) {
+		int count = countByIzvewenijaId(izvewenija_id, sozdal);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Izvewenija> list = findByIzvewenijaId(izvewenija_id, sozdal,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Removes all the izvewenijas where izvewenija_id = &#63; and sozdal = &#63; from the database.
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 */
+	@Override
+	public void removeByIzvewenijaId(long izvewenija_id, long sozdal) {
+		for (Izvewenija izvewenija : findByIzvewenijaId(izvewenija_id, sozdal,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(izvewenija);
+		}
+	}
+
+	/**
+	 * Returns the number of izvewenijas where izvewenija_id = &#63; and sozdal = &#63;.
+	 *
+	 * @param izvewenija_id the izvewenija_id
+	 * @param sozdal the sozdal
+	 * @return the number of matching izvewenijas
+	 */
+	@Override
+	public int countByIzvewenijaId(long izvewenija_id, long sozdal) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_IZVEWENIJAID;
+
+		Object[] finderArgs = new Object[] { izvewenija_id, sozdal };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_IZVEWENIJA_WHERE);
+
+			query.append(_FINDER_COLUMN_IZVEWENIJAID_IZVEWENIJA_ID_2);
+
+			query.append(_FINDER_COLUMN_IZVEWENIJAID_SOZDAL_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(izvewenija_id);
+
+				qPos.add(sozdal);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_IZVEWENIJAID_IZVEWENIJA_ID_2 = "izvewenija.izvewenija_id = ? AND ";
+	private static final String _FINDER_COLUMN_IZVEWENIJAID_SOZDAL_2 = "izvewenija.sozdal = ?";
 
 	public IzvewenijaPersistenceImpl() {
 		setModelClass(Izvewenija.class);
@@ -174,6 +1502,8 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 
 		izvewenija.setNew(true);
 		izvewenija.setPrimaryKey(izvewenija_id);
+
+		izvewenija.setCompanyId(companyProvider.getCompanyId());
 
 		return izvewenija;
 	}
@@ -269,6 +1599,30 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 
 		boolean isNew = izvewenija.isNew();
 
+		IzvewenijaModelImpl izvewenijaModelImpl = (IzvewenijaModelImpl)izvewenija;
+
+		ServiceContext serviceContext = ServiceContextThreadLocal.getServiceContext();
+
+		Date now = new Date();
+
+		if (isNew && (izvewenija.getCreateDate() == null)) {
+			if (serviceContext == null) {
+				izvewenija.setCreateDate(now);
+			}
+			else {
+				izvewenija.setCreateDate(serviceContext.getCreateDate(now));
+			}
+		}
+
+		if (!izvewenijaModelImpl.hasSetModifiedDate()) {
+			if (serviceContext == null) {
+				izvewenija.setModifiedDate(now);
+			}
+			else {
+				izvewenija.setModifiedDate(serviceContext.getModifiedDate(now));
+			}
+		}
+
 		Session session = null;
 
 		try {
@@ -292,8 +1646,54 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !IzvewenijaModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+
+		else {
+			if ((izvewenijaModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID_GROUPID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						izvewenijaModelImpl.getOriginalCompanyId(),
+						izvewenijaModelImpl.getOriginalGroupId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID_GROUPID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID_GROUPID,
+					args);
+
+				args = new Object[] {
+						izvewenijaModelImpl.getCompanyId(),
+						izvewenijaModelImpl.getGroupId()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID_GROUPID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID_GROUPID,
+					args);
+			}
+
+			if ((izvewenijaModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIJAID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						izvewenijaModelImpl.getOriginalIzvewenija_id(),
+						izvewenijaModelImpl.getOriginalSozdal()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIJAID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIJAID,
+					args);
+
+				args = new Object[] {
+						izvewenijaModelImpl.getIzvewenija_id(),
+						izvewenijaModelImpl.getSozdal()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIJAID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIJAID,
+					args);
+			}
 		}
 
 		entityCache.putResult(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
@@ -314,8 +1714,8 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 		izvewenijaImpl.setNew(izvewenija.isNew());
 		izvewenijaImpl.setPrimaryKey(izvewenija.getPrimaryKey());
 
-		izvewenijaImpl.setData_izmenenija(izvewenija.getData_izmenenija());
-		izvewenijaImpl.setData_sozdanija(izvewenija.getData_sozdanija());
+		izvewenijaImpl.setModifiedDate(izvewenija.getModifiedDate());
+		izvewenijaImpl.setCreateDate(izvewenija.getCreateDate());
 		izvewenijaImpl.setIzmenil(izvewenija.getIzmenil());
 		izvewenijaImpl.setIzvewenija_id(izvewenija.getIzvewenija_id());
 		izvewenijaImpl.setKod_id(izvewenija.getKod_id());
@@ -326,6 +1726,10 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 		izvewenijaImpl.setStatus_id(izvewenija.getStatus_id());
 		izvewenijaImpl.setTip_izvewenija_id(izvewenija.getTip_izvewenija_id());
 		izvewenijaImpl.setVyshestojawaja_organizacija_id(izvewenija.getVyshestojawaja_organizacija_id());
+		izvewenijaImpl.setUserId(izvewenija.getUserId());
+		izvewenijaImpl.setGroupId(izvewenija.getGroupId());
+		izvewenijaImpl.setCompanyId(izvewenija.getCompanyId());
+		izvewenijaImpl.setUserName(izvewenija.getUserName());
 
 		return izvewenijaImpl;
 	}
@@ -729,14 +2133,29 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
+	@ServiceReference(type = CompanyProviderWrapper.class)
+	protected CompanyProvider companyProvider;
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_IZVEWENIJA = "SELECT izvewenija FROM Izvewenija izvewenija";
 	private static final String _SQL_SELECT_IZVEWENIJA_WHERE_PKS_IN = "SELECT izvewenija FROM Izvewenija izvewenija WHERE izvewenija_id IN (";
+	private static final String _SQL_SELECT_IZVEWENIJA_WHERE = "SELECT izvewenija FROM Izvewenija izvewenija WHERE ";
 	private static final String _SQL_COUNT_IZVEWENIJA = "SELECT COUNT(izvewenija) FROM Izvewenija izvewenija";
+	private static final String _SQL_COUNT_IZVEWENIJA_WHERE = "SELECT COUNT(izvewenija) FROM Izvewenija izvewenija WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "izvewenija.izvewenija_id";
+	private static final String _FILTER_SQL_SELECT_IZVEWENIJA_WHERE = "SELECT DISTINCT {izvewenija.*} FROM sapp.izvewenija izvewenija WHERE ";
+	private static final String _FILTER_SQL_SELECT_IZVEWENIJA_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {sapp.izvewenija.*} FROM (SELECT DISTINCT izvewenija.izvewenija_id FROM sapp.izvewenija izvewenija WHERE ";
+	private static final String _FILTER_SQL_SELECT_IZVEWENIJA_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN sapp.izvewenija ON TEMP_TABLE.izvewenija_id = sapp.izvewenija.izvewenija_id";
+	private static final String _FILTER_SQL_COUNT_IZVEWENIJA_WHERE = "SELECT COUNT(DISTINCT izvewenija.izvewenija_id) AS COUNT_VALUE FROM sapp.izvewenija izvewenija WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "izvewenija";
+	private static final String _FILTER_ENTITY_TABLE = "sapp.izvewenija";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "izvewenija.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "sapp.izvewenija.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Izvewenija exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Izvewenija exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(IzvewenijaPersistenceImpl.class);
 }
