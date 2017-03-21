@@ -10,6 +10,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import tj.status.izvewenij.service.StatusIzvewenijLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
@@ -52,6 +53,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	private void updateGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		//StringPool.PERCENT;
 		
 		long  izvewenie = 0;
 		

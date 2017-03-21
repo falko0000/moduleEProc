@@ -32,7 +32,7 @@
  <aui:field-wrapper>
 <aui:input name="delivery_time_p" type="radio" value="8" label="big_term_and_procedure_of_the_software_application" inlineField="true" checked="true"/>
 
-<aui:input name="" suffix="%"  type="number" value="0.0" step="0.1" min="0.0" max="3.0"/>
+<aui:input name="" suffix="<%=StringPool.PERCENT%>"  type="number" value="0.0" step="0.1" min="0.0" max="3.0"/>
 
 
  </aui:field-wrapper>
