@@ -3,46 +3,53 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eQuotationModule
 Bundle-SymbolicName: tj.module.equotation
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_112 (Oracle Corporation)
-Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
- )",com.liferay.expando.kernel.model;version="[1.0,2)",com.liferay.exp
- ortimport.kernel.lar;version="[1.0,2)",com.liferay.portal.kernel.anno
- tation;version="[6.3,7)",com.liferay.portal.kernel.bean;version="[7.0
- ,8)",com.liferay.portal.kernel.dao.orm;version="[7.0,8)",com.liferay.
- portal.kernel.dao.search;version="[7.0,8)",com.liferay.portal.kernel.
- exception;version="[7.0,8)",com.liferay.portal.kernel.language;versio
- n="[7.0,8)",com.liferay.portal.kernel.model;version="[1.0,2)",com.lif
- eray.portal.kernel.portlet;version="[7.0,8)",com.liferay.portal.kerne
- l.portlet.bridges.mvc;version="[1.0,2)",com.liferay.portal.kernel.res
- iliency.spi.agent.annotation;version="[6.2,7)",com.liferay.portal.ker
- nel.search;version="[7.0,8)",com.liferay.portal.kernel.security.permi
- ssion;version="[1.0,2)",com.liferay.portal.kernel.service;version="[1
- .0,2)",com.liferay.portal.kernel.service.permission;version="[1.0,2)"
- ,com.liferay.portal.kernel.servlet.taglib.ui;version="[6.3,7)",com.li
- feray.portal.kernel.theme;version="[1.0,2)",com.liferay.portal.kernel
- .upload;version="[6.3,7)",com.liferay.portal.kernel.util;version="[7.
- 0,8)",javax.portlet;version="[2.0,3)",javax.servlet;version="[3.0,4)"
- ,javax.servlet.http;version="[3.0,4)",tj.izvewenieput.exception;versi
- on="[1.0,2)",tj.izvewenieput.model;version="[1.0,2)",tj.izvewenieput.
- service.persistence;version="[1.0,2)",tj.izvewenija.model;version="[1
- .0,2)",tj.izvewenija.service;version="[1.0,2)",tj.orgindex.exception;
- version="[1.0,2)",tj.orgindex.model;version="[1.0,2)",tj.orgindex.ser
- vice;version="[1.0,2)",tj.orgindex.service.persistence;version="[1.0,
- 2)",tj.porjadok.raboty.komissii.exception;version="[1.0,2)",tj.porjad
- ok.raboty.komissii.model;version="[1.0,2)",tj.porjadok.raboty.komissi
- i.service;version="[1.0,2)",tj.porjadok.raboty.komissii.service.persi
- stence;version="[1.0,2)",tj.sapp.services.model;version="[1.0,2)",tj.
- sapp.services.service;version="[1.0,2)",tj.spisok.lotov.model;version
- ="[1.0,2)",tj.spisok.lotov.service;version="[1.0,2)",tj.status.izvewe
- nij.model;version="[1.0,2)",tj.status.izvewenij.service;version="[1.0
- ,2)",tj.tipy.izvewenij.exception;version="[1.0,2)",tj.tipy.izvewenij.
- model;version="[1.0,2)",tj.tipy.izvewenij.service;version="[1.0,2)",t
- j.tipy.izvewenij.service.persistence;version="[1.0,2)"
+Created-By: 1.8.0_111 (Oracle Corporation)
+Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
+ feray.announcements.kernel.model;version="[1.0,2)",com.liferay.expand
+ o.kernel.model;version="[1.0,2)",com.liferay.exportimport.kernel.lar;
+ version="[1.0,2)",com.liferay.exportimport.kernel.model;version="[1.0
+ ,2)",com.liferay.portal.kernel.annotation;version="[6.3,7)",com.lifer
+ ay.portal.kernel.bean;version="[7.0,8)",com.liferay.portal.kernel.dao
+ .orm;version="[7.0,8)",com.liferay.portal.kernel.dao.search;version="
+ [7.0,8)",com.liferay.portal.kernel.exception;version="[7.0,8)",com.li
+ feray.portal.kernel.language;version="[7.0,8)",com.liferay.portal.ker
+ nel.messaging.proxy;version="[7.0,8)",com.liferay.portal.kernel.model
+ ;version="[1.0,2)",com.liferay.portal.kernel.portlet;version="[7.0,8)
+ ",com.liferay.portal.kernel.portlet.bridges.mvc;version="[1.0,2)",com
+ .liferay.portal.kernel.resiliency.spi.agent.annotation;version="[6.2,
+ 7)",com.liferay.portal.kernel.search;version="[7.0,8)",com.liferay.po
+ rtal.kernel.security.auth;version="[1.0,2)",com.liferay.portal.kernel
+ .security.permission;version="[1.0,2)",com.liferay.portal.kernel.serv
+ ice;version="[1.0,2)",com.liferay.portal.kernel.service.permission;ve
+ rsion="[1.0,2)",com.liferay.portal.kernel.servlet.taglib.ui;version="
+ [6.3,7)",com.liferay.portal.kernel.theme;version="[1.0,2)",com.lifera
+ y.portal.kernel.upload;version="[6.3,7)",com.liferay.portal.kernel.ut
+ il;version="[7.0,8)",com.liferay.portal.kernel.workflow;version="[7.0
+ ,8)",com.liferay.portal.util,com.liferay.portlet.usergroupsadmin.sear
+ ch,com.liferay.portlet.usersadmin.search,com.liferay.registry.collect
+ ions,com.liferay.user.groups.admin.constants,javax.portlet;version="[
+ 2.0,3)",javax.servlet;version="[3.0,4)",javax.servlet.http;version="[
+ 3.0,4)",tj.izvewenieput.exception;version="[1.0,2)",tj.izvewenieput.m
+ odel;version="[1.0,2)",tj.izvewenieput.service.persistence;version="[
+ 1.0,2)",tj.izvewenija.model;version="[1.0,2)",tj.izvewenija.service;v
+ ersion="[1.0,2)",tj.orgindex.exception;version="[1.0,2)",tj.orgindex.
+ model;version="[1.0,2)",tj.orgindex.service;version="[1.0,2)",tj.orgi
+ ndex.service.persistence;version="[1.0,2)",tj.porjadok.raboty.komissi
+ i.exception;version="[1.0,2)",tj.porjadok.raboty.komissii.model;versi
+ on="[1.0,2)",tj.porjadok.raboty.komissii.service;version="[1.0,2)",tj
+ .porjadok.raboty.komissii.service.persistence;version="[1.0,2)",tj.sa
+ pp.services.model;version="[1.0,2)",tj.sapp.services.service;version=
+ "[1.0,2)",tj.spisok.lotov.model;version="[1.0,2)",tj.spisok.lotov.ser
+ vice;version="[1.0,2)",tj.status.izvewenij.model;version="[1.0,2)",tj
+ .status.izvewenij.service;version="[1.0,2)",tj.tipy.izvewenij.excepti
+ on;version="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.tip
+ y.izvewenij.service;version="[1.0,2)",tj.tipy.izvewenij.service.persi
+ stence;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251
 Private-Package: content,resource-actions,tj.module.equotation.constan
- ts,tj.module.equotation.portlet
+ ts,tj.module.equotation.portlet,tj.usergroupsadmin.search
 Provide-Capability: osgi.service;objectClass:List<String>="com.liferay
  .portal.kernel.portlet.bridges.mvc.MVCActionCommand",osgi.service;obj
  ectClass:List<String>="com.liferay.portal.kernel.portlet.bridges.mvc.
@@ -60,8 +67,9 @@ Require-Capability: osgi.extender;filter:="(&(osgi.extender=jsp.taglib
  er=jsp.taglib)(uri=http://liferay.com/tld/security))",osgi.extender;f
  ilter:="(&(osgi.extender=jsp.taglib)(uri=http://liferay.com/tld/theme
  ))",osgi.extender;filter:="(&(osgi.extender=jsp.taglib)(uri=http://li
- feray.com/tld/ui))",osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))
- "
+ feray.com/tld/ui))",osgi.service;filter:="(objectClass=com.liferay.po
+ rtal.kernel.service.UserService)";effective:=active,osgi.ee;filter:="
+ (&(osgi.ee=JavaSE)(version=1.8))"
 Service-Component: OSGI-INF/tj.module.equotation.portlet.EQuotationRes
  ourceCommand.xml,OSGI-INF/tj.module.equotation.portlet.EqoutationActi
  onCommand.xml,OSGI-INF/tj.module.equotation.portlet.EqoutationModuleP

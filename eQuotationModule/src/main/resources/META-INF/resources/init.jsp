@@ -9,9 +9,19 @@
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 
 <%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
+<%@page import="com.liferay.portal.kernel.model.Layout" %>
+<%@page import="com.liferay.portal.kernel.model.LayoutSet" %>
+<%@page import="com.liferay.portal.kernel.model.LayoutSetPrototype" %>
+<%@page import="com.liferay.portal.kernel.model.LayoutConstants" %>
+<%@page import="com.liferay.portal.kernel.service.LayoutLocalServiceUtil" %>
+<%@page import="com.liferay.portal.kernel.service.LayoutSetLocalServiceUtil" %>
+<%@page import="com.liferay.portal.kernel.service.LayoutSetPrototypeLocalServiceUtil" %>
+<%@page import="com.liferay.portal.kernel.service.LayoutSetPrototypeServiceUtil" %>
 
 <%@ page import="com.liferay.portal.kernel.service.permission.PortletPermissionUtil" %>
 <%@ page import="com.liferay.portal.kernel.security.permission.ActionKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
@@ -19,12 +29,19 @@
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="javax.portlet.ActionRequest"%>
+<%@page import="javax.portlet.WindowState" %>
+
+<%@page import="com.liferay.portal.kernel.exception.DuplicateUserGroupException" %>
+<%@page import="com.liferay.portal.kernel.exception.NoSuchUserGroupException" %>
+<%@page import="com.liferay.portal.kernel.exception.RequiredUserGroupException" %>
+<%@page import="com.liferay.portal.kernel.exception.UserGroupNameException" %>
 
 <%@page import="java.util.List" %>
 <%@page import="java.util.Collections" %>
 <%@ page import = "java.util.Date" %>
 <%@ page import = "java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.LinkedHashMap" %>
 
 <%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %> 
@@ -34,24 +51,38 @@
  <%@ page import ="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
 <%@ page import ="com.liferay.portal.kernel.util.DateUtil" %>
 <%@page import="com.liferay.portal.kernel.util.StringPool" %> 
-
+<%@page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %>
+<%@ page import="com.liferay.admin.kernel.util.PortalMyAccountApplicationType" %>
+<%@page import="com.liferay.user.groups.admin.constants.UserGroupsAdminPortletKeys" %>
+<%@page import="com.liferay.portal.kernel.service.UserGroupServiceUtil" %>
+<%@page import="com.liferay.portal.kernel.exception.RequiredUserGroupException" %>
+<%@page import="com.liferay.portal.kernel.portlet.PortletURLUtil" %>
 <%@page import="com.liferay.portal.kernel.portlet.PortletURLFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.portlet.PortletProvider" %>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@page import="com.liferay.portal.kernel.dao.search.ResultRow"%>
 <%@page import="com.liferay.portal.kernel.dao.search.RowChecker" %>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%@page import="com.liferay.portal.kernel.language.UnicodeLanguageUtil" %>
+<%@page import="com.liferay.portal.kernel.portlet.PortletProviderUtil" %>
 
-<%@page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %>
-
+<%@page import="com.liferay.portal.kernel.portlet.PortalPreferences" %>
+<%@page import="com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil" %>
 <%@page import="com.liferay.portal.kernel.service.OrganizationServiceUtil" %>
 <%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil" %>
 <%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil" %>
 <%@page import="com.liferay.portal.kernel.service.UserServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.permission.GroupPermissionUtil" %>
+<%@page import="com.liferay.portal.kernel.service.permission.PortalPermissionUtil" %>
+<%@page import="com.liferay.portal.kernel.service.permission.UserGroupPermissionUtil" %>
+
 <%@ page import = "com.liferay.portal.kernel.model.Address" %>
 <%@page import="com.liferay.portal.kernel.model.Organization"%>
 <%@page import="com.liferay.portal.kernel.model.User"%>
 <%@page import="com.liferay.portal.kernel.model.Phone"%>
-
+<%@page import="com.liferay.portal.kernel.model.Group" %>
+<%@page import="com.liferay.portal.kernel.model.UserGroup" %>
+<%@page import="com.liferay.portal.util.PropsValues" %>
 <!--TRS -->
 <%@page import="tj.sapp.services.model.VW_Izvewenija"%>
 <%@page import="tj.sapp.services.service.VW_IzvewenijaLocalServiceUtil"%>
@@ -61,8 +92,15 @@
 <%@page import="tj.spisok.lotov.service.spisok_lotovLocalServiceUtil"%>
 
 <%@page import="tj.module.equotation.constants.EQuotationConstants" %>
-
-
+<%@page import="com.liferay.portal.kernel.model.UserGroupConstants" %>
+<%@page import="com.liferay.portlet.usergroupsadmin.search.SetUserUserGroupChecker" %>
+<%@page import="com.liferay.portlet.usergroupsadmin.search.UnsetUserUserGroupChecker" %>
+<%@page import="com.liferay.portlet.usergroupsadmin.search.UserGroupChecker" %>
+<%@page import="com.liferay.portlet.usergroupsadmin.search.UserGroupDisplayTerms" %>
+<%@page import="com.liferay.portlet.usergroupsadmin.search.UserGroupSearch" %>
+<%@page import="com.liferay.portlet.usersadmin.search.UserSearch" %>
+<%@page import="com.liferay.portlet.usersadmin.search.UserSearchTerms" %>
+<%@page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@page import="tj.tipy.izvewenij.model.TipyIzvewenij"%>
 <%@page import="tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil"%>
 <%@page import="tj.tipy.izvewenij.service.persistence.TipyIzvewenijUtil" %>
@@ -91,15 +129,28 @@
 <portlet:defineObjects />
 
 <%
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
 
-/*
-long groupId = scopeGroupId;
-String name = portletDisplay.getRootPortletId();
-String primKey = portletDisplay.getResourcePK();
-String actionADD_NEW = "NEW";
+boolean filterManageableOrganizations = true;
 
-boolean canAddNew = permissionChecker.hasPermission(groupId, name, primKey, actionADD_NEW);
-*/
+Group scopeGroup = themeDisplay.getScopeGroup();
+
+if (permissionChecker.hasPermission(scopeGroup.getGroupId(), User.class.getName(), User.class.getName(), ActionKeys.VIEW)) {
+	filterManageableOrganizations = false;
+}
+
+String portletId = PortletProviderUtil.getPortletId(PortalMyAccountApplicationType.MyAccount.CLASS_NAME, PortletProvider.Action.VIEW);
+
+if (portletName.equals(portletId) || permissionChecker.hasPermission(scopeGroup.getGroupId(), Organization.class.getName(), Organization.class.getName(), ActionKeys.VIEW)) {
+	filterManageableOrganizations = false;
+}
+
+boolean filterManageableUserGroups = true;
+
+if (portletName.equals(portletId) || permissionChecker.hasPermission(scopeGroup.getGroupId(), UserGroup.class.getName(), UserGroup.class.getName(), ActionKeys.VIEW)) {
+	filterManageableUserGroups = false;
+}
+
 
 %>
 

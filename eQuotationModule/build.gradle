@@ -14,5 +14,5 @@ dependencies {
 	 compile project (":modules:PorjadokRabotyKomissii:PorjadokRabotyKomissii-api")
 	 
 	  compile project (":modules:StatusIzvewenij:StatusIzvewenij-api")
-	 
+
 }

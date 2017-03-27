@@ -2,11 +2,13 @@ package tj.module.equotation.portlet;
 
 
 import com.liferay.portal.kernel.exception.PortalException;
-
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserService;
 import com.liferay.portal.kernel.service.persistence.OrganizationUtil;
 
 //import com.liferay.portal.kernel.service.ResourceLocalServiceUtil;
@@ -15,6 +17,7 @@ import com.liferay.portal.kernel.service.persistence.OrganizationUtil;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import tj.izvewenieput.model.IzveweniePut;
 import tj.izvewenieput.service.IzveweniePutLocalService;
@@ -42,6 +45,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 
 @Component(
@@ -49,12 +53,16 @@ import org.osgi.service.component.annotations.Component;
 	property = {
 		"com.liferay.portlet.display-category="+EQuotationConstants.PORTLRT_DISPLAY_CATEGORY,
 		"com.liferay.portlet.instanceable=true",
+		"com.liferay.portlet.header-portlet-css=/css/main.scss",
+		"com.liferay.portlet.render-weight=50",
+		"com.liferay.portlet.icon=/icons/user_groups_admin.png",
 		"javax.portlet.display-name="+EQuotationConstants.PORTLET_DISPLAY_NAME,
 		"javax.portlet.name="+EQuotationConstants.PORTLET_NAME,
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template="+EQuotationConstants.VIEW_TEMPLATE,
 		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user"
+		"javax.portlet.security-role-ref=power-user,user",
+		"javax.portlet.supports.mime-type=text/html"
 	},
 	service = Portlet.class
 )
@@ -98,7 +106,35 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		String iNum = ParamUtil.getString(actionRequest, "iNum");
 		String naimenovanie = ParamUtil.getString(actionRequest, "naimenovanie");
 		System.out.println("==>" + iNum + ", " + naimenovanie );
+		
+		
+	}
+	
+	public void editUserGroupAssignments(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		long userGroupId = ParamUtil.getLong(actionRequest, "userGroupId");
+
+		long[] addUserIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
+		long[] removeUserIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
+
+		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
+				new ProxyModeThreadLocalCloseable()) {
+
+			ProxyModeThreadLocal.setForceSync(true);
+
+			_userService.addUserGroupUsers(userGroupId, addUserIds);
+			_userService.unsetUserGroupUsers(userGroupId, removeUserIds);
+		}
 	}
 
-
+	@Reference(unbind = "-")
+	protected void setUserService(UserService userService) {
+		_userService = userService;
+	}
+	
+	private UserService _userService;
 }

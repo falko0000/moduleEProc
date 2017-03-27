@@ -55,8 +55,4 @@
 		 <liferay-ui:search-iterator />
 		</liferay-ui:search-container>
 		
-		<aui:field-wrapper label="Permissions">
-          <liferay-ui:input-permissions
-        modelName="<%= Izvewenija.class.getName() %>" />
-        
-       </aui:field-wrapper>
+	

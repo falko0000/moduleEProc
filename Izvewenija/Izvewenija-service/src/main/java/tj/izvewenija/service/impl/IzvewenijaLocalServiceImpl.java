@@ -84,7 +84,7 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 	public List<Izvewenija> getIzvewenija( long companyId, long groupId) 
 			throws SystemException {
 		
-		return izvewenijaPersistence.findByCompanyId_GroupId(companyId, groupId);
+		return izvewenijaPersistence.filterFindByCompanyId_GroupId(companyId, groupId);
 	}
 	
 	public int getCountIzvewenija(long companyId, long groupId)

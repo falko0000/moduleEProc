@@ -28,7 +28,7 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse)  {
 		//bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots
-		String names = "bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots";
+		String names = "bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots,bid_commission";
 		
 		
 	/*	long izvewenie_id = (Long) renderRequest.getAttribute("izvewenie_id");

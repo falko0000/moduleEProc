@@ -76,6 +76,10 @@
     			</liferay-ui:section>
     		
  
+                <liferay-ui:section>    
+        			<jsp:include page="<%=EQuotationConstants.PAGE_COMMISSION%>" flush="true" />
+    			</liferay-ui:section>
+			
 			</liferay-ui:tabs>
 
 
