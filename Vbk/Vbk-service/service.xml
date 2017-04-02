@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.vbk">
+	<namespace>vbk</namespace>
+    <entity local-service="true" remote-service="false" name="Vbk" table="klassifikatory.vbk">
+        <column name="vbk_id" type="long" primary="true" id-type="sequence" id-param="klassifikatory.vbk_id_seq"></column>
+        <column name="kod" type="String"></column>
+        <column name="nazvanie_tj" type="String"></column>
+        <column name="nazvanie_ru" type="String"></column>
+    </entity>
+	
+</service-builder>

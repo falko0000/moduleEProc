@@ -1,0 +1,9 @@
+Bundle-Name: Vbk-api
+Bundle-SymbolicName: tj.vbk.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.vbk.exception,\
+	tj.vbk.model,\
+	tj.vbk.service,\
+	tj.vbk.service.persistence
+-includeresource: META-INF/service.xml=../Vbk-service/service.xml

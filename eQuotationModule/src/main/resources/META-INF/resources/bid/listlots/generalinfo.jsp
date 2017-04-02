@@ -4,12 +4,13 @@
 
 </aui:field-wrapper>
 
-<aui:fieldset>
 
-<aui:input name="lot_number"  type="number" value="" step="1" min="1"  />
-<aui:input name="item_name"  type="textarea" value=""  />
-<aui:input name="allocated_amount"  type="number" value="" step="0.1" min="0.0" />
-<aui:input name="classification_ebc"  type="textarea" value=""/>
 
-</aui:fieldset>
+<aui:input name="lot_number"  type="number" min="0"  />
+<aui:input name="item_name"  type="text" value=""  />
+<aui:input name="allocated_amount"  type="number" min="0" suffix ="<%=EQuotationConstants.amount%>" />
+<aui:input name="classification_ebc"  type="text" value=""/>
+<aui:input name="kod_jebk" type="hidden" value="" />
+
+
 

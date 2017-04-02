@@ -1,0 +1,9 @@
+Bundle-Name: Okgz-api
+Bundle-SymbolicName: tj.okgz.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.okgz.exception,\
+	tj.okgz.model,\
+	tj.okgz.service,\
+	tj.okgz.service.persistence
+-includeresource: META-INF/service.xml=../Okgz-service/service.xml

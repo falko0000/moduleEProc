@@ -122,7 +122,11 @@
 <%@page import="tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii" %>
 <%@page import="tj.porjadok.raboty.komissii.service.persistence.PorjadokRabotyKomissiiUtil" %>
 
+<%@page import="tj.edinicy.izmerenija.model.EdinicyIzmerenija" %>
+<%@page import="tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil" %>
 
+<%@page import="tj.strany.model.Strany" %>
+<%@page import="tj.strany.service.StranyLocalServiceUtil" %>
 
 <liferay-theme:defineObjects />
 
@@ -153,7 +157,6 @@ if (portletName.equals(portletId) || permissionChecker.hasPermission(scopeGroup.
 
 
 %>
-
 
 
 

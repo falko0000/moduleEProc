@@ -1,0 +1,1 @@
+create sequence klassifikatory.vbk_id_seq;

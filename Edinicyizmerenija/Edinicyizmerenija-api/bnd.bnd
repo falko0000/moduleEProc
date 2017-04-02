@@ -1,0 +1,9 @@
+Bundle-Name: Edinicyizmerenija-api
+Bundle-SymbolicName: tj.edinicy.izmerenija.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.edinicy.izmerenija.exception,\
+	tj.edinicy.izmerenija.model,\
+	tj.edinicy.izmerenija.service,\
+	tj.edinicy.izmerenija.service.persistence
+-includeresource: META-INF/service.xml=../Edinicyizmerenija-service/service.xml

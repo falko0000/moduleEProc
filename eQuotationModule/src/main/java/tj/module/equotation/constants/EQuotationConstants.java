@@ -52,4 +52,5 @@ public interface EQuotationConstants  {
     
     static final long AUTHORIZED_BODY_ID = 38548;
     
+    static final String amount = "Сомони";
 }

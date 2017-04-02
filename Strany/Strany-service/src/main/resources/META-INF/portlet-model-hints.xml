@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.strany.model.Strany">
+		<field name="nazvanie" type="String" />
+		<field name="nazvanie_tj" type="String" />
+		<field name="strany_id" type="long" />
+	</model>
+</model-hints>

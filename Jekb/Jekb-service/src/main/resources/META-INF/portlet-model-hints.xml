@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.jekb.model.Jekb">
+		<field name="jekb_id" type="long" />
+		<field name="kod" type="String" />
+		<field name="nazvanie_ru" type="String" />
+		<field name="nazvanie_tj" type="String" />
+		<field name="nazvanie_en" type="String" />
+	</model>
+</model-hints>

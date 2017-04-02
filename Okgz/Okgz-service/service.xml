@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.okgz">
+	<namespace>okgz</namespace>
+    <entity name="Okgz" local-service="true" table="klassifikatory.okgz">
+        <column name="okgz_id" type="long" primary="true" id-type="sequence" id-param="klassifikatory.okgz_id_seq"></column>
+        <column name="kod" type="String"></column>
+        <column name="naimenovanie" type="String"></column>
+    </entity>
+	
+</service-builder>

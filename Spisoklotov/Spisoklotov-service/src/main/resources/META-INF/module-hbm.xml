@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.spisok.lotov.model.Spisoklotov" />
+	<class name="tj.spisok.lotov.model.impl.SpisoklotovImpl" table="sapp.spisok_lotov">
+		<id name="spisok_lotov_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.spisok_lotov_id_seq</param>
+			</generator>
+		</id>
+		<property name="cena_kontrakta" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="cena_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="id_jebk" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="istochnik_finansirovanija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="klassifikacija_po_jekb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kod_jekb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kod_zakazchika" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mesto_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="naimenovanie_lota" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nomer_lota" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="obespechenie_ispolnenija" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="obespechenie_ispolnenija_v_procentah" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="obespechenie_v_procentah" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="obespechenie_zajavki" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="oplata" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="soputstvujuwie_uslovija" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="srok_dejstvija" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_ispolnenija_zajavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_obespechenija_zajavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zakazchik" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

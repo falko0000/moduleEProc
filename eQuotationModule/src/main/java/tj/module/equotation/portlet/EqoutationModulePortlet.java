@@ -4,36 +4,25 @@ package tj.module.equotation.portlet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
-import com.liferay.portal.kernel.model.User;
+
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
+
 import com.liferay.portal.kernel.service.UserService;
-import com.liferay.portal.kernel.service.persistence.OrganizationUtil;
-
-//import com.liferay.portal.kernel.service.ResourceLocalServiceUtil;
-
 
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+
 import com.liferay.portal.kernel.util.StringUtil;
 
-import tj.izvewenieput.model.IzveweniePut;
-import tj.izvewenieput.service.IzveweniePutLocalService;
-import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
-import tj.izvewenieput.service.persistence.IzveweniePutUtil;
-import tj.izvewenija.model.Izvewenija;
-import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
+
 import tj.module.equotation.constants.EQuotationConstants;
-import tj.orgindex.service.persistence.OrgindexUtil;
+
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
-import tj.porjadok.raboty.komissii.service.persistence.PorjadokRabotyKomissiiUtil;
+
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
+
 
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 
@@ -46,7 +35,7 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-
+import tj.spisok.lotov.service.SpisoklotovLocalServiceUtil;
 
 @Component(
 	immediate = true,
@@ -71,9 +60,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 	
-
 		
-	
 	try {
 		PorjadokRabotyKomissii por = PorjadokRabotyKomissiiLocalServiceUtil.getPorjadokRabotyKomissii(116);
 

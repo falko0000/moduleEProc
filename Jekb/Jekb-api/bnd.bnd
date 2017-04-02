@@ -1,0 +1,9 @@
+Bundle-Name: Jekb-api
+Bundle-SymbolicName: tj.jekb.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.jekb.exception,\
+	tj.jekb.model,\
+	tj.jekb.service,\
+	tj.jekb.service.persistence
+-includeresource: META-INF/service.xml=../Jekb-service/service.xml

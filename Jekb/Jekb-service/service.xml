@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.jekb">
+<author>falko</author>
+	<namespace>jekb</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="Jekb" remote-service="false" uuid="false" table='klassifikatory.jekb'>
+        
+        <column name="jekb_id" type="long" primary="true" id-type="sequence" accessor="false" id-param="klassifikatory.jekb_id_seq"> </column>
+        
+        <column name="kod" type="String"></column>
+    	<column name="nazvanie_ru" type="String"></column>
+    	<column name="nazvanie_tj" type="String"></column>
+    	<column name="nazvanie_en" type="String"></column>
+    	
+	</entity>
+</service-builder>
