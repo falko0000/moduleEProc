@@ -89,7 +89,7 @@
       <aui:col md="3">
       
     
-      <aui:input id="bid_number_IFB_C" name ="(C)" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_c() : ""%>">
+      <aui:input id="bid_number_IFB_C" name ="(C)" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_c() : ""%>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      
