@@ -66,7 +66,7 @@
       
       <aui:col md="6">
 
-        <aui:select id="bid_number_IFB_B" label="(B)" name="" >
+        <aui:select id="bid_number_IFB_B" label="(B)" name=""  disabled="<%=disabled %>"> 
       <c:if test="<%= izvewenieput != null %>">
        <%for(Orgindex orgind : orgindex) 
          { %>
