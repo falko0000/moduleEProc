@@ -19,7 +19,6 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
@@ -43,7 +42,7 @@ import java.util.Date;
  * @generated
  */
 @ProviderType
-public interface IzvewenijaModel extends AuditedModel,BaseModel<Izvewenija>, ShardedModel {
+public interface IzvewenijaModel extends BaseModel<Izvewenija>, ShardedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
