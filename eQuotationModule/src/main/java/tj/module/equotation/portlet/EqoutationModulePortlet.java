@@ -36,7 +36,7 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import tj.spisok.lotov.service.SpisoklotovLocalServiceUtil;
-
+import tj.izvewenija.model.Izvewenija;
 @Component(
 	immediate = true,
 	property = {
@@ -64,10 +64,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	try {
 		PorjadokRabotyKomissii por = PorjadokRabotyKomissiiLocalServiceUtil.getPorjadokRabotyKomissii(116);
 
-		/* Date date = por.getData_podvedenija_itogov()
-		 
-		 System.out.println(date);
-*/
+
 	} catch (PortalException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

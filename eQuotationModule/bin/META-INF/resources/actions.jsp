@@ -7,7 +7,11 @@
     Izvewenija izvewenie = (Izvewenija)row.getObject();
    %>
 
-
+		<portlet:renderURL var="edit">
+			<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
+             <portlet:param name="izvewenie_id" value="<%=Long.toString(izvewenie.getIzvewenija_id())%>" /> 
+		</portlet:renderURL>
+		
 	 <portlet:renderURL var="infoURL" windowState="<%=LiferayWindowState.NORMAL.toString()%>" > 
 		 <portlet:param name="izvewenija_id" value="<%=Long.toString(izvewenie.getIzvewenija_id())%>" /> 
 		 <portlet:param name="mvcPath" value="<%=EQuotationConstants.PAGE_INFO%>"/>
@@ -25,7 +29,7 @@
 			var="permissionsURL" />
 	 
     <liferay-ui:icon-menu>
-    	<liferay-ui:icon iconCssClass="icon-edit" message="Edit" url="<%= infoURL.toString() %>" />  
+    	<liferay-ui:icon iconCssClass="icon-edit" message="Edit" url="<%= edit.toString() %>" />  
         <liferay-ui:icon iconCssClass="icon-info-sign" message="Info" url="<%= infoURL.toString() %>" />
         <liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
         <liferay-ui:icon image="permissions" message="Permissions" url="<%= permissionsURL %>" />

@@ -32,19 +32,19 @@ Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  t;version="[3.0,4)",javax.servlet.http;version="[3.0,4)",tj.edinicy.i
  zmerenija.model;version="[1.0,2)",tj.edinicy.izmerenija.service;versi
  on="[1.0,2)",tj.izvewenieput.exception;version="[1.0,2)",tj.izvewenie
- put.model;version="[1.0,2)",tj.izvewenieput.service.persistence;versi
- on="[1.0,2)",tj.izvewenija.model;version="[1.0,2)",tj.izvewenija.serv
- ice;version="[1.0,2)",tj.jekb.model;version="[1.0,2)",tj.jekb.service
- ;version="[1.0,2)",tj.okgz.model;version="[1.0,2)",tj.okgz.service;ve
- rsion="[1.0,2)",tj.orgindex.exception;version="[1.0,2)",tj.orgindex.m
- odel;version="[1.0,2)",tj.orgindex.service;version="[1.0,2)",tj.orgin
- dex.service.persistence;version="[1.0,2)",tj.porjadok.raboty.komissii
- .exception;version="[1.0,2)",tj.porjadok.raboty.komissii.model;versio
- n="[1.0,2)",tj.porjadok.raboty.komissii.service;version="[1.0,2)",tj.
- porjadok.raboty.komissii.service.persistence;version="[1.0,2)",tj.sap
- p.services.model;version="[1.0,2)",tj.sapp.services.service;version="
- [1.0,2)",tj.spisok.lotov.model;version="[1.0,2)",tj.spisok.lotov.serv
- ice;version="[1.0,2)",tj.status.izvewenij.model;version="[1.0,2)",tj.
+ put.model;version="[1.0,2)",tj.izvewenieput.service;version="[1.0,2)"
+ ,tj.izvewenieput.service.persistence;version="[1.0,2)",tj.izvewenija.
+ model;version="[1.0,2)",tj.izvewenija.service;version="[1.0,2)",tj.je
+ kb.model;version="[1.0,2)",tj.jekb.service;version="[1.0,2)",tj.okgz.
+ model;version="[1.0,2)",tj.okgz.service;version="[1.0,2)",tj.orgindex
+ .exception;version="[1.0,2)",tj.orgindex.model;version="[1.0,2)",tj.o
+ rgindex.service;version="[1.0,2)",tj.orgindex.service.persistence;ver
+ sion="[1.0,2)",tj.porjadok.raboty.komissii.exception;version="[1.0,2)
+ ",tj.porjadok.raboty.komissii.model;version="[1.0,2)",tj.porjadok.rab
+ oty.komissii.service;version="[1.0,2)",tj.porjadok.raboty.komissii.se
+ rvice.persistence;version="[1.0,2)",tj.sapp.services.model;version="[
+ 1.0,2)",tj.sapp.services.service;version="[1.0,2)",tj.spisok.lotov.mo
+ del;version="[1.0,2)",tj.status.izvewenij.model;version="[1.0,2)",tj.
  status.izvewenij.service;version="[1.0,2)",tj.strany.model;version="[
  1.0,2)",tj.strany.service;version="[1.0,2)",tj.tipy.izvewenij.excepti
  on;version="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.tip

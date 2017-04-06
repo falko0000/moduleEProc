@@ -7,7 +7,7 @@
 	long companyId = PortalUtil.getCompanyId(request);
 	long groupId = PortalUtil.getScopeGroupId(request);
 	
-	System.out.println(companyId+ " " + groupId );
+
 
     
 %>	

@@ -24,12 +24,12 @@
 
      <liferay-frontend:add-menu>
 	
-		<portlet:renderURL var="addMessageURL">
+		<portlet:renderURL var="addIzvewenijaURL">
 			<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="0"/>
 		</portlet:renderURL>
 
-		<liferay-frontend:add-menu-item title='ADD' url="<%= addMessageURL.toString() %>" />
+		<liferay-frontend:add-menu-item title='ADD' url="<%= addIzvewenijaURL.toString() %>" />
 	
 	</liferay-frontend:add-menu>
 	
