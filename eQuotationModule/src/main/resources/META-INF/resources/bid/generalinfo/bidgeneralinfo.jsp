@@ -1,4 +1,5 @@
 <%@ include file="/init.jsp" %>
+
 <%
 
 	List<TipyIzvewenij> typeizvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenijs(0,TipyIzvewenijLocalServiceUtil.getTipyIzvewenijsCount()); 
@@ -12,7 +13,7 @@
 	IzveweniePut izvewenieput = null;
 	
 	if(izvewenija != null)
-		izvewenieput = IzveweniePutUtil.findByIzvewenieId(izvewenija.getIzvewenija_id()).get(0);
+		izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(izvewenija.getIzvewenija_id());
 %>
 
       <aui:input 
@@ -51,7 +52,7 @@
      
       <aui:col md="3">
       
-      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="text" >
+      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_a() : ""%>" >
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      
@@ -60,7 +61,7 @@
       
       <aui:col md="6">
 
-        <aui:select id="bid_number_IFB_B" label="(B)" name=" " >
+        <aui:select id="bid_number_IFB_B" label="(B)" name="" >
       <c:if test="<%= izvewenieput != null %>">
        <%for(Orgindex orgind : orgindex) 
          { %>

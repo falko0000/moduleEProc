@@ -240,6 +240,12 @@ public class IzveweniePutLocalServiceUtil {
 		return getService().getIzveweniePut(izvewenie_put_id);
 	}
 
+	public static tj.izvewenieput.model.IzveweniePut getIzvewenijaPutByIzvewenieId(
+		long IzvewenijaID)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getIzvewenijaPutByIzvewenieId(IzvewenijaID);
+	}
+
 	/**
 	* Updates the izvewenie put in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

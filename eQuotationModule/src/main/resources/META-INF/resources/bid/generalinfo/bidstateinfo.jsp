@@ -29,7 +29,7 @@
       
       <c:if test="<%= izvewenija!= null  %>">
       
-      <aui:input id="bid_last_modified" type="text"  name="bid_last_modified" value="<%=izvewenija.getData_izmenenija()%>" disabled="true"/>
+      <aui:input id="bid_last_modified" type="text"  name="bid_last_modified" value="<%=izvewenija.getModifiedDate()%>" disabled="true"/>
       
       </c:if>
       

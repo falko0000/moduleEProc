@@ -23,8 +23,9 @@
   
   if(izvewenija != null )
 	{
-		bidorg = OrganizationLocalServiceUtil.getOrganization(izvewenija.getIzvewenija_id());
-		biduser = UserLocalServiceUtil.getUser(izvewenija.getSozdal());
+		//bidorg = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
+		bidorg = OrganizationLocalServiceUtil.getOrganization(38548);
+		biduser = UserLocalServiceUtil.getUser(izvewenija.getUserId());
 	}
 	else if(OrganizationLocalServiceUtil.hasUserOrganizations(UserServiceUtil.getCurrentUser().getUserId()))
 	{

@@ -88,8 +88,6 @@
 <%@page import="tj.sapp.services.service.VW_IzvewenijaLocalServiceUtil"%>
 
 
-<%@page import="tj.spisok.lotov.model.spisok_lotov"%>
-<%@page import="tj.spisok.lotov.service.spisok_lotovLocalServiceUtil"%>
 
 <%@page import="tj.module.equotation.constants.EQuotationConstants" %>
 <%@page import="com.liferay.portal.kernel.model.UserGroupConstants" %>
@@ -117,6 +115,7 @@
 
 <%@page import="tj.izvewenieput.model.IzveweniePut"%>
 <%@page import="tj.izvewenieput.service.persistence.IzveweniePutUtil"%>
+<%@page import="tj.izvewenieput.service.IzveweniePutLocalServiceUtil" %>
 
 <%@page import="tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil" %>
 <%@page import="tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii" %>
@@ -127,6 +126,9 @@
 
 <%@page import="tj.strany.model.Strany" %>
 <%@page import="tj.strany.service.StranyLocalServiceUtil" %>
+
+<%@page import="tj.spisok.lotov.model.Spisoklotov" %>
+<%@page import ="tj.spisok.lotov.service.SpisoklotovLocalServiceUtil" %>
 
 <liferay-theme:defineObjects />
 
