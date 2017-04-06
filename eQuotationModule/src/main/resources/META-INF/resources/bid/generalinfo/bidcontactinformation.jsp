@@ -30,14 +30,18 @@
 		for(Phone phone : phones)
 			allphone+=phone.getNumber()+";";
 	}
+	
+	String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
+
+	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
  
 %>
   <aui:input id="bid_address" type="text"  name="address" value= "<%=allfulladdress%>" disabled="true"/>
      
-      <aui:input id="bid_contact_name" type="text"  name="bid_contact_name" value= "<%=biduser.getFullName()%>" />
+      <aui:input id="bid_contact_name" type="text"  name="bid_contact_name" value= "<%=biduser.getFullName()%>"  disabled="<%=disabled %>"/>
       
-      <aui:input id="bid_email-address" type="text"  name="email-address" value= "<%=biduser.getEmailAddress()%>" />
+      <aui:input id="bid_email-address" type="text"  name="email-address" value= "<%=biduser.getEmailAddress()%>" disabled="<%=disabled %>"/>
       
-      <aui:input id="bid_personal-phones" type="text"  name="personal-phones" value = "<%=allphone%>" />
+      <aui:input id="bid_personal-phones" type="text"  name="personal-phones" value = "<%=allphone%>"  disabled="<%=disabled %>"/>
       
