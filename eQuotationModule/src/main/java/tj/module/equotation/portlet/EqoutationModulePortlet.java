@@ -17,8 +17,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import tj.module.equotation.constants.EQuotationConstants;
 
-import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
-import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
 
 
 import java.io.IOException;
@@ -37,8 +35,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 
-import tj.spisok.lotov.service.SpisoklotovLocalServiceUtil;
-import tj.izvewenija.model.Izvewenija;
+
 
 @Component(
 	immediate = true,
