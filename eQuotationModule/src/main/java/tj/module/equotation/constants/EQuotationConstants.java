@@ -53,4 +53,12 @@ public interface EQuotationConstants  {
     static final long AUTHORIZED_BODY_ID = 38548;
     
     static final String amount = "Сомони";
+    
+    //izvewenija var tab
+    //preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders
+    static final  String TAB_PREPARATION = "preparation";
+    static final  String TAB_SUBMISSION_OF_PROPOSALS = "submission_of_proposals";
+    static final  String TAB_EVALUATION_AND_AWARDING = "evaluation_and_awarding";
+    static final  String TAB_UNFULFILLED_TENDERS = "unfulfilled_tenders";
+    static final  String TAB_COMPLETED_TENDERS = "completed_tenders";
 }

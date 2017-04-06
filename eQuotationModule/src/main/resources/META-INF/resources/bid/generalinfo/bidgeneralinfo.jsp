@@ -1,3 +1,4 @@
+
 <%@ include file="/init.jsp" %>
 
 <%
@@ -14,6 +15,10 @@
 	
 	if(izvewenija != null)
 		izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(izvewenija.getIzvewenija_id());
+
+	String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
+
+	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 %>
 
       <aui:input 
@@ -42,7 +47,7 @@
       
       <aui:input id="bid_authorized_body" type="text"  name="bid_authorized_body" value= "<%=authorized_body_org.getName()%>" disabled="true"/>
       
-      <aui:input id="bid_name_notification" type="text"  name="bid_name_notification"  value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : ""  %>">
+      <aui:input id="bid_name_notification" type="text"  name="bid_name_notification"  value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : ""  %>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
       
@@ -52,7 +57,7 @@
      
       <aui:col md="3">
       
-      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_a() : ""%>" >
+      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_a() : ""%>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      

@@ -1,3 +1,4 @@
+<%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@ include file="/init.jsp" %>
 
-<p>sub</p>
+<jsp:include page="<%=EQuotationConstants.PAGE_PREPARATION %>"></jsp:include>

@@ -35,13 +35,11 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-<<<<<<< HEAD
 
 
-=======
 import tj.spisok.lotov.service.SpisoklotovLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
->>>>>>> origin/master
+
 @Component(
 	immediate = true,
 	property = {
@@ -64,7 +62,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-	
+		 
 		
 	try {
 		PorjadokRabotyKomissii por = PorjadokRabotyKomissiiLocalServiceUtil.getPorjadokRabotyKomissii(116);
@@ -75,8 +73,16 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		e.printStackTrace();
 	}
 		
-		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
-		renderRequest.setAttribute("editnametabs", names);
+	StringBuilder names = new StringBuilder();
+	
+	names.append(EQuotationConstants.TAB_PREPARATION);
+	names.append(","+EQuotationConstants.TAB_SUBMISSION_OF_PROPOSALS);
+	names.append(","+EQuotationConstants.TAB_EVALUATION_AND_AWARDING);
+	names.append(","+EQuotationConstants.TAB_UNFULFILLED_TENDERS);
+	names.append(","+EQuotationConstants.TAB_COMPLETED_TENDERS);
+
+//		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
+		renderRequest.setAttribute("editnametabs", names.toString());
 		super.doView(renderRequest, renderResponse);
 	}
 	
