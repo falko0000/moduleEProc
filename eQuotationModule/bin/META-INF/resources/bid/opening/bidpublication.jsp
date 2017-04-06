@@ -8,7 +8,7 @@
 	PorjadokRabotyKomissii porjadok_raboty_komissii = null;
 	
 	if(izvewenija != null)
-		porjadok_raboty_komissii = PorjadokRabotyKomissiiUtil.findByIzvewenieId(izvewenija.getIzvewenija_id()).get(0);
+		porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija.getIzvewenija_id());
 	
 	if(porjadok_raboty_komissii != null)
        cal.setTime(porjadok_raboty_komissii.getData_publikacii());

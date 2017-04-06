@@ -14,8 +14,12 @@
 
 package tj.porjadok.raboty.komissii.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.List;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
+import aQute.bnd.annotation.ProviderType;
+import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.base.PorjadokRabotyKomissiiLocalServiceBaseImpl;
 
 /**
@@ -35,9 +39,10 @@ import tj.porjadok.raboty.komissii.service.base.PorjadokRabotyKomissiiLocalServi
 @ProviderType
 public class PorjadokRabotyKomissiiLocalServiceImpl
 	extends PorjadokRabotyKomissiiLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil} to access the porjadok raboty komissii local service.
-	 */
+	
+    public PorjadokRabotyKomissii getPRKbyIzvewenieId(long IzvewenieId)
+    		throws SystemException {
+    
+    	return porjadokRabotyKomissiiPersistence.findByIzvewenieId(IzvewenieId).get(0);
+    }
 }

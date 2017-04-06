@@ -19,6 +19,7 @@ import java.util.List;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.PortalUtil;
 
@@ -69,9 +70,9 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 	    
 		izvewenija = addIzvewenija(izvewenija);
 		
-		System.out.println(izvewenija);
+		
 		try {
-			resourceLocalService.addModelResources(izvewenija, serviceContext);
+			resourceLocalService.addModelResources((AuditedModel) izvewenija, serviceContext);
 			} catch (PortalException e) {
 			e.printStackTrace();
 			} catch (SystemException e) {

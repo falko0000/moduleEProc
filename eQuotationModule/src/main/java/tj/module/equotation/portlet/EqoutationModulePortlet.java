@@ -64,14 +64,8 @@ public class EqoutationModulePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		 
 		
-	try {
-		PorjadokRabotyKomissii por = PorjadokRabotyKomissiiLocalServiceUtil.getPorjadokRabotyKomissii(116);
-
-
-	} catch (PortalException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		
+	
 		
 	StringBuilder names = new StringBuilder();
 	

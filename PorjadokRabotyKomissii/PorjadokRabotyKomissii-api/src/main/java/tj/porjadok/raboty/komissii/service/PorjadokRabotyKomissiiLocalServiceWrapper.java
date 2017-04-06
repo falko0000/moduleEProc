@@ -241,6 +241,13 @@ public class PorjadokRabotyKomissiiLocalServiceWrapper
 		return _porjadokRabotyKomissiiLocalService.fetchPorjadokRabotyKomissii(porjadok_raboty_komissii_id);
 	}
 
+	@Override
+	public tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii getPRKbyIzvewenieId(
+		long IzvewenieId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _porjadokRabotyKomissiiLocalService.getPRKbyIzvewenieId(IzvewenieId);
+	}
+
 	/**
 	* Returns the porjadok raboty komissii with the primary key.
 	*

@@ -230,6 +230,12 @@ public class PorjadokRabotyKomissiiLocalServiceUtil {
 				   .fetchPorjadokRabotyKomissii(porjadok_raboty_komissii_id);
 	}
 
+	public static tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii getPRKbyIzvewenieId(
+		long IzvewenieId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPRKbyIzvewenieId(IzvewenieId);
+	}
+
 	/**
 	* Returns the porjadok raboty komissii with the primary key.
 	*

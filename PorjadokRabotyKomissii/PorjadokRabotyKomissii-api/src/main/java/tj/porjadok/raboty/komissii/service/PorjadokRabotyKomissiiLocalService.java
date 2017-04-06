@@ -211,6 +211,10 @@ public interface PorjadokRabotyKomissiiLocalService extends BaseLocalService,
 	public PorjadokRabotyKomissii fetchPorjadokRabotyKomissii(
 		long porjadok_raboty_komissii_id);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public PorjadokRabotyKomissii getPRKbyIzvewenieId(long IzvewenieId)
+		throws SystemException;
+
 	/**
 	* Returns the porjadok raboty komissii with the primary key.
 	*
