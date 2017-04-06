@@ -217,6 +217,10 @@ public interface IzveweniePutLocalService extends BaseLocalService,
 	public IzveweniePut getIzveweniePut(long izvewenie_put_id)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public IzveweniePut getIzvewenijaPutByIzvewenieId(long IzvewenijaID)
+		throws SystemException;
+
 	/**
 	* Updates the izvewenie put in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

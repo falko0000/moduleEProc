@@ -9,6 +9,7 @@ List<Strany> strany = StranyLocalServiceUtil.getStranies(0, StranyLocalServiceUt
 %>
 
 <aui:input name="name_goods" type="text" value="" />
+
 <aui:input name="belonging_cpv" type="text" value="" />
 <aui:input name="kod_cpv" type="text" value="" disabled="true" />
 <aui:input name="description_goods" type="textarea" />

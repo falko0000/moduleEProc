@@ -252,6 +252,13 @@ public class IzveweniePutLocalServiceWrapper implements IzveweniePutLocalService
 		return _izveweniePutLocalService.getIzveweniePut(izvewenie_put_id);
 	}
 
+	@Override
+	public tj.izvewenieput.model.IzveweniePut getIzvewenijaPutByIzvewenieId(
+		long IzvewenijaID)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _izveweniePutLocalService.getIzvewenijaPutByIzvewenieId(IzvewenijaID);
+	}
+
 	/**
 	* Updates the izvewenie put in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

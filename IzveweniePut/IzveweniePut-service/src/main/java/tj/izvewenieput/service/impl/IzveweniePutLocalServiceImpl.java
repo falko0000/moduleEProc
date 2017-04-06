@@ -14,9 +14,14 @@
 
 package tj.izvewenieput.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
 import aQute.bnd.annotation.ProviderType;
 
 import tj.izvewenieput.service.base.IzveweniePutLocalServiceBaseImpl;
+import tj.izvewenieput.model.IzveweniePut;
 
 /**
  * The implementation of the izvewenie put local service.
@@ -35,9 +40,10 @@ import tj.izvewenieput.service.base.IzveweniePutLocalServiceBaseImpl;
 @ProviderType
 public class IzveweniePutLocalServiceImpl
 	extends IzveweniePutLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link tj.izvewenieput.service.IzveweniePutLocalServiceUtil} to access the izvewenie put local service.
-	 */
+
+	public IzveweniePut getIzvewenijaPutByIzvewenieId(long IzvewenijaID) 
+			throws SystemException {
+		
+		return izveweniePutPersistence.findByIzvewenieId(IzvewenijaID).get(0);
+	}
 }
