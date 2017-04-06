@@ -15,7 +15,7 @@
     
      String names =(String) request.getAttribute("editnametabs");
     
-     String tab = ParamUtil.getString(request, "my","preparation");
+     String tab = ParamUtil.getString(request, "izvewenija_tab","preparation");
     String currentURL = themeDisplay.getURLCurrent();
 %>
 
@@ -24,16 +24,16 @@
 
      <liferay-frontend:add-menu>
 	
-		<portlet:renderURL var="addMessageURL">
+		<portlet:renderURL var="addIzvewenijaURL">
 			<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="0"/>
 		</portlet:renderURL>
 
-		<liferay-frontend:add-menu-item title='ADD' url="<%= addMessageURL.toString() %>" />
+		<liferay-frontend:add-menu-item title='ADD' url="<%= addIzvewenijaURL.toString() %>" />
 	
 	</liferay-frontend:add-menu>
 	
-			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="my" > 
+			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="izvewenija_tab" > 
  
              <liferay-ui:section>
     		    <jsp:include page="<%=EQuotationConstants.PAGE_PREPARATION%>" flush="true" />
