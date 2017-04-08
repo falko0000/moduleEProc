@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.informacija.razmewenii.model.InformacijaORazmewenii">
+		<field name="cena_postavki" type="String" />
+		<field name="cena_postavki_dlja_zakaza" type="double" />
+		<field name="data_izmenenija" type="Date" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="informacija_o_razmewenii_id" type="long" />
+		<field name="izmenil" type="long" />
+		<field name="izvewenie_id" type="long" />
+		<field name="mesto_postavki" type="String" />
+		<field name="mesto_postavki_dlja_zakaza" type="long" />
+		<field name="obespechenie_ispolnenija" type="long" />
+		<field name="obespechenie_ispolnenija_dlja_zakaza" type="long" />
+		<field name="obespechenie_ispolnenija_v_procentah" type="double" />
+		<field name="obespechenie_v_procentah" type="double" />
+		<field name="obespechenie_zajavki" type="long" />
+		<field name="obespechenie_zajavki_dlja_zakaza" type="long" />
+		<field name="oplata" type="String" />
+		<field name="oplata_dlja_zakaza" type="long" />
+		<field name="soputstvujuwie_uslovija" type="String" />
+		<field name="soputstvujuwie_uslovija_dlja_zakaza" type="long" />
+		<field name="sozdal" type="long" />
+		<field name="srok_dejstvija" type="String" />
+		<field name="srok_dejstvija_dlja_zakaza" type="long" />
+		<field name="srok_ispolnenija_zajavki" type="String" />
+		<field name="srok_obespechenija_zajavki" type="String" />
+		<field name="srok_postavki" type="String" />
+		<field name="srok_postavki_dlja_zakaza" type="long" />
+	</model>
+</model-hints>

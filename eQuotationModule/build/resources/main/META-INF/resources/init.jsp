@@ -130,6 +130,7 @@
 <%@page import="tj.spisok.lotov.model.Spisoklotov" %>
 <%@page import ="tj.spisok.lotov.service.SpisoklotovLocalServiceUtil" %>
 
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
