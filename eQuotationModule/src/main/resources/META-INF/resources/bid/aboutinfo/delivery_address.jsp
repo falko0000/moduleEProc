@@ -2,9 +2,9 @@
 
 <%
 
-String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
+  String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
-Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
+  Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 %>
 <aui:field-wrapper label="delivery_address">
 
@@ -17,7 +17,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
 </div>
 
-<aui:input name=" " type="textarea" value=""  placeholder="delivery_address" />
+<aui:input name=" " type="textarea" value=""  placeholder="delivery_address" disabled="<%=disabled %>"/>
 
 
 
