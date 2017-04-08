@@ -1,7 +1,7 @@
 package tj.module.equotation.portlet;
 
 
-import com.liferay.portal.kernel.exception.PortalException;
+
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 
