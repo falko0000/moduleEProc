@@ -24,7 +24,7 @@
   if(izvewenija != null )
 	{
 		//bidorg = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
-		bidorg = OrganizationLocalServiceUtil.getOrganization(38548);
+		bidorg = OrganizationLocalServiceUtil.getOrganization(EQuotationConstants.AUTHORIZED_BODY_ID);
 		biduser = UserLocalServiceUtil.getUser(izvewenija.getUserId());
 	}
 	else if(OrganizationLocalServiceUtil.hasUserOrganizations(UserServiceUtil.getCurrentUser().getUserId()))

@@ -22,4 +22,6 @@ dependencies {
 	compile project (":modules:Edinicyizmerenija:Edinicyizmerenija-api")
 	compile project (":modules:Strany:Strany-api")
 	compile project (":modules:InformacijaRazmewenii:InformacijaRazmewenii-api")
+	
+	compile project (":modules:IstochnikFinansirovanija:IstochnikFinansirovanija-api")
 	}

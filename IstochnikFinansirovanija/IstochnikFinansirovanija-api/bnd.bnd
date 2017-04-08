@@ -1,0 +1,9 @@
+Bundle-Name: IstochnikFinansirovanija-api
+Bundle-SymbolicName: tj.istochnik.finansirovanija.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.istochnik.finansirovanija.exception,\
+	tj.istochnik.finansirovanija.model,\
+	tj.istochnik.finansirovanija.service,\
+	tj.istochnik.finansirovanija.service.persistence
+-includeresource: META-INF/service.xml=../IstochnikFinansirovanija-service/service.xml
