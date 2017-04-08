@@ -27,6 +27,9 @@ int endMinute = ParamUtil.get(request, "schedulerEndDateMinute", cal.get(Calenda
 int endMonth = ParamUtil.get(request, "schedulerEndDateMonth", cal.get(Calendar.MONTH));
 int endYear = ParamUtil.get(request, "schedulerEndDateYear", cal.get(Calendar.YEAR));
 
+String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
+
+Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 %>
 
 	<aui:field-wrapper label="bid_date_submission">
@@ -36,13 +39,13 @@ int endYear = ParamUtil.get(request, "schedulerEndDateYear", cal.get(Calendar.YE
 				cssClass="form-group form-group-inline"
 				dayParam="schedulerEndDateDay"
 				dayValue="<%= endDay %>"
-				disabled="<%= false %>"
 				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
 				monthParam="schedulerEndDateMonth"
 				monthValue="<%= endMonth %>"
 				name="endDate"
 				yearParam="schedulerEndDateYear"
 				yearValue="<%= endYear %>"
+				disabled="<%=disabled %>"
 			/>
 
 			<liferay-ui:icon icon="calendar" markupView="lexicon" />
@@ -56,6 +59,8 @@ int endYear = ParamUtil.get(request, "schedulerEndDateYear", cal.get(Calendar.YE
 				minuteParam="schedulerEndDateMinute"
 				minuteValue="<%= endMinute %>"
 				name="endTime"
+				timeFormat="24-hour"
+				disabled="<%=disabled %>"
 			/>
 		</div>
 	</aui:field-wrapper>

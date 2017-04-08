@@ -26,6 +26,9 @@
 	int startMonth = ParamUtil.get(request, "schedulerStartDateMonth", cal.get(Calendar.MONTH));
 	int startYear = ParamUtil.get(request, "schedulerStartDateYear", cal.get(Calendar.YEAR));
 	
+	String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
+
+	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 %>
 
 <aui:field-wrapper label="bid_date_publication">
@@ -34,13 +37,13 @@
 				cssClass="form-group form-group-inline"
 				dayParam="schedulerStartDateDay"
 				dayValue="<%= startDay %>"
-				disabled="<%= false %>"
 				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
 				monthParam="schedulerStartDateMonth"
 				monthValue="<%= startMonth %>"
 				name="startDate"
 				yearParam="schedulerStartDateYear"
 				yearValue="<%= startYear %>"
+			    disabled="<%=disabled %>"
 			/>
 
 			<liferay-ui:icon icon="calendar" markupView="lexicon" />
@@ -55,6 +58,7 @@
 				minuteValue="<%= startMinute %>"
 				name="startTime"
 				timeFormat="24-hour"
+			    disabled="<%=disabled %>"
 			/>
 		</div>
 	</aui:field-wrapper>
