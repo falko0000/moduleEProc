@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import tj.izvewenieput.exception.NoSuchIzveweniePutException;
+
 import tj.izvewenieput.model.IzveweniePut;
 
 import java.io.Serializable;
@@ -219,7 +221,7 @@ public interface IzveweniePutLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IzveweniePut getIzvewenijaPutByIzvewenieId(long IzvewenijaID)
-		throws SystemException;
+		throws SystemException, NoSuchIzveweniePutException;
 
 	/**
 	* Updates the izvewenie put in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

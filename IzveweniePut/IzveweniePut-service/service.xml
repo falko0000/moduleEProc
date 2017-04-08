@@ -9,7 +9,7 @@
         <column name="put_a" type="long" primary="false"></column>
         <column name="put_b" type="long"></column>
         <column name="put_c" type="String"></column>
-        <finder return-type="Collection" name="IzvewenieId">
+        <finder return-type="IzveweniePut" name="IzvewenieId">
         <finder-column name="izvewenie_id"></finder-column>
         </finder>
     </entity>

@@ -17,6 +17,7 @@ package tj.informacija.razmewenii.service.impl;
 import aQute.bnd.annotation.ProviderType;
 import tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
+import tj.informacija.razmewenii.model.impl.InformacijaORazmeweniiImpl;
 import tj.informacija.razmewenii.service.base.InformacijaORazmeweniiLocalServiceBaseImpl;
 
 /**
@@ -41,4 +42,20 @@ public class InformacijaORazmeweniiLocalServiceImpl
 		
      return informacijaORazmeweniiPersistence.findByIzvewenijaID(IzvewenijaID); 
 	}
+	
+	
+	public  InformacijaORazmewenii insertInfoORazmewenii(long izvewenie_id, int mesto_postavki_dlja_zakaza, String mesto_postavki){
+		    
+		InformacijaORazmewenii informacija_o_razmewenii = new InformacijaORazmeweniiImpl();
+	
+		informacija_o_razmewenii.setIzvewenie_id(izvewenie_id);
+		informacija_o_razmewenii.setMesto_postavki_dlja_zakaza(mesto_postavki_dlja_zakaza);
+		informacija_o_razmewenii.setMesto_postavki(mesto_postavki);
+		
+		informacija_o_razmewenii = addInformacijaORazmewenii(informacija_o_razmewenii);
+		
+		return informacija_o_razmewenii;
+	}
+	
+	
 }

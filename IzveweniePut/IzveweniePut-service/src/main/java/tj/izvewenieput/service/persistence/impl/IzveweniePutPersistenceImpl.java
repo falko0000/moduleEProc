@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import tj.izvewenieput.exception.NoSuchIzveweniePutException;
@@ -83,20 +84,9 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
 			IzveweniePutModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIEID =
-		new FinderPath(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_IZVEWENIEID = new FinderPath(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
 			IzveweniePutModelImpl.FINDER_CACHE_ENABLED, IzveweniePutImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByIzvewenieId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID =
-		new FinderPath(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
-			IzveweniePutModelImpl.FINDER_CACHE_ENABLED, IzveweniePutImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByIzvewenieId",
+			FINDER_CLASS_NAME_ENTITY, "fetchByIzvewenieId",
 			new String[] { Long.class.getName() },
 			IzveweniePutModelImpl.IZVEWENIE_ID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_IZVEWENIEID = new FinderPath(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
@@ -105,132 +95,81 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the izvewenie puts where izvewenie_id = &#63;.
+	 * Returns the izvewenie put where izvewenie_id = &#63; or throws a {@link NoSuchIzveweniePutException} if it could not be found.
 	 *
 	 * @param izvewenie_id the izvewenie_id
-	 * @return the matching izvewenie puts
+	 * @return the matching izvewenie put
+	 * @throws NoSuchIzveweniePutException if a matching izvewenie put could not be found
 	 */
 	@Override
-	public List<IzveweniePut> findByIzvewenieId(long izvewenie_id) {
-		return findByIzvewenieId(izvewenie_id, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public IzveweniePut findByIzvewenieId(long izvewenie_id)
+		throws NoSuchIzveweniePutException {
+		IzveweniePut izveweniePut = fetchByIzvewenieId(izvewenie_id);
+
+		if (izveweniePut == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("izvewenie_id=");
+			msg.append(izvewenie_id);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchIzveweniePutException(msg.toString());
+		}
+
+		return izveweniePut;
 	}
 
 	/**
-	 * Returns a range of all the izvewenie puts where izvewenie_id = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzveweniePutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the izvewenie put where izvewenie_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param izvewenie_id the izvewenie_id
-	 * @param start the lower bound of the range of izvewenie puts
-	 * @param end the upper bound of the range of izvewenie puts (not inclusive)
-	 * @return the range of matching izvewenie puts
+	 * @return the matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
 	 */
 	@Override
-	public List<IzveweniePut> findByIzvewenieId(long izvewenie_id, int start,
-		int end) {
-		return findByIzvewenieId(izvewenie_id, start, end, null);
+	public IzveweniePut fetchByIzvewenieId(long izvewenie_id) {
+		return fetchByIzvewenieId(izvewenie_id, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the izvewenie puts where izvewenie_id = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzveweniePutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the izvewenie put where izvewenie_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param izvewenie_id the izvewenie_id
-	 * @param start the lower bound of the range of izvewenie puts
-	 * @param end the upper bound of the range of izvewenie puts (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching izvewenie puts
-	 */
-	@Override
-	public List<IzveweniePut> findByIzvewenieId(long izvewenie_id, int start,
-		int end, OrderByComparator<IzveweniePut> orderByComparator) {
-		return findByIzvewenieId(izvewenie_id, start, end, orderByComparator,
-			true);
-	}
-
-	/**
-	 * Returns an ordered range of all the izvewenie puts where izvewenie_id = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzveweniePutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param start the lower bound of the range of izvewenie puts
-	 * @param end the upper bound of the range of izvewenie puts (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching izvewenie puts
+	 * @return the matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
 	 */
 	@Override
-	public List<IzveweniePut> findByIzvewenieId(long izvewenie_id, int start,
-		int end, OrderByComparator<IzveweniePut> orderByComparator,
+	public IzveweniePut fetchByIzvewenieId(long izvewenie_id,
 		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
+		Object[] finderArgs = new Object[] { izvewenie_id };
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID;
-			finderArgs = new Object[] { izvewenie_id };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIEID;
-			finderArgs = new Object[] {
-					izvewenie_id,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<IzveweniePut> list = null;
+		Object result = null;
 
 		if (retrieveFromCache) {
-			list = (List<IzveweniePut>)finderCache.getResult(finderPath,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
 					finderArgs, this);
+		}
 
-			if ((list != null) && !list.isEmpty()) {
-				for (IzveweniePut izveweniePut : list) {
-					if ((izvewenie_id != izveweniePut.getIzvewenie_id())) {
-						list = null;
+		if (result instanceof IzveweniePut) {
+			IzveweniePut izveweniePut = (IzveweniePut)result;
 
-						break;
-					}
-				}
+			if ((izvewenie_id != izveweniePut.getIzvewenie_id())) {
+				result = null;
 			}
 		}
 
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_SELECT_IZVEWENIEPUT_WHERE);
 
 			query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(IzveweniePutModelImpl.ORDER_BY_JPQL);
-			}
 
 			String sql = query.toString();
 
@@ -245,25 +184,39 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 
 				qPos.add(izvewenie_id);
 
-				if (!pagination) {
-					list = (List<IzveweniePut>)QueryUtil.list(q, getDialect(),
-							start, end, false);
+				List<IzveweniePut> list = q.list();
 
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+						finderArgs, list);
 				}
 				else {
-					list = (List<IzveweniePut>)QueryUtil.list(q, getDialect(),
-							start, end);
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"IzveweniePutPersistenceImpl.fetchByIzvewenieId(long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					IzveweniePut izveweniePut = list.get(0);
+
+					result = izveweniePut;
+
+					cacheResult(izveweniePut);
+
+					if ((izveweniePut.getIzvewenie_id() != izvewenie_id)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+							finderArgs, izveweniePut);
+					}
 				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+					finderArgs);
 
 				throw processException(e);
 			}
@@ -272,274 +225,26 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 			}
 		}
 
-		return list;
-	}
-
-	/**
-	 * Returns the first izvewenie put in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching izvewenie put
-	 * @throws NoSuchIzveweniePutException if a matching izvewenie put could not be found
-	 */
-	@Override
-	public IzveweniePut findByIzvewenieId_First(long izvewenie_id,
-		OrderByComparator<IzveweniePut> orderByComparator)
-		throws NoSuchIzveweniePutException {
-		IzveweniePut izveweniePut = fetchByIzvewenieId_First(izvewenie_id,
-				orderByComparator);
-
-		if (izveweniePut != null) {
-			return izveweniePut;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("izvewenie_id=");
-		msg.append(izvewenie_id);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchIzveweniePutException(msg.toString());
-	}
-
-	/**
-	 * Returns the first izvewenie put in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
-	 */
-	@Override
-	public IzveweniePut fetchByIzvewenieId_First(long izvewenie_id,
-		OrderByComparator<IzveweniePut> orderByComparator) {
-		List<IzveweniePut> list = findByIzvewenieId(izvewenie_id, 0, 1,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last izvewenie put in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching izvewenie put
-	 * @throws NoSuchIzveweniePutException if a matching izvewenie put could not be found
-	 */
-	@Override
-	public IzveweniePut findByIzvewenieId_Last(long izvewenie_id,
-		OrderByComparator<IzveweniePut> orderByComparator)
-		throws NoSuchIzveweniePutException {
-		IzveweniePut izveweniePut = fetchByIzvewenieId_Last(izvewenie_id,
-				orderByComparator);
-
-		if (izveweniePut != null) {
-			return izveweniePut;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("izvewenie_id=");
-		msg.append(izvewenie_id);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchIzveweniePutException(msg.toString());
-	}
-
-	/**
-	 * Returns the last izvewenie put in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
-	 */
-	@Override
-	public IzveweniePut fetchByIzvewenieId_Last(long izvewenie_id,
-		OrderByComparator<IzveweniePut> orderByComparator) {
-		int count = countByIzvewenieId(izvewenie_id);
-
-		if (count == 0) {
+		if (result instanceof List<?>) {
 			return null;
 		}
-
-		List<IzveweniePut> list = findByIzvewenieId(izvewenie_id, count - 1,
-				count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
+		else {
+			return (IzveweniePut)result;
 		}
-
-		return null;
 	}
 
 	/**
-	 * Returns the izvewenie puts before and after the current izvewenie put in the ordered set where izvewenie_id = &#63;.
+	 * Removes the izvewenie put where izvewenie_id = &#63; from the database.
 	 *
-	 * @param izvewenie_put_id the primary key of the current izvewenie put
 	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next izvewenie put
-	 * @throws NoSuchIzveweniePutException if a izvewenie put with the primary key could not be found
+	 * @return the izvewenie put that was removed
 	 */
 	@Override
-	public IzveweniePut[] findByIzvewenieId_PrevAndNext(long izvewenie_put_id,
-		long izvewenie_id, OrderByComparator<IzveweniePut> orderByComparator)
+	public IzveweniePut removeByIzvewenieId(long izvewenie_id)
 		throws NoSuchIzveweniePutException {
-		IzveweniePut izveweniePut = findByPrimaryKey(izvewenie_put_id);
+		IzveweniePut izveweniePut = findByIzvewenieId(izvewenie_id);
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			IzveweniePut[] array = new IzveweniePutImpl[3];
-
-			array[0] = getByIzvewenieId_PrevAndNext(session, izveweniePut,
-					izvewenie_id, orderByComparator, true);
-
-			array[1] = izveweniePut;
-
-			array[2] = getByIzvewenieId_PrevAndNext(session, izveweniePut,
-					izvewenie_id, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected IzveweniePut getByIzvewenieId_PrevAndNext(Session session,
-		IzveweniePut izveweniePut, long izvewenie_id,
-		OrderByComparator<IzveweniePut> orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_IZVEWENIEPUT_WHERE);
-
-		query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(IzveweniePutModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(izvewenie_id);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(izveweniePut);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<IzveweniePut> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the izvewenie puts where izvewenie_id = &#63; from the database.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 */
-	@Override
-	public void removeByIzvewenieId(long izvewenie_id) {
-		for (IzveweniePut izveweniePut : findByIzvewenieId(izvewenie_id,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(izveweniePut);
-		}
+		return remove(izveweniePut);
 	}
 
 	/**
@@ -609,6 +314,9 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 		entityCache.putResult(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
 			IzveweniePutImpl.class, izveweniePut.getPrimaryKey(), izveweniePut);
 
+		finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+			new Object[] { izveweniePut.getIzvewenie_id() }, izveweniePut);
+
 		izveweniePut.resetOriginalValues();
 	}
 
@@ -661,6 +369,8 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((IzveweniePutModelImpl)izveweniePut, true);
 	}
 
 	@Override
@@ -671,6 +381,38 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 		for (IzveweniePut izveweniePut : izveweniePuts) {
 			entityCache.removeResult(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
 				IzveweniePutImpl.class, izveweniePut.getPrimaryKey());
+
+			clearUniqueFindersCache((IzveweniePutModelImpl)izveweniePut, true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		IzveweniePutModelImpl izveweniePutModelImpl) {
+		Object[] args = new Object[] { izveweniePutModelImpl.getIzvewenie_id() };
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args,
+			izveweniePutModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		IzveweniePutModelImpl izveweniePutModelImpl, boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] { izveweniePutModelImpl.getIzvewenie_id() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args);
+		}
+
+		if ((izveweniePutModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_IZVEWENIEID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					izveweniePutModelImpl.getOriginalIzvewenie_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args);
 		}
 	}
 
@@ -810,28 +552,12 @@ public class IzveweniePutPersistenceImpl extends BasePersistenceImpl<IzveweniePu
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
-		else {
-			if ((izveweniePutModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						izveweniePutModelImpl.getOriginalIzvewenie_id()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID,
-					args);
-
-				args = new Object[] { izveweniePutModelImpl.getIzvewenie_id() };
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID,
-					args);
-			}
-		}
-
 		entityCache.putResult(IzveweniePutModelImpl.ENTITY_CACHE_ENABLED,
 			IzveweniePutImpl.class, izveweniePut.getPrimaryKey(), izveweniePut,
 			false);
+
+		clearUniqueFindersCache(izveweniePutModelImpl, false);
+		cacheUniqueFindersCache(izveweniePutModelImpl);
 
 		izveweniePut.resetOriginalValues();
 

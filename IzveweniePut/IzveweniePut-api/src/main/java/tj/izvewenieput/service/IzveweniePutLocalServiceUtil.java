@@ -242,7 +242,8 @@ public class IzveweniePutLocalServiceUtil {
 
 	public static tj.izvewenieput.model.IzveweniePut getIzvewenijaPutByIzvewenieId(
 		long IzvewenijaID)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException,
+			tj.izvewenieput.exception.NoSuchIzveweniePutException {
 		return getService().getIzvewenijaPutByIzvewenieId(IzvewenijaID);
 	}
 

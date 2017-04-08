@@ -114,162 +114,49 @@ public class PorjadokRabotyKomissiiUtil {
 	}
 
 	/**
-	* Returns all the porjadok raboty komissiis where izvewenie_id = &#63;.
+	* Returns the porjadok raboty komissii where izvewenie_id = &#63; or throws a {@link NoSuchPorjadokRabotyKomissiiException} if it could not be found.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @return the matching porjadok raboty komissiis
+	* @return the matching porjadok raboty komissii
+	* @throws NoSuchPorjadokRabotyKomissiiException if a matching porjadok raboty komissii could not be found
 	*/
-	public static List<PorjadokRabotyKomissii> findByIzvewenieId(
-		long izvewenie_id) {
+	public static PorjadokRabotyKomissii findByIzvewenieId(long izvewenie_id)
+		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
 		return getPersistence().findByIzvewenieId(izvewenie_id);
 	}
 
 	/**
-	* Returns a range of all the porjadok raboty komissiis where izvewenie_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link PorjadokRabotyKomissiiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
+	* Returns the porjadok raboty komissii where izvewenie_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @param start the lower bound of the range of porjadok raboty komissiis
-	* @param end the upper bound of the range of porjadok raboty komissiis (not inclusive)
-	* @return the range of matching porjadok raboty komissiis
+	* @return the matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
 	*/
-	public static List<PorjadokRabotyKomissii> findByIzvewenieId(
-		long izvewenie_id, int start, int end) {
-		return getPersistence().findByIzvewenieId(izvewenie_id, start, end);
+	public static PorjadokRabotyKomissii fetchByIzvewenieId(long izvewenie_id) {
+		return getPersistence().fetchByIzvewenieId(izvewenie_id);
 	}
 
 	/**
-	* Returns an ordered range of all the porjadok raboty komissiis where izvewenie_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link PorjadokRabotyKomissiiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
+	* Returns the porjadok raboty komissii where izvewenie_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @param start the lower bound of the range of porjadok raboty komissiis
-	* @param end the upper bound of the range of porjadok raboty komissiis (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching porjadok raboty komissiis
-	*/
-	public static List<PorjadokRabotyKomissii> findByIzvewenieId(
-		long izvewenie_id, int start, int end,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator) {
-		return getPersistence()
-				   .findByIzvewenieId(izvewenie_id, start, end,
-			orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the porjadok raboty komissiis where izvewenie_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link PorjadokRabotyKomissiiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param start the lower bound of the range of porjadok raboty komissiis
-	* @param end the upper bound of the range of porjadok raboty komissiis (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching porjadok raboty komissiis
+	* @return the matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
 	*/
-	public static List<PorjadokRabotyKomissii> findByIzvewenieId(
-		long izvewenie_id, int start, int end,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator,
+	public static PorjadokRabotyKomissii fetchByIzvewenieId(long izvewenie_id,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByIzvewenieId(izvewenie_id, start, end,
-			orderByComparator, retrieveFromCache);
+				   .fetchByIzvewenieId(izvewenie_id, retrieveFromCache);
 	}
 
 	/**
-	* Returns the first porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
+	* Removes the porjadok raboty komissii where izvewenie_id = &#63; from the database.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching porjadok raboty komissii
-	* @throws NoSuchPorjadokRabotyKomissiiException if a matching porjadok raboty komissii could not be found
+	* @return the porjadok raboty komissii that was removed
 	*/
-	public static PorjadokRabotyKomissii findByIzvewenieId_First(
-		long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator)
+	public static PorjadokRabotyKomissii removeByIzvewenieId(long izvewenie_id)
 		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
-		return getPersistence()
-				   .findByIzvewenieId_First(izvewenie_id, orderByComparator);
-	}
-
-	/**
-	* Returns the first porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
-	*/
-	public static PorjadokRabotyKomissii fetchByIzvewenieId_First(
-		long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator) {
-		return getPersistence()
-				   .fetchByIzvewenieId_First(izvewenie_id, orderByComparator);
-	}
-
-	/**
-	* Returns the last porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching porjadok raboty komissii
-	* @throws NoSuchPorjadokRabotyKomissiiException if a matching porjadok raboty komissii could not be found
-	*/
-	public static PorjadokRabotyKomissii findByIzvewenieId_Last(
-		long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator)
-		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
-		return getPersistence()
-				   .findByIzvewenieId_Last(izvewenie_id, orderByComparator);
-	}
-
-	/**
-	* Returns the last porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
-	*/
-	public static PorjadokRabotyKomissii fetchByIzvewenieId_Last(
-		long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator) {
-		return getPersistence()
-				   .fetchByIzvewenieId_Last(izvewenie_id, orderByComparator);
-	}
-
-	/**
-	* Returns the porjadok raboty komissiis before and after the current porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param porjadok_raboty_komissii_id the primary key of the current porjadok raboty komissii
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next porjadok raboty komissii
-	* @throws NoSuchPorjadokRabotyKomissiiException if a porjadok raboty komissii with the primary key could not be found
-	*/
-	public static PorjadokRabotyKomissii[] findByIzvewenieId_PrevAndNext(
-		long porjadok_raboty_komissii_id, long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator)
-		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
-		return getPersistence()
-				   .findByIzvewenieId_PrevAndNext(porjadok_raboty_komissii_id,
-			izvewenie_id, orderByComparator);
-	}
-
-	/**
-	* Removes all the porjadok raboty komissiis where izvewenie_id = &#63; from the database.
-	*
-	* @param izvewenie_id the izvewenie_id
-	*/
-	public static void removeByIzvewenieId(long izvewenie_id) {
-		getPersistence().removeByIzvewenieId(izvewenie_id);
+		return getPersistence().removeByIzvewenieId(izvewenie_id);
 	}
 
 	/**

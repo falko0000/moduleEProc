@@ -262,6 +262,14 @@ public class InformacijaORazmeweniiLocalServiceWrapper
 		return _informacijaORazmeweniiLocalService.getInformacijaORazmewenii(informacija_o_razmewenii_id);
 	}
 
+	@Override
+	public tj.informacija.razmewenii.model.InformacijaORazmewenii insertInfoORazmewenii(
+		long izvewenie_id, int mesto_postavki_dlja_zakaza,
+		java.lang.String mesto_postavki) {
+		return _informacijaORazmeweniiLocalService.insertInfoORazmewenii(izvewenie_id,
+			mesto_postavki_dlja_zakaza, mesto_postavki);
+	}
+
 	/**
 	* Updates the informacija o razmewenii in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

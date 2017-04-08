@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import aQute.bnd.annotation.ProviderType;
 
 import tj.izvewenieput.service.base.IzveweniePutLocalServiceBaseImpl;
+import tj.izvewenieput.exception.NoSuchIzveweniePutException;
 import tj.izvewenieput.model.IzveweniePut;
 
 /**
@@ -42,8 +43,8 @@ public class IzveweniePutLocalServiceImpl
 	extends IzveweniePutLocalServiceBaseImpl {
 
 	public IzveweniePut getIzvewenijaPutByIzvewenieId(long IzvewenijaID) 
-			throws SystemException {
+			throws SystemException, NoSuchIzveweniePutException {
 		
-		return izveweniePutPersistence.findByIzvewenieId(IzvewenijaID).get(0);
+		return izveweniePutPersistence.findByIzvewenieId(IzvewenijaID);
 	}
 }

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 
 import java.io.Serializable;
@@ -213,7 +214,7 @@ public interface PorjadokRabotyKomissiiLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PorjadokRabotyKomissii getPRKbyIzvewenieId(long IzvewenieId)
-		throws SystemException;
+		throws NoSuchPorjadokRabotyKomissiiException;
 
 	/**
 	* Returns the porjadok raboty komissii with the primary key.

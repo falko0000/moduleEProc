@@ -1,16 +1,25 @@
+
 <%@ include file="/init.jsp" %>
 
 <%
+
+
 Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 
 PorjadokRabotyKomissii porjadok_raboty_komissii = null;
 
-Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+try {
+	porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);
+} catch (NoSuchPorjadokRabotyKomissiiException e) {
+	// TODO Auto-generated catch block
+	
+} catch (SystemException e) {
+	// TODO Auto-generated catch block
 
-
-if(izvewenija != null)
-	porjadok_raboty_komissii = PorjadokRabotyKomissiiUtil.findByIzvewenieId(izvewenija.getIzvewenija_id()).get(0);
-
+}
+	
 if(porjadok_raboty_komissii != null)
    cal.setTime(porjadok_raboty_komissii.getData_podvedenija_itogov());
 

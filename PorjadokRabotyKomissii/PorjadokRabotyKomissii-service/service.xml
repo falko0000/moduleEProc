@@ -15,8 +15,8 @@
         <column name="porjadok_raboty_komissii_id" type="long" primary="true" id-type="sequence" id-param="sapp.porjadok_raboty_komissii_id_seq"></column>
         <column name="sozdal" type="long"></column>
    
-    <finder return-type="Collection" name="IzvewenieId">
-    <finder-column name="izvewenie_id"></finder-column>
+    <finder return-type="PorjadokRabotyKomissii" name="IzvewenieId">
+    	<finder-column name="izvewenie_id"></finder-column>
     </finder>
    
     </entity>

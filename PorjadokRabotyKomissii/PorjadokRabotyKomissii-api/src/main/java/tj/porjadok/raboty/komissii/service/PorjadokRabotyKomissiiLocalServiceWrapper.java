@@ -244,7 +244,7 @@ public class PorjadokRabotyKomissiiLocalServiceWrapper
 	@Override
 	public tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii getPRKbyIzvewenieId(
 		long IzvewenieId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
 		return _porjadokRabotyKomissiiLocalService.getPRKbyIzvewenieId(IzvewenieId);
 	}
 

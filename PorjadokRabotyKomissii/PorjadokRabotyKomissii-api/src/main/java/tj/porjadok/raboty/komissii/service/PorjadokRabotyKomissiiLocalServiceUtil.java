@@ -232,7 +232,7 @@ public class PorjadokRabotyKomissiiLocalServiceUtil {
 
 	public static tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii getPRKbyIzvewenieId(
 		long IzvewenieId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
 		return getService().getPRKbyIzvewenieId(IzvewenieId);
 	}
 

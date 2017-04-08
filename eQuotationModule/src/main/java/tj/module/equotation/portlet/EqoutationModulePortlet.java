@@ -2,6 +2,8 @@ package tj.module.equotation.portlet;
 
 
 
+
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 
@@ -37,7 +39,6 @@ import org.osgi.service.component.annotations.Reference;
 
 
 
-
 @Component(
 	immediate = true,
 	property = {
@@ -61,10 +62,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		 
-		
-		
 	
-		
 	StringBuilder names = new StringBuilder();
 	
 	names.append(EQuotationConstants.TAB_PREPARATION);
@@ -83,7 +81,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		// TODO Auto-generated method stub
 		
-
+	
 		super.doEdit(renderRequest, renderResponse);
 	}
 	

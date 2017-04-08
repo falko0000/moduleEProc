@@ -19,6 +19,7 @@ import java.util.List;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import aQute.bnd.annotation.ProviderType;
+import tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.base.PorjadokRabotyKomissiiLocalServiceBaseImpl;
 
@@ -40,9 +41,9 @@ import tj.porjadok.raboty.komissii.service.base.PorjadokRabotyKomissiiLocalServi
 public class PorjadokRabotyKomissiiLocalServiceImpl
 	extends PorjadokRabotyKomissiiLocalServiceBaseImpl {
 	
-    public PorjadokRabotyKomissii getPRKbyIzvewenieId(long IzvewenieId)
-    		throws SystemException {
+    public PorjadokRabotyKomissii getPRKbyIzvewenieId(long IzvewenieId) throws NoSuchPorjadokRabotyKomissiiException
+    		 {
     
-    	return porjadokRabotyKomissiiPersistence.findByIzvewenieId(IzvewenieId).get(0);
+    	return porjadokRabotyKomissiiPersistence.findByIzvewenieId(IzvewenieId);
     }
 }

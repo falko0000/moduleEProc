@@ -43,128 +43,41 @@ public interface IzveweniePutPersistence extends BasePersistence<IzveweniePut> {
 	 */
 
 	/**
-	* Returns all the izvewenie puts where izvewenie_id = &#63;.
+	* Returns the izvewenie put where izvewenie_id = &#63; or throws a {@link NoSuchIzveweniePutException} if it could not be found.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @return the matching izvewenie puts
+	* @return the matching izvewenie put
+	* @throws NoSuchIzveweniePutException if a matching izvewenie put could not be found
 	*/
-	public java.util.List<IzveweniePut> findByIzvewenieId(long izvewenie_id);
+	public IzveweniePut findByIzvewenieId(long izvewenie_id)
+		throws NoSuchIzveweniePutException;
 
 	/**
-	* Returns a range of all the izvewenie puts where izvewenie_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzveweniePutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
+	* Returns the izvewenie put where izvewenie_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @param start the lower bound of the range of izvewenie puts
-	* @param end the upper bound of the range of izvewenie puts (not inclusive)
-	* @return the range of matching izvewenie puts
+	* @return the matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
 	*/
-	public java.util.List<IzveweniePut> findByIzvewenieId(long izvewenie_id,
-		int start, int end);
+	public IzveweniePut fetchByIzvewenieId(long izvewenie_id);
 
 	/**
-	* Returns an ordered range of all the izvewenie puts where izvewenie_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzveweniePutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
+	* Returns the izvewenie put where izvewenie_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @param start the lower bound of the range of izvewenie puts
-	* @param end the upper bound of the range of izvewenie puts (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching izvewenie puts
-	*/
-	public java.util.List<IzveweniePut> findByIzvewenieId(long izvewenie_id,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<IzveweniePut> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the izvewenie puts where izvewenie_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzveweniePutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param start the lower bound of the range of izvewenie puts
-	* @param end the upper bound of the range of izvewenie puts (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching izvewenie puts
+	* @return the matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
 	*/
-	public java.util.List<IzveweniePut> findByIzvewenieId(long izvewenie_id,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<IzveweniePut> orderByComparator,
+	public IzveweniePut fetchByIzvewenieId(long izvewenie_id,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first izvewenie put in the ordered set where izvewenie_id = &#63;.
+	* Removes the izvewenie put where izvewenie_id = &#63; from the database.
 	*
 	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching izvewenie put
-	* @throws NoSuchIzveweniePutException if a matching izvewenie put could not be found
+	* @return the izvewenie put that was removed
 	*/
-	public IzveweniePut findByIzvewenieId_First(long izvewenie_id,
-		com.liferay.portal.kernel.util.OrderByComparator<IzveweniePut> orderByComparator)
+	public IzveweniePut removeByIzvewenieId(long izvewenie_id)
 		throws NoSuchIzveweniePutException;
-
-	/**
-	* Returns the first izvewenie put in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
-	*/
-	public IzveweniePut fetchByIzvewenieId_First(long izvewenie_id,
-		com.liferay.portal.kernel.util.OrderByComparator<IzveweniePut> orderByComparator);
-
-	/**
-	* Returns the last izvewenie put in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching izvewenie put
-	* @throws NoSuchIzveweniePutException if a matching izvewenie put could not be found
-	*/
-	public IzveweniePut findByIzvewenieId_Last(long izvewenie_id,
-		com.liferay.portal.kernel.util.OrderByComparator<IzveweniePut> orderByComparator)
-		throws NoSuchIzveweniePutException;
-
-	/**
-	* Returns the last izvewenie put in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching izvewenie put, or <code>null</code> if a matching izvewenie put could not be found
-	*/
-	public IzveweniePut fetchByIzvewenieId_Last(long izvewenie_id,
-		com.liferay.portal.kernel.util.OrderByComparator<IzveweniePut> orderByComparator);
-
-	/**
-	* Returns the izvewenie puts before and after the current izvewenie put in the ordered set where izvewenie_id = &#63;.
-	*
-	* @param izvewenie_put_id the primary key of the current izvewenie put
-	* @param izvewenie_id the izvewenie_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next izvewenie put
-	* @throws NoSuchIzveweniePutException if a izvewenie put with the primary key could not be found
-	*/
-	public IzveweniePut[] findByIzvewenieId_PrevAndNext(long izvewenie_put_id,
-		long izvewenie_id,
-		com.liferay.portal.kernel.util.OrderByComparator<IzveweniePut> orderByComparator)
-		throws NoSuchIzveweniePutException;
-
-	/**
-	* Removes all the izvewenie puts where izvewenie_id = &#63; from the database.
-	*
-	* @param izvewenie_id the izvewenie_id
-	*/
-	public void removeByIzvewenieId(long izvewenie_id);
 
 	/**
 	* Returns the number of izvewenie puts where izvewenie_id = &#63;.

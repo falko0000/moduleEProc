@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException;
@@ -83,23 +84,10 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(PorjadokRabotyKomissiiModelImpl.ENTITY_CACHE_ENABLED,
 			PorjadokRabotyKomissiiModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIEID =
-		new FinderPath(PorjadokRabotyKomissiiModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_IZVEWENIEID = new FinderPath(PorjadokRabotyKomissiiModelImpl.ENTITY_CACHE_ENABLED,
 			PorjadokRabotyKomissiiModelImpl.FINDER_CACHE_ENABLED,
-			PorjadokRabotyKomissiiImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByIzvewenieId",
-			new String[] {
-				Long.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID =
-		new FinderPath(PorjadokRabotyKomissiiModelImpl.ENTITY_CACHE_ENABLED,
-			PorjadokRabotyKomissiiModelImpl.FINDER_CACHE_ENABLED,
-			PorjadokRabotyKomissiiImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByIzvewenieId",
-			new String[] { Long.class.getName() },
+			PorjadokRabotyKomissiiImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByIzvewenieId", new String[] { Long.class.getName() },
 			PorjadokRabotyKomissiiModelImpl.IZVEWENIE_ID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_IZVEWENIEID = new FinderPath(PorjadokRabotyKomissiiModelImpl.ENTITY_CACHE_ENABLED,
 			PorjadokRabotyKomissiiModelImpl.FINDER_CACHE_ENABLED, Long.class,
@@ -107,134 +95,81 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the porjadok raboty komissiis where izvewenie_id = &#63;.
+	 * Returns the porjadok raboty komissii where izvewenie_id = &#63; or throws a {@link NoSuchPorjadokRabotyKomissiiException} if it could not be found.
 	 *
 	 * @param izvewenie_id the izvewenie_id
-	 * @return the matching porjadok raboty komissiis
+	 * @return the matching porjadok raboty komissii
+	 * @throws NoSuchPorjadokRabotyKomissiiException if a matching porjadok raboty komissii could not be found
 	 */
 	@Override
-	public List<PorjadokRabotyKomissii> findByIzvewenieId(long izvewenie_id) {
-		return findByIzvewenieId(izvewenie_id, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public PorjadokRabotyKomissii findByIzvewenieId(long izvewenie_id)
+		throws NoSuchPorjadokRabotyKomissiiException {
+		PorjadokRabotyKomissii porjadokRabotyKomissii = fetchByIzvewenieId(izvewenie_id);
+
+		if (porjadokRabotyKomissii == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("izvewenie_id=");
+			msg.append(izvewenie_id);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchPorjadokRabotyKomissiiException(msg.toString());
+		}
+
+		return porjadokRabotyKomissii;
 	}
 
 	/**
-	 * Returns a range of all the porjadok raboty komissiis where izvewenie_id = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link PorjadokRabotyKomissiiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the porjadok raboty komissii where izvewenie_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param izvewenie_id the izvewenie_id
-	 * @param start the lower bound of the range of porjadok raboty komissiis
-	 * @param end the upper bound of the range of porjadok raboty komissiis (not inclusive)
-	 * @return the range of matching porjadok raboty komissiis
+	 * @return the matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
 	 */
 	@Override
-	public List<PorjadokRabotyKomissii> findByIzvewenieId(long izvewenie_id,
-		int start, int end) {
-		return findByIzvewenieId(izvewenie_id, start, end, null);
+	public PorjadokRabotyKomissii fetchByIzvewenieId(long izvewenie_id) {
+		return fetchByIzvewenieId(izvewenie_id, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the porjadok raboty komissiis where izvewenie_id = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link PorjadokRabotyKomissiiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the porjadok raboty komissii where izvewenie_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param izvewenie_id the izvewenie_id
-	 * @param start the lower bound of the range of porjadok raboty komissiis
-	 * @param end the upper bound of the range of porjadok raboty komissiis (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching porjadok raboty komissiis
-	 */
-	@Override
-	public List<PorjadokRabotyKomissii> findByIzvewenieId(long izvewenie_id,
-		int start, int end,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator) {
-		return findByIzvewenieId(izvewenie_id, start, end, orderByComparator,
-			true);
-	}
-
-	/**
-	 * Returns an ordered range of all the porjadok raboty komissiis where izvewenie_id = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link PorjadokRabotyKomissiiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param start the lower bound of the range of porjadok raboty komissiis
-	 * @param end the upper bound of the range of porjadok raboty komissiis (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching porjadok raboty komissiis
+	 * @return the matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
 	 */
 	@Override
-	public List<PorjadokRabotyKomissii> findByIzvewenieId(long izvewenie_id,
-		int start, int end,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator,
+	public PorjadokRabotyKomissii fetchByIzvewenieId(long izvewenie_id,
 		boolean retrieveFromCache) {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
+		Object[] finderArgs = new Object[] { izvewenie_id };
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID;
-			finderArgs = new Object[] { izvewenie_id };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIEID;
-			finderArgs = new Object[] {
-					izvewenie_id,
-					
-					start, end, orderByComparator
-				};
-		}
-
-		List<PorjadokRabotyKomissii> list = null;
+		Object result = null;
 
 		if (retrieveFromCache) {
-			list = (List<PorjadokRabotyKomissii>)finderCache.getResult(finderPath,
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
 					finderArgs, this);
+		}
 
-			if ((list != null) && !list.isEmpty()) {
-				for (PorjadokRabotyKomissii porjadokRabotyKomissii : list) {
-					if ((izvewenie_id != porjadokRabotyKomissii.getIzvewenie_id())) {
-						list = null;
+		if (result instanceof PorjadokRabotyKomissii) {
+			PorjadokRabotyKomissii porjadokRabotyKomissii = (PorjadokRabotyKomissii)result;
 
-						break;
-					}
-				}
+			if ((izvewenie_id != porjadokRabotyKomissii.getIzvewenie_id())) {
+				result = null;
 			}
 		}
 
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_SELECT_PORJADOKRABOTYKOMISSII_WHERE);
 
 			query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(PorjadokRabotyKomissiiModelImpl.ORDER_BY_JPQL);
-			}
 
 			String sql = query.toString();
 
@@ -249,25 +184,39 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 
 				qPos.add(izvewenie_id);
 
-				if (!pagination) {
-					list = (List<PorjadokRabotyKomissii>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+				List<PorjadokRabotyKomissii> list = q.list();
 
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+						finderArgs, list);
 				}
 				else {
-					list = (List<PorjadokRabotyKomissii>)QueryUtil.list(q,
-							getDialect(), start, end);
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"PorjadokRabotyKomissiiPersistenceImpl.fetchByIzvewenieId(long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					PorjadokRabotyKomissii porjadokRabotyKomissii = list.get(0);
+
+					result = porjadokRabotyKomissii;
+
+					cacheResult(porjadokRabotyKomissii);
+
+					if ((porjadokRabotyKomissii.getIzvewenie_id() != izvewenie_id)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+							finderArgs, porjadokRabotyKomissii);
+					}
 				}
-
-				cacheResult(list);
-
-				finderCache.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+					finderArgs);
 
 				throw processException(e);
 			}
@@ -276,279 +225,26 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 			}
 		}
 
-		return list;
-	}
-
-	/**
-	 * Returns the first porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching porjadok raboty komissii
-	 * @throws NoSuchPorjadokRabotyKomissiiException if a matching porjadok raboty komissii could not be found
-	 */
-	@Override
-	public PorjadokRabotyKomissii findByIzvewenieId_First(long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator)
-		throws NoSuchPorjadokRabotyKomissiiException {
-		PorjadokRabotyKomissii porjadokRabotyKomissii = fetchByIzvewenieId_First(izvewenie_id,
-				orderByComparator);
-
-		if (porjadokRabotyKomissii != null) {
-			return porjadokRabotyKomissii;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("izvewenie_id=");
-		msg.append(izvewenie_id);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchPorjadokRabotyKomissiiException(msg.toString());
-	}
-
-	/**
-	 * Returns the first porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
-	 */
-	@Override
-	public PorjadokRabotyKomissii fetchByIzvewenieId_First(long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator) {
-		List<PorjadokRabotyKomissii> list = findByIzvewenieId(izvewenie_id, 0,
-				1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching porjadok raboty komissii
-	 * @throws NoSuchPorjadokRabotyKomissiiException if a matching porjadok raboty komissii could not be found
-	 */
-	@Override
-	public PorjadokRabotyKomissii findByIzvewenieId_Last(long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator)
-		throws NoSuchPorjadokRabotyKomissiiException {
-		PorjadokRabotyKomissii porjadokRabotyKomissii = fetchByIzvewenieId_Last(izvewenie_id,
-				orderByComparator);
-
-		if (porjadokRabotyKomissii != null) {
-			return porjadokRabotyKomissii;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("izvewenie_id=");
-		msg.append(izvewenie_id);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchPorjadokRabotyKomissiiException(msg.toString());
-	}
-
-	/**
-	 * Returns the last porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching porjadok raboty komissii, or <code>null</code> if a matching porjadok raboty komissii could not be found
-	 */
-	@Override
-	public PorjadokRabotyKomissii fetchByIzvewenieId_Last(long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator) {
-		int count = countByIzvewenieId(izvewenie_id);
-
-		if (count == 0) {
+		if (result instanceof List<?>) {
 			return null;
 		}
-
-		List<PorjadokRabotyKomissii> list = findByIzvewenieId(izvewenie_id,
-				count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
+		else {
+			return (PorjadokRabotyKomissii)result;
 		}
-
-		return null;
 	}
 
 	/**
-	 * Returns the porjadok raboty komissiis before and after the current porjadok raboty komissii in the ordered set where izvewenie_id = &#63;.
+	 * Removes the porjadok raboty komissii where izvewenie_id = &#63; from the database.
 	 *
-	 * @param porjadok_raboty_komissii_id the primary key of the current porjadok raboty komissii
 	 * @param izvewenie_id the izvewenie_id
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next porjadok raboty komissii
-	 * @throws NoSuchPorjadokRabotyKomissiiException if a porjadok raboty komissii with the primary key could not be found
+	 * @return the porjadok raboty komissii that was removed
 	 */
 	@Override
-	public PorjadokRabotyKomissii[] findByIzvewenieId_PrevAndNext(
-		long porjadok_raboty_komissii_id, long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator)
+	public PorjadokRabotyKomissii removeByIzvewenieId(long izvewenie_id)
 		throws NoSuchPorjadokRabotyKomissiiException {
-		PorjadokRabotyKomissii porjadokRabotyKomissii = findByPrimaryKey(porjadok_raboty_komissii_id);
+		PorjadokRabotyKomissii porjadokRabotyKomissii = findByIzvewenieId(izvewenie_id);
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			PorjadokRabotyKomissii[] array = new PorjadokRabotyKomissiiImpl[3];
-
-			array[0] = getByIzvewenieId_PrevAndNext(session,
-					porjadokRabotyKomissii, izvewenie_id, orderByComparator,
-					true);
-
-			array[1] = porjadokRabotyKomissii;
-
-			array[2] = getByIzvewenieId_PrevAndNext(session,
-					porjadokRabotyKomissii, izvewenie_id, orderByComparator,
-					false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected PorjadokRabotyKomissii getByIzvewenieId_PrevAndNext(
-		Session session, PorjadokRabotyKomissii porjadokRabotyKomissii,
-		long izvewenie_id,
-		OrderByComparator<PorjadokRabotyKomissii> orderByComparator,
-		boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(4 +
-					(orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_PORJADOKRABOTYKOMISSII_WHERE);
-
-		query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(PorjadokRabotyKomissiiModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(izvewenie_id);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(porjadokRabotyKomissii);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<PorjadokRabotyKomissii> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the porjadok raboty komissiis where izvewenie_id = &#63; from the database.
-	 *
-	 * @param izvewenie_id the izvewenie_id
-	 */
-	@Override
-	public void removeByIzvewenieId(long izvewenie_id) {
-		for (PorjadokRabotyKomissii porjadokRabotyKomissii : findByIzvewenieId(
-				izvewenie_id, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(porjadokRabotyKomissii);
-		}
+		return remove(porjadokRabotyKomissii);
 	}
 
 	/**
@@ -619,6 +315,10 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 			PorjadokRabotyKomissiiImpl.class,
 			porjadokRabotyKomissii.getPrimaryKey(), porjadokRabotyKomissii);
 
+		finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+			new Object[] { porjadokRabotyKomissii.getIzvewenie_id() },
+			porjadokRabotyKomissii);
+
 		porjadokRabotyKomissii.resetOriginalValues();
 	}
 
@@ -674,6 +374,9 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((PorjadokRabotyKomissiiModelImpl)porjadokRabotyKomissii,
+			true);
 	}
 
 	@Override
@@ -685,6 +388,44 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 			entityCache.removeResult(PorjadokRabotyKomissiiModelImpl.ENTITY_CACHE_ENABLED,
 				PorjadokRabotyKomissiiImpl.class,
 				porjadokRabotyKomissii.getPrimaryKey());
+
+			clearUniqueFindersCache((PorjadokRabotyKomissiiModelImpl)porjadokRabotyKomissii,
+				true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		PorjadokRabotyKomissiiModelImpl porjadokRabotyKomissiiModelImpl) {
+		Object[] args = new Object[] {
+				porjadokRabotyKomissiiModelImpl.getIzvewenie_id()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args,
+			porjadokRabotyKomissiiModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		PorjadokRabotyKomissiiModelImpl porjadokRabotyKomissiiModelImpl,
+		boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					porjadokRabotyKomissiiModelImpl.getIzvewenie_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args);
+		}
+
+		if ((porjadokRabotyKomissiiModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_IZVEWENIEID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					porjadokRabotyKomissiiModelImpl.getOriginalIzvewenie_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args);
 		}
 	}
 
@@ -826,31 +567,13 @@ public class PorjadokRabotyKomissiiPersistenceImpl extends BasePersistenceImpl<P
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
-		else {
-			if ((porjadokRabotyKomissiiModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						porjadokRabotyKomissiiModelImpl.getOriginalIzvewenie_id()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID,
-					args);
-
-				args = new Object[] {
-						porjadokRabotyKomissiiModelImpl.getIzvewenie_id()
-					};
-
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID,
-					args);
-			}
-		}
-
 		entityCache.putResult(PorjadokRabotyKomissiiModelImpl.ENTITY_CACHE_ENABLED,
 			PorjadokRabotyKomissiiImpl.class,
 			porjadokRabotyKomissii.getPrimaryKey(), porjadokRabotyKomissii,
 			false);
+
+		clearUniqueFindersCache(porjadokRabotyKomissiiModelImpl, false);
+		cacheUniqueFindersCache(porjadokRabotyKomissiiModelImpl);
 
 		porjadokRabotyKomissii.resetOriginalValues();
 

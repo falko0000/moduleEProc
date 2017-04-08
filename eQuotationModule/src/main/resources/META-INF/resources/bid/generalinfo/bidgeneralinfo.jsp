@@ -5,17 +5,26 @@
 
 	List<TipyIzvewenij> typeizvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenijs(0,TipyIzvewenijLocalServiceUtil.getTipyIzvewenijsCount()); 
 
-	Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
-
+	Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
+	
+	Izvewenija izvewenija = null;
+	
 	List<Orgindex> orgindex = OrgindexLocalServiceUtil.getOrgindexs(0, OrgindexLocalServiceUtil.getOrgindexsCount());
 
 	Organization authorized_body_org = (Organization) request.getAttribute("authorized_body_org");
 
 	IzveweniePut izvewenieput = null;
 	
-	if(izvewenija != null)
-		izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(izvewenija.getIzvewenija_id());
-
+	try {
+		izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(IzvewenijaID);
+	} catch (NoSuchIzveweniePutException | SystemException e) {
+		// TODO Auto-generated catch block
+	
+	}
+    if(IzvewenijaID == 0)
+    {
+    	izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+    }
 	String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
 	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;

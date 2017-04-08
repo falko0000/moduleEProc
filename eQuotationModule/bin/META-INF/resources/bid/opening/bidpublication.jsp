@@ -3,12 +3,20 @@
 <%
 	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
-	Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+	Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 	
 	PorjadokRabotyKomissii porjadok_raboty_komissii = null;
 	
-	if(izvewenija != null)
-		porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija.getIzvewenija_id());
+	try {
+		porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);
+	} catch (NoSuchPorjadokRabotyKomissiiException e) {
+		// TODO Auto-generated catch block
+		
+	} catch (SystemException e) {
+		// TODO Auto-generated catch block
+
+	}
+		
 	
 	if(porjadok_raboty_komissii != null)
        cal.setTime(porjadok_raboty_komissii.getData_publikacii());
