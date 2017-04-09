@@ -17,6 +17,7 @@ package tj.izvewenija.model;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.annotation.ImplementationClassName;
+import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.util.Accessor;
 
@@ -31,7 +32,7 @@ import com.liferay.portal.kernel.util.Accessor;
  */
 @ImplementationClassName("tj.izvewenija.model.impl.IzvewenijaImpl")
 @ProviderType
-public interface Izvewenija extends IzvewenijaModel, PersistedModel {
+public interface Izvewenija extends IzvewenijaModel, PersistedModel,AuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

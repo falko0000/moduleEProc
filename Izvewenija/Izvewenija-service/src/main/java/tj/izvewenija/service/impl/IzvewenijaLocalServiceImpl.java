@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.PortalUtil;
 
 import aQute.bnd.annotation.ProviderType;
-
+import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.izvewenija.service.base.IzvewenijaLocalServiceBaseImpl;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.model.impl.IzvewenijaImpl;
@@ -72,7 +72,7 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 		
 		
 		try {
-			resourceLocalService.addModelResources((AuditedModel) izvewenija, serviceContext);
+			resourceLocalService.addModelResources(izvewenija, serviceContext);
 			} catch (PortalException e) {
 			e.printStackTrace();
 			} catch (SystemException e) {
@@ -81,6 +81,35 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 		
 		return izvewenija;
 	}
+	 
+	public Izvewenija updateIzvewenija( long izvewenija_id, long sostojanie_id, long status_id, long tip_izvewenija_id, 
+            long organizacija_id, String naimenovanie, ServiceContext serviceContext ) throws PortalException
+	{
+		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
+
+		izvewenija.setSostojanie_id(sostojanie_id);
+		izvewenija.setStatus_id(status_id);
+		izvewenija.setTip_izvewenija_id(tip_izvewenija_id);
+		izvewenija.setOrganizacija_id(organizacija_id);
+		izvewenija.setNaimenovanie(naimenovanie);
+
+	
+		izvewenija.setModifiedDate(new Date());
+
+		
+		izvewenija.setIzmenil(serviceContext.getUserId());
+
+		
+		
+	
+
+		izvewenija = updateIzvewenija(izvewenija);
+
+
+	
+
+return izvewenija;
+}
 	
 	public List<Izvewenija> getIzvewenija( long companyId, long groupId) 
 			throws SystemException {

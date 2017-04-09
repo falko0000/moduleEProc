@@ -255,8 +255,7 @@ public class IzveweniePutLocalServiceWrapper implements IzveweniePutLocalService
 	@Override
 	public tj.izvewenieput.model.IzveweniePut getIzvewenijaPutByIzvewenieId(
 		long IzvewenijaID)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			tj.izvewenieput.exception.NoSuchIzveweniePutException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _izveweniePutLocalService.getIzvewenijaPutByIzvewenieId(IzvewenijaID);
 	}
 

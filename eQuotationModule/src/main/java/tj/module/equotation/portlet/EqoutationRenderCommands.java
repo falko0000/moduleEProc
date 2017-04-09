@@ -27,31 +27,14 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse)  {
-		//bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots
+		
+		
 		String names = "bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots,bid_commission";
 		
 		
-	/*	long izvewenie_id = (Long) renderRequest.getAttribute("izvewenie_id");
-
-		//long izvewenie_id = Long.parseLong(iz);
-		
-		if(izvewenie_id == 0)
-			names = "bid_generalinfo";
-		else
-		{
-			if(izvewenie_id > 0)
-				names += ",bid_opening";
-		   
-		    	
-		    	if(!IzveweniePutUtil.findByIzvewenieId(izvewenie_id).isEmpty());
-				   
-		    	names = ",bid_aboutinfo";
-			
-				// TODO: handle exception
-			}
-				*/
 		renderRequest.setAttribute("editnametabs", names);
 	
+		
 		return EQuotationConstants.PAGE_EDIT;
 	}
 

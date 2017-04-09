@@ -135,6 +135,9 @@
 <%@page import="tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil" %>
 <%@page import="tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException" %>
 
+<%@page import="tj.obwaja.informacija.model.ObwajaInformacija" %>
+<%@page import="tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil" %>
+<%@page import="tj.obwaja.informacija.exception.NoSuchObwajaInformacijaException" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

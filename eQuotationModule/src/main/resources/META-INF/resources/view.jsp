@@ -26,6 +26,7 @@
 	
 		<portlet:renderURL var="addIzvewenijaURL">
 			<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
+		  <portlet:param name="<%Constants.CMD %>" value="<%=Constants.ADD%>" />
 		   <portlet:param name="izvewenie_id" value="0"/>
 		</portlet:renderURL>
 

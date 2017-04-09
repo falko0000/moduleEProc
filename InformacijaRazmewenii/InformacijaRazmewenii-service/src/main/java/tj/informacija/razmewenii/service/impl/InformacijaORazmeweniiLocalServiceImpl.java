@@ -14,6 +14,14 @@
 
 package tj.informacija.razmewenii.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Phone;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+
 import aQute.bnd.annotation.ProviderType;
 import tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
@@ -38,15 +46,25 @@ import tj.informacija.razmewenii.service.base.InformacijaORazmeweniiLocalService
 public class InformacijaORazmeweniiLocalServiceImpl
 	extends InformacijaORazmeweniiLocalServiceBaseImpl {
 
-	public InformacijaORazmewenii getInfRazmeweniiByIzvewenija(long IzvewenijaID) throws NoSuchInformacijaORazmeweniiException {
+	public InformacijaORazmewenii getInfRazmeweniiByIzvewenija(long IzvewenijaID)  {
 		
-     return informacijaORazmeweniiPersistence.findByIzvewenijaID(IzvewenijaID); 
+	InformacijaORazmewenii informacija_orazmewenii = new InformacijaORazmeweniiImpl();
+     try {
+    	 informacija_orazmewenii = informacijaORazmeweniiPersistence.findByIzvewenijaID(IzvewenijaID);
+	} catch (NoSuchInformacijaORazmeweniiException e) {
+		
+	} 
+     
+    return informacija_orazmewenii;
 	}
+	
+	
 	
 	
 	public  InformacijaORazmewenii insertInfoORazmewenii(long izvewenie_id, int mesto_postavki_dlja_zakaza, String mesto_postavki){
 		    
 		InformacijaORazmewenii informacija_o_razmewenii = new InformacijaORazmeweniiImpl();
+		
 	
 		informacija_o_razmewenii.setIzvewenie_id(izvewenie_id);
 		informacija_o_razmewenii.setMesto_postavki_dlja_zakaza(mesto_postavki_dlja_zakaza);

@@ -6,8 +6,13 @@
     Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
    
     User biduser = (User) request.getAttribute("biduser");
+    ObwajaInformacija obwaja_informacija = null;
+	
+    	obwaja_informacija = ObwajaInformacijaLocalServiceUtil.getObInfoByIzvewenieId(izvewenie_id , biduser.getUserId());
 
-                                                  
+	
+  
+    
 	List<Address> addresses = Collections.emptyList();
     List<Phone>   phones  = Collections.emptyList();
     
@@ -40,9 +45,40 @@
 %>
   <aui:input id="bid_address" type="text"  name="address" value= "<%=allfulladdress%>" disabled="true"/>
      
-      <aui:input id="bid_contact_name" type="text"  name="bid_contact_name" value= "<%=biduser.getFullName()%>"  disabled="<%=disabled %>"/>
+   
+      <aui:input id="bid_contact_name" type="text"  name="bid_contact_name" value= "<%=obwaja_informacija.getKontaktnoe_lico()%>"  disabled="<%=disabled %>">
+      	<aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+      </aui:input>
       
-      <aui:input id="bid_email-address" type="text"  name="email-address" value= "<%=biduser.getEmailAddress()%>" disabled="<%=disabled %>"/>
+     
+      <aui:input id="bid_email-address" type="text"  name="email-address" value= "<%= obwaja_informacija.getJe_pochta()%>" disabled="<%=disabled %>">
       
-      <aui:input id="bid_personal-phones" type="text"  name="personal-phones" value = "<%=allphone%>"  disabled="<%=disabled %>"/>
+        <aui:validator name="email" errorMessage=""/>
+      	<aui:validator name="required" errorMessage="email-address-and-type-are-required-fields"></aui:validator>
+     
+      </aui:input>
       
+     
+      
+      <aui:input id="bid_personal-phones" type="text"  name="personal-phones" value = "<%=obwaja_informacija.getKontaktnyj_telefon()%>"  disabled="<%=disabled %>">
+      	<aui:validator name="custom" errorMessage="this-field-is-mandatory">
+      	
+      	function (val, fieldNode, ruleValue)
+                             {
+                                var result = true;
+                                var pattern=/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[0-9]*$/g;
+                                var check = pattern.test(val);
+                                if(check == false)
+                                {
+                                  result=false;
+                                }
+                                val=$.trim(val);
+                                $("#<portlet:namespace />bid_personal-phones").val(val);
+                                return result;
+                              }
+      	</aui:validator>
+        <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+      </aui:input>
+    
+       
+ 

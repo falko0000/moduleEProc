@@ -24,4 +24,5 @@ dependencies {
 	compile project (":modules:InformacijaRazmewenii:InformacijaRazmewenii-api")
 	
 	compile project (":modules:IstochnikFinansirovanija:IstochnikFinansirovanija-api")
+	compile project (":modules:ObwajaInformacija:ObwajaInformacija-api")
 	}

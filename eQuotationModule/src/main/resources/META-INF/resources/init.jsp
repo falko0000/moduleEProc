@@ -135,6 +135,9 @@
 <%@page import="tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil" %>
 <%@page import="tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException" %>
 
+<%@page import="tj.obwaja.informacija.model.ObwajaInformacija" %>
+<%@page import="tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil" %>
+<%@page import="tj.obwaja.informacija.exception.NoSuchObwajaInformacijaException" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
@@ -161,6 +164,7 @@ boolean filterManageableUserGroups = true;
 if (portletName.equals(portletId) || permissionChecker.hasPermission(scopeGroup.getGroupId(), UserGroup.class.getName(), UserGroup.class.getName(), ActionKeys.VIEW)) {
 	filterManageableUserGroups = false;
 }
+
 
 
 %>

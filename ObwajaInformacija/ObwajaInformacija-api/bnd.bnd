@@ -1,0 +1,9 @@
+Bundle-Name: ObwajaInformacija-api
+Bundle-SymbolicName: tj.obwaja.informacija.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.obwaja.informacija.exception,\
+	tj.obwaja.informacija.model,\
+	tj.obwaja.informacija.service,\
+	tj.obwaja.informacija.service.persistence
+-includeresource: META-INF/service.xml=../ObwajaInformacija-service/service.xml

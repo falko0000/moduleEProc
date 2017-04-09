@@ -15,13 +15,10 @@
 
 	IzveweniePut izvewenieput = null;
 	
-	try {
-		izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(IzvewenijaID);
-	} catch (NoSuchIzveweniePutException | SystemException e) {
-		// TODO Auto-generated catch block
-	
-	}
-    if(IzvewenijaID == 0)
+
+	izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(IzvewenijaID);
+
+    if(IzvewenijaID != 0)
     {
     	izvewenija = (Izvewenija) request.getAttribute("izvewenija");
     }
@@ -39,7 +36,7 @@
       disabled="true"
        />
 
-      <aui:select id="bid_method" label="bid_method" name="bid_method" disabled="true">
+      <aui:select id="bid_method" label="bid_method" name="bid_method" >
        
        <%for(TipyIzvewenij type : typeizvewenij) 
          { %>
@@ -66,7 +63,7 @@
      
       <aui:col md="3">
       
-      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_a() : ""%>" disabled="<%=disabled %>">
+      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="number" min ="0" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_a():"" %>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      
@@ -76,7 +73,7 @@
       <aui:col md="6">
 
         <aui:select id="bid_number_IFB_B" label="(B)" name=""  disabled="<%=disabled %>"> 
-      <c:if test="<%= izvewenieput != null %>">
+      <c:if test="<%= !izvewenieput.isNew() %>">
        <%for(Orgindex orgind : orgindex) 
          { %>
       		
@@ -84,7 +81,7 @@
        
        <%} %>
        </c:if>
-       <c:if test="<%= izvewenieput == null %>">
+       <c:if test="<%= izvewenieput.isNew() %>">
        <%for(Orgindex orgind : orgindex) 
          { %>
       		
@@ -98,7 +95,7 @@
       <aui:col md="3">
       
     
-      <aui:input id="bid_number_IFB_C" name ="(C)" type="text" value="<%=(izvewenieput != null)? izvewenieput.getPut_c() : ""%>" disabled="<%=disabled %>">
+      <aui:input id="bid_number_IFB_C" name ="(C)" type="text" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_c():"" %>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      

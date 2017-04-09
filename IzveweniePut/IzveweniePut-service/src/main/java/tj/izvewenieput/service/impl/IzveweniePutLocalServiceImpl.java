@@ -23,6 +23,7 @@ import aQute.bnd.annotation.ProviderType;
 import tj.izvewenieput.service.base.IzveweniePutLocalServiceBaseImpl;
 import tj.izvewenieput.exception.NoSuchIzveweniePutException;
 import tj.izvewenieput.model.IzveweniePut;
+import tj.izvewenieput.model.impl.IzveweniePutImpl;
 
 /**
  * The implementation of the izvewenie put local service.
@@ -43,8 +44,18 @@ public class IzveweniePutLocalServiceImpl
 	extends IzveweniePutLocalServiceBaseImpl {
 
 	public IzveweniePut getIzvewenijaPutByIzvewenieId(long IzvewenijaID) 
-			throws SystemException, NoSuchIzveweniePutException {
+			throws SystemException{
+		IzveweniePut izvewenie_put = new IzveweniePutImpl();
 		
-		return izveweniePutPersistence.findByIzvewenieId(IzvewenijaID);
+		try {
+			izvewenie_put =  izveweniePutPersistence.findByIzvewenieId(IzvewenijaID);
+		} catch (NoSuchIzveweniePutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return izvewenie_put;
 	}
+	
+
 }

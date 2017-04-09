@@ -21,7 +21,7 @@
 </liferay-portlet:actionURL>
 
 
-<aui:form action="<%=editgeneralinfo%>" cssClass="container-fluid-1280" method="post" name="fm"> 
+<aui:form action="<%=editgeneralinfo%>" cssClass="container-fluid-1280" method="post" name="<%= EQuotationConstants.FORM_GENERAL_INFO%>"> 
 
 <aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (izvewenija == null) ? Constants.ADD : Constants.UPDATE %>" />
 
@@ -30,6 +30,7 @@
 
  
  <liferay-ui:form-navigator 
+ formName = "<%= EQuotationConstants.FORM_GENERAL_INFO%>"
  categoryNames="<%= CAT_NAMES %>"
  categorySections="<%= CAT_SECTION %>"
  jspPath="/bid/generalinfo/"

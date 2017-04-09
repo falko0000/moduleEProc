@@ -229,6 +229,11 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 		long tip_izvewenija_id, long organizacija_id,
 		java.lang.String naimenovanie, ServiceContext serviceContext);
 
+	public Izvewenija updateIzvewenija(long izvewenija_id, long sostojanie_id,
+		long status_id, long tip_izvewenija_id, long organizacija_id,
+		java.lang.String naimenovanie, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	* Updates the izvewenija in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

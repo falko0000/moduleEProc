@@ -6,7 +6,7 @@ package tj.module.equotation.portlet;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
-
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import com.liferay.portal.kernel.service.UserService;
@@ -16,11 +16,12 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import com.liferay.portal.kernel.util.StringUtil;
 
-
+import tj.informacija.razmewenii.model.InformacijaORazmewenii;
+import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
-
-
-
+import tj.obwaja.informacija.model.ObwajaInformacija;
+import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
+import tj.obwaja.informacija.exception.NoSuchObwajaInformacijaException;
 import java.io.IOException;
 
 
@@ -62,7 +63,8 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		 
-	
+
+		
 	StringBuilder names = new StringBuilder();
 	
 	names.append(EQuotationConstants.TAB_PREPARATION);

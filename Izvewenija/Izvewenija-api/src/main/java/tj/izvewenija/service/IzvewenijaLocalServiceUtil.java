@@ -259,6 +259,17 @@ public class IzvewenijaLocalServiceUtil {
 			tip_izvewenija_id, organizacija_id, naimenovanie, serviceContext);
 	}
 
+	public static tj.izvewenija.model.Izvewenija updateIzvewenija(
+		long izvewenija_id, long sostojanie_id, long status_id,
+		long tip_izvewenija_id, long organizacija_id,
+		java.lang.String naimenovanie,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateIzvewenija(izvewenija_id, sostojanie_id, status_id,
+			tip_izvewenija_id, organizacija_id, naimenovanie, serviceContext);
+	}
+
 	/**
 	* Updates the izvewenija in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
