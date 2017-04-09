@@ -15,12 +15,13 @@
   
   try {
 		informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(IzvewenijaID);
+		
 		checked_delivery_address =  (informacija_orazmewenii.getMesto_postavki_dlja_zakaza()==0)?true:false;
   } catch (NoSuchInformacijaORazmeweniiException e) {
 		
 		e.printStackTrace();
 	}
- 
+ request.setAttribute("informacija_orazmewenii", informacija_orazmewenii);
 
 	  
 %>
@@ -31,21 +32,23 @@
 
 <aui:input 
 	name="delivery_address" 
-	type="radio" value="1" 
+	type="radio" value="0" 
 	label="bid_task_each"  
 	inlineLabel="right" 
 	inlineField="true" 
 	checked = "<%=checked_delivery_address %>"
-	disabled="<%=disabled %>"/>
+	disabled="<%=disabled %>"
+/>
 
 <aui:input 
 	name="delivery_address" 
-	type="radio" value="2" 
+	type="radio" value="1" 
 	label="bid_task_whole" 
 	inlineLabel="right" 
 	inlineField="false" 
 	checked = "<%=(informacija_orazmewenii == null || !checked_delivery_address)?true:false %>"
-	disabled="<%=disabled %>"/>
+	disabled="<%=disabled %>"
+/>
 
 </div>
 
@@ -54,7 +57,8 @@
 	type="textarea" 
 	value="<%=(informacija_orazmewenii != null)?informacija_orazmewenii.getMesto_postavki():StringPool.BLANK%>"  
 	placeholder="delivery_address" 
-	disabled="<%=disabled %>"/>
+	disabled="<%=disabled %>"
+/>
 
 
 
