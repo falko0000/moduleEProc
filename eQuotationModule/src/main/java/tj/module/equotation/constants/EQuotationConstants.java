@@ -1,6 +1,6 @@
 package tj.module.equotation.constants;
 
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
 
 public interface EQuotationConstants  {
 	

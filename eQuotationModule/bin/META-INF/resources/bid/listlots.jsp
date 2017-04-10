@@ -16,7 +16,11 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 	
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
-
+    
+ PortletURL viewUrl = renderResponse.createRenderURL();
+	viewUrl.setParameter("mvcPath", EQuotationConstants.PAGE_LISTLOTS);
+	viewUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
+	
 %>
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
@@ -33,10 +37,50 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_LISTLOTS %>" />
 
 
-
- 
 </aui:form>
 		
+
+
+<liferay-ui:search-container
+				emptyResultsMessage="no-leaves-found" 
+				delta = "<%=5%>"
+				iteratorURL="<%=viewUrl %>" 
+				total="<%= SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenie_id) %>"
+				rowChecker="<%= new RowChecker(renderResponse) %>"
+			> 
+			 <liferay-ui:search-container-results 
+		     results="<%=  SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenie_id) %>">
+		  
+		 	</liferay-ui:search-container-results>
+		 
+		  	<liferay-ui:search-container-row className="tj.spisok.lotov.model.Spisoklotov" modelVar="spisoklot" keyProperty="spisok_lotov_id" > 
+		 
+				 
+				 	
+				 <liferay-ui:search-container-column-text 
+				 	
+				 	property="spisok_lotov_id" 
+				 	name="id_lot"  
+				 	orderable="<%= true %>"  		 	
+				 /> 
+			  			
+				 <liferay-ui:search-container-column-text 
+				 	property="naimenovanie_lota" 
+				 	name="naimenovanie_lota"  
+				 	orderable="<%= true %>" 
+				 	
+				 />
+			
+				 <liferay-ui:search-container-column-jsp 
+				 	valign="middle"
+				 	name="actions_bid"  
+				 	align="right"
+			        path="<%=EQuotationConstants.PAGE_ACTIONS%>"   
+				 />
+		  </liferay-ui:search-container-row>
+		 <liferay-ui:search-iterator />
+		</liferay-ui:search-container>
+
 
 <aui:button id="addLot" name="addLot" value="Add new lot" />
 

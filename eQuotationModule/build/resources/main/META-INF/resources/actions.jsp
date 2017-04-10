@@ -1,6 +1,6 @@
 
 
-<%@page import="com.liferay.portal.kernel.util.Constants"%>
+
 <%@ include file="/init.jsp" %>
 
 
@@ -26,9 +26,10 @@
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.VIEW%>" /> 
 		</portlet:renderURL>
 	 
-	 <portlet:renderURL var="deleteURL" windowState="<%=LiferayWindowState.NORMAL.toString()%>" > 
+	 <portlet:renderURL var="deleteURL"  > 
+	     <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>"/>
 		 <portlet:param name="izvewenija_id" value="<%=Long.toString(izvewenie.getIzvewenija_id())%>" /> 
-		 <portlet:param name="mvcPath" value="<%=EQuotationConstants.PAGE_DELETE %>"/>
+		 <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.DELETE%>" />
 	 </portlet:renderURL>
 	 
 	 <liferay-security:permissionsURL

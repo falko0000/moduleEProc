@@ -73,3 +73,5 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 			/>
 		</div>
 	</aui:field-wrapper>
+	
+	<aui:input name=" " type="numebr" suffix="" prefix=""/>

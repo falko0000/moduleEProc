@@ -16,12 +16,9 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import com.liferay.portal.kernel.util.StringUtil;
 
-import tj.informacija.razmewenii.model.InformacijaORazmewenii;
-import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
+
 import tj.module.equotation.constants.EQuotationConstants;
-import tj.obwaja.informacija.model.ObwajaInformacija;
-import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
-import tj.obwaja.informacija.exception.NoSuchObwajaInformacijaException;
+
 import java.io.IOException;
 
 

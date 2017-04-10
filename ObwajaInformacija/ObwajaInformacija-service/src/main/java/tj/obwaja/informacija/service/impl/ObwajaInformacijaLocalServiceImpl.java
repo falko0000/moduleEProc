@@ -77,6 +77,10 @@ public class ObwajaInformacijaLocalServiceImpl
                 
 				email = user.getEmailAddress();
 				fullname = user.getFullName(false, true);
+				
+				obwaja_informacija.setJe_pochta(email);
+				obwaja_informacija.setKontaktnyj_telefon(phone);
+				obwaja_informacija.setKontaktnoe_lico(fullname);
 			 } catch (PortalException e1) {
 				
 				
@@ -84,9 +88,7 @@ public class ObwajaInformacijaLocalServiceImpl
 			 
 		} 
 	    
-		obwaja_informacija.setJe_pochta(email);
-		obwaja_informacija.setKontaktnyj_telefon(phone);
-		obwaja_informacija.setKontaktnoe_lico(fullname);
+		
         		
 	    return obwaja_informacija;
 	}

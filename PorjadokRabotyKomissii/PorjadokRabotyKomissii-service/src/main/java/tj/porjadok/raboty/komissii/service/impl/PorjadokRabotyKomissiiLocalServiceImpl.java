@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import aQute.bnd.annotation.ProviderType;
 import tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
+import tj.porjadok.raboty.komissii.model.impl.PorjadokRabotyKomissiiImpl;
 import tj.porjadok.raboty.komissii.service.base.PorjadokRabotyKomissiiLocalServiceBaseImpl;
 
 /**
@@ -41,9 +42,17 @@ import tj.porjadok.raboty.komissii.service.base.PorjadokRabotyKomissiiLocalServi
 public class PorjadokRabotyKomissiiLocalServiceImpl
 	extends PorjadokRabotyKomissiiLocalServiceBaseImpl {
 	
-    public PorjadokRabotyKomissii getPRKbyIzvewenieId(long IzvewenieId) throws NoSuchPorjadokRabotyKomissiiException
+    public PorjadokRabotyKomissii getPRKbyIzvewenieId(long IzvewenieId) 
     		 {
-    
-    	return porjadokRabotyKomissiiPersistence.findByIzvewenieId(IzvewenieId);
+    	PorjadokRabotyKomissii porjadok_raboty_komissii = new PorjadokRabotyKomissiiImpl();
+    	
+    	try {
+			porjadok_raboty_komissii = porjadokRabotyKomissiiPersistence.findByIzvewenieId(IzvewenieId);
+		} catch (NoSuchPorjadokRabotyKomissiiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return porjadok_raboty_komissii;
     }
 }

@@ -11,15 +11,15 @@ import org.osgi.service.component.annotations.Component;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
-import tj.status.izvewenij.service.StatusIzvewenijLocalServiceUtil;
+
+
 import tj.izvewenieput.model.IzveweniePut;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
@@ -52,7 +52,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		   
 		   insertGeneralInfo( actionRequest , actionResponse);
 	  
-	   if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && !cmd.equals(Constants.ADD))
+	   if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.UPDATE))
 		   updateGeneralInfo( actionRequest , actionResponse);
 		   
 	   if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO))
@@ -74,15 +74,16 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		long bid_method = ParamUtil.getLong(actionRequest, "bid_method");
 		
 		//izvewenija_put
-		int put_a = ParamUtil.getInteger(actionRequest, "bid_number_IFB_A");
-		int put_b = ParamUtil.getInteger(actionRequest, "bid_number_IFB_B");
-		String put_c = ParamUtil.getString(actionRequest, "bid_number_IFB_C");
+
+		int put_a = ParamUtil.getInteger(actionRequest, "bid_number_ifb_a");
+		int put_b = ParamUtil.getInteger(actionRequest, "bid_number_ifb_b");
+		String put_c = ParamUtil.getString(actionRequest, "bid_number_ifb_c");
        
-		//obwaja_informacija
+		
 		
 		String contact_name = ParamUtil.getString(actionRequest, "bid_contact_name");
-		String contact_email = ParamUtil.getString(actionRequest, "email-address");
-		String contact_phone = ParamUtil.getString(actionRequest, "personal-phones");
+		String contact_email = ParamUtil.getString(actionRequest, "bid_email_address");
+		String contact_phone = ParamUtil.getString(actionRequest, "bid_personal_phones");
 		
 		ServiceContext serviceContext = null;
        
@@ -97,13 +98,13 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
        Izvewenija inserted_izvewenija =  IzvewenijaLocalServiceUtil
     		                            .insertIzvewenija(EQuotationConstants.STATE_BID_PREPARATION, 
     		                                              EQuotationConstants.STATUS_BID_PREPARATION,
-    		                                              org_ids[0],bid_method,name, serviceContext);
+    		                                              bid_method,org_ids[0],name, serviceContext);
 		
 
       
-	  long new_izvewenie_put = CounterLocalServiceUtil.increment(IzveweniePut.class.toString());
+	  
     
-	 IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.createIzveweniePut(new_izvewenie_put);
+	 IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(inserted_izvewenija.getIzvewenija_id());
 		
 	 izveweniePut.setIzvewenie_id(inserted_izvewenija.getIzvewenija_id());
 	 izveweniePut.setPut_a(put_a);
@@ -113,9 +114,10 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	 izveweniePut = IzveweniePutLocalServiceUtil.addIzveweniePut(izveweniePut);
        
 	 
-	 long new_obwaja_info = CounterLocalServiceUtil.increment(ObwajaInformacija.class.toString());
+	 
 	  
-	 ObwajaInformacija obwajaInformacija = ObwajaInformacijaLocalServiceUtil.createObwajaInformacija(new_obwaja_info);
+	 ObwajaInformacija obwajaInformacija = ObwajaInformacijaLocalServiceUtil
+			                              .getObInfoByIzvewenieId(inserted_izvewenija.getIzvewenija_id(),serviceContext.getUserId() );
 	 
 	 obwajaInformacija.setIzvewenie_id(inserted_izvewenija.getIzvewenija_id());
 	 obwajaInformacija.setKontaktnoe_lico(contact_name);
@@ -139,15 +141,16 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		long bid_method = ParamUtil.getLong(actionRequest, "bid_method");
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		//izvewenija_put
-		int put_a = ParamUtil.getInteger(actionRequest, "bid_number_IFB_A");
-		int put_b = ParamUtil.getInteger(actionRequest, "bid_number_IFB_B");
-		String put_c = ParamUtil.getString(actionRequest, "bid_number_IFB_C");
+
+		int put_a = ParamUtil.getInteger(actionRequest, "bid_number_ifb_a");
+		int put_b = ParamUtil.getInteger(actionRequest, "bid_number_ifb_b");
+		String put_c = ParamUtil.getString(actionRequest, "bid_number_ifb_c");
        
-		//obwaja_informacija
+		
 		
 		String contact_name = ParamUtil.getString(actionRequest, "bid_contact_name");
-		String contact_email = ParamUtil.getString(actionRequest, "email-address");
-		String contact_phone = ParamUtil.getString(actionRequest, "personal-phones");
+		String contact_email = ParamUtil.getString(actionRequest, "bid_email_address");
+		String contact_phone = ParamUtil.getString(actionRequest, "bid_personal_phones");
 		
 		ServiceContext serviceContext = null;
        
@@ -161,7 +164,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
       Izvewenija inserted_izvewenija =  IzvewenijaLocalServiceUtil
     		                                            .updateIzvewenija(izvewenie_id,EQuotationConstants.STATE_BID_PREPARATION, 
     		                                            				EQuotationConstants.STATUS_BID_PREPARATION,
-    		                                            				org_ids[0],bid_method,name, serviceContext);
+    		                                            				bid_method,org_ids[0],name, serviceContext);
 		
 
       
@@ -179,7 +182,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	 
 	
 	  
-	 ObwajaInformacija obwajaInformacija = ObwajaInformacijaLocalServiceUtil.getObInfoByIzvewenieId(izvewenie_id);
+	 ObwajaInformacija obwajaInformacija = ObwajaInformacijaLocalServiceUtil.getObInfoByIzvewenieId(izvewenie_id, serviceContext.getUserId());
 	 
 	 obwajaInformacija.setIzvewenie_id(inserted_izvewenija.getIzvewenija_id());
 	 obwajaInformacija.setKontaktnoe_lico(contact_name);

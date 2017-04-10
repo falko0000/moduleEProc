@@ -1,17 +1,15 @@
 package tj.module.equotation.portlet;
 
-import javax.portlet.PortletException;
+
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-import com.liferay.portal.kernel.exception.PortalException;
+
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 
-import tj.izvewenieput.exception.NoSuchIzveweniePutException;
-import tj.izvewenieput.service.persistence.IzveweniePutUtil;
-import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
+
 import tj.module.equotation.constants.EQuotationConstants;
 
 @Component(

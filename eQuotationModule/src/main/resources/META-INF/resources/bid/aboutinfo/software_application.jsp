@@ -147,7 +147,7 @@
 
  </aui:field-wrapper>
 <aui:input 
-	name=" " 
+	name="" 
 	type="textarea" 
 	value=""  
 	placeholder="big_term_and_procedure_of_the_software_application" 

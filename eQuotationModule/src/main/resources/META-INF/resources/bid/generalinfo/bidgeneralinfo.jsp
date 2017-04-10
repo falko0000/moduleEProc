@@ -18,7 +18,8 @@
 
 	izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(IzvewenijaID);
 
-    if(IzvewenijaID != 0)
+        
+	if(IzvewenijaID != 0)
     {
     	izvewenija = (Izvewenija) request.getAttribute("izvewenija");
     }
@@ -53,7 +54,7 @@
       
       <aui:input id="bid_authorized_body" type="text"  name="bid_authorized_body" value= "<%=authorized_body_org.getName()%>" disabled="true"/>
       
-      <aui:input id="bid_name_notification" type="text"  name="bid_name_notification"  value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : ""  %>" disabled="<%=disabled %>">
+      <aui:input id="bid_name_notification" type="text"  name="bid_name_notification"  value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : StringPool.BLANK  %>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
       
@@ -63,7 +64,7 @@
      
       <aui:col md="3">
       
-      <aui:input id="bid_number_IFB_A" name ="bid_number_ifb" type="number" min ="0" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_a():"" %>" disabled="<%=disabled %>">
+      <aui:input  name ="bid_number_ifb_a" type="number" min ="0" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_a():StringPool.BLANK %>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      
@@ -72,7 +73,7 @@
       
       <aui:col md="6">
 
-        <aui:select id="bid_number_IFB_B" label="(B)" name=""  disabled="<%=disabled %>"> 
+        <aui:select  label="(B)" name="bid_number_ifb_b"  disabled="<%=disabled %>"> 
       <c:if test="<%= !izvewenieput.isNew() %>">
        <%for(Orgindex orgind : orgindex) 
          { %>
@@ -95,7 +96,7 @@
       <aui:col md="3">
       
     
-      <aui:input id="bid_number_IFB_C" name ="(C)" type="text" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_c():"" %>" disabled="<%=disabled %>">
+      <aui:input  name ="bid_number_ifb_c" type="text" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_c():StringPool.BLANK %>" disabled="<%=disabled %>">
       
       <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      
