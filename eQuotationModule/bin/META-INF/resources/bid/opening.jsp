@@ -18,7 +18,7 @@
 </liferay-portlet:actionURL>
 
 <!--  2 -->
-<aui:form action="<%=opening%>" cssClass="container-fluid-1280" method="post" name="fm"> 
+<aui:form action="<%=opening%>" cssClass="container-fluid-1280" method="post" name="<%=EQuotationConstants.FORM_OPENING %>"> 
 
 <aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (izvewenija == null) ? Constants.ADD : Constants.UPDATE %>" />
 

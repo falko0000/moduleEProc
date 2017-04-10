@@ -10,17 +10,10 @@ Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 
 PorjadokRabotyKomissii porjadok_raboty_komissii = null;
 
-try {
-	porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);
-} catch (NoSuchPorjadokRabotyKomissiiException e) {
-	// TODO Auto-generated catch block
-	
-} catch (SystemException e) {
-	// TODO Auto-generated catch block
+porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);
 
-}
-	
-if(porjadok_raboty_komissii != null)
+
+if(!porjadok_raboty_komissii.isNew())
    cal.setTime(porjadok_raboty_komissii.getData_podvedenija_itogov());
 
 int endAmPm = ParamUtil.get(request, "schedulerEndDateAmPm", cal.get(Calendar.AM_PM));
@@ -73,3 +66,10 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 			/>
 		</div>
 	</aui:field-wrapper>
+	<aui:input  name="bid_days" 
+				type="number" 
+				value="<%=(!porjadok_raboty_komissii.isNew())?porjadok_raboty_komissii.getPo_istecheniju_dnej():1 %>" 
+				suffix="bid_working_days" 
+				prefix="bid_across"
+				min="0"
+	/>

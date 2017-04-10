@@ -7,18 +7,11 @@
 	
 	PorjadokRabotyKomissii porjadok_raboty_komissii = null;
 	
-	try {
-		porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);
-	} catch (NoSuchPorjadokRabotyKomissiiException e) {
-		// TODO Auto-generated catch block
-		
-	} catch (SystemException e) {
-		// TODO Auto-generated catch block
-
-	}
-		
 	
-	if(porjadok_raboty_komissii != null)
+		porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);
+ 
+	
+	if(!porjadok_raboty_komissii.isNew())
        cal.setTime(porjadok_raboty_komissii.getData_publikacii());
     
 	int startAmPm = ParamUtil.get(request, "schedulerStartDateAmPm", cal.get(Calendar.AM_PM));
