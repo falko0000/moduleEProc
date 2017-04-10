@@ -8,19 +8,19 @@
 
 	 InformacijaORazmewenii informacija_orazmewenii = (InformacijaORazmewenii)request.getAttribute("informacija_orazmewenii");
 
-	 boolean checked_delivery_time = false;
+	 boolean checked_software_application = false;
 	 boolean delivery_time_p[] = {true, false, false, false, false, false, false, false};
-	 if(informacija_orazmewenii!=null){
+	 if(!informacija_orazmewenii.isNew()){
 	 
- 	 checked_delivery_time =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
-	 delivery_time_p[0] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==0)?true:false;
-	 delivery_time_p[1] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==1)?true:false;
-	 delivery_time_p[2] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==2)?true:false;
-	 delivery_time_p[3] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==3)?true:false;
-	 delivery_time_p[4] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==4)?true:false;
-	 delivery_time_p[5] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==5)?true:false;
-	 delivery_time_p[6] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==6)?true:false;
-	 delivery_time_p[7] = (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==7)?true:false;
+ 	 checked_software_application =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
+	 delivery_time_p[0] = (informacija_orazmewenii.getObespechenie_zajavki()==0)?true:false;
+	 delivery_time_p[1] = (informacija_orazmewenii.getObespechenie_zajavki()==1)?true:false;
+	 delivery_time_p[2] = (informacija_orazmewenii.getObespechenie_zajavki()==2)?true:false;
+	 delivery_time_p[3] = (informacija_orazmewenii.getObespechenie_zajavki()==3)?true:false;
+	 delivery_time_p[4] = (informacija_orazmewenii.getObespechenie_zajavki()==4)?true:false;
+	 delivery_time_p[5] = (informacija_orazmewenii.getObespechenie_zajavki()==5)?true:false;
+	 delivery_time_p[6] = (informacija_orazmewenii.getObespechenie_zajavki()==6)?true:false;
+	 delivery_time_p[7] = (informacija_orazmewenii.getObespechenie_zajavki()==7)?true:false;
 
 	 }
  %>
@@ -32,24 +32,24 @@
 
 
 <aui:input 
-	name="delivery_time" 
+	name="software_application" 
 	type="radio" 
 	value="0" 
 	label="bid_the_task_for_each_lot_separately"  
 	inlineLabel="right" 
 	inlineField="true"  
-	checked = "<%=checked_delivery_time %>"
+	checked = "<%=checked_software_application %>"
 	disabled="<%=disabled %>" 
 />
 
 <aui:input 
-	name="delivery_time" 
+	name="software_application" 
 	type="radio" 
 	value="1" 
 	label="bid_the_task_for_the_whole_order" 
 	inlineLabel="right" 
 	inlineField="false" 
-	checked = "<%=(informacija_orazmewenii == null || !checked_delivery_time)?true:false %>"
+	checked = "<%=(informacija_orazmewenii.isNew() || !checked_software_application)?true:false %>"
 	disabled="<%=disabled %>"
 />
 
@@ -72,7 +72,7 @@
 	type="radio" 
 	value="1" 
 	label="bid_bonds" 
-	chekcked = "<%delivery_time_p[1] %>"
+	chekcked = "<%delivery_time_p[1]%>"
 	disabled="<%=disabled %>"
 />
 
@@ -129,7 +129,7 @@
 	value="7" 
 	label="big_term_and_procedure_of_the_software_application" 
 	inlineField="true" 
-	checked="<%delivery_time_p[7] %>" 
+	checked="<%delivery_time_p[7]%>" 
 	disabled="<%=disabled %>"
 />
 
@@ -137,7 +137,7 @@
 	name="" 
 	suffix="<%=StringPool.PERCENT%>"  
 	type="number" 
-	value="0.0" 
+	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getObespechenie_v_procentah():"0.0") %>" 
 	step="0.1" 
 	min="0.0" 
 	max="3.0" 
@@ -149,7 +149,7 @@
 <aui:input 
 	name="" 
 	type="textarea" 
-	value=""  
+	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_obespechenija_zajavki():StringPool.BLANK) %>"  
 	placeholder="big_term_and_procedure_of_the_software_application" 
 	disabled="<%=disabled %>"
 />
