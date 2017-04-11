@@ -59,6 +59,7 @@
 				minuteValue="<%= startMinute %>"
 				name="startTime"
 				timeFormat="24-hour"
+				dateParam="public_dateTime"
 			    disabled="<%=disabled %>"
 			/>
 		</div>

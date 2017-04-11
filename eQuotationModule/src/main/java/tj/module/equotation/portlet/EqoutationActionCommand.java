@@ -1,5 +1,7 @@
 package tj.module.equotation.portlet;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.portlet.ActionRequest;
@@ -15,7 +17,9 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 
@@ -48,6 +52,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   String form_name = ParamUtil.getString(actionRequest, "FormName");
 	   String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 	   
+	   System.out.println(form_name+"------------------"+cmd);
 	   if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
 		   
 		   insertGeneralInfo( actionRequest , actionResponse);
@@ -55,12 +60,37 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.UPDATE))
 		   updateGeneralInfo( actionRequest , actionResponse);
 		   
+       if(form_name.equals(EQuotationConstants.FORM_OPENING) && cmd.equals(Constants.ADD))
+		   
+		   insertOpening( actionRequest , actionResponse);
+	  
+	   if(form_name.equals(EQuotationConstants.FORM_OPENING) && cmd.equals(Constants.UPDATE))
+		   updateOpening( actionRequest , actionResponse);
+	   
 	   if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO))
 		   
 		      updateAboutInfo( actionRequest , actionResponse); 
 		
 	   
 	   
+	}
+
+
+
+	
+
+
+
+	private void insertOpening(ActionRequest actionRequest, ActionResponse actionResponse) {
+		// TODO Auto-generated method stub
+		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
+		
+				Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
+				Date startTime = ParamUtil.getDate(actionRequest, "startTime", dateFormat);
+				startDate.setTime(startTime.getTime());
+                
+				System.out.println(startDate.toString());
+                
 	}
 
 
@@ -131,6 +161,26 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	 
     ObwajaInformacijaLocalServiceUtil.addObwajaInformacija(obwajaInformacija);
     
+	}
+	
+	private void updateOpening(ActionRequest actionRequest, ActionResponse actionResponse) {
+		// TODO Auto-generated method stub
+		
+		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
+		
+		Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
+		int hours = ParamUtil.getInteger(actionRequest, "schedulerStartDateHour");
+		int minutes = ParamUtil.getInteger(actionRequest, "schedulerStartDateMinute");
+		
+	Calendar cal  = CalendarFactoryUtil.getCalendar(startDate.getTime());// hours, minutes);
+	//	cal.set(cal.HOUR, hour);
+	//	cal.set(cal.MINUTE, minute);
+		
+	//	startDate.setHours(hours);
+		//startDate.setMinutes(minutes);
+		
+	
+		System.out.println(cal);
 	}
 	
 	private void updateGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
