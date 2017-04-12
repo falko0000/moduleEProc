@@ -15,13 +15,14 @@ import com.liferay.portal.kernel.service.UserService;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import com.liferay.portal.kernel.util.StringUtil;
-
+import com.liferay.portal.kernel.util.WebKeys;
 
 import tj.module.equotation.constants.EQuotationConstants;
+import tj.spisoklotov.model.Spisoklotov;
+import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 
 import java.io.IOException;
-
-
+import java.util.List;
 
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 
@@ -61,6 +62,14 @@ public class EqoutationModulePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		 
 
+		//WebKeys.SEARCH_CONTAINER_RESULT_ROW;
+	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
+	
+	for (Spisoklotov spisoklotov : spisoklots) {
+	 
+	System.out.println(spisoklotov);
+	}
+		
 		
 	StringBuilder names = new StringBuilder();
 	

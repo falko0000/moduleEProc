@@ -57,7 +57,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input 
 		name="bid_assignment_lot_payment" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getOplata():StringPool.BLANK)%>"  
+		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getOplata():StringPool.BLANK%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
@@ -94,7 +94,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input
 		name="bid_assignment_lot_delivery" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getCena_postavki():StringPool.BLANK)%>"  
+		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getCena_postavki():StringPool.BLANK%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
@@ -130,7 +130,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input 
 		name="bid_assignment_lot_conditions" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSoputstvujuwie_uslovija():StringPool.BLANK)%>"  
+		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSoputstvujuwie_uslovija():StringPool.BLANK%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />

@@ -204,7 +204,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 																		summarizing_hour, summarizing_minute);
 	    
 		PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenie_id);
-		
+	
 		
 		porjadokRabotyKomissii.setIzvewenie_id(izvewenie_id);
 		porjadokRabotyKomissii.setData_sozdanija(new Date());

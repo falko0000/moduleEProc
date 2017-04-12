@@ -1,0 +1,9 @@
+Bundle-Name: SpisokLots-api
+Bundle-SymbolicName: tj.spisoklotov.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.spisoklotov.exception,\
+	tj.spisoklotov.model,\
+	tj.spisoklotov.service,\
+	tj.spisoklotov.service.persistence
+-includeresource: META-INF/service.xml=../SpisokLots-service/service.xml

@@ -126,8 +126,8 @@
 <%@page import="tj.strany.model.Strany" %>
 <%@page import="tj.strany.service.StranyLocalServiceUtil" %>
 
-<%@page import="tj.spisok.lotov.model.Spisoklotov" %>
-<%@page import ="tj.spisok.lotov.service.SpisoklotovLocalServiceUtil" %>
+<%@page import="tj.spisoklotov.model.Spisoklotov" %>
+<%@page import ="tj.spisoklotov.service.SpisoklotovLocalServiceUtil" %>
 
 <%@page import="tj.istochnik.finansirovanija.model.IstochnikFinansirovanija" %>
 <%@page import="tj.istochnik.finansirovanija.service.IstochnikFinansirovanijaLocalServiceUtil" %>

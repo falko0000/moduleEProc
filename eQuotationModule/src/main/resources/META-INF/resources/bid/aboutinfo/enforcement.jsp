@@ -138,7 +138,7 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 	name="bid_percent_enforcement" 
 	suffix="<%=StringPool.PERCENT%>" 
 	type="number" 
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getObespechenie_v_procentah():"0.0") %>" 
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getObespechenie_v_procentah():"0.0" %>" 
 	step="0.1" 
 	min="0.0" 
 	max="3.0" 
@@ -150,7 +150,7 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 <aui:input 
 	name="bid_enforcement" 
 	type="textarea" 
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK) %>"  
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK %>"  
 	placeholder="bid_performance_contract" 
 	disabled="<%=disabled %>"
 />

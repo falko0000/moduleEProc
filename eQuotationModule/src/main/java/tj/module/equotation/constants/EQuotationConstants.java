@@ -14,6 +14,7 @@ public interface EQuotationConstants  {
 	//Path  pages  jsp 
     //main
 	static final String PAGE_ACTIONS = "/actions.jsp";
+	static final String PAGE_ACTIONS_LOTS = "/bid/listlots/actions.jsp";
 	static final String PAGE_DELETE = "/delete.jsp";
 	static final String PAGE_INFO = "/info.jsp";
 	static final String PAGE_EDIT = "/edit.jsp";

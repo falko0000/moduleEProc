@@ -1,0 +1,1 @@
+create index IX_DBC26E54 on sapp.spisok_lotov (izvewenie_id);
