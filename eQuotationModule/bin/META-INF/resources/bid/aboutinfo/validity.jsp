@@ -49,7 +49,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 </div>
 
 <aui:input 
-	name=" " 
+	name="bid_validity_tenders" 
 	type="textarea" 
 	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_dejstvija():StringPool.BLANK) %>"  
 	placeholder="bid_validity_tenders" 

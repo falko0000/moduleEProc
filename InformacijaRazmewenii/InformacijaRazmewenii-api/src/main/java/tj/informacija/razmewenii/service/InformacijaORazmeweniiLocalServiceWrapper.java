@@ -243,8 +243,7 @@ public class InformacijaORazmeweniiLocalServiceWrapper
 
 	@Override
 	public tj.informacija.razmewenii.model.InformacijaORazmewenii getInfRazmeweniiByIzvewenija(
-		long IzvewenijaID)
-		throws tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException {
+		long IzvewenijaID) {
 		return _informacijaORazmeweniiLocalService.getInfRazmeweniiByIzvewenija(IzvewenijaID);
 	}
 

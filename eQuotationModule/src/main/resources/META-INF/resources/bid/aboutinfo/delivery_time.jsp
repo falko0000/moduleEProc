@@ -11,7 +11,7 @@ boolean checked_delivery_time = false;
 
 if(!informacija_orazmewenii.isNew()){
 	
-	checked_delivery_time =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
+	checked_delivery_time =  (informacija_orazmewenii.getSrok_postavki_dlja_zakaza()==0)?true:false;
 
 }
 %>
@@ -45,7 +45,7 @@ if(!informacija_orazmewenii.isNew()){
 </div>
 
 <aui:input 
-	name=" " 
+	name="bid_delivery_time" 
 	type="textarea" 
 	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_postavki():StringPool.BLANK%>"  
 	placeholder="bid_delivery_time" 

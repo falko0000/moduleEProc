@@ -15,17 +15,17 @@
        cal.setTime(porjadok_raboty_komissii.getData_publikacii());
     
 	int startAmPm = ParamUtil.get(request, "schedulerStartDateAmPm", cal.get(Calendar.AM_PM));
-	int startDay = ParamUtil.get(request, "schedulerStartDateDay", cal.get(Calendar.DATE));
+	int startDay = ParamUtil.get(request, "publication_day", cal.get(Calendar.DATE));
 
-	int startHour = ParamUtil.get(request, "schedulerStartDateHour", cal.get(Calendar.HOUR_OF_DAY));
+	int startHour = ParamUtil.get(request, "publication_hour", cal.get(Calendar.HOUR_OF_DAY));
 
 	if (DateUtil.isFormatAmPm(locale)) {
-		startHour = ParamUtil.get(request, "schedulerStartDateHour", cal.get(Calendar.HOUR));
+		startHour = ParamUtil.get(request, "publication_hour", cal.get(Calendar.HOUR));
 	}	
 
-	int startMinute = ParamUtil.get(request, "schedulerStartDateMinute", cal.get(Calendar.MINUTE));
-	int startMonth = ParamUtil.get(request, "schedulerStartDateMonth", cal.get(Calendar.MONTH));
-	int startYear = ParamUtil.get(request, "schedulerStartDateYear", cal.get(Calendar.YEAR));
+	int startMinute = ParamUtil.get(request, "publication_minute", cal.get(Calendar.MINUTE));
+	int startMonth = ParamUtil.get(request, "publication_month", cal.get(Calendar.MONTH));
+	int startYear = ParamUtil.get(request, "publication_year", cal.get(Calendar.YEAR));
 	
 	String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
@@ -36,13 +36,13 @@
 		<div class="flex-container">
 			<liferay-ui:input-date
 				cssClass="form-group form-group-inline"
-				dayParam="schedulerStartDateDay"
+				dayParam="publication_day"
 				dayValue="<%= startDay %>"
 				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
-				monthParam="schedulerStartDateMonth"
+				monthParam="publication_month"
 				monthValue="<%= startMonth %>"
 				name="startDate"
-				yearParam="schedulerStartDateYear"
+				yearParam="publication_year"
 				yearValue="<%= startYear %>"
 			    disabled="<%=disabled %>"
 			/>
@@ -53,9 +53,9 @@
 				amPmParam="schedulerStartDateAmPm"
 				amPmValue="<%= startAmPm %>"
 				cssClass="form-group form-group-inline"
-				hourParam="schedulerStartDateHour"
+				hourParam="publication_hour"
 				hourValue="<%= startHour %>"
-				minuteParam="schedulerStartDateMinute"
+				minuteParam="publication_minute"
 				minuteValue="<%= startMinute %>"
 				name="startTime"
 				timeFormat="24-hour"

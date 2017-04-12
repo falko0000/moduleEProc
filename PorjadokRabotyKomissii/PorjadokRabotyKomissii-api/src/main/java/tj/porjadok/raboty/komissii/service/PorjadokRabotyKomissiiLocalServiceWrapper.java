@@ -243,8 +243,7 @@ public class PorjadokRabotyKomissiiLocalServiceWrapper
 
 	@Override
 	public tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii getPRKbyIzvewenieId(
-		long IzvewenieId)
-		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
+		long IzvewenieId) {
 		return _porjadokRabotyKomissiiLocalService.getPRKbyIzvewenieId(IzvewenieId);
 	}
 

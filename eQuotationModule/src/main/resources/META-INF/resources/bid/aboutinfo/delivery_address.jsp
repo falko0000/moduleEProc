@@ -53,7 +53,7 @@
 </div>
 
 <aui:input 
-	name=" " 
+	name="bid_delivery_address" 
 	type="textarea" 
 	value="<%=(informacija_orazmewenii != null)?informacija_orazmewenii.getMesto_postavki():StringPool.BLANK%>"  
 	placeholder="delivery_address" 

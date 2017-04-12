@@ -231,8 +231,7 @@ public class PorjadokRabotyKomissiiLocalServiceUtil {
 	}
 
 	public static tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii getPRKbyIzvewenieId(
-		long IzvewenieId)
-		throws tj.porjadok.raboty.komissii.exception.NoSuchPorjadokRabotyKomissiiException {
+		long IzvewenieId) {
 		return getService().getPRKbyIzvewenieId(IzvewenieId);
 	}
 

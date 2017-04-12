@@ -18,11 +18,11 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	 
 	 
 
- checked_assignment_lot_payment =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
+ checked_assignment_lot_payment =  (informacija_orazmewenii.getOplata_dlja_zakaza()==0)?true:false;
  
- checked_assignment_lot_delivery =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
+ checked_assignment_lot_delivery =  (informacija_orazmewenii.getCena_postavki_dlja_zakaza()==0)?true:false;
 
- checked_assignment_lot_conditions =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
+ checked_assignment_lot_conditions =  (informacija_orazmewenii.getSoputstvujuwie_uslovija_dlja_zakaza()==0)?true:false;
 
  }
 
@@ -55,9 +55,9 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 />
 		
 	<aui:input 
-		name=" " 
+		name="bid_assignment_lot_payment" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getOplata():StringPool.BLANK)%>"  
+		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getOplata():StringPool.BLANK)%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
@@ -92,9 +92,9 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		disabled="<%=disabled %>"
 />
 	<aui:input
-		name=" " 
+		name="bid_assignment_lot_delivery" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getCena_postavki():StringPool.BLANK)%>"  
+		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getCena_postavki():StringPool.BLANK)%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
@@ -128,9 +128,9 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		disabled="<%=disabled %>"
 />
 	<aui:input 
-		name=" " 
+		name="bid_assignment_lot_conditions" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSoputstvujuwie_uslovija():StringPool.BLANK)%>"  
+		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSoputstvujuwie_uslovija():StringPool.BLANK)%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />

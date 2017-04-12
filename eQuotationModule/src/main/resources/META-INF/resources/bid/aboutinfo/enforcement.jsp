@@ -13,7 +13,7 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 	 if(!informacija_orazmewenii.isNew()){
 		 
 	 
- 	 checked_enforcement =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
+ 	 checked_enforcement =  (informacija_orazmewenii.getObespechenie_ispolnenija_dlja_zakaza()==0)?true:false;
 	 delivery_time_q[0] = (informacija_orazmewenii.getObespechenie_ispolnenija()==0)?true:false;
 	 delivery_time_q[1] = (informacija_orazmewenii.getObespechenie_ispolnenija()==1)?true:false;
 	 delivery_time_q[2] = (informacija_orazmewenii.getObespechenie_ispolnenija()==2)?true:false;
@@ -135,10 +135,10 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 />
 
 <aui:input 
-	name="" 
+	name="bid_percent_enforcement" 
 	suffix="<%=StringPool.PERCENT%>" 
 	type="number" 
-	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getObespechenie_v_procentah():"0.0") %>" 
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getObespechenie_v_procentah():"0.0") %>" 
 	step="0.1" 
 	min="0.0" 
 	max="3.0" 
@@ -148,9 +148,9 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
  </aui:field-wrapper>
 <aui:input 
-	name=" " 
+	name="bid_enforcement" 
 	type="textarea" 
-	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK) %>"  
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK) %>"  
 	placeholder="bid_performance_contract" 
 	disabled="<%=disabled %>"
 />

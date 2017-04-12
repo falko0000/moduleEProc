@@ -8,14 +8,14 @@ porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewen
 if(!porjadok_raboty_komissii.isNew())
    cal.setTime(porjadok_raboty_komissii.getData_podvedenija_itogov());
 int endAmPm = ParamUtil.get(request, "schedulerEndDateAmPm", cal.get(Calendar.AM_PM));
-int endDay = ParamUtil.get(request, "schedulerEndDateDay", cal.get(Calendar.DATE));
-int endHour = ParamUtil.get(request, "schedulerEndDateHour", cal.get(Calendar.HOUR_OF_DAY));
+int endDay = ParamUtil.get(request, "summarizing_day", cal.get(Calendar.DATE));
+int endHour = ParamUtil.get(request, "summarizing_hour", cal.get(Calendar.HOUR_OF_DAY));
 if (DateUtil.isFormatAmPm(locale)) {
-	endHour = ParamUtil.get(request, "schedulerEndDateHour", cal.get(Calendar.HOUR));
+	endHour = ParamUtil.get(request, "summarizing_hour", cal.get(Calendar.HOUR));
 }
-int endMinute = ParamUtil.get(request, "schedulerEndDateMinute", cal.get(Calendar.MINUTE));
-int endMonth = ParamUtil.get(request, "schedulerEndDateMonth", cal.get(Calendar.MONTH));
-int endYear = ParamUtil.get(request, "schedulerEndDateYear", cal.get(Calendar.YEAR));
+int endMinute = ParamUtil.get(request, "summarizing_minute", cal.get(Calendar.MINUTE));
+int endMonth = ParamUtil.get(request, "summarizing_month", cal.get(Calendar.MONTH));
+int endYear = ParamUtil.get(request, "summarizing_year", cal.get(Calendar.YEAR));
 String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 %>
@@ -25,13 +25,13 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		<div class="flex-container" id="<portlet:namespace />schedulerEndDateType">
 			<liferay-ui:input-date
 				cssClass="form-group form-group-inline"
-				dayParam="schedulerEndDateDay"
+				dayParam="summarizing_day"
 				dayValue="<%= endDay %>"
 				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
-				monthParam="schedulerEndDateMonth"
+				monthParam="summarizing_month"
 				monthValue="<%= endMonth %>"
 				name="endDate"
-				yearParam="schedulerEndDateYear"
+				yearParam="summarizing_year"
 				yearValue="<%= endYear %>"
 				disabled="<%=disabled %>"
 			/>
@@ -42,9 +42,9 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 				amPmParam="schedulerEndDateAmPm"
 				amPmValue="<%= endAmPm %>"
 				cssClass="form-group form-group-inline"
-				hourParam="schedulerEndDateHour"
+				hourParam="summarizing_hour"
 				hourValue="<%= endHour %>"
-				minuteParam="schedulerEndDateMinute"
+				minuteParam="summarizing_minute"
 				minuteValue="<%= endMinute %>"
 				name="endTime"
 				timeFormat="24-hour"
@@ -58,4 +58,6 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 				suffix="bid_working_days" 
 				prefix="bid_across"
 				min="0"
-	/>
+	>
+	   <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+	</aui:input>

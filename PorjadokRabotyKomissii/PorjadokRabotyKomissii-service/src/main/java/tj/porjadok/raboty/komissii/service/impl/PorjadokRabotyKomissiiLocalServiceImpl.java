@@ -49,8 +49,8 @@ public class PorjadokRabotyKomissiiLocalServiceImpl
     	try {
 			porjadok_raboty_komissii = porjadokRabotyKomissiiPersistence.findByIzvewenieId(IzvewenieId);
 		} catch (NoSuchPorjadokRabotyKomissiiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			porjadok_raboty_komissii.setNew(true);
 		}
     	
     	return porjadok_raboty_komissii;

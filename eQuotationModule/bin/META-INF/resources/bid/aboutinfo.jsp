@@ -22,17 +22,19 @@ String[] CAT_NAMES = new String[]{ "bid_title_delivery_address",
  
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+ Long izvewenie_id = ParamUtil.getLong(request,"izvewenie_id");
+ InformacijaORazmewenii informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
 %>
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="aboutinfo">
 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
-		   <portlet:param name="izvewenie_id" value="<%= (izvewenija == null) ? "0" : String.valueOf(izvewenija.getIzvewenija_id()) %>"/>
+		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 </liferay-portlet:actionURL>
 
 
-<aui:form action="<%=aboutinfo%>" cssClass="container-fluid-1280" method="post" name="fm"> 
+<aui:form action="<%=aboutinfo%>" cssClass="container-fluid-1280" method="post" name="<%=EQuotationConstants.FORM_ABOUT_INFO%>"> 
 
-<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (izvewenija == null) ? Constants.ADD : Constants.UPDATE %>" />
+<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (informacija_orazmewenii.isNew()) ? Constants.ADD : Constants.UPDATE %>" />
 
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_ABOUT_INFO %>" />
 

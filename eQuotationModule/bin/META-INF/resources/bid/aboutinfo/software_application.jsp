@@ -12,7 +12,7 @@
 	 boolean delivery_time_p[] = {true, false, false, false, false, false, false, false};
 	 if(!informacija_orazmewenii.isNew()){
 	 
- 	 checked_software_application =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
+ 	 checked_software_application =  (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==0)?true:false;
 	 delivery_time_p[0] = (informacija_orazmewenii.getObespechenie_zajavki()==0)?true:false;
 	 delivery_time_p[1] = (informacija_orazmewenii.getObespechenie_zajavki()==1)?true:false;
 	 delivery_time_p[2] = (informacija_orazmewenii.getObespechenie_zajavki()==2)?true:false;
@@ -134,7 +134,7 @@
 />
 
 <aui:input 
-	name="" 
+	name="bid_percent_software_application" 
 	suffix="<%=StringPool.PERCENT%>"  
 	type="number" 
 	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getObespechenie_v_procentah():"0.0") %>" 
@@ -147,7 +147,7 @@
 
  </aui:field-wrapper>
 <aui:input 
-	name="" 
+	name="bid_software_application" 
 	type="textarea" 
 	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_obespechenija_zajavki():StringPool.BLANK) %>"  
 	placeholder="big_term_and_procedure_of_the_software_application" 

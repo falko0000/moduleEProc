@@ -231,8 +231,7 @@ public class InformacijaORazmeweniiLocalServiceUtil {
 	}
 
 	public static tj.informacija.razmewenii.model.InformacijaORazmewenii getInfRazmeweniiByIzvewenija(
-		long IzvewenijaID)
-		throws tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException {
+		long IzvewenijaID) {
 		return getService().getInfRazmeweniiByIzvewenija(IzvewenijaID);
 	}
 

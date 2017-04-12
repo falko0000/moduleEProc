@@ -52,7 +52,7 @@ public class InformacijaORazmeweniiLocalServiceImpl
      try {
     	 informacija_orazmewenii = informacijaORazmeweniiPersistence.findByIzvewenijaID(IzvewenijaID);
 	} catch (NoSuchInformacijaORazmeweniiException e) {
-		
+		informacija_orazmewenii.setNew(true);
 	} 
      
     return informacija_orazmewenii;

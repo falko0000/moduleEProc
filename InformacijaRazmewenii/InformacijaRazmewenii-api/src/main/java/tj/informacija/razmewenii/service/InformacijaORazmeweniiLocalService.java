@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 
 import java.io.Serializable;
@@ -214,7 +213,7 @@ public interface InformacijaORazmeweniiLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public InformacijaORazmewenii getInfRazmeweniiByIzvewenija(
-		long IzvewenijaID) throws NoSuchInformacijaORazmeweniiException;
+		long IzvewenijaID);
 
 	/**
 	* Returns the informacija o razmewenii with the primary key.

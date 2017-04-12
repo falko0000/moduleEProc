@@ -11,6 +11,7 @@ import javax.portlet.ActionResponse;
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 
@@ -21,9 +22,10 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
-
-
+import tj.informacija.razmewenii.model.InformacijaORazmewenii;
+import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.izvewenieput.model.IzveweniePut;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
@@ -32,6 +34,8 @@ import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
+import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
+import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
 
 @Component(
 	    immediate = true,
@@ -52,7 +56,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   String form_name = ParamUtil.getString(actionRequest, "FormName");
 	   String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 	   
-	   System.out.println(form_name+"------------------"+cmd);
+	
 	   if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
 		   
 		   insertGeneralInfo( actionRequest , actionResponse);
@@ -67,9 +71,14 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   if(form_name.equals(EQuotationConstants.FORM_OPENING) && cmd.equals(Constants.UPDATE))
 		   updateOpening( actionRequest , actionResponse);
 	   
-	   if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO))
+	  
+	   
+ if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO) && cmd.equals(Constants.ADD))
 		   
-		      updateAboutInfo( actionRequest , actionResponse); 
+		   insertAboutInfo( actionRequest , actionResponse);
+	  
+	   if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO) && cmd.equals(Constants.UPDATE))
+		   updateAboutInfo( actionRequest , actionResponse);
 		
 	   
 	   
@@ -81,15 +90,135 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 
 
 
+	private void insertAboutInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+		User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		
+		int delivery_address = ParamUtil.getInteger(actionRequest, "delivery_address");
+		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
+		
+		int delivery_time = ParamUtil.getInteger(actionRequest, "delivery_time");
+		String bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
+		
+		//enforcement
+		int enforcement = ParamUtil.getInteger(actionRequest, "enforcement");
+		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
+		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
+		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
+		
+		int assignment_lot_payment = ParamUtil.getInteger(actionRequest, "assignment_lot_payment");
+		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
+		
+		int assignment_lot_delivery = ParamUtil.getInteger(actionRequest, "assignment_lot_delivery");
+		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
+		
+		int assignment_lot_conditions = ParamUtil.getInteger(actionRequest, "assignment_lot_conditions");
+		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
+	
+		int software_application = ParamUtil.getInteger(actionRequest, "software_application");
+		int delivery_time_p = ParamUtil.getInteger(actionRequest, "delivery_time_p");
+		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
+		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");
+		
+		int validity_tenders = ParamUtil.getInteger(actionRequest, "validity_tenders");
+		String bid_validity_tenders = ParamUtil.getString(actionRequest, "bid_validity_tenders");
+		
+		InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
+		
+		// general info
+		informacijaORazmewenii.setIzvewenie_id(izvewenie_id);
+		informacijaORazmewenii.setSozdal(user.getUserId());
+		informacijaORazmewenii.setIzmenil(user.getUserId());
+		informacijaORazmewenii.setData_sozdanija(new Date());
+		informacijaORazmewenii.setData_izmenenija(new Date());
+		
+		//delivery_address
+		informacijaORazmewenii.setMesto_postavki_dlja_zakaza(delivery_address);
+		informacijaORazmewenii.setMesto_postavki(bid_delivery_address);
+		//delivery_time
+		informacijaORazmewenii.setSrok_postavki_dlja_zakaza(delivery_time);
+		informacijaORazmewenii.setSrok_postavki(bid_delivery_time);
+		
+		//enforcement
+		informacijaORazmewenii.setObespechenie_ispolnenija_dlja_zakaza(enforcement);
+		informacijaORazmewenii.setObespechenie_ispolnenija(delivery_time_q);
+		informacijaORazmewenii.setObespechenie_v_procentah(bid_percent_enforcement.doubleValue());
+		informacijaORazmewenii.setSrok_ispolnenija_zajavki(bid_enforcement);
+		//other conditions
+		informacijaORazmewenii.setOplata_dlja_zakaza(assignment_lot_payment);
+		informacijaORazmewenii.setOplata(bid_assignment_lot_payment);
+		informacijaORazmewenii.setCena_postavki_dlja_zakaza(assignment_lot_delivery);
+		informacijaORazmewenii.setCena_postavki(bid_assignment_lot_delivery);
+		
+		informacijaORazmewenii.setSoputstvujuwie_uslovija_dlja_zakaza(assignment_lot_conditions);
+		informacijaORazmewenii.setSoputstvujuwie_uslovija(bid_assignment_lot_conditions);
+		
+		informacijaORazmewenii.setObespechenie_zajavki_dlja_zakaza(software_application);
+		informacijaORazmewenii.setObespechenie_zajavki(delivery_time_p);
+		informacijaORazmewenii.setObespechenie_v_procentah(bid_percent_software_application.doubleValue());
+		informacijaORazmewenii.setSrok_obespechenija_zajavki(bid_software_application);
+		
+		informacijaORazmewenii.setSrok_dejstvija_dlja_zakaza(validity_tenders);
+		informacijaORazmewenii.setSrok_dejstvija(bid_validity_tenders);
+		
+		InformacijaORazmeweniiLocalServiceUtil.addInformacijaORazmewenii(informacijaORazmewenii);
+	}
+
+
+
+
+
+
+
 	private void insertOpening(ActionRequest actionRequest, ActionResponse actionResponse) {
 		// TODO Auto-generated method stub
+	
+		
+		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
 		
-				Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
-				Date startTime = ParamUtil.getDate(actionRequest, "startTime", dateFormat);
-				startDate.setTime(startTime.getTime());
-                
-				System.out.println(startDate.toString());
+		//Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
+		//bid publication
+		int publication_day = ParamUtil.getInteger(actionRequest, "publication_day");
+		int publication_month = ParamUtil.getInteger(actionRequest, "publication_month");
+		int publication_year = ParamUtil.getInteger(actionRequest, "publication_year");
+		int publication_hour = ParamUtil.getInteger(actionRequest, "publication_hour");
+		int publication_minute = ParamUtil.getInteger(actionRequest, "publication_minute");
+		
+		//bid summarizing
+	
+		int summarizing_day = ParamUtil.getInteger(actionRequest, "summarizing_day");
+		int summarizing_month = ParamUtil.getInteger(actionRequest, "summarizing_month");
+		int summarizing_year = ParamUtil.getInteger(actionRequest, "summarizing_year");
+		int summarizing_hour = ParamUtil.getInteger(actionRequest, "summarizing_hour");
+		int summarizing_minute = ParamUtil.getInteger(actionRequest, "summarizing_minute");
+		
+		int bid_days = ParamUtil.getInteger(actionRequest, "bid_days");
+		
+		Calendar publication_calendar = CalendarFactoryUtil.getCalendar(publication_year, publication_month, publication_day, 
+																		publication_hour, publication_minute);
+		
+		Calendar summarizing_calendar = CalendarFactoryUtil.getCalendar(summarizing_year, summarizing_month, summarizing_day, 
+																		summarizing_hour, summarizing_minute);
+	    
+		PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenie_id);
+		
+		
+		porjadokRabotyKomissii.setIzvewenie_id(izvewenie_id);
+		porjadokRabotyKomissii.setData_sozdanija(new Date());
+		porjadokRabotyKomissii.setData_izmenenija(new Date());
+		
+		porjadokRabotyKomissii.setData_publikacii(publication_calendar.getTime());
+		porjadokRabotyKomissii.setData_podvedenija_itogov(summarizing_calendar.getTime());
+		
+		porjadokRabotyKomissii.setIzmenil(user.getUserId());
+		porjadokRabotyKomissii.setSozdal(user.getUserId());
+		porjadokRabotyKomissii.setPo_istecheniju_dnej(bid_days);
+		
+		PorjadokRabotyKomissiiLocalServiceUtil.addPorjadokRabotyKomissii(porjadokRabotyKomissii);
+	
                 
 	}
 
@@ -166,21 +295,43 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	private void updateOpening(ActionRequest actionRequest, ActionResponse actionResponse) {
 		// TODO Auto-generated method stub
 		
+		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
 		
-		Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
-		int hours = ParamUtil.getInteger(actionRequest, "schedulerStartDateHour");
-		int minutes = ParamUtil.getInteger(actionRequest, "schedulerStartDateMinute");
+		//Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
+		//bid publication
+		int publication_day = ParamUtil.getInteger(actionRequest, "publication_day");
+		int publication_month = ParamUtil.getInteger(actionRequest, "publication_month");
+		int publication_year = ParamUtil.getInteger(actionRequest, "publication_year");
+		int publication_hour = ParamUtil.getInteger(actionRequest, "publication_hour");
+		int publication_minute = ParamUtil.getInteger(actionRequest, "publication_minute");
 		
-	Calendar cal  = CalendarFactoryUtil.getCalendar(startDate.getTime());// hours, minutes);
-	//	cal.set(cal.HOUR, hour);
-	//	cal.set(cal.MINUTE, minute);
+		//bid summarizing
+		int summarizing_day = ParamUtil.getInteger(actionRequest, "summarizing_day");
+		int summarizing_month = ParamUtil.getInteger(actionRequest, "summarizing_month");
+		int summarizing_year = ParamUtil.getInteger(actionRequest, "summarizing_year");
+		int summarizing_hour = ParamUtil.getInteger(actionRequest, "summarizing_hour");
+		int summarizing_minute = ParamUtil.getInteger(actionRequest, "summarizing_minute");
 		
-	//	startDate.setHours(hours);
-		//startDate.setMinutes(minutes);
+		int bid_days = ParamUtil.getInteger(actionRequest, "bid_days");
 		
+		Calendar publication_calendar = CalendarFactoryUtil.getCalendar(publication_year, publication_month, publication_day, 
+																		publication_hour, publication_minute);
+		
+		Calendar summarizing_calendar = CalendarFactoryUtil.getCalendar(summarizing_year, summarizing_month, summarizing_day, 
+																		summarizing_hour, summarizing_minute);
+	    
+		PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenie_id);
+		
+		porjadokRabotyKomissii.setData_izmenenija(new Date());
+		porjadokRabotyKomissii.setData_publikacii(publication_calendar.getTime());
+		porjadokRabotyKomissii.setData_podvedenija_itogov(summarizing_calendar.getTime());
+		
+		porjadokRabotyKomissii.setIzmenil(user.getUserId());
+		porjadokRabotyKomissii.setPo_istecheniju_dnej(bid_days);
+		PorjadokRabotyKomissiiLocalServiceUtil.updatePorjadokRabotyKomissii(porjadokRabotyKomissii);
 	
-		System.out.println(cal);
 	}
 	
 	private void updateGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
@@ -247,8 +398,78 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	}
 
 	private void updateAboutInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
-		// TODO Auto-generated method stub
 		
+		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+		User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		
+		int delivery_address = ParamUtil.getInteger(actionRequest, "delivery_address");
+		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
+		
+		int delivery_time = ParamUtil.getInteger(actionRequest, "delivery_time");
+		String bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
+		
+		//enforcement
+		int enforcement = ParamUtil.getInteger(actionRequest, "enforcement");
+		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
+		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
+		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
+		
+		int assignment_lot_payment = ParamUtil.getInteger(actionRequest, "assignment_lot_payment");
+		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
+		
+		int assignment_lot_delivery = ParamUtil.getInteger(actionRequest, "assignment_lot_delivery");
+		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
+		
+		int assignment_lot_conditions = ParamUtil.getInteger(actionRequest, "assignment_lot_conditions");
+		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
+	
+		int software_application = ParamUtil.getInteger(actionRequest, "software_application");
+		int delivery_time_p = ParamUtil.getInteger(actionRequest, "delivery_time_p");
+		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
+		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");
+		
+		int validity_tenders = ParamUtil.getInteger(actionRequest, "validity_tenders");
+		String bid_validity_tenders = ParamUtil.getString(actionRequest, "bid_validity_tenders");
+		
+		InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
+		
+		// general info
+	
+		
+		informacijaORazmewenii.setIzmenil(user.getUserId());
+		
+		informacijaORazmewenii.setData_izmenenija(new Date());
+		
+		//delivery_address
+		informacijaORazmewenii.setMesto_postavki_dlja_zakaza(delivery_address);
+		informacijaORazmewenii.setMesto_postavki(bid_delivery_address);
+		//delivery_time
+		informacijaORazmewenii.setSrok_postavki_dlja_zakaza(delivery_time);
+		informacijaORazmewenii.setSrok_postavki(bid_delivery_time);
+		
+		//enforcement
+		informacijaORazmewenii.setObespechenie_ispolnenija_dlja_zakaza(enforcement);
+		informacijaORazmewenii.setObespechenie_ispolnenija(delivery_time_q);
+		informacijaORazmewenii.setObespechenie_v_procentah(bid_percent_enforcement.doubleValue());
+		informacijaORazmewenii.setSrok_ispolnenija_zajavki(bid_enforcement);
+		//other conditions
+		informacijaORazmewenii.setOplata_dlja_zakaza(assignment_lot_payment);
+		informacijaORazmewenii.setOplata(bid_assignment_lot_payment);
+		informacijaORazmewenii.setCena_postavki_dlja_zakaza(assignment_lot_delivery);
+		informacijaORazmewenii.setCena_postavki(bid_assignment_lot_delivery);
+		
+		informacijaORazmewenii.setSoputstvujuwie_uslovija_dlja_zakaza(assignment_lot_conditions);
+		informacijaORazmewenii.setSoputstvujuwie_uslovija(bid_assignment_lot_conditions);
+		
+		informacijaORazmewenii.setObespechenie_zajavki_dlja_zakaza(software_application);
+		informacijaORazmewenii.setObespechenie_zajavki(delivery_time_p);
+		informacijaORazmewenii.setObespechenie_v_procentah(bid_percent_software_application.doubleValue());
+		informacijaORazmewenii.setSrok_obespechenija_zajavki(bid_software_application);
+		
+		informacijaORazmewenii.setSrok_dejstvija_dlja_zakaza(validity_tenders);
+		informacijaORazmewenii.setSrok_dejstvija(bid_validity_tenders);
+		
+		InformacijaORazmeweniiLocalServiceUtil.updateInformacijaORazmewenii(informacijaORazmewenii);
 	}
 
 }
