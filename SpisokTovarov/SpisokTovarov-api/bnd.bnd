@@ -1,0 +1,9 @@
+Bundle-Name: SpisokTovarov-api
+Bundle-SymbolicName: tj.spisok.tovarov.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.spisok.tovarov.exception,\
+	tj.spisok.tovarov.model,\
+	tj.spisok.tovarov.service,\
+	tj.spisok.tovarov.service.persistence
+-includeresource: META-INF/service.xml=../SpisokTovarov-service/service.xml

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.spisok.tovarov.model.SpisokTovarov">
+		<field name="data_izmenenija" type="Date" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="edinica_izmerenija_id" type="long" />
+		<field name="izmenil" type="long" />
+		<field name="izvewenie_id" type="long" />
+		<field name="klassifikacija_po_okdp" type="String" />
+		<field name="kod_po_okdp" type="String" />
+		<field name="kod_po_spravochniku_naimenovanij" type="long" />
+		<field name="kod_strany_proizvoditelja" type="long" />
+		<field name="kolichestvo" type="long" />
+		<field name="lot_id" type="long" />
+		<field name="naimenovanie_tovara" type="String" />
+		<field name="opisanie_tovara" type="String" />
+		<field name="sozdal" type="long" />
+		<field name="spisok_tovarov_id" type="long" />
+	</model>
+</model-hints>

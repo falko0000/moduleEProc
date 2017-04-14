@@ -3,14 +3,14 @@
 
 
 <%
-String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer","info_about_goods_works_services"
+String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer","info_about_goods_works_services","listproducts"
 		                         }; 
 
  String[] geberalinfo = new String[]{"generalinfo"};
  String[] info_about_customer = new String[]{"info_about_customer"}; 
  String[] info_about_goods_works_services = new String[]{"info_about_goods_works_services"};
- 
- String[][] CAT_SECTION = {geberalinfo,info_about_customer,info_about_goods_works_services};
+ String[] listproducts = new String[]{"listproducts"};
+ String[][] CAT_SECTION = {geberalinfo,info_about_customer,info_about_goods_works_services,listproducts};
  
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");

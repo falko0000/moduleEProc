@@ -13,7 +13,7 @@
    String izvewenie_id = (String)ParamUtil.getString(request,"izvewenie_id","0");
         
    %>
-
+        
 		<portlet:renderURL var="edit">
 			 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
              <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
@@ -21,6 +21,14 @@
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.EDIT%>" /> 
 		</portlet:renderURL>
 		
+	 <portlet:renderURL var="addproducts">
+			 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
+             <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
+             <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
+		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.EDIT%>" /> 
+		      <portlet:param name="good_work_service" value="1" /> 
+		</portlet:renderURL>
+	 
 	 <portlet:renderURL var="info">
 			 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
                 <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
@@ -45,7 +53,7 @@
         <liferay-ui:icon iconCssClass="icon-info-sign" message="Info" url="<%= info.toString() %>" />
       </c:if>
         <liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
-      
+        <liferay-ui:icon  message="GOODS, WORKS, SERVICES" url="<%= addproducts.toString() %>" />
     </liferay-ui:icon-menu>
     
     

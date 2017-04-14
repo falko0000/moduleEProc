@@ -14,9 +14,10 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
  String[][] CAT_SECTION = {geberalinfo};
  
 
-	
+
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
+ String number = String.valueOf(SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenie_id)+1);
  String cmd = ParamUtil.getString(request,Constants.CMD);   
  PortletURL viewUrl = renderResponse.createRenderURL();
 	viewUrl.setParameter("mvcRenderCommandName", EQuotationConstants.ACTION_COMMAND_NAME_EDIT);
@@ -102,7 +103,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 				
 			},
 			id: '<portlet:namespace/>dialog',
-			title: 'Add lot number 1',
+			title: 'Add lot number <%=number%>',
 			uri: '<%=selectUsersURL %>'
 		});
 	});

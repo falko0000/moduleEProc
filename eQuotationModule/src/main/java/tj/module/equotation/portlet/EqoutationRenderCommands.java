@@ -8,7 +8,7 @@ import org.osgi.service.component.annotations.Component;
 
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import tj.module.equotation.constants.EQuotationConstants;
 
@@ -32,6 +32,10 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		
 		renderRequest.setAttribute("editnametabs", names);
 	
+		String service = ParamUtil.getString(renderRequest, "good_work_service", "0");
+		
+		if(service.equals("1"))
+			return EQuotationConstants.PAGE_ADDPRODUCTS;
 		
 		return EQuotationConstants.PAGE_EDIT;
 	}

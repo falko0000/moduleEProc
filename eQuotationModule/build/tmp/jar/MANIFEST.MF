@@ -46,13 +46,14 @@ Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  ,2)",tj.orgindex.service;version="[1.0,2)",tj.orgindex.service.persis
  tence;version="[1.0,2)",tj.porjadok.raboty.komissii.exception;version
  ="[1.0,2)",tj.porjadok.raboty.komissii.model;version="[1.0,2)",tj.por
- jadok.raboty.komissii.service;version="[1.0,2)",tj.spisoklotov.model;
- version="[1.0,2)",tj.spisoklotov.service;version="[1.0,2)",tj.strany.
- model;version="[1.0,2)",tj.strany.service;version="[1.0,2)",tj.tipy.i
- zvewenij.exception;version="[1.0,2)",tj.tipy.izvewenij.model;version=
- "[1.0,2)",tj.tipy.izvewenij.service;version="[1.0,2)",tj.tipy.izvewen
- ij.service.persistence;version="[1.0,2)",tj.vbk.model;version="[1.0,2
- )",tj.vbk.service;version="[1.0,2)"
+ jadok.raboty.komissii.service;version="[1.0,2)",tj.spisok.tovarov.mod
+ el;version="[1.0,2)",tj.spisok.tovarov.service;version="[1.0,2)",tj.s
+ pisoklotov.model;version="[1.0,2)",tj.spisoklotov.service;version="[1
+ .0,2)",tj.strany.model;version="[1.0,2)",tj.strany.service;version="[
+ 1.0,2)",tj.tipy.izvewenij.exception;version="[1.0,2)",tj.tipy.izvewen
+ ij.model;version="[1.0,2)",tj.tipy.izvewenij.service;version="[1.0,2)
+ ",tj.tipy.izvewenij.service.persistence;version="[1.0,2)",tj.vbk.mode
+ l;version="[1.0,2)",tj.vbk.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

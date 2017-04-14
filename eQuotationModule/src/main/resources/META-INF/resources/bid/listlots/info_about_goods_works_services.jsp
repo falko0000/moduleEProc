@@ -29,6 +29,7 @@ List<Strany> strany = StranyLocalServiceUtil.getStranies(0, StranyLocalServiceUt
 
 <aui:button name="add_goods_work_service" value="add_goods_work_service" />
 
+
 <aui:script use="aui-base">
 
 A.one('#<portlet:namespace/>add_goods_work_service').on('click', function(event) { 

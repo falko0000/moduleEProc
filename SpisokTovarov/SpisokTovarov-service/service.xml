@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.spisok.tovarov">
+	<namespace>spisok_tovarov</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+    <entity name="SpisokTovarov" table="sapp.spisok_tovarov" local-service="true" remote-service="false">
+        <column name="data_izmenenija" type="Date"></column>
+        <column name="data_sozdanija" type="Date"></column>
+        <column name="edinica_izmerenija_id" type="long"></column>
+        <column name="izmenil" type="long"></column>
+        <column name="izvewenie_id" type="long"></column>
+        <column name="klassifikacija_po_okdp" type="String"></column>
+        <column name="kod_po_okdp" type="String"></column>
+        <column name="kod_po_spravochniku_naimenovanij" type="long"></column>
+        <column name="kod_strany_proizvoditelja" type="long"></column>
+        <column name="kolichestvo" type="long"></column>
+        <column name="lot_id" type="long"></column>
+        <column name="naimenovanie_tovara" type="String"></column>
+        <column name="opisanie_tovara" type="String"></column>
+        <column name="sozdal" type="long"></column>
+        <column name="spisok_tovarov_id" type="long" primary="true" id-type="sequence" id-param="sapp.spisok_tovarov_id_seq"></column>
+   	<finder return-type="Collection" name="LotId">
+   		<finder-column name="lot_id"></finder-column>
+   	</finder>
+    </entity>
+</service-builder>
