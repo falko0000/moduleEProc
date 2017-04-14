@@ -7,13 +7,14 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import com.liferay.portal.kernel.service.UserService;
 
 
 import com.liferay.portal.kernel.util.ParamUtil;
-
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -71,7 +72,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		
 	System.out.println(spisoklotov);
 	}
-		
+	
 		
 	StringBuilder names = new StringBuilder();
 	

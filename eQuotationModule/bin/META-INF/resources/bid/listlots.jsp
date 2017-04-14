@@ -7,11 +7,11 @@
 String[] CAT_NAMES = new String[]{ "generalinfo"
 		                         }; 
 
- String[] geberalinfo = new String[]{"generalinfo"};
+ String[] generalinfo = new String[]{"generalinfo"};
 
 
  
- String[][] CAT_SECTION = {geberalinfo};
+ String[][] CAT_SECTION = {generalinfo};
  
 
 
@@ -92,6 +92,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 	<portlet:renderURL var="selectUsersURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 	<portlet:param name="mvcPath" value="/bid/listlots/newlot.jsp" />
 	<portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>" />
+		<portlet:param name="spisok_lotov_id" value="0" />
 	</portlet:renderURL>
 	A.one('#<portlet:namespace/>addLot').on('click', function(event) {
 	   

@@ -33,10 +33,15 @@ public interface EQuotationConstants  {
 	static final String PAGE_ABOUTINFO = "/bid/aboutinfo.jsp";
 	static final String PAGE_LISTLOTS = "/bid/listlots.jsp";
 	static final String PAGE_COMMISSION = "/bid/commission.jsp";
+	
+	static final String PAGE_NEWLOT = "/bid/listlots/newlot.jsp";
+	
 	//Action command name
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
     static final String ACTION_COMMAND_NAME_NEW  = "new";    
-	//Render commands name
+    static final String ACTION_COMMAND_NAME_ADDPRODUCT  = "add_or_edit_product";  
+    static final String ACTION_COMMAND_NAME_EDIT_LOT = "edit_lot";
+    //Render commands name
     static final String RENDER_COMMAND_NAME_EDIT = "/edit_entry";
 	
 	//Resource command name

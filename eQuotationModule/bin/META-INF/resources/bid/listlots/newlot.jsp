@@ -3,19 +3,20 @@
 
 
 <%
-String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer","info_about_goods_works_services","listproducts"
+String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer",
+									"bid_title_delivery_address"
 		                         }; 
 
- String[] geberalinfo = new String[]{"generalinfo"};
+ String[] generalinfo = new String[]{"generalinfo"};
  String[] info_about_customer = new String[]{"info_about_customer"}; 
- String[] info_about_goods_works_services = new String[]{"info_about_goods_works_services"};
- String[] listproducts = new String[]{"listproducts"};
- String[][] CAT_SECTION = {geberalinfo,info_about_customer,info_about_goods_works_services,listproducts};
+ String[] deliveryaddress = new String[]{"delivery_address"};
+
+ String[][] CAT_SECTION = {generalinfo,info_about_customer,deliveryaddress};
  
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
-
+ 
 %>
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
@@ -34,7 +35,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer","info_abo
 <liferay-ui:form-navigator 
  categoryNames="<%= CAT_NAMES %>"
  categorySections="<%= CAT_SECTION %>"
- jspPath="/bid/listlots/"
+ jspPath="/bid/listlots/lot/"
  markupView="lexicon"
  
 />
