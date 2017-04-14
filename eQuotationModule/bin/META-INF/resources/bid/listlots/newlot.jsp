@@ -4,14 +4,21 @@
 
 <%
 String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer",
-									"bid_title_delivery_address"
+									"bid_title_delivery_address","bid_title_delivery_time",
+									"bid_title_validity","bid_title_software_application",
+									"bid_title_enforcement","bid_title_other_conditions"
 		                         }; 
 
  String[] generalinfo = new String[]{"generalinfo"};
  String[] info_about_customer = new String[]{"info_about_customer"}; 
  String[] deliveryaddress = new String[]{"delivery_address"};
+ String[] deliverytime =  new String[]{"delivery_time"};
+ String[] validity = new String[]{"validity"};
+ String[] software_application = new String[]{"software_application"};
+ String[] enforcement = new String[]{"enforcement"};
+ String[] other_conditions = new String[]{"other_conditions"};
 
- String[][] CAT_SECTION = {generalinfo,info_about_customer,deliveryaddress};
+ String[][] CAT_SECTION = {generalinfo,info_about_customer,deliveryaddress,deliverytime,validity,software_application,enforcement,other_conditions};
  
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");

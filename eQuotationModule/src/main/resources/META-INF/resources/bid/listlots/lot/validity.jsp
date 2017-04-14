@@ -16,7 +16,7 @@
   if(spisok_lotov_id != 0)
 	spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);  
   
-  String srok_postavki = StringPool.BLANK;
+  String srok_dejstvija = StringPool.BLANK;
   
   InformacijaORazmewenii informacija_orazmewenii = null;
 
@@ -26,9 +26,9 @@
 		informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(IzvewenijaID);
 		
 		if(spisok_lotov_id == 0)
-			srok_postavki = informacija_orazmewenii.getSrok_postavki();
+			srok_dejstvija = informacija_orazmewenii.getSrok_dejstvija();
 		else
-			srok_postavki = spisoklotov.getSrok_postavki();
+			srok_dejstvija = spisoklotov.getSrok_dejstvija();
  
 		
  request.setAttribute("informacija_orazmewenii", informacija_orazmewenii);
@@ -38,10 +38,10 @@
 
 
 <aui:input 
-	name="bid_delivery_time" 
+	name="bid_validity" 
 	type="textarea" 
-	value="<%=srok_postavki%>"  
-	placeholder="bid_delivery_time" 
+	value="<%=srok_dejstvija%>"  
+	placeholder="validity" 
 	disabled="<%=disabled %>"
 />
 
