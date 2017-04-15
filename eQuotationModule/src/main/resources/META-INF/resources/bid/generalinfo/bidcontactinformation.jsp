@@ -43,25 +43,71 @@
 
  
 %>
-  <aui:input id="bid_address" type="text"  name="bid_address" value= "<%=allfulladdress%>" disabled="true"/>
+ 
+ <aui:input 
+ 		id="bid_address" 
+ 		type="text"  
+ 		name="bid_address" 
+ 		value= "<%=allfulladdress%>" 
+ 		disabled="true"
+ />
      
    
-      <aui:input id="bid_contact_name" type="text"  name="bid_contact_name" value= "<%=obwaja_informacija.getKontaktnoe_lico()%>"  disabled="<%=disabled %>">
-      	<aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+ <aui:input 
+ 		id="bid_contact_name" 
+ 		type="text"  
+ 		name="bid_contact_name" 
+ 		value= "<%=obwaja_informacija.getKontaktnoe_lico()%>"  
+ 		disabled="<%=disabled %>"
+ >
+ 
+ <aui:validator 
+ 		name="required" 
+ 		errorMessage="this-field-is-mandatory"
+ >
+ 
+ </aui:validator>
       </aui:input>
       
      
-      <aui:input id="bid_email_address" type="text"  name="bid_email_address" value= "<%= obwaja_informacija.getJe_pochta()%>" disabled="<%=disabled %>">
+<aui:input 
+		id="bid_email_address" 
+		type="text"  
+		name="bid_email_address" 
+		value= "<%= obwaja_informacija.getJe_pochta()%>" 
+		disabled="<%=disabled %>"
+>
       
-        <aui:validator name="email" errorMessage=""/>
-      	<aui:validator name="required" errorMessage="email-address-and-type-are-required-fields"></aui:validator>
+
+<aui:validator 
+		name="email" 
+		errorMessage=""
+/>
+      	
+      	
+<aui:validator 
+		name="required" 
+		errorMessage="email-address-and-type-are-required-fields"
+>
+
+</aui:validator>
      
-      </aui:input>
+   </aui:input>
       
      
       
-      <aui:input id="bid_personal_phones" type="text"  name="bid_personal_phones" value = "<%=obwaja_informacija.getKontaktnyj_telefon()%>"  disabled="<%=disabled %>">
-      	<aui:validator name="custom" errorMessage="this-field-is-mandatory">
+<aui:input 
+		id="bid_personal_phones" 
+		type="text"  
+		name="bid_personal_phones" 
+		value = "<%=obwaja_informacija.getKontaktnyj_telefon()%>"  
+		disabled="<%=disabled %>"
+>
+
+<aui:validator 
+		name="custom" 
+		errorMessage="this-field-is-mandatory"
+>
       	
       	 function(val, fieldNode, ruleValue){
                              
@@ -69,8 +115,14 @@
                                 
                                 return pattern.test(val);
                               }
-      	</aui:validator>
-        <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+    </aui:validator>
+ 
+ <aui:validator 
+ 		name="required" 
+ 		errorMessage="this-field-is-mandatory"
+>
+
+</aui:validator>
       </aui:input>
     
        

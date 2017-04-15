@@ -48,15 +48,43 @@
       </aui:select> 
 
       
-      <aui:input id="bid_related_conditions" type="text"  name="bid_related_conditions" value= "<%=LanguageUtil.get(request,"bid_related_conditions_value")%>" disabled="true"/>
+<aui:input 
+		id="bid_related_conditions" 
+        type="text"  
+        name="bid_related_conditions" 
+        value= "<%=LanguageUtil.get(request,"bid_related_conditions_value")%>" 
+        disabled="true"
+ />
      
-      <aui:input id="bid_approval_publication" type="text"  name="bid_approval_publication" value= "<%=LanguageUtil.get(request,"bid_approval_publication_value")%>" disabled="true"/>
+<aui:input 
+		id="bid_approval_publication" 
+		type="text"  
+		name="bid_approval_publication" 
+		value= "<%=LanguageUtil.get(request,"bid_approval_publication_value")%>" 
+		disabled="true"
+ />
       
-      <aui:input id="bid_authorized_body" type="text"  name="bid_authorized_body" value= "<%=authorized_body_org.getName()%>" disabled="true"/>
+<aui:input 
+		id="bid_authorized_body" 
+		type="text"  
+		name="bid_authorized_body" 
+		value= "<%=authorized_body_org.getName()%>" 
+		disabled="true"
+ />
       
-      <aui:input id="bid_name_notification" type="text"  name="bid_name_notification"  value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : StringPool.BLANK  %>" disabled="<%=disabled %>">
+<aui:input 
+		id="bid_name_notification" 
+		type="text"  
+		name="bid_name_notification"  
+		value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : StringPool.BLANK  %>" 
+		disabled="<%=disabled %>"
+/>
       
-      <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+<aui:validator 
+		name="required" 
+		errorMessage="this-field-is-mandatory"
+/>
+</aui:validator>
       
       </aui:input>
       
@@ -64,9 +92,19 @@
      
       <aui:col md="3">
       
-      <aui:input  name ="bid_number_ifb_a" type="number" min ="0" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_a():StringPool.BLANK %>" disabled="<%=disabled %>">
+<aui:input  
+		name ="bid_number_ifb_a" 
+		type="number" min ="0" 
+		value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_a():StringPool.BLANK %>" 
+		disabled="<%=disabled %>"
+>
       
-      <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+<aui:validator 
+		name="required" 
+		errorMessage="this-field-is-mandatory"
+>
+		
+</aui:validator>
      
       </aui:input>
       </aui:col>
@@ -96,9 +134,18 @@
       <aui:col md="3">
       
     
-      <aui:input  name ="bid_number_ifb_c" type="text" value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_c():StringPool.BLANK %>" disabled="<%=disabled %>">
+<aui:input  
+		name ="bid_number_ifb_c" 
+		type="text" 
+		value="<%=(!izvewenieput.isNew())? izvewenieput.getPut_c():StringPool.BLANK %>" 
+		disabled="<%=disabled %>"
+>
       
-      <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
+<aui:validator 
+		name="required" 
+		errorMessage="this-field-is-mandatory"
+>
+</aui:validator>
      
       </aui:input>
       

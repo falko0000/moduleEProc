@@ -103,30 +103,42 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		
+		//generalinfo
 		int lot_number = ParamUtil.getInteger(actionRequest, "lot_number");
 		String item_name = ParamUtil.getString(actionRequest, "item_name");
 		int allocated_amount = ParamUtil.getInteger(actionRequest, "allocated_amount");
 		String classification_ebc = ParamUtil.getString(actionRequest, "classification_ebc");
 		int kod_jebk = ParamUtil.getInteger(actionRequest, "kod_jebk");
 		
+		//info about customer
 		String procuring_entity = ParamUtil.getString(actionRequest, "procuring_entity");
 		String bsc_vbk = ParamUtil.getString(actionRequest, "bsc_vbk");
 		
-		
+		//deliver address 
 		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
 		
+		//deliver time
 		String bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
 		
+		//validity
 		String bid_validity = ParamUtil.getString(actionRequest, "bid_validity");
 		
+		//software aplication
 		int delivery_time_p = ParamUtil.getInteger(actionRequest, "delivery_time_p");
 		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
 		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");		
 		
+		//enforcement
+		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
+		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
+		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
+		
+		//source financing
+		int delivery_time_t = ParamUtil.getInteger(actionRequest, "delivery_time_t");
+		
+		//other condition
 		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
-		
 		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
-		
 		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
 	}
 
@@ -142,35 +154,42 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		
-		
+		//generalinfo
 		int lot_number = ParamUtil.getInteger(actionRequest, "lot_number");
 		String item_name = ParamUtil.getString(actionRequest, "item_name");
 		int allocated_amount = ParamUtil.getInteger(actionRequest, "allocated_amount");
 		String classification_ebc = ParamUtil.getString(actionRequest, "classification_ebc");
 		int kod_jebk = ParamUtil.getInteger(actionRequest, "kod_jebk");
 		
+		//info about customer
 		String procuring_entity = ParamUtil.getString(actionRequest, "procuring_entity");
 		String bsc_vbk = ParamUtil.getString(actionRequest, "bsc_vbk");
 		
-		
+		//deliver address 
 		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
-	
+		
+		//deliver time
 		String bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
 	
+		//validity
 		String bid_validity = ParamUtil.getString(actionRequest, "bid_validity");
 		
+		//software aplication
 		int delivery_time_p = ParamUtil.getInteger(actionRequest, "delivery_time_p");
 		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
 		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");
 		
+		//enforcement
 		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
 		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
 		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
 		
+		//source financing
+		int delivery_time_t = ParamUtil.getInteger(actionRequest, "delivery_time_t");
+		
+		//other condition
 		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
-		
 		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
-		
 		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
 	
 	
