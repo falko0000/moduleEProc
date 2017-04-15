@@ -43,7 +43,9 @@
 	value="<%=srok_postavki%>"  
 	placeholder="bid_delivery_time" 
 	disabled="<%=disabled %>"
-/>
+>
 
+	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 
+ 	</aui:input>
 

@@ -36,6 +36,7 @@ import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.spisoklotov.model.Spisoklotov;
 
 @Component(
 	    immediate = true,
@@ -123,6 +124,10 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
 		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");		
 		
+		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
+		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
+		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
+		
 		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
 		
 		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
@@ -172,7 +177,9 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
 		
 		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
-	
+	    
+		
+		
 	
 	}
 
