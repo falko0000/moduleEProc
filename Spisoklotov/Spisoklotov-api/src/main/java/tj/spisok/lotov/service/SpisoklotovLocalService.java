@@ -182,6 +182,8 @@ public interface SpisoklotovLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public Spisoklotov addSpisoklotov(Spisoklotov spisoklotov);
 
+	public Spisoklotov createSpisoklotov();
+
 	/**
 	* Creates a new spisoklotov with the primary key. Does not add the spisoklotov to the database.
 	*

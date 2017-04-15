@@ -192,9 +192,9 @@ public class SpisoklotovPersistenceImpl extends BasePersistenceImpl<Spisoklotov>
 		List<Spisoklotov> list = null;
 
 		if (retrieveFromCache) {
-			/*list = (List<Spisoklotov>)finderCache.getResult(finderPath,
+			list = (List<Spisoklotov>)finderCache.getResult(finderPath,
 					finderArgs, this);
-*/
+
 			if ((list != null) && !list.isEmpty()) {
 				for (Spisoklotov spisoklotov : list) {
 					if ((izvewenie_id != spisoklotov.getIzvewenie_id())) {

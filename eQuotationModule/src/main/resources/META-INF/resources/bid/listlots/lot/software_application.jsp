@@ -163,7 +163,11 @@
 	value="<%=srok_obespechenija_zajavki%>"  
 	placeholder="big_term_and_procedure_of_the_software_application" 
 	disabled="<%=disabled %>"
-/>
+>
+
+	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
+
+ 	</aui:input>
 
 </aui:fieldset>
 

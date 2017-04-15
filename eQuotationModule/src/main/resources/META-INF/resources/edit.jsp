@@ -6,7 +6,7 @@
 <%
   String names =(String) request.getAttribute("editnametabs");
  
- String tab = ParamUtil.getString(request, "myParam","bid_generalinfo");
+ String tab = ParamUtil.getString(request, "edit_tab","bid_generalinfo");
   
   Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
   
@@ -48,12 +48,13 @@
 <portlet:renderURL var="tabs" >
 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
  <portlet:param name="izvewenie_id" value="<%=String.valueOf(izvewenie_id)%>"/>
+ <portlet:param name="edit_tab"  value="<%=tab %>"/>
 </portlet:renderURL>
 
 
 
 
-    <liferay-ui:tabs names="<%=names %>" url="<%=tabs.toString()%>" param="myParam"  refresh="<%=false%>"> 
+    <liferay-ui:tabs names="<%=names %>" url="<%=tabs.toString()%>" param="edit_tab"  refresh="<%=false%>" value ="<%=tab %>"> 
  
             			
     			<liferay-ui:section>      

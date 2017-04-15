@@ -14,6 +14,7 @@ String[] CAT_NAMES = new String[]{ "info_about_goods_works_services","listproduc
  Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
   %>
   
+
   <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
 
 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />

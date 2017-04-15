@@ -160,8 +160,12 @@
 	value="<%=srok_ispolnenija_zajavki%>"  
 	placeholder="bid_performance_contract" 
 	disabled="<%=disabled %>"
-/>
+>
 
+	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
+
+ 	</aui:input>
+	
 </aui:fieldset>
 
 

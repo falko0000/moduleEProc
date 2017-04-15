@@ -43,7 +43,9 @@
 	value="<%=srok_dejstvija%>"  
 	placeholder="validity" 
 	disabled="<%=disabled %>"
-/>
+>
 
+	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 
+ 	</aui:input>
 

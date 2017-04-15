@@ -43,7 +43,10 @@
 	value="<%=mesto_postavki%>"  
 	placeholder="delivery_address" 
 	disabled="<%=disabled %>"
-/>
+	>
+	 	
+ 	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 
-
+ 	</aui:input>  
+   
 

@@ -9,6 +9,7 @@
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 
 <%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
+
 <%@page import="com.liferay.portal.kernel.model.Layout" %>
 <%@page import="com.liferay.portal.kernel.model.LayoutSet" %>
 <%@page import="com.liferay.portal.kernel.model.LayoutSetPrototype" %>

@@ -206,6 +206,11 @@ public class SpisoklotovLocalServiceWrapper implements SpisoklotovLocalService,
 		return _spisoklotovLocalService.addSpisoklotov(spisoklotov);
 	}
 
+	@Override
+	public tj.spisok.lotov.model.Spisoklotov createSpisoklotov() {
+		return _spisoklotovLocalService.createSpisoklotov();
+	}
+
 	/**
 	* Creates a new spisoklotov with the primary key. Does not add the spisoklotov to the database.
 	*
