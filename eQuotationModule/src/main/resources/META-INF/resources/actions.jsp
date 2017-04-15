@@ -17,7 +17,9 @@
 		<portlet:renderURL var="edit">
 			 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
              <portlet:param name="izvewenie_id" value="<%=Long.toString(izvewenie.getIzvewenija_id())%>" /> 
+             <portlet:param name="edit_tab" value="bid_generalinfo" /> 
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.EDIT%>" /> 
+			 
 		</portlet:renderURL>
 		
 	 <portlet:renderURL var="info">

@@ -32,7 +32,7 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		
 		
 		renderRequest.setAttribute("editnametabs", names);
-	
+		
 		String service = ParamUtil.getString(renderRequest, "good_work_service", "0");
 		String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 		

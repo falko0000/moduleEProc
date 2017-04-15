@@ -197,6 +197,10 @@ public class SpisoklotovLocalServiceUtil {
 		return getService().addSpisoklotov(spisoklotov);
 	}
 
+	public static tj.spisok.lotov.model.Spisoklotov createSpisoklotov() {
+		return getService().createSpisoklotov();
+	}
+
 	/**
 	* Creates a new spisoklotov with the primary key. Does not add the spisoklotov to the database.
 	*

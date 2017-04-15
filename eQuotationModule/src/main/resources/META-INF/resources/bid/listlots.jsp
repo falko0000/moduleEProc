@@ -19,10 +19,10 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
  Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
  String number = String.valueOf(SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenie_id)+1);
  String cmd = ParamUtil.getString(request,Constants.CMD);   
- PortletURL viewUrl = renderResponse.createRenderURL();
-	viewUrl.setParameter("mvcRenderCommandName", EQuotationConstants.ACTION_COMMAND_NAME_EDIT);
-	viewUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
-	viewUrl.setParameter(Constants.CMD,cmd);
+ PortletURL listlotsUrl = renderResponse.createRenderURL();
+ listlotsUrl.setParameter("mvcRenderCommandName", EQuotationConstants.ACTION_COMMAND_NAME_EDIT);
+ listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
+ listlotsUrl.setParameter(Constants.CMD,cmd);
 	
 %>
 
@@ -47,7 +47,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
 				delta = "<%=5%>"
-				iteratorURL="<%=viewUrl %>" 
+				iteratorURL="<%=listlotsUrl %>" 
 				total="<%= SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenie_id)%>"
 				rowChecker="<%= new RowChecker(renderResponse) %>"
 			> 

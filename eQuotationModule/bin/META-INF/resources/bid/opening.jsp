@@ -12,6 +12,8 @@
  
  Long izvewenie_id = ParamUtil.getLong(request,"izvewenie_id");
  PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenie_id);
+ String currentURL = themeDisplay.getURLCurrent();
+ 
 %>
 
 <!--  sar shud -->
@@ -26,7 +28,7 @@
 <aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (porjadokRabotyKomissii.isNew()) ? Constants.ADD : Constants.UPDATE %>" />
 
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_OPENING %>" />
-
+<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
 <!--  tamom shud -->
 

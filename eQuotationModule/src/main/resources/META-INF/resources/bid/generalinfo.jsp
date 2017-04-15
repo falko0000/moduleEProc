@@ -12,7 +12,7 @@
  String[][] CAT_SECTION = {stateinfo, generalinfo, contactinformation};
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
- 
+ String currentURL = themeDisplay.getURLCurrent();
 %>
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="editgeneralinfo">
@@ -27,6 +27,7 @@
 
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_GENERAL_INFO %>" />
 
+<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
  
  <liferay-ui:form-navigator 

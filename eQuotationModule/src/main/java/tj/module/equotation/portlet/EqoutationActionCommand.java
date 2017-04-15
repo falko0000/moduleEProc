@@ -1,12 +1,13 @@
 package tj.module.equotation.portlet;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-
+import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -36,6 +37,9 @@ import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.spisoklotov.model.Spisoklotov;
+import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
+
 
 @Component(
 	    immediate = true,
@@ -73,7 +77,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   
 	  
 	   
- if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO) && cmd.equals(Constants.ADD))
+	   if(form_name.equals(EQuotationConstants.FORM_ABOUT_INFO) && cmd.equals(Constants.ADD))
 		   
 		   insertAboutInfo( actionRequest , actionResponse);
 	  
@@ -125,6 +129,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		String bid_validity_tenders = ParamUtil.getString(actionRequest, "bid_validity_tenders");
 		
 		InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
+
 		
 		// general info
 		informacijaORazmewenii.setIzvewenie_id(izvewenie_id);
@@ -292,7 +297,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
     
 	}
 	
-	private void updateOpening(ActionRequest actionRequest, ActionResponse actionResponse) {
+	private void updateOpening(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException {
 		// TODO Auto-generated method stub
 		
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
@@ -330,11 +335,32 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 		porjadokRabotyKomissii.setIzmenil(user.getUserId());
 		porjadokRabotyKomissii.setPo_istecheniju_dnej(bid_days);
+		
 		PorjadokRabotyKomissiiLocalServiceUtil.updatePorjadokRabotyKomissii(porjadokRabotyKomissii);
 	
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		 
+		
+		
+		int index_edit_tab = redirect.indexOf("_edit_tab=")+"_edit_tab=".length();
+		
+		int index = redirect.indexOf("&",index_edit_tab);
+		
+		
+		redirect = redirect.substring(0, index_edit_tab) + "bid_opening"+redirect.substring(index);
+		/*
+		  System.out.println(redirect.substring(0, index_edit_tab)); 
+		 
+		System.out.println(redirect.substring(index));
+		System.out.println(redirect.substring(index_edit_tab, index));
+		System.out.println("Redirect -->"+redirect);
+		*/
+		System.out.println(redirect);
+		actionResponse.sendRedirect(redirect);
+		
 	}
 	
-	private void updateGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+	private void updateGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, IOException {
 		
 	//izvewenija
 		
@@ -352,6 +378,8 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		String contact_name = ParamUtil.getString(actionRequest, "bid_contact_name");
 		String contact_email = ParamUtil.getString(actionRequest, "bid_email_address");
 		String contact_phone = ParamUtil.getString(actionRequest, "bid_personal_phones");
+		
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
 		
 		ServiceContext serviceContext = null;
        
@@ -395,6 +423,9 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	 obwajaInformacija.setData_izmenenija(new Date());
 	 
 	 ObwajaInformacijaLocalServiceUtil.updateObwajaInformacija(obwajaInformacija);
+	
+	 
+	 actionResponse.sendRedirect(redirect);
 	}
 
 	private void updateAboutInfo(ActionRequest actionRequest, ActionResponse actionResponse) {

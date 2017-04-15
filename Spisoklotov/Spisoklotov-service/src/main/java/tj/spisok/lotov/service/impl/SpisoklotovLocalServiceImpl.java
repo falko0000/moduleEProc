@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import aQute.bnd.annotation.ProviderType;
 
 import tj.spisok.lotov.model.Spisoklotov;
+import tj.spisok.lotov.model.impl.SpisoklotovImpl;
 import tj.spisok.lotov.service.base.SpisoklotovLocalServiceBaseImpl;
 
 /**
@@ -48,6 +49,7 @@ public class SpisoklotovLocalServiceImpl extends SpisoklotovLocalServiceBaseImpl
 	public List<Spisoklotov> getLotsByIzvewenijaID( long IzvewenijaID) 
 			throws SystemException {
 		
+	
 		return spisoklotovPersistence.findByIzvewenieID(IzvewenijaID);
 	}
 	
@@ -55,5 +57,10 @@ public class SpisoklotovLocalServiceImpl extends SpisoklotovLocalServiceBaseImpl
 	{
 		
 		return spisoklotovPersistence.countByIzvewenieID(IzvewenijaID);
+	}
+	
+	public Spisoklotov createSpisoklotov()
+	{
+		return new SpisoklotovImpl();
 	}
 }
