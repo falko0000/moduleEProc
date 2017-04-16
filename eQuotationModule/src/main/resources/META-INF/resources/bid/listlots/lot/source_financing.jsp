@@ -1,3 +1,4 @@
+
 <%@ include file="/init.jsp" %>
 
 <%
@@ -10,69 +11,53 @@
   
   Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
  
+  List<IstochnikFinansirovanija> istochnikFinansirovanija = IstochnikFinansirovanijaLocalServiceUtil.
+          getIstochnikFinansirovanijas(0, IstochnikFinansirovanijaLocalServiceUtil.getIstochnikFinansirovanijasCount());
+  
   Spisoklotov spisoklotov = null;
 		  
   if(spisok_lotov_id != 0)
-	spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);
-	
-	 
-	  boolean delivery_time_t[] = {true,false, false};
-	  
-	  
-	  
+	spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);  
   
-  InformacijaORazmewenii informacija_orazmewenii = null;
-  
-  
-  		informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(IzvewenijaID);
-		
-		
-			
-		if(spisok_lotov_id == 0)
-		{
-				 delivery_time_t[0] = (informacija_orazmewenii.getObespechenie_zajavki()==0)?true:false;
-				 delivery_time_t[1] = (informacija_orazmewenii.getObespechenie_zajavki()==1)?true:false;
-				 delivery_time_t[2] = (informacija_orazmewenii.getObespechenie_zajavki()==2)?true:false;
-		}
-		else
-		{
-				delivery_time_t[0] = (spisoklotov.getObespechenie_zajavki()==0)?true:false;
-			 	delivery_time_t[1] = (spisoklotov.getObespechenie_zajavki()==1)?true:false;
-			 	delivery_time_t[2] = (spisoklotov.getObespechenie_zajavki()==2)?true:false;
-		}
-		
- request.setAttribute("informacija_orazmewenii", informacija_orazmewenii);
- 
- 
- %>
- 
- 
 
+	 boolean delivery_time_p[] = new boolean[IstochnikFinansirovanijaLocalServiceUtil.getIstochnikFinansirovanijasCount()+1];
+	 
+	 Arrays.fill(delivery_time_p, false);
+	 
+	 delivery_time_p[1] = true;
+	
+	 if(spisok_lotov_id!= 0)
+		{
+			for(IstochnikFinansirovanija finansirovanija : istochnikFinansirovanija)
+			{
+				delivery_time_p[(int)finansirovanija.getIstochnik_finansirovanija_id()] = 
+						       (finansirovanija.getIstochnik_finansirovanija_id()==spisoklotov.getIstochnik_finansirovanija_id())?true:false;
+			}
+			
+		}
+		
+
+
+	  
+%>
+
+
+<aui:fieldset>
+
+<%for(IstochnikFinansirovanija finansirovanija : istochnikFinansirovanija){%>
 <aui:input 
-	name="delivery_time_t" 
+	name="bid_source_financing" 
 	type="radio" 
-	value="0" 
-	label="local_budget_bid" 
-	checked = "<%=delivery_time_t[0] %>"
+	value="<%=finansirovanija.getIstochnik_finansirovanija_id() %>" 
+	label="<%=finansirovanija.getNaimenovanie() %>" 
+	checked = "<%=delivery_time_p[(int)finansirovanija.getIstochnik_finansirovanija_id()] %>"
 	disabled="<%=disabled %>" 
 />
 
+<%} %>
+	
 
-<aui:input 
-	name="delivery_time_t" 
-	type="radio" 
-	value="1" 
-	label="bid_republican_budget" 
-	chekcked = "<%delivery_time_t[1]%>"
-	disabled="<%=disabled %>"
-/>
+</aui:fieldset>
 
 
-<aui:input 
-	name="delivery_time_t" 
-	type="radio" 
-	value="2" 
-	label="bid_own_funds" 
-	chekced = "<%delivery_time_t[2] %>"
-	disabled="<%=disabled %>"
-/>
+
