@@ -1,0 +1,45 @@
+package tj.module.suppworkplace.constant;
+
+import javax.servlet.SessionTrackingMode;
+
+public interface SupplierWorkplaceConstant {
+	
+	//Component property
+	
+	static final String PORTLET_NAME = "SupplierWorkplace";
+	static final String PORTLET_DISPLAY_NAME = "SupplierWorkplace Module";
+	static final String PORTLRT_DISPLAY_CATEGORY = "eProcurement";
+	static final String VIEW_TEMPLATE = "/view.jsp";
+	
+	//Path  pages  jsp 
+    //main
+	static final String PAGE_ACTIONS = "/actions.jsp";
+	static final String PAGE_ACTIONS_LOTS = "/bid/listlots/actions.jsp";
+	static final String PAGE_DELETE = "/delete.jsp";
+	static final String PAGE_INFO = "/info.jsp";
+	static final String PAGE_EDIT = "/edit.jsp";
+	static final String PAGE_ADDPRODUCTS = "/bid/listlots/addproducts.jsp";
+	//tabitems
+	static final String PAGE_PREPARATION = "/tabitems/preparation.jsp";
+	static final String PAGE_SUBMISSION = "/tabitems/submission.jsp";
+	static final String PAGE_EVALUATION = "/tabitems/evaluation.jsp";
+	static final String PAGE_UNFULFILLED = "/tabitems/unfulfilled.jsp";
+	static final String PAGE_COMPLETED = "/tabitems/completed.jsp";
+	
+	//
+	static final String RENDER_COMMAND_NAME_EDIT = "/client/edit/";
+	static final String ACTION_COMMAND_NAME_EDIT = "edit";
+	
+	//
+	static final String RESOURCE_COMMAND_NAME_LIST = "list";
+	
+	//
+	
+	static final String SUBMISSION_OF_APPLICATIONS = "/tabitems/preparation.jsp";
+	static final String OPENING_AND_DETERMINING_THE_WINNER = "/tabitems/opening.jsp";
+	static final String INCOMING_ORDERS = "/tabitems/incoming.jsp";
+	static final String COMPLETED_ORDERS = "/tabitems/completed.jsp";
+	
+	//
+	static final String VIEW_TEMPELATED = "/tabitems/view";
+}

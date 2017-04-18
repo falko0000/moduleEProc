@@ -1,6 +1,9 @@
 package tj.workplace.supplier.portlet;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.util.ParamUtil;
+
+import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 
 import java.io.IOException;
 
@@ -19,10 +22,10 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.portlet.display-category=eProcurement",
+		"com.liferay.portlet.display-category="+SupplierWorkplaceConstant.PORTLRT_DISPLAY_CATEGORY,
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=SupplierWorkplace Portlet",
-	
+		"javax.portlet.display-name="+SupplierWorkplaceConstant.PORTLET_DISPLAY_NAME,
+		"javax.portlet.name="+SupplierWorkplaceConstant.PORTLET_NAME,
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.resource-bundle=content.Language",
@@ -35,7 +38,7 @@ public class SupplierWorkplacePortlet extends MVCPortlet {
    @Override
 public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
-	
+	   
 	super.doView(renderRequest, renderResponse);
 }
 }
