@@ -24,6 +24,7 @@ String[] CAT_NAMES = new String[]{ "bid_title_delivery_address",
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  Long izvewenie_id = ParamUtil.getLong(request,"izvewenie_id");
  InformacijaORazmewenii informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
+ String currentURL = themeDisplay.getURLCurrent();
 %>
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="aboutinfo">
@@ -38,7 +39,7 @@ String[] CAT_NAMES = new String[]{ "bid_title_delivery_address",
 
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_ABOUT_INFO %>" />
 
-
+<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
  
  <liferay-ui:form-navigator 

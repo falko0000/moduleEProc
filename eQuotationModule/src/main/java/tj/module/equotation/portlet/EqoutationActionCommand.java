@@ -1,17 +1,20 @@
 package tj.module.equotation.portlet;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-
+import javax.portlet.WindowState;
+import javax.portlet.WindowStateException;
 
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 
@@ -22,6 +25,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
@@ -36,6 +40,8 @@ import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.spisoklotov.model.Spisoklotov;
+import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 
 @Component(
 	    immediate = true,
@@ -83,116 +89,127 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   
 	   if(form_name.equals(EQuotationConstants.FORM_LISTLOTS) && cmd.equals(Constants.ADD))
 		   
-		   insertListlost( actionRequest , actionResponse);	
+		   insertListlots( actionRequest , actionResponse);	
 	   
 	   if(form_name.equals(EQuotationConstants.FORM_LISTLOTS) && cmd.equals(Constants.UPDATE))
-		   updateListlost( actionRequest , actionResponse);
+		   updateListlots( actionRequest , actionResponse);
 	   
 	   
 	}
 
 
-
+  @Override
+  protected void sendRedirect(ActionRequest actionRequest, ActionResponse actionResponse, String redirect)
+		throws IOException {
 	
-
-
-
-	private void updateListlost(ActionRequest actionRequest, ActionResponse actionResponse) {
-		// TODO Auto-generated method stub
+	super.sendRedirect(actionRequest, actionResponse, redirect);
+}
+	
+	private void insertListlots(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
 		
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
+		
 		
 		//generalinfo
-		int lot_number = ParamUtil.getInteger(actionRequest, "lot_number");
-		String item_name = ParamUtil.getString(actionRequest, "item_name");
-		int allocated_amount = ParamUtil.getInteger(actionRequest, "allocated_amount");
-		String classification_ebc = ParamUtil.getString(actionRequest, "classification_ebc");
-		int kod_jebk = ParamUtil.getInteger(actionRequest, "kod_jebk");
+		int nomer_lota = ParamUtil.getInteger(actionRequest, "lot_number");
+		String naimenovanie_lota = ParamUtil.getString(actionRequest, "item_name");
+		Number cena_kontrakta = ParamUtil.getNumber(actionRequest, "allocated_amount");
 		
+		String klassifikacija_po_jekb = ParamUtil.getString(actionRequest, "classification_ebc");
+		String kod_jekb = ParamUtil.getString(actionRequest, "kod_jebk");
+		long   id_jebk = ParamUtil.getLong(actionRequest, "id_jebk");
 		//info about customer
-		String procuring_entity = ParamUtil.getString(actionRequest, "procuring_entity");
+		String zakazchik = ParamUtil.getString(actionRequest, "procuring_entity");
 		String bsc_vbk = ParamUtil.getString(actionRequest, "bsc_vbk");
-		
+		String kod_zakazchika = ParamUtil.getString(actionRequest, "vbk_id");
 		//deliver address 
-		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
+		String mesto_postavki = ParamUtil.getString(actionRequest, "bid_delivery_address");
 		
 		//deliver time
-		String bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
-		
-		//validity
-		String bid_validity = ParamUtil.getString(actionRequest, "bid_validity");
-		
-		//software aplication
-		int delivery_time_p = ParamUtil.getInteger(actionRequest, "delivery_time_p");
-		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
-		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");		
-		
-		//enforcement
-		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
-		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
-		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
-		
-		//source financing
-		int delivery_time_t = ParamUtil.getInteger(actionRequest, "delivery_time_t");
-		
-		//other condition
-		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
-		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
-		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
-	}
-
-
-
-
-
-
-
-	private void insertListlost(ActionRequest actionRequest, ActionResponse actionResponse) {
-		// TODO Auto-generated method stub
-		
-		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
-		User user=(User) actionRequest.getAttribute(WebKeys.USER);
-		
-		//generalinfo
-		int lot_number = ParamUtil.getInteger(actionRequest, "lot_number");
-		String item_name = ParamUtil.getString(actionRequest, "item_name");
-		int allocated_amount = ParamUtil.getInteger(actionRequest, "allocated_amount");
-		String classification_ebc = ParamUtil.getString(actionRequest, "classification_ebc");
-		int kod_jebk = ParamUtil.getInteger(actionRequest, "kod_jebk");
-		
-		//info about customer
-		String procuring_entity = ParamUtil.getString(actionRequest, "procuring_entity");
-		String bsc_vbk = ParamUtil.getString(actionRequest, "bsc_vbk");
-		
-		//deliver address 
-		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
-		
-		//deliver time
-		String bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
+		String srok_postavki = ParamUtil.getString(actionRequest, "bid_delivery_time");
 	
 		//validity
-		String bid_validity = ParamUtil.getString(actionRequest, "bid_validity");
+		String srok_dejstvija = ParamUtil.getString(actionRequest, "bid_validity");
 		
 		//software aplication
-		int delivery_time_p = ParamUtil.getInteger(actionRequest, "delivery_time_p");
-		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
-		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");
+		int obespechenie_zajavki = ParamUtil.getInteger(actionRequest, "delivery_time_p");
+		Number obespechenie_v_procentah = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
+		String srok_obespechenija_zajavki = ParamUtil.getString(actionRequest, "bid_software_application");
 		
 		//enforcement
-		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
-		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
-		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
+		int obespechenie_ispolnenija = ParamUtil.getInteger(actionRequest, "delivery_time_q");
+		Number obespechenie_ispolnenija_v_procentah = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
+		String srok_ispolnenija_zajavki = ParamUtil.getString(actionRequest, "bid_enforcement");
 		
 		//source financing
-		int delivery_time_t = ParamUtil.getInteger(actionRequest, "delivery_time_t");
+		int istochnik_finansirovanija_id = ParamUtil.getInteger(actionRequest, "bid_source_financing");
 		
 		//other condition
-		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
-		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
-		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
+		String oplata = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
+		String cena_postavki = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
+		String soputstvujuwie_uslovija = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
+	   
+	     long spisok_lotov_id = CounterLocalServiceUtil.increment(Spisoklotov.class.toString());
+	     
+		
+		Spisoklotov spisoklotov = SpisoklotovLocalServiceUtil.createSpisoklotov(spisok_lotov_id);
+	    
+		spisoklotov.setSozdal(user.getUserId());
+		spisoklotov.setIzmenil(user.getUserId());
+		spisoklotov.setData_sozdanija(new Date());
+		spisoklotov.setData_izmenenija(new Date());
+		
+		
+		spisoklotov.setIzvewenie_id(izvewenie_id);
+		spisoklotov.setNomer_lota(nomer_lota);
+		spisoklotov.setNaimenovanie_lota(naimenovanie_lota);
+		spisoklotov.setCena_kontrakta(cena_kontrakta.doubleValue());
+		spisoklotov.setKlassifikacija_po_jekb(klassifikacija_po_jekb);
+		spisoklotov.setKod_jekb(kod_jekb);
+		spisoklotov.setZakazchik(zakazchik);
+	    spisoklotov.setKod_zakazchika(kod_zakazchika);
+	    spisoklotov.setMesto_postavki(mesto_postavki);
+	    spisoklotov.setSrok_postavki(srok_postavki);
+	    spisoklotov.setSrok_dejstvija(srok_dejstvija);
+	    
+	    spisoklotov.setObespechenie_zajavki(obespechenie_zajavki);
+	    spisoklotov.setObespechenie_v_procentah(obespechenie_v_procentah.doubleValue());
+	    spisoklotov.setSrok_obespechenija_zajavki(srok_obespechenija_zajavki);
+	    
+	    spisoklotov.setObespechenie_ispolnenija(obespechenie_ispolnenija);
+	    spisoklotov.setObespechenie_ispolnenija_v_procentah(obespechenie_ispolnenija_v_procentah.doubleValue());
+	    spisoklotov.setSrok_ispolnenija_zajavki(srok_ispolnenija_zajavki);
+	    
+	    spisoklotov.setIstochnik_finansirovanija_id(istochnik_finansirovanija_id);
 	
-	
+	    spisoklotov.setOplata(oplata);
+	    spisoklotov.setCena_postavki(cena_postavki);
+	    spisoklotov.setSoputstvujuwie_uslovija(soputstvujuwie_uslovija);
+	    
+	    spisoklotov.setId_jebk(id_jebk);
+	    
+	   // System.out.println(redirect);
+	    
+		 String param = "_edit_tab=";
+			
+		  /*  int indextab = redirect.indexOf(param)+param.length();
+			int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+			
+			redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_LISTLOTS+redirect.substring(indexamp);
+	   */
+			try {
+				actionResponse.setWindowState(WindowState.NORMAL);
+			  sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException | WindowStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+	   System.out.println(spisoklotov.toString());
+	    // spisoklotov = SpisoklotovLocalServiceUtil.addSpisoklotov(spisoklotov);
 	}
 
 
@@ -205,6 +222,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		
 		int delivery_address = ParamUtil.getInteger(actionRequest, "delivery_address");
 		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
@@ -273,6 +291,20 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		informacijaORazmewenii.setSrok_dejstvija_dlja_zakaza(validity_tenders);
 		informacijaORazmewenii.setSrok_dejstvija(bid_validity_tenders);
 		
+		 String param = "_edit_tab=";
+			
+		    int indextab = redirect.indexOf(param)+param.length();
+			int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+			
+			redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_ABOUTINFO+redirect.substring(indexamp);
+	   
+			try {
+				 sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
 		InformacijaORazmeweniiLocalServiceUtil.addInformacijaORazmewenii(informacijaORazmewenii);
 	}
 
@@ -289,7 +321,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
-		
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		//Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
 		//bid publication
 		int publication_day = ParamUtil.getInteger(actionRequest, "publication_day");
@@ -329,8 +361,20 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		porjadokRabotyKomissii.setPo_istecheniju_dnej(bid_days);
 		
 		PorjadokRabotyKomissiiLocalServiceUtil.addPorjadokRabotyKomissii(porjadokRabotyKomissii);
-	
-                
+	    
+		 String param = "_edit_tab=";
+			
+		    int indextab = redirect.indexOf(param)+param.length();
+			int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+			
+			redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_OPENING+redirect.substring(indexamp);
+	   
+			try {
+				 sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}       
 	}
 
 
@@ -342,7 +386,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 		String name = ParamUtil.getString(actionRequest, "bid_name_notification");
 		long bid_method = ParamUtil.getLong(actionRequest, "bid_method");
-		
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		//izvewenija_put
 
 		int put_a = ParamUtil.getInteger(actionRequest, "bid_number_ifb_a");
@@ -398,8 +442,21 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	 obwajaInformacija.setData_sozdanija(new Date());
 	 obwajaInformacija.setData_izmenenija(new Date());
 	 
-	 
-    ObwajaInformacijaLocalServiceUtil.addObwajaInformacija(obwajaInformacija);
+	 String param = "_edit_tab=";
+		
+	    int indextab = redirect.indexOf(param)+param.length();
+		int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+		
+		redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_GENERALINFO+redirect.substring(indexamp);
+   
+		try {
+			 sendRedirect(actionRequest, actionResponse, redirect);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}        
+   
+	 ObwajaInformacijaLocalServiceUtil.addObwajaInformacija(obwajaInformacija);
     
 	}
 	
@@ -409,7 +466,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
-		
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		//Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
 		//bid publication
 		int publication_day = ParamUtil.getInteger(actionRequest, "publication_day");
@@ -441,7 +498,23 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 		porjadokRabotyKomissii.setIzmenil(user.getUserId());
 		porjadokRabotyKomissii.setPo_istecheniju_dnej(bid_days);
+		
+		
 		PorjadokRabotyKomissiiLocalServiceUtil.updatePorjadokRabotyKomissii(porjadokRabotyKomissii);
+	
+		 String param = "_edit_tab=";
+			
+		    int indextab = redirect.indexOf(param)+param.length();
+			int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+			
+			redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_OPENING+redirect.substring(indexamp);
+	   
+			try {
+				 sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 	
 	}
 	
@@ -452,6 +525,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		String name = ParamUtil.getString(actionRequest, "bid_name_notification");
 		long bid_method = ParamUtil.getLong(actionRequest, "bid_method");
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		//izvewenija_put
 
 		int put_a = ParamUtil.getInteger(actionRequest, "bid_number_ifb_a");
@@ -505,13 +579,29 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	
 	 obwajaInformacija.setData_izmenenija(new Date());
 	 
+	 String param = "_edit_tab=";
+		
+	    int indextab = redirect.indexOf(param)+param.length();
+		int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+		
+		redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_GENERALINFO+redirect.substring(indexamp);
+
+		try {
+			 sendRedirect(actionRequest, actionResponse, redirect);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}        
+	 
 	 ObwajaInformacijaLocalServiceUtil.updateObwajaInformacija(obwajaInformacija);
+	
 	}
 
 	private void updateAboutInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		
 		int delivery_address = ParamUtil.getInteger(actionRequest, "delivery_address");
 		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
@@ -580,7 +670,89 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		informacijaORazmewenii.setSrok_dejstvija_dlja_zakaza(validity_tenders);
 		informacijaORazmewenii.setSrok_dejstvija(bid_validity_tenders);
 		
+		 String param = "_edit_tab=";
+			
+		    int indextab = redirect.indexOf(param)+param.length();
+			int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+			
+			redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_ABOUTINFO+redirect.substring(indexamp);
+	   
+			try {
+				 sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
 		InformacijaORazmeweniiLocalServiceUtil.updateInformacijaORazmewenii(informacijaORazmewenii);
 	}
+	
+	private void updateListlots(ActionRequest actionRequest, ActionResponse actionResponse) {
+		// TODO Auto-generated method stub
+		
+		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+		User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
+		
+		//generalinfo
+		int lot_number = ParamUtil.getInteger(actionRequest, "lot_number");
+		String item_name = ParamUtil.getString(actionRequest, "item_name");
+		int allocated_amount = ParamUtil.getInteger(actionRequest, "allocated_amount");
+		String classification_ebc = ParamUtil.getString(actionRequest, "classification_ebc");
+		int kod_jebk = ParamUtil.getInteger(actionRequest, "kod_jebk");
+		
+		//info about customer
+		String procuring_entity = ParamUtil.getString(actionRequest, "procuring_entity");
+		String bsc_vbk = ParamUtil.getString(actionRequest, "bsc_vbk");
+		
+		//deliver address 
+		String bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
+		
+		//deliver time
+		String bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
+		
+		//validity
+		String bid_validity = ParamUtil.getString(actionRequest, "bid_validity");
+		
+		//software aplication
+		int delivery_time_p = ParamUtil.getInteger(actionRequest, "delivery_time_p");
+		Number bid_percent_software_application = ParamUtil.getNumber(actionRequest, "bid_percent_software_application");
+		String bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");		
+		
+		//enforcement
+		int delivery_time_q = ParamUtil.getInteger(actionRequest, "delivery_time_q");
+		Number bid_percent_enforcement = ParamUtil.getNumber(actionRequest, "bid_percent_enforcement");
+		String bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
+		
+		//source financing
+		int delivery_time_t = ParamUtil.getInteger(actionRequest, "delivery_time_t");
+		
+		//other condition
+		String bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
+		String bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
+		String bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
+		 
+		
+		
+	/*	String param = "_edit_tab=";
+			
+		    int indextab = redirect.indexOf(param)+param.length();
+			int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+			
+			redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_LISTLOTS+redirect.substring(indexamp);
+	  */ 
+			try {
+				actionResponse.setWindowState(WindowState.NORMAL);
+				 sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException | WindowStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+	
+	}
+
+
+
+
 
 }

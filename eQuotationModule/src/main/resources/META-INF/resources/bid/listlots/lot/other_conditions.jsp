@@ -50,14 +50,11 @@
 		value="<%=oplata%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
-/>
+>
  
-<aui:validator 
- 		name="required" 
- 		errorMessage="this-field-is-mandatory"
-/>
+<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 
-
+</aui:input>
 
 <aui:input
 		name="bid_assignment_lot_delivery" 
@@ -65,14 +62,11 @@
 		value="<%=cena_postavki%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
- />
+ >
  
- <aui:validator 
- 		name="required" 
- 		errorMessage="this-field-is-mandatory"
-/>
+ <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 
-
+</aui:input>
 
 <aui:input 
 		name="bid_assignment_lot_conditions" 
@@ -80,13 +74,10 @@
 		value="<%=soputstvujuwie_uslovija%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
-/>
+>
 
-   <aui:validator 
- 		name="required" 
- 		errorMessage="this-field-is-mandatory"
-/>
+   <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 
- 
+</aui:input> 
 
 

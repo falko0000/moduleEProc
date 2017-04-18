@@ -14,6 +14,7 @@
 <%@page import="com.liferay.portal.kernel.model.LayoutSet" %>
 <%@page import="com.liferay.portal.kernel.model.LayoutSetPrototype" %>
 <%@page import="com.liferay.portal.kernel.model.LayoutConstants" %>
+<%@page import="com.liferay.portal.kernel.portlet.LiferayPortletMode" %>
 <%@page import="com.liferay.portal.kernel.service.LayoutLocalServiceUtil" %>
 <%@page import="com.liferay.portal.kernel.service.LayoutSetLocalServiceUtil" %>
 <%@page import="com.liferay.portal.kernel.service.LayoutSetPrototypeLocalServiceUtil" %>
@@ -45,6 +46,7 @@
 <%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Arrays" %>
 
 <%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %> 

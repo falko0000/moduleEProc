@@ -43,7 +43,7 @@ if(!informacija_orazmewenii.isNew()){
 />
 
 </div>
-
+</aui:field-wrapper>
 <aui:input 
 	name="bid_delivery_time" 
 	type="textarea" 
@@ -54,4 +54,3 @@ if(!informacija_orazmewenii.isNew()){
 
 
 
-</aui:field-wrapper>

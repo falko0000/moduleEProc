@@ -36,6 +36,7 @@
 							var result = event.result.raw;
 							
 							A.one('#<portlet:namespace/>kod_jebk').set('value',result.kod);
+							A.one('#<portlet:namespace/>id_jebk').set('value',result.jekb_id);
 							}
 							},
 					});
@@ -64,6 +65,7 @@
 							var result = event.result.raw;
 							
 							A.one('#<portlet:namespace/>bsc_vbk').set('value',result.kod);
+							A.one('#<portlet:namespace/>vbk_id').set('value',result.vbk_id);
 							}
 							},
 					});

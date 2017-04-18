@@ -28,12 +28,19 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse)  {
 		
 		
-		String names = "bid_generalinfo,bid_opening,bid_aboutinfo,bid_listlots,bid_commission";
 		
+		StringBuilder names = new StringBuilder();
 		
-		renderRequest.setAttribute("editnametabs", names);
+		names.append(EQuotationConstants.TAB_BID_GENERALINFO);
+		names.append(","+EQuotationConstants.TAB_BID_OPENING);
+		names.append(","+EQuotationConstants.TAB_BID_ABOUTINFO);
+		names.append(","+EQuotationConstants.TAB_BID_LISTLOTS);
+		names.append(","+EQuotationConstants.TAB_BID_COMMISSION);
+		
+		renderRequest.setAttribute("editnametabs", names.toString());
 		
 		String service = ParamUtil.getString(renderRequest, "good_work_service", "0");
+		
 		String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 		
 		if(cmd.equals(EQuotationConstants.ACTION_COMMAND_NAME_ADDPRODUCT))
@@ -41,7 +48,7 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 	    	
 		if(cmd.equals(EQuotationConstants.ACTION_COMMAND_NAME_EDIT_LOT))
 			return EQuotationConstants.PAGE_NEWLOT;
-		
+	
 		
 		return EQuotationConstants.PAGE_EDIT;
 	}

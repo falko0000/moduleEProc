@@ -23,7 +23,9 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
  listlotsUrl.setParameter("mvcRenderCommandName", EQuotationConstants.ACTION_COMMAND_NAME_EDIT);
  listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
  listlotsUrl.setParameter(Constants.CMD,cmd);
-	
+ 
+ String currentURL = themeDisplay.getURLCurrent();
+ request.setAttribute("redirect", currentURL);
 %>
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
@@ -39,6 +41,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_LISTLOTS %>" />
 
+<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
 </aui:form>
 		
@@ -89,13 +92,16 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 
 <aui:script use="liferay-util-window">
 
-	<portlet:renderURL var="selectUsersURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:renderURL var="addLots" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 	<portlet:param name="mvcPath" value="/bid/listlots/newlot.jsp" />
 	<portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>" />
-		<portlet:param name="spisok_lotov_id" value="0" />
+		<portlet:param name="edit_tab" value="bid_listlots" /> 
+	<portlet:param name="spisok_lotov_id" value="0" />
 	</portlet:renderURL>
+	
+    
 	A.one('#<portlet:namespace/>addLot').on('click', function(event) {
-	   
+		
 		Liferay.Util.openWindow({
 			dialog: {
 				centered: true,
@@ -103,9 +109,18 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 				modal: true
 				
 			},
-			id: '<portlet:namespace/>dialog',
+			id: '<portlet:namespace/>newlot',
 			title: 'Add lot number <%=number%>',
-			uri: '<%=selectUsersURL %>'
+			uri: '<%=addLots %>'
 		});
 	});
 </aui:script>
+
+<aui:script> 
+Liferay.provide(window,'<portlet:namespace/>closePopUp', function(dialogId) {
+	
+var A = AUI(); var dialog = Liferay.Util.Window.getById(dialogId); 
+dialog.destroy();
+},
+['liferay-util-window'] ); 
+</aui:script> 

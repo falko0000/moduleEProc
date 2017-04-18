@@ -61,12 +61,9 @@
  		disabled="<%=disabled %>"
  >
  
- <aui:validator 
- 		name="required" 
- 		errorMessage="this-field-is-mandatory"
- >
+ <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
  
- </aui:validator>
+ 
       </aui:input>
       
      
@@ -79,18 +76,12 @@
 >
       
 
-<aui:validator 
-		name="email" 
-		errorMessage=""
-/>
+<aui:validator name="email" errorMessage=""/>
       	
       	
-<aui:validator 
-		name="required" 
-		errorMessage="email-address-and-type-are-required-fields"
->
 
-</aui:validator>
+
+     <aui:validator name="required" errorMessage="email-address-and-type-are-required-fields"/>
      
    </aui:input>
       
@@ -104,10 +95,7 @@
 		disabled="<%=disabled %>"
 >
 
-<aui:validator 
-		name="custom" 
-		errorMessage="this-field-is-mandatory"
->
+	<aui:validator name="custom" errorMessage="this-field-is-mandatory">
       	
       	 function(val, fieldNode, ruleValue){
                              
@@ -117,12 +105,9 @@
                               }
     </aui:validator>
  
- <aui:validator 
- 		name="required" 
- 		errorMessage="this-field-is-mandatory"
->
+ <aui:validator name="required"  errorMessage="this-field-is-mandatory"/>
 
-</aui:validator>
+
       </aui:input>
     
        

@@ -72,23 +72,20 @@
 		disabled="true"
  />
       
-<aui:input 
+	<aui:input 
 		id="bid_name_notification" 
 		type="text"  
 		name="bid_name_notification"  
 		value ="<%=(izvewenija != null)? izvewenija.getNaimenovanie() : StringPool.BLANK  %>" 
 		disabled="<%=disabled %>"
-/>
+	>
       
-<aui:validator 
-		name="required" 
-		errorMessage="this-field-is-mandatory"
-/>
-</aui:validator>
+		<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
+
       
-      </aui:input>
+ 	</aui:input>
       
-      <aui:row>
+  <aui:row>
      
       <aui:col md="3">
       
@@ -99,12 +96,7 @@
 		disabled="<%=disabled %>"
 >
       
-<aui:validator 
-		name="required" 
-		errorMessage="this-field-is-mandatory"
->
-		
-</aui:validator>
+<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
      
       </aui:input>
       </aui:col>
@@ -141,11 +133,8 @@
 		disabled="<%=disabled %>"
 >
       
-<aui:validator 
-		name="required" 
-		errorMessage="this-field-is-mandatory"
->
-</aui:validator>
+
+   <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
      
       </aui:input>
       

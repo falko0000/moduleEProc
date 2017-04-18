@@ -12,6 +12,7 @@
  String[][] CAT_SECTION = {stateinfo, generalinfo, contactinformation};
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+ 
  String currentURL = themeDisplay.getURLCurrent();
 %>
 

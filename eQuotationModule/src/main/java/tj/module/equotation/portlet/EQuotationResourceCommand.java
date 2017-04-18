@@ -78,7 +78,7 @@ public class EQuotationResourceCommand implements MVCResourceCommand {
 			 jekbJSON.put("kod",jekb.getKod());
 			 jekbJSON.put("nazvanie",jekb.getKod()+" "+jekb.getNazvanie_ru());
 			 
-			 
+		
 			 jekbsJSONArray.put(jekbJSON);
 		 }
 		 } catch (Exception e) {
@@ -100,7 +100,7 @@ public class EQuotationResourceCommand implements MVCResourceCommand {
 		 JSONObject vbkJSON=null;
 		 try {
 		 List<Vbk> vbkList=VbkLocalServiceUtil.getVbks(0,
-				 JekbLocalServiceUtil.getJekbsCount());
+				 VbkLocalServiceUtil.getVbksCount());
 		                         
 		 for(Vbk vbk : vbkList){
 			 vbkJSON=JSONFactoryUtil.createJSONObject();
@@ -108,7 +108,7 @@ public class EQuotationResourceCommand implements MVCResourceCommand {
 			 vbkJSON.put("kod",vbk.getKod());
 			 vbkJSON.put("nazvanie",vbk.getKod()+" "+vbk.getNazvanie_ru());
 			 
-			 
+			
 			 vbksJSONArray.put(vbkJSON);
 		 }
 		 } catch (Exception e) {
@@ -136,10 +136,10 @@ public class EQuotationResourceCommand implements MVCResourceCommand {
 		                         
 		 for(Okgz okgz : okgzList){
 			 okgzJSON=JSONFactoryUtil.createJSONObject();
-			 okgzJSON.put("vbk_id", okgz.getOkgz_id());
+			 okgzJSON.put("okgz_id", okgz.getOkgz_id());
 			 okgzJSON.put("kod",okgz.getKod());
 			 okgzJSON.put("nazvanie",okgz.getNaimenovanie());
-			 
+			
 			 
 			 okgzsJSONArray.put(okgzJSON);
 		 }

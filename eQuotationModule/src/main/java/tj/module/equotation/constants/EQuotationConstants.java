@@ -70,6 +70,15 @@ public interface EQuotationConstants  {
     static final  String TAB_UNFULFILLED_TENDERS = "unfulfilled_tenders";
     static final  String TAB_COMPLETED_TENDERS = "completed_tenders";
     
+    //add izvewenija data tab
+    //BID_GENERALINFO,BID_OPENING,BID_ABOUTINFO,BID_LISTLOTS,BID_COMMISSION;
+   
+    static final  String TAB_BID_GENERALINFO = "bid_generalinfo";
+    static final  String TAB_BID_OPENING 	 = "bid_opening";
+    static final  String TAB_BID_ABOUTINFO 	 = "bid_aboutinfo";
+    static final  String TAB_BID_LISTLOTS 	 = "bid_listlots";
+    static final  String TAB_BID_COMMISSION  = "bid_commission";
+    
     // State
     static final int STATE_BID_PREPARATION = 1;
     static final int STATE_BID_SUBMISSION_OF_PROPOSALS = 2;

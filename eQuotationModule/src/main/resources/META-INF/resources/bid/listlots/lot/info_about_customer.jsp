@@ -10,6 +10,7 @@
 		  
 		   
 <aui:input name="bsc_vbk" type="text" disabled="true"/>
+<aui:input name="vbk_id" type="hidden"/>
 
 
 
