@@ -1,5 +1,4 @@
-<%@page import="tj.module.equotation.constants.EQuotationConstants"%>
-<%@page import="com.liferay.portal.kernel.util.Constants"%>
+
 <%@ include file="/init.jsp" %>
 
 
@@ -30,6 +29,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer",
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
  
+ Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
 
  PortletURL renderUrl = renderResponse.createRenderURL();
  
@@ -44,8 +44,9 @@ String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer",
 %>
 
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
-<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
-		   <portlet:param name="izvewenie_id" value="<%= (izvewenija == null) ? "0" : String.valueOf(izvewenija.getIzvewenija_id()) %>"/>
+			<portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
+		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
+			<portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>"/>
 </liferay-portlet:actionURL>
 
 
@@ -96,4 +97,15 @@ String[] CAT_NAMES = new String[]{ "generalinfo","info_about_customer",
    A.one('#<portlet:namespace/>lot_cancel').on('click', function(event) {
         Liferay.Util.getOpener().<portlet:namespace/>closePopUp('<portlet:namespace/>newlot'); 
    });
+</aui:script>
+<aui:script>
+AUI().use('aui-base','aui-io-request', function(A){
+var inputValue=A.one('#<portlet:namespace/><%=Constants.CMD%>').get('value');
+var spisok_lotov_id = '<%=spisok_lotov_id%>';
+
+	if(spisok_lotov_id>0)
+		A.one('#<portlet:namespace/><%=Constants.CMD%>').set('value','<%=Constants.UPDATE%>');
+	else
+		A.one('#<portlet:namespace/><%=Constants.CMD%>').set('value','<%=Constants.ADD%>');
+});
 </aui:script>

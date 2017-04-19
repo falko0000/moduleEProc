@@ -23,7 +23,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
  listlotsUrl.setParameter("mvcRenderCommandName", EQuotationConstants.ACTION_COMMAND_NAME_EDIT);
  listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
  listlotsUrl.setParameter(Constants.CMD,cmd);
- 
+ Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
  String currentURL = themeDisplay.getURLCurrent();
  request.setAttribute("redirect", currentURL);
 %>
@@ -115,6 +115,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 		});
 	});
 </aui:script>
+
 
 <aui:script> 
 Liferay.provide(window,'<portlet:namespace/>closePopUp', function(dialogId) {

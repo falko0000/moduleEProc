@@ -50,8 +50,7 @@ public class IzveweniePutLocalServiceImpl
 		try {
 			izvewenie_put =  izveweniePutPersistence.findByIzvewenieId(IzvewenijaID);
 		} catch (NoSuchIzveweniePutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 		
 		return izvewenie_put;

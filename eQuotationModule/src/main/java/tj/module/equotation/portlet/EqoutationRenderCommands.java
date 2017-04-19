@@ -12,6 +12,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import tj.module.equotation.constants.EQuotationConstants;
+import tj.spisoklotov.model.Spisoklotov;
 
 @Component(
 	    immediate = true,

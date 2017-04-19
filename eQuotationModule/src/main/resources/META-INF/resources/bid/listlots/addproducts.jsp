@@ -1,12 +1,12 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String[] CAT_NAMES = new String[]{ "info_about_goods_works_services","listproducts"
+String[] CAT_NAMES = new String[]{ "listproducts"
 		                         }; 
 
- String[] info_about_goods_works_services = new String[]{"info_about_goods_works_services"};
+ //String[] info_about_goods_works_services = new String[]{"info_about_goods_works_services"};
  String[] listproducts = new String[]{"listproducts"};
- String[][] CAT_SECTION = {info_about_goods_works_services,listproducts};
+ String[][] CAT_SECTION = {listproducts};
  
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
@@ -34,7 +34,24 @@ String[] CAT_NAMES = new String[]{ "info_about_goods_works_services","listproduc
  categorySections="<%= CAT_SECTION %>"
  jspPath="/bid/listlots/"
  markupView="lexicon"
- 
+ showButtons="false" 
 />
+
+  
+ <aui:button-row>
+		
+		<aui:button id="add_product" name="add_product" value="ADD PRODUCT" type="button"  primary="true"/>
+        <aui:button id="add_product_cancel" name="add_product_cancel" type="cancel" value="back"/>
+  
+  </aui:button-row>
+  
 </aui:form>
+
+  
+   <aui:script use="aui-base">
+   A.one('#<portlet:namespace/>add_product_cancel').on('click', function(event) {
+        Liferay.Util.getOpener().<portlet:namespace/>closePopUp('<portlet:namespace/>addProduct'); 
+   });
+  </aui:script>
+  
 <%@ include file="/bid/listlots/autocomplete.jspf" %>

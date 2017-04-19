@@ -15,7 +15,7 @@
 
 	IzveweniePut izvewenieput = null;
 	
-
+    System.out.println("izvewenija_id======================="+IzvewenijaID);
 	izvewenieput = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(IzvewenijaID);
 
         

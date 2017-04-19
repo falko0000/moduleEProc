@@ -3,7 +3,7 @@
 <%
 
 Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
-
+System.out.println(spisok_lotov_id);
 Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
 String cmd = ParamUtil.getString(request,Constants.CMD);   
  PortletURL productUrl = renderResponse.createRenderURL();
@@ -108,48 +108,4 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 		</liferay-ui:search-container>
 		
 		
-		<aui:script use="liferay-item-selector-dialog">
-	var form = AUI.$(document.<portlet:namespace />fm);
-
-	<portlet:renderURL var="selectUsersURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-		<portlet:param name="mvcPath" value="/bid/listlots/info_about_goods_works_services.jsp" />
-		<portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>" />
-			<portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>" />
-		</portlet:renderURL>
-
-	$('#<portlet:namespace />editProduct').on(
-		'click',
-		function(event) {
-			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
-				{
-					eventName: '<portlet:namespace />selectUsers',
-					on: {
-						selectedItemChange: function(event) {
-							var selectedItem = event.newVal;
-
-							if (selectedItem) {
-								form.fm('addUserIds').val(selectedItem);
-
-								submitForm(form, '<portlet:actionURL name="editUserGroupAssignments" />');
-							}
-						}
-					},
-					title: '<liferay-ui:message arguments="<%= HtmlUtil.escape(userGroup.getName()) %>" key="add-users-to-x" />',
-					url: '<%= selectUsersURL %>'
-				}
-			);
-
-			itemSelectorDialog.open();
-		}
-	);
-
-	$('#<portlet:namespace />removeUsers').on(
-		'click',
-		function() {
-			form.fm('redirect').val('<%= portletURL.toString() %>');
-			form.fm('removeUserIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-
-			submitForm(form, '<portlet:actionURL name="editUserGroupAssignments" />');
-		}
-	);
-</aui:script>
+		
