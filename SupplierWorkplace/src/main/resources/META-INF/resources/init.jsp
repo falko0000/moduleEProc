@@ -13,7 +13,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 
 <%@page import="tj.spisoklotov.model.Spisoklotov" %>
-
+<%@page import ="tj.spisoklotov.service.SpisoklotovLocalServiceUtil" %>
 
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="javax.portlet.ActionRequest"%>

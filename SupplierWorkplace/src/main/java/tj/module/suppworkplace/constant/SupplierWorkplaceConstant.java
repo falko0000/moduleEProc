@@ -14,10 +14,10 @@ public interface SupplierWorkplaceConstant {
 	//Path  pages  jsp 
     //main
 	static final String PAGE_ACTIONS = "/actions.jsp";
-	static final String PAGE_ACTIONS_LOTS = "/bid/listlots/actions.jsp";
+	static final String PAGE_ACTIONS_LOTS = "/bid/actions.jsp";
 	static final String PAGE_DELETE = "/delete.jsp";
 	static final String PAGE_INFO = "/info.jsp";
-	static final String PAGE_LISTLOTS = "/listlots.jsp";
+	static final String PAGE_LISTLOTS = "/bid/listlots.jsp";
 	static final String PAGE_ADDPRODUCTS = "/bid/listlots/addproducts.jsp";
 	//tabitems
 	static final String PAGE_FILING_APPLICATION = "/tabiteams/filing_applications.jsp";
@@ -41,9 +41,17 @@ public interface SupplierWorkplaceConstant {
 	static final String COMPLETED_ORDERS = "/tabitems/completed.jsp";
 	static final String TAB_FILING_APPLICATION = "/application_filing.jsp";
 	
+	
 	//
 	static final  String TAB_LIST_LOTS = "bid/list_lots";
 	static final  String LIST_LOTS = "listlots";
+	static final  String FORM_LISTLOTS = "listlots";
 	
+	
+    static final String ACTION_COMMAND_NAME_NEW  = "new";    
+    static final String ACTION_COMMAND_NAME_ADDPRODUCT  = "add_or_edit_product";  
+    static final String ACTION_COMMAND_NAME_EDIT_LOT = "edit_lot";
+    
+    static final  String TAB_PREPARATION = "preparation";
 
 }

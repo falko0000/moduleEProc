@@ -1,24 +1,20 @@
 
 <%@ include file="/init.jsp" %>
 
-
-
 <%
 
- 
+Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
+String number = String.valueOf(SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenie_id)+1);
+String cmd = ParamUtil.getString(request,Constants.CMD);   
+PortletURL listlotsUrl = renderResponse.createRenderURL();
+listlotsUrl.setParameter("mvcRenderCommandName", SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT);
+listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
+listlotsUrl.setParameter(Constants.CMD,cmd);
 
+String currentURL = themeDisplay.getURLCurrent();
+request.setAttribute("redirect", currentURL);
 
- Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
- Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
- String number = String.valueOf(SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenie_id)+1);
- String cmd = ParamUtil.getString(request,Constants.CMD);   
- PortletURL listlotsUrl = renderResponse.createRenderURL();
- listlotsUrl.setParameter("mvcRenderCommandName", SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT);
- listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
- listlotsUrl.setParameter(Constants.CMD,cmd);
- 
- String currentURL = themeDisplay.getURLCurrent();
- request.setAttribute("redirect", currentURL);
 %>
 
 <liferay-portlet:actionURL name="<%=SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
@@ -79,3 +75,5 @@
 		  </liferay-ui:search-container-row>
 		 <liferay-ui:search-iterator />
 		</liferay-ui:search-container>
+
+
