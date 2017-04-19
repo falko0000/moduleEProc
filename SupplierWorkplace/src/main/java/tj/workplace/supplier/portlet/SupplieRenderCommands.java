@@ -29,28 +29,11 @@ public class SupplieRenderCommands implements MVCRenderCommand {
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse)  {
 		
 		
+		Long spisok_lotov_id = ParamUtil.getLong(renderRequest,"spisok_lotov_id");
+
+		if(spisok_lotov_id!= 0) 
+			return SupplierWorkplaceConstant.PAGE_FORMING_APPLICATION;
 		
-	/*	StringBuilder names = new StringBuilder();
-		
-		names.append(SupplierWorkplaceConstant.TAB_BID_GENERALINFO);
-		names.append(","+SupplierWorkplaceConstant.TAB_BID_OPENING);
-		names.append(","+SupplierWorkplaceConstant.TAB_BID_ABOUTINFO);
-		names.append(","+SupplierWorkplaceConstant.TAB_BID_LISTLOTS);
-		names.append(","+SupplierWorkplaceConstant.TAB_BID_COMMISSION);
-		
-		renderRequest.setAttribute("editnametabs", names.toString());
-		
-		String service = ParamUtil.getString(renderRequest, "good_work_service", "0");
-		
-		String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
-		
-		if(cmd.equals(SupplierWorkplaceConstant.ACTION_COMMAND_NAME_ADDPRODUCT))
-			return SupplierWorkplaceConstant.PAGE_ADDPRODUCTS;
-	    	
-		if(cmd.equals(SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT_LOT))
-			return SupplierWorkplaceConstant.PAGE_NEWLOT;
-	
-		*/
 		return SupplierWorkplaceConstant.PAGE_LISTLOTS;
 		
 	}

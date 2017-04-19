@@ -26,6 +26,9 @@ public interface SupplierWorkplaceConstant {
 	static final String PAGE_UNFULFILLED = "/tabitems/unfulfilled.jsp";
 	static final String PAGE_COMPLETED = "/tabitems/completed.jsp";
 	
+	
+
+	
 	//
 	static final String RENDER_COMMAND_NAME_EDIT = "/client/edit/";
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
@@ -40,6 +43,8 @@ public interface SupplierWorkplaceConstant {
 	static final String INCOMING_ORDERS = "/tabitems/incoming.jsp";
 	static final String COMPLETED_ORDERS = "/tabitems/completed.jsp";
 	static final String TAB_FILING_APPLICATION = "/application_filing.jsp";
+	static final String TAB_APPLICATION = "/bid/application.jsp";
+	
 	
 	
 	//
@@ -48,10 +53,21 @@ public interface SupplierWorkplaceConstant {
 	static final  String FORM_LISTLOTS = "listlots";
 	
 	
+	
     static final String ACTION_COMMAND_NAME_NEW  = "new";    
     static final String ACTION_COMMAND_NAME_ADDPRODUCT  = "add_or_edit_product";  
     static final String ACTION_COMMAND_NAME_EDIT_LOT = "edit_lot";
     
     static final  String TAB_PREPARATION = "preparation";
+    
+    
+    static final String PAGE_LOTNAME = "/bid/lotname.jsp";
+    static final String PAGE_FORMING_APPLICATION = "/bid/forming_application.jsp";
+    
+    //
+    static final String PAGE_APPLICATION = "/bid/application.jsp";
+    static final String PAGE_OTHER_INFORMATION = "/bid/application.jsp";
+    static final String PAGE_DOCUMENTATION = "/bid/application.jsp";
+    
 
 }

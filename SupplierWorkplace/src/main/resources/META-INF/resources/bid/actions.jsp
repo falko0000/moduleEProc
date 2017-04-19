@@ -48,11 +48,11 @@
 	 
     <liferay-ui:icon-menu>
     
-    	<liferay-ui:icon iconCssClass="icon-edit" message="Lot name" url="<%= edit.toString() %>" />  
+    	<liferay-ui:icon iconCssClass="icon-edit" message="Forming an application" url="<%= edit.toString() %>" />  
    
 		
         <liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
-        <liferay-ui:icon  message="Forming an application" url="<%= addproducts.toString() %>" />
+        <liferay-ui:icon  message="Lot name" url="<%= addproducts.toString() %>" />
     	
     </liferay-ui:icon-menu>
     
