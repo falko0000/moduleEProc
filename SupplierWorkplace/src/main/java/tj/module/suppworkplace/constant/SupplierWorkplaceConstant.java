@@ -17,10 +17,10 @@ public interface SupplierWorkplaceConstant {
 	static final String PAGE_ACTIONS_LOTS = "/bid/listlots/actions.jsp";
 	static final String PAGE_DELETE = "/delete.jsp";
 	static final String PAGE_INFO = "/info.jsp";
-	static final String PAGE_EDIT = "/edit.jsp";
+	static final String PAGE_LISTLOTS = "/listlots.jsp";
 	static final String PAGE_ADDPRODUCTS = "/bid/listlots/addproducts.jsp";
 	//tabitems
-	static final String PAGE_PREPARATION = "/tabitems/preparation.jsp";
+	static final String PAGE_FILING_APPLICATION = "/tabiteams/filing_applications.jsp";
 	static final String PAGE_SUBMISSION = "/tabitems/submission.jsp";
 	static final String PAGE_EVALUATION = "/tabitems/evaluation.jsp";
 	static final String PAGE_UNFULFILLED = "/tabitems/unfulfilled.jsp";
@@ -35,11 +35,15 @@ public interface SupplierWorkplaceConstant {
 	
 	//
 	
-	static final String SUBMISSION_OF_APPLICATIONS = "/tabitems/preparation.jsp";
+	static final String FILING_APPLICATION = "/tabitems/preparation.jsp";
 	static final String OPENING_AND_DETERMINING_THE_WINNER = "/tabitems/opening.jsp";
 	static final String INCOMING_ORDERS = "/tabitems/incoming.jsp";
 	static final String COMPLETED_ORDERS = "/tabitems/completed.jsp";
+	static final String TAB_FILING_APPLICATION = "/application_filing.jsp";
 	
 	//
-	static final String VIEW_TEMPELATED = "/tabitems/view";
+	static final  String TAB_LIST_LOTS = "bid/list_lots";
+	static final  String LIST_LOTS = "listlots";
+	
+
 }

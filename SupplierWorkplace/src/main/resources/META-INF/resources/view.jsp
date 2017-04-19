@@ -7,7 +7,7 @@
     
     // String names =(String) request.getAttribute("editnametabs");
     
-     String names = "SUBMISSION_OF_APPLICATIONS,OPENING_AND_DETERMINING_THE_WINNER,INCOMING_ORDERS,COMPLETED_ORDERS";
+     String names = "FILING_APPLICATIONS,OPENING_AND_DETERMINING_THE_WINNER,INCOMING_ORDERS,COMPLETED_ORDERS";
      String tab = ParamUtil.getString(request, "izvewenija_tab","preparation");
     String currentURL = themeDisplay.getURLCurrent();
 %>
@@ -28,8 +28,8 @@
 	
 			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="izvewenija_tab" > 
  
-             <liferay-ui:section>
-    		   <p>SUBMISSION_OF_APPLICATIONS</p>
+             <liferay-ui:section>     
+        			<jsp:include page="<%=SupplierWorkplaceConstant.PAGE_FILING_APPLICATION%>" flush="true" />
     		</liferay-ui:section>
     		 <liferay-ui:section>
     		   <p>OPENING_AND_DETERMINING_THE_WINNER</p>

@@ -51,7 +51,7 @@ public class SupplieRenderCommands implements MVCRenderCommand {
 			return SupplierWorkplaceConstant.PAGE_NEWLOT;
 	
 		*/
-		return SupplierWorkplaceConstant.PAGE_EDIT;
+		return SupplierWorkplaceConstant.PAGE_LISTLOTS;
 		
 	}
 
