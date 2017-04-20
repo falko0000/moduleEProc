@@ -10,10 +10,13 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="tj.izvewenieput.model.IzveweniePut"%>
 <%@page import="tj.izvewenija.model.Izvewenija" %>
 <%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil" %>
-
-
+<%@page import="tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil" %>
+<%@page import="tj.informacija.razmewenii.model.InformacijaORazmewenii" %>
 <%@page import="tj.spisoklotov.model.Spisoklotov" %>
 <%@page import ="tj.spisoklotov.service.SpisoklotovLocalServiceUtil" %>
+<%@page import="com.liferay.portal.kernel.util.StringPool" %>
+
+<%@page import="tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException" %>
 
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="javax.portlet.ActionRequest"%>

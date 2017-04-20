@@ -56,7 +56,11 @@
 
     <liferay-ui:tabs names="<%=names %>" url="<%=tabs.toString()%>" param="edit_tab"  refresh="<%=false%>" value ="<%=tab %>"> 
  
-            			
+            		<liferay-ui:section>      
+        			<jsp:include page="<%=SupplierWorkplaceConstant.OTHER_INFORMATION%>" flush="true" />
+    		    </liferay-ui:section>
+            	
+      
     			<liferay-ui:section>      
         			<jsp:include page="<%=SupplierWorkplaceConstant.LIST_LOTS%>" flush="true" />
     		    </liferay-ui:section>
