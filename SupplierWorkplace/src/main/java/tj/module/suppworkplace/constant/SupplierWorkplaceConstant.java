@@ -32,7 +32,7 @@ public interface SupplierWorkplaceConstant {
 	//
 	static final String RENDER_COMMAND_NAME_EDIT = "/client/edit/";
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
-	
+	static final String FORM_ABOUT_INFO = "info";
 	//
 	static final String RESOURCE_COMMAND_NAME_LIST = "list";
 	
@@ -58,16 +58,20 @@ public interface SupplierWorkplaceConstant {
     static final String ACTION_COMMAND_NAME_ADDPRODUCT  = "add_or_edit_product";  
     static final String ACTION_COMMAND_NAME_EDIT_LOT = "edit_lot";
     
-    static final  String TAB_PREPARATION = "preparation";
-    
+    static final String TAB_PREPARATION = "preparation";
     
     static final String PAGE_LOTNAME = "/bid/lotname.jsp";
     static final String PAGE_FORMING_APPLICATION = "/bid/forming_application.jsp";
     
     //
     static final String PAGE_APPLICATION = "/bid/application.jsp";
-    static final String PAGE_OTHER_INFORMATION = "/bid/application.jsp";
+    static final String PAGE_OTHER_INFORMATION = "/bid/otherinformation/main_other_info.jsp";
     static final String PAGE_DOCUMENTATION = "/bid/application.jsp";
     
-
+    static final String PAGE_LISTLOTS_INFO = "/bid/listlots/main_listlots_info.jsp";
+    
+    static final String ACTIONS_ITEM = "action_item";
+    
+    static final String ACTIONS_ITEM_FORMING = "Forming an application";
+    static final String ACTIONS_ITEM_LOT_NAME = "Lot name";
 }

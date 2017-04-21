@@ -6,14 +6,22 @@
 taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 
+<%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
+
+<%@page import="tj.istochnik.finansirovanija.model.IstochnikFinansirovanija" %>
+<%@page import="tj.istochnik.finansirovanija.service.IstochnikFinansirovanijaLocalServiceUtil" %>
 <%@page import="tj.izvewenieput.model.IzveweniePut"%>
 <%@page import="tj.izvewenija.model.Izvewenija" %>
 <%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil" %>
-
-
+<%@page import="tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil" %>
+<%@page import="tj.informacija.razmewenii.model.InformacijaORazmewenii" %>
 <%@page import="tj.spisoklotov.model.Spisoklotov" %>
 <%@page import ="tj.spisoklotov.service.SpisoklotovLocalServiceUtil" %>
+<%@page import="com.liferay.portal.kernel.util.StringPool" %>
+
+<%@page import="tj.informacija.razmewenii.exception.NoSuchInformacijaORazmeweniiException" %>
 
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="javax.portlet.ActionRequest"%>
@@ -28,6 +36,12 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.portal.kernel.service.permission.PortletPermissionUtil" %>
 <%@ page import="com.liferay.portal.kernel.security.permission.ActionKeys" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
+
+

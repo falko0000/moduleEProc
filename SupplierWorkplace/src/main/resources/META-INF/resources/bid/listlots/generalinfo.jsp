@@ -26,7 +26,7 @@ if(spisok_lotov_id!=0)
 <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 </aui:input>
 
-<aui:input name="allocated_amount"  type="number" min="0" value="<%=(spisoklotov!=null)?spisoklotov.getCena_kontrakta():0.0 %>" suffix ="<%=EQuotationConstants.amount%>" >
+<aui:input name="allocated_amount"  type="number" min="0" value="<%=(spisoklotov!=null)?spisoklotov.getCena_kontrakta():0.0 %>" suffix ="<%=SupplierWorkplaceConstant.amount%>" >
 <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 </aui:input>
 

@@ -11,7 +11,8 @@ dependencies {
 		
 		
 		compile project (":modules:SpisokLots:SpisokLots-api")
-
+		compile project (":modules:InformacijaRazmewenii:InformacijaRazmewenii-api")
+        compile project (":modules:IstochnikFinansirovanija:IstochnikFinansirovanija-api")
 }
 
 

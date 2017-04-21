@@ -10,7 +10,7 @@
   
   Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
   
-  String names = "APPLICATION,STRONG_INFORMATION,DOCUMENTATION";
+  String names = "APPLICATION,OTHER_INFORMATION,DOCUMENTATION";
 %>
 
 <portlet:renderURL var="tabs" >

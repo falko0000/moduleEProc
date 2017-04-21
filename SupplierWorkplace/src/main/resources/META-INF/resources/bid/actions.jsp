@@ -19,14 +19,14 @@
 			 <portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
              <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
              <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
-		     <portlet:param name="<%=Constants.CMD %>" value="<%=SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT_LOT%>" /> 
+		     <portlet:param name="<%=SupplierWorkplaceConstant.ACTIONS_ITEM %>" value="<%=SupplierWorkplaceConstant.ACTIONS_ITEM_FORMING%>" /> 
 		</portlet:renderURL>
 		
 	 <portlet:renderURL var="addproducts">
 			 <portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
              <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
              <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
-		     <portlet:param name="<%=Constants.CMD %>" value="<%=SupplierWorkplaceConstant.ACTION_COMMAND_NAME_ADDPRODUCT%>" />
+		     <portlet:param name="<%=SupplierWorkplaceConstant.ACTIONS_ITEM%>" value="<%=SupplierWorkplaceConstant.ACTIONS_ITEM_LOT_NAME%>" />
 		    
 		</portlet:renderURL>
 	 
