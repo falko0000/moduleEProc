@@ -40,7 +40,7 @@ String[] CAT_NAMES = new String[]{ "listproducts"
   
  <aui:button-row>
 		
-		<aui:button id="add_product" name="add_product" value="ADD PRODUCT" type="button"  primary="true"/>
+		
         <aui:button id="add_product_cancel" name="add_product_cancel" type="cancel" value="back"/>
   
   </aui:button-row>

@@ -20,7 +20,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
  String number = String.valueOf(SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenie_id)+1);
  String cmd = ParamUtil.getString(request,Constants.CMD);   
  PortletURL listlotsUrl = renderResponse.createRenderURL();
- listlotsUrl.setParameter("mvcRenderCommandName", EQuotationConstants.ACTION_COMMAND_NAME_EDIT);
+ listlotsUrl.setParameter("mvcRenderCommandName", EQuotationConstants.RENDER_COMMAND_NAME_EDIT);
  listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
  listlotsUrl.setParameter(Constants.CMD,cmd);
  Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
@@ -40,6 +40,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 <aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (izvewenija == null) ? Constants.ADD : Constants.UPDATE %>" />
 
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_LISTLOTS %>" />
+<aui:input name="IdsForDeleteProducts" type="hidden"/>
 
 <aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 

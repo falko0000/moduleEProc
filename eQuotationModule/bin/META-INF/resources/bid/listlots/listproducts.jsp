@@ -25,12 +25,25 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 
 	<liferay-frontend:management-bar-action-buttons>
 	
+	<%
+	String removeProducts = "javascript:" + renderResponse.getNamespace()+"removeProducts()";
+	%>
 	    <liferay-frontend:management-bar-button href="javascript:;" icon="edit" id="editProduct" label="edit"/>
-		<liferay-frontend:management-bar-button href="javascript:;" icon="trash" id="removeProduct" label="remove" />
+		<liferay-frontend:management-bar-button href="<%=removeProducts %>" icon="trash" id="removeProduct" label="remove" />
 	
 	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
+ <liferay-frontend:add-menu>
+	
+		<%
+		String AddProductUrl = "javascript:" + renderResponse.getNamespace()+"openDialogAddProduct()";
+		%>
+
+		<liferay-frontend:add-menu-item title='ADD PRODUCT' url="<%= AddProductUrl %>" />
+	
+	</liferay-frontend:add-menu>
+	
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
 				delta = "<%=SpisokTovarovLocalServiceUtil.getCountSpisokTovarovByLotId(spisok_lotov_id)%>"
@@ -106,50 +119,60 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 		  </liferay-ui:search-container-row>
 		 <liferay-ui:search-iterator  markupView="lexicon" />
 		</liferay-ui:search-container>
+		 
 		
+		<aui:script>
 		
-		<aui:script use="liferay-item-selector-dialog">
-	var form = AUI.$(document.<portlet:namespace />fm);
-
-	<portlet:renderURL var="selectUsersURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-		<portlet:param name="mvcPath" value="/bid/listlots/info_about_goods_works_services.jsp" />
-		<portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>" />
-			<portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>" />
-		</portlet:renderURL>
-
-	$('#<portlet:namespace />editProduct').on(
-		'click',
-		function(event) {
-			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
-				{
-					eventName: '<portlet:namespace />selectUsers',
-					on: {
-						selectedItemChange: function(event) {
-							var selectedItem = event.newVal;
-
-							if (selectedItem) {
-								form.fm('addUserIds').val(selectedItem);
-
-								submitForm(form, '<portlet:actionURL name="editUserGroupAssignments" />');
-							}
-						}
-					},
-					title: '<liferay-ui:message arguments="<%= HtmlUtil.escape(userGroup.getName()) %>" key="add-users-to-x" />',
-					url: '<%= selectUsersURL %>'
-				}
-			);
-
-			itemSelectorDialog.open();
+		function <portlet:namespace />openDialogAddProduct()
+		{
+			
+			<portlet:renderURL var="addProduct" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+			<portlet:param name="mvcPath" value="/bid/listlots/info_about_goods_works_services.jsp" />
+			<portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>" />
+				<portlet:param name="edit_tab" value="bid_listlots" /> 
+			<portlet:param name="spisok_lotov_id" value="<%=String.valueOf(spisok_lotov_id)%>" />
+				<portlet:param name="<%=Constants.CMD%>" value="<%=Constants.ADD%>" />
+			</portlet:renderURL>
+		
+			Liferay.Util.openWindow({
+				dialog: {
+					centered: true,
+				
+					modal: true
+					
+				},
+				id: '<portlet:namespace/>addProduct',
+				title: 'Product',
+				uri: '<%=addProduct%>'
+			});
 		}
-	);
-
-	$('#<portlet:namespace />removeUsers').on(
-		'click',
-		function() {
-			form.fm('redirect').val('<%= portletURL.toString() %>');
-			form.fm('removeUserIds').val(Liferay.Util.listCheckedExcept(form, '<portlet:namespace />allRowIds'));
-
-			submitForm(form, '<portlet:actionURL name="editUserGroupAssignments" />');
-		}
-	);
-</aui:script>
+		
+		function <portlet:namespace />removeProducts()
+		{
+			
+			 AUI().use('aui-base','aui-io-request', function(A){
+			       
+			       
+				    var FormName =  A.one("#<portlet:namespace />FormName").get('value');
+				    var cmd =  A.one("#<portlet:namespace /><%=Constants.CMD%>").get('value');
+				   
+				    A.one("#<portlet:namespace />FormName").set('value','<%=EQuotationConstants.FORM_ADDPRODUCT%>');
+			       
+			        
+			var fmr = document.<portlet:namespace/>fm;
+			var ids= Liferay.Util.listCheckedExcept(fmr, "<portlet:namespace/>allRowIds")+'_'+'<%=Constants.DELETE%>';
+			
+			 A.one("#<portlet:namespace /><%=Constants.CMD%>").set('value',ids);
+		
+			
+			var accepted = confirm('<%="are-you-sure-you-want-to-delete-selected-products" %>');
+			if(accepted)
+			{
+				submitForm(fmr);
+				 
+			}
+			 });
+			 }
+		
+		</aui:script>
+		

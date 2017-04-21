@@ -54,6 +54,7 @@ public interface EQuotationConstants  {
     static final String FORM_ABOUT_INFO = "aboutinfo";
     static final String FORM_OPENING = "opening";
     static final String FORM_LISTLOTS = "listlots";
+    static final String FORM_ADDPRODUCT= "addProduct";
     
     //static final long AUTHORIZED_BODY_ID = 38548; // sobirov_j
     // static final long AUTHORIZED_BODY_ID = 94344; // ashurov_sh

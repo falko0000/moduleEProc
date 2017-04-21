@@ -40,6 +40,8 @@ import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.spisok.tovarov.model.SpisokTovarov;
+import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 
@@ -62,8 +64,9 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   String form_name = ParamUtil.getString(actionRequest, "FormName");
 	   String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 	  
-	  
-	   if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
+	 
+	   
+	  if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
 		   
 		   insertGeneralInfo( actionRequest , actionResponse);
 	  
@@ -95,10 +98,92 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		   updateListlots( actionRequest , actionResponse);
 	   
 	   
+      if(form_name.equals(EQuotationConstants.FORM_ADDPRODUCT) && cmd.equals(Constants.ADD))
+		   
+		   insertProduct( actionRequest , actionResponse);	
+	   
+	   if(form_name.equals(EQuotationConstants.FORM_ADDPRODUCT) && cmd.equals(Constants.UPDATE))
+		   updateProduct( actionRequest , actionResponse);
+	   
+	   if(form_name.equals(EQuotationConstants.FORM_ADDPRODUCT) && cmd.endsWith("_"+Constants.DELETE))
+		   deleteProduct( actionRequest , actionResponse,cmd);
 	}
 
 
-  @Override
+  private void deleteProduct(ActionRequest actionRequest, ActionResponse actionResponse,String cmd) {
+		
+	  String ids ="";
+	  
+	  if(cmd.startsWith("on"))
+	     ids = cmd.substring(3, cmd.indexOf("_"+Constants.DELETE));
+	  else
+		    ids = cmd.substring(0, cmd.indexOf("_"+Constants.DELETE));  
+	  System.out.println(ids);
+		
+	  String id[] = ids.split(",");
+	  
+	  for(String idP : id)
+		try {
+			SpisokTovarovLocalServiceUtil.deleteSpisokTovarov(Long.valueOf(idP));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  
+	 
+		
+	}
+
+
+private void updateProduct(ActionRequest actionRequest, ActionResponse actionResponse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+private void insertProduct(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+	long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+	long lot_id = ParamUtil.getLong(actionRequest,"spisok_lotov_id");
+	User user=(User) actionRequest.getAttribute(WebKeys.USER);
+	
+	String name_goods = ParamUtil.getString(actionRequest, "name_goods");
+	String belonging_cpv = ParamUtil.getString(actionRequest, "belonging_cpv");
+	String kod_cpv = ParamUtil.getString(actionRequest, "kod_cpv");
+	String description_goods = ParamUtil.getString(actionRequest, "description_goods");
+	int unit_measurement = ParamUtil.getInteger(actionRequest, "unit_measurement");
+	
+	Number amount = ParamUtil.getNumber(actionRequest, "amount");
+	long country_origin = ParamUtil.getInteger(actionRequest, "country_origin");
+	
+	
+	 long spisok_tovarov_id = CounterLocalServiceUtil.increment(SpisokTovarov.class.toString());
+		
+     SpisokTovarov spisokTovarov = SpisokTovarovLocalServiceUtil.createSpisokTovarov(spisok_tovarov_id);
+     
+     spisokTovarov.setIzvewenie_id(izvewenie_id);
+     spisokTovarov.setLot_id(lot_id);
+     spisokTovarov.setNaimenovanie_tovara(name_goods);
+     spisokTovarov.setKlassifikacija_po_okdp(belonging_cpv);
+     spisokTovarov.setKod_po_okdp(kod_cpv);
+     spisokTovarov.setEdinica_izmerenija_id(unit_measurement);
+     spisokTovarov.setKolichestvo(amount.longValue());
+     spisokTovarov.setSozdal(user.getUserId());
+     spisokTovarov.setIzmenil(user.getUserId());
+     spisokTovarov.setData_sozdanija(new Date());
+     spisokTovarov.setData_izmenenija(new Date());
+     spisokTovarov.setOpisanie_tovara(description_goods);
+     spisokTovarov.setKod_strany_proizvoditelja(country_origin);
+     
+     SpisokTovarovLocalServiceUtil.addSpisokTovarov(spisokTovarov);
+	 
+}
+
+
+@Override
   protected void sendRedirect(ActionRequest actionRequest, ActionResponse actionResponse, String redirect)
 		throws IOException {
 	
