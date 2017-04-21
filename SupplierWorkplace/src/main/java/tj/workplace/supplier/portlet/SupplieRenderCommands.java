@@ -29,11 +29,13 @@ public class SupplieRenderCommands implements MVCRenderCommand {
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse)  {
 		
 		
-		Long spisok_lotov_id = ParamUtil.getLong(renderRequest,"spisok_lotov_id");
+		String actions_item = ParamUtil.getString(renderRequest, SupplierWorkplaceConstant.ACTIONS_ITEM);
 
-		if(spisok_lotov_id!= 0) 
+		if(actions_item.equals(SupplierWorkplaceConstant.ACTIONS_ITEM_FORMING)) 
 			return SupplierWorkplaceConstant.PAGE_FORMING_APPLICATION;
-		
+		if(actions_item.equals(SupplierWorkplaceConstant.ACTIONS_ITEM_LOT_NAME))
+		   return SupplierWorkplaceConstant.PAGE_LISTLOTS_INFO;
+	
 		return SupplierWorkplaceConstant.PAGE_LISTLOTS;
 		
 	}

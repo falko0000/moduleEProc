@@ -68,5 +68,10 @@ public interface SupplierWorkplaceConstant {
     static final String PAGE_OTHER_INFORMATION = "/bid/otherinformation/main_other_info.jsp";
     static final String PAGE_DOCUMENTATION = "/bid/application.jsp";
     
-
+    static final String PAGE_LISTLOTS_INFO = "/bid/listlots/main_listlots_info.jsp";
+    
+    static final String ACTIONS_ITEM = "action_item";
+    
+    static final String ACTIONS_ITEM_FORMING = "Forming an application";
+    static final String ACTIONS_ITEM_LOT_NAME = "Lot name";
 }
