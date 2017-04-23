@@ -33,8 +33,8 @@ public interface EQuotationConstants  {
 	static final String PAGE_ABOUTINFO = "/bid/aboutinfo.jsp";
 	static final String PAGE_LISTLOTS = "/bid/listlots.jsp";
 	static final String PAGE_COMMISSION = "/bid/commission.jsp";
-	
 	static final String PAGE_NEWLOT = "/bid/listlots/newlot.jsp";
+	static final String PAGE_CRITERIA = "/bid/listlots/criterias.jsp";
 	
 	//Action command name
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
@@ -54,7 +54,8 @@ public interface EQuotationConstants  {
     static final String FORM_ABOUT_INFO = "aboutinfo";
     static final String FORM_OPENING = "opening";
     static final String FORM_LISTLOTS = "listlots";
-    static final String FORM_ADDPRODUCT= "addProduct";
+    static final String FORM_ADDPRODUCT = "addProduct";
+    static final String FORM_CRITERIA =	"criteria";
     
     //static final long AUTHORIZED_BODY_ID = 38548; // sobirov_j
     // static final long AUTHORIZED_BODY_ID = 94344; // ashurov_sh

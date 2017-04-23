@@ -1,0 +1,9 @@
+Bundle-Name: Criterias-api
+Bundle-SymbolicName: tj.criterias.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.criterias.exception,\
+	tj.criterias.model,\
+	tj.criterias.service,\
+	tj.criterias.service.persistence
+-includeresource: META-INF/service.xml=../Criterias-service/service.xml

@@ -32,6 +32,8 @@ import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.izvewenieput.model.IzveweniePut;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.expando.kernel.model.ExpandoColumnConstants;
+
 import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
@@ -112,6 +114,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 
   private void deleteProduct(ActionRequest actionRequest, ActionResponse actionResponse,String cmd) {
 		
+	 
 	  String ids ="";
 	  
 	  if(cmd.startsWith("on"))
@@ -139,9 +142,38 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 
 
 private void updateProduct(ActionRequest actionRequest, ActionResponse actionResponse) {
-		// TODO Auto-generated method stub
 		
+     
+	long spisok_tovarov_id = ParamUtil.getLong(actionRequest, "spisok_tovarov_id");
+	
+	String name_goods = ParamUtil.getString(actionRequest, "name_goods");
+	String belonging_cpv = ParamUtil.getString(actionRequest, "belonging_cpv");
+	String kod_cpv = ParamUtil.getString(actionRequest, "kod_cpv");
+	String description_goods = ParamUtil.getString(actionRequest, "description_goods");
+	int unit_measurement = ParamUtil.getInteger(actionRequest, "unit_measurement");
+	
+	Number amount = ParamUtil.getNumber(actionRequest, "amount");
+	long country_origin = ParamUtil.getInteger(actionRequest, "country_origin");
+	
+	 try {
+		SpisokTovarov spisokTovarov = SpisokTovarovLocalServiceUtil.getSpisokTovarov(spisok_tovarov_id);
+		 
+		 spisokTovarov.setNaimenovanie_tovara(name_goods);
+		 spisokTovarov.setKlassifikacija_po_okdp(belonging_cpv);
+	     spisokTovarov.setKod_po_okdp(kod_cpv);
+	     spisokTovarov.setEdinica_izmerenija_id(unit_measurement);
+	     spisokTovarov.setKolichestvo(amount.longValue());
+	     spisokTovarov.setOpisanie_tovara(description_goods);
+	     spisokTovarov.setKod_strany_proizvoditelja(country_origin);
+	     
+	
+	     SpisokTovarovLocalServiceUtil.updateSpisokTovarov(spisokTovarov);
+	 } catch (PortalException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
+	
+  }
 
 
 private void insertProduct(ActionRequest actionRequest, ActionResponse actionResponse) {

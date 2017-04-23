@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.criterias.model.Criteria" />
+	<import class="tj.criterias.model.CriteriasWeight" />
+	<import class="tj.criterias.model.CriteriaTemplate" />
+	<import class="tj.criterias.model.CriteriaValue" />
+	<class name="tj.criterias.model.impl.CriteriaImpl" table="sapp.criteria">
+		<id name="criteria_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.criteria_id_seq</param>
+			</generator>
+		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="criteria_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="criteria_weight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="criteria_category_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="criteria_description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spisok_lotov_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="created" type="org.hibernate.type.TimestampType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="tj.criterias.model.impl.CriteriasWeightImpl" table="sapp.criterias_weight">
+		<id name="criterias_weight_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.criterias_weight_id_seq</param>
+			</generator>
+		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spisok_lotov_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="criteria_category_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="criterias_weight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="created" type="org.hibernate.type.TimestampType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="tj.criterias.model.impl.CriteriaTemplateImpl" table="sapp.criteria_template">
+		<id name="criteria_template_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.criteria_template_id_seq</param>
+			</generator>
+		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="criteria_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="criteria_category_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="created" type="org.hibernate.type.TimestampType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="tj.criterias.model.impl.CriteriaValueImpl" table="sapp.criteria_value">
+		<id name="criteria_value_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.criteria_value_id_seq</param>
+			</generator>
+		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="criteria_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="created" type="org.hibernate.type.TimestampType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="max_value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="min_value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+</hibernate-mapping>

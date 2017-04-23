@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.criterias.model.Criteria">
+		<field name="uuid" type="String" />
+		<field name="criteria_id" type="long" />
+		<field name="criteria_name" type="String" />
+		<field name="criteria_weight" type="double" />
+		<field name="criteria_category_id" type="int" />
+		<field name="criteria_description" type="String" />
+		<field name="spisok_lotov_id" type="long" />
+		<field name="created" type="Date" />
+		<field name="updated" type="Date" />
+		<field name="createdby" type="long" />
+		<field name="updatedby" type="long" />
+	</model>
+	<model name="tj.criterias.model.CriteriasWeight">
+		<field name="uuid" type="String" />
+		<field name="criterias_weight_id" type="long" />
+		<field name="spisok_lotov_id" type="long" />
+		<field name="criteria_category_id" type="int" />
+		<field name="criterias_weight" type="double" />
+		<field name="created" type="Date" />
+		<field name="updated" type="Date" />
+		<field name="createdby" type="long" />
+		<field name="updatedby" type="long" />
+	</model>
+	<model name="tj.criterias.model.CriteriaTemplate">
+		<field name="uuid" type="String" />
+		<field name="criteria_template_id" type="long" />
+		<field name="criteria_name" type="String" />
+		<field name="criteria_category_id" type="int" />
+		<field name="created" type="Date" />
+		<field name="updated" type="Date" />
+		<field name="createdby" type="long" />
+		<field name="updatedby" type="long" />
+	</model>
+	<model name="tj.criterias.model.CriteriaValue">
+		<field name="uuid" type="String" />
+		<field name="criteria_value_id" type="long" />
+		<field name="criteria_id" type="long" />
+		<field name="userid" type="long" />
+		<field name="value" type="double" />
+		<field name="description" type="String" />
+		<field name="created" type="Date" />
+		<field name="updated" type="Date" />
+		<field name="createdby" type="long" />
+		<field name="updatedby" type="long" />
+		<field name="max_value" type="int" />
+		<field name="min_value" type="int" />
+	</model>
+</model-hints>
