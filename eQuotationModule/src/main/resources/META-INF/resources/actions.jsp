@@ -42,13 +42,13 @@
 	 
     <liferay-ui:icon-menu>
     <c:if test="<%=tab.equals(EQuotationConstants.TAB_PREPARATION) %>">
-    	<liferay-ui:icon iconCssClass="icon-edit" message="Edit" url="<%= edit.toString() %>" />  
+    	<liferay-ui:icon iconCssClass="icon-edit" message="action.EDIT" url="<%= edit.toString() %>" />  
       </c:if>
       <c:if test="<%=tab.equals(EQuotationConstants.TAB_SUBMISSION_OF_PROPOSALS) %>">
-        <liferay-ui:icon iconCssClass="icon-info-sign" message="Info" url="<%= info.toString() %>" />
+        <liferay-ui:icon iconCssClass="icon-info-sign" message="action.INFO" url="<%= info.toString() %>" />
       </c:if>
-        <liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
-        <liferay-ui:icon image="permissions" message="Permissions" url="<%= permissionsURL %>" />
+        <liferay-ui:icon iconCssClass="icon-trash" message="action.DELETE" url="<%= deleteURL.toString() %>" />
+        <liferay-ui:icon image="permissions" message="action.PERMISSIONS" url="<%= permissionsURL %>" />
     </liferay-ui:icon-menu>
     
     
