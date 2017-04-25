@@ -12,7 +12,8 @@
   Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
  
   Spisoklotov spisoklotov = null;
-		  
+  
+ 		  
   if(spisok_lotov_id != 0)
 	spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);  
   
@@ -37,12 +38,13 @@
 %>
 
 
+
 <aui:input 
 	name="bid_delivery_address" 
 	type="textarea" 
 	value="<%=mesto_postavki%>"  
 	placeholder="delivery_address" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 	>
 	 	
  	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
