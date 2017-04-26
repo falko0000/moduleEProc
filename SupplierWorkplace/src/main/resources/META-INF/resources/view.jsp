@@ -7,7 +7,7 @@
     
     // String names =(String) request.getAttribute("editnametabs");
     
-     String names = "FILING_APPLICATIONS,OPENING_AND_DETERMINING_THE_WINNER,INCOMING_ORDERS,Completed orders";
+     String names = "filing_applications,opening_and_determining_the_winner,incoming_orders,completed_orders";
      String tab = ParamUtil.getString(request, "izvewenija_tab","preparation");
     String currentURL = themeDisplay.getURLCurrent();
 %>

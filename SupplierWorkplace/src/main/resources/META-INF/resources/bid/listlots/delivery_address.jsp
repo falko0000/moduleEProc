@@ -37,7 +37,7 @@
 	  
 %>
 
-
+<aui:field-wrapper label="delivery_address">
 
 <aui:input 
 	name="bid_delivery_address" 
@@ -51,4 +51,4 @@
 
  	</aui:input>  
    
-
+</aui:field-wrapper>

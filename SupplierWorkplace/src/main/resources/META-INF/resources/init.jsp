@@ -37,8 +37,15 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.portal.kernel.security.permission.ActionKeys" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys" %>
 
+<%@ page import="java.util.Arrays" %>
+<%@page import="java.util.List" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+
+
+
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
