@@ -1,0 +1,9 @@
+Bundle-Name: Tariff-api
+Bundle-SymbolicName: tj.tariff.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.tariff.exception,\
+	tj.tariff.model,\
+	tj.tariff.service,\
+	tj.tariff.service.persistence
+-includeresource: META-INF/service.xml=../Tariff-service/service.xml

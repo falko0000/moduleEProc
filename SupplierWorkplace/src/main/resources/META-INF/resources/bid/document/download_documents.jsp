@@ -9,34 +9,27 @@
 
 <div class="table-responsive">
     <table class="table table-bordered">
-       <tr>
-       <th>
-		Documents name
-       </th>
-       <th>
-       <aui:input
-       		name="">
-       </aui:input>
-       </th>
-       </tr>
-              
-       <tbody>
-       <tr>
-       <th>
-        File4444
-       </th>       
-       <th>
-       <a>
-        -------
-       </a>
-       <a>
-        Choose
-       </a>
-
-       </th>
-       </tr>
-       
-
+     
+     <tbody>
+     <tr>
+     
+     	<td>
+    	 Document name
+     	</td>
+     	<td>
+     		<aui:input label="" name="doc_name" type="text" />
+     	</td>
+     </tr>
+     <tr>
+     	
+     	<td>
+     	   File
+     	</td>
+     	<td>
+     	<aui:input label="" name="doc_file" type="file"  />
+     	</td>
+     </tr>
+     </tbody>
      
     </table>
 </div>

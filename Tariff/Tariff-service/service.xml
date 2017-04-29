@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.tariff">
+	<namespace>FOO</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="Tariff" remote-service="false" uuid="false" table="sapp.tariff">
+
+		<column name="tariff_id" type="long" primary="true" id-type="sequence" id-param="sapp.tariff_id_seq"></column>
+	    <column name="region_id" type="long"></column>
+	    <column name="type_tariff" type="int"></column>
+	    <column name="tariff_value" type="double"></column>
+	<finder return-type="Tariff" name="regionIdTypeTariff">
+	<finder-column name="region_id"></finder-column>
+	<finder-column name="type_tariff"></finder-column>
+	
+	
+	</finder>
+	
+	</entity>
+</service-builder>
