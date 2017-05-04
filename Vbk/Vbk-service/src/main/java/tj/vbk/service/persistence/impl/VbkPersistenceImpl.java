@@ -313,6 +313,7 @@ public class VbkPersistenceImpl extends BasePersistenceImpl<Vbk>
 		vbkImpl.setKod(vbk.getKod());
 		vbkImpl.setNazvanie_tj(vbk.getNazvanie_tj());
 		vbkImpl.setNazvanie_ru(vbk.getNazvanie_ru());
+		vbkImpl.setOrganizationid(vbk.getOrganizationid());
 
 		return vbkImpl;
 	}

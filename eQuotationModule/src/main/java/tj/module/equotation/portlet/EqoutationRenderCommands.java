@@ -33,10 +33,11 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		StringBuilder names = new StringBuilder();
 		
 		names.append(EQuotationConstants.TAB_BID_GENERALINFO);
-		names.append(","+EQuotationConstants.TAB_BID_OPENING);
-		names.append(","+EQuotationConstants.TAB_BID_ABOUTINFO);
-		names.append(","+EQuotationConstants.TAB_BID_LISTLOTS);
-		names.append(","+EQuotationConstants.TAB_BID_COMMISSION);
+		names.append("," + EQuotationConstants.TAB_BID_OPENING);
+		names.append("," + EQuotationConstants.TAB_BID_ABOUTINFO);
+		names.append("," + EQuotationConstants.TAB_BID_LISTLOTS);
+		names.append("," + EQuotationConstants.TAB_BID_COMMISSION);
+		names.append("," + EQuotationConstants.TAB_BID_TENDER_DOCUMENTATION);
 		
 		renderRequest.setAttribute("editnametabs", names.toString());
 		

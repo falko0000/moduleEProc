@@ -33,7 +33,6 @@ public class CriteriaValueSoap implements Serializable {
 	public static CriteriaValueSoap toSoapModel(CriteriaValue model) {
 		CriteriaValueSoap soapModel = new CriteriaValueSoap();
 
-		soapModel.setUuid(model.getUuid());
 		soapModel.setCriteria_value_id(model.getCriteria_value_id());
 		soapModel.setCriteria_id(model.getCriteria_id());
 		soapModel.setUserid(model.getUserid());
@@ -43,8 +42,6 @@ public class CriteriaValueSoap implements Serializable {
 		soapModel.setUpdated(model.getUpdated());
 		soapModel.setCreatedby(model.getCreatedby());
 		soapModel.setUpdatedby(model.getUpdatedby());
-		soapModel.setMax_value(model.getMax_value());
-		soapModel.setMin_value(model.getMin_value());
 
 		return soapModel;
 	}
@@ -95,14 +92,6 @@ public class CriteriaValueSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCriteria_value_id(pk);
-	}
-
-	public String getUuid() {
-		return _uuid;
-	}
-
-	public void setUuid(String uuid) {
-		_uuid = uuid;
 	}
 
 	public long getCriteria_value_id() {
@@ -177,23 +166,6 @@ public class CriteriaValueSoap implements Serializable {
 		_updatedby = updatedby;
 	}
 
-	public int getMax_value() {
-		return _max_value;
-	}
-
-	public void setMax_value(int max_value) {
-		_max_value = max_value;
-	}
-
-	public int getMin_value() {
-		return _min_value;
-	}
-
-	public void setMin_value(int min_value) {
-		_min_value = min_value;
-	}
-
-	private String _uuid;
 	private long _criteria_value_id;
 	private long _criteria_id;
 	private long _userid;
@@ -203,6 +175,4 @@ public class CriteriaValueSoap implements Serializable {
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
-	private int _max_value;
-	private int _min_value;
 }

@@ -7,7 +7,7 @@
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
-
+<%@ taglib uri="http://liferay.com/tld/item-selector" prefix="liferay-item-selector" %>
 <%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
 
 <%@page import="com.liferay.portal.kernel.model.Layout" %>
@@ -145,6 +145,16 @@
 
 <%@page import="tj.spisok.tovarov.model.SpisokTovarov" %>
 <%@page import="tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil" %>
+
+<%@page import="tj.criterias.model.Criteria"%>
+<%@page import="tj.criterias.service.CriteriaLocalServiceUtil"%>
+
+
+<%@page import="tj.criterias.model.CriteriasWeight"%>
+<%@page import="tj.criterias.service.CriteriasWeightLocalServiceUtil"%>
+
+<%@page import="tj.vbk.model.Vbk"%>
+<%@page import="tj.vbk.service.VbkLocalServiceUtil"%>
 
 <liferay-theme:defineObjects />
 

@@ -14,13 +14,57 @@
  */
 --%>
 
+<%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@ include file="/init.jsp" %>
+<%@page import="com.liferay.portal.kernel.util.StringUtil"%>
 
+<%@page import="tj.spisoklotov.service.SpisoklotovLocalServiceUtil"%>
+<%@page import="tj.spisoklotov.model.Spisoklotov"%>
+<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
+<%@page import="tj.izvewenija.model.Izvewenija"%>
+<%@page import="com.liferay.portal.kernel.model.Organization"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Collections"%>
 <%
-long userGroupId = ParamUtil.getLong(request, "userGroupId");
+
+Izvewenija izvewenija = null;
+		 
+		long izvewenie_id = ParamUtil.getLong(request, "izvewenie_id");
+		 
+		 izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenie_id); 
+		 
+
+		
+   long userGroupId = izvewenija.getUserGroupId();
+
 
 UserGroup userGroup = UserGroupServiceUtil.fetchUserGroup(userGroupId);
 
+long ids[] = { 0, 0 };
+ List<Organization> organizations = Collections.emptyList();
+
+ List<Spisoklotov> spisoklotovs =  SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id());
+
+ ids[0] = izvewenija.getOrganizacija_id();
+ ids[1] = izvewenija.getOrganizacija_id();
+ 
+ if(!spisoklotovs.isEmpty())
+ {
+	   String spisoklotov = spisoklotovs.get(0).getKod_zakazchika();
+	  
+	  long vbk_id = Long.parseLong(spisoklotov);
+	  Vbk vbk = VbkLocalServiceUtil.getVbk(vbk_id);
+		 
+		ids[1] = vbk.getOrganizationid();
+ }
+for(long id : ids)
+	  System.out.println("id = " + id);
+
+ organizations =  OrganizationLocalServiceUtil.getOrganizations(ids);
+ 
+
+ 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
@@ -49,7 +93,7 @@ UserSearchTerms searchTerms = (UserSearchTerms)userSearchContainer.getSearchTerm
 LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
 if (filterManageableOrganizations) {
-	userParams.put("usersOrgsTree", user.getOrganizations());
+	userParams.put("usersOrgsTree", organizations);
 }
 
 RowChecker rowChecker = new SetUserUserGroupChecker(renderResponse, userGroup);

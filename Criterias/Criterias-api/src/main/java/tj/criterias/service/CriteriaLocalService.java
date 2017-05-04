@@ -134,6 +134,14 @@ public interface CriteriaLocalService extends BaseLocalService,
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Criteria> getCriteria(long spisok_lotov_id,
+		int criteria_category_id);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Criteria> getCriteria(long spisok_lotov_id,
+		int criteria_category_id, int criteria_type_id);
+
 	/**
 	* Returns a range of all the criterias.
 	*
@@ -147,10 +155,6 @@ public interface CriteriaLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Criteria> getCriterias(int start, int end);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Criteria> getLotAndCategory(long spisok_lotov_id,
-		int criteria_category_id);
 
 	/**
 	* Returns the number of rows matching the dynamic query.

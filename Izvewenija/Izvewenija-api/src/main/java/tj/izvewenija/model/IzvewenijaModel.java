@@ -306,6 +306,20 @@ public interface IzvewenijaModel extends BaseModel<Izvewenija>, ShardedModel {
 	 */
 	public void setUserName(String UserName);
 
+	/**
+	 * Returns the user group ID of this izvewenija.
+	 *
+	 * @return the user group ID of this izvewenija
+	 */
+	public long getUserGroupId();
+
+	/**
+	 * Sets the user group ID of this izvewenija.
+	 *
+	 * @param UserGroupId the user group ID of this izvewenija
+	 */
+	public void setUserGroupId(long UserGroupId);
+
 	@Override
 	public boolean isNew();
 

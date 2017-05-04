@@ -138,6 +138,20 @@ public class CriteriaLocalServiceWrapper implements CriteriaLocalService,
 			orderByComparator);
 	}
 
+	@Override
+	public java.util.List<tj.criterias.model.Criteria> getCriteria(
+		long spisok_lotov_id, int criteria_category_id) {
+		return _criteriaLocalService.getCriteria(spisok_lotov_id,
+			criteria_category_id);
+	}
+
+	@Override
+	public java.util.List<tj.criterias.model.Criteria> getCriteria(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id) {
+		return _criteriaLocalService.getCriteria(spisok_lotov_id,
+			criteria_category_id, criteria_type_id);
+	}
+
 	/**
 	* Returns a range of all the criterias.
 	*
@@ -153,13 +167,6 @@ public class CriteriaLocalServiceWrapper implements CriteriaLocalService,
 	public java.util.List<tj.criterias.model.Criteria> getCriterias(int start,
 		int end) {
 		return _criteriaLocalService.getCriterias(start, end);
-	}
-
-	@Override
-	public java.util.List<tj.criterias.model.Criteria> getLotAndCategory(
-		long spisok_lotov_id, int criteria_category_id) {
-		return _criteriaLocalService.getLotAndCategory(spisok_lotov_id,
-			criteria_category_id);
 	}
 
 	/**

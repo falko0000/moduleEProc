@@ -63,21 +63,6 @@ public interface CriteriaValueModel extends BaseModel<CriteriaValue> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the uuid of this criteria value.
-	 *
-	 * @return the uuid of this criteria value
-	 */
-	@AutoEscape
-	public String getUuid();
-
-	/**
-	 * Sets the uuid of this criteria value.
-	 *
-	 * @param uuid the uuid of this criteria value
-	 */
-	public void setUuid(String uuid);
-
-	/**
 	 * Returns the criteria_value_id of this criteria value.
 	 *
 	 * @return the criteria_value_id of this criteria value
@@ -203,34 +188,6 @@ public interface CriteriaValueModel extends BaseModel<CriteriaValue> {
 	 * @param updatedby the updatedby of this criteria value
 	 */
 	public void setUpdatedby(long updatedby);
-
-	/**
-	 * Returns the max_value of this criteria value.
-	 *
-	 * @return the max_value of this criteria value
-	 */
-	public int getMax_value();
-
-	/**
-	 * Sets the max_value of this criteria value.
-	 *
-	 * @param max_value the max_value of this criteria value
-	 */
-	public void setMax_value(int max_value);
-
-	/**
-	 * Returns the min_value of this criteria value.
-	 *
-	 * @return the min_value of this criteria value
-	 */
-	public int getMin_value();
-
-	/**
-	 * Sets the min_value of this criteria value.
-	 *
-	 * @param min_value the min_value of this criteria value
-	 */
-	public void setMin_value(int min_value);
 
 	@Override
 	public boolean isNew();

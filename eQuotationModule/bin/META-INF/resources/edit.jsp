@@ -77,7 +77,7 @@
         			<jsp:include page="<%=EQuotationConstants.PAGE_LISTLOTS%>" flush="true" />
     			</liferay-ui:section>
     		
-
+               
 
                 <liferay-ui:section>
 
@@ -85,7 +85,11 @@
  
     			</liferay-ui:section>
 			
-			
+		
+		        <liferay-ui:section>
+		        <jsp:include page="<%=EQuotationConstants.PAGE_TENDER_DOCUMENTATION %>"/>
+		        </liferay-ui:section>	
+		
 			</liferay-ui:tabs>
 
 

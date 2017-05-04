@@ -74,6 +74,7 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("UserName", getUserName());
+		attributes.put("UserGroupId", getUserGroupId());
 
 		return attributes;
 	}
@@ -175,6 +176,12 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 
 		if (UserName != null) {
 			setUserName(UserName);
+		}
+
+		Long UserGroupId = (Long)attributes.get("UserGroupId");
+
+		if (UserGroupId != null) {
+			setUserGroupId(UserGroupId);
 		}
 	}
 
@@ -394,6 +401,16 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	}
 
 	/**
+	* Returns the user group ID of this izvewenija.
+	*
+	* @return the user group ID of this izvewenija
+	*/
+	@Override
+	public long getUserGroupId() {
+		return _izvewenija.getUserGroupId();
+	}
+
+	/**
 	* Returns the user ID of this izvewenija.
 	*
 	* @return the user ID of this izvewenija
@@ -597,6 +614,16 @@ public class IzvewenijaWrapper implements Izvewenija, ModelWrapper<Izvewenija> {
 	@Override
 	public void setTip_izvewenija_id(long tip_izvewenija_id) {
 		_izvewenija.setTip_izvewenija_id(tip_izvewenija_id);
+	}
+
+	/**
+	* Sets the user group ID of this izvewenija.
+	*
+	* @param UserGroupId the user group ID of this izvewenija
+	*/
+	@Override
+	public void setUserGroupId(long UserGroupId) {
+		_izvewenija.setUserGroupId(UserGroupId);
 	}
 
 	/**

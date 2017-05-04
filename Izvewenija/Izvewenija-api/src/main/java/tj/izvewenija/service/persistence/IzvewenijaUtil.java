@@ -540,6 +540,513 @@ public class IzvewenijaUtil {
 	}
 
 	/**
+	* Returns all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @return the matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id);
+	}
+
+	/**
+	* Returns a range of all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @return the range of matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		int start, int end) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Returns the first izvewenija in the ordered set where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching izvewenija
+	* @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	*/
+	public static Izvewenija findByCompanyIdGroupIdSostojanieIdStatusId_First(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		OrderByComparator<Izvewenija> orderByComparator)
+		throws tj.izvewenija.exception.NoSuchIzvewenijaException {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId_First(companyId,
+			groupId, sostojanie_id, status_id, orderByComparator);
+	}
+
+	/**
+	* Returns the first izvewenija in the ordered set where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	*/
+	public static Izvewenija fetchByCompanyIdGroupIdSostojanieIdStatusId_First(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		OrderByComparator<Izvewenija> orderByComparator) {
+		return getPersistence()
+				   .fetchByCompanyIdGroupIdSostojanieIdStatusId_First(companyId,
+			groupId, sostojanie_id, status_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last izvewenija in the ordered set where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching izvewenija
+	* @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	*/
+	public static Izvewenija findByCompanyIdGroupIdSostojanieIdStatusId_Last(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		OrderByComparator<Izvewenija> orderByComparator)
+		throws tj.izvewenija.exception.NoSuchIzvewenijaException {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId_Last(companyId,
+			groupId, sostojanie_id, status_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last izvewenija in the ordered set where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	*/
+	public static Izvewenija fetchByCompanyIdGroupIdSostojanieIdStatusId_Last(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		OrderByComparator<Izvewenija> orderByComparator) {
+		return getPersistence()
+				   .fetchByCompanyIdGroupIdSostojanieIdStatusId_Last(companyId,
+			groupId, sostojanie_id, status_id, orderByComparator);
+	}
+
+	/**
+	* Returns the izvewenijas before and after the current izvewenija in the ordered set where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param izvewenija_id the primary key of the current izvewenija
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next izvewenija
+	* @throws NoSuchIzvewenijaException if a izvewenija with the primary key could not be found
+	*/
+	public static Izvewenija[] findByCompanyIdGroupIdSostojanieIdStatusId_PrevAndNext(
+		long izvewenija_id, long companyId, long groupId, long sostojanie_id,
+		long status_id, OrderByComparator<Izvewenija> orderByComparator)
+		throws tj.izvewenija.exception.NoSuchIzvewenijaException {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId_PrevAndNext(izvewenija_id,
+			companyId, groupId, sostojanie_id, status_id, orderByComparator);
+	}
+
+	/**
+	* Returns all the izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @return the matching izvewenijas that the user has permission to view
+	*/
+	public static List<Izvewenija> filterFindByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id) {
+		return getPersistence()
+				   .filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id);
+	}
+
+	/**
+	* Returns a range of all the izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @return the range of matching izvewenijas that the user has permission to view
+	*/
+	public static List<Izvewenija> filterFindByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		int start, int end) {
+		return getPersistence()
+				   .filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the izvewenijas that the user has permissions to view where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching izvewenijas that the user has permission to view
+	*/
+	public static List<Izvewenija> filterFindByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator) {
+		return getPersistence()
+				   .filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the izvewenijas before and after the current izvewenija in the ordered set of izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param izvewenija_id the primary key of the current izvewenija
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next izvewenija
+	* @throws NoSuchIzvewenijaException if a izvewenija with the primary key could not be found
+	*/
+	public static Izvewenija[] filterFindByCompanyIdGroupIdSostojanieIdStatusId_PrevAndNext(
+		long izvewenija_id, long companyId, long groupId, long sostojanie_id,
+		long status_id, OrderByComparator<Izvewenija> orderByComparator)
+		throws tj.izvewenija.exception.NoSuchIzvewenijaException {
+		return getPersistence()
+				   .filterFindByCompanyIdGroupIdSostojanieIdStatusId_PrevAndNext(izvewenija_id,
+			companyId, groupId, sostojanie_id, status_id, orderByComparator);
+	}
+
+	/**
+	* Returns all the izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @return the matching izvewenijas that the user has permission to view
+	*/
+	public static List<Izvewenija> filterFindByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids) {
+		return getPersistence()
+				   .filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids);
+	}
+
+	/**
+	* Returns a range of all the izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @return the range of matching izvewenijas that the user has permission to view
+	*/
+	public static List<Izvewenija> filterFindByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids,
+		int start, int end) {
+		return getPersistence()
+				   .filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching izvewenijas that the user has permission to view
+	*/
+	public static List<Izvewenija> filterFindByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator) {
+		return getPersistence()
+				   .filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @return the matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids);
+	}
+
+	/**
+	* Returns a range of all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @return the range of matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids,
+		int start, int end) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;, optionally using the finder cache.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link IzvewenijaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @param start the lower bound of the range of izvewenijas
+	* @param end the upper bound of the range of izvewenijas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching izvewenijas
+	*/
+	public static List<Izvewenija> findByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids,
+		int start, int end, OrderByComparator<Izvewenija> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids, start, end, orderByComparator,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes all the izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	*/
+	public static void removeByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id) {
+		getPersistence()
+			.removeByCompanyIdGroupIdSostojanieIdStatusId(companyId, groupId,
+			sostojanie_id, status_id);
+	}
+
+	/**
+	* Returns the number of izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @return the number of matching izvewenijas
+	*/
+	public static int countByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id) {
+		return getPersistence()
+				   .countByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id);
+	}
+
+	/**
+	* Returns the number of izvewenijas where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @return the number of matching izvewenijas
+	*/
+	public static int countByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids) {
+		return getPersistence()
+				   .countByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids);
+	}
+
+	/**
+	* Returns the number of izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = &#63; and status_id = &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_id the sostojanie_id
+	* @param status_id the status_id
+	* @return the number of matching izvewenijas that the user has permission to view
+	*/
+	public static int filterCountByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long sostojanie_id, long status_id) {
+		return getPersistence()
+				   .filterCountByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_id, status_id);
+	}
+
+	/**
+	* Returns the number of izvewenijas that the user has permission to view where companyId = &#63; and groupId = &#63; and sostojanie_id = any &#63; and status_id = any &#63;.
+	*
+	* @param companyId the company ID
+	* @param groupId the group ID
+	* @param sostojanie_ids the sostojanie_ids
+	* @param status_ids the status_ids
+	* @return the number of matching izvewenijas that the user has permission to view
+	*/
+	public static int filterCountByCompanyIdGroupIdSostojanieIdStatusId(
+		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids) {
+		return getPersistence()
+				   .filterCountByCompanyIdGroupIdSostojanieIdStatusId(companyId,
+			groupId, sostojanie_ids, status_ids);
+	}
+
+	/**
 	* Caches the izvewenija in the entity cache if it is enabled.
 	*
 	* @param izvewenija the izvewenija

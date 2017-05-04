@@ -142,6 +142,10 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 	public List<Izvewenija> getIzvewenija(long companyId, long groupId)
 		throws SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Izvewenija> getIzvewenija(long companyId, long groupId,
+		long[] sostojanie_ids, long[] status_ids) throws SystemException;
+
 	/**
 	* Returns a range of all the izvewenijas.
 	*
