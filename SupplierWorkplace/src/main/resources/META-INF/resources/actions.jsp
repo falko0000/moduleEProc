@@ -42,10 +42,10 @@
 	 
     <liferay-ui:icon-menu>
    
-    	<liferay-ui:icon iconCssClass="icon-edit" message="Edit" url="<%= edit.toString() %>" />  
+    	<liferay-ui:icon iconCssClass="icon-edit" message="action.EDIT" url="<%= edit.toString() %>" />  
      
      
-        <liferay-ui:icon iconCssClass="icon-info-sign" message="Info" url="<%= info.toString() %>" />
+        <liferay-ui:icon iconCssClass="icon-info-sign" message="action.INFO" url="<%= info.toString() %>" />
       
         <liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
        

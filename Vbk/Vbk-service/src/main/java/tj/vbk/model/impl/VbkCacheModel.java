@@ -63,7 +63,7 @@ public class VbkCacheModel implements CacheModel<Vbk>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{vbk_id=");
 		sb.append(vbk_id);
@@ -73,6 +73,8 @@ public class VbkCacheModel implements CacheModel<Vbk>, Externalizable {
 		sb.append(nazvanie_tj);
 		sb.append(", nazvanie_ru=");
 		sb.append(nazvanie_ru);
+		sb.append(", organizationid=");
+		sb.append(organizationid);
 		sb.append("}");
 
 		return sb.toString();
@@ -105,6 +107,8 @@ public class VbkCacheModel implements CacheModel<Vbk>, Externalizable {
 			vbkImpl.setNazvanie_ru(nazvanie_ru);
 		}
 
+		vbkImpl.setOrganizationid(organizationid);
+
 		vbkImpl.resetOriginalValues();
 
 		return vbkImpl;
@@ -116,6 +120,8 @@ public class VbkCacheModel implements CacheModel<Vbk>, Externalizable {
 		kod = objectInput.readUTF();
 		nazvanie_tj = objectInput.readUTF();
 		nazvanie_ru = objectInput.readUTF();
+
+		organizationid = objectInput.readLong();
 	}
 
 	@Override
@@ -143,10 +149,13 @@ public class VbkCacheModel implements CacheModel<Vbk>, Externalizable {
 		else {
 			objectOutput.writeUTF(nazvanie_ru);
 		}
+
+		objectOutput.writeLong(organizationid);
 	}
 
 	public long vbk_id;
 	public String kod;
 	public String nazvanie_tj;
 	public String nazvanie_ru;
+	public long organizationid;
 }

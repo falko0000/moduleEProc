@@ -14,6 +14,7 @@
 
 package tj.izvewenija.service.impl;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -121,6 +122,12 @@ return izvewenija;
 	{
 		
 		return izvewenijaPersistence.countByCompanyId_GroupId(companyId, groupId);
+	}
+	
+	public List<Izvewenija> getIzvewenija( long companyId, long groupId, long sostojanie_ids[], long status_ids[]) 
+			throws SystemException {
+		
+		return izvewenijaPersistence.filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId, groupId, sostojanie_ids, status_ids);
 	}
 	
 }

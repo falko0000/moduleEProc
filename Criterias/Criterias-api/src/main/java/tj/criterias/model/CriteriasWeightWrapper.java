@@ -58,7 +58,6 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("uuid", getUuid());
 		attributes.put("criterias_weight_id", getCriterias_weight_id());
 		attributes.put("spisok_lotov_id", getSpisok_lotov_id());
 		attributes.put("criteria_category_id", getCriteria_category_id());
@@ -73,12 +72,6 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		String uuid = (String)attributes.get("uuid");
-
-		if (uuid != null) {
-			setUuid(uuid);
-		}
-
 		Long criterias_weight_id = (Long)attributes.get("criterias_weight_id");
 
 		if (criterias_weight_id != null) {
@@ -192,16 +185,6 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 	@Override
 	public java.lang.Object clone() {
 		return new CriteriasWeightWrapper((CriteriasWeight)_criteriasWeight.clone());
-	}
-
-	/**
-	* Returns the uuid of this criterias weight.
-	*
-	* @return the uuid of this criterias weight
-	*/
-	@Override
-	public java.lang.String getUuid() {
-		return _criteriasWeight.getUuid();
 	}
 
 	@Override
@@ -418,16 +401,6 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 	@Override
 	public void setUpdatedby(long updatedby) {
 		_criteriasWeight.setUpdatedby(updatedby);
-	}
-
-	/**
-	* Sets the uuid of this criterias weight.
-	*
-	* @param uuid the uuid of this criterias weight
-	*/
-	@Override
-	public void setUuid(java.lang.String uuid) {
-		_criteriasWeight.setUuid(uuid);
 	}
 
 	@Override

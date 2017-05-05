@@ -18,6 +18,7 @@ String zakazchik = spisoklotov.getZakazchik();
 		   name="procuring_entity" 
 		   type="text" 
 		   value="<%=(spisoklotov!=null)?spisoklotov.getZakazchik():StringPool.BLANK %>"
+		   disabled="<%=true %>" 
 		   >
 		   
 	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
@@ -26,17 +27,21 @@ String zakazchik = spisoklotov.getZakazchik();
 		  
 		   
 <aui:input 
-	name="bsc_vbk" 
-	type="text" 
-	disabled="true" 
-	value="<%=kod_zakazchik%>" />
+			name="bsc_vbk" 
+			type="text" 
+			disabled="true" 
+			value="<%=kod_zakazchik%>" 
+			/>
 <aui:input 
-	name="vbk_id"
-	type="hidden" 
-	value="<%=(spisoklotov!=null)?String.valueOf(spisoklotov.getKod_zakazchika()):StringPool.BLANK%>"
-	/>
+			name="vbk_id"
+			type="hidden" 
+			value="<%=(spisoklotov!=null)?String.valueOf(spisoklotov.getKod_zakazchika()):StringPool.BLANK%>"
+			disabled="<%=true %>"
+	>
 
+	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>
 
+ 	</aui:input>
 
 
 

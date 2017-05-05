@@ -42,7 +42,7 @@
 	type="textarea" 
 	value="<%=srok_dejstvija%>"  
 	placeholder="validity" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 >
 
 	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>

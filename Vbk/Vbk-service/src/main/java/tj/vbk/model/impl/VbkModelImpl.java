@@ -63,7 +63,8 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 			{ "vbk_id", Types.BIGINT },
 			{ "kod", Types.VARCHAR },
 			{ "nazvanie_tj", Types.VARCHAR },
-			{ "nazvanie_ru", Types.VARCHAR }
+			{ "nazvanie_ru", Types.VARCHAR },
+			{ "organizationid", Types.BIGINT }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -72,9 +73,10 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 		TABLE_COLUMNS_MAP.put("kod", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("nazvanie_tj", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("nazvanie_ru", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("organizationid", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table klassifikatory.vbk (vbk_id LONG not null primary key,kod VARCHAR(75) null,nazvanie_tj VARCHAR(75) null,nazvanie_ru VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table klassifikatory.vbk (vbk_id LONG not null primary key,kod VARCHAR(75) null,nazvanie_tj VARCHAR(75) null,nazvanie_ru VARCHAR(75) null,organizationid LONG)";
 	public static final String TABLE_SQL_DROP = "drop table klassifikatory.vbk";
 	public static final String ORDER_BY_JPQL = " ORDER BY vbk.vbk_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY klassifikatory.vbk.vbk_id ASC";
@@ -130,6 +132,7 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 		attributes.put("kod", getKod());
 		attributes.put("nazvanie_tj", getNazvanie_tj());
 		attributes.put("nazvanie_ru", getNazvanie_ru());
+		attributes.put("organizationid", getOrganizationid());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -161,6 +164,12 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 
 		if (nazvanie_ru != null) {
 			setNazvanie_ru(nazvanie_ru);
+		}
+
+		Long organizationid = (Long)attributes.get("organizationid");
+
+		if (organizationid != null) {
+			setOrganizationid(organizationid);
 		}
 	}
 
@@ -220,6 +229,16 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 	}
 
 	@Override
+	public long getOrganizationid() {
+		return _organizationid;
+	}
+
+	@Override
+	public void setOrganizationid(long organizationid) {
+		_organizationid = organizationid;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			Vbk.class.getName(), getPrimaryKey());
@@ -250,6 +269,7 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 		vbkImpl.setKod(getKod());
 		vbkImpl.setNazvanie_tj(getNazvanie_tj());
 		vbkImpl.setNazvanie_ru(getNazvanie_ru());
+		vbkImpl.setOrganizationid(getOrganizationid());
 
 		vbkImpl.resetOriginalValues();
 
@@ -342,12 +362,14 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 			vbkCacheModel.nazvanie_ru = null;
 		}
 
+		vbkCacheModel.organizationid = getOrganizationid();
+
 		return vbkCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{vbk_id=");
 		sb.append(getVbk_id());
@@ -357,6 +379,8 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 		sb.append(getNazvanie_tj());
 		sb.append(", nazvanie_ru=");
 		sb.append(getNazvanie_ru());
+		sb.append(", organizationid=");
+		sb.append(getOrganizationid());
 		sb.append("}");
 
 		return sb.toString();
@@ -364,7 +388,7 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.vbk.model.Vbk");
@@ -386,6 +410,10 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 			"<column><column-name>nazvanie_ru</column-name><column-value><![CDATA[");
 		sb.append(getNazvanie_ru());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>organizationid</column-name><column-value><![CDATA[");
+		sb.append(getOrganizationid());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -400,5 +428,6 @@ public class VbkModelImpl extends BaseModelImpl<Vbk> implements VbkModel {
 	private String _kod;
 	private String _nazvanie_tj;
 	private String _nazvanie_ru;
+	private long _organizationid;
 	private Vbk _escapedModel;
 }

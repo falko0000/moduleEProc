@@ -43,7 +43,7 @@ public interface SupplierWorkplaceConstant {
 	static final String INCOMING_ORDERS = "/tabitems/incoming.jsp";
 	static final String COMPLETED_ORDERS = "/tabitems/completed.jsp";
 	static final String TAB_FILING_APPLICATION = "/application_filing.jsp";
-	static final String TAB_APPLICATION = "/bid/application.jsp";
+	static final String TAB_APPLICATION = "/bid/application/application.jsp";
 	
 	
 	
@@ -64,14 +64,30 @@ public interface SupplierWorkplaceConstant {
     static final String PAGE_FORMING_APPLICATION = "/bid/forming_application.jsp";
     
     //
-    static final String PAGE_APPLICATION = "/bid/application.jsp";
+    static final String PAGE_APPLICATION = "/bid/application/main_application_info.jsp";
     static final String PAGE_OTHER_INFORMATION = "/bid/otherinformation/main_other_info.jsp";
-    static final String PAGE_DOCUMENTATION = "/bid/application.jsp";
+    static final String PAGE_DOCUMENTATION = "/bid/document/main_docum_info.jsp";
+    static final String PAGE_DOCUMENTATION1 = "/bid/documentation1/info_document.jsp"; 
+    static final String PAGE_DOCUMENT = "/bid/document/main_docum_info.jsp";
     
     static final String PAGE_LISTLOTS_INFO = "/bid/listlots/main_listlots_info.jsp";
+    
+    static final String PAGE_INFO_DOCUMENT = "/bid/documentation1/info_document.jsp";
+    static final String PAGE_TAKE_PART = "/bid/takepart/take_part.jsp";
+    static final String PAGE_VIEW_APPLICATION = "/bid/viewapplication/main_viewapplication_info.jsp";
+    static final String PAGE_WITHDRAW_APPLICATION = "/bid/withdrawapplication/withdrawapplication.jsp";
+    static final String PAGE_REFUSE_PARTICIPATE = "/bid/refuseparticipate/refuseparticipate.jsp";
+    
+   /// static final String PAGE_TAKEPART = "bid/takepart/take_part.jsp";
     
     static final String ACTIONS_ITEM = "action_item";
     
     static final String ACTIONS_ITEM_FORMING = "Forming an application";
     static final String ACTIONS_ITEM_LOT_NAME = "Lot name";
+    static final String ACTIONS_ITEM_INFO_DOCUM = "Info docum";
+    static final String ACTIONS_ITEM_TAKE_PART = "Take part";
+    static final String ACTIONS_ITEM_VIEW_APPLICATION = "View application";
+    static final String ACTION_ITEM_WITHDRAW_APPLICATION = "Withdraw the application";
+    static final String ACTIONS_ITEM_REFUSE_PARTICIPATE = "Refuse to participate";
+
 }

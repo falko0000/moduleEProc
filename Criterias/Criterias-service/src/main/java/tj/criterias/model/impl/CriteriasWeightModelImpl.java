@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import tj.criterias.model.CriteriasWeight;
 import tj.criterias.model.CriteriasWeightModel;
@@ -62,7 +61,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	 */
 	public static final String TABLE_NAME = "sapp.criterias_weight";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", Types.VARCHAR },
 			{ "criterias_weight_id", Types.BIGINT },
 			{ "spisok_lotov_id", Types.BIGINT },
 			{ "criteria_category_id", Types.INTEGER },
@@ -75,7 +73,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
-		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("criterias_weight_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("spisok_lotov_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("criteria_category_id", Types.INTEGER);
@@ -86,7 +83,7 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criterias_weight (uuid_ VARCHAR(75) null,criterias_weight_id LONG not null primary key,spisok_lotov_id LONG,criteria_category_id INTEGER,criterias_weight DOUBLE,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criterias_weight (criterias_weight_id LONG not null primary key,spisok_lotov_id LONG,criteria_category_id INTEGER,criterias_weight DOUBLE,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criterias_weight";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteriasWeight.criterias_weight_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criterias_weight.criterias_weight_id ASC";
@@ -104,8 +101,7 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 			true);
 	public static final long CRITERIA_CATEGORY_ID_COLUMN_BITMASK = 1L;
 	public static final long SPISOK_LOTOV_ID_COLUMN_BITMASK = 2L;
-	public static final long UUID_COLUMN_BITMASK = 4L;
-	public static final long CRITERIAS_WEIGHT_ID_COLUMN_BITMASK = 8L;
+	public static final long CRITERIAS_WEIGHT_ID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.criterias.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.criterias.model.CriteriasWeight"));
 
@@ -146,7 +142,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("uuid", getUuid());
 		attributes.put("criterias_weight_id", getCriterias_weight_id());
 		attributes.put("spisok_lotov_id", getSpisok_lotov_id());
 		attributes.put("criteria_category_id", getCriteria_category_id());
@@ -164,12 +159,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		String uuid = (String)attributes.get("uuid");
-
-		if (uuid != null) {
-			setUuid(uuid);
-		}
-
 		Long criterias_weight_id = (Long)attributes.get("criterias_weight_id");
 
 		if (criterias_weight_id != null) {
@@ -218,29 +207,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
-	}
-
-	@Override
-	public String getUuid() {
-		if (_uuid == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _uuid;
-		}
-	}
-
-	@Override
-	public void setUuid(String uuid) {
-		if (_originalUuid == null) {
-			_originalUuid = _uuid;
-		}
-
-		_uuid = uuid;
-	}
-
-	public String getOriginalUuid() {
-		return GetterUtil.getString(_originalUuid);
 	}
 
 	@Override
@@ -378,7 +344,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	public Object clone() {
 		CriteriasWeightImpl criteriasWeightImpl = new CriteriasWeightImpl();
 
-		criteriasWeightImpl.setUuid(getUuid());
 		criteriasWeightImpl.setCriterias_weight_id(getCriterias_weight_id());
 		criteriasWeightImpl.setSpisok_lotov_id(getSpisok_lotov_id());
 		criteriasWeightImpl.setCriteria_category_id(getCriteria_category_id());
@@ -449,8 +414,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	public void resetOriginalValues() {
 		CriteriasWeightModelImpl criteriasWeightModelImpl = this;
 
-		criteriasWeightModelImpl._originalUuid = criteriasWeightModelImpl._uuid;
-
 		criteriasWeightModelImpl._originalSpisok_lotov_id = criteriasWeightModelImpl._spisok_lotov_id;
 
 		criteriasWeightModelImpl._setOriginalSpisok_lotov_id = false;
@@ -465,14 +428,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	@Override
 	public CacheModel<CriteriasWeight> toCacheModel() {
 		CriteriasWeightCacheModel criteriasWeightCacheModel = new CriteriasWeightCacheModel();
-
-		criteriasWeightCacheModel.uuid = getUuid();
-
-		String uuid = criteriasWeightCacheModel.uuid;
-
-		if ((uuid != null) && (uuid.length() == 0)) {
-			criteriasWeightCacheModel.uuid = null;
-		}
 
 		criteriasWeightCacheModel.criterias_weight_id = getCriterias_weight_id();
 
@@ -509,11 +464,9 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("{uuid=");
-		sb.append(getUuid());
-		sb.append(", criterias_weight_id=");
+		sb.append("{criterias_weight_id=");
 		sb.append(getCriterias_weight_id());
 		sb.append(", spisok_lotov_id=");
 		sb.append(getSpisok_lotov_id());
@@ -536,16 +489,12 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriasWeight");
 		sb.append("</model-name>");
 
-		sb.append(
-			"<column><column-name>uuid</column-name><column-value><![CDATA[");
-		sb.append(getUuid());
-		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>criterias_weight_id</column-name><column-value><![CDATA[");
 		sb.append(getCriterias_weight_id());
@@ -588,8 +537,6 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			CriteriasWeight.class
 		};
-	private String _uuid;
-	private String _originalUuid;
 	private long _criterias_weight_id;
 	private long _spisok_lotov_id;
 	private long _originalSpisok_lotov_id;

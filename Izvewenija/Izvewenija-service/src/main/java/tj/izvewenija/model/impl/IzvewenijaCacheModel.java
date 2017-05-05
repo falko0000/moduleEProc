@@ -66,7 +66,7 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{modifiedDate=");
 		sb.append(modifiedDate);
@@ -100,6 +100,8 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 		sb.append(companyId);
 		sb.append(", UserName=");
 		sb.append(UserName);
+		sb.append(", UserGroupId=");
+		sb.append(UserGroupId);
 		sb.append("}");
 
 		return sb.toString();
@@ -151,6 +153,8 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 			izvewenijaImpl.setUserName(UserName);
 		}
 
+		izvewenijaImpl.setUserGroupId(UserGroupId);
+
 		izvewenijaImpl.resetOriginalValues();
 
 		return izvewenijaImpl;
@@ -186,6 +190,8 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 
 		companyId = objectInput.readLong();
 		UserName = objectInput.readUTF();
+
+		UserGroupId = objectInput.readLong();
 	}
 
 	@Override
@@ -231,6 +237,8 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 		else {
 			objectOutput.writeUTF(UserName);
 		}
+
+		objectOutput.writeLong(UserGroupId);
 	}
 
 	public long modifiedDate;
@@ -249,4 +257,5 @@ public class IzvewenijaCacheModel implements CacheModel<Izvewenija>,
 	public long groupId;
 	public long companyId;
 	public String UserName;
+	public long UserGroupId;
 }

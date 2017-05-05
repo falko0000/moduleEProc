@@ -49,6 +49,7 @@ public class IzvewenijaSoap implements Serializable {
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserName(model.getUserName());
+		soapModel.setUserGroupId(model.getUserGroupId());
 
 		return soapModel;
 	}
@@ -230,6 +231,14 @@ public class IzvewenijaSoap implements Serializable {
 		_UserName = UserName;
 	}
 
+	public long getUserGroupId() {
+		return _UserGroupId;
+	}
+
+	public void setUserGroupId(long UserGroupId) {
+		_UserGroupId = UserGroupId;
+	}
+
 	private Date _modifiedDate;
 	private Date _createDate;
 	private long _izmenil;
@@ -246,4 +255,5 @@ public class IzvewenijaSoap implements Serializable {
 	private long _groupId;
 	private long _companyId;
 	private String _UserName;
+	private long _UserGroupId;
 }

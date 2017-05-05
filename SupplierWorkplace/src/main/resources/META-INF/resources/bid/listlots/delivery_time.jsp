@@ -37,12 +37,13 @@
 %>
 
 
+
 <aui:input 
 	name="bid_delivery_time" 
 	type="textarea" 
 	value="<%=srok_postavki%>"  
 	placeholder="bid_delivery_time" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 >
 
 	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>

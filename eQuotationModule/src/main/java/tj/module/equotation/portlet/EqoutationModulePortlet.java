@@ -10,7 +10,8 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserGroupService;
 import com.liferay.portal.kernel.service.UserService;
 
 
@@ -22,12 +23,15 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil;
+import tj.izvewenija.model.Izvewenija;
+import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.strany.service.StranyLocalServiceUtil;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
@@ -93,7 +97,11 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	names.append(","+EQuotationConstants.TAB_UNFULFILLED_TENDERS);
 	names.append(","+EQuotationConstants.TAB_COMPLETED_TENDERS);
 
-//		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
+	
+	
+	UserGroupService _userGroupService;
+//	_userGroupService.addUserGroup(name, description, serviceContext);
+	//		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
 		renderRequest.setAttribute("editnametabs", names.toString());
 		super.doView(renderRequest, renderResponse);
 	}
@@ -101,7 +109,6 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	@Override
 	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		// TODO Auto-generated method stub
 		
 		
 		super.doEdit(renderRequest, renderResponse);
@@ -128,6 +135,8 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
+		System.out.println("userGroupID=   =   ="+userGroupId);
+		
 		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
 				new ProxyModeThreadLocalCloseable()) {
 

@@ -22,6 +22,7 @@
   
 
 
+  
      <liferay-frontend:add-menu>
 	
 		<portlet:renderURL var="addIzvewenijaURL">
@@ -61,3 +62,11 @@
     			
  
 			</liferay-ui:tabs>
+			
+			<liferay-ui:input-editor name="content" initMethod="initEditor" width="100" height="400" 
+  resizable="true" ></liferay-ui:input-editor>
+			<aui:script>
+ function <portlet:namespace/>initEditor(){
+ return  "Sample CKEDITOR";
+ }
+</aui:script>

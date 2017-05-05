@@ -3,29 +3,32 @@
 
 
 <%
-String[] CAT_NAMES = new String[]{ "bid_title_delivery_address",
+String[] CAT_NAMES = new String[]{ "bid_generalinfo",
+		                            "bid_other_conditions",
+									"bid_title_delivery_address",
 		                            "bid_title_delivery_time",
 		                            "bid_validity_tenders",
-		                            "bid_software_application",
-		                            "bid_generalinfo",
+		                            "bid_software_application",		                            
 		                            "bid_info_about_customer",
 		                            "bid_source_financing",
 		                            "bid_enforcement",
-		                            "bid_other_conditions"}; 
+		                            }; 
 
  String[] deliveryaddress = new String[]{"delivery_address"};
+ String[] generalinfo = new String[]{"generalinfo"}; 
+ String[] infoaboutcustomer = new String[]{"info_about_customer"};
+ 
  String[] deliverytime = new String[]{"delivery_time"};
  String[] validity = new String[]{"validity"};
  String[] softwareapplication = new String[]{"software_application"};
  String[] enforcement = new String[]{"enforcement"};
- String[] otherconditions = new String[]{"other_conditions"};
- String[] generalinfo = new String[]{"generalinfo"};
- String[] infoaboutcustomer = new String[]{"info_about_customer"};
  String[] sourcefinancing = new String[]{"source_financing"};
+ String[] otherconditions = new String[]{"other_conditions"}; 
+ 
 
 
  
- String[][] CAT_SECTION = {deliveryaddress,deliverytime,validity,softwareapplication,enforcement,otherconditions,generalinfo,infoaboutcustomer,sourcefinancing};
+ String[][] CAT_SECTION = {deliveryaddress,generalinfo,infoaboutcustomer,deliverytime,validity,softwareapplication,enforcement,sourcefinancing,otherconditions};
  
  
 

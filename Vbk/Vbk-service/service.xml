@@ -8,6 +8,7 @@
         <column name="kod" type="String"></column>
         <column name="nazvanie_tj" type="String"></column>
         <column name="nazvanie_ru" type="String"></column>
+        <column name="organizationid" type="long"></column>
     </entity>
 	
 </service-builder>

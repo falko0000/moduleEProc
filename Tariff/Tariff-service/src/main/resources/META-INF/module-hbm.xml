@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.tariff.model.Tariff" />
+	<class name="tj.tariff.model.impl.TariffImpl" table="sapp.tariff">
+		<id name="tariff_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.tariff_id_seq</param>
+			</generator>
+		</id>
+		<property name="region_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="type_tariff" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="tariff_value" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+	</class>
+</hibernate-mapping>

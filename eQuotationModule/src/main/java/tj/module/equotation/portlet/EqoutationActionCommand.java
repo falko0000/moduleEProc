@@ -1,9 +1,16 @@
 package tj.module.equotation.portlet;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -13,30 +20,50 @@ import javax.portlet.WindowStateException;
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Image;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-
+import com.liferay.portal.kernel.service.ImageLocalServiceUtil;
+import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserGroupService;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-
+import com.liferay.taglib.ui.JournalArticleTag;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateExceptionHandler;
+import tj.criterias.model.Criteria;
+import tj.criterias.model.CriteriasWeight;
+import tj.criterias.service.CriteriaLocalServiceUtil;
+import tj.criterias.service.CriteriasWeightLocalServiceUtil;
+import tj.generate.document.GenerateDocument;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.izvewenieput.model.IzveweniePut;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
-import com.liferay.expando.kernel.model.ExpandoColumnConstants;
+import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
+import com.liferay.journal.kernel.util.JournalConverterManagerUtil;
 
 import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
+import tj.izvewenija.model.IzvewenijaWrapper;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
+import tj.izvewenija.service.IzvewenijaLocalServiceWrapper;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
@@ -46,6 +73,7 @@ import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
+
 
 @Component(
 	    immediate = true,
@@ -65,9 +93,8 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 	   String form_name = ParamUtil.getString(actionRequest, "FormName");
 	   String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-	  
-	 
-	   
+	
+  
 	  if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
 		   
 		   insertGeneralInfo( actionRequest , actionResponse);
@@ -109,10 +136,239 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   
 	   if(form_name.equals(EQuotationConstants.FORM_ADDPRODUCT) && cmd.endsWith("_"+Constants.DELETE))
 		   deleteProduct( actionRequest , actionResponse,cmd);
+	   
+	   if(form_name.equals(EQuotationConstants.FORM_CRITERIA))
+		   criteria(actionRequest, actionResponse);
+	
+	   if(form_name.equals(EQuotationConstants.FORM_TENDER_DOCUMENTATION))
+		   generateDocument(actionRequest,actionResponse);
 	}
 
 
-  private void deleteProduct(ActionRequest actionRequest, ActionResponse actionResponse,String cmd) {
+  private void generateDocument(ActionRequest actionRequest, ActionResponse actionResponse) {
+	
+	   String ROOT_FOLDER_NAME_FTL = EQuotationConstants.TEMPLATE_FTL_FOLDER_NAME;
+	   String ROOT_FOLDER_DESCRIPTION = EQuotationConstants.TEMPLATE_FTL_FOLDER_DESCRIPTION;
+	   String ROOT_FOLDER_NAME_OUT_HTML = EQuotationConstants.OUT_HTML;
+	   String template_file_name = ParamUtil.get(actionRequest, "template_file_name", "")+".ftl";
+	   long PARENT_FOLDER_ID = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		
+	  long izvewenija_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+	  String name = StringPool.BLANK;
+	  String OrgName = StringPool.BLANK;
+	 
+	    try {
+		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
+	    name = izvewenija.getNaimenovanie();
+	
+		OrgName =  OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id()).getName();
+	
+        
+		IzvewenijaWrapper izvewenijaWrapper = new IzvewenijaWrapper(izvewenija);
+		
+		Map<String, Object> input = izvewenijaWrapper.getModelAttributes();
+        
+       
+        
+        GenerateDocument generate = new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
+        												template_file_name,
+        		                                         input, "0.0", actionRequest);
+	    } catch (PortalException e) {
+		
+	}
+	 
+	  
+	  
+	  
+	  
+	
+        
+
+        
+       
+       
+	}
+
+
+private void criteria(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+	   
+	  criteriaInsertAndUpdate(actionRequest, actionResponse, "qualification", EQuotationConstants.CRITERIA_QUALIFICATION);
+      
+	  criteriaInsertAndUpdate(actionRequest, actionResponse, "technical", EQuotationConstants.CRITERIA_TECHNICAL);
+	  
+	  criteriaInsertAndUpdate(actionRequest, actionResponse, "financial", EQuotationConstants.CRITERIA_FINANCIAL);
+	  
+	  	 updateCriteriasWeight(actionRequest, actionResponse, "qualification_totalWeight", EQuotationConstants.CRITERIA_QUALIFICATION);
+	     updateCriteriasWeight(actionRequest, actionResponse, "technical_totalWeight", EQuotationConstants.CRITERIA_TECHNICAL);
+	     updateCriteriasWeight(actionRequest, actionResponse, "financial_totalWeight", EQuotationConstants.CRITERIA_FINANCIAL);
+	     
+	}
+
+  private void criteriaInsertAndUpdate(ActionRequest actionRequest, ActionResponse actionResponse,String key, int category_id)
+  {
+	  int[] Indexes = ParamUtil.getIntegerValues(actionRequest, key+"_rowIndexes", new int[0]);
+	 
+	  String ids = ParamUtil.getString(actionRequest, key+"_initial_data_ids");
+	 
+	  User user=(User) actionRequest.getAttribute(WebKeys.USER);
+	  
+	  long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+	  
+	  int criteria_type_id = ParamUtil.getInteger(actionRequest, "criteria_type_id");
+	 
+	  ids = ids.replaceAll("on,","");
+	  ids = (ids.length()>0)?ids+",":ids;
+	  
+      
+	   
+	  
+	  for(int a : Indexes )
+	  {
+	      
+		
+	      String criteriaName = ParamUtil.getString(actionRequest,key+"_criteriaName"+a); 
+	      Number criteriaWeight = ParamUtil.getNumber(actionRequest, key+"_criteriaWeight"+a);
+	      String description_criteria = ParamUtil.getString(actionRequest, key+"_description_criteria"+a);
+	      
+	      long criteria_id = ParamUtil.getLong(actionRequest, key+"_criteria_id"+a);
+	    
+	       ids = ids.replaceAll(String.valueOf(criteria_id)+",","");
+	       
+	      if(criteria_id != 0)
+	    	  updateCriteria(criteria_id, criteriaName,
+	    			  		criteriaWeight, 
+	    			  		0, user.getUserId(),description_criteria);
+	      else
+	    	 insertCriteria( criteriaName,criteriaWeight,
+  			  				0, user.getUserId(), category_id,
+  			  				spisok_lotov_id, description_criteria, criteria_type_id);  
+	      
+		
+	  }
+	  
+	  deleteCriteria(ids); 
+  }
+
+  private void updateCriteriasWeight(ActionRequest actionRequest, ActionResponse actionResponse , String key, int category) {
+	
+	
+	double totalWeight = ParamUtil.getDouble(actionRequest, key);
+  	
+  	User user=(User) actionRequest.getAttribute(WebKeys.USER);
+	  long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+	  
+   CriteriasWeight Weight = CriteriasWeightLocalServiceUtil.getCriteriasWeight(spisok_lotov_id, category);
+
+  
+      if(Weight == null)
+      {
+    	long  criterias_weight_id = CounterLocalServiceUtil.increment(CriteriasWeight.class.toString()); 
+    		
+    		CriteriasWeight criteriasWeight = CriteriasWeightLocalServiceUtil.createCriteriasWeight(criterias_weight_id);
+            
+    		criteriasWeight.setSpisok_lotov_id(spisok_lotov_id);
+    		criteriasWeight.setCriterias_weight(totalWeight);
+    		criteriasWeight.setCriteria_category_id(category);
+    		criteriasWeight.setCreated(new Date());
+    		criteriasWeight.setUpdated(new Date());
+    		criteriasWeight.setCreatedby(user.getUserId());
+    		criteriasWeight.setUpdatedby(user.getUserId());
+    		CriteriasWeightLocalServiceUtil.addCriteriasWeight(criteriasWeight);
+    	}
+      else
+      {
+    	  Weight.setCriterias_weight(totalWeight);
+          Weight.setUpdated(new Date());
+          Weight.setCreatedby(user.getUserId());
+          CriteriasWeightLocalServiceUtil.updateCriteriasWeight(Weight);
+      }
+	
+}
+
+
+private void insertCriteria(String qualification_criteriaName,Number qualification_criteriaWeight, 
+							Number qualification_weightMin, long userId, int category_id,
+							long spisok_lotov_id, String descriptionCriteria, int criteria_type_id) {
+	
+	 long qualification_criteria_id = CounterLocalServiceUtil.increment(Criteria.class.toString());
+	 
+     	Criteria criteria = CriteriaLocalServiceUtil.createCriteria(qualification_criteria_id);
+     	criteria.setCriteria_name(qualification_criteriaName);
+        criteria.setCriteria_weight(qualification_criteriaWeight.doubleValue());
+        criteria.setMax_weight(qualification_criteriaWeight.intValue());
+        criteria.setMin_weight(qualification_weightMin.intValue());
+        criteria.setSpisok_lotov_id(spisok_lotov_id);
+        criteria.setCreated(new Date());
+        criteria.setUpdated(new Date());
+        criteria.setCreatedby(userId);
+        criteria.setUpdatedby(userId);
+        criteria.setCriteria_description(descriptionCriteria);
+        criteria.setCriteria_category_id(category_id);
+        criteria.setCriteria_type_id(criteria_type_id);
+        CriteriaLocalServiceUtil.addCriteria(criteria);
+}
+
+
+private void updateCriteria(long qualification_criteria_id, String qualification_criteriaName,
+							Number qualification_criteriaWeight,
+							Number qualification_weightMin, long userId, String descriptionCriteria) {
+	
+	Criteria criteria = null;
+	Criteria cloneCriteria = null;
+	try {
+		criteria = CriteriaLocalServiceUtil.getCriteria(qualification_criteria_id);
+         cloneCriteria =(Criteria) criteria.clone();
+	  
+         cloneCriteria.setCriteria_name(qualification_criteriaName);
+         cloneCriteria.setCriteria_weight(qualification_criteriaWeight.doubleValue());
+         cloneCriteria.setMax_weight(qualification_criteriaWeight.intValue());
+         cloneCriteria.setMin_weight(qualification_weightMin.intValue());
+         cloneCriteria.setCriteria_description(descriptionCriteria);
+         
+        if(criteria.getCriteria_weight()!=cloneCriteria.getCriteria_weight() ||
+        	!criteria.getCriteria_name().equals(cloneCriteria.getCriteria_name()) ||
+        	!criteria.getCriteria_description().equals(cloneCriteria.getCriteria_description()))
+        {
+        cloneCriteria.setUpdated(new Date());
+    	cloneCriteria.setUpdatedby(userId);
+      CriteriaLocalServiceUtil.updateCriteria(cloneCriteria);
+        }
+               
+	} catch (PortalException e) {
+		
+	}
+	
+	  
+	
+	
+}
+
+
+private void deleteCriteria(String ids) {
+	
+
+	
+	long defaultValue = 0;
+	long[] idsForDelete = StringUtil.split(ids, defaultValue);
+	
+	
+	for(long criteria_id : idsForDelete)
+
+        if(criteria_id!=0)
+		try {
+			CriteriaLocalServiceUtil.deleteCriteria(criteria_id);
+		} catch (PortalException e) {
+			
+		}
+	
+		
+	
+	
+}
+
+
+private void deleteProduct(ActionRequest actionRequest, ActionResponse actionResponse,String cmd) {
 		
 	 
 	  String ids ="";
@@ -143,7 +399,9 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 
 private void updateProduct(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
-     
+    
+  
+	
 	long spisok_tovarov_id = ParamUtil.getLong(actionRequest, "spisok_tovarov_id");
 	
 	String name_goods = ParamUtil.getString(actionRequest, "name_goods");
@@ -524,10 +782,27 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
     		                            .insertIzvewenija(EQuotationConstants.STATE_BID_PREPARATION, 
     		                                              EQuotationConstants.STATUS_BID_PREPARATION,
     		                                              bid_method,org_ids[0],name, serviceContext);
-		
-
       
-	  
+      String description = "This group for member commission bid number "+String.valueOf(inserted_izvewenija.getIzvewenija_id());
+      String groupName = "bid number " + String.valueOf(inserted_izvewenija.getIzvewenija_id());
+     
+  
+		
+	                   
+		UserGroup userGroup = null;
+		try {
+			userGroup = UserGroupLocalServiceUtil.addUserGroup(serviceContext.getUserId(), serviceContext.getCompanyId(),
+					                name,description, serviceContext);
+			inserted_izvewenija.setUserGroupId(userGroup.getUserGroupId());
+		    IzvewenijaLocalServiceUtil.updateIzvewenija(inserted_izvewenija);
+		    
+		System.out.println("omad------------------------------------------!");
+		} catch (PortalException e1) {
+			
+			System.out.println("naomad---------------------------------------!");
+		}
+	                     
+      
     
 	 IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(inserted_izvewenija.getIzvewenija_id());
 		
@@ -898,9 +1173,5 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	    spisoklotov = SpisoklotovLocalServiceUtil.updateSpisoklotov(spisoklotov);
 	
 	}
-
-
-
-
 
 }

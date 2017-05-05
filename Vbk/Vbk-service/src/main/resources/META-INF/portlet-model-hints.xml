@@ -6,5 +6,6 @@
 		<field name="kod" type="String" />
 		<field name="nazvanie_tj" type="String" />
 		<field name="nazvanie_ru" type="String" />
+		<field name="organizationid" type="long" />
 	</model>
 </model-hints>

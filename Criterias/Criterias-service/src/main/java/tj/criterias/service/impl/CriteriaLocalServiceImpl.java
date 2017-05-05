@@ -37,8 +37,13 @@ import tj.criterias.service.base.CriteriaLocalServiceBaseImpl;
 @ProviderType
 public class CriteriaLocalServiceImpl extends CriteriaLocalServiceBaseImpl {
 	
-	public List<Criteria> getLotAndCategory(long spisok_lotov_id,int criteria_category_id)
+	public List<Criteria> getCriteria(long spisok_lotov_id,int criteria_category_id)
 	{
 		return criteriaPersistence.findByLotIdAndCategoryId(spisok_lotov_id, criteria_category_id);
+	}
+	
+	public List<Criteria> getCriteria(long spisok_lotov_id,int criteria_category_id, int criteria_type_id) {
+		
+		return criteriaPersistence.findByLotIdCategoryIdAndTypeId(spisok_lotov_id, criteria_category_id, criteria_type_id);
 	}
 }

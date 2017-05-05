@@ -33,7 +33,6 @@ public class CriteriaSoap implements Serializable {
 	public static CriteriaSoap toSoapModel(Criteria model) {
 		CriteriaSoap soapModel = new CriteriaSoap();
 
-		soapModel.setUuid(model.getUuid());
 		soapModel.setCriteria_id(model.getCriteria_id());
 		soapModel.setCriteria_name(model.getCriteria_name());
 		soapModel.setCriteria_weight(model.getCriteria_weight());
@@ -44,6 +43,9 @@ public class CriteriaSoap implements Serializable {
 		soapModel.setUpdated(model.getUpdated());
 		soapModel.setCreatedby(model.getCreatedby());
 		soapModel.setUpdatedby(model.getUpdatedby());
+		soapModel.setMax_weight(model.getMax_weight());
+		soapModel.setMin_weight(model.getMin_weight());
+		soapModel.setCriteria_type_id(model.getCriteria_type_id());
 
 		return soapModel;
 	}
@@ -94,14 +96,6 @@ public class CriteriaSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCriteria_id(pk);
-	}
-
-	public String getUuid() {
-		return _uuid;
-	}
-
-	public void setUuid(String uuid) {
-		_uuid = uuid;
 	}
 
 	public long getCriteria_id() {
@@ -184,7 +178,30 @@ public class CriteriaSoap implements Serializable {
 		_updatedby = updatedby;
 	}
 
-	private String _uuid;
+	public int getMax_weight() {
+		return _max_weight;
+	}
+
+	public void setMax_weight(int max_weight) {
+		_max_weight = max_weight;
+	}
+
+	public int getMin_weight() {
+		return _min_weight;
+	}
+
+	public void setMin_weight(int min_weight) {
+		_min_weight = min_weight;
+	}
+
+	public int getCriteria_type_id() {
+		return _criteria_type_id;
+	}
+
+	public void setCriteria_type_id(int criteria_type_id) {
+		_criteria_type_id = criteria_type_id;
+	}
+
 	private long _criteria_id;
 	private String _criteria_name;
 	private double _criteria_weight;
@@ -195,4 +212,7 @@ public class CriteriaSoap implements Serializable {
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private int _max_weight;
+	private int _min_weight;
+	private int _criteria_type_id;
 }

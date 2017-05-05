@@ -136,6 +136,18 @@ public class CriteriaLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<tj.criterias.model.Criteria> getCriteria(
+		long spisok_lotov_id, int criteria_category_id) {
+		return getService().getCriteria(spisok_lotov_id, criteria_category_id);
+	}
+
+	public static java.util.List<tj.criterias.model.Criteria> getCriteria(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id) {
+		return getService()
+				   .getCriteria(spisok_lotov_id, criteria_category_id,
+			criteria_type_id);
+	}
+
 	/**
 	* Returns a range of all the criterias.
 	*
@@ -150,12 +162,6 @@ public class CriteriaLocalServiceUtil {
 	public static java.util.List<tj.criterias.model.Criteria> getCriterias(
 		int start, int end) {
 		return getService().getCriterias(start, end);
-	}
-
-	public static java.util.List<tj.criterias.model.Criteria> getLotAndCategory(
-		long spisok_lotov_id, int criteria_category_id) {
-		return getService()
-				   .getLotAndCategory(spisok_lotov_id, criteria_category_id);
 	}
 
 	/**

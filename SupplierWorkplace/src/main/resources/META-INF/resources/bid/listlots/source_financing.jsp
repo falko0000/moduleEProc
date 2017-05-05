@@ -34,11 +34,7 @@
 						       (finansirovanija.getIstochnik_finansirovanija_id()==spisoklotov.getIstochnik_finansirovanija_id())?true:false;
 			}
 			
-		}
-		
-
-
-	  
+		}		  
 %>
 
 
@@ -51,7 +47,7 @@
 	value="<%=finansirovanija.getIstochnik_finansirovanija_id() %>" 
 	label="<%=finansirovanija.getNaimenovanie() %>" 
 	checked = "<%=delivery_time_p[(int)finansirovanija.getIstochnik_finansirovanija_id()] %>"
-	disabled="<%=disabled %>" 
+	disabled="<%=true %>" 
 />
 
 <%} %>
