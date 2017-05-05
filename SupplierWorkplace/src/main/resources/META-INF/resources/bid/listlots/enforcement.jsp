@@ -71,7 +71,7 @@
 	value="0" 
 	label="bid_ensuring_the_application_is_not_required" 
 	checked = "<%=delivery_time_q[0] %>"
-	disabled="<%=disabled %>" 
+	disabled="<%=true %>"
 />
 
 
@@ -81,7 +81,7 @@
 	value="1" 
 	label="bid_bonds"
 	checked = "<%=delivery_time_q[1] %>" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
 
 
@@ -91,7 +91,7 @@
 	value="2" 
 	label="bid_bank_guarantee"
 	checked = "<%=delivery_time_q[2] %>" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
 
 
@@ -101,7 +101,7 @@
 	value="3" 
 	label="bid_paper"
 	checked = "<%=delivery_time_q[3] %>" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
 
 <aui:input 
@@ -110,7 +110,7 @@
 	value="4" 
 	label="bid_deposits"
 	checked = "<%=delivery_time_q[4] %>" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
 
 <aui:input 
@@ -119,7 +119,7 @@
 	value="5" 
 	label="bid_Free_float"
 	checked = "<%=delivery_time_q[5] %>" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
 
 <aui:input 
@@ -128,7 +128,7 @@
 	value="6" 
 	label="bid_percentage"  
 	checked = "<%=delivery_time_q[6] %>" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
  <aui:field-wrapper>
 <aui:input 
@@ -138,7 +138,7 @@
 	label="big_term_and_procedure_of_the_software_application" 
 	inlineField="true" 
 	checked = "<%=delivery_time_q[7] %>" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
 
 <aui:input 
@@ -149,7 +149,7 @@
 	step="0.1" 
 	min="0.0" 
 	max="3.0" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 />
 
 
@@ -159,7 +159,7 @@
 	type="textarea" 
 	value="<%=srok_ispolnenija_zajavki%>"  
 	placeholder="bid_performance_contract" 
-	disabled="<%=disabled %>"
+	disabled="<%=true %>"
 >
 
 	<aui:validator name="required" errorMessage="this-field-is-mandatory"/>

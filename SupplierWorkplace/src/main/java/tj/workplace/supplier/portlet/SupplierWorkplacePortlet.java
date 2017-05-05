@@ -7,6 +7,7 @@ import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 	   List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 		
+
 	super.doView(renderRequest, renderResponse);
 }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.tariff.model.Tariff">
+		<field name="tariff_id" type="long" />
+		<field name="region_id" type="long" />
+		<field name="type_tariff" type="int" />
+		<field name="tariff_value" type="double" />
+	</model>
+</model-hints>

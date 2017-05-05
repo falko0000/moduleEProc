@@ -1,0 +1,1 @@
+create sequence sapp.tariff_id_seq;

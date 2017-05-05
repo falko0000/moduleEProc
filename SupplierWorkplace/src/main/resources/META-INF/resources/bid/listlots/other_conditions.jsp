@@ -49,7 +49,7 @@
 		type="textarea" 
 		value="<%=oplata%>"  
 		placeholder="bid_performance_contract"
-		disabled="<%=disabled %>"
+		disabled="<%=true %>"
 >
  
 <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
@@ -61,7 +61,7 @@
 		type="textarea" 
 		value="<%=cena_postavki%>"  
 		placeholder="bid_performance_contract"
-		disabled="<%=disabled %>"
+		disabled="<%=true %>"
  >
  
  <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
@@ -73,7 +73,7 @@
 		type="textarea" 
 		value="<%=soputstvujuwie_uslovija%>"  
 		placeholder="bid_performance_contract"
-		disabled="<%=disabled %>"
+		disabled="<%=true %>"
 >
 
    <aui:validator name="required" errorMessage="this-field-is-mandatory"/>
