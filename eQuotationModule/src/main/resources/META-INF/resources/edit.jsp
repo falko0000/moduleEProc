@@ -52,7 +52,7 @@
 </portlet:renderURL>
 
 
-
+<% System.out.println("edit.jsp=====" + names); %>
 
     <liferay-ui:tabs names="<%=names %>" url="<%=tabs.toString()%>" param="edit_tab"  refresh="<%=false%>" value ="<%=tab %>"> 
  

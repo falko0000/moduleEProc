@@ -34,8 +34,10 @@
 	
 	</liferay-frontend:add-menu>
 	
-			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="izvewenija_tab" > 
- 
+		
+ 			<liferay-ui:tabs names="<%=names %>" 
+							 url="<%=tabURL.toString()%>"
+ 							 param="izvewenija_tab" >
              <liferay-ui:section>
     		    <jsp:include page="<%=EQuotationConstants.PAGE_PREPARATION%>" flush="true" />
     		</liferay-ui:section>
