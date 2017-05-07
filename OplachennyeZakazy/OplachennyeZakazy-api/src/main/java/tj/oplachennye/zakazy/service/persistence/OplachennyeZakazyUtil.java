@@ -35,7 +35,11 @@ import java.util.List;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazyPersistence
  * @see tj.oplachennye.zakazy.service.persistence.impl.OplachennyeZakazyPersistenceImpl
  * @generated

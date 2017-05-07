@@ -53,10 +53,11 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil" %>
 
 <%@page import="tj.oplachennye.zakazy.model.OplachennyeZakazy" %>
-
+<%@page import="tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil"%>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
 
 
 

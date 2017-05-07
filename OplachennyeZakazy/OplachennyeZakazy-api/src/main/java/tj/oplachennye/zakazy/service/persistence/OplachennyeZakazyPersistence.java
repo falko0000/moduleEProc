@@ -28,7 +28,11 @@ import tj.oplachennye.zakazy.model.OplachennyeZakazy;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see tj.oplachennye.zakazy.service.persistence.impl.OplachennyeZakazyPersistenceImpl
  * @see OplachennyeZakazyUtil
  * @generated

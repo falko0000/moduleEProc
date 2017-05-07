@@ -23,7 +23,11 @@ import aQute.bnd.annotation.ProviderType;
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link tj.oplachennye.zakazy.model.OplachennyeZakazy} interface.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  */
 @ProviderType
 public class OplachennyeZakazyImpl extends OplachennyeZakazyBaseImpl {

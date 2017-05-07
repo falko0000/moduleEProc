@@ -1,0 +1,9 @@
+Bundle-Name: OplachennyeZakazy-api
+Bundle-SymbolicName: tj.oplachennye.zakazy.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.oplachennye.zakazy.exception,\
+	tj.oplachennye.zakazy.model,\
+	tj.oplachennye.zakazy.service,\
+	tj.oplachennye.zakazy.service.persistence
+-includeresource: META-INF/service.xml=../OplachennyeZakazy-service/service.xml

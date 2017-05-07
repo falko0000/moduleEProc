@@ -23,7 +23,11 @@ import com.liferay.portal.kernel.util.Accessor;
 /**
  * The extended model interface for the OplachennyeZakazy service. Represents a row in the &quot;sapp.oplachennye_zakazy&quot; database table, with each column mapped to a property of this class.
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazyModel
  * @see tj.oplachennye.zakazy.model.impl.OplachennyeZakazyImpl
  * @see tj.oplachennye.zakazy.model.impl.OplachennyeZakazyModelImpl

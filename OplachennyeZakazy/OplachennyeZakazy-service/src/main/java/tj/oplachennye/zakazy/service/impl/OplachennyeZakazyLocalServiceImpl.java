@@ -19,7 +19,6 @@ import tj.oplachennye.zakazy.exception.NoSuchOplachennyeZakazyException;
 import tj.oplachennye.zakazy.model.OplachennyeZakazy;
 import tj.oplachennye.zakazy.service.base.OplachennyeZakazyLocalServiceBaseImpl;
 
-
 /**
  * The implementation of the oplachennye zakazy local service.
  *
@@ -30,16 +29,27 @@ import tj.oplachennye.zakazy.service.base.OplachennyeZakazyLocalServiceBaseImpl;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazyLocalServiceBaseImpl
  * @see tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil
  */
 @ProviderType
-public class OplachennyeZakazyLocalServiceImpl extends OplachennyeZakazyLocalServiceBaseImpl {
+public class OplachennyeZakazyLocalServiceImpl
+	extends OplachennyeZakazyLocalServiceBaseImpl {
 
-	
-	public OplachennyeZakazy getOplachennyZakazy(long postavwik_id, long izvewenie_id) throws NoSuchOplachennyeZakazyException   {
+	public  boolean isPaid( long postavwik_id, long izvewenija_id) {
 		
-		return oplachennyeZakazyPersistence.findBypostavwikIdIzvewenieId(postavwik_id, izvewenie_id);
+		boolean ispaid = false;
+		try {
+			oplachennyeZakazyPersistence.findBypostavwikIdIzvewenieId(postavwik_id, izvewenija_id);
+		   ispaid = true;	
+		} catch (NoSuchOplachennyeZakazyException e) {
+		   
+		}
+		return ispaid;
 	}
 }

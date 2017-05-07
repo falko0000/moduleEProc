@@ -33,7 +33,11 @@ import java.util.Objects;
  * This class is a wrapper for {@link OplachennyeZakazy}.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazy
  * @generated
  */

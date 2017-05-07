@@ -33,7 +33,11 @@ import java.util.Date;
 /**
  * The cache model class for representing OplachennyeZakazy in entity cache.
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazy
  * @generated
  */

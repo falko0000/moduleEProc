@@ -9,7 +9,7 @@
  long OrgId = UserServiceUtil.getCurrentUser().getOrganizations().get(0).getOrganizationId();
  
    BalansPostavwika balanspostavwik = BalansPostavwikaLocalServiceUtil.getBalansPostavwik(OrgId);
-  System.out.println(balanspostavwik.getBalans());
+  
 %>
 <c:if test="<%= tariff.getTariff_value()<=balanspostavwik.getBalans()%>">
 <liferay-ui:alert timeout="100000"  message="befor_participating" type="info"></liferay-ui:alert>

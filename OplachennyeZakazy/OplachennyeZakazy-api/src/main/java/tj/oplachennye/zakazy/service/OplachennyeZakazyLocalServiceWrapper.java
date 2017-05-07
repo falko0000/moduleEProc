@@ -21,7 +21,11 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link OplachennyeZakazyLocalService}.
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazyLocalService
  * @generated
  */
@@ -32,6 +36,11 @@ public class OplachennyeZakazyLocalServiceWrapper
 	public OplachennyeZakazyLocalServiceWrapper(
 		OplachennyeZakazyLocalService oplachennyeZakazyLocalService) {
 		_oplachennyeZakazyLocalService = oplachennyeZakazyLocalService;
+	}
+
+	@Override
+	public boolean isPaid(long postavwik_id, long izvewenija_id) {
+		return _oplachennyeZakazyLocalService.isPaid(postavwik_id, izvewenija_id);
 	}
 
 	@Override
@@ -238,14 +247,6 @@ public class OplachennyeZakazyLocalServiceWrapper
 	public tj.oplachennye.zakazy.model.OplachennyeZakazy fetchOplachennyeZakazy(
 		long oplachennye_zakazy_id) {
 		return _oplachennyeZakazyLocalService.fetchOplachennyeZakazy(oplachennye_zakazy_id);
-	}
-
-	@Override
-	public tj.oplachennye.zakazy.model.OplachennyeZakazy getOplachennyZakazy(
-		long postavwik_id, long izvewenie_id)
-		throws tj.oplachennye.zakazy.exception.NoSuchOplachennyeZakazyException {
-		return _oplachennyeZakazyLocalService.getOplachennyZakazy(postavwik_id,
-			izvewenie_id);
 	}
 
 	/**

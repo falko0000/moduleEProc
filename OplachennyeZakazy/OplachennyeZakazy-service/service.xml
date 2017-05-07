@@ -2,9 +2,14 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
 
 <service-builder package-path="tj.oplachennye.zakazy">
-		<namespace>Oplachennye_zakazy</namespace>
-	
-		<entity local-service="true" name="OplachennyeZakazy" remote-service="false" uuid="false" table="sapp.oplachennye_zakazy" >
+	<author>
+    Ashurov Shohin 
+   
+    falko000012@gmail.com
+	</author>
+	<namespace>Oplachennye_zakazy</namespace>
+
+	<entity local-service="true" name="OplachennyeZakazy" remote-service="false" uuid="false" table="sapp.oplachennye_zakazy" >
 	 	
 			<column name="oplachennye_zakazy_id" type="long" primary="true" id-type="sequence" id-param="sapp.oplachennye_zakazy_id_seq"></column>
 			<column name="tranzakcija" type="String"></column>
@@ -21,5 +26,4 @@
 
 		
 	</entity>
-	
 </service-builder>

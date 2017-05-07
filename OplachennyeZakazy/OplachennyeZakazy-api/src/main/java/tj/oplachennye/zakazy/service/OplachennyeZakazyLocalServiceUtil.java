@@ -28,7 +28,11 @@ import org.osgi.util.tracker.ServiceTracker;
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazyLocalService
  * @see tj.oplachennye.zakazy.service.base.OplachennyeZakazyLocalServiceBaseImpl
  * @see tj.oplachennye.zakazy.service.impl.OplachennyeZakazyLocalServiceImpl
@@ -41,6 +45,10 @@ public class OplachennyeZakazyLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link tj.oplachennye.zakazy.service.impl.OplachennyeZakazyLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static boolean isPaid(long postavwik_id, long izvewenija_id) {
+		return getService().isPaid(postavwik_id, izvewenija_id);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}
@@ -225,12 +233,6 @@ public class OplachennyeZakazyLocalServiceUtil {
 	public static tj.oplachennye.zakazy.model.OplachennyeZakazy fetchOplachennyeZakazy(
 		long oplachennye_zakazy_id) {
 		return getService().fetchOplachennyeZakazy(oplachennye_zakazy_id);
-	}
-
-	public static tj.oplachennye.zakazy.model.OplachennyeZakazy getOplachennyZakazy(
-		long postavwik_id, long izvewenie_id)
-		throws tj.oplachennye.zakazy.exception.NoSuchOplachennyeZakazyException {
-		return getService().getOplachennyZakazy(postavwik_id, izvewenie_id);
 	}
 
 	/**

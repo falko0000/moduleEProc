@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import tj.oplachennye.zakazy.exception.NoSuchOplachennyeZakazyException;
 import tj.oplachennye.zakazy.model.OplachennyeZakazy;
 
 import java.io.Serializable;
@@ -45,7 +44,11 @@ import java.util.List;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author Brian Wing Shun Chan
+ * @author
+    Ashurov Shohin
+
+    falko000012@gmail.com
+
  * @see OplachennyeZakazyLocalServiceUtil
  * @see tj.oplachennye.zakazy.service.base.OplachennyeZakazyLocalServiceBaseImpl
  * @see tj.oplachennye.zakazy.service.impl.OplachennyeZakazyLocalServiceImpl
@@ -61,6 +64,9 @@ public interface OplachennyeZakazyLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link OplachennyeZakazyLocalServiceUtil} to access the oplachennye zakazy local service. Add custom service methods to {@link tj.oplachennye.zakazy.service.impl.OplachennyeZakazyLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isPaid(long postavwik_id, long izvewenija_id);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
@@ -208,10 +214,6 @@ public interface OplachennyeZakazyLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public OplachennyeZakazy fetchOplachennyeZakazy(long oplachennye_zakazy_id);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public OplachennyeZakazy getOplachennyZakazy(long postavwik_id,
-		long izvewenie_id) throws NoSuchOplachennyeZakazyException;
 
 	/**
 	* Returns the oplachennye zakazy with the primary key.
