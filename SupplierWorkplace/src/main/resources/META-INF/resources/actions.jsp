@@ -42,7 +42,7 @@
 	 
     <liferay-ui:icon-menu>
    
-    	<liferay-ui:icon iconCssClass="icon-edit" message="action.EDIT" url="<%= edit.toString() %>" />  
+    	<liferay-ui:icon iconCssClass="icon-edit" message="action.order_details" url="<%= edit.toString() %>" />  
      
      
         <liferay-ui:icon iconCssClass="icon-info-sign" message="action.INFO" url="<%= info.toString() %>" />

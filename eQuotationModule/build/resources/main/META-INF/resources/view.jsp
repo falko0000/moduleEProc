@@ -6,6 +6,7 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.security.permission.ActionKeys"%>
 <%@ include file="/init.jsp" %>
 
 <portlet:renderURL var="tabURL" />
@@ -17,12 +18,20 @@
     
      String tab = ParamUtil.getString(request, "izvewenija_tab","preparation");
     String currentURL = themeDisplay.getURLCurrent();
+
+    String portlet = portletDisplay.getRootPortletId();
+    long  companyId = themeDisplay.getCompanyId();
+
+    String primKey = portletDisplay.getResourcePK(); 
+    long role[] = permissionChecker.getRoleIds(permissionChecker.getUserId(), themeDisplay.getScopeGroupId());
+    
+    
 %>
 
   
 
 
-  
+    <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, ActionKeys.ADD_ENTRY ) %>">
      <liferay-frontend:add-menu>
 	
 		<portlet:renderURL var="addIzvewenijaURL">
@@ -34,7 +43,7 @@
 		<liferay-frontend:add-menu-item title='ADD' url="<%= addIzvewenijaURL.toString() %>" />
 	
 	</liferay-frontend:add-menu>
-	
+	</c:if>
 			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="izvewenija_tab" > 
  
              <liferay-ui:section>
