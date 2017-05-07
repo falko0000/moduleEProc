@@ -26,7 +26,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 
 	@Override
 	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

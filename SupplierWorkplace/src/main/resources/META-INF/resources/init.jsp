@@ -10,7 +10,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 
 <%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
-
+<%@page import="java.util.Collections" %>
 <%@page import="tj.istochnik.finansirovanija.model.IstochnikFinansirovanija" %>
 <%@page import="tj.istochnik.finansirovanija.service.IstochnikFinansirovanijaLocalServiceUtil" %>
 <%@page import="tj.izvewenieput.model.IzveweniePut"%>
@@ -28,6 +28,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="javax.portlet.ActionRequest"%>
 <%@page import="javax.portlet.WindowState" %>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
+<%@page import="com.liferay.portal.kernel.util.ListUtil"%>
 <%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
 <%@page import="com.liferay.portal.kernel.util.Constants" %>
 <%@page import="tj.module.suppworkplace.constant.SupplierWorkplaceConstant" %>

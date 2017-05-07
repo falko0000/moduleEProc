@@ -27,13 +27,18 @@ import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.ImageLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupService;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
@@ -93,8 +98,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 	   String form_name = ParamUtil.getString(actionRequest, "FormName");
 	   String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-	
-  
+
 	  if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
 		   
 		   insertGeneralInfo( actionRequest , actionResponse);
@@ -226,6 +230,9 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	  for(int a : Indexes )
 	  {
 	      
+		 PermissionChecker permissionChecker;
+		 ThemeDisplay themeDisplay;
+		
 		
 	      String criteriaName = ParamUtil.getString(actionRequest,key+"_criteriaName"+a); 
 	      Number criteriaWeight = ParamUtil.getNumber(actionRequest, key+"_criteriaWeight"+a);
@@ -252,7 +259,8 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 
   private void updateCriteriasWeight(ActionRequest actionRequest, ActionResponse actionResponse , String key, int category) {
 	
-	
+	  
+	  
 	double totalWeight = ParamUtil.getDouble(actionRequest, key);
   	
   	User user=(User) actionRequest.getAttribute(WebKeys.USER);

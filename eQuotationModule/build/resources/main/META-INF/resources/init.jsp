@@ -80,7 +80,7 @@
 <%@page import="com.liferay.portal.kernel.service.permission.GroupPermissionUtil" %>
 <%@page import="com.liferay.portal.kernel.service.permission.PortalPermissionUtil" %>
 <%@page import="com.liferay.portal.kernel.service.permission.UserGroupPermissionUtil" %>
-
+<%@page import= "com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil"%>
 <%@ page import = "com.liferay.portal.kernel.model.Address" %>
 <%@page import="com.liferay.portal.kernel.model.Organization"%>
 <%@page import="com.liferay.portal.kernel.model.User"%>

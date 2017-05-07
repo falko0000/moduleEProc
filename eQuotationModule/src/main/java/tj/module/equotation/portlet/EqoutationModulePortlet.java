@@ -10,7 +10,9 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupService;
 import com.liferay.portal.kernel.service.UserService;
 
@@ -63,7 +65,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template="+EQuotationConstants.VIEW_TEMPLATE,
 		 "javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user",
+		
 		"javax.portlet.supports.mime-type=text/html"
 	},
 	service = Portlet.class
@@ -73,7 +75,8 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		 
-
+	//	"javax.portlet.security-role-ref=power-user,user",
+		
 		//WebKeys.SEARCH_CONTAINER_RESULT_ROW;
 	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 	
@@ -82,12 +85,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	System.out.println(spisoklotov);
 	}*/
 
-	
-	String vv=LanguageUtil.get(renderRequest.getLocale(),"bid_number_value","not found");
-
-
-	
-	System.out.println(renderRequest.getLocale().getLanguage()+" bid_number_value ==" +vv);
+	PermissionChecker checker;
 	
 	StringBuilder names = new StringBuilder();
 	
