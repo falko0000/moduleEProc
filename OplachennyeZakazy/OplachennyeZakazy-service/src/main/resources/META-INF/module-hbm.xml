@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.oplachennye.zakazy.model.OplachennyeZakazy" />
+	<class name="tj.oplachennye.zakazy.model.impl.OplachennyeZakazyImpl" table="sapp.oplachennye_zakazy">
+		<id name="oplachennye_zakazy_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.oplachennye_zakazy_id_seq</param>
+			</generator>
+		</id>
+		<property name="tranzakcija" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="postavwik_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="summa" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="oplatil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_oplaty" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

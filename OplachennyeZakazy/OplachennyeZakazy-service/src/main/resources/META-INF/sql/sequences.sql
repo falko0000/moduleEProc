@@ -1,0 +1,1 @@
+create sequence sapp.oplachennye_zakazy_id_seq;

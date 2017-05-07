@@ -33,6 +33,9 @@ public interface SupplierWorkplaceConstant {
 	static final String RENDER_COMMAND_NAME_EDIT = "/client/edit/";
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
 	static final String FORM_ABOUT_INFO = "info";
+	static final String FORM_ABOUT_INFO_BALANS = "balas";
+	static final String FORM_ABOUT_INFO_DOCUMENT = "documentation1";
+	
 	//
 	static final String RESOURCE_COMMAND_NAME_LIST = "list";
 	

@@ -3,6 +3,7 @@ package tj.workplace.supplier.portlet;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import tj.balans.postavwika.model.BalansPostavwika;
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
@@ -43,7 +44,16 @@ public class SupplierWorkplacePortlet extends MVCPortlet {
 public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 	   List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
+		ClassLoader classLoader = SupplierWorkplacePortlet.class.getClassLoader();
 		
+	
+		try {
+			Class tariff = classLoader.loadClass("tj.tariff.service.TariffLocalServiceUtil");
+		} catch (ClassNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+	
 
 	super.doView(renderRequest, renderResponse);
 }

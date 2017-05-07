@@ -10,18 +10,6 @@ String[] CAT_NAMES = new String[]{"information_lota","documentation2"};
  String[] informationlota = new String[]{"information_lota"};
  String[] documentation2 = new String[]{"documentation2"};
  
- /*
- String[] generalinfo = new String[]{"generalinfo"}; 
- String[] infoaboutcustomer = new String[]{"info_about_customer"};
- 
- String[] deliverytime = new String[]{"delivery_time"};
- String[] validity = new String[]{"validity"};
- String[] softwareapplication = new String[]{"software_application"};
- String[] enforcement = new String[]{"enforcement"};
- String[] sourcefinancing = new String[]{"source_financing"};
- String[] otherconditions = new String[]{"other_conditions"}; 
- */
-
 
  
  String[][] CAT_SECTION = {informationlota,documentation2};
@@ -41,11 +29,11 @@ String[] CAT_NAMES = new String[]{"information_lota","documentation2"};
 
 <liferay-ui:tabs names="DOCUMENTATION">
 
-<aui:form action="<%=documentation%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO%>"> 
+<aui:form action="<%=documentation%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO_DOCUMENT%>"> 
 
 <aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (informacija_orazmewenii.isNew()) ? Constants.ADD : Constants.UPDATE %>" />
 
-<aui:input name="FormName" type="hidden" value="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO %>" />
+<aui:input name="FormName" type="hidden" value="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO_DOCUMENT %>" />
 
 <aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
@@ -55,8 +43,9 @@ String[] CAT_NAMES = new String[]{"information_lota","documentation2"};
  categorySections="<%= CAT_SECTION %>"
  jspPath="/bid/documentation1/"
  markupView="lexicon"
- 
  />
+ 
+
 </aui:form>
 
 </liferay-ui:tabs>
