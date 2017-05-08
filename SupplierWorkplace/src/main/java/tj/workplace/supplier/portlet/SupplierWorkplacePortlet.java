@@ -18,7 +18,7 @@ import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import org.osgi.service.component.annotations.Component;
 
 /**
@@ -45,8 +45,8 @@ public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 	   List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 		ClassLoader classLoader = SupplierWorkplacePortlet.class.getClassLoader();
-		
-	
+	//	PortalUUIDUtil.get
+
 		try {
 			Class tariff = classLoader.loadClass("tj.tariff.service.TariffLocalServiceUtil");
 		} catch (ClassNotFoundException e) {

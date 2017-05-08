@@ -27,18 +27,15 @@
 	
     <table class="table table-bordered">
        <tr>
-       <th>
+        <td> 
 		Current account
-       </th>
-       <th>
-       <aui:input
-       		name=""
-       		type="number"
-       		disabled="<%=true %>"
-            value="<%= balanspostavwik.getBalans() %>"
-       />
+       </td>
+       <td>
+      
+       <%= balanspostavwik.getBalans() %>
        
-       </th>
+       
+       </td>
        </tr>
      
        

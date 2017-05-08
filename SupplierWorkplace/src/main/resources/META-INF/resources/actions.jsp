@@ -15,7 +15,10 @@
     long OrgId = UserServiceUtil.getCurrentUser().getOrganizations().get(0).getOrganizationId();
    
     boolean ispaid = OplachennyeZakazyLocalServiceUtil.isPaid( OrgId, izvewenie.getIzvewenija_id());
-   %>
+   
+    String currentURL = themeDisplay.getURLCurrent();
+    
+    %>
 
 		<portlet:renderURL var="edit">
 			 <portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
@@ -45,7 +48,7 @@
 			
 			 <portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
              <portlet:param name="izvewenie_id" value="<%=String.valueOf(izvewenie.getIzvewenija_id())%>" /> 
-             
+             <portlet:param name="redirect" value = "<%=currentURL.toString() %>" />
 		     <portlet:param name="<%=SupplierWorkplaceConstant.ACTIONS_ITEM%>" value="<%=SupplierWorkplaceConstant.ACTIONS_ITEM_TAKE_PART%>" />
 		    
 		</portlet:renderURL>
