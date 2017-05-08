@@ -31,7 +31,7 @@ String[] downloaddocuments = new String[]{"download_documents"};
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 </liferay-portlet:actionURL>
 
-<liferay-ui:tabs names="LIST OF DOCUMENTS">
+<liferay-ui:tabs names="list_documents">
 
 
 

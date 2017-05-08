@@ -5,43 +5,46 @@
 	
 %>
 
-<liferay-ui:tabs names="DOWNLOAD DOCUMENTATION">
+<liferay-ui:tabs names="download_documentation">
 
 <div class="table-responsive">
     <table class="table table-bordered">
-     
-     <tbody>
-     <tr>
-     
-     	<td>
-    	 Document name
-     	</td>
-     	<td>
-     		<aui:input label="" name="doc_name" type="text" />
-     	</td>
-     </tr>
-     <tr>
-     	
-     	<td>
-     	   File
-     	</td>
-     	<td>
-     	<aui:input label="" name="doc_file" type="file"  />
-     	</td>
-     </tr>
-     </tbody>
+       <tr>
+       
+       <th>
+		<%=LanguageUtil.get(request, "documents_name") %>
+		
+       </th>
+      
+       <th>
+       <aui:input
+       		name="">
+       </aui:input>
+       </th>
+       </tr>
+              
+       <tbody>
+       <tr>
+      
+       <th>
+      <%=LanguageUtil.get(request, "file") %>
+       
+       </th>       
+      
+       <th>
+       <a>
+        -------
+       </a>
+       <a>
+        Choose
+       </a>
+
+       </th>
+       </tr>
+       
+
      
     </table>
 </div>
 
 </liferay-ui:tabs>
-
-
-
-
-
-
-
-
-
-	

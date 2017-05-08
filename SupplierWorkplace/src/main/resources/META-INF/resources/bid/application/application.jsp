@@ -5,7 +5,7 @@
 	
 %>
 
-<liferay-ui:tabs names="LIST OF GOODS">
+<liferay-ui:tabs names="list_goods">
 
 <div class="table-responsive">
     <table class="table table-bordered">
@@ -14,28 +14,45 @@
 		  	No
        </th>
        <th>
-       		Customer request
+       	<%=LanguageUtil.get(request, "customer_request") %>
+       	
+       		
        <aui:input name="" type="text" value="" >
        </aui:input>
        </th>
        <th>
-       		Belonging to the OKGZ
+       <%=LanguageUtil.get(request, "belonging_okgz") %>
+       
+       		
+       		
        </th>
        
        <th>
-       		Code OKGZ
+       	<%=LanguageUtil.get(request, "code_okgz") %>
+       	
+       		
+       		
        </th>
+      
        <th>
-       		Description of goods (Form of issue)
+      	<%=LanguageUtil.get(request, "description_goods") %>
+      	
        </th>
+       
        <th>
-       		Unit of measure
+       <%=LanguageUtil.get(request, "unit_measure") %>
+       	
        </th>
+       
        <th>
-       		Quantity
+       	<%=LanguageUtil.get(request, "quantity") %>
+       
+       		
        </th>
+       
        <th>
-       		Country of origin
+       	<%=LanguageUtil.get(request, "country_origin") %>
+       
        </th>
           
        </tr>
