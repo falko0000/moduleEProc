@@ -1,7 +1,10 @@
 package tj.workplace.supplier.portlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -22,6 +25,8 @@ import tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil;
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 import tj.oplachennye.zakazy.model.OplachennyeZakazy;
 import tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil;
+import tj.spisok.tovarov.model.SpisokTovarov;
+import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.tariff.model.Tariff;
 import tj.tariff.service.TariffLocalServiceUtil;
 
@@ -47,6 +52,40 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO_BALANS))
 			withdrawmoney(actionRequest, actionResponse);
 		
+		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION))
+			updateApplication(actionRequest, actionResponse);
+		
+	}
+
+	private void updateApplication(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+		 Long izvewenie_id =  ParamUtil.getLong(actionRequest,"izvewenie_id");
+		Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+		
+	    String peredlojenie = "peredlojenie";
+        String opisanie = "opisanie";
+        String country  = "Country";
+	    String price    = "price";
+	    
+		
+		List<SpisokTovarov> spisokTovarov  = SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(spisok_lotov_id);
+		
+		for( SpisokTovarov spTovarov : spisokTovarov)
+		{ 
+			String tovar_id = String.valueOf(spTovarov.getSpisok_tovarov_id()); 
+		   String peredloj = ParamUtil.getString(actionRequest, peredlojenie+tovar_id);	
+		   String opisanija = ParamUtil.getString(actionRequest, opisanie+tovar_id);
+		   Long countr = ParamUtil.getLong(actionRequest, country+tovar_id);
+		   String pric = ParamUtil.getString(actionRequest, price+tovar_id);
+		   
+		   BigDecimal  p = new BigDecimal(pric);
+		   p = p.multiply(new BigDecimal(spTovarov.getKolichestvo()), MathContext.DECIMAL32);
+		  
+		  // double total = pric * spTovarov.getKolichestvo();
+		   
+		   System.out.println(peredloj + " "+opisanija+" "+ countr+" "+ pric + " "+p.toString());
+		   
+		}
 	}
 
 	private void withdrawmoney(ActionRequest actionRequest, ActionResponse actionResponse)  {

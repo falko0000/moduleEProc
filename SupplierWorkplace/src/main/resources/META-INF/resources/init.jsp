@@ -20,6 +20,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="tj.informacija.razmewenii.model.InformacijaORazmewenii" %>
 <%@page import="tj.spisoklotov.model.Spisoklotov" %>
 <%@page import ="tj.spisoklotov.service.SpisoklotovLocalServiceUtil" %>
+<%@page import="tj.spisok.tovarov.model.SpisokTovarov" %>
+<%@page import="tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil" %>
 <%@page import="com.liferay.portal.kernel.util.StringPool" %>
 <%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil" %>
 <%@page import="com.liferay.portal.kernel.service.UserServiceUtil"%>
@@ -54,9 +56,17 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@page import="tj.oplachennye.zakazy.model.OplachennyeZakazy" %>
 <%@page import="tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%@page import="tj.edinicy.izmerenija.model.EdinicyIzmerenija" %>
+<%@page import="tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil" %>
+<%@page import="tj.strany.model.Strany" %>
+<%@page import="tj.strany.service.StranyLocalServiceUtil" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
+
+
 
 
 

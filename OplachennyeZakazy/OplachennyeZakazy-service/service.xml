@@ -9,7 +9,7 @@
 	</author>
 	<namespace>Oplachennye_zakazy</namespace>
 
-	<entity local-service="true" name="OplachennyeZakazy" remote-service="false" uuid="false" table="sapp.oplachennye_zakazy" >
+	<entity local-service="true" name="OplachennyeZakazy" remote-service="false" uuid="false" table="sapp.oplachennye_zakazy" cache-enabled="false">
 	 	
 			<column name="oplachennye_zakazy_id" type="long" primary="true" id-type="sequence" id-param="sapp.oplachennye_zakazy_id_seq"></column>
 			<column name="tranzakcija" type="String"></column>

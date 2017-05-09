@@ -8,6 +8,8 @@ import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.kernel.model.SubscriptionConstants;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 
@@ -26,7 +28,11 @@ public class WSupplieResourceCommand implements MVCResourceCommand{
 	@Override
 	public boolean serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 			throws PortletException {
-		// TODO Auto-generated method stub
+		
+		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
+		
+		 
+		
 		return false;
 	}
 
