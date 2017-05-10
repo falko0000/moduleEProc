@@ -2,6 +2,7 @@ package tj.workplace.supplier.portlet;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.xml.bind.Validator;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -13,6 +14,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import tj.balans.postavwika.model.BalansPostavwika;
 import tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil;
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
+import tj.strany.model.Strany;
+import tj.strany.service.StranyLocalServiceUtil;
 
 
 
@@ -48,6 +51,9 @@ public class SupplieRenderCommands implements MVCRenderCommand {
 			return SupplierWorkplaceConstant.PAGE_WITHDRAW_APPLICATION;
 		if(actions_item.equals(SupplierWorkplaceConstant.ACTIONS_ITEM_REFUSE_PARTICIPATE))
 			return SupplierWorkplaceConstant.PAGE_REFUSE_PARTICIPATE;
+		
+		
+
 		
 		return SupplierWorkplaceConstant.PAGE_LISTLOTS;
 		

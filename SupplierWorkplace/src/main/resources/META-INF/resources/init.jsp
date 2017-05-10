@@ -46,7 +46,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="java.util.Arrays" %>
 <%@page import="java.util.List" %>
 
-
+<%@page import="com.liferay.portal.kernel.util.Validator" %>
 
 <%@page import="tj.tariff.model.Tariff" %>
 <%@page import="tj.tariff.service.TariffLocalServiceUtil" %>
@@ -61,6 +61,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil" %>
 <%@page import="tj.strany.model.Strany" %>
 <%@page import="tj.strany.service.StranyLocalServiceUtil" %>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil" %>
+<%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

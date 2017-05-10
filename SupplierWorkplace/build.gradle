@@ -19,6 +19,7 @@ dependencies {
 		compile project (":modules:SpisokTovarov:SpisokTovarov-api")
 		compile project (":modules:Edinicyizmerenija:Edinicyizmerenija-api")
 			compile project (":modules:Strany:Strany-api")
+			compile project (":modules:ZajavkiOtPostavwikov:ZajavkiOtPostavwikov-api")
 }
 
 

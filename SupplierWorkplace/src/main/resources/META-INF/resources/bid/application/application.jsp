@@ -87,7 +87,7 @@
 
 	               <% for (Strany strana : strany) {%>
 		
-		         <aui:option label="<%=strana.getNazvanie() %>"  value="<%= strana.getStrany_id() %>" />
+		         <aui:option label="<%=LanguageUtil.get(request, strany.getKey()) %>"  value="<%= strana.getStrany_id() %>" />
 	             <%} %>
            
            </aui:select>

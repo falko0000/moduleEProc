@@ -1,0 +1,1 @@
+create sequence sapp.zajavki_ot_postavwikov_id;

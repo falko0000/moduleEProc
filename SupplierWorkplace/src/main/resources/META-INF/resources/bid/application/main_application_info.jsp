@@ -13,7 +13,8 @@
   List<Strany> strany = StranyLocalServiceUtil.getStranies(0, StranyLocalServiceUtil.getStraniesCount());
 
 
-
+	int countSpisokTovarov =	SpisokTovarovLocalServiceUtil.getCountSpisokTovarovByLotId(spisok_lotov_id);
+	int countZajavk        =    ZajavkiOtPostavwikovLocalServiceUtil.getCountLotId(spisok_lotov_id);
 
 
         String peredlojenie = "peredlojenie";
@@ -77,7 +78,7 @@
 				 <liferay-ui:search-container-column-text 
 				 	
 				 
-				 	name="Peredlojenie postavwika"  
+				 	name="vendor-proposal"  
 				 	
                      		 	
 				 >
@@ -90,7 +91,7 @@
 			 
 			  		</liferay-ui:search-container-column-text>
 			
-				 <liferay-ui:search-container-column-text name="opisanie tovara"  >
+				 <liferay-ui:search-container-column-text name="description-of-goods"  >
 				 	<aui:input 
 				 	   colspan="2"
 				 	   label="" 
@@ -100,7 +101,7 @@
 				 	   /> 
 				 	</liferay-ui:search-container-column-text>
 				 	
-			 <liferay-ui:search-container-column-text name="Country of origin" >
+			 <liferay-ui:search-container-column-text name="country-of-origin" >
 			 	
 			 	
 			
@@ -108,15 +109,16 @@
 	
 
 	               <% for (Strany strana : strany) {%>
-		
-		         <aui:option label="<%=strana.getNazvanie() %>"  value="<%= strana.getStrany_id() %>" />
+		     <c:if test="<%=Validator.isNotNull(strana.getKey())%>">
+		         <aui:option label="<%=LanguageUtil.get(request, strana.getKey()) %>"  value="<%= strana.getStrany_id() %>" />
+	         </c:if>
 	             <%} %>
            
            </aui:select>
 			
 			 </liferay-ui:search-container-column-text>
 				 
-				  <liferay-ui:search-container-column-text name="Unit price" >
+				  <liferay-ui:search-container-column-text name="unit-price" >
 				  
 				  <aui:input 
 				     label="" 
@@ -130,6 +132,7 @@
 				  </liferay-ui:search-container-column-text>
 				  
 				     <liferay-ui:search-container-column-text name="count" >
+				         <div class="input-group">
 				         <aui:input  
 				             label="" 
 				             name = "<%=count+ String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>" 
@@ -138,7 +141,7 @@
 				              disabled="true"
 				              suffix = "<%= EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenija(spisok_tovarov.getEdinica_izmerenija_id()).getNazvanie()%>"
 				              />
-				   		 
+				   		 </div>
 				   </liferay-ui:search-container-column-text>
 				 
 				   <liferay-ui:search-container-column-text name="the-order-total" >
@@ -157,7 +160,10 @@
 </liferay-ui:panel>
 
  <aui:button-row>
- 	
+ 	   
+ 	    <c:if test="<%=countSpisokTovarov == countZajavk %>" >
+ 	    <aui:button name="filing_an_application" value="filing an application" type="submit" />
+		</c:if>
 		<aui:button id="pay_now" name="save" value="save" type="submit" />
   			
 		<aui:button id="pay_now_cancel" name="cancle" lable="cancle" type="cancel" />

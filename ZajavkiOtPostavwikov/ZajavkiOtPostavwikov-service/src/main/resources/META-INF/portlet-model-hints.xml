@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov">
+		<field name="zajavki_ot_postavwikov_id" type="long" />
+		<field name="izvewenie_id" type="long" />
+		<field name="lot_id" type="long" />
+		<field name="tovar_id" type="long" />
+		<field name="postavwik_id" type="long" />
+		<field name="kolichestvo" type="int" />
+		<field name="summa_za_edinicu_tovara" type="double" />
+		<field name="itogo_za_tovar" type="double" />
+		<field name="sozdal" type="long" />
+		<field name="izmenil" type="long" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="data_izmenenija" type="Date" />
+		<field name="kod_po_obshhemu_klassifikatoru" type="long" />
+		<field name="kod_strany_proizvoditelja" type="long" />
+		<field name="opisanie_tovara" type="String" />
+		<field name="predlozhenie_postavwika" type="String" />
+	</model>
+</model-hints>

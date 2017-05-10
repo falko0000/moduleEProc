@@ -29,6 +29,8 @@ import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.tariff.model.Tariff;
 import tj.tariff.service.TariffLocalServiceUtil;
+import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
+
 
 @Component(
 		immediate = true,
@@ -76,15 +78,20 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		   String peredloj = ParamUtil.getString(actionRequest, peredlojenie+tovar_id);	
 		   String opisanija = ParamUtil.getString(actionRequest, opisanie+tovar_id);
 		   Long countr = ParamUtil.getLong(actionRequest, country+tovar_id);
-		   String pric = ParamUtil.getString(actionRequest, price+tovar_id);
+		   String pric = ParamUtil.getString(actionRequest, price+tovar_id,"0");
 		   
 		   BigDecimal  p = new BigDecimal(pric);
 		   p = p.multiply(new BigDecimal(spTovarov.getKolichestvo()), MathContext.DECIMAL32);
 		  
+		   if(!pric.equals("0"))
+		   {
+			   
+		   }
 		  // double total = pric * spTovarov.getKolichestvo();
 		   
 		   System.out.println(peredloj + " "+opisanija+" "+ countr+" "+ pric + " "+p.toString());
-		   
+		
+
 		}
 	}
 
