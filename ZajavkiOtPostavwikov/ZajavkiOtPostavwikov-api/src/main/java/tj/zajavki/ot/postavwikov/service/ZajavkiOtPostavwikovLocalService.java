@@ -85,7 +85,7 @@ public interface ZajavkiOtPostavwikovLocalService extends BaseLocalService,
 	public int getCountLotId(long lot_id);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCountZajavkiOtPostavwikovs(long tovar_id, long postavwik_id);
+	public int getCountZajavkiOtPostavwikovs(long lot_id, long postavwik_id);
 
 	/**
 	* Returns the number of zajavki ot postavwikovs.
@@ -157,15 +157,15 @@ public interface ZajavkiOtPostavwikovLocalService extends BaseLocalService,
 		int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(long tovar_id);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(long tovar_id,
+	public List<ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(long lot_id,
 		long postavwik_id);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(long tovar_id);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Map<java.lang.Long, ZajavkiOtPostavwikov> getMapZajavkiOtPostavwikovs(
-		long tovar_id, long postavwik_id);
+		long lot_id, long postavwik_id);
 
 	/**
 	* Returns the number of rows matching the dynamic query.

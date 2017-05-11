@@ -1,22 +1,30 @@
+<%@page import="com.liferay.portal.kernel.util.Constants"%>
 <%@ include file="/init.jsp" %>
 
 
 
 <%
 
- Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
+ long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
 
- Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
+ long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
 
  List<EdinicyIzmerenija> edinicy_izmerenijas = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijas(0, EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijasCount());
 
   List<Strany> strany = StranyLocalServiceUtil.getStranies(0, StranyLocalServiceUtil.getStraniesCount());
 
-
+  long organization_id = 0;
+  
+  
+  long userId = themeDisplay.getUserId();
+  List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
+ if(organizations.size()>0)
+	  organization_id = organizations.get(0).getOrganizationId();
+  
 	int countSpisokTovarov =	SpisokTovarovLocalServiceUtil.getCountSpisokTovarovByLotId(spisok_lotov_id);
-	int countZajavk        =    ZajavkiOtPostavwikovLocalServiceUtil.getCountLotId(spisok_lotov_id);
+	int countZajavk        =    ZajavkiOtPostavwikovTempLocalServiceUtil.getCountZajavkiOtPostavwikovs(spisok_lotov_id , organization_id);
 
-
+System.out.println(countSpisokTovarov +" "+countZajavk);
         String peredlojenie = "peredlojenie";
         String opisanie = "opisanie";
         String country  = "Country";
@@ -29,8 +37,8 @@
 	productUrl.setParameter("mvcRenderCommandName", SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT);
 	productUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
 	productUrl.setParameter("spisok_lotov_id",String.valueOf(spisok_lotov_id));
-	productUrl.setParameter("good_work_service","1");
-	productUrl.setParameter(Constants.CMD,cmd);
+	productUrl.setParameter(Constants.CMD, Constants.ADD);
+	
  
  
 
@@ -43,13 +51,21 @@
 <portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 		   <portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>"/>
+		  <portlet:param name="<%=Constants.CMD %>" value="<%= Constants.ADD %>"/>
+</liferay-portlet:actionURL>
+
+<liferay-portlet:actionURL name="<%=SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT%>" var="forming_temp">
+<portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
+		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
+		   <portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>"/>
+		  <portlet:param name="<%=Constants.CMD %>" value="<%= Constants.ADD_TEMP %>"/>
 </liferay-portlet:actionURL>
 
 
 
-<aui:form action="<%=forming%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_APPLICATION%>"> 
+<aui:form action="<%=forming_temp%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_APPLICATION%>"> 
 
-<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+
 
 <aui:input name="FormName" type="hidden" value="<%=SupplierWorkplaceConstant.FORM_APPLICATION %>" />
 
@@ -161,9 +177,16 @@
 
  <aui:button-row>
  	   
- 	    <c:if test="<%=countSpisokTovarov == countZajavk %>" >
- 	    <aui:button name="filing_an_application" value="filing an application" type="submit" />
-		</c:if>
+ 	   
+ 	
+ 	 <c:if test="<%=countSpisokTovarov == countZajavk %>" >   
+		  <aui:button 
+ 	        id="filing_an_application" 
+ 	        name="filing_an_application" 
+ 	        value="filing an application" type="button"  
+ 	        primary="true"
+ 	     />
+ 	     </c:if>
 		<aui:button id="pay_now" name="save" value="save" type="submit" />
   			
 		<aui:button id="pay_now_cancel" name="cancle" lable="cancle" type="cancel" />
@@ -171,6 +194,8 @@
   </aui:button-row>
 
 </aui:form>
+
+  
 <aui:script use="aui-base">
 
 
@@ -215,13 +240,37 @@ AUI().use('event', 'node', function(A) {
 });
 
 
+
 </aui:script>
 
 
 
+<c:if test="<%=countSpisokTovarov == countZajavk %>" >   
+<aui:script>
+AUI().use('aui-io-request', function(A){
+A.one('#<portlet:namespace/>filing_an_application').on('click', function(event) {
+	
+	alert('<%=forming.toString()%>');
+   
+    var url = '<%=forming.toString()%>';
+    A.io.request(
+         url,
+         {
+            method: 'POST',
+             form: {id: '<portlet:namespace/><%=SupplierWorkplaceConstant.FORM_APPLICATION %>'},
+             on: {
+                 success: function() {
+                   
+                	 alert('<%=forming.toString()%>');
+                 }
+             }
+        }
+     );
+ });
+});
 
-
+</aui:script>
 
  
-
+</c:if>
 

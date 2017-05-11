@@ -45,25 +45,27 @@ public class ZajavkiOtPostavwikovLocalServiceImpl
 		return zajavkiOtPostavwikovPersistence.findByTovarId(tovar_id);
 	}
 	
-	public List<ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(long tovar_id, long postavwik_id) 
+	public List<ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(long lot_id, long postavwik_id) 
 	{
-		return zajavkiOtPostavwikovPersistence.findByTavarIdPostavwikId(tovar_id, postavwik_id);
+		return zajavkiOtPostavwikovPersistence.findByLotIdPostavwikId(lot_id, postavwik_id);
 	}
 	
-	public Map<Long, ZajavkiOtPostavwikov> getMapZajavkiOtPostavwikovs(long tovar_id, long postavwik_id) 
+	public Map<Long, ZajavkiOtPostavwikov> getMapZajavkiOtPostavwikovs(long lot_id, long postavwik_id) 
 	{
 		Map<Long, ZajavkiOtPostavwikov> zajavka = new HashMap<Long, ZajavkiOtPostavwikov>();
 		
-		for(ZajavkiOtPostavwikov otPostavwikov : getZajavkiOtPostavwikovs(tovar_id,postavwik_id ))
+		List<ZajavkiOtPostavwikov> zajavkiOtPostavwikovs =  getZajavkiOtPostavwikovs(lot_id,postavwik_id );
 		
-			zajavka.put(otPostavwikov.getZajavki_ot_postavwikov_id(), otPostavwikov);
+		for(ZajavkiOtPostavwikov otPostavwikov : zajavkiOtPostavwikovs)
+		
+			zajavka.put(otPostavwikov.getTovar_id(), otPostavwikov);
 			
 			return zajavka;
 	}
 	
-	public int getCountZajavkiOtPostavwikovs(long tovar_id, long postavwik_id)
+	public int getCountZajavkiOtPostavwikovs(long lot_id, long postavwik_id)
 	{
-		return zajavkiOtPostavwikovPersistence.countByTavarIdPostavwikId(tovar_id, postavwik_id);
+		return zajavkiOtPostavwikovPersistence.countByLotIdPostavwikId(lot_id, postavwik_id);
 	}
 	
 	public int getCountLotId(long lot_id)

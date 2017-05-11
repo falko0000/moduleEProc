@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -13,9 +14,15 @@ import org.osgi.service.component.annotations.Component;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -29,7 +36,9 @@ import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.tariff.model.Tariff;
 import tj.tariff.service.TariffLocalServiceUtil;
+import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
+import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil;
 
 
 @Component(
@@ -55,21 +64,36 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 			withdrawmoney(actionRequest, actionResponse);
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION))
-			updateApplication(actionRequest, actionResponse);
+			updateApplicationTemp(actionRequest, actionResponse);
 		
 	}
 
-	private void updateApplication(ActionRequest actionRequest, ActionResponse actionResponse) {
+	private void updateApplicationTemp(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
 		 Long izvewenie_id =  ParamUtil.getLong(actionRequest,"izvewenie_id");
 		Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+		String cmd  = ParamUtil.getString(actionRequest, Constants.CMD);
+		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		  long organization_id = 0;
+		  
+		  
+		   long userId = themeDisplay.getUserId();
+		   List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
+		  if(organizations.size()>0)
+			  organization_id = organizations.get(0).getOrganizationId();
+		  
+	     Map<Long, ZajavkiOtPostavwikovTemp> map = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
+		 
+	
 		
 	    String peredlojenie = "peredlojenie";
         String opisanie = "opisanie";
         String country  = "Country";
 	    String price    = "price";
 	    
-		
+	    System.out.println("befor error ===============================");
+	    
 		List<SpisokTovarov> spisokTovarov  = SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(spisok_lotov_id);
 		
 		for( SpisokTovarov spTovarov : spisokTovarov)
@@ -78,22 +102,74 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		   String peredloj = ParamUtil.getString(actionRequest, peredlojenie+tovar_id);	
 		   String opisanija = ParamUtil.getString(actionRequest, opisanie+tovar_id);
 		   Long countr = ParamUtil.getLong(actionRequest, country+tovar_id);
-		   String pric = ParamUtil.getString(actionRequest, price+tovar_id,"0");
-		   
-		   BigDecimal  p = new BigDecimal(pric);
-		   p = p.multiply(new BigDecimal(spTovarov.getKolichestvo()), MathContext.DECIMAL32);
-		  
-		   if(!pric.equals("0"))
+		   String pric = ParamUtil.getString(actionRequest, price+tovar_id);
+		   if(pric.isEmpty())
+			   pric = "0";
+		   System.out.println(tovar_id+" "+peredloj+" "+opisanija+" "+countr+" "+pric);
+		   if(!pric.equals("0") && map.containsKey(spTovarov.getSpisok_tovarov_id()))
 		   {
+			   ZajavkiOtPostavwikovTemp otPostavwikovTemp = null;
+		
+				   otPostavwikovTemp = map.get(spTovarov.getSpisok_tovarov_id());
+				   
+				   if(!ZajavkiOtPostavwikovTempLocalServiceUtil.compareTo(
+						   otPostavwikovTemp, peredloj, opisanija, countr, Double.valueOf(pric)))
+				   {
+				  
+				   otPostavwikovTemp.setData_izmenenija(new Date());
+				   otPostavwikovTemp.setIzmenil(themeDisplay.getUserId());
+			       otPostavwikovTemp.setOpisanie_tovara(opisanija);
+			       otPostavwikovTemp.setPredlozhenie_postavwika(peredloj);
+			       otPostavwikovTemp.setKod_strany_proizvoditelja(countr);
+			       
+			       BigDecimal  p = new BigDecimal(pric);
+			        
+			       otPostavwikovTemp.setSumma_za_edinicu_tovara(p.doubleValue());
+				 
+			       p = p.multiply(new BigDecimal(spTovarov.getKolichestvo()), MathContext.DECIMAL32);
+				  
+				   otPostavwikovTemp.setItogo_za_tovar(p.doubleValue());
+				   }
+				   ZajavkiOtPostavwikovTempLocalServiceUtil.updateZajavkiOtPostavwikovTemp(otPostavwikovTemp);
+				   }
+			   
+		   if(!pric.equals("0") && !map.containsKey(spTovarov.getSpisok_tovarov_id()))
+			 {
+			   ZajavkiOtPostavwikovTemp otPostavwikovTemp = null;
+			   
+			     
+				   long zajavki_ot_postavwikov_temp_id = CounterLocalServiceUtil.increment(ZajavkiOtPostavwikovTemp.class.toString());
+				   otPostavwikovTemp = ZajavkiOtPostavwikovTempLocalServiceUtil.createZajavkiOtPostavwikovTemp(zajavki_ot_postavwikov_temp_id);
+				  
+				   otPostavwikovTemp.setIzvewenie_id(izvewenie_id);
+				   otPostavwikovTemp.setLot_id(spisok_lotov_id);
+				   otPostavwikovTemp.setTovar_id(spTovarov.getSpisok_tovarov_id());
+				   otPostavwikovTemp.setData_izmenenija(new Date());
+				   otPostavwikovTemp.setData_sozdanija(new Date());
+				   otPostavwikovTemp.setSozdal(themeDisplay.getUserId());
+				   otPostavwikovTemp.setIzmenil(themeDisplay.getUserId());
+				   otPostavwikovTemp.setPostavwik_id(organization_id);
+				   otPostavwikovTemp.setKolichestvo((int) spTovarov.getKolichestvo());
+				  
+				   
+				   BigDecimal  p = new BigDecimal(pric);
+				   otPostavwikovTemp.setSumma_za_edinicu_tovara(p.doubleValue());
+				   p = p.multiply(new BigDecimal(spTovarov.getKolichestvo()), MathContext.DECIMAL32);
+				   
+				   otPostavwikovTemp.setOpisanie_tovara(opisanija);
+			       otPostavwikovTemp.setPredlozhenie_postavwika(peredloj);
+			       otPostavwikovTemp.setKod_strany_proizvoditelja(countr);
+			       otPostavwikovTemp.setItogo_za_tovar(p.doubleValue());
+			       
+			       ZajavkiOtPostavwikovTempLocalServiceUtil.addZajavkiOtPostavwikovTemp(otPostavwikovTemp);
+				   
+			   }
 			   
 		   }
-		  // double total = pric * spTovarov.getKolichestvo();
 		   
-		   System.out.println(peredloj + " "+opisanija+" "+ countr+" "+ pric + " "+p.toString());
-		
 
 		}
-	}
+	
 
 	private void withdrawmoney(ActionRequest actionRequest, ActionResponse actionResponse)  {
 		

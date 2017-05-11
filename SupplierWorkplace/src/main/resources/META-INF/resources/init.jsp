@@ -63,6 +63,13 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="tj.strany.service.StranyLocalServiceUtil" %>
 <%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil" %>
 <%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov" %>
+<%@page import="com.liferay.portal.kernel.model.Group"%>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil" %>
+<%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp" %>
+
+<%@page import="com.liferay.portal.kernel.model.Organization" %>
+<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil" %>
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

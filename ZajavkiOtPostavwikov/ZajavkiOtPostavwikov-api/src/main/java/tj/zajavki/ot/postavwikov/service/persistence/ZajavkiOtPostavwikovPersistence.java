@@ -174,143 +174,46 @@ public interface ZajavkiOtPostavwikovPersistence extends BasePersistence<Zajavki
 	public int countByTovarId(long tovar_id);
 
 	/**
-	* Returns all the zajavki ot postavwikovs where tovar_id = &#63; and postavwik_id = &#63;.
+	* Returns the zajavki ot postavwikov where tovar_id = &#63; and postavwik_id = &#63; or throws a {@link NoSuchZajavkiOtPostavwikovException} if it could not be found.
 	*
 	* @param tovar_id the tovar_id
 	* @param postavwik_id the postavwik_id
-	* @return the matching zajavki ot postavwikovs
+	* @return the matching zajavki ot postavwikov
+	* @throws NoSuchZajavkiOtPostavwikovException if a matching zajavki ot postavwikov could not be found
 	*/
-	public java.util.List<ZajavkiOtPostavwikov> findByTavarIdPostavwikId(
-		long tovar_id, long postavwik_id);
+	public ZajavkiOtPostavwikov findByTavarIdPostavwikId(long tovar_id,
+		long postavwik_id) throws NoSuchZajavkiOtPostavwikovException;
 
 	/**
-	* Returns a range of all the zajavki ot postavwikovs where tovar_id = &#63; and postavwik_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ZajavkiOtPostavwikovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
+	* Returns the zajavki ot postavwikov where tovar_id = &#63; and postavwik_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param tovar_id the tovar_id
 	* @param postavwik_id the postavwik_id
-	* @param start the lower bound of the range of zajavki ot postavwikovs
-	* @param end the upper bound of the range of zajavki ot postavwikovs (not inclusive)
-	* @return the range of matching zajavki ot postavwikovs
+	* @return the matching zajavki ot postavwikov, or <code>null</code> if a matching zajavki ot postavwikov could not be found
 	*/
-	public java.util.List<ZajavkiOtPostavwikov> findByTavarIdPostavwikId(
-		long tovar_id, long postavwik_id, int start, int end);
+	public ZajavkiOtPostavwikov fetchByTavarIdPostavwikId(long tovar_id,
+		long postavwik_id);
 
 	/**
-	* Returns an ordered range of all the zajavki ot postavwikovs where tovar_id = &#63; and postavwik_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ZajavkiOtPostavwikovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
+	* Returns the zajavki ot postavwikov where tovar_id = &#63; and postavwik_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param tovar_id the tovar_id
 	* @param postavwik_id the postavwik_id
-	* @param start the lower bound of the range of zajavki ot postavwikovs
-	* @param end the upper bound of the range of zajavki ot postavwikovs (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching zajavki ot postavwikovs
-	*/
-	public java.util.List<ZajavkiOtPostavwikov> findByTavarIdPostavwikId(
-		long tovar_id, long postavwik_id, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator);
-
-	/**
-	* Returns an ordered range of all the zajavki ot postavwikovs where tovar_id = &#63; and postavwik_id = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ZajavkiOtPostavwikovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param tovar_id the tovar_id
-	* @param postavwik_id the postavwik_id
-	* @param start the lower bound of the range of zajavki ot postavwikovs
-	* @param end the upper bound of the range of zajavki ot postavwikovs (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching zajavki ot postavwikovs
+	* @return the matching zajavki ot postavwikov, or <code>null</code> if a matching zajavki ot postavwikov could not be found
 	*/
-	public java.util.List<ZajavkiOtPostavwikov> findByTavarIdPostavwikId(
-		long tovar_id, long postavwik_id, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator,
-		boolean retrieveFromCache);
+	public ZajavkiOtPostavwikov fetchByTavarIdPostavwikId(long tovar_id,
+		long postavwik_id, boolean retrieveFromCache);
 
 	/**
-	* Returns the first zajavki ot postavwikov in the ordered set where tovar_id = &#63; and postavwik_id = &#63;.
+	* Removes the zajavki ot postavwikov where tovar_id = &#63; and postavwik_id = &#63; from the database.
 	*
 	* @param tovar_id the tovar_id
 	* @param postavwik_id the postavwik_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching zajavki ot postavwikov
-	* @throws NoSuchZajavkiOtPostavwikovException if a matching zajavki ot postavwikov could not be found
+	* @return the zajavki ot postavwikov that was removed
 	*/
-	public ZajavkiOtPostavwikov findByTavarIdPostavwikId_First(long tovar_id,
-		long postavwik_id,
-		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator)
-		throws NoSuchZajavkiOtPostavwikovException;
-
-	/**
-	* Returns the first zajavki ot postavwikov in the ordered set where tovar_id = &#63; and postavwik_id = &#63;.
-	*
-	* @param tovar_id the tovar_id
-	* @param postavwik_id the postavwik_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching zajavki ot postavwikov, or <code>null</code> if a matching zajavki ot postavwikov could not be found
-	*/
-	public ZajavkiOtPostavwikov fetchByTavarIdPostavwikId_First(long tovar_id,
-		long postavwik_id,
-		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator);
-
-	/**
-	* Returns the last zajavki ot postavwikov in the ordered set where tovar_id = &#63; and postavwik_id = &#63;.
-	*
-	* @param tovar_id the tovar_id
-	* @param postavwik_id the postavwik_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching zajavki ot postavwikov
-	* @throws NoSuchZajavkiOtPostavwikovException if a matching zajavki ot postavwikov could not be found
-	*/
-	public ZajavkiOtPostavwikov findByTavarIdPostavwikId_Last(long tovar_id,
-		long postavwik_id,
-		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator)
-		throws NoSuchZajavkiOtPostavwikovException;
-
-	/**
-	* Returns the last zajavki ot postavwikov in the ordered set where tovar_id = &#63; and postavwik_id = &#63;.
-	*
-	* @param tovar_id the tovar_id
-	* @param postavwik_id the postavwik_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching zajavki ot postavwikov, or <code>null</code> if a matching zajavki ot postavwikov could not be found
-	*/
-	public ZajavkiOtPostavwikov fetchByTavarIdPostavwikId_Last(long tovar_id,
-		long postavwik_id,
-		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator);
-
-	/**
-	* Returns the zajavki ot postavwikovs before and after the current zajavki ot postavwikov in the ordered set where tovar_id = &#63; and postavwik_id = &#63;.
-	*
-	* @param zajavki_ot_postavwikov_id the primary key of the current zajavki ot postavwikov
-	* @param tovar_id the tovar_id
-	* @param postavwik_id the postavwik_id
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next zajavki ot postavwikov
-	* @throws NoSuchZajavkiOtPostavwikovException if a zajavki ot postavwikov with the primary key could not be found
-	*/
-	public ZajavkiOtPostavwikov[] findByTavarIdPostavwikId_PrevAndNext(
-		long zajavki_ot_postavwikov_id, long tovar_id, long postavwik_id,
-		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator)
-		throws NoSuchZajavkiOtPostavwikovException;
-
-	/**
-	* Removes all the zajavki ot postavwikovs where tovar_id = &#63; and postavwik_id = &#63; from the database.
-	*
-	* @param tovar_id the tovar_id
-	* @param postavwik_id the postavwik_id
-	*/
-	public void removeByTavarIdPostavwikId(long tovar_id, long postavwik_id);
+	public ZajavkiOtPostavwikov removeByTavarIdPostavwikId(long tovar_id,
+		long postavwik_id) throws NoSuchZajavkiOtPostavwikovException;
 
 	/**
 	* Returns the number of zajavki ot postavwikovs where tovar_id = &#63; and postavwik_id = &#63;.
@@ -452,6 +355,154 @@ public interface ZajavkiOtPostavwikovPersistence extends BasePersistence<Zajavki
 	* @return the number of matching zajavki ot postavwikovs
 	*/
 	public int countByLotId(long lot_id);
+
+	/**
+	* Returns all the zajavki ot postavwikovs where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @return the matching zajavki ot postavwikovs
+	*/
+	public java.util.List<ZajavkiOtPostavwikov> findByLotIdPostavwikId(
+		long lot_id, long postavwik_id);
+
+	/**
+	* Returns a range of all the zajavki ot postavwikovs where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ZajavkiOtPostavwikovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param start the lower bound of the range of zajavki ot postavwikovs
+	* @param end the upper bound of the range of zajavki ot postavwikovs (not inclusive)
+	* @return the range of matching zajavki ot postavwikovs
+	*/
+	public java.util.List<ZajavkiOtPostavwikov> findByLotIdPostavwikId(
+		long lot_id, long postavwik_id, int start, int end);
+
+	/**
+	* Returns an ordered range of all the zajavki ot postavwikovs where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ZajavkiOtPostavwikovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param start the lower bound of the range of zajavki ot postavwikovs
+	* @param end the upper bound of the range of zajavki ot postavwikovs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching zajavki ot postavwikovs
+	*/
+	public java.util.List<ZajavkiOtPostavwikov> findByLotIdPostavwikId(
+		long lot_id, long postavwik_id, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the zajavki ot postavwikovs where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ZajavkiOtPostavwikovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param start the lower bound of the range of zajavki ot postavwikovs
+	* @param end the upper bound of the range of zajavki ot postavwikovs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching zajavki ot postavwikovs
+	*/
+	public java.util.List<ZajavkiOtPostavwikov> findByLotIdPostavwikId(
+		long lot_id, long postavwik_id, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first zajavki ot postavwikov in the ordered set where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching zajavki ot postavwikov
+	* @throws NoSuchZajavkiOtPostavwikovException if a matching zajavki ot postavwikov could not be found
+	*/
+	public ZajavkiOtPostavwikov findByLotIdPostavwikId_First(long lot_id,
+		long postavwik_id,
+		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator)
+		throws NoSuchZajavkiOtPostavwikovException;
+
+	/**
+	* Returns the first zajavki ot postavwikov in the ordered set where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching zajavki ot postavwikov, or <code>null</code> if a matching zajavki ot postavwikov could not be found
+	*/
+	public ZajavkiOtPostavwikov fetchByLotIdPostavwikId_First(long lot_id,
+		long postavwik_id,
+		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator);
+
+	/**
+	* Returns the last zajavki ot postavwikov in the ordered set where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching zajavki ot postavwikov
+	* @throws NoSuchZajavkiOtPostavwikovException if a matching zajavki ot postavwikov could not be found
+	*/
+	public ZajavkiOtPostavwikov findByLotIdPostavwikId_Last(long lot_id,
+		long postavwik_id,
+		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator)
+		throws NoSuchZajavkiOtPostavwikovException;
+
+	/**
+	* Returns the last zajavki ot postavwikov in the ordered set where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching zajavki ot postavwikov, or <code>null</code> if a matching zajavki ot postavwikov could not be found
+	*/
+	public ZajavkiOtPostavwikov fetchByLotIdPostavwikId_Last(long lot_id,
+		long postavwik_id,
+		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator);
+
+	/**
+	* Returns the zajavki ot postavwikovs before and after the current zajavki ot postavwikov in the ordered set where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* @param zajavki_ot_postavwikov_id the primary key of the current zajavki ot postavwikov
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next zajavki ot postavwikov
+	* @throws NoSuchZajavkiOtPostavwikovException if a zajavki ot postavwikov with the primary key could not be found
+	*/
+	public ZajavkiOtPostavwikov[] findByLotIdPostavwikId_PrevAndNext(
+		long zajavki_ot_postavwikov_id, long lot_id, long postavwik_id,
+		com.liferay.portal.kernel.util.OrderByComparator<ZajavkiOtPostavwikov> orderByComparator)
+		throws NoSuchZajavkiOtPostavwikovException;
+
+	/**
+	* Removes all the zajavki ot postavwikovs where lot_id = &#63; and postavwik_id = &#63; from the database.
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	*/
+	public void removeByLotIdPostavwikId(long lot_id, long postavwik_id);
+
+	/**
+	* Returns the number of zajavki ot postavwikovs where lot_id = &#63; and postavwik_id = &#63;.
+	*
+	* @param lot_id the lot_id
+	* @param postavwik_id the postavwik_id
+	* @return the number of matching zajavki ot postavwikovs
+	*/
+	public int countByLotIdPostavwikId(long lot_id, long postavwik_id);
 
 	/**
 	* Caches the zajavki ot postavwikov in the entity cache if it is enabled.

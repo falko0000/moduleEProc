@@ -72,8 +72,8 @@ public class ZajavkiOtPostavwikovLocalServiceWrapper
 	}
 
 	@Override
-	public int getCountZajavkiOtPostavwikovs(long tovar_id, long postavwik_id) {
-		return _zajavkiOtPostavwikovLocalService.getCountZajavkiOtPostavwikovs(tovar_id,
+	public int getCountZajavkiOtPostavwikovs(long lot_id, long postavwik_id) {
+		return _zajavkiOtPostavwikovLocalService.getCountZajavkiOtPostavwikovs(lot_id,
 			postavwik_id);
 	}
 
@@ -171,21 +171,21 @@ public class ZajavkiOtPostavwikovLocalServiceWrapper
 
 	@Override
 	public java.util.List<tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(
+		long lot_id, long postavwik_id) {
+		return _zajavkiOtPostavwikovLocalService.getZajavkiOtPostavwikovs(lot_id,
+			postavwik_id);
+	}
+
+	@Override
+	public java.util.List<tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(
 		long tovar_id) {
 		return _zajavkiOtPostavwikovLocalService.getZajavkiOtPostavwikovs(tovar_id);
 	}
 
 	@Override
-	public java.util.List<tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(
-		long tovar_id, long postavwik_id) {
-		return _zajavkiOtPostavwikovLocalService.getZajavkiOtPostavwikovs(tovar_id,
-			postavwik_id);
-	}
-
-	@Override
 	public java.util.Map<java.lang.Long, tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getMapZajavkiOtPostavwikovs(
-		long tovar_id, long postavwik_id) {
-		return _zajavkiOtPostavwikovLocalService.getMapZajavkiOtPostavwikovs(tovar_id,
+		long lot_id, long postavwik_id) {
+		return _zajavkiOtPostavwikovLocalService.getMapZajavkiOtPostavwikovs(lot_id,
 			postavwik_id);
 	}
 

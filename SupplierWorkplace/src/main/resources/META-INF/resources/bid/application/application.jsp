@@ -1,18 +1,24 @@
 
+
 <%@ include file="/init.jsp" %>
 
 <%
 
-	Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
+	long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
 
-	  Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
+	  long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
 	  
 	  List<EdinicyIzmerenija> edinicy_izmerenijas = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijas(0, EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijasCount());
 
 	  List<Strany> strany = StranyLocalServiceUtil.getStranies(0, StranyLocalServiceUtil.getStraniesCount());
 	  
-	 
-	
+	  long organization_id = 0;
+	  
+	  Group group  = themeDisplay.getScopeGroup();
+	   
+	  if(group.isOrganization())
+		  organization_id = group.getOrganizationId();
+	  
 	  String currentURL = themeDisplay.getURLCurrent();
 	  
 	  String peredlojenie = "peredlojenie";

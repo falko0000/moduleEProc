@@ -4,7 +4,7 @@
 <service-builder package-path="tj.zajavki.ot.postavwikov">
 	<namespace>zajavki_ot_postavwikov</namespace>
 	
-	<entity local-service="true" name="ZajavkiOtPostavwikov" remote-service="false" uuid="false">
+	<entity local-service="true" name="ZajavkiOtPostavwikov" remote-service="false" uuid="false" table="sapp.zajavki_ot_postavwikov">
 
        <column name="zajavki_ot_postavwikov_id" type="long" primary="true" id-type="sequence" id-param="sapp.zajavki_ot_postavwikov_id_seq"></column>
         <column name="izvewenie_id" type="long"></column>    
@@ -27,7 +27,50 @@
      		<finder-column name="tovar_id"></finder-column>
      </finder>
      
-     <finder return-type="Collection" name="TavarIdPostavwikId">
+     <finder return-type="ZajavkiOtPostavwikov" name="TavarIdPostavwikId">
+   
+     <finder-column name="tovar_id"></finder-column>
+     <finder-column name="postavwik_id"></finder-column>
+     
+     </finder>
+	
+	<finder return-type="Collection" name="LotId">
+		<finder-column name="lot_id"/>
+	</finder>	
+		
+		
+	<finder return-type="Collection" name="LotIdPostavwikId">
+	
+	<finder-column name="lot_id"></finder-column>
+	<finder-column name="postavwik_id"></finder-column>
+	</finder>
+
+	</entity>
+	
+	<entity local-service="true" name="ZajavkiOtPostavwikovTemp" remote-service="false" uuid="false" table="sapp.zajavki_ot_postavwikov_temp">
+
+       <column name="zajavki_ot_postavwikov_temp_id" type="long" primary="true" id-type="sequence" id-param="sapp.zajavki_ot_postavwikov_temp_id_seq"></column>
+        <column name="izvewenie_id" type="long"></column>    
+        <column name="lot_id" type="long"></column>  
+        <column name="tovar_id" type="long"></column>     
+         <column name="postavwik_id" type="long"></column>  
+         <column name="kolichestvo" type="int"></column>
+         <column name="summa_za_edinicu_tovara" type="double"></column>
+          <column name="itogo_za_tovar" type="double"></column>
+            <column name="sozdal" type="long"></column>     
+         <column name="izmenil" type="long"></column>  
+         <column name="data_sozdanija" type="Date"></column>
+         <column name="data_izmenenija" type="Date"></column>
+         <column name="kod_po_obshhemu_klassifikatoru" type="long"></column>     
+         <column name="kod_strany_proizvoditelja" type="long"></column> 
+         <column name="opisanie_tovara" type="String"></column> 
+         <column name="predlozhenie_postavwika" type="String"></column>
+     
+     <finder return-type="Collection" name="TovarId">
+     		<finder-column name="tovar_id"></finder-column>
+     </finder>
+     
+     <finder return-type="ZajavkiOtPostavwikovTemp" name="TavarIdPostavwikId">
    
      <finder-column name="tovar_id"></finder-column>
      <finder-column name="postavwik_id"></finder-column>
@@ -37,5 +80,12 @@
 	<finder return-type="Collection" name="LotId">
 	<finder-column name="lot_id"></finder-column>
 	</finder>
+	
+	<finder return-type="Collection" name="LotIdPostavwikId">
+	
+	<finder-column name="lot_id"></finder-column>
+		<finder-column name="postavwik_id"></finder-column>
+	</finder>
+	
 	</entity>
 </service-builder>

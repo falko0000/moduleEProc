@@ -72,9 +72,9 @@ public class ZajavkiOtPostavwikovLocalServiceUtil {
 		return getService().getCountLotId(lot_id);
 	}
 
-	public static int getCountZajavkiOtPostavwikovs(long tovar_id,
+	public static int getCountZajavkiOtPostavwikovs(long lot_id,
 		long postavwik_id) {
-		return getService().getCountZajavkiOtPostavwikovs(tovar_id, postavwik_id);
+		return getService().getCountZajavkiOtPostavwikovs(lot_id, postavwik_id);
 	}
 
 	/**
@@ -162,18 +162,18 @@ public class ZajavkiOtPostavwikovLocalServiceUtil {
 	}
 
 	public static java.util.List<tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(
+		long lot_id, long postavwik_id) {
+		return getService().getZajavkiOtPostavwikovs(lot_id, postavwik_id);
+	}
+
+	public static java.util.List<tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(
 		long tovar_id) {
 		return getService().getZajavkiOtPostavwikovs(tovar_id);
 	}
 
-	public static java.util.List<tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getZajavkiOtPostavwikovs(
-		long tovar_id, long postavwik_id) {
-		return getService().getZajavkiOtPostavwikovs(tovar_id, postavwik_id);
-	}
-
 	public static java.util.Map<java.lang.Long, tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov> getMapZajavkiOtPostavwikovs(
-		long tovar_id, long postavwik_id) {
-		return getService().getMapZajavkiOtPostavwikovs(tovar_id, postavwik_id);
+		long lot_id, long postavwik_id) {
+		return getService().getMapZajavkiOtPostavwikovs(lot_id, postavwik_id);
 	}
 
 	/**
