@@ -36,6 +36,7 @@ import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.tariff.model.Tariff;
 import tj.tariff.service.TariffLocalServiceUtil;
+import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil;
@@ -59,20 +60,66 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		
 		String formname = ParamUtil.getString(actionRequest, "FormName");
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO_BALANS))
 			withdrawmoney(actionRequest, actionResponse);
 		
-		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION))
+		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION) && cmd.equals(Constants.ADD_TEMP))
 			updateApplicationTemp(actionRequest, actionResponse);
 		
+		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION) && cmd.equals(Constants.ADD))
+			updateApplication(actionRequest, actionResponse);
+		
+	}
+
+	private void updateApplication(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+		 	
+			Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+			
+			 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			  long organization_id = 0;
+			  
+			  
+			   long userId = themeDisplay.getUserId();
+			   List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
+			  if(organizations.size()>0)
+				  organization_id = organizations.get(0).getOrganizationId();
+			  
+		    List<ZajavkiOtPostavwikovTemp> postavwikovTemps = ZajavkiOtPostavwikovTempLocalServiceUtil.getZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
+		    
+		    for( ZajavkiOtPostavwikovTemp temp : postavwikovTemps)
+		    {
+		    	  long zajavki_ot_postavwikov_id = CounterLocalServiceUtil.increment(ZajavkiOtPostavwikov.class.toString());
+		    	  ZajavkiOtPostavwikov postavwikov = ZajavkiOtPostavwikovLocalServiceUtil.createZajavkiOtPostavwikov(zajavki_ot_postavwikov_id);
+		    	  postavwikov.setIzvewenie_id(temp.getIzvewenie_id());
+		    	  postavwikov.setLot_id(temp.getLot_id());
+		    	  postavwikov.setTovar_id(temp.getTovar_id());
+		    	  postavwikov.setPostavwik_id(temp.getPostavwik_id());
+		    	  postavwikov.setKolichestvo(temp.getKolichestvo());
+		    	  postavwikov.setSumma_za_edinicu_tovara(temp.getSumma_za_edinicu_tovara());
+		    	  postavwikov.setItogo_za_tovar(temp.getItogo_za_tovar());
+		    	  postavwikov.setSozdal(temp.getSozdal());
+		    	  postavwikov.setIzmenil(temp.getIzmenil());
+		    	  postavwikov.setData_sozdanija(temp.getData_sozdanija());
+		    	  postavwikov.setData_izmenenija(temp.getData_izmenenija());
+		    	  postavwikov.setKod_po_obshhemu_klassifikatoru(temp.getKod_po_obshhemu_klassifikatoru());
+		    	  postavwikov.setKod_strany_proizvoditelja(temp.getKod_strany_proizvoditelja());
+		    	  postavwikov.setOpisanie_tovara(temp.getOpisanie_tovara());
+		    	  postavwikov.setPredlozhenie_postavwika(temp.getPredlozhenie_postavwika());
+		    	  
+		    	  ZajavkiOtPostavwikovLocalServiceUtil.addZajavkiOtPostavwikov(postavwikov);
+		    	  ZajavkiOtPostavwikovTempLocalServiceUtil.deleteZajavkiOtPostavwikovTemp(temp);
+		    }
 	}
 
 	private void updateApplicationTemp(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
 		 Long izvewenie_id =  ParamUtil.getLong(actionRequest,"izvewenie_id");
 		Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
-		String cmd  = ParamUtil.getString(actionRequest, Constants.CMD);
+		
 		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		  long organization_id = 0;
@@ -85,14 +132,17 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		  
 	     Map<Long, ZajavkiOtPostavwikovTemp> map = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
 		 
-	
+	  for(Map.Entry<Long, ZajavkiOtPostavwikovTemp> entry : map.entrySet())
+	  {
+		  System.out.println(entry.getKey() + " "+ entry.getValue());
+	  }
 		
 	    String peredlojenie = "peredlojenie";
         String opisanie = "opisanie";
         String country  = "Country";
 	    String price    = "price";
 	    
-	    System.out.println("befor error ===============================");
+	    
 	    
 		List<SpisokTovarov> spisokTovarov  = SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(spisok_lotov_id);
 		
@@ -105,7 +155,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		   String pric = ParamUtil.getString(actionRequest, price+tovar_id);
 		   if(pric.isEmpty())
 			   pric = "0";
-		   System.out.println(tovar_id+" "+peredloj+" "+opisanija+" "+countr+" "+pric);
+		  
 		   if(!pric.equals("0") && map.containsKey(spTovarov.getSpisok_tovarov_id()))
 		   {
 			   ZajavkiOtPostavwikovTemp otPostavwikovTemp = null;

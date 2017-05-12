@@ -24,7 +24,7 @@
 	int countSpisokTovarov =	SpisokTovarovLocalServiceUtil.getCountSpisokTovarovByLotId(spisok_lotov_id);
 	int countZajavk        =    ZajavkiOtPostavwikovTempLocalServiceUtil.getCountZajavkiOtPostavwikovs(spisok_lotov_id , organization_id);
 
-System.out.println(countSpisokTovarov +" "+countZajavk);
+
         String peredlojenie = "peredlojenie";
         String opisanie = "opisanie";
         String country  = "Country";
@@ -39,9 +39,9 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 	productUrl.setParameter("spisok_lotov_id",String.valueOf(spisok_lotov_id));
 	productUrl.setParameter(Constants.CMD, Constants.ADD);
 	
+	  Map<Long, ZajavkiOtPostavwikovTemp> map = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
  
- 
-
+    double stotal = 0;
 
  String currentURL = themeDisplay.getURLCurrent();
 
@@ -90,6 +90,27 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 		  	<liferay-ui:search-container-row className="tj.spisok.tovarov.model.SpisokTovarov" modelVar="spisok_tovarov" keyProperty="spisok_tovarov_id" > 
 		 
 				 
+				 <%
+				    String Naimenovanie_tovara = spisok_tovarov.getNaimenovanie_tovara();
+				    String Opisanie_tovara = spisok_tovarov.getOpisanie_tovara();
+				    long strany_id = 44;
+				    double pricevalue = 0;
+				    double totalsvalue = 0;
+				    
+				    		
+				    if(map.containsKey(spisok_tovarov.getSpisok_tovarov_id()))
+				    {
+				    	 ZajavkiOtPostavwikovTemp otPostavwikovTemp = map.get(spisok_tovarov.getSpisok_tovarov_id());
+				           
+				    	 Naimenovanie_tovara = otPostavwikovTemp.getPredlozhenie_postavwika();
+				    	 Opisanie_tovara = otPostavwikovTemp.getOpisanie_tovara();
+				    	 strany_id = otPostavwikovTemp.getKod_strany_proizvoditelja();
+				    	 pricevalue = otPostavwikovTemp.getSumma_za_edinicu_tovara();
+				    	 totalsvalue = otPostavwikovTemp.getItogo_za_tovar();
+				    	 stotal += totalsvalue;
+				    }
+				 
+				 %>
 				 	
 				 <liferay-ui:search-container-column-text 
 				 	
@@ -102,7 +123,7 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 				         label="" 
 				         name="<%=peredlojenie+String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>"
 				          type="text"
-				          value="<%=spisok_tovarov.getNaimenovanie_tovara() %>" 
+				          value="<%=Naimenovanie_tovara %>" 
 				 /> 
 			 
 			  		</liferay-ui:search-container-column-text>
@@ -113,7 +134,7 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 				 	   label="" 
 				 	   type="text" 
 				 	   name="<%=opisanie + String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>"
-				 	   value="<%=spisok_tovarov.getOpisanie_tovara() %>"
+				 	   value="<%=Opisanie_tovara %>"
 				 	   /> 
 				 	</liferay-ui:search-container-column-text>
 				 	
@@ -126,7 +147,7 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 
 	               <% for (Strany strana : strany) {%>
 		     <c:if test="<%=Validator.isNotNull(strana.getKey())%>">
-		         <aui:option label="<%=LanguageUtil.get(request, strana.getKey()) %>"  value="<%= strana.getStrany_id() %>" />
+		         <aui:option label="<%=LanguageUtil.get(request, strana.getKey()) %>"  value="<%= strana.getStrany_id() %>" selected ="<%=strany_id ==  strana.getStrany_id()%>"/>
 	         </c:if>
 	             <%} %>
            
@@ -141,6 +162,7 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 				     step="0.01"
 				     type="number" 
 				     name="<%=price + String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>"
+				     value = "<%=String.valueOf(pricevalue) %>"
 				      min="0.0"
 				      title = "<%=LanguageUtil.get(request, "the_price_for")+" "+ EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenija(spisok_tovarov.getEdinica_izmerenija_id()).getNazvanie() %>"
 				      />  
@@ -161,7 +183,9 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 				   </liferay-ui:search-container-column-text>
 				 
 				   <liferay-ui:search-container-column-text name="the-order-total" >
-				   		 <aui:input label="" type="number" name="<%=totals + String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>" disabled="true"/> 
+				   		 <aui:input label="" type="number" 
+				   		 name="<%=totals + String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>" 
+				   		 value = "<%=String.valueOf(totalsvalue) %>" disabled="true"/> 
 				   </liferay-ui:search-container-column-text>
 				 
 				 
@@ -171,7 +195,7 @@ System.out.println(countSpisokTovarov +" "+countZajavk);
 		</liferay-ui:search-container>
  
            <div class="panel-footer" align="right"  id="<%=renderResponse.getNamespace()+"total_price"%>">
-              <%=LanguageUtil.get(request, "total")+": "%> 0     
+              <%=LanguageUtil.get(request, "total")+": "+String.valueOf(stotal)%>     
             </div>
 </liferay-ui:panel>
 
@@ -261,7 +285,7 @@ A.one('#<portlet:namespace/>filing_an_application').on('click', function(event) 
              on: {
                  success: function() {
                    
-                	 alert('<%=forming.toString()%>');
+                	 
                  }
              }
         }

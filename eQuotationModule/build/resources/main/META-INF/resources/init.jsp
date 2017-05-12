@@ -48,6 +48,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Arrays" %>
 
+<%@page import="com.liferay.portal.kernel.util.ListUtil"%>
 <%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %> 
 <%@page import="com.liferay.portal.kernel.util.Constants"%>

@@ -10,6 +10,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 
 <%@taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %>
+
+<%@page import="java.util.Map" %>
 <%@page import="java.util.Collections" %>
 <%@page import="tj.istochnik.finansirovanija.model.IstochnikFinansirovanija" %>
 <%@page import="tj.istochnik.finansirovanija.service.IstochnikFinansirovanijaLocalServiceUtil" %>

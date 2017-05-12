@@ -91,11 +91,13 @@ public class GenerateDocument {
 	    	
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), this.actionRequest);
 	    	InputStream is = new FileInputStream( f );
+	    	
 	    	DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folder.getFolderId(),
 	    			filename.substring(0,filename.indexOf(".")+1)+"html", "text/html", 
 	    			filename.substring(0,filename.indexOf(".")+1)+"html", "test", "", is, f.getTotalSpace(), serviceContext);
 	    	
 	    	f.delete();
+	    	is.close();
 		  } catch (IOException | TemplateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
