@@ -3,6 +3,7 @@ package tj.module.equotation.portlet;
 
 
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
@@ -13,6 +14,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupService;
 import com.liferay.portal.kernel.service.UserService;
 
@@ -84,7 +86,14 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		
 	System.out.println(spisoklotov);
 	}*/
-
+	boolean t = false;
+	try {
+		t = UserGroupRoleLocalServiceUtil.hasUserGroupRole(68216, 180701,"Owner");
+	} catch (PortalException e) {
+		
+		
+	}
+   System.out.println("UserGroupRoleLocalServiceUtil.hasUserGroupRole="+t );
 	PermissionChecker checker;
 	
 	StringBuilder names = new StringBuilder();

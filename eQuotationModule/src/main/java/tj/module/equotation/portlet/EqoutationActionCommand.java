@@ -20,6 +20,7 @@ import javax.portlet.WindowStateException;
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Image;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
@@ -27,6 +28,7 @@ import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.ImageLocalServiceUtil;
@@ -35,9 +37,12 @@ import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupService;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
+import com.liferay.portal.kernel.service.permission.UserGroupRolePermissionUtil;
+import com.liferay.portal.kernel.service.persistence.UserGroupRoleUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -60,7 +65,9 @@ import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.izvewenieput.model.IzveweniePut;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.document.library.kernel.model.DLFolder;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.journal.kernel.util.JournalConverterManagerUtil;
 
@@ -151,6 +158,8 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 
   private void generateDocument(ActionRequest actionRequest, ActionResponse actionResponse) {
 	
+	  
+	  
 	   String ROOT_FOLDER_NAME_FTL = EQuotationConstants.TEMPLATE_FTL_FOLDER_NAME;
 	   String ROOT_FOLDER_DESCRIPTION = EQuotationConstants.TEMPLATE_FTL_FOLDER_DESCRIPTION;
 	   String ROOT_FOLDER_NAME_OUT_HTML = EQuotationConstants.OUT_HTML;
@@ -490,7 +499,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	
 	private void insertListlots(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
-		
+		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		String redirect = ParamUtil.getString(actionRequest,"redirect");
@@ -586,7 +595,20 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 				e.printStackTrace();
 			} 
 	
-	    spisoklotov = SpisoklotovLocalServiceUtil.addSpisoklotov(spisoklotov);
+	    spisoklotov = SpisoklotovLocalServiceUtil.addSpisoklotov(spisoklotov); 
+	    Folder folder = null;
+		
+		long repositoryId = themeDisplay.getScopeGroupId();		
+		try {
+			folder = DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, EQuotationConstants.FOLDER_BID);
+			folder = DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), folder.getFolderId(), String.valueOf(izvewenie_id) );
+			ServiceContext serviceContexts = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
+			folder = DLAppServiceUtil.addFolder(repositoryId,folder.getFolderId(), String.valueOf(spisoklotov.getSpisok_lotov_id()),"this folder for bid number " + String.valueOf(spisoklotov.getSpisok_lotov_id()), serviceContexts);
+		} catch (PortalException e1) {
+			e1.printStackTrace();
+		} catch (SystemException e1) {
+			e1.printStackTrace();
+		}	
 	}
 
 
@@ -758,6 +780,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 
 	private void insertGeneralInfo(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
+		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 		//izvewenija
 		
@@ -793,6 +816,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
       
       String description = "This group for member commission bid number "+String.valueOf(inserted_izvewenija.getIzvewenija_id());
       String groupName = "bid number " + String.valueOf(inserted_izvewenija.getIzvewenija_id());
+      
      
   
 		
@@ -801,16 +825,32 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		try {
 			userGroup = UserGroupLocalServiceUtil.addUserGroup(serviceContext.getUserId(), serviceContext.getCompanyId(),
 					                name,description, serviceContext);
+			
+			
+			
 			inserted_izvewenija.setUserGroupId(userGroup.getUserGroupId());
 		    IzvewenijaLocalServiceUtil.updateIzvewenija(inserted_izvewenija);
 		    
-		System.out.println("omad------------------------------------------!");
+		
 		} catch (PortalException e1) {
 			
-			System.out.println("naomad---------------------------------------!");
+		
 		}
 	                     
-      
+		Folder folder = null;
+		
+			long repositoryId = themeDisplay.getScopeGroupId();		
+			try {
+				folder = DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, EQuotationConstants.FOLDER_BID);
+				ServiceContext serviceContexts = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
+				folder = DLAppServiceUtil.addFolder(repositoryId,folder.getFolderId(), String.valueOf(inserted_izvewenija.getIzvewenija_id()),"this folder for bid number " + String.valueOf(inserted_izvewenija.getIzvewenija_id()), serviceContexts);
+			} catch (PortalException e1) {
+				e1.printStackTrace();
+			} catch (SystemException e1) {
+				e1.printStackTrace();
+			}			
+		
+		
     
 	 IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(inserted_izvewenija.getIzvewenija_id());
 		

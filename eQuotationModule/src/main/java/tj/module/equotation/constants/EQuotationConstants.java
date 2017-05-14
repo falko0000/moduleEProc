@@ -125,4 +125,6 @@ public interface EQuotationConstants  {
     static final String TEMPLATE_FTL_FOLDER_NAME = "template_ftl";
     static final String  TEMPLATE_FTL_FOLDER_DESCRIPTION = "This folder for document generation templates";
     static final String   OUT_HTML = "SDB";
+    static final String FOLDER_BID = "bid";
+    
 }

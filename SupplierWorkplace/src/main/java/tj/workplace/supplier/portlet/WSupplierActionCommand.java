@@ -1,6 +1,10 @@
 package tj.workplace.supplier.portlet;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Date;
@@ -13,22 +17,38 @@ import javax.portlet.ActionResponse;
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.document.library.kernel.model.DLFileEntry;
+import com.liferay.document.library.kernel.model.DLFolder;
+import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
+import com.liferay.document.library.kernel.service.DLAppServiceUtil;
+import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileEntrySoap;
+import com.liferay.portal.kernel.repository.model.FileEntryWrapper;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import tj.balans.postavwika.model.BalansPostavwika;
 import tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil;
+
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 import tj.oplachennye.zakazy.model.OplachennyeZakazy;
 import tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil;
@@ -62,6 +82,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		String formname = ParamUtil.getString(actionRequest, "FormName");
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 		
+	
 		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO_BALANS))
 			withdrawmoney(actionRequest, actionResponse);
 		
@@ -71,11 +92,96 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION) && cmd.equals(Constants.ADD))
 			updateApplication(actionRequest, actionResponse);
 		
+		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO_DOCUMENT))
+		   addDocument(actionRequest, actionResponse);
+		
+		if(formname.equals(SupplierWorkplaceConstant.FORM_SEARCH_CONTENER))
+			deleteFile(actionRequest, actionResponse);
+	}
+
+	private void deleteFile(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+	   String deleteIds = ParamUtil.getString(actionRequest, "deleteIds");
+		
+	 
+		  
+		  if(deleteIds.startsWith("on"))
+			  deleteIds = deleteIds.substring(3, deleteIds.length());
+	 
+		 
+			
+		  String ids[] = deleteIds.split(",");
+		  
+		  for(String id : ids)
+			try {
+				DLAppLocalServiceUtil.deleteFileEntry(Long.valueOf(id));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
+
+	private void addDocument(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+		 Long izvewenie_id = ParamUtil.getLong(actionRequest,"izvewenie_id");
+		 Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+		
+		 
+		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		  long organization_id = 0;
+		  
+		  
+		   long userId = themeDisplay.getUserId();
+		   List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
+		  if(organizations.size()>0)
+			  organization_id = organizations.get(0).getOrganizationId();
+		  
+		
+		 
+		 long repositoryId = 20147;
+		 
+		 
+		 
+		Folder folder = createFolder(repositoryId, izvewenie_id, spisok_lotov_id,organization_id, actionRequest );
+		 
+		uploadFile(folder, actionRequest);
+	}
+
+	private void uploadFile(Folder folder, ActionRequest actionRequest) {
+		
+				String doc_name = ParamUtil.getString(actionRequest, "doc_name");
+				String description = ParamUtil.getString(actionRequest, "doc_descripton");
+				
+				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
+				String title=uploadPortletRequest.getFileName("doc_file");	
+				String mimeType = uploadPortletRequest.getContentType("doc_file");
+				File file = uploadPortletRequest.getFile("doc_file");
+				 
+				 try {
+					 ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
+					InputStream is = new FileInputStream( file );
+					DLAppServiceUtil.addFileEntry(folder.getRepositoryId(), folder.getFolderId(), title, mimeType, 
+							doc_name, description, "", is, file.length(), serviceContext);
+					
+					 
+				} catch (FileNotFoundException | PortalException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+					
 	}
 
 	private void updateApplication(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
-		 	
+		com.liferay.portal.kernel.repository.model.FileEntry entry;
+
+
 			Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
 			
 			 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
@@ -284,4 +390,67 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 	        }
 		    return buuid;
   }
+	   
+		private boolean isFolderExist(long repositoryId, long izvewenija_id, long spisok_lotov_id, long pastavwik_id){
+			boolean folderExist = false;
+		Folder folder = null;
+			try {
+				folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID);
+				folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenija_id));
+				folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
+				folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(pastavwik_id));
+				
+				folderExist = true;
+				
+			} catch (Exception e) {	
+				
+			}
+			return folderExist;
+	}
+		
+		public Folder createFolder(long repositoryId, long izvewenija_id, long spisok_lotov_id, long pastavwik_id , ActionRequest actionRequest)
+		{
+	      boolean folderExist = isFolderExist(repositoryId, izvewenija_id, spisok_lotov_id, pastavwik_id);
+		   
+	      
+	        Folder folder = null;
+			if (!folderExist) {
+				
+				try {
+					
+			
+					ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
+					
+					folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID);
+					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenija_id));
+					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
+					
+					folder = DLAppServiceUtil.addFolder(repositoryId,folder.getFolderId(), String.valueOf(pastavwik_id),"organization "+ String.valueOf(pastavwik_id)+" for lot" + String.valueOf(spisok_lotov_id), serviceContext);
+				} catch (PortalException e1) {
+					e1.printStackTrace();
+				} catch (SystemException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+			else
+			{
+				try {
+				
+					
+					folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID);
+					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenija_id));
+					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
+					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(pastavwik_id));
+				} catch (PortalException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+			return folder;
+		}
+		
+	   
 }

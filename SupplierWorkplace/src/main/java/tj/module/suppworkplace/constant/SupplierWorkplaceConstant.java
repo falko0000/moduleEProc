@@ -15,6 +15,8 @@ public interface SupplierWorkplaceConstant {
     //main
 	static final String PAGE_ACTIONS = "/actions.jsp";
 	static final String PAGE_ACTIONS_LOTS = "/bid/actions.jsp";
+	static final String PAGE_DOCUMENT_ACTION = "/bid/document/action.jsp";
+	static final String SEARCH_CONTENER = "/bid/document/contener_document.jsp";
 	static final String PAGE_DELETE = "/delete.jsp";
 	static final String PAGE_INFO = "/info.jsp";
 	static final String PAGE_LISTLOTS = "/bid/listlots.jsp";
@@ -35,8 +37,9 @@ public interface SupplierWorkplaceConstant {
 	
 	static final String FORM_ABOUT_INFO = "info";
 	static final String FORM_ABOUT_INFO_BALANS = "balas";
-	static final String FORM_ABOUT_INFO_DOCUMENT = "documentation1";
+	static final String FORM_ABOUT_INFO_DOCUMENT = "documentation";
 	static final String FORM_APPLICATION = "application";
+	static final String FORM_SEARCH_CONTENER = "search_contener_form";
 	//
 	static final String RESOURCE_COMMAND_NAME_LIST = "list";
 	
@@ -121,4 +124,6 @@ public interface SupplierWorkplaceConstant {
     static final int STATUS_BID_REFUSAL_CONTRACT = 302;
     
     static final int STATUS_BID_COMPLETED_TRADES = 400;
+    
+    static final String FOLDER_BID = "bid";
 }

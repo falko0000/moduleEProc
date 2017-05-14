@@ -77,14 +77,14 @@
         			<jsp:include page="<%=EQuotationConstants.PAGE_LISTLOTS%>" flush="true" />
     			</liferay-ui:section>
     		
-               
+               <c:if test="<%= izvewenie_id!=0%>">
 
                 <liferay-ui:section>
 
 					<jsp:include page="<%=EQuotationConstants.PAGE_COMMISSION%>" flush="true" />
  
     			</liferay-ui:section>
-			
+			  </c:if>
 		
 		        <liferay-ui:section>
 		        <jsp:include page="<%=EQuotationConstants.PAGE_TENDER_DOCUMENTATION %>"/>

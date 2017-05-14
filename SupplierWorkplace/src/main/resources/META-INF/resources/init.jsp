@@ -44,7 +44,9 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.portal.kernel.service.permission.PortletPermissionUtil" %>
 <%@ page import="com.liferay.portal.kernel.security.permission.ActionKeys" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys" %>
-
+<%@page import="com.liferay.portal.kernel.exception.PortalException"%>
+<%@page import="com.liferay.document.library.kernel.service.DLAppServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.repository.model.FileEntry"%>
 <%@ page import="java.util.Arrays" %>
 <%@page import="java.util.List" %>
 
@@ -72,13 +74,17 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="com.liferay.portal.kernel.model.Organization" %>
 <%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil" %>
 
+
+<%@page import="com.liferay.document.library.kernel.model.DLFolderConstants"%>
+
+<%@page import="com.liferay.portal.kernel.repository.model.Folder"%>
+
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
 
 
 
-
-
-
+	
 
