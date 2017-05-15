@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.spisok.tovarov.model.SpisokTovarov" />
+	<class name="tj.spisok.tovarov.model.impl.SpisokTovarovImpl" table="sapp.spisok_tovarov">
+		<id name="spisok_tovarov_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.spisok_tovarov_id_seq</param>
+			</generator>
+		</id>
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="edinica_izmerenija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="klassifikacija_po_okdp" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kod_po_okdp" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kod_po_spravochniku_naimenovanij" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kod_strany_proizvoditelja" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kolichestvo" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lot_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="naimenovanie_tovara" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="opisanie_tovara" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

@@ -150,14 +150,6 @@ public class IzvewenijaLocalServiceWrapper implements IzvewenijaLocalService,
 		return _izvewenijaLocalService.getIzvewenija(companyId, groupId);
 	}
 
-	@Override
-	public java.util.List<tj.izvewenija.model.Izvewenija> getIzvewenija(
-		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _izvewenijaLocalService.getIzvewenija(companyId, groupId,
-			sostojanie_ids, status_ids);
-	}
-
 	/**
 	* Returns a range of all the izvewenijas.
 	*

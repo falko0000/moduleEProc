@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
+import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -60,6 +61,21 @@ public interface CriteriasWeightModel extends BaseModel<CriteriasWeight> {
 	 * @param primaryKey the primary key of this criterias weight
 	 */
 	public void setPrimaryKey(long primaryKey);
+
+	/**
+	 * Returns the uuid of this criterias weight.
+	 *
+	 * @return the uuid of this criterias weight
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this criterias weight.
+	 *
+	 * @param uuid the uuid of this criterias weight
+	 */
+	public void setUuid(String uuid);
 
 	/**
 	 * Returns the criterias_weight_id of this criterias weight.

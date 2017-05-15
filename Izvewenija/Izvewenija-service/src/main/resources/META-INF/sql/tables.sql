@@ -14,6 +14,5 @@ create table sapp.izvewenija (
 	userId LONG,
 	groupId LONG,
 	companyId LONG,
-	UserName VARCHAR(75) null,
-	UserGroupId LONG
+	UserName VARCHAR(75) null
 );

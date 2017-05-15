@@ -60,7 +60,6 @@ public class VbkWrapper implements Vbk, ModelWrapper<Vbk> {
 		attributes.put("kod", getKod());
 		attributes.put("nazvanie_tj", getNazvanie_tj());
 		attributes.put("nazvanie_ru", getNazvanie_ru());
-		attributes.put("organizationid", getOrganizationid());
 
 		return attributes;
 	}
@@ -89,12 +88,6 @@ public class VbkWrapper implements Vbk, ModelWrapper<Vbk> {
 
 		if (nazvanie_ru != null) {
 			setNazvanie_ru(nazvanie_ru);
-		}
-
-		Long organizationid = (Long)attributes.get("organizationid");
-
-		if (organizationid != null) {
-			setOrganizationid(organizationid);
 		}
 	}
 
@@ -181,16 +174,6 @@ public class VbkWrapper implements Vbk, ModelWrapper<Vbk> {
 	@Override
 	public java.lang.String toXmlString() {
 		return _vbk.toXmlString();
-	}
-
-	/**
-	* Returns the organizationid of this vbk.
-	*
-	* @return the organizationid of this vbk
-	*/
-	@Override
-	public long getOrganizationid() {
-		return _vbk.getOrganizationid();
 	}
 
 	/**
@@ -282,16 +265,6 @@ public class VbkWrapper implements Vbk, ModelWrapper<Vbk> {
 	@Override
 	public void setNew(boolean n) {
 		_vbk.setNew(n);
-	}
-
-	/**
-	* Sets the organizationid of this vbk.
-	*
-	* @param organizationid the organizationid of this vbk
-	*/
-	@Override
-	public void setOrganizationid(long organizationid) {
-		_vbk.setOrganizationid(organizationid);
 	}
 
 	/**

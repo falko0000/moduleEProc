@@ -1,0 +1,1 @@
+create sequence sapp.istochnik_finansirovanija;

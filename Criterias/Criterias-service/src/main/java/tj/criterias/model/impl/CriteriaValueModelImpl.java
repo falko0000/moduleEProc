@@ -62,6 +62,7 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	 */
 	public static final String TABLE_NAME = "sapp.criteria_value";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "criteria_value_id", Types.BIGINT },
 			{ "criteria_id", Types.BIGINT },
 			{ "userid", Types.BIGINT },
@@ -70,11 +71,14 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 			{ "created", Types.TIMESTAMP },
 			{ "updated", Types.TIMESTAMP },
 			{ "createdby", Types.BIGINT },
-			{ "updatedby", Types.BIGINT }
+			{ "updatedby", Types.BIGINT },
+			{ "max_value", Types.INTEGER },
+			{ "min_value", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("criteria_value_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("criteria_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userid", Types.BIGINT);
@@ -84,9 +88,11 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		TABLE_COLUMNS_MAP.put("updated", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("createdby", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("max_value", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("min_value", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_value (criteria_value_id LONG not null primary key,criteria_id LONG,userid LONG,value DOUBLE,description VARCHAR(75) null,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_value (uuid_ VARCHAR(75) null,criteria_value_id LONG not null primary key,criteria_id LONG,userid LONG,value DOUBLE,description VARCHAR(75) null,created DATE null,updated DATE null,createdby LONG,updatedby LONG,max_value INTEGER,min_value INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria_value";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteriaValue.criteria_value_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria_value.criteria_value_id ASC";
@@ -104,7 +110,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 			true);
 	public static final long CRITERIA_ID_COLUMN_BITMASK = 1L;
 	public static final long USERID_COLUMN_BITMASK = 2L;
-	public static final long CRITERIA_VALUE_ID_COLUMN_BITMASK = 4L;
+	public static final long UUID_COLUMN_BITMASK = 4L;
+	public static final long CRITERIA_VALUE_ID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.criterias.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.criterias.model.CriteriaValue"));
 
@@ -145,6 +152,7 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("criteria_value_id", getCriteria_value_id());
 		attributes.put("criteria_id", getCriteria_id());
 		attributes.put("userid", getUserid());
@@ -154,6 +162,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("max_value", getMax_value());
+		attributes.put("min_value", getMin_value());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -163,6 +173,12 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long criteria_value_id = (Long)attributes.get("criteria_value_id");
 
 		if (criteria_value_id != null) {
@@ -216,6 +232,41 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
+
+		Integer max_value = (Integer)attributes.get("max_value");
+
+		if (max_value != null) {
+			setMax_value(max_value);
+		}
+
+		Integer min_value = (Integer)attributes.get("min_value");
+
+		if (min_value != null) {
+			setMin_value(min_value);
+		}
+	}
+
+	@Override
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
+		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	@Override
@@ -337,6 +388,26 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		_updatedby = updatedby;
 	}
 
+	@Override
+	public int getMax_value() {
+		return _max_value;
+	}
+
+	@Override
+	public void setMax_value(int max_value) {
+		_max_value = max_value;
+	}
+
+	@Override
+	public int getMin_value() {
+		return _min_value;
+	}
+
+	@Override
+	public void setMin_value(int min_value) {
+		_min_value = min_value;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -368,6 +439,7 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	public Object clone() {
 		CriteriaValueImpl criteriaValueImpl = new CriteriaValueImpl();
 
+		criteriaValueImpl.setUuid(getUuid());
 		criteriaValueImpl.setCriteria_value_id(getCriteria_value_id());
 		criteriaValueImpl.setCriteria_id(getCriteria_id());
 		criteriaValueImpl.setUserid(getUserid());
@@ -377,6 +449,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		criteriaValueImpl.setUpdated(getUpdated());
 		criteriaValueImpl.setCreatedby(getCreatedby());
 		criteriaValueImpl.setUpdatedby(getUpdatedby());
+		criteriaValueImpl.setMax_value(getMax_value());
+		criteriaValueImpl.setMin_value(getMin_value());
 
 		criteriaValueImpl.resetOriginalValues();
 
@@ -439,6 +513,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	public void resetOriginalValues() {
 		CriteriaValueModelImpl criteriaValueModelImpl = this;
 
+		criteriaValueModelImpl._originalUuid = criteriaValueModelImpl._uuid;
+
 		criteriaValueModelImpl._originalCriteria_id = criteriaValueModelImpl._criteria_id;
 
 		criteriaValueModelImpl._setOriginalCriteria_id = false;
@@ -453,6 +529,14 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	@Override
 	public CacheModel<CriteriaValue> toCacheModel() {
 		CriteriaValueCacheModel criteriaValueCacheModel = new CriteriaValueCacheModel();
+
+		criteriaValueCacheModel.uuid = getUuid();
+
+		String uuid = criteriaValueCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			criteriaValueCacheModel.uuid = null;
+		}
 
 		criteriaValueCacheModel.criteria_value_id = getCriteria_value_id();
 
@@ -492,14 +576,20 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 
 		criteriaValueCacheModel.updatedby = getUpdatedby();
 
+		criteriaValueCacheModel.max_value = getMax_value();
+
+		criteriaValueCacheModel.min_value = getMin_value();
+
 		return criteriaValueCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(25);
 
-		sb.append("{criteria_value_id=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", criteria_value_id=");
 		sb.append(getCriteria_value_id());
 		sb.append(", criteria_id=");
 		sb.append(getCriteria_id());
@@ -517,6 +607,10 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		sb.append(getCreatedby());
 		sb.append(", updatedby=");
 		sb.append(getUpdatedby());
+		sb.append(", max_value=");
+		sb.append(getMax_value());
+		sb.append(", min_value=");
+		sb.append(getMin_value());
 		sb.append("}");
 
 		return sb.toString();
@@ -524,12 +618,16 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriaValue");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>criteria_value_id</column-name><column-value><![CDATA[");
 		sb.append(getCriteria_value_id());
@@ -566,6 +664,14 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 			"<column><column-name>updatedby</column-name><column-value><![CDATA[");
 		sb.append(getUpdatedby());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>max_value</column-name><column-value><![CDATA[");
+		sb.append(getMax_value());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>min_value</column-name><column-value><![CDATA[");
+		sb.append(getMin_value());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -576,6 +682,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			CriteriaValue.class
 		};
+	private String _uuid;
+	private String _originalUuid;
 	private long _criteria_value_id;
 	private long _criteria_id;
 	private long _originalCriteria_id;
@@ -589,6 +697,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private int _max_value;
+	private int _min_value;
 	private long _columnBitmask;
 	private CriteriaValue _escapedModel;
 }

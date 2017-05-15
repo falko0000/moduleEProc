@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.informacija.razmewenii.model.InformacijaORazmewenii" />
+	<class name="tj.informacija.razmewenii.model.impl.InformacijaORazmeweniiImpl" table="sapp.informacija_o_razmewenii">
+		<id name="informacija_o_razmewenii_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.informacija_o_razmewenii_id_seq</param>
+			</generator>
+		</id>
+		<property name="cena_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cena_postavki_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="mesto_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mesto_postavki_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="obespechenie_ispolnenija" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="obespechenie_ispolnenija_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="obespechenie_ispolnenija_v_procentah" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="obespechenie_v_procentah" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="obespechenie_zajavki" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="obespechenie_zajavki_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="oplata" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="oplata_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="soputstvujuwie_uslovija" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="soputstvujuwie_uslovija_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="srok_dejstvija" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_dejstvija_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="srok_ispolnenija_zajavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_obespechenija_zajavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_postavki_dlja_zakaza" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

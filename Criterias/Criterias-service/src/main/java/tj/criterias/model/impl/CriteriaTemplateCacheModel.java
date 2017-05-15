@@ -66,9 +66,11 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("{criteria_template_id=");
+		sb.append("{uuid=");
+		sb.append(uuid);
+		sb.append(", criteria_template_id=");
 		sb.append(criteria_template_id);
 		sb.append(", criteria_name=");
 		sb.append(criteria_name);
@@ -90,6 +92,13 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 	@Override
 	public CriteriaTemplate toEntityModel() {
 		CriteriaTemplateImpl criteriaTemplateImpl = new CriteriaTemplateImpl();
+
+		if (uuid == null) {
+			criteriaTemplateImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			criteriaTemplateImpl.setUuid(uuid);
+		}
 
 		criteriaTemplateImpl.setCriteria_template_id(criteria_template_id);
 
@@ -126,6 +135,8 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid = objectInput.readUTF();
+
 		criteria_template_id = objectInput.readLong();
 		criteria_name = objectInput.readUTF();
 
@@ -141,6 +152,13 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
+
 		objectOutput.writeLong(criteria_template_id);
 
 		if (criteria_name == null) {
@@ -159,6 +177,7 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 		objectOutput.writeLong(updatedby);
 	}
 
+	public String uuid;
 	public long criteria_template_id;
 	public String criteria_name;
 	public int criteria_category_id;

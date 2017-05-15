@@ -21,8 +21,11 @@ if(spisok_lotov_id!=0)
     
     <tr>
     <th>
-    	number_of_lot
+    	<%=LanguageUtil.get(request, "number_lot") %>
+    	
+    	
     </th>
+   
     <th>
     <aui:input
     	name="10101010"
@@ -36,9 +39,12 @@ if(spisok_lotov_id!=0)
     
     <tbody>
     <tr>
+   
     <th>
-    	item_name
+    <%=LanguageUtil.get(request, "item_name") %>
+    
     </th>
+   
     <th>
     <aui:input
     	name=""
@@ -48,6 +54,7 @@ if(spisok_lotov_id!=0)
     </aui:validator>
     </aui:input>    
     </th>
+   
     </tr>    
     </tbody>
     

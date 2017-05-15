@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="tj.criterias.service.impl.CriteriaLocalServiceImpl" id="tj.criterias.service.CriteriaLocalService" />
+	<bean class="tj.criterias.service.persistence.impl.CriteriaPersistenceImpl" id="tj.criterias.service.persistence.CriteriaPersistence" parent="basePersistence" />
+	<bean class="tj.criterias.service.impl.CriteriasWeightLocalServiceImpl" id="tj.criterias.service.CriteriasWeightLocalService" />
+	<bean class="tj.criterias.service.persistence.impl.CriteriasWeightPersistenceImpl" id="tj.criterias.service.persistence.CriteriasWeightPersistence" parent="basePersistence" />
+	<bean class="tj.criterias.service.impl.CriteriaTemplateLocalServiceImpl" id="tj.criterias.service.CriteriaTemplateLocalService" />
+	<bean class="tj.criterias.service.persistence.impl.CriteriaTemplatePersistenceImpl" id="tj.criterias.service.persistence.CriteriaTemplatePersistence" parent="basePersistence" />
+	<bean class="tj.criterias.service.impl.CriteriaValueLocalServiceImpl" id="tj.criterias.service.CriteriaValueLocalService" />
+	<bean class="tj.criterias.service.persistence.impl.CriteriaValuePersistenceImpl" id="tj.criterias.service.persistence.CriteriaValuePersistence" parent="basePersistence" />
+</beans>

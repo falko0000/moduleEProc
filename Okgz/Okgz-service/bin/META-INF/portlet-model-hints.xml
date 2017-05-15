@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.okgz.model.Okgz">
+		<field name="okgz_id" type="long" />
+		<field name="kod" type="String" />
+		<field name="naimenovanie" type="String" />
+	</model>
+</model-hints>

@@ -1,0 +1,1 @@
+create sequence sapp.status_izvewenij_id_seq;

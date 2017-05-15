@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.strany.model.Strany" />
+	<class name="tj.strany.model.impl.StranyImpl" table="sapp.strany">
+		<id name="strany_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">seq_strany</param>
+			</generator>
+		</id>
+		<property name="nazvanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nazvanie_tj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property column="key_" name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

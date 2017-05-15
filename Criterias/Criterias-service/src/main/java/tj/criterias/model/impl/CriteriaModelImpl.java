@@ -62,6 +62,7 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	 */
 	public static final String TABLE_NAME = "sapp.criteria";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "criteria_id", Types.BIGINT },
 			{ "criteria_name", Types.VARCHAR },
 			{ "criteria_weight", Types.DOUBLE },
@@ -71,14 +72,12 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 			{ "created", Types.TIMESTAMP },
 			{ "updated", Types.TIMESTAMP },
 			{ "createdby", Types.BIGINT },
-			{ "updatedby", Types.BIGINT },
-			{ "max_weight", Types.INTEGER },
-			{ "min_weight", Types.INTEGER },
-			{ "criteria_type_id", Types.INTEGER }
+			{ "updatedby", Types.BIGINT }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("criteria_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("criteria_name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("criteria_weight", Types.DOUBLE);
@@ -89,12 +88,9 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		TABLE_COLUMNS_MAP.put("updated", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("createdby", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("max_weight", Types.INTEGER);
-		TABLE_COLUMNS_MAP.put("min_weight", Types.INTEGER);
-		TABLE_COLUMNS_MAP.put("criteria_type_id", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria (criteria_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_weight DOUBLE,criteria_category_id INTEGER,criteria_description VARCHAR(75) null,spisok_lotov_id LONG,created DATE null,updated DATE null,createdby LONG,updatedby LONG,max_weight INTEGER,min_weight INTEGER,criteria_type_id INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria (uuid_ VARCHAR(75) null,criteria_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_weight DOUBLE,criteria_category_id INTEGER,criteria_description VARCHAR(75) null,spisok_lotov_id LONG,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteria.criteria_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria.criteria_id ASC";
@@ -111,8 +107,8 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 				"value.object.column.bitmask.enabled.tj.criterias.model.Criteria"),
 			true);
 	public static final long CRITERIA_CATEGORY_ID_COLUMN_BITMASK = 1L;
-	public static final long CRITERIA_TYPE_ID_COLUMN_BITMASK = 2L;
-	public static final long SPISOK_LOTOV_ID_COLUMN_BITMASK = 4L;
+	public static final long SPISOK_LOTOV_ID_COLUMN_BITMASK = 2L;
+	public static final long UUID_COLUMN_BITMASK = 4L;
 	public static final long CRITERIA_ID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.criterias.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.criterias.model.Criteria"));
@@ -154,6 +150,7 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("criteria_id", getCriteria_id());
 		attributes.put("criteria_name", getCriteria_name());
 		attributes.put("criteria_weight", getCriteria_weight());
@@ -164,9 +161,6 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
-		attributes.put("max_weight", getMax_weight());
-		attributes.put("min_weight", getMin_weight());
-		attributes.put("criteria_type_id", getCriteria_type_id());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -176,6 +170,12 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long criteria_id = (Long)attributes.get("criteria_id");
 
 		if (criteria_id != null) {
@@ -237,24 +237,29 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
+	}
 
-		Integer max_weight = (Integer)attributes.get("max_weight");
+	@Override
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
 
-		if (max_weight != null) {
-			setMax_weight(max_weight);
+	@Override
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
 		}
 
-		Integer min_weight = (Integer)attributes.get("min_weight");
+		_uuid = uuid;
+	}
 
-		if (min_weight != null) {
-			setMin_weight(min_weight);
-		}
-
-		Integer criteria_type_id = (Integer)attributes.get("criteria_type_id");
-
-		if (criteria_type_id != null) {
-			setCriteria_type_id(criteria_type_id);
-		}
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	@Override
@@ -391,48 +396,6 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		_updatedby = updatedby;
 	}
 
-	@Override
-	public int getMax_weight() {
-		return _max_weight;
-	}
-
-	@Override
-	public void setMax_weight(int max_weight) {
-		_max_weight = max_weight;
-	}
-
-	@Override
-	public int getMin_weight() {
-		return _min_weight;
-	}
-
-	@Override
-	public void setMin_weight(int min_weight) {
-		_min_weight = min_weight;
-	}
-
-	@Override
-	public int getCriteria_type_id() {
-		return _criteria_type_id;
-	}
-
-	@Override
-	public void setCriteria_type_id(int criteria_type_id) {
-		_columnBitmask |= CRITERIA_TYPE_ID_COLUMN_BITMASK;
-
-		if (!_setOriginalCriteria_type_id) {
-			_setOriginalCriteria_type_id = true;
-
-			_originalCriteria_type_id = _criteria_type_id;
-		}
-
-		_criteria_type_id = criteria_type_id;
-	}
-
-	public int getOriginalCriteria_type_id() {
-		return _originalCriteria_type_id;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -464,6 +427,7 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	public Object clone() {
 		CriteriaImpl criteriaImpl = new CriteriaImpl();
 
+		criteriaImpl.setUuid(getUuid());
 		criteriaImpl.setCriteria_id(getCriteria_id());
 		criteriaImpl.setCriteria_name(getCriteria_name());
 		criteriaImpl.setCriteria_weight(getCriteria_weight());
@@ -474,9 +438,6 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		criteriaImpl.setUpdated(getUpdated());
 		criteriaImpl.setCreatedby(getCreatedby());
 		criteriaImpl.setUpdatedby(getUpdatedby());
-		criteriaImpl.setMax_weight(getMax_weight());
-		criteriaImpl.setMin_weight(getMin_weight());
-		criteriaImpl.setCriteria_type_id(getCriteria_type_id());
 
 		criteriaImpl.resetOriginalValues();
 
@@ -539,6 +500,8 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	public void resetOriginalValues() {
 		CriteriaModelImpl criteriaModelImpl = this;
 
+		criteriaModelImpl._originalUuid = criteriaModelImpl._uuid;
+
 		criteriaModelImpl._originalCriteria_category_id = criteriaModelImpl._criteria_category_id;
 
 		criteriaModelImpl._setOriginalCriteria_category_id = false;
@@ -547,16 +510,20 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 
 		criteriaModelImpl._setOriginalSpisok_lotov_id = false;
 
-		criteriaModelImpl._originalCriteria_type_id = criteriaModelImpl._criteria_type_id;
-
-		criteriaModelImpl._setOriginalCriteria_type_id = false;
-
 		criteriaModelImpl._columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<Criteria> toCacheModel() {
 		CriteriaCacheModel criteriaCacheModel = new CriteriaCacheModel();
+
+		criteriaCacheModel.uuid = getUuid();
+
+		String uuid = criteriaCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			criteriaCacheModel.uuid = null;
+		}
 
 		criteriaCacheModel.criteria_id = getCriteria_id();
 
@@ -605,20 +572,16 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 
 		criteriaCacheModel.updatedby = getUpdatedby();
 
-		criteriaCacheModel.max_weight = getMax_weight();
-
-		criteriaCacheModel.min_weight = getMin_weight();
-
-		criteriaCacheModel.criteria_type_id = getCriteria_type_id();
-
 		return criteriaCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(23);
 
-		sb.append("{criteria_id=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", criteria_id=");
 		sb.append(getCriteria_id());
 		sb.append(", criteria_name=");
 		sb.append(getCriteria_name());
@@ -638,12 +601,6 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		sb.append(getCreatedby());
 		sb.append(", updatedby=");
 		sb.append(getUpdatedby());
-		sb.append(", max_weight=");
-		sb.append(getMax_weight());
-		sb.append(", min_weight=");
-		sb.append(getMin_weight());
-		sb.append(", criteria_type_id=");
-		sb.append(getCriteria_type_id());
 		sb.append("}");
 
 		return sb.toString();
@@ -651,12 +608,16 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.Criteria");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>criteria_id</column-name><column-value><![CDATA[");
 		sb.append(getCriteria_id());
@@ -697,18 +658,6 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 			"<column><column-name>updatedby</column-name><column-value><![CDATA[");
 		sb.append(getUpdatedby());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>max_weight</column-name><column-value><![CDATA[");
-		sb.append(getMax_weight());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>min_weight</column-name><column-value><![CDATA[");
-		sb.append(getMin_weight());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>criteria_type_id</column-name><column-value><![CDATA[");
-		sb.append(getCriteria_type_id());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -719,6 +668,8 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			Criteria.class
 		};
+	private String _uuid;
+	private String _originalUuid;
 	private long _criteria_id;
 	private String _criteria_name;
 	private double _criteria_weight;
@@ -733,11 +684,6 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
-	private int _max_weight;
-	private int _min_weight;
-	private int _criteria_type_id;
-	private int _originalCriteria_type_id;
-	private boolean _setOriginalCriteria_type_id;
 	private long _columnBitmask;
 	private Criteria _escapedModel;
 }

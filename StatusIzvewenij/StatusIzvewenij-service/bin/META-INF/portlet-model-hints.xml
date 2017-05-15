@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.status.izvewenij.model.StatusIzvewenij">
+		<field name="status_izvewenij_id" type="long" />
+		<field name="status" type="String" />
+	</model>
+</model-hints>

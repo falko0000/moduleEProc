@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.postavwiki.model.Postavwiki" />
+	<class name="tj.postavwiki.model.impl.PostavwikiImpl" table="sapp.postavwiki">
+		<id name="postavwiki_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">seq_postawki</param>
+			</generator>
+		</id>
+		<property name="adres" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="data_gosudarstvennoj_registracii" type="org.hibernate.type.TimestampType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="ein" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gorod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="inn" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kratkoe_naimenovanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mesto_registracii" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="oblast_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="polnoe_naimenovanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="rajon_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sin" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

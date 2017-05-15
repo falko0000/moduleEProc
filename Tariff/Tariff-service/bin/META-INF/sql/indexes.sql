@@ -1,0 +1,1 @@
+create index IX_56CCAE0D on sapp.tariff (region_id, type_tariff);

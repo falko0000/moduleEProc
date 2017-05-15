@@ -1,42 +1,28 @@
-
+<%--
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
 
 <%@ include file="/init.jsp" %>
 
 <%
-  String redirect = ParamUtil.getString(request, "redirect");
-  
+String redirect = ParamUtil.getString(request, "redirect");
 
- 
-   Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
-  
-  long userGroupId = izvewenija.getUserGroupId();
-  
-  
+long userGroupId = ParamUtil.getLong(request, "userGroupId");
 
-  
-  UserGroup userGroup = UserGroupServiceUtil.fetchUserGroup(userGroupId);
-  
-  long ids[] = { 0, 0 };
-   List<Organization> organizations = Collections.emptyList();
-  
-   List<Spisoklotov> spisoklotovs =  SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id());
- 
-   ids[0] = izvewenija.getOrganizacija_id();
-   ids[1] = izvewenija.getOrganizacija_id();
-   if(!spisoklotovs.isEmpty())
-   {
-	   String spisoklotov = spisoklotovs.get(0).getKod_zakazchika();
-	  
-	  long vbk_id = Long.parseLong(spisoklotov);
-	  Vbk vbk = VbkLocalServiceUtil.getVbk(vbk_id);
-		 
-		ids[1] = vbk.getOrganizationid();
-   }
-  
-  
-   organizations =  OrganizationLocalServiceUtil.getOrganizations(ids);
-   
-  
+UserGroup userGroup = UserGroupServiceUtil.fetchUserGroup(userGroupId);
+
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
@@ -67,10 +53,10 @@ if (!searchTerms.isSearch()) {
 LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
 if (filterManageableOrganizations) {
-	userParams.put("usersOrgsTree", organizations);
+	userParams.put("usersOrgsTree", user.getOrganizations());
 }
-  
-   userParams.put("usersUserGroups", Long.valueOf(userGroup.getUserGroupId()));
+
+userParams.put("usersUserGroups", Long.valueOf(userGroup.getUserGroupId()));
 
 RowChecker rowChecker = new UnsetUserUserGroupChecker(renderResponse, userGroup);
 
@@ -131,7 +117,7 @@ String currentURL = themeDisplay.getURLCurrent();
 	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
-<aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="AddUser">
+<aui:form action="<%= portletURL.toString() %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 	<aui:input name="deleteUserGroupIds" type="hidden" />
@@ -173,12 +159,11 @@ String currentURL = themeDisplay.getURLCurrent();
 </liferay-frontend:add-menu>
 
 <aui:script use="liferay-item-selector-dialog">
-	var form = AUI.$(document.<portlet:namespace />AddUser);
+	var form = AUI.$(document.<portlet:namespace />fm);
 
 	<portlet:renderURL var="selectUsersURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 		<portlet:param name="mvcPath" value="/bid/commission/select_user_group_users.jsp" />
 		<portlet:param name="userGroupId" value="<%= String.valueOf(userGroupId) %>" />
-			<portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenija.getIzvewenija_id()) %>" />
 	</portlet:renderURL>
 
 	$('#<portlet:namespace />addUsers').on(

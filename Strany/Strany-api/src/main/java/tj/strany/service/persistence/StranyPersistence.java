@@ -159,7 +159,4 @@ public interface StranyPersistence extends BasePersistence<Strany> {
 	* @return the number of stranies
 	*/
 	public int countAll();
-
-	@Override
-	public java.util.Set<java.lang.String> getBadColumnNames();
 }

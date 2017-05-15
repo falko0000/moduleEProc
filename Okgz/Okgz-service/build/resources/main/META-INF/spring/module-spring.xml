@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="tj.okgz.service.impl.OkgzLocalServiceImpl" id="tj.okgz.service.OkgzLocalService" />
+	<bean class="tj.okgz.service.impl.OkgzServiceImpl" id="tj.okgz.service.OkgzService" />
+	<bean class="tj.okgz.service.persistence.impl.OkgzPersistenceImpl" id="tj.okgz.service.persistence.OkgzPersistence" parent="basePersistence" />
+</beans>

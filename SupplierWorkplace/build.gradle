@@ -13,13 +13,7 @@ dependencies {
 		compile project (":modules:SpisokLots:SpisokLots-api")
 		compile project (":modules:InformacijaRazmewenii:InformacijaRazmewenii-api")
         compile project (":modules:IstochnikFinansirovanija:IstochnikFinansirovanija-api")
-        compile project (":modules:BalansPostavwika:BalansPostavwika-api")
-          compile project (":modules:OplachennyeZakazy:OplachennyeZakazy-api")
 		compile project (":modules:Tariff:Tariff-api")
-		compile project (":modules:SpisokTovarov:SpisokTovarov-api")
-		compile project (":modules:Edinicyizmerenija:Edinicyizmerenija-api")
-			compile project (":modules:Strany:Strany-api")
-			compile project (":modules:ZajavkiOtPostavwikov:ZajavkiOtPostavwikov-api")
 }
 
 

@@ -1,0 +1,1 @@
+create sequence klassifikatory.okgz_id_seq;

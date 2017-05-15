@@ -1,0 +1,1 @@
+create index IX_FB6F6724 on sapp.izvewenie_put (izvewenie_id);

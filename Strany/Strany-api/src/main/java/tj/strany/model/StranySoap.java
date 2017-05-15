@@ -35,7 +35,6 @@ public class StranySoap implements Serializable {
 		soapModel.setNazvanie(model.getNazvanie());
 		soapModel.setNazvanie_tj(model.getNazvanie_tj());
 		soapModel.setStrany_id(model.getStrany_id());
-		soapModel.setKey(model.getKey());
 
 		return soapModel;
 	}
@@ -112,16 +111,7 @@ public class StranySoap implements Serializable {
 		_strany_id = strany_id;
 	}
 
-	public String getKey() {
-		return _key;
-	}
-
-	public void setKey(String key) {
-		_key = key;
-	}
-
 	private String _nazvanie;
 	private String _nazvanie_tj;
 	private long _strany_id;
-	private String _key;
 }

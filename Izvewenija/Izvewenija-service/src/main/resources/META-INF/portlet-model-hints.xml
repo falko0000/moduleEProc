@@ -18,6 +18,5 @@
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="UserName" type="String" />
-		<field name="UserGroupId" type="long" />
 	</model>
 </model-hints>

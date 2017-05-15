@@ -15,8 +15,6 @@ public interface SupplierWorkplaceConstant {
     //main
 	static final String PAGE_ACTIONS = "/actions.jsp";
 	static final String PAGE_ACTIONS_LOTS = "/bid/actions.jsp";
-	static final String PAGE_DOCUMENT_ACTION = "/bid/document/action.jsp";
-	static final String SEARCH_CONTENER = "/bid/document/contener_document.jsp";
 	static final String PAGE_DELETE = "/delete.jsp";
 	static final String PAGE_INFO = "/info.jsp";
 	static final String PAGE_LISTLOTS = "/bid/listlots.jsp";
@@ -34,12 +32,7 @@ public interface SupplierWorkplaceConstant {
 	//
 	static final String RENDER_COMMAND_NAME_EDIT = "/client/edit/";
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
-	
 	static final String FORM_ABOUT_INFO = "info";
-	static final String FORM_ABOUT_INFO_BALANS = "balas";
-	static final String FORM_ABOUT_INFO_DOCUMENT = "documentation";
-	static final String FORM_APPLICATION = "application";
-	static final String FORM_SEARCH_CONTENER = "search_contener_form";
 	//
 	static final String RESOURCE_COMMAND_NAME_LIST = "list";
 	
@@ -97,33 +90,4 @@ public interface SupplierWorkplaceConstant {
     static final String ACTION_ITEM_WITHDRAW_APPLICATION = "Withdraw the application";
     static final String ACTIONS_ITEM_REFUSE_PARTICIPATE = "Refuse to participate";
 
- // State
-    static final int STATE_BID_PREPARATION = 1;
-    static final int STATE_BID_SUBMISSION_OF_PROPOSALS = 2;
-    static final int STATE_BID_EVALUATION_AND_AWARDING = 3;
-    static final int STATE_BID_UNFULFILLED_TENDERS = 4;
-    static final int STATE_BID_COMPLETED_TENDERS = 5;
-    
-    //Status
-
-    static final int STATUS_BID_PREPARATION = 100;
-    static final int STATUS_BID_SUBMISSION_OF_PROPOSALS = 200;
-   //Sending for publication approval
-    static final int STATUS_BID_TO_APPROVE = 101;
-    static final int STATUS_BID_BEFORE_PUBLICATION = 102;
-    static final int STATUS_BID_FINALIZING_ORDER = 103;
-    static final int STATUS_BID_CANCELLATION_AGREEMENT = 201;
-    //CANCELED BY THE OPERATOR OF THE AUTHORIZED BODY
-    static final int STATUS_BID_CANCELED_BODY = 202;
-    static final int STATUS_BID_WINNER_IDENTIFIED = 300;
-    //At the stage of opening and determining the winner
-    static final int STATUS_BID_AT_DETERMINING_WINNER = 500;
-    //Customer's refusal to sign a contract
-    static final int STATUS_BID_CUSTOMER_CONTRACT = 301;
-    //Refusal of the supplier to sign the contract
-    static final int STATUS_BID_REFUSAL_CONTRACT = 302;
-    
-    static final int STATUS_BID_COMPLETED_TRADES = 400;
-    
-    static final String FOLDER_BID = "bid";
 }

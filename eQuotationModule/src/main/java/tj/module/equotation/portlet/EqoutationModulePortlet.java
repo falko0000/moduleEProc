@@ -3,7 +3,6 @@ package tj.module.equotation.portlet;
 
 
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
@@ -11,11 +10,7 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserGroupService;
+
 import com.liferay.portal.kernel.service.UserService;
 
 
@@ -27,15 +22,12 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil;
-import tj.izvewenija.model.Izvewenija;
-import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.strany.service.StranyLocalServiceUtil;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
@@ -67,7 +59,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template="+EQuotationConstants.VIEW_TEMPLATE,
 		 "javax.portlet.resource-bundle=content.Language",
-		
+		"javax.portlet.security-role-ref=power-user,user",
 		"javax.portlet.supports.mime-type=text/html"
 	},
 	service = Portlet.class
@@ -77,8 +69,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		 
-	//	"javax.portlet.security-role-ref=power-user,user",
-		
+
 		//WebKeys.SEARCH_CONTAINER_RESULT_ROW;
 	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 	
@@ -86,15 +77,13 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		
 	System.out.println(spisoklotov);
 	}*/
-	boolean t = false;
-	try {
-		t = UserGroupRoleLocalServiceUtil.hasUserGroupRole(68216, 180701,"Owner");
-	} catch (PortalException e) {
-		
-		
-	}
-   System.out.println("UserGroupRoleLocalServiceUtil.hasUserGroupRole="+t );
-	PermissionChecker checker;
+
+	
+	String vv=LanguageUtil.get(renderRequest.getLocale(),"bid_number_value","not found");
+
+
+	
+	System.out.println(renderRequest.getLocale().getLanguage()+" bid_number_value ==" +vv);
 	
 	StringBuilder names = new StringBuilder();
 	
@@ -104,11 +93,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	names.append(","+EQuotationConstants.TAB_UNFULFILLED_TENDERS);
 	names.append(","+EQuotationConstants.TAB_COMPLETED_TENDERS);
 
-	
-	
-	UserGroupService _userGroupService;
-//	_userGroupService.addUserGroup(name, description, serviceContext);
-	//		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
+//		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
 		renderRequest.setAttribute("editnametabs", names.toString());
 		super.doView(renderRequest, renderResponse);
 	}
@@ -116,6 +101,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	@Override
 	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
+		// TODO Auto-generated method stub
 		
 		
 		super.doEdit(renderRequest, renderResponse);
@@ -142,8 +128,6 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
-		System.out.println("userGroupID=   =   ="+userGroupId);
-		
 		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
 				new ProxyModeThreadLocalCloseable()) {
 

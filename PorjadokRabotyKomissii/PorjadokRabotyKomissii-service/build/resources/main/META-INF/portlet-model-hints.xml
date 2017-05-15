@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii">
+		<field name="data_izmenenija" type="Date" />
+		<field name="data_podvedenija_itogov" type="Date" />
+		<field name="data_publikacii" type="Date" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="izmenil" type="long" />
+		<field name="izvewenie_id" type="long" />
+		<field name="po_istecheniju_dnej" type="long" />
+		<field name="porjadok_raboty_komissii_id" type="long" />
+		<field name="sozdal" type="long" />
+	</model>
+</model-hints>

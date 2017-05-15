@@ -7,12 +7,8 @@
         <column name="nazvanie" type="String"></column>
         <column name="nazvanie_tj" type="String"></column>
         <column name="strany_id" type="long" primary="true" id-type="sequence" id-param="seq_strany"></column>
-        <column name="key" type="String"></column>
-    
     <order>
-    <order-column name="key"></order-column>
+    <order-column name="strany_id"></order-column>
     </order>
-    
-    
     </entity>
 </service-builder>

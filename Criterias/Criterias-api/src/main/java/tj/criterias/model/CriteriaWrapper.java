@@ -57,6 +57,7 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("criteria_id", getCriteria_id());
 		attributes.put("criteria_name", getCriteria_name());
 		attributes.put("criteria_weight", getCriteria_weight());
@@ -67,15 +68,18 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
-		attributes.put("max_weight", getMax_weight());
-		attributes.put("min_weight", getMin_weight());
-		attributes.put("criteria_type_id", getCriteria_type_id());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long criteria_id = (Long)attributes.get("criteria_id");
 
 		if (criteria_id != null) {
@@ -137,24 +141,6 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
-
-		Integer max_weight = (Integer)attributes.get("max_weight");
-
-		if (max_weight != null) {
-			setMax_weight(max_weight);
-		}
-
-		Integer min_weight = (Integer)attributes.get("min_weight");
-
-		if (min_weight != null) {
-			setMin_weight(min_weight);
-		}
-
-		Integer criteria_type_id = (Integer)attributes.get("criteria_type_id");
-
-		if (criteria_type_id != null) {
-			setCriteria_type_id(criteria_type_id);
-		}
 	}
 
 	@Override
@@ -207,36 +193,6 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 		return _criteria.getCriteria_category_id();
 	}
 
-	/**
-	* Returns the criteria_type_id of this criteria.
-	*
-	* @return the criteria_type_id of this criteria
-	*/
-	@Override
-	public int getCriteria_type_id() {
-		return _criteria.getCriteria_type_id();
-	}
-
-	/**
-	* Returns the max_weight of this criteria.
-	*
-	* @return the max_weight of this criteria
-	*/
-	@Override
-	public int getMax_weight() {
-		return _criteria.getMax_weight();
-	}
-
-	/**
-	* Returns the min_weight of this criteria.
-	*
-	* @return the min_weight of this criteria
-	*/
-	@Override
-	public int getMin_weight() {
-		return _criteria.getMin_weight();
-	}
-
 	@Override
 	public int hashCode() {
 		return _criteria.hashCode();
@@ -270,6 +226,16 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 	@Override
 	public java.lang.String getCriteria_name() {
 		return _criteria.getCriteria_name();
+	}
+
+	/**
+	* Returns the uuid of this criteria.
+	*
+	* @return the uuid of this criteria
+	*/
+	@Override
+	public java.lang.String getUuid() {
+		return _criteria.getUuid();
 	}
 
 	@Override
@@ -433,16 +399,6 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 	}
 
 	/**
-	* Sets the criteria_type_id of this criteria.
-	*
-	* @param criteria_type_id the criteria_type_id of this criteria
-	*/
-	@Override
-	public void setCriteria_type_id(int criteria_type_id) {
-		_criteria.setCriteria_type_id(criteria_type_id);
-	}
-
-	/**
 	* Sets the criteria_weight of this criteria.
 	*
 	* @param criteria_weight the criteria_weight of this criteria
@@ -466,26 +422,6 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_criteria.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	* Sets the max_weight of this criteria.
-	*
-	* @param max_weight the max_weight of this criteria
-	*/
-	@Override
-	public void setMax_weight(int max_weight) {
-		_criteria.setMax_weight(max_weight);
-	}
-
-	/**
-	* Sets the min_weight of this criteria.
-	*
-	* @param min_weight the min_weight of this criteria
-	*/
-	@Override
-	public void setMin_weight(int min_weight) {
-		_criteria.setMin_weight(min_weight);
 	}
 
 	@Override
@@ -536,6 +472,16 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 	@Override
 	public void setUpdatedby(long updatedby) {
 		_criteria.setUpdatedby(updatedby);
+	}
+
+	/**
+	* Sets the uuid of this criteria.
+	*
+	* @param uuid the uuid of this criteria
+	*/
+	@Override
+	public void setUuid(java.lang.String uuid) {
+		_criteria.setUuid(uuid);
 	}
 
 	@Override

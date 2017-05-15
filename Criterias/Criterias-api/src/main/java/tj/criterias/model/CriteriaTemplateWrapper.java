@@ -58,6 +58,7 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("criteria_template_id", getCriteria_template_id());
 		attributes.put("criteria_name", getCriteria_name());
 		attributes.put("criteria_category_id", getCriteria_category_id());
@@ -71,6 +72,12 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long criteria_template_id = (Long)attributes.get("criteria_template_id");
 
 		if (criteria_template_id != null) {
@@ -178,6 +185,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	@Override
 	public java.lang.String getCriteria_name() {
 		return _criteriaTemplate.getCriteria_name();
+	}
+
+	/**
+	* Returns the uuid of this criteria template.
+	*
+	* @return the uuid of this criteria template
+	*/
+	@Override
+	public java.lang.String getUuid() {
+		return _criteriaTemplate.getUuid();
 	}
 
 	@Override
@@ -374,6 +391,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	@Override
 	public void setUpdatedby(long updatedby) {
 		_criteriaTemplate.setUpdatedby(updatedby);
+	}
+
+	/**
+	* Sets the uuid of this criteria template.
+	*
+	* @param uuid the uuid of this criteria template
+	*/
+	@Override
+	public void setUuid(java.lang.String uuid) {
+		_criteriaTemplate.setUuid(uuid);
 	}
 
 	@Override

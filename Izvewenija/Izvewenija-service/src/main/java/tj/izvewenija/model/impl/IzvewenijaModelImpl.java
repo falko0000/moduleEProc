@@ -80,8 +80,7 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 			{ "userId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
-			{ "UserName", Types.VARCHAR },
-			{ "UserGroupId", Types.BIGINT }
+			{ "UserName", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -102,10 +101,9 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("UserName", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("UserGroupId", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.izvewenija (modifiedDate DATE null,createDate DATE null,izmenil LONG,izvewenija_id LONG not null primary key,kod_id LONG,naimenovanie VARCHAR(75) null,organizacija_id LONG,sostojanie_id LONG,sozdal LONG,status_id LONG,tip_izvewenija_id LONG,vyshestojawaja_organizacija_id LONG,userId LONG,groupId LONG,companyId LONG,UserName VARCHAR(75) null,UserGroupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.izvewenija (modifiedDate DATE null,createDate DATE null,izmenil LONG,izvewenija_id LONG not null primary key,kod_id LONG,naimenovanie VARCHAR(75) null,organizacija_id LONG,sostojanie_id LONG,sozdal LONG,status_id LONG,tip_izvewenija_id LONG,vyshestojawaja_organizacija_id LONG,userId LONG,groupId LONG,companyId LONG,UserName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.izvewenija";
 	public static final String ORDER_BY_JPQL = " ORDER BY izvewenija.izvewenija_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.izvewenija.izvewenija_id ASC";
@@ -114,19 +112,17 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(tj.izvewenija.service.util.ServiceProps.get(
 				"value.object.entity.cache.enabled.tj.izvewenija.model.Izvewenija"),
-			false);
+			true);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(tj.izvewenija.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.tj.izvewenija.model.Izvewenija"),
-			false);
+			true);
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.izvewenija.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.izvewenija.model.Izvewenija"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long GROUPID_COLUMN_BITMASK = 2L;
 	public static final long IZVEWENIJA_ID_COLUMN_BITMASK = 4L;
-	public static final long SOSTOJANIE_ID_COLUMN_BITMASK = 8L;
-	public static final long SOZDAL_COLUMN_BITMASK = 16L;
-	public static final long STATUS_ID_COLUMN_BITMASK = 32L;
+	public static final long SOZDAL_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.izvewenija.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.izvewenija.model.Izvewenija"));
 
@@ -184,7 +180,6 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("UserName", getUserName());
-		attributes.put("UserGroupId", getUserGroupId());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -290,12 +285,6 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 		if (UserName != null) {
 			setUserName(UserName);
 		}
-
-		Long UserGroupId = (Long)attributes.get("UserGroupId");
-
-		if (UserGroupId != null) {
-			setUserGroupId(UserGroupId);
-		}
 	}
 
 	@Override
@@ -398,19 +387,7 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 
 	@Override
 	public void setSostojanie_id(long sostojanie_id) {
-		_columnBitmask |= SOSTOJANIE_ID_COLUMN_BITMASK;
-
-		if (!_setOriginalSostojanie_id) {
-			_setOriginalSostojanie_id = true;
-
-			_originalSostojanie_id = _sostojanie_id;
-		}
-
 		_sostojanie_id = sostojanie_id;
-	}
-
-	public long getOriginalSostojanie_id() {
-		return _originalSostojanie_id;
 	}
 
 	@Override
@@ -442,19 +419,7 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 
 	@Override
 	public void setStatus_id(long status_id) {
-		_columnBitmask |= STATUS_ID_COLUMN_BITMASK;
-
-		if (!_setOriginalStatus_id) {
-			_setOriginalStatus_id = true;
-
-			_originalStatus_id = _status_id;
-		}
-
 		_status_id = status_id;
-	}
-
-	public long getOriginalStatus_id() {
-		return _originalStatus_id;
 	}
 
 	@Override
@@ -563,16 +528,6 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 		_UserName = UserName;
 	}
 
-	@Override
-	public long getUserGroupId() {
-		return _UserGroupId;
-	}
-
-	@Override
-	public void setUserGroupId(long UserGroupId) {
-		_UserGroupId = UserGroupId;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -620,7 +575,6 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 		izvewenijaImpl.setGroupId(getGroupId());
 		izvewenijaImpl.setCompanyId(getCompanyId());
 		izvewenijaImpl.setUserName(getUserName());
-		izvewenijaImpl.setUserGroupId(getUserGroupId());
 
 		izvewenijaImpl.resetOriginalValues();
 
@@ -695,17 +649,9 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 
 		izvewenijaModelImpl._setOriginalIzvewenija_id = false;
 
-		izvewenijaModelImpl._originalSostojanie_id = izvewenijaModelImpl._sostojanie_id;
-
-		izvewenijaModelImpl._setOriginalSostojanie_id = false;
-
 		izvewenijaModelImpl._originalSozdal = izvewenijaModelImpl._sozdal;
 
 		izvewenijaModelImpl._setOriginalSozdal = false;
-
-		izvewenijaModelImpl._originalStatus_id = izvewenijaModelImpl._status_id;
-
-		izvewenijaModelImpl._setOriginalStatus_id = false;
 
 		izvewenijaModelImpl._originalGroupId = izvewenijaModelImpl._groupId;
 
@@ -780,14 +726,12 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 			izvewenijaCacheModel.UserName = null;
 		}
 
-		izvewenijaCacheModel.UserGroupId = getUserGroupId();
-
 		return izvewenijaCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{modifiedDate=");
 		sb.append(getModifiedDate());
@@ -821,8 +765,6 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 		sb.append(getCompanyId());
 		sb.append(", UserName=");
 		sb.append(getUserName());
-		sb.append(", UserGroupId=");
-		sb.append(getUserGroupId());
 		sb.append("}");
 
 		return sb.toString();
@@ -830,7 +772,7 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.izvewenija.model.Izvewenija");
@@ -900,10 +842,6 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 			"<column><column-name>UserName</column-name><column-value><![CDATA[");
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>UserGroupId</column-name><column-value><![CDATA[");
-		sb.append(getUserGroupId());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -925,14 +863,10 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 	private String _naimenovanie;
 	private long _organizacija_id;
 	private long _sostojanie_id;
-	private long _originalSostojanie_id;
-	private boolean _setOriginalSostojanie_id;
 	private long _sozdal;
 	private long _originalSozdal;
 	private boolean _setOriginalSozdal;
 	private long _status_id;
-	private long _originalStatus_id;
-	private boolean _setOriginalStatus_id;
 	private long _tip_izvewenija_id;
 	private long _vyshestojawaja_organizacija_id;
 	private long _userId;
@@ -943,7 +877,6 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private String _UserName;
-	private long _UserGroupId;
 	private long _columnBitmask;
 	private Izvewenija _escapedModel;
 }

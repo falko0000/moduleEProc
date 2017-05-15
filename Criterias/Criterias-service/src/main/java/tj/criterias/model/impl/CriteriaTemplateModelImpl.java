@@ -62,6 +62,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	 */
 	public static final String TABLE_NAME = "sapp.criteria_template";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "criteria_template_id", Types.BIGINT },
 			{ "criteria_name", Types.VARCHAR },
 			{ "criteria_category_id", Types.INTEGER },
@@ -73,6 +74,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("criteria_template_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("criteria_name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("criteria_category_id", Types.INTEGER);
@@ -82,7 +84,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_template (criteria_template_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_category_id INTEGER,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_template (uuid_ VARCHAR(75) null,criteria_template_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_category_id INTEGER,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria_template";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteriaTemplate.criteria_template_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria_template.criteria_template_id ASC";
@@ -99,7 +101,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 				"value.object.column.bitmask.enabled.tj.criterias.model.CriteriaTemplate"),
 			true);
 	public static final long CRITERIA_CATEGORY_ID_COLUMN_BITMASK = 1L;
-	public static final long CRITERIA_TEMPLATE_ID_COLUMN_BITMASK = 2L;
+	public static final long UUID_COLUMN_BITMASK = 2L;
+	public static final long CRITERIA_TEMPLATE_ID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.criterias.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.criterias.model.CriteriaTemplate"));
 
@@ -140,6 +143,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("criteria_template_id", getCriteria_template_id());
 		attributes.put("criteria_name", getCriteria_name());
 		attributes.put("criteria_category_id", getCriteria_category_id());
@@ -156,6 +160,12 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long criteria_template_id = (Long)attributes.get("criteria_template_id");
 
 		if (criteria_template_id != null) {
@@ -198,6 +208,29 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
+	}
+
+	@Override
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
+		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	@Override
@@ -318,6 +351,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	public Object clone() {
 		CriteriaTemplateImpl criteriaTemplateImpl = new CriteriaTemplateImpl();
 
+		criteriaTemplateImpl.setUuid(getUuid());
 		criteriaTemplateImpl.setCriteria_template_id(getCriteria_template_id());
 		criteriaTemplateImpl.setCriteria_name(getCriteria_name());
 		criteriaTemplateImpl.setCriteria_category_id(getCriteria_category_id());
@@ -387,6 +421,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	public void resetOriginalValues() {
 		CriteriaTemplateModelImpl criteriaTemplateModelImpl = this;
 
+		criteriaTemplateModelImpl._originalUuid = criteriaTemplateModelImpl._uuid;
+
 		criteriaTemplateModelImpl._originalCriteria_category_id = criteriaTemplateModelImpl._criteria_category_id;
 
 		criteriaTemplateModelImpl._setOriginalCriteria_category_id = false;
@@ -397,6 +433,14 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	@Override
 	public CacheModel<CriteriaTemplate> toCacheModel() {
 		CriteriaTemplateCacheModel criteriaTemplateCacheModel = new CriteriaTemplateCacheModel();
+
+		criteriaTemplateCacheModel.uuid = getUuid();
+
+		String uuid = criteriaTemplateCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			criteriaTemplateCacheModel.uuid = null;
+		}
 
 		criteriaTemplateCacheModel.criteria_template_id = getCriteria_template_id();
 
@@ -437,9 +481,11 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("{criteria_template_id=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", criteria_template_id=");
 		sb.append(getCriteria_template_id());
 		sb.append(", criteria_name=");
 		sb.append(getCriteria_name());
@@ -460,12 +506,16 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriaTemplate");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>criteria_template_id</column-name><column-value><![CDATA[");
 		sb.append(getCriteria_template_id());
@@ -504,6 +554,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	private static final Class<?>[] _escapedModelInterfaces = new Class[] {
 			CriteriaTemplate.class
 		};
+	private String _uuid;
+	private String _originalUuid;
 	private long _criteria_template_id;
 	private String _criteria_name;
 	private int _criteria_category_id;

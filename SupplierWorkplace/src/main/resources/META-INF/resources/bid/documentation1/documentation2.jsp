@@ -9,9 +9,13 @@
 <div class="table-responsive">
     <table class="table table-bordered">
        <tr>
+    
        <th>
-		Documents name2222
+		<%=LanguageUtil.get(request, "documents_name") %>
+		
+	
        </th>
+    
        <th>
        <aui:input
        		name="">
@@ -21,9 +25,13 @@
               
        <tbody>
        <tr>
+       
        <th>
-       Qualification requirements
+       <%=LanguageUtil.get(request, "qualification_requirements") %> 
+       
+       
        </th>       
+       
        <th>
        <aui:input
 			name=""
@@ -34,9 +42,12 @@
        
        <tbody>
        <tr>
+     
        <th>
-       		Delivery conditions
+       	<%=LanguageUtil.get(request, "conditions") %>
+       
        </th>
+       
        <th>
        <aui:input
 			name="">

@@ -1,0 +1,107 @@
+	
+<portlet:resourceURL id="<%=EQuotationConstants.RESOURCE_COMMAND_NAME_LIST %>" var="getJekb">
+   	<portlet:param name="<%=Constants.CMD%>" value="getJekb" />
+</portlet:resourceURL>
+
+<portlet:resourceURL id="<%=EQuotationConstants.RESOURCE_COMMAND_NAME_LIST %>" var="getVbk">
+   	<portlet:param name="<%=Constants.CMD%>" value="getVbk" />
+</portlet:resourceURL>
+
+<portlet:resourceURL id="<%=EQuotationConstants.RESOURCE_COMMAND_NAME_LIST %>" var="getOkgz">
+   	<portlet:param name="<%=Constants.CMD%>" value="getOkgz" />
+</portlet:resourceURL>
+
+ <aui:script>
+ 
+	AUI().use('autocomplete-list','aui-base','aui-io-request','autocomplete-filters','autocomplete-highlighters',function (A) {
+     
+     A.io.request('<%=getJekb%>',{
+			dataType: 'json',
+			method: 'GET',
+			on: {
+				success: function() {
+
+		 new A.AutoCompleteList(
+					{
+						allowBrowserAutocomplete: 'true',
+						activateFirstItem: 'true',
+						inputNode: '#<portlet:namespace/>classification_ebc',
+						resultTextLocator: 'nazvanie',
+						resultHighlighter:['phraseMatch'],
+						resultFilters:['phraseMatch'],
+						render: 'true',
+						source:this.get('responseData'),
+						on: {
+							select: function(event) {
+							var result = event.result.raw;
+							
+							A.one('#<portlet:namespace/>kod_jebk').set('value',result.kod);
+							A.one('#<portlet:namespace/>id_jebk').set('value',result.jekb_id);
+							}
+							},
+					});
+						}}
+								});
+								
+	  
+					A.io.request('<%=getVbk%>',{
+			dataType: 'json',
+			method: 'GET',
+			on: {
+				success: function() {
+
+		 new A.AutoCompleteList(
+					{
+						allowBrowserAutocomplete: 'true',
+						activateFirstItem: 'true',
+						inputNode: '#<portlet:namespace/>procuring_entity',
+						resultTextLocator: 'nazvanie',
+						resultHighlighter:['phraseMatch'],
+						resultFilters:['phraseMatch'],
+						render: 'true',
+						source:this.get('responseData'),
+						on: {
+							select: function(event) {
+							var result = event.result.raw;
+							
+							A.one('#<portlet:namespace/>bsc_vbk').set('value',result.kod);
+							A.one('#<portlet:namespace/>vbk_id').set('value',result.vbk_id);
+							}
+							},
+					});
+						}}
+								});
+								
+									A.io.request('<%=getOkgz%>',{
+			dataType: 'json',
+			method: 'GET',
+			on: {
+				success: function() {
+
+		 new A.AutoCompleteList(
+					{
+						allowBrowserAutocomplete: 'true',
+						activateFirstItem: 'true',
+						inputNode: '#<portlet:namespace/>belonging_cpv',
+						resultTextLocator: 'nazvanie',
+						resultHighlighter:['phraseMatch'],
+						resultFilters:['phraseMatch'],
+						render: 'true',
+						source:this.get('responseData'),
+						on: {
+							select: function(event) {
+							var result = event.result.raw;
+							
+							A.one('#<portlet:namespace/>kod_cpv').set('value',result.kod);
+							}
+							},
+					});
+						}}
+								});
+												
+					
+			});
+			 
+			 
+		
+</aui:script>

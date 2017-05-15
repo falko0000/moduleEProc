@@ -66,9 +66,11 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(25);
 
-		sb.append("{criteria_value_id=");
+		sb.append("{uuid=");
+		sb.append(uuid);
+		sb.append(", criteria_value_id=");
 		sb.append(criteria_value_id);
 		sb.append(", criteria_id=");
 		sb.append(criteria_id);
@@ -86,6 +88,10 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 		sb.append(createdby);
 		sb.append(", updatedby=");
 		sb.append(updatedby);
+		sb.append(", max_value=");
+		sb.append(max_value);
+		sb.append(", min_value=");
+		sb.append(min_value);
 		sb.append("}");
 
 		return sb.toString();
@@ -94,6 +100,13 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 	@Override
 	public CriteriaValue toEntityModel() {
 		CriteriaValueImpl criteriaValueImpl = new CriteriaValueImpl();
+
+		if (uuid == null) {
+			criteriaValueImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			criteriaValueImpl.setUuid(uuid);
+		}
 
 		criteriaValueImpl.setCriteria_value_id(criteria_value_id);
 		criteriaValueImpl.setCriteria_id(criteria_id);
@@ -123,6 +136,8 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 
 		criteriaValueImpl.setCreatedby(createdby);
 		criteriaValueImpl.setUpdatedby(updatedby);
+		criteriaValueImpl.setMax_value(max_value);
+		criteriaValueImpl.setMin_value(min_value);
 
 		criteriaValueImpl.resetOriginalValues();
 
@@ -131,6 +146,8 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid = objectInput.readUTF();
+
 		criteria_value_id = objectInput.readLong();
 
 		criteria_id = objectInput.readLong();
@@ -145,11 +162,22 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 		createdby = objectInput.readLong();
 
 		updatedby = objectInput.readLong();
+
+		max_value = objectInput.readInt();
+
+		min_value = objectInput.readInt();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
+
 		objectOutput.writeLong(criteria_value_id);
 
 		objectOutput.writeLong(criteria_id);
@@ -171,8 +199,13 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 		objectOutput.writeLong(createdby);
 
 		objectOutput.writeLong(updatedby);
+
+		objectOutput.writeInt(max_value);
+
+		objectOutput.writeInt(min_value);
 	}
 
+	public String uuid;
 	public long criteria_value_id;
 	public long criteria_id;
 	public long userid;
@@ -182,4 +215,6 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 	public long updated;
 	public long createdby;
 	public long updatedby;
+	public int max_value;
+	public int min_value;
 }

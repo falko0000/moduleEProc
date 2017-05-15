@@ -63,7 +63,7 @@ public class StranyCacheModel implements CacheModel<Strany>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{nazvanie=");
 		sb.append(nazvanie);
@@ -71,8 +71,6 @@ public class StranyCacheModel implements CacheModel<Strany>, Externalizable {
 		sb.append(nazvanie_tj);
 		sb.append(", strany_id=");
 		sb.append(strany_id);
-		sb.append(", key=");
-		sb.append(key);
 		sb.append("}");
 
 		return sb.toString();
@@ -98,13 +96,6 @@ public class StranyCacheModel implements CacheModel<Strany>, Externalizable {
 
 		stranyImpl.setStrany_id(strany_id);
 
-		if (key == null) {
-			stranyImpl.setKey(StringPool.BLANK);
-		}
-		else {
-			stranyImpl.setKey(key);
-		}
-
 		stranyImpl.resetOriginalValues();
 
 		return stranyImpl;
@@ -116,7 +107,6 @@ public class StranyCacheModel implements CacheModel<Strany>, Externalizable {
 		nazvanie_tj = objectInput.readUTF();
 
 		strany_id = objectInput.readLong();
-		key = objectInput.readUTF();
 	}
 
 	@Override
@@ -137,17 +127,9 @@ public class StranyCacheModel implements CacheModel<Strany>, Externalizable {
 		}
 
 		objectOutput.writeLong(strany_id);
-
-		if (key == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(key);
-		}
 	}
 
 	public String nazvanie;
 	public String nazvanie_tj;
 	public long strany_id;
-	public String key;
 }

@@ -1,0 +1,1 @@
+create sequence sapp.izvewenija_id_seq;

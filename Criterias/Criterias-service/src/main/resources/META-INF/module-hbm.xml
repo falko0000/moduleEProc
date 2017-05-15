@@ -12,6 +12,7 @@
 				<param name="sequence">sapp.criteria_id_seq</param>
 			</generator>
 		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="criteria_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="criteria_weight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="criteria_category_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
@@ -21,9 +22,6 @@
 		<property name="updated" type="org.hibernate.type.TimestampType" />
 		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="max_weight" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="min_weight" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="criteria_type_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="tj.criterias.model.impl.CriteriasWeightImpl" table="sapp.criterias_weight">
 		<id name="criterias_weight_id" type="long">
@@ -31,6 +29,7 @@
 				<param name="sequence">sapp.criterias_weight_id_seq</param>
 			</generator>
 		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="spisok_lotov_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="criteria_category_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="criterias_weight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
@@ -45,6 +44,7 @@
 				<param name="sequence">sapp.criteria_template_id_seq</param>
 			</generator>
 		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="criteria_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="criteria_category_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="created" type="org.hibernate.type.TimestampType" />
@@ -58,6 +58,7 @@
 				<param name="sequence">sapp.criteria_value_id_seq</param>
 			</generator>
 		</id>
+		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="criteria_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
@@ -66,5 +67,7 @@
 		<property name="updated" type="org.hibernate.type.TimestampType" />
 		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="max_value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="min_value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 </hibernate-mapping>

@@ -33,6 +33,7 @@ public class CriteriaTemplateSoap implements Serializable {
 	public static CriteriaTemplateSoap toSoapModel(CriteriaTemplate model) {
 		CriteriaTemplateSoap soapModel = new CriteriaTemplateSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setCriteria_template_id(model.getCriteria_template_id());
 		soapModel.setCriteria_name(model.getCriteria_name());
 		soapModel.setCriteria_category_id(model.getCriteria_category_id());
@@ -94,6 +95,14 @@ public class CriteriaTemplateSoap implements Serializable {
 		setCriteria_template_id(pk);
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
 	public long getCriteria_template_id() {
 		return _criteria_template_id;
 	}
@@ -150,6 +159,7 @@ public class CriteriaTemplateSoap implements Serializable {
 		_updatedby = updatedby;
 	}
 
+	private String _uuid;
 	private long _criteria_template_id;
 	private String _criteria_name;
 	private int _criteria_category_id;

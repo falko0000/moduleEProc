@@ -35,7 +35,6 @@ public interface EQuotationConstants  {
 	static final String PAGE_COMMISSION = "/bid/commission.jsp";
 	static final String PAGE_NEWLOT = "/bid/listlots/newlot.jsp";
 	static final String PAGE_CRITERIA = "/bid/listlots/criterias.jsp";
-	static final String PAGE_TENDER_DOCUMENTATION = "/bid/tender_documentation.jsp";
 	
 	//Action command name
 	static final String ACTION_COMMAND_NAME_EDIT = "edit";
@@ -57,7 +56,6 @@ public interface EQuotationConstants  {
     static final String FORM_LISTLOTS = "listlots";
     static final String FORM_ADDPRODUCT = "addProduct";
     static final String FORM_CRITERIA =	"criteria";
-    static final String FORM_TENDER_DOCUMENTATION = "tender_documentation";
     
     //static final long AUTHORIZED_BODY_ID = 38548; // sobirov_j
     // static final long AUTHORIZED_BODY_ID = 94344; // ashurov_sh
@@ -82,8 +80,6 @@ public interface EQuotationConstants  {
     static final  String TAB_BID_ABOUTINFO 	 = "bid_aboutinfo";
     static final  String TAB_BID_LISTLOTS 	 = "bid_listlots";
     static final  String TAB_BID_COMMISSION  = "bid_commission";
-    static final  String TAB_BID_TENDER_DOCUMENTATION = "tab_bid_tender_documentation"; 
-
     
     // State
     static final int STATE_BID_PREPARATION = 1;
@@ -110,21 +106,5 @@ public interface EQuotationConstants  {
     static final int STATUS_BID_CUSTOMER_CONTRACT = 301;
     //Refusal of the supplier to sign the contract
     static final int STATUS_BID_REFUSAL_CONTRACT = 302;
-    
-    static final int STATUS_BID_COMPLETED_TRADES = 400;
-    //Criteria category
-    
-    static final int CRITERIA_QUALIFICATION = 1;
-    static final int CRITERIA_TECHNICAL = 2;
-    static final int CRITERIA_FINANCIAL = 3;
-    
-    //Criteria type
-    static final int CRITERIA_LOW_PRICE = 1;
-    static final int CRITERIA_LOWEST_COST = 2;
-    
-    static final String TEMPLATE_FTL_FOLDER_NAME = "template_ftl";
-    static final String  TEMPLATE_FTL_FOLDER_DESCRIPTION = "This folder for document generation templates";
-    static final String   OUT_HTML = "SDB";
-    static final String FOLDER_BID = "bid";
     
 }

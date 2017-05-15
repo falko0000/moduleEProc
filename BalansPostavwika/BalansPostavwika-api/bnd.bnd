@@ -1,9 +1,0 @@
-Bundle-Name: BalansPostavwika-api
-Bundle-SymbolicName: tj.balans.postavwika.api
-Bundle-Version: 1.0.0
-Export-Package:\
-	tj.balans.postavwika.exception,\
-	tj.balans.postavwika.model,\
-	tj.balans.postavwika.service,\
-	tj.balans.postavwika.service.persistence
--includeresource: META-INF/service.xml=../BalansPostavwika-service/service.xml

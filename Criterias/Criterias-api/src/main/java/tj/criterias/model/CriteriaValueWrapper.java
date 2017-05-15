@@ -58,6 +58,7 @@ public class CriteriaValueWrapper implements CriteriaValue,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("criteria_value_id", getCriteria_value_id());
 		attributes.put("criteria_id", getCriteria_id());
 		attributes.put("userid", getUserid());
@@ -67,12 +68,20 @@ public class CriteriaValueWrapper implements CriteriaValue,
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("max_value", getMax_value());
+		attributes.put("min_value", getMin_value());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long criteria_value_id = (Long)attributes.get("criteria_value_id");
 
 		if (criteria_value_id != null) {
@@ -126,6 +135,18 @@ public class CriteriaValueWrapper implements CriteriaValue,
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
+
+		Integer max_value = (Integer)attributes.get("max_value");
+
+		if (max_value != null) {
+			setMax_value(max_value);
+		}
+
+		Integer min_value = (Integer)attributes.get("min_value");
+
+		if (min_value != null) {
+			setMin_value(min_value);
+		}
 	}
 
 	@Override
@@ -168,6 +189,26 @@ public class CriteriaValueWrapper implements CriteriaValue,
 		return _criteriaValue.compareTo(criteriaValue);
 	}
 
+	/**
+	* Returns the max_value of this criteria value.
+	*
+	* @return the max_value of this criteria value
+	*/
+	@Override
+	public int getMax_value() {
+		return _criteriaValue.getMax_value();
+	}
+
+	/**
+	* Returns the min_value of this criteria value.
+	*
+	* @return the min_value of this criteria value
+	*/
+	@Override
+	public int getMin_value() {
+		return _criteriaValue.getMin_value();
+	}
+
 	@Override
 	public int hashCode() {
 		return _criteriaValue.hashCode();
@@ -191,6 +232,16 @@ public class CriteriaValueWrapper implements CriteriaValue,
 	@Override
 	public java.lang.String getDescription() {
 		return _criteriaValue.getDescription();
+	}
+
+	/**
+	* Returns the uuid of this criteria value.
+	*
+	* @return the uuid of this criteria value
+	*/
+	@Override
+	public java.lang.String getUuid() {
+		return _criteriaValue.getUuid();
 	}
 
 	@Override
@@ -369,6 +420,26 @@ public class CriteriaValueWrapper implements CriteriaValue,
 		_criteriaValue.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	/**
+	* Sets the max_value of this criteria value.
+	*
+	* @param max_value the max_value of this criteria value
+	*/
+	@Override
+	public void setMax_value(int max_value) {
+		_criteriaValue.setMax_value(max_value);
+	}
+
+	/**
+	* Sets the min_value of this criteria value.
+	*
+	* @param min_value the min_value of this criteria value
+	*/
+	@Override
+	public void setMin_value(int min_value) {
+		_criteriaValue.setMin_value(min_value);
+	}
+
 	@Override
 	public void setNew(boolean n) {
 		_criteriaValue.setNew(n);
@@ -417,6 +488,16 @@ public class CriteriaValueWrapper implements CriteriaValue,
 	@Override
 	public void setUserid(long userid) {
 		_criteriaValue.setUserid(userid);
+	}
+
+	/**
+	* Sets the uuid of this criteria value.
+	*
+	* @param uuid the uuid of this criteria value
+	*/
+	@Override
+	public void setUuid(java.lang.String uuid) {
+		_criteriaValue.setUuid(uuid);
 	}
 
 	/**

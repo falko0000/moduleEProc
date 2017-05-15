@@ -146,13 +146,6 @@ public class IzvewenijaLocalServiceUtil {
 		return getService().getIzvewenija(companyId, groupId);
 	}
 
-	public static java.util.List<tj.izvewenija.model.Izvewenija> getIzvewenija(
-		long companyId, long groupId, long[] sostojanie_ids, long[] status_ids)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getIzvewenija(companyId, groupId, sostojanie_ids, status_ids);
-	}
-
 	/**
 	* Returns a range of all the izvewenijas.
 	*

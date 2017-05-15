@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="tj.module.access.service.impl.AccessModuleLocalServiceImpl" id="tj.module.access.service.AccessModuleLocalService" />
+	<bean class="tj.module.access.service.impl.AccessModuleServiceImpl" id="tj.module.access.service.AccessModuleService" />
+	<bean class="tj.module.access.service.persistence.impl.AccessModulePersistenceImpl" id="tj.module.access.service.persistence.AccessModulePersistence" parent="basePersistence" />
+</beans>

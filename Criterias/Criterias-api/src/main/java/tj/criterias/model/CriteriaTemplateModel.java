@@ -63,6 +63,21 @@ public interface CriteriaTemplateModel extends BaseModel<CriteriaTemplate> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid of this criteria template.
+	 *
+	 * @return the uuid of this criteria template
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this criteria template.
+	 *
+	 * @param uuid the uuid of this criteria template
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Returns the criteria_template_id of this criteria template.
 	 *
 	 * @return the criteria_template_id of this criteria template

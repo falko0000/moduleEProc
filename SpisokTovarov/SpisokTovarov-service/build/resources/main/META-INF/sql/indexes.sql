@@ -1,0 +1,1 @@
+create index IX_140B1DFA on sapp.spisok_tovarov (lot_id);

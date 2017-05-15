@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.izvewenieput.model.IzveweniePut">
+		<field name="izvewenie_id" type="long" />
+		<field name="izvewenie_put_id" type="long" />
+		<field name="put_a" type="long" />
+		<field name="put_b" type="long" />
+		<field name="put_c" type="String" />
+	</model>
+</model-hints>

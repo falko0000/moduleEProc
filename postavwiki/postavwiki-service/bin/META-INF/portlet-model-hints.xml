@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.postavwiki.model.Postavwiki">
+		<field name="adres" type="String" />
+		<field name="data_gosudarstvennoj_registracii" type="Date" />
+		<field name="data_izmenenija" type="Date" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="ein" type="String" />
+		<field name="gorod" type="String" />
+		<field name="inn" type="String" />
+		<field name="izmenil" type="long" />
+		<field name="kratkoe_naimenovanie" type="String" />
+		<field name="mesto_registracii" type="String" />
+		<field name="oblast_id" type="long" />
+		<field name="polnoe_naimenovanie" type="String" />
+		<field name="postavwiki_id" type="long" />
+		<field name="rajon_id" type="long" />
+		<field name="sin" type="String" />
+		<field name="sozdal" type="long" />
+	</model>
+</model-hints>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.izvewenija.model.Izvewenija" />
+	<class name="tj.izvewenija.model.impl.IzvewenijaImpl" table="sapp.izvewenija">
+		<id name="izvewenija_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.izvewenija_id_seq</param>
+			</generator>
+		</id>
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kod_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="naimenovanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="organizacija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sostojanie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="status_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tip_izvewenija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="vyshestojawaja_organizacija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="UserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="UserGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

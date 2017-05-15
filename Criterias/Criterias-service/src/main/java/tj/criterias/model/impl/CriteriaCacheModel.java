@@ -65,9 +65,11 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(23);
 
-		sb.append("{criteria_id=");
+		sb.append("{uuid=");
+		sb.append(uuid);
+		sb.append(", criteria_id=");
 		sb.append(criteria_id);
 		sb.append(", criteria_name=");
 		sb.append(criteria_name);
@@ -87,12 +89,6 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 		sb.append(createdby);
 		sb.append(", updatedby=");
 		sb.append(updatedby);
-		sb.append(", max_weight=");
-		sb.append(max_weight);
-		sb.append(", min_weight=");
-		sb.append(min_weight);
-		sb.append(", criteria_type_id=");
-		sb.append(criteria_type_id);
 		sb.append("}");
 
 		return sb.toString();
@@ -101,6 +97,13 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 	@Override
 	public Criteria toEntityModel() {
 		CriteriaImpl criteriaImpl = new CriteriaImpl();
+
+		if (uuid == null) {
+			criteriaImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			criteriaImpl.setUuid(uuid);
+		}
 
 		criteriaImpl.setCriteria_id(criteria_id);
 
@@ -139,9 +142,6 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 
 		criteriaImpl.setCreatedby(createdby);
 		criteriaImpl.setUpdatedby(updatedby);
-		criteriaImpl.setMax_weight(max_weight);
-		criteriaImpl.setMin_weight(min_weight);
-		criteriaImpl.setCriteria_type_id(criteria_type_id);
 
 		criteriaImpl.resetOriginalValues();
 
@@ -150,6 +150,8 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid = objectInput.readUTF();
+
 		criteria_id = objectInput.readLong();
 		criteria_name = objectInput.readUTF();
 
@@ -165,17 +167,18 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 		createdby = objectInput.readLong();
 
 		updatedby = objectInput.readLong();
-
-		max_weight = objectInput.readInt();
-
-		min_weight = objectInput.readInt();
-
-		criteria_type_id = objectInput.readInt();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
+
 		objectOutput.writeLong(criteria_id);
 
 		if (criteria_name == null) {
@@ -203,14 +206,9 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 		objectOutput.writeLong(createdby);
 
 		objectOutput.writeLong(updatedby);
-
-		objectOutput.writeInt(max_weight);
-
-		objectOutput.writeInt(min_weight);
-
-		objectOutput.writeInt(criteria_type_id);
 	}
 
+	public String uuid;
 	public long criteria_id;
 	public String criteria_name;
 	public double criteria_weight;
@@ -221,7 +219,4 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 	public long updated;
 	public long createdby;
 	public long updatedby;
-	public int max_weight;
-	public int min_weight;
-	public int criteria_type_id;
 }

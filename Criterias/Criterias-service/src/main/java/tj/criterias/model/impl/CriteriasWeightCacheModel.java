@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 
 import tj.criterias.model.CriteriasWeight;
 
@@ -65,9 +66,11 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
-		sb.append("{criterias_weight_id=");
+		sb.append("{uuid=");
+		sb.append(uuid);
+		sb.append(", criterias_weight_id=");
 		sb.append(criterias_weight_id);
 		sb.append(", spisok_lotov_id=");
 		sb.append(spisok_lotov_id);
@@ -91,6 +94,13 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 	@Override
 	public CriteriasWeight toEntityModel() {
 		CriteriasWeightImpl criteriasWeightImpl = new CriteriasWeightImpl();
+
+		if (uuid == null) {
+			criteriasWeightImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			criteriasWeightImpl.setUuid(uuid);
+		}
 
 		criteriasWeightImpl.setCriterias_weight_id(criterias_weight_id);
 		criteriasWeightImpl.setSpisok_lotov_id(spisok_lotov_id);
@@ -121,6 +131,8 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid = objectInput.readUTF();
+
 		criterias_weight_id = objectInput.readLong();
 
 		spisok_lotov_id = objectInput.readLong();
@@ -139,6 +151,13 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
+
 		objectOutput.writeLong(criterias_weight_id);
 
 		objectOutput.writeLong(spisok_lotov_id);
@@ -154,6 +173,7 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 		objectOutput.writeLong(updatedby);
 	}
 
+	public String uuid;
 	public long criterias_weight_id;
 	public long spisok_lotov_id;
 	public int criteria_category_id;

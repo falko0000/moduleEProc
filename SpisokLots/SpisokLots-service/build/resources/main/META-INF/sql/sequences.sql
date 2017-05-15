@@ -1,0 +1,1 @@
+create sequence sapp.spisok_lotov_id_seq;

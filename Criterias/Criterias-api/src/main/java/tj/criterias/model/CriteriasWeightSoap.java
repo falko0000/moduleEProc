@@ -33,6 +33,7 @@ public class CriteriasWeightSoap implements Serializable {
 	public static CriteriasWeightSoap toSoapModel(CriteriasWeight model) {
 		CriteriasWeightSoap soapModel = new CriteriasWeightSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setCriterias_weight_id(model.getCriterias_weight_id());
 		soapModel.setSpisok_lotov_id(model.getSpisok_lotov_id());
 		soapModel.setCriteria_category_id(model.getCriteria_category_id());
@@ -93,6 +94,14 @@ public class CriteriasWeightSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCriterias_weight_id(pk);
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getCriterias_weight_id() {
@@ -159,6 +168,7 @@ public class CriteriasWeightSoap implements Serializable {
 		_updatedby = updatedby;
 	}
 
+	private String _uuid;
 	private long _criterias_weight_id;
 	private long _spisok_lotov_id;
 	private int _criteria_category_id;

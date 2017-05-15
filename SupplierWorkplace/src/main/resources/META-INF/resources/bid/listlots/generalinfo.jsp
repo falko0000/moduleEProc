@@ -14,9 +14,6 @@ if(spisok_lotov_id!=0)
 	
 %>
 
-<aui:field-wrapper label="geniralinformation">
-
-</aui:field-wrapper>
 
 
 

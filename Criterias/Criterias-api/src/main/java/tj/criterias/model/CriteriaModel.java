@@ -63,6 +63,21 @@ public interface CriteriaModel extends BaseModel<Criteria> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid of this criteria.
+	 *
+	 * @return the uuid of this criteria
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this criteria.
+	 *
+	 * @param uuid the uuid of this criteria
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Returns the criteria_id of this criteria.
 	 *
 	 * @return the criteria_id of this criteria
@@ -203,48 +218,6 @@ public interface CriteriaModel extends BaseModel<Criteria> {
 	 * @param updatedby the updatedby of this criteria
 	 */
 	public void setUpdatedby(long updatedby);
-
-	/**
-	 * Returns the max_weight of this criteria.
-	 *
-	 * @return the max_weight of this criteria
-	 */
-	public int getMax_weight();
-
-	/**
-	 * Sets the max_weight of this criteria.
-	 *
-	 * @param max_weight the max_weight of this criteria
-	 */
-	public void setMax_weight(int max_weight);
-
-	/**
-	 * Returns the min_weight of this criteria.
-	 *
-	 * @return the min_weight of this criteria
-	 */
-	public int getMin_weight();
-
-	/**
-	 * Sets the min_weight of this criteria.
-	 *
-	 * @param min_weight the min_weight of this criteria
-	 */
-	public void setMin_weight(int min_weight);
-
-	/**
-	 * Returns the criteria_type_id of this criteria.
-	 *
-	 * @return the criteria_type_id of this criteria
-	 */
-	public int getCriteria_type_id();
-
-	/**
-	 * Sets the criteria_type_id of this criteria.
-	 *
-	 * @param criteria_type_id the criteria_type_id of this criteria
-	 */
-	public void setCriteria_type_id(int criteria_type_id);
 
 	@Override
 	public boolean isNew();

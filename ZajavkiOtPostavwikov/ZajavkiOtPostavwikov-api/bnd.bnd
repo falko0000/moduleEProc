@@ -1,9 +1,0 @@
-Bundle-Name: ZajavkiOtPostavwikov-api
-Bundle-SymbolicName: tj.zajavki.ot.postavwikov.api
-Bundle-Version: 1.0.0
-Export-Package:\
-	tj.zajavki.ot.postavwikov.exception,\
-	tj.zajavki.ot.postavwikov.model,\
-	tj.zajavki.ot.postavwikov.service,\
-	tj.zajavki.ot.postavwikov.service.persistence
--includeresource: META-INF/service.xml=../ZajavkiOtPostavwikov-service/service.xml

@@ -5,7 +5,7 @@
 	<namespace>izvewenija</namespace>
 	
 
-	  <entity name="Izvewenija" local-service="true" table="sapp.izvewenija" remote-service="false" cache-enabled="false">
+	  <entity name="Izvewenija" local-service="true" table="sapp.izvewenija" remote-service="false">
        
         <column name="modifiedDate" type="Date"></column>
         <column name="createDate" type="Date"></column>
@@ -23,24 +23,17 @@
         <column name="groupId" type="long"></column>
        <column name="companyId" type="long"></column>
         <column name="UserName" type="String"></column>
-       <column name="UserGroupId" type="long"></column>
         <order by="asc">
             <order-column name="izvewenija_id" order-by="asc"></order-column>
         </order>
-      <finder return-type="Collection" name="CompanyId_GroupId" >
-     	 <finder-column name="companyId" ></finder-column>
+      <finder return-type="Collection" name="CompanyId_GroupId">
+     	 <finder-column name="companyId"></finder-column>
       	<finder-column name="groupId"></finder-column>
       </finder>
        <finder name="IzvewenijaId" return-type="Collection">
             <finder-column name="izvewenija_id"></finder-column>
             <finder-column name="sozdal"></finder-column>
        </finder>
-  	 <finder return-type="Collection" name="CompanyIdGroupIdSostojanieIdStatusId">
-  	 	<finder-column name="companyId" ></finder-column>
-      	<finder-column name="groupId"></finder-column>
-      	<finder-column name="sostojanie_id" comparator="=" arrayable-operator="OR"></finder-column>
-  	 	<finder-column name="status_id" comparator="=" arrayable-operator="OR"></finder-column>
-  	 </finder>
   	
 	</entity>
 	

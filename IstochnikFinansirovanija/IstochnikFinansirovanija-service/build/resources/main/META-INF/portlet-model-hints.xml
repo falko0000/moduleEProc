@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.istochnik.finansirovanija.model.IstochnikFinansirovanija">
+		<field name="istochnik_finansirovanija_id" type="long" />
+		<field name="naimenovanie" type="String" />
+	</model>
+</model-hints>

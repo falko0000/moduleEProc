@@ -6,27 +6,21 @@
         <portlet-name>eQuotation</portlet-name>
         <permissions>
             <supports>
-               <action-key>VIEW</action-key>
-               <action-key>CAN_EDIT</action-key>
-               <action-key>PERMISSIONS</action-key>
-               <action-key>PREFERENCES</action-key>
-               <action-key>CONFIGURATION</action-key>
-               
                 <action-key>ACCESS_IN_CONTROL_PANEL</action-key>               
-                <action-key>ADD_TO_PAGE</action-key>
-                <action-key>EDIT</action-key>
-               
+                <action-key>CONFIGURATION</action-key>
+                <action-key>VIEW</action-key>
+                <action-key>NEW</action-key>
                 <action-key>DELETE</action-key>
-                <action-key>PUBLISH</action-key>
-                <action-key>APPROVE</action-key>
-                <action-key>ADD_ENTRY</action-key>
+                <action-key>EDIT</action-key>
+                <action-key>READ</action-key>
+                <action-key>ADD_TO_PAGE</action-key>
             </supports>
             <site-member-defaults>
                 <action-key>VIEW</action-key>
-       
+                <action-key>NEW</action-key>
                 <action-key>DELETE</action-key>
-                 
-                          
+                <action-key>EDIT</action-key>
+                <action-key>READ</action-key>                
             </site-member-defaults>
             <guest-defaults>
                 <action-key>VIEW</action-key>
@@ -40,7 +34,7 @@
     </portlet-resource>
 
 	<model-resource>
-		<model-name>tj.sapp.services.model.Izvewenija</model-name>
+		<model-name>tj.sapp.services.model.VW_Izvewenija</model-name>
 		<portlet-ref>
 			<portlet-name>eQuotation</portlet-name>
 		</portlet-ref>
