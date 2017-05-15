@@ -38,7 +38,7 @@
 
 
 <aui:input 
-	name="" 
+	name="bid_validity" 
 	type="textarea" 
 	value="<%=srok_dejstvija%>"  
 	placeholder="validity" 

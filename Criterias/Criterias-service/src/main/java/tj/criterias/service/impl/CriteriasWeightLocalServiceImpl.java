@@ -48,4 +48,5 @@ public class CriteriasWeightLocalServiceImpl
 		return null;
 		}
 	}
+	
 }

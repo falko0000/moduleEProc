@@ -59,6 +59,7 @@ public class StranyWrapper implements Strany, ModelWrapper<Strany> {
 		attributes.put("nazvanie", getNazvanie());
 		attributes.put("nazvanie_tj", getNazvanie_tj());
 		attributes.put("strany_id", getStrany_id());
+		attributes.put("key", getKey());
 
 		return attributes;
 	}
@@ -81,6 +82,12 @@ public class StranyWrapper implements Strany, ModelWrapper<Strany> {
 
 		if (strany_id != null) {
 			setStrany_id(strany_id);
+		}
+
+		String key = (String)attributes.get("key");
+
+		if (key != null) {
+			setKey(key);
 		}
 	}
 
@@ -127,6 +134,16 @@ public class StranyWrapper implements Strany, ModelWrapper<Strany> {
 	@Override
 	public java.lang.Object clone() {
 		return new StranyWrapper((Strany)_strany.clone());
+	}
+
+	/**
+	* Returns the key of this strany.
+	*
+	* @return the key of this strany
+	*/
+	@Override
+	public java.lang.String getKey() {
+		return _strany.getKey();
 	}
 
 	/**
@@ -213,6 +230,16 @@ public class StranyWrapper implements Strany, ModelWrapper<Strany> {
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_strany.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets the key of this strany.
+	*
+	* @param key the key of this strany
+	*/
+	@Override
+	public void setKey(java.lang.String key) {
+		_strany.setKey(key);
 	}
 
 	/**

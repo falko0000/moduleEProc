@@ -11,5 +11,6 @@
 		</id>
 		<property name="nazvanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="nazvanie_tj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property column="key_" name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

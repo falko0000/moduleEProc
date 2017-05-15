@@ -1,30 +1,41 @@
+
 <%@ include file="/init.jsp" %>
-<%@page import="tj.tariff.model.Tariff" %>
+
 <%
   
   
    Tariff tariff = TariffLocalServiceUtil.getTariff(1, 1);
+
+ long OrgId = UserServiceUtil.getCurrentUser().getOrganizations().get(0).getOrganizationId();
+ 
+   BalansPostavwika balanspostavwik = BalansPostavwikaLocalServiceUtil.getBalansPostavwik(OrgId);
   
 %>
+<c:if test="<%= tariff.getTariff_value()<=balanspostavwik.getBalans()%>">
+<liferay-ui:alert timeout="100000"  message="befor_participating" type="info"></liferay-ui:alert>
+</c:if>
 
-<liferay-ui:alert animationTime="600000"  message="befor_participating" ></liferay-ui:alert>
-<liferay-ui:tabs names="BALANCE INFORMATION">
+<c:if test="<%= tariff.getTariff_value()>balanspostavwik.getBalans()%>">
+<liferay-ui:alert timeout="100000"  message="befor_participating" type="danger"></liferay-ui:alert>
+</c:if>
+<liferay-ui:panel collapsible="false" title="BALANCE INFORMATION" markupView="lexicon">
+
+
 
 <div class="table-responsive">
+	
+	
     <table class="table table-bordered">
        <tr>
-       <th>
+        <td> 
 		Current account
-       </th>
-       <th>
-       <aui:input
-       		name=""
-       		type="number"
-       		disabled="<%=true %>"
-          
-       />
+       </td>
+       <td>
+      
+       <%= balanspostavwik.getBalans() %>
        
-       </th>
+       
+       </td>
        </tr>
      
        
@@ -32,4 +43,11 @@
     </table>
 </div>
 
-</liferay-ui:tabs>
+ <aui:button-row>
+ 	
+		<aui:button id="pay_now" name="pay_now" value="pay_now" type="submit" disabled="<%= (tariff.getTariff_value()>balanspostavwik.getBalans())? true: false%>"/>
+  			
+		<aui:button id="pay_now_cancel" name="pay_now_cancle" lable="pay_now_cancle" type="cancel" />
+  </aui:button-row>
+
+	</liferay-ui:panel>

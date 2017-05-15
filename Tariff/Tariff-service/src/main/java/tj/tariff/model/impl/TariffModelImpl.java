@@ -83,10 +83,10 @@ public class TariffModelImpl extends BaseModelImpl<Tariff>
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(tj.tariff.service.util.ServiceProps.get(
 				"value.object.entity.cache.enabled.tj.tariff.model.Tariff"),
-			true);
+			false);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(tj.tariff.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.tj.tariff.model.Tariff"),
-			true);
+			false);
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.tariff.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.tariff.model.Tariff"),
 			true);

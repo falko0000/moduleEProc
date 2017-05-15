@@ -1,5 +1,4 @@
 create table sapp.criteria (
-	uuid_ VARCHAR(75) null,
 	criteria_id LONG not null primary key,
 	criteria_name VARCHAR(75) null,
 	criteria_weight DOUBLE,
@@ -9,11 +8,13 @@ create table sapp.criteria (
 	created DATE null,
 	updated DATE null,
 	createdby LONG,
-	updatedby LONG
+	updatedby LONG,
+	max_weight INTEGER,
+	min_weight INTEGER,
+	criteria_type_id INTEGER
 );
 
 create table sapp.criteria_template (
-	uuid_ VARCHAR(75) null,
 	criteria_template_id LONG not null primary key,
 	criteria_name VARCHAR(75) null,
 	criteria_category_id INTEGER,
@@ -24,7 +25,6 @@ create table sapp.criteria_template (
 );
 
 create table sapp.criteria_value (
-	uuid_ VARCHAR(75) null,
 	criteria_value_id LONG not null primary key,
 	criteria_id LONG,
 	userid LONG,
@@ -33,13 +33,10 @@ create table sapp.criteria_value (
 	created DATE null,
 	updated DATE null,
 	createdby LONG,
-	updatedby LONG,
-	max_value INTEGER,
-	min_value INTEGER
+	updatedby LONG
 );
 
 create table sapp.criterias_weight (
-	uuid_ VARCHAR(75) null,
 	criterias_weight_id LONG not null primary key,
 	spisok_lotov_id LONG,
 	criteria_category_id INTEGER,

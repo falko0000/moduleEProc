@@ -3,8 +3,8 @@
 
 <service-builder package-path="tj.criterias">
 	<namespace>criterias</namespace>
-	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
-	<entity local-service="true" name="Criteria" remote-service="false" uuid="true" table="sapp.criteria">
+	
+	<entity local-service="true" name="Criteria" remote-service="false" uuid="false" table="sapp.criteria">
 
 		<column name="criteria_id" type="long" primary="true" id-type="sequence" id-param="sapp.criteria_id_seq"></column>
 		<column name="criteria_name" type="String"></column>
@@ -16,14 +16,24 @@
 		<column name="updated" type="Date"></column>
 		<column name="createdby" type="long"></column>
 		<column name="updatedby" type="long"></column>
+		<column name="max_weight" type="int"></column>
+	   <column name="min_weight" type="int"></column>
+		<column name="criteria_type_id" type="int"></column>
 		
 		<finder return-type="Collection" name="LotIdAndCategoryId">
 		  <finder-column name="spisok_lotov_id"></finder-column>
 		  <finder-column name="criteria_category_id"></finder-column>
 		</finder>
+		
+		<finder return-type="Collection" name="LotIdCategoryIdAndTypeId">
+		  <finder-column name="spisok_lotov_id"></finder-column>
+		  <finder-column name="criteria_category_id"></finder-column>
+		  <finder-column name="criteria_type_id"></finder-column>
+		</finder>
+
 	</entity>
 	
-	<entity local-service="true" name="CriteriaTemplate" remote-service="false" uuid="true" table="sapp.criteria_template">
+	<entity local-service="true" name="CriteriaTemplate" remote-service="false" uuid="false" table="sapp.criteria_template">
 	
 	<column name="criteria_template_id" type="long" primary="true" id-type="sequence" id-param="sapp.criteria_template_id_seq"></column>
 	<column name="criteria_name" type="String"></column>
@@ -38,7 +48,7 @@
 	</finder>
 	</entity>
 	
-		<entity local-service="true" name="CriteriaValue" remote-service="false" uuid="true" table="sapp.criteria_value">
+		<entity local-service="true" name="CriteriaValue" remote-service="false" uuid="false" table="sapp.criteria_value">
 	
 	<column name="criteria_value_id" type="long" primary="true" id-type="sequence" id-param="sapp.criteria_value_id_seq"></column>
 	<column name="criteria_id" type="long"></column>
@@ -52,8 +62,7 @@
 	<column name="createdby" type="long"></column>
 	<column name="updatedby" type="long"></column>
 	
-	<column name="max_value" type="int"></column>
-	<column name="min_value" type="int"></column>
+	
 	 
 	 <finder return-type="Collection" name="CriteriaIdAndUserId">
 	 	<finder-column name="criteria_id"></finder-column>
@@ -62,7 +71,7 @@
 	 
 	</entity>
 	
-	<entity local-service="true" name="CriteriasWeight" remote-service="false" uuid="true" table="sapp.criterias_weight">
+	<entity local-service="true" name="CriteriasWeight" remote-service="false" uuid="false" table="sapp.criterias_weight">
 	<column name="criterias_weight_id" type="long" primary="true" id-type="sequence" id-param="sapp.criterias_weight_id_seq"></column>
 	<column name="spisok_lotov_id" type="long"></column>
 	<column name="criteria_category_id" type="int"></column>

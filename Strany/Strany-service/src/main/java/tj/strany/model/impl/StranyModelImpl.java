@@ -63,7 +63,8 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "nazvanie", Types.VARCHAR },
 			{ "nazvanie_tj", Types.VARCHAR },
-			{ "strany_id", Types.BIGINT }
+			{ "strany_id", Types.BIGINT },
+			{ "key_", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -71,12 +72,13 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 		TABLE_COLUMNS_MAP.put("nazvanie", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("nazvanie_tj", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("strany_id", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("key_", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.strany (nazvanie VARCHAR(75) null,nazvanie_tj VARCHAR(75) null,strany_id LONG not null primary key)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.strany (nazvanie VARCHAR(75) null,nazvanie_tj VARCHAR(75) null,strany_id LONG not null primary key,key_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.strany";
-	public static final String ORDER_BY_JPQL = " ORDER BY strany.strany_id ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY sapp.strany.strany_id ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY strany.key ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY sapp.strany.key_ ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -130,6 +132,7 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 		attributes.put("nazvanie", getNazvanie());
 		attributes.put("nazvanie_tj", getNazvanie_tj());
 		attributes.put("strany_id", getStrany_id());
+		attributes.put("key", getKey());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -155,6 +158,12 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 
 		if (strany_id != null) {
 			setStrany_id(strany_id);
+		}
+
+		String key = (String)attributes.get("key");
+
+		if (key != null) {
+			setKey(key);
 		}
 	}
 
@@ -199,6 +208,21 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 	}
 
 	@Override
+	public String getKey() {
+		if (_key == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _key;
+		}
+	}
+
+	@Override
+	public void setKey(String key) {
+		_key = key;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			Strany.class.getName(), getPrimaryKey());
@@ -228,6 +252,7 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 		stranyImpl.setNazvanie(getNazvanie());
 		stranyImpl.setNazvanie_tj(getNazvanie_tj());
 		stranyImpl.setStrany_id(getStrany_id());
+		stranyImpl.setKey(getKey());
 
 		stranyImpl.resetOriginalValues();
 
@@ -238,15 +263,7 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 	public int compareTo(Strany strany) {
 		int value = 0;
 
-		if (getStrany_id() < strany.getStrany_id()) {
-			value = -1;
-		}
-		else if (getStrany_id() > strany.getStrany_id()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = getKey().compareTo(strany.getKey());
 
 		if (value != 0) {
 			return value;
@@ -318,12 +335,20 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 
 		stranyCacheModel.strany_id = getStrany_id();
 
+		stranyCacheModel.key = getKey();
+
+		String key = stranyCacheModel.key;
+
+		if ((key != null) && (key.length() == 0)) {
+			stranyCacheModel.key = null;
+		}
+
 		return stranyCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{nazvanie=");
 		sb.append(getNazvanie());
@@ -331,6 +356,8 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 		sb.append(getNazvanie_tj());
 		sb.append(", strany_id=");
 		sb.append(getStrany_id());
+		sb.append(", key=");
+		sb.append(getKey());
 		sb.append("}");
 
 		return sb.toString();
@@ -338,7 +365,7 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.strany.model.Strany");
@@ -356,6 +383,10 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 			"<column><column-name>strany_id</column-name><column-value><![CDATA[");
 		sb.append(getStrany_id());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>key</column-name><column-value><![CDATA[");
+		sb.append(getKey());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -369,5 +400,6 @@ public class StranyModelImpl extends BaseModelImpl<Strany>
 	private String _nazvanie;
 	private String _nazvanie_tj;
 	private long _strany_id;
+	private String _key;
 	private Strany _escapedModel;
 }

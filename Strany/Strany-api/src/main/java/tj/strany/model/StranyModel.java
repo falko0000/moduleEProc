@@ -104,6 +104,21 @@ public interface StranyModel extends BaseModel<Strany> {
 	 */
 	public void setStrany_id(long strany_id);
 
+	/**
+	 * Returns the key of this strany.
+	 *
+	 * @return the key of this strany
+	 */
+	@AutoEscape
+	public String getKey();
+
+	/**
+	 * Sets the key of this strany.
+	 *
+	 * @param key the key of this strany
+	 */
+	public void setKey(String key);
+
 	@Override
 	public boolean isNew();
 

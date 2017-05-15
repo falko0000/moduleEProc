@@ -38,10 +38,19 @@
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.VIEW%>" /> 
 		</portlet:renderURL>
 	 
-	  <portlet:renderURL var="criteria"  > 
+	  <portlet:renderURL var="criteriaA"  > 
 	     <portlet:param name="mvcPath" value="<%=EQuotationConstants.PAGE_CRITERIA%>"/>
 		    <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
              <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
+		     <portlet:param name="criteria_type_id" value="2" /> 
+		 <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.ADD%>" />
+	 </portlet:renderURL>
+	 
+	  <portlet:renderURL var="criteriaB"  > 
+	     <portlet:param name="mvcPath" value="<%=EQuotationConstants.PAGE_CRITERIA%>"/>
+		    <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
+             <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
+		     <portlet:param name="criteria_type_id" value="1" /> 
 		 <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.ADD%>" />
 	 </portlet:renderURL>
 	 
@@ -67,7 +76,10 @@
 
 	 	<liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
         <liferay-ui:icon  message="GOODS, WORKS, SERVICES" url="<%= addproducts.toString() %>" />
-          <liferay-ui:icon  message="CRITERIA" url="<%= criteria.toString() %>" />
+         
+          <liferay-ui:icon message="CRITERIA LOW PRICE"  url="<%= criteriaA.toString() %>" />
+          <liferay-ui:icon message="CRITERIA LOWEST COST"  url="<%= criteriaB.toString() %>" />
+          
     	
     </liferay-ui:icon-menu>
     

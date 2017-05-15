@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.oplachennye.zakazy.model.OplachennyeZakazy">
+		<field name="oplachennye_zakazy_id" type="long" />
+		<field name="tranzakcija" type="String" />
+		<field name="izvewenie_id" type="long" />
+		<field name="postavwik_id" type="long" />
+		<field name="summa" type="double" />
+		<field name="oplatil" type="long" />
+		<field name="data_oplaty" type="Date" />
+	</model>
+</model-hints>

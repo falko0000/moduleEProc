@@ -1,3 +1,5 @@
+
+
 <%@ include file="/init.jsp" %>
 
 <%
@@ -7,19 +9,23 @@
  long companyId = PortalUtil.getCompanyId(request);
  long groupId = PortalUtil.getScopeGroupId(request);
  
-   
+	List<Izvewenija> izvewenijas = Collections.emptyList();
+	
+ long[] sostojanie_ids = {SupplierWorkplaceConstant.STATE_BID_SUBMISSION_OF_PROPOSALS};
+	long[] status_ids = {SupplierWorkplaceConstant.STATUS_BID_SUBMISSION_OF_PROPOSALS};
 
-    
+	izvewenijas = IzvewenijaLocalServiceUtil.getIzvewenija(companyId, groupId, sostojanie_ids, status_ids);
+	
 %> 
 <liferay-ui:search-container
     emptyResultsMessage="no-leaves-found" 
     delta = "<%=5%>"
     iteratorURL="<%=viewUrl %>" 
-    total="<%=IzvewenijaLocalServiceUtil.getCountIzvewenija(companyId, groupId) %>"
+   total="<%=izvewenijas.size() %>"
     rowChecker="<%= new RowChecker(renderResponse) %>"
    > 
     <liferay-ui:search-container-results 
-       results="<%= IzvewenijaLocalServiceUtil.getIzvewenija(companyId , groupId ) %>">
+       results="<%=ListUtil.subList(izvewenijas, searchContainer.getStart(), searchContainer.getEnd())  %>">
     
     </liferay-ui:search-container-results>
    

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov" />
+	<import class="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp" />
+	<class name="tj.zajavki.ot.postavwikov.model.impl.ZajavkiOtPostavwikovImpl" table="sapp.zajavki_ot_postavwikov">
+		<id name="zajavki_ot_postavwikov_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.zajavki_ot_postavwikov_id_seq</param>
+			</generator>
+		</id>
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lot_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tovar_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="postavwik_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kolichestvo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="summa_za_edinicu_tovara" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="itogo_za_tovar" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="kod_po_obshhemu_klassifikatoru" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kod_strany_proizvoditelja" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="opisanie_tovara" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="predlozhenie_postavwika" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="tj.zajavki.ot.postavwikov.model.impl.ZajavkiOtPostavwikovTempImpl" table="sapp.zajavki_ot_postavwikov_temp">
+		<id name="zajavki_ot_postavwikov_temp_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.zajavki_ot_postavwikov_temp_id_seq</param>
+			</generator>
+		</id>
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lot_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tovar_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="postavwik_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kolichestvo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="summa_za_edinicu_tovara" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="itogo_za_tovar" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="kod_po_obshhemu_klassifikatoru" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kod_strany_proizvoditelja" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="opisanie_tovara" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="predlozhenie_postavwika" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

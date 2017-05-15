@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -313,6 +314,7 @@ public class StranyPersistenceImpl extends BasePersistenceImpl<Strany>
 		stranyImpl.setNazvanie(strany.getNazvanie());
 		stranyImpl.setNazvanie_tj(strany.getNazvanie_tj());
 		stranyImpl.setStrany_id(strany.getStrany_id());
+		stranyImpl.setKey(strany.getKey());
 
 		return stranyImpl;
 	}
@@ -696,6 +698,11 @@ public class StranyPersistenceImpl extends BasePersistenceImpl<Strany>
 	}
 
 	@Override
+	public Set<String> getBadColumnNames() {
+		return _badColumnNames;
+	}
+
+	@Override
 	protected Map<String, Integer> getTableColumnsMap() {
 		return StranyModelImpl.TABLE_COLUMNS_MAP;
 	}
@@ -723,4 +730,7 @@ public class StranyPersistenceImpl extends BasePersistenceImpl<Strany>
 	private static final String _ORDER_BY_ENTITY_ALIAS = "strany.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Strany exists with the primary key ";
 	private static final Log _log = LogFactoryUtil.getLog(StranyPersistenceImpl.class);
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+				"key"
+			});
 }

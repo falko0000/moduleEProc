@@ -255,6 +255,10 @@ public class StranyUtil {
 		return getPersistence().countAll();
 	}
 
+	public static java.util.Set<java.lang.String> getBadColumnNames() {
+		return getPersistence().getBadColumnNames();
+	}
+
 	public static StranyPersistence getPersistence() {
 		return _serviceTracker.getService();
 	}

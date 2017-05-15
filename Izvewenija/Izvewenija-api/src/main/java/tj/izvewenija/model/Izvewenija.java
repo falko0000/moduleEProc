@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.Accessor;
  */
 @ImplementationClassName("tj.izvewenija.model.impl.IzvewenijaImpl")
 @ProviderType
-public interface Izvewenija extends IzvewenijaModel, PersistedModel,AuditedModel {
+public interface Izvewenija extends IzvewenijaModel, PersistedModel, AuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

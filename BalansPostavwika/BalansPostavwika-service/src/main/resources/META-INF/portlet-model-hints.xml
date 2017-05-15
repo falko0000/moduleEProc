@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.balans.postavwika.model.BalansPostavwika">
+		<field name="balans_postavwika_id" type="long" />
+		<field name="postavwik_id" type="long" />
+		<field name="balans" type="double" />
+	</model>
+</model-hints>

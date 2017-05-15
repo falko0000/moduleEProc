@@ -119,6 +119,20 @@ public interface VbkModel extends BaseModel<Vbk> {
 	 */
 	public void setNazvanie_ru(String nazvanie_ru);
 
+	/**
+	 * Returns the organizationid of this vbk.
+	 *
+	 * @return the organizationid of this vbk
+	 */
+	public long getOrganizationid();
+
+	/**
+	 * Sets the organizationid of this vbk.
+	 *
+	 * @param organizationid the organizationid of this vbk
+	 */
+	public void setOrganizationid(long organizationid);
+
 	@Override
 	public boolean isNew();
 

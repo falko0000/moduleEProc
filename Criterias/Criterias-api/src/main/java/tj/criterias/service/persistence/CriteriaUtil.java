@@ -111,160 +111,6 @@ public class CriteriaUtil {
 	}
 
 	/**
-	* Returns all the criterias where uuid = &#63;.
-	*
-	* @param uuid the uuid
-	* @return the matching criterias
-	*/
-	public static List<Criteria> findByUuid(java.lang.String uuid) {
-		return getPersistence().findByUuid(uuid);
-	}
-
-	/**
-	* Returns a range of all the criterias where uuid = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param uuid the uuid
-	* @param start the lower bound of the range of criterias
-	* @param end the upper bound of the range of criterias (not inclusive)
-	* @return the range of matching criterias
-	*/
-	public static List<Criteria> findByUuid(java.lang.String uuid, int start,
-		int end) {
-		return getPersistence().findByUuid(uuid, start, end);
-	}
-
-	/**
-	* Returns an ordered range of all the criterias where uuid = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param uuid the uuid
-	* @param start the lower bound of the range of criterias
-	* @param end the upper bound of the range of criterias (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching criterias
-	*/
-	public static List<Criteria> findByUuid(java.lang.String uuid, int start,
-		int end, OrderByComparator<Criteria> orderByComparator) {
-		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
-	}
-
-	/**
-	* Returns an ordered range of all the criterias where uuid = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param uuid the uuid
-	* @param start the lower bound of the range of criterias
-	* @param end the upper bound of the range of criterias (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching criterias
-	*/
-	public static List<Criteria> findByUuid(java.lang.String uuid, int start,
-		int end, OrderByComparator<Criteria> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByUuid(uuid, start, end, orderByComparator,
-			retrieveFromCache);
-	}
-
-	/**
-	* Returns the first criteria in the ordered set where uuid = &#63;.
-	*
-	* @param uuid the uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching criteria
-	* @throws NoSuchCriteriaException if a matching criteria could not be found
-	*/
-	public static Criteria findByUuid_First(java.lang.String uuid,
-		OrderByComparator<Criteria> orderByComparator)
-		throws tj.criterias.exception.NoSuchCriteriaException {
-		return getPersistence().findByUuid_First(uuid, orderByComparator);
-	}
-
-	/**
-	* Returns the first criteria in the ordered set where uuid = &#63;.
-	*
-	* @param uuid the uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching criteria, or <code>null</code> if a matching criteria could not be found
-	*/
-	public static Criteria fetchByUuid_First(java.lang.String uuid,
-		OrderByComparator<Criteria> orderByComparator) {
-		return getPersistence().fetchByUuid_First(uuid, orderByComparator);
-	}
-
-	/**
-	* Returns the last criteria in the ordered set where uuid = &#63;.
-	*
-	* @param uuid the uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching criteria
-	* @throws NoSuchCriteriaException if a matching criteria could not be found
-	*/
-	public static Criteria findByUuid_Last(java.lang.String uuid,
-		OrderByComparator<Criteria> orderByComparator)
-		throws tj.criterias.exception.NoSuchCriteriaException {
-		return getPersistence().findByUuid_Last(uuid, orderByComparator);
-	}
-
-	/**
-	* Returns the last criteria in the ordered set where uuid = &#63;.
-	*
-	* @param uuid the uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching criteria, or <code>null</code> if a matching criteria could not be found
-	*/
-	public static Criteria fetchByUuid_Last(java.lang.String uuid,
-		OrderByComparator<Criteria> orderByComparator) {
-		return getPersistence().fetchByUuid_Last(uuid, orderByComparator);
-	}
-
-	/**
-	* Returns the criterias before and after the current criteria in the ordered set where uuid = &#63;.
-	*
-	* @param criteria_id the primary key of the current criteria
-	* @param uuid the uuid
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next criteria
-	* @throws NoSuchCriteriaException if a criteria with the primary key could not be found
-	*/
-	public static Criteria[] findByUuid_PrevAndNext(long criteria_id,
-		java.lang.String uuid, OrderByComparator<Criteria> orderByComparator)
-		throws tj.criterias.exception.NoSuchCriteriaException {
-		return getPersistence()
-				   .findByUuid_PrevAndNext(criteria_id, uuid, orderByComparator);
-	}
-
-	/**
-	* Removes all the criterias where uuid = &#63; from the database.
-	*
-	* @param uuid the uuid
-	*/
-	public static void removeByUuid(java.lang.String uuid) {
-		getPersistence().removeByUuid(uuid);
-	}
-
-	/**
-	* Returns the number of criterias where uuid = &#63;.
-	*
-	* @param uuid the uuid
-	* @return the number of matching criterias
-	*/
-	public static int countByUuid(java.lang.String uuid) {
-		return getPersistence().countByUuid(uuid);
-	}
-
-	/**
 	* Returns all the criterias where spisok_lotov_id = &#63; and criteria_category_id = &#63;.
 	*
 	* @param spisok_lotov_id the spisok_lotov_id
@@ -457,6 +303,215 @@ public class CriteriaUtil {
 	}
 
 	/**
+	* Returns all the criterias where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @return the matching criterias
+	*/
+	public static List<Criteria> findByLotIdCategoryIdAndTypeId(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id) {
+		return getPersistence()
+				   .findByLotIdCategoryIdAndTypeId(spisok_lotov_id,
+			criteria_category_id, criteria_type_id);
+	}
+
+	/**
+	* Returns a range of all the criterias where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param start the lower bound of the range of criterias
+	* @param end the upper bound of the range of criterias (not inclusive)
+	* @return the range of matching criterias
+	*/
+	public static List<Criteria> findByLotIdCategoryIdAndTypeId(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id,
+		int start, int end) {
+		return getPersistence()
+				   .findByLotIdCategoryIdAndTypeId(spisok_lotov_id,
+			criteria_category_id, criteria_type_id, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the criterias where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param start the lower bound of the range of criterias
+	* @param end the upper bound of the range of criterias (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching criterias
+	*/
+	public static List<Criteria> findByLotIdCategoryIdAndTypeId(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id,
+		int start, int end, OrderByComparator<Criteria> orderByComparator) {
+		return getPersistence()
+				   .findByLotIdCategoryIdAndTypeId(spisok_lotov_id,
+			criteria_category_id, criteria_type_id, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the criterias where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param start the lower bound of the range of criterias
+	* @param end the upper bound of the range of criterias (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching criterias
+	*/
+	public static List<Criteria> findByLotIdCategoryIdAndTypeId(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id,
+		int start, int end, OrderByComparator<Criteria> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByLotIdCategoryIdAndTypeId(spisok_lotov_id,
+			criteria_category_id, criteria_type_id, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first criteria in the ordered set where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching criteria
+	* @throws NoSuchCriteriaException if a matching criteria could not be found
+	*/
+	public static Criteria findByLotIdCategoryIdAndTypeId_First(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id,
+		OrderByComparator<Criteria> orderByComparator)
+		throws tj.criterias.exception.NoSuchCriteriaException {
+		return getPersistence()
+				   .findByLotIdCategoryIdAndTypeId_First(spisok_lotov_id,
+			criteria_category_id, criteria_type_id, orderByComparator);
+	}
+
+	/**
+	* Returns the first criteria in the ordered set where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching criteria, or <code>null</code> if a matching criteria could not be found
+	*/
+	public static Criteria fetchByLotIdCategoryIdAndTypeId_First(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id,
+		OrderByComparator<Criteria> orderByComparator) {
+		return getPersistence()
+				   .fetchByLotIdCategoryIdAndTypeId_First(spisok_lotov_id,
+			criteria_category_id, criteria_type_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last criteria in the ordered set where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching criteria
+	* @throws NoSuchCriteriaException if a matching criteria could not be found
+	*/
+	public static Criteria findByLotIdCategoryIdAndTypeId_Last(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id,
+		OrderByComparator<Criteria> orderByComparator)
+		throws tj.criterias.exception.NoSuchCriteriaException {
+		return getPersistence()
+				   .findByLotIdCategoryIdAndTypeId_Last(spisok_lotov_id,
+			criteria_category_id, criteria_type_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last criteria in the ordered set where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching criteria, or <code>null</code> if a matching criteria could not be found
+	*/
+	public static Criteria fetchByLotIdCategoryIdAndTypeId_Last(
+		long spisok_lotov_id, int criteria_category_id, int criteria_type_id,
+		OrderByComparator<Criteria> orderByComparator) {
+		return getPersistence()
+				   .fetchByLotIdCategoryIdAndTypeId_Last(spisok_lotov_id,
+			criteria_category_id, criteria_type_id, orderByComparator);
+	}
+
+	/**
+	* Returns the criterias before and after the current criteria in the ordered set where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param criteria_id the primary key of the current criteria
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next criteria
+	* @throws NoSuchCriteriaException if a criteria with the primary key could not be found
+	*/
+	public static Criteria[] findByLotIdCategoryIdAndTypeId_PrevAndNext(
+		long criteria_id, long spisok_lotov_id, int criteria_category_id,
+		int criteria_type_id, OrderByComparator<Criteria> orderByComparator)
+		throws tj.criterias.exception.NoSuchCriteriaException {
+		return getPersistence()
+				   .findByLotIdCategoryIdAndTypeId_PrevAndNext(criteria_id,
+			spisok_lotov_id, criteria_category_id, criteria_type_id,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the criterias where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63; from the database.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	*/
+	public static void removeByLotIdCategoryIdAndTypeId(long spisok_lotov_id,
+		int criteria_category_id, int criteria_type_id) {
+		getPersistence()
+			.removeByLotIdCategoryIdAndTypeId(spisok_lotov_id,
+			criteria_category_id, criteria_type_id);
+	}
+
+	/**
+	* Returns the number of criterias where spisok_lotov_id = &#63; and criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @return the number of matching criterias
+	*/
+	public static int countByLotIdCategoryIdAndTypeId(long spisok_lotov_id,
+		int criteria_category_id, int criteria_type_id) {
+		return getPersistence()
+				   .countByLotIdCategoryIdAndTypeId(spisok_lotov_id,
+			criteria_category_id, criteria_type_id);
+	}
+
+	/**
 	* Caches the criteria in the entity cache if it is enabled.
 	*
 	* @param criteria the criteria
@@ -601,10 +656,6 @@ public class CriteriaUtil {
 	*/
 	public static int countAll() {
 		return getPersistence().countAll();
-	}
-
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
 	}
 
 	public static CriteriaPersistence getPersistence() {

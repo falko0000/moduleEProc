@@ -1,6 +1,3 @@
-
-
-
 <%@ include file="/init.jsp" %>
 
 <%
@@ -22,14 +19,15 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
   %>
   
   
-
+<aui:field-wrapper label="bid_validity_tenders">
 
 <div class="radio">
 
 
 <aui:input 
 	name="validity_tenders" 
-	type="radio" value="0" 
+	type="radio" 
+	value="0" 
 	label="bid_task_each"  
 	inlineLabel="right" 
 	inlineField="true" 
@@ -39,7 +37,8 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
 <aui:input 
 	name="validity_tenders" 
-	type="radio" value="1" 
+	type="radio" 
+	value="1" 
 	label="bid_task_whole" 
 	inlineLabel="right" 
 	inlineField="false" 
@@ -50,9 +49,13 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 </div>
 
 <aui:input 
-	name="" 
+	name="bid_validity_tenders" 
 	type="textarea" 
 	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_dejstvija():StringPool.BLANK) %>"  
-	placeholder="validity" 
+	placeholder="bid_validity_tenders" 
 	disabled="<%=disabled %>"
 />
+
+
+
+</aui:field-wrapper>

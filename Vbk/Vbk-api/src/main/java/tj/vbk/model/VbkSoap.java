@@ -36,6 +36,7 @@ public class VbkSoap implements Serializable {
 		soapModel.setKod(model.getKod());
 		soapModel.setNazvanie_tj(model.getNazvanie_tj());
 		soapModel.setNazvanie_ru(model.getNazvanie_ru());
+		soapModel.setOrganizationid(model.getOrganizationid());
 
 		return soapModel;
 	}
@@ -120,8 +121,17 @@ public class VbkSoap implements Serializable {
 		_nazvanie_ru = nazvanie_ru;
 	}
 
+	public long getOrganizationid() {
+		return _organizationid;
+	}
+
+	public void setOrganizationid(long organizationid) {
+		_organizationid = organizationid;
+	}
+
 	private long _vbk_id;
 	private String _kod;
 	private String _nazvanie_tj;
 	private String _nazvanie_ru;
+	private long _organizationid;
 }

@@ -1,3 +1,3 @@
 <%@ include file="/init.jsp" %>
 
-<p>unf</p>
+<jsp:include page="<%=EQuotationConstants.PAGE_PREPARATION %>"></jsp:include>

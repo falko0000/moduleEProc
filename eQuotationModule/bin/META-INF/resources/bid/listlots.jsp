@@ -31,13 +31,13 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
 
 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
-		   <portlet:param name="izvewenie_id" value="<%= (izvewenija == null) ? "0" : String.valueOf(izvewenija.getIzvewenija_id()) %>"/>
+		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 </liferay-portlet:actionURL>
 
 
 <aui:form action="<%=listlots%>" cssClass="container-fluid-1280" method="post" name="fm"> 
 
-<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (izvewenija == null) ? Constants.ADD : Constants.UPDATE %>" />
+<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (izvewenie_id == 0 ) ? Constants.ADD : Constants.UPDATE %>" />
 
 <aui:input name="FormName" type="hidden" value="<%=EQuotationConstants.FORM_LISTLOTS %>" />
 <aui:input name="IdsForDeleteProducts" type="hidden"/>

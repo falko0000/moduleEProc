@@ -49,7 +49,14 @@ public class SpisoklotovLocalServiceImpl extends SpisoklotovLocalServiceBaseImpl
 	public List<Spisoklotov> getLotsByIzvewenijaID( long IzvewenijaID) 
 			throws SystemException {
 		
-	
+		/* String spisoklotov = spisoklotovs.get(0).getKod_zakazchika();
+		  
+		   long vbk_id = Long.getLong(spisoklotov);
+		System.out.println(spisoklotov+" ------------------- "+ vbk_id );
+		 Vbk vbk = VbkLocalServiceUtil.getVbk(vbk_id);
+		 
+		ids[1] = vbk.getOrganizationid();
+	*/
 		return spisoklotovPersistence.findByIzvewenieID(IzvewenijaID);
 	}
 	
