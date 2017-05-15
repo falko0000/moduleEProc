@@ -813,29 +813,13 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
     		                            .insertIzvewenija(EQuotationConstants.STATE_BID_PREPARATION, 
     		                                              EQuotationConstants.STATUS_BID_PREPARATION,
     		                                              bid_method,org_ids[0],name, serviceContext);
-      
-      String description = "This group for member commission bid number "+String.valueOf(inserted_izvewenija.getIzvewenija_id());
-      String groupName = "bid number " + String.valueOf(inserted_izvewenija.getIzvewenija_id());
+
       
      
   
 		
 	                   
-		UserGroup userGroup = null;
-		try {
-			userGroup = UserGroupLocalServiceUtil.addUserGroup(serviceContext.getUserId(), serviceContext.getCompanyId(),
-					                name,description, serviceContext);
-			
-			
-			
-			inserted_izvewenija.setUserGroupId(userGroup.getUserGroupId());
-		    IzvewenijaLocalServiceUtil.updateIzvewenija(inserted_izvewenija);
-		    
 		
-		} catch (PortalException e1) {
-			
-		
-		}
 	                     
 		Folder folder = null;
 		

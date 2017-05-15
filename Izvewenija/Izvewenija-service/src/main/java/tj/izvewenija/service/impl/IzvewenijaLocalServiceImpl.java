@@ -18,15 +18,19 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.AuditedModel;
+import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 
 import aQute.bnd.annotation.ProviderType;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.izvewenija.service.base.IzvewenijaLocalServiceBaseImpl;
+
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.model.impl.IzvewenijaImpl;
 import tj.izvewenija.service.persistence.IzvewenijaPersistence;
@@ -50,7 +54,23 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 	public Izvewenija insertIzvewenija( long sostojanie_id, long status_id, long tip_izvewenija_id, 
 			                            long organizacija_id, String naimenovanie, ServiceContext serviceContext )
 	{
-		Izvewenija izvewenija = new IzvewenijaImpl();
+		
+		long  izvewenija_id = CounterLocalServiceUtil.increment(Izvewenija.class.toString());
+		     
+		      String description = "This group for member commission bid number "+String.valueOf(izvewenija_id);
+		      String groupName = "bid number " + String.valueOf(izvewenija_id);
+		
+		  UserGroup userGroup = null;
+		try {
+			userGroup = UserGroupLocalServiceUtil.addUserGroup(serviceContext.getUserId(), serviceContext.getCompanyId(),
+					naimenovanie,description, serviceContext);
+			    
+		
+		} catch (PortalException e1) {
+			
+		
+		}
+		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.createIzvewenija(izvewenija_id);
 		
 		izvewenija.setSostojanie_id(sostojanie_id);
 		izvewenija.setStatus_id(status_id);
@@ -67,8 +87,10 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 		izvewenija.setCompanyId(serviceContext.getCompanyId());
 		izvewenija.setGroupId(serviceContext.getScopeGroupId());
 		izvewenija.setUserId(serviceContext.getUserId());
-		izvewenija.setUserName(PortalUtil.getUserName(serviceContext.getUserId(), "Valiqul"));
+		izvewenija.setUserName(PortalUtil.getUserName(serviceContext.getUserId(), "--"));
 	    
+		izvewenija.setUserGroupId(userGroup.getUserGroupId());
+		
 		izvewenija = addIzvewenija(izvewenija);
 		
 		
