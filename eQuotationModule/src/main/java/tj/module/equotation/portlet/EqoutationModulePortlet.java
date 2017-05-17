@@ -3,32 +3,25 @@ package tj.module.equotation.portlet;
 
 
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
+
+
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
+
+
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupService;
+
 import com.liferay.portal.kernel.service.UserService;
 
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.ResourceBundleLoader;
-import com.liferay.portal.kernel.util.ResourceBundleLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 
-import tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil;
-import tj.izvewenija.model.Izvewenija;
-import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
+
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
@@ -48,6 +41,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.swing.text.AbstractDocument.Content;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.Language;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -73,10 +67,12 @@ import org.osgi.service.component.annotations.Reference;
 	service = Portlet.class
 )
 public class EqoutationModulePortlet extends MVCPortlet {
+	
+
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		 
+		
 	//	"javax.portlet.security-role-ref=power-user,user",
 		
 		//WebKeys.SEARCH_CONTAINER_RESULT_ROW;
@@ -87,14 +83,18 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	System.out.println(spisoklotov);
 	}*/
 	boolean t = false;
-	try {
+	/*try {
 		t = UserGroupRoleLocalServiceUtil.hasUserGroupRole(68216, 180701,"Owner");
 	} catch (PortalException e) {
 		
 		
-	}
+	}*/
+	
    System.out.println("UserGroupRoleLocalServiceUtil.hasUserGroupRole="+t );
-	PermissionChecker checker;
+	
+   
+   
+   PermissionChecker checker;
 	
 	StringBuilder names = new StringBuilder();
 	
@@ -107,8 +107,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	
 	
 	UserGroupService _userGroupService;
-//	_userGroupService.addUserGroup(name, description, serviceContext);
-	//		String names = "preparation,submission_of_proposals,evaluation_and_awarding,unfulfilled_tenders,completed_tenders";
+
 		renderRequest.setAttribute("editnametabs", names.toString());
 		super.doView(renderRequest, renderResponse);
 	}
@@ -133,24 +132,38 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	
 	public void editUserGroupAssignments(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
+		 {
 
 		long userGroupId = ParamUtil.getLong(actionRequest, "userGroupId");
-
+		String redirect = ParamUtil.getString(actionRequest,"redirect");
+		
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
-		System.out.println("userGroupID=   =   ="+userGroupId);
+		
 		
 		try (ProxyModeThreadLocalCloseable proxyModeThreadLocalCloseable =
 				new ProxyModeThreadLocalCloseable()) {
 
 			ProxyModeThreadLocal.setForceSync(true);
 
-			_userService.addUserGroupUsers(userGroupId, addUserIds);
-			_userService.unsetUserGroupUsers(userGroupId, removeUserIds);
+			//_userService.addUserGroupUsers(userGroupId, addUserIds);
+			for(long addUserId : addUserIds)
+			UserGroupLocalServiceUtil.addUserUserGroup(addUserId, userGroupId);
+			//_userService.unsetUserGroupUsers(userGroupId, removeUserIds);
+			for(long removeUserId : removeUserIds)
+				UserGroupLocalServiceUtil.deleteUserUserGroup(removeUserId, userGroupId); //(userGroupId, removeUserIds);
+		
+			 String param = "_edit_tab=";
+				
+			    int indextab = redirect.indexOf(param)+param.length();
+				int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+				
+				redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_GENERALINFO+redirect.substring(indexamp);
+		   
+				 
 		}
 	}
 

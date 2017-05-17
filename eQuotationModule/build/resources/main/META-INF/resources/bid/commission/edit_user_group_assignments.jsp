@@ -6,15 +6,22 @@
   String redirect = ParamUtil.getString(request, "redirect");
   
 
- 
-   Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+Izvewenija izvewenija = null;
+long izvewenie_id = ParamUtil.getLong(request, "izvewenie_id");
+izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenie_id);
   
   long userGroupId = izvewenija.getUserGroupId();
   
   
 
+  UserGroup userGroup = null;
   
-  UserGroup userGroup = UserGroupServiceUtil.getUserGroup(userGroupId);
+  try {
+		userGroup =UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+	} catch (PortalException e) {
+		
+		 System.out.println("dosn't have pirmission to : "+userGroupId);
+	}
   
   long ids[] = { 0, 0 };
    List<Organization> organizations = Collections.emptyList();
@@ -52,6 +59,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/bid/commission/edit_user_group_assignments.jsp");
 portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("izvewenie_id", String.valueOf(izvewenie_id));
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
 
 PortletURL searchURL = PortletURLUtil.clone(portletURL, renderResponse);
@@ -83,9 +91,12 @@ PortletURL homeURL = renderResponse.createRenderURL();
 
 homeURL.setParameter("mvcPath", "/bid/commission.jsp");
 
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "user-groups"), homeURL.toString());
-PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);
+
+
 String currentURL = themeDisplay.getURLCurrent();
+
+redirect = currentURL;
+
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
@@ -184,6 +195,7 @@ String currentURL = themeDisplay.getURLCurrent();
 	$('#<portlet:namespace />addUsers').on(
 		'click',
 		function(event) {
+			
 			var itemSelectorDialog = new A.LiferayItemSelectorDialog(
 				{
 					eventName: '<portlet:namespace />selectUsers',

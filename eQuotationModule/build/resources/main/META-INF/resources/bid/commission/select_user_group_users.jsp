@@ -14,18 +14,11 @@
  */
 --%>
 
-<%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil"%>
-<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
-<%@ include file="/init.jsp" %>
-<%@page import="com.liferay.portal.kernel.util.StringUtil"%>
 
-<%@page import="tj.spisoklotov.service.SpisoklotovLocalServiceUtil"%>
-<%@page import="tj.spisoklotov.model.Spisoklotov"%>
-<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
-<%@page import="tj.izvewenija.model.Izvewenija"%>
-<%@page import="com.liferay.portal.kernel.model.Organization"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Collections"%>
+<%@ include file="/init.jsp" %>
+
+
+
 <%
 
 Izvewenija izvewenija = null;
@@ -39,7 +32,10 @@ Izvewenija izvewenija = null;
    long userGroupId = izvewenija.getUserGroupId();
 
 
-UserGroup userGroup = UserGroupServiceUtil.fetchUserGroup(userGroupId);
+   UserGroup userGroup = null;
+   
+  
+ 		userGroup =UserGroupLocalServiceUtil.getUserGroup(userGroupId);
 
 long ids[] = { 0, 0 };
  List<Organization> organizations = Collections.emptyList();
@@ -58,8 +54,7 @@ long ids[] = { 0, 0 };
 		 
 		ids[1] = vbk.getOrganizationid();
  }
-for(long id : ids)
-	  System.out.println("id = " + id);
+
 
  organizations =  OrganizationLocalServiceUtil.getOrganizations(ids);
  
@@ -82,6 +77,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/bid/commission/select_user_group_users.jsp");
 portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()));
+portletURL.setParameter("izvewenie_id", String.valueOf(izvewenie_id));
 portletURL.setParameter("eventName", eventName);
 
 PortletURL searchURL = PortletURLUtil.clone(portletURL, renderResponse);
@@ -92,11 +88,11 @@ UserSearchTerms searchTerms = (UserSearchTerms)userSearchContainer.getSearchTerm
 
 LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
-if (filterManageableOrganizations) {
-	userParams.put("usersOrgsTree", organizations);
-}
 
-RowChecker rowChecker = new SetUserUserGroupChecker(renderResponse, userGroup);
+	userParams.put("usersOrgsTree", organizations);
+
+
+	RowChecker rowChecker = new SetUserUserGroupChecker(renderResponse, userGroup);
 %>
 
 <aui:nav-bar cssClass="collapse-basic-search" markupView="lexicon">
@@ -174,7 +170,7 @@ RowChecker rowChecker = new SetUserUserGroupChecker(renderResponse, userGroup);
 		'rowToggled',
 		function(event) {
 			var selectedItems = event.elements.allSelectedElements;
-
+                     alert(selectedItems);
 			Liferay.Util.getOpener().Liferay.fire(
 				'<%= HtmlUtil.escapeJS(eventName) %>',
 				{

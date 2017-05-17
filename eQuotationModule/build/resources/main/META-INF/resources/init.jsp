@@ -157,6 +157,10 @@
 <%@page import="tj.vbk.model.Vbk"%>
 <%@page import="tj.vbk.service.VbkLocalServiceUtil"%>
 
+<%@page import="com.liferay.portal.kernel.exception.PortalException" %>
+
+<%@page import="com.liferay.portal.kernel.service.UserGroupLocalServiceUtil" %>
+
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
