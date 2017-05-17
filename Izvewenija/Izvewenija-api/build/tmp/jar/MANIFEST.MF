@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Izvewenija-api
 Bundle-SymbolicName: tj.izvewenija.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_112 (Oracle Corporation)
 Export-Package: tj.izvewenija.exception;uses:="com.liferay.portal.kern
  el.exception";version="1.0.0",tj.izvewenija.model;uses:="com.liferay.
  expando.kernel.model,com.liferay.portal.kernel.annotation,com.liferay
