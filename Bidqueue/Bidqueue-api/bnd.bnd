@@ -1,0 +1,9 @@
+Bundle-Name: Bidqueue-api
+Bundle-SymbolicName: tj.bid.queue.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.bid.queue.exception,\
+	tj.bid.queue.model,\
+	tj.bid.queue.service,\
+	tj.bid.queue.service.persistence
+-includeresource: META-INF/service.xml=../Bidqueue-service/service.xml

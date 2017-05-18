@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.bid.queue.model.Bidqueue" />
+	<class name="tj.bid.queue.model.impl.BidqueueImpl" table="sapp.bid_queue">
+		<id name="bid_queue_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="izvewenija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="closing_date" type="org.hibernate.type.TimestampType" />
+		<property name="closing_by_minutes" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

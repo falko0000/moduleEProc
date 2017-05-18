@@ -1,7 +1,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+Locale local = new Locale("ru", "RU");
+	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, local);
 
 	Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 	

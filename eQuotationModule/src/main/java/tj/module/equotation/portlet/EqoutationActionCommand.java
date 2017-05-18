@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -21,8 +22,11 @@ import org.osgi.service.component.annotations.Component;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.Address;
+import com.liferay.portal.kernel.model.AddressWrapper;
 import com.liferay.portal.kernel.model.Image;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.OrganizationWrapper;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
@@ -31,6 +35,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.service.AddressLocalServiceUtil;
 import com.liferay.portal.kernel.service.ImageLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 
@@ -80,6 +85,7 @@ import tj.module.equotation.constants.EQuotationConstants;
 import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
+import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissiiWrapper;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
@@ -174,18 +180,43 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
 	    name = izvewenija.getNaimenovanie();
 	
-		OrgName =  OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id()).getName();
-	
+		Organization organization =  OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
+	    
+	     
+	      
+        OrgName  = organization.getName();
+		
         
 		IzvewenijaWrapper izvewenijaWrapper = new IzvewenijaWrapper(izvewenija);
 		
-		Map<String, Object> input = izvewenijaWrapper.getModelAttributes();
+		OrganizationWrapper organizationWrapper = new OrganizationWrapper(organization);
+		
+		 Address address = organization.getAddress();
+	      
+	      AddressWrapper addressWrapper = new AddressWrapper(address);
+		
+        
+       Map<String, Map<String,Object>> inputs = new HashMap<String, Map<String,Object>>();
         
        
-        
-        GenerateDocument generate = new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
+       
+       
+       PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija_id);
+       
+       PorjadokRabotyKomissiiWrapper porjadokRabotyKomissiiWrapper = new PorjadokRabotyKomissiiWrapper(porjadokRabotyKomissii);
+       
+     
+       inputs.put("izvewenija", izvewenijaWrapper.getModelAttributes());
+       
+       inputs.put("organization_", organizationWrapper.getModelAttributes());
+       
+       inputs.put("address", addressWrapper.getModelAttributes());
+    
+       inputs.put("porjadok_raboty_komissii", porjadokRabotyKomissiiWrapper.getModelAttributes() );
+       
+       GenerateDocument generate = new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
         												template_file_name,
-        		                                         input, "0.0", actionRequest);
+        												inputs, "0.0", actionRequest);
 	    } catch (PortalException e) {
 		
 	}
@@ -716,7 +747,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	private void insertOpening(ActionRequest actionRequest, ActionResponse actionResponse) {
 		// TODO Auto-generated method stub
 	
-		
+		Locale g;
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
@@ -885,28 +916,30 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
 		String redirect = ParamUtil.getString(actionRequest,"redirect");
-		//Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
-		//bid publication
-		int publication_day = ParamUtil.getInteger(actionRequest, "publication_day");
-		int publication_month = ParamUtil.getInteger(actionRequest, "publication_month");
-		int publication_year = ParamUtil.getInteger(actionRequest, "publication_year");
-		int publication_hour = ParamUtil.getInteger(actionRequest, "publication_hour");
-		int publication_minute = ParamUtil.getInteger(actionRequest, "publication_minute");
 		
-		//bid summarizing
-		int summarizing_day = ParamUtil.getInteger(actionRequest, "summarizing_day");
-		int summarizing_month = ParamUtil.getInteger(actionRequest, "summarizing_month");
-		int summarizing_year = ParamUtil.getInteger(actionRequest, "summarizing_year");
-		int summarizing_hour = ParamUtil.getInteger(actionRequest, "summarizing_hour");
-		int summarizing_minute = ParamUtil.getInteger(actionRequest, "summarizing_minute");
+		String startDate =  ParamUtil.getString(actionRequest, "startDate");
+		String startTime = ParamUtil.getString(actionRequest, "startTime");
+		
+		String endDate =  ParamUtil.getString(actionRequest, "endDate");
+		String endTime = ParamUtil.getString(actionRequest, "endTime");
+		
+		int startD[] = StringUtil.split(startDate, "/", 0);
+		int startT[] = StringUtil.split(startTime,":",0);
+		
+		int endD[] = StringUtil.split(endDate, "/", 0);
+		int endT[] = StringUtil.split(endTime,":",0);
+
 		
 		int bid_days = ParamUtil.getInteger(actionRequest, "bid_days");
 		
-		Calendar publication_calendar = CalendarFactoryUtil.getCalendar(publication_year, publication_month, publication_day, 
-																		publication_hour, publication_minute);
 		
-		Calendar summarizing_calendar = CalendarFactoryUtil.getCalendar(summarizing_year, summarizing_month, summarizing_day, 
-																		summarizing_hour, summarizing_minute);
+		
+		
+		Calendar publication_calendar = CalendarFactoryUtil.getCalendar(startD[2], startD[1]-1, startD[0], 
+																			startT[0], startT[1]);
+		
+		Calendar summarizing_calendar = CalendarFactoryUtil.getCalendar(endD[2], endD[1]-1, endD[0], 
+																			endT[0], endT[1]);
 	    
 		PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenie_id);
 		

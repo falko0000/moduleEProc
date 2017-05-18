@@ -1,7 +1,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+Calendar cal = CalendarFactoryUtil.getCalendar();
 Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 PorjadokRabotyKomissii porjadok_raboty_komissii = null;
 porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);
@@ -61,3 +61,53 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	>
 	   <aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
 	</aui:input>
+	
+	
+	
+	<aui:script use="aui-base">
+
+
+	
+	AUI().use('event', 'node', function(A) {
+		
+		A.one('#<portlet:namespace />bid_days').on('keyup',function(event){
+		
+			
+			
+			var startDate = A.one('#<portlet:namespace />startDate').get('value');
+			var startDate = startDate.replace(".","/");
+			
+			var bid_days = A.one('#<portlet:namespace />bid_days').get('value');
+		
+			 if(bid_days == '')
+				 bid_days = 0;
+			
+			var parts = startDate.split('/');
+			
+			var d = new Date(parts[2],parts[1],parts[0]);
+			
+			d.setMonth(d.getMonth()-1);
+			
+			
+			d.setDate(d.getDate()+parseInt(bid_days));
+			var day = d.getDate();
+			
+			if( day < 10)
+				day = '0' + day;
+			
+			var month = d.getMonth()+1;
+			
+			if( month < 10)
+				month ='0'+month;
+			
+			
+			
+			var dat = day+ "/" +month  + "/"+ d.getFullYear();  
+			
+			A.one('#<portlet:namespace />endDate').set('value',dat);
+		
+			
+	});
+	});
+	
+	</aui:script>

@@ -170,7 +170,7 @@ LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 		'rowToggled',
 		function(event) {
 			var selectedItems = event.elements.allSelectedElements;
-                     alert(selectedItems);
+                     
 			Liferay.Util.getOpener().Liferay.fire(
 				'<%= HtmlUtil.escapeJS(eventName) %>',
 				{

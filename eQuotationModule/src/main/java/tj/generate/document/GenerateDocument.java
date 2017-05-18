@@ -37,7 +37,7 @@ public class GenerateDocument {
 	private static String filename = StringPool.BLANK;
 	private static String folder_name_ftl = StringPool.BLANK;
 	private static String folder_name_html = StringPool.BLANK;
-	private static Map<String, Object> param = null;
+	private static  Map<String, Map<String,Object>> param = null;
 	private ThemeDisplay themeDisplay = null;
     private static String version = "0.0";
     private static  ActionRequest actionRequest = null;
@@ -45,7 +45,7 @@ public class GenerateDocument {
 
 
 	public GenerateDocument(String folder_name_ftl, String folder_name_html,
-			                     String filenmae, Map<String, Object> param, 
+			                     String filenmae,  Map<String, Map<String,Object>> param, 
 			                     String version, ActionRequest actionRequest) {
 		
 		this.folder_name_ftl = folder_name_ftl;
@@ -75,10 +75,10 @@ public class GenerateDocument {
 			
 			fileOut = new FileWriter (new File(filename.substring(0,filename.indexOf(".")+1)+"html"));
 		 
-			Map<String, Object> izvewenija = new HashMap<String, Object>();
-			izvewenija.put("izvewenija", param);
+			//Map<String, Object> izvewenija = new HashMap<String, Object>();
+			//izvewenija.put("izvewenija", param);
 			
-			template.process(izvewenija, fileOut);
+			template.process(this.param, fileOut);
 			
 			fileOut.flush();
 		

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.bid.queue.model.Bidqueue">
+		<field name="bid_queue_id" type="long" />
+		<field name="izvewenija_id" type="long" />
+		<field name="closing_date" type="Date" />
+		<field name="closing_by_minutes" type="long" />
+	</model>
+</model-hints>
