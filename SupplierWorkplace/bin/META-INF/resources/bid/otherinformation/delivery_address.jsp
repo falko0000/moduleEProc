@@ -33,7 +33,7 @@
 <aui:input 
 	name="delivery_address" 
 	type="radio" value="0" 
-	label="bid_task_each"  
+	label="bid_own_offer"  
 	inlineLabel="right" 
 	inlineField="true" 
 	checked = "<%=checked_delivery_address %>"
@@ -43,7 +43,7 @@
 <aui:input 
 	name="delivery_address" 
 	type="radio" value="1" 
-	label="bid_task_whole" 
+	label="bid_in_accordance_customer" 
 	inlineLabel="right" 
 	inlineField="false" 
 	checked = "<%=(informacija_orazmewenii == null || !checked_delivery_address)?true:false %>"
@@ -58,6 +58,15 @@
 	value="<%=(informacija_orazmewenii != null)?informacija_orazmewenii.getMesto_postavki():StringPool.BLANK%>"  
 	placeholder="delivery_address" 
 	disabled="<%=disabled %>"
+/>
+
+<aui:input
+	name="bid_conditions_of_customer"
+	type="textarea"
+	value=""
+	placeholder="bid_conditions_of_customer"
+	disabled="<%=true %>"
+		
 />
 
 
