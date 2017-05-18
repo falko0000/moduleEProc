@@ -43,7 +43,7 @@ String[] CAT_NAMES = new String[]{ "bid_generalinfo",
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 </liferay-portlet:actionURL>
 
-<liferay-ui:tabs names="svedenija o lot">
+<liferay-ui:tabs names="svedenija_lot">
 
 <aui:form action="<%=otherinformation%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO%>"> 
 
