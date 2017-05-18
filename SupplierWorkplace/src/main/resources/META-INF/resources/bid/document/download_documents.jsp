@@ -44,23 +44,23 @@ productUrl.setParameter("spisok_lotov_id",String.valueOf(spisok_lotov_id));
 
 		
   
-<liferay-ui:panel collapsible="false" title="DOWNLOAD DOCUMENTATION" markupView="lexicon">
+<liferay-ui:panel collapsible="false" title="download_docum" markupView="lexicon">
 
      
      	
      <aui:row>
      		<aui:col>
-     		<aui:input label="Document name" name="doc_name" type="text" >
+     		<aui:input label="document_name" name="doc_name" type="text" >
      		<aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
      		</aui:input>
      </aui:col>
      
      <aui:col>
-     <aui:input label="Document  description" name="doc_descripton" type="text" >
+     <aui:input label="document_description" name="doc_descripton" type="text" >
      </aui:input>
      </aui:col>
      <aui:col>
-         	<aui:input label="Document" name="doc_file" type="file"  >
+         	<aui:input label="document" name="doc_file" type="file"  >
          	
          		<aui:validator name="required" errorMessage="this-field-is-mandatory"></aui:validator>
          		<aui:validator name="acceptFiles">'jpg,png,doc,docx,pdf,xlsx'</aui:validator>

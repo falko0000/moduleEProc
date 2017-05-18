@@ -28,7 +28,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	name="validity_tenders" 
 	type="radio" 
 	value="0" 
-	label="bid_task_each"  
+	label="bid_own_offer"  
 	inlineLabel="right" 
 	inlineField="true" 
 	checked = "<%=checked_validity_tenders %>"
@@ -39,7 +39,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	name="validity_tenders" 
 	type="radio" 
 	value="1" 
-	label="bid_task_whole" 
+	label="bid_in_accordance_customer" 
 	inlineLabel="right" 
 	inlineField="false" 
 	checked = "<%=(informacija_orazmewenii.isNew() || !checked_validity_tenders)?true:false %>"
@@ -56,6 +56,13 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	disabled="<%=disabled %>"
 />
 
+<aui:input
+	name="bid_conditions_of_customer"
+	type="textarea"
+	value=""
+	disabled="<%=true %>"
+		
+/>
 
 
 </aui:field-wrapper>
