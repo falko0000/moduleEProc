@@ -39,7 +39,7 @@
 
 
 <aui:input 
-	name="bid_delivery_time" 
+	name="delivery" 
 	type="textarea" 
 	value="<%=srok_postavki%>"  
 	placeholder="bid_delivery_time" 

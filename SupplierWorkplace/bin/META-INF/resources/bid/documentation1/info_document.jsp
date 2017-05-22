@@ -27,7 +27,7 @@ String[] CAT_NAMES = new String[]{"information_lota","documentation2"};
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 </liferay-portlet:actionURL>
 
-<liferay-ui:tabs names="DOCUMENTATION">
+<liferay-ui:tabs names="documentation">
 
 <aui:form action="<%=documentation%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO_DOCUMENT%>"> 
 

@@ -138,6 +138,11 @@ public class BidqueueLocalServiceWrapper implements BidqueueLocalService,
 			orderByComparator);
 	}
 
+	@Override
+	public java.util.List<tj.bid.queue.model.Bidqueue> getBidqueue() {
+		return _bidqueueLocalService.getBidqueue();
+	}
+
 	/**
 	* Returns a range of all the bidqueues.
 	*

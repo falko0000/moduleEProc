@@ -41,5 +41,7 @@ dependencies {
 	compile project (":modules:IstochnikFinansirovanija:IstochnikFinansirovanija-api")
 	compile project (":modules:ObwajaInformacija:ObwajaInformacija-api")
 	compile project (":modules:SpisokTovarov:SpisokTovarov-api")
-    compile project (":modules:Criterias:Criterias-api");
+    compile project (":modules:Criterias:Criterias-api")
+    
+    compile project (":modules:Bidqueue:Bidqueue-api")
 	}

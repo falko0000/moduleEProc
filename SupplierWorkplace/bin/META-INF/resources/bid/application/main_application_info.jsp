@@ -72,7 +72,7 @@
 <aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
  
- <liferay-ui:panel collapsible="false" title="LIST OF GOODS" markupView="lexicon">
+ <liferay-ui:panel collapsible="false" title="list_goods" markupView="lexicon">
 
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
@@ -207,7 +207,7 @@
 		  <aui:button 
  	        id="filing_an_application" 
  	        name="filing_an_application" 
- 	        value="filing an application" type="button"  
+ 	        value="filing_an_application" type="button"  
  	        primary="true"
  	     />
  	     </c:if>

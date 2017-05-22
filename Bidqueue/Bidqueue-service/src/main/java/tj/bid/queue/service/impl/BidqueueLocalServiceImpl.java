@@ -14,8 +14,10 @@
 
 package tj.bid.queue.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
+import java.util.List;
 
+import aQute.bnd.annotation.ProviderType;
+import tj.bid.queue.model.Bidqueue;
 import tj.bid.queue.service.base.BidqueueLocalServiceBaseImpl;
 
 /**
@@ -34,9 +36,9 @@ import tj.bid.queue.service.base.BidqueueLocalServiceBaseImpl;
  */
 @ProviderType
 public class BidqueueLocalServiceImpl extends BidqueueLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link tj.bid.queue.service.BidqueueLocalServiceUtil} to access the bidqueue local service.
-	 */
+	
+	public List<Bidqueue> getBidqueue() {
+		
+		return bidqueuePersistence.findAll();
+	}
 }

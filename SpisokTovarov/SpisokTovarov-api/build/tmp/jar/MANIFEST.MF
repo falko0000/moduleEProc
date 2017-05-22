@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SpisokTovarov-api
 Bundle-SymbolicName: tj.spisok.tovarov.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_112 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Export-Package: tj.spisok.tovarov.exception;uses:="com.liferay.portal.
  kernel.exception";version="1.0.0",tj.spisok.tovarov.model;uses:="com.
  liferay.expando.kernel.model,com.liferay.portal.kernel.annotation,com

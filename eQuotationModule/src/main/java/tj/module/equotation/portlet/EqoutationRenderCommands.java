@@ -1,11 +1,14 @@
 package tj.module.equotation.portlet;
 
 
+import java.util.Date;
+
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -15,9 +18,12 @@ import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUti
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import tj.bid.queue.model.Bidqueue;
+import tj.bid.queue.service.BidqueueLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
+import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
 
 @Component(
@@ -101,6 +107,23 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 				izvewenija.setStatus_id(EQuotationConstants.STATUS_BID_SUBMISSION_OF_PROPOSALS);
 				
 				IzvewenijaLocalServiceUtil.updateIzvewenija(izvewenija);
+				
+				Date closing_date = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija_id).getData_podvedenija_itogov();
+				
+				long bid_queue_id = CounterLocalServiceUtil.increment(Bidqueue.class.toString());
+				
+				Bidqueue bidqueue = BidqueueLocalServiceUtil.createBidqueue(bid_queue_id);
+				
+				bidqueue.setIzvewenija_id(izvewenija_id);
+				bidqueue.setClosing_date(closing_date);
+				
+				long closing_by_minutes = closing_date.getTime()/6000;
+				
+				
+				bidqueue.setClosing_date(closing_date);
+				bidqueue.setClosing_by_minutes(closing_by_minutes);
+				
+				BidqueueLocalServiceUtil.addBidqueue(bidqueue);
 				
 			  } catch (PortalException e) {
 				
