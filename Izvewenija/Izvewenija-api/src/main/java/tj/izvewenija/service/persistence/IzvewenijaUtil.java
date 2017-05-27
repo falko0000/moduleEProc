@@ -1047,6 +1047,62 @@ public class IzvewenijaUtil {
 	}
 
 	/**
+	* Returns the izvewenija where UserGroupId = &#63; or throws a {@link NoSuchIzvewenijaException} if it could not be found.
+	*
+	* @param UserGroupId the user group ID
+	* @return the matching izvewenija
+	* @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	*/
+	public static Izvewenija findByUserGroupId(long UserGroupId)
+		throws tj.izvewenija.exception.NoSuchIzvewenijaException {
+		return getPersistence().findByUserGroupId(UserGroupId);
+	}
+
+	/**
+	* Returns the izvewenija where UserGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param UserGroupId the user group ID
+	* @return the matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	*/
+	public static Izvewenija fetchByUserGroupId(long UserGroupId) {
+		return getPersistence().fetchByUserGroupId(UserGroupId);
+	}
+
+	/**
+	* Returns the izvewenija where UserGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param UserGroupId the user group ID
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	*/
+	public static Izvewenija fetchByUserGroupId(long UserGroupId,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByUserGroupId(UserGroupId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the izvewenija where UserGroupId = &#63; from the database.
+	*
+	* @param UserGroupId the user group ID
+	* @return the izvewenija that was removed
+	*/
+	public static Izvewenija removeByUserGroupId(long UserGroupId)
+		throws tj.izvewenija.exception.NoSuchIzvewenijaException {
+		return getPersistence().removeByUserGroupId(UserGroupId);
+	}
+
+	/**
+	* Returns the number of izvewenijas where UserGroupId = &#63;.
+	*
+	* @param UserGroupId the user group ID
+	* @return the number of matching izvewenijas
+	*/
+	public static int countByUserGroupId(long UserGroupId) {
+		return getPersistence().countByUserGroupId(UserGroupId);
+	}
+
+	/**
 	* Caches the izvewenija in the entity cache if it is enabled.
 	*
 	* @param izvewenija the izvewenija

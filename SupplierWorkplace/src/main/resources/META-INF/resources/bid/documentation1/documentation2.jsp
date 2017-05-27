@@ -10,7 +10,7 @@
     <table class="table table-bordered">
        <tr>
        <th>
-		Documents name2222
+		documents_name
        </th>
        <th>
        <aui:input
@@ -22,7 +22,7 @@
        <tbody>
        <tr>
        <th>
-       Qualification requirements
+       qualification_requirements
        </th>       
        <th>
        <aui:input
@@ -35,7 +35,7 @@
        <tbody>
        <tr>
        <th>
-       		Delivery conditions
+       		delivery_conditions
        </th>
        <th>
        <aui:input

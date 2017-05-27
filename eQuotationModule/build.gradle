@@ -13,6 +13,9 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.portal.upgrade", version: "2.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.trash.taglib", version: "2.0.0"
+	compileOnly group: 'com.sun.mail', name: 'javax.mail', version: '1.5.5'
+	compileOnly group: 'javax.activation', name: 'activation', version: '1.1.1'
+	
 	
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "2.0.0"
@@ -41,6 +44,7 @@ dependencies {
 	compile project (":modules:IstochnikFinansirovanija:IstochnikFinansirovanija-api")
 	compile project (":modules:ObwajaInformacija:ObwajaInformacija-api")
 	compile project (":modules:SpisokTovarov:SpisokTovarov-api")
+<<<<<<< HEAD
     compile project (":modules:Criterias:Criterias-api");
     compile project (":modules:SystemConfig:SystemConfig-api");
     compile project (":modules:TipyDokumentovPostavwika:TipyDokumentovPostavwika-api");
@@ -48,4 +52,9 @@ dependencies {
     compile project (":modules:postavwiki:postavwiki-api");
     compile project (":modules:ZajavkiOtPostavwikov:ZajavkiOtPostavwikov-api");
 	
+=======
+    compile project (":modules:Criterias:Criterias-api")
+    
+    compile project (":modules:Bidqueue:Bidqueue-api")
+>>>>>>> 81695383d855f472c43ab5543392a9bcc4a2c0be
 	}

@@ -1,4 +1,5 @@
 
+
 <%@ include file="/init.jsp" %>
 
 <%
@@ -13,14 +14,12 @@
 
   boolean checked_delivery_address = false;
   
-  try {
+
 		informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(IzvewenijaID);
 		
 		checked_delivery_address =  (informacija_orazmewenii.getMesto_postavki_dlja_zakaza()==0)?true:false;
-  } catch (NoSuchInformacijaORazmeweniiException e) {
+ 
 		
-		e.printStackTrace();
-	}
  request.setAttribute("informacija_orazmewenii", informacija_orazmewenii);
 
 	  

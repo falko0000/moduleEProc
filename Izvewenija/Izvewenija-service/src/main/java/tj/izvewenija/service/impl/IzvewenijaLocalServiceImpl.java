@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import aQute.bnd.annotation.ProviderType;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.izvewenija.service.base.IzvewenijaLocalServiceBaseImpl;
-
+import tj.izvewenija.exception.NoSuchIzvewenijaException;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.model.impl.IzvewenijaImpl;
 import tj.izvewenija.service.persistence.IzvewenijaPersistence;
@@ -152,4 +152,13 @@ return izvewenija;
 		return izvewenijaPersistence.filterFindByCompanyIdGroupIdSostojanieIdStatusId(companyId, groupId, sostojanie_ids, status_ids);
 	}
 	
+	public Izvewenija getIzvewenijaByUserGroupId(long UserGroupId) {
+		
+	try {
+		return izvewenijaPersistence.findByUserGroupId(UserGroupId);
+	} catch (NoSuchIzvewenijaException e) {
+		
+	}
+	return null;
+	}
 }

@@ -257,6 +257,11 @@ public class IzvewenijaLocalServiceUtil {
 		return getService().getIzvewenija(izvewenija_id);
 	}
 
+	public static tj.izvewenija.model.Izvewenija getIzvewenijaByUserGroupId(
+		long UserGroupId) {
+		return getService().getIzvewenijaByUserGroupId(UserGroupId);
+	}
+
 	public static tj.izvewenija.model.Izvewenija insertIzvewenija(
 		long sostojanie_id, long status_id, long tip_izvewenija_id,
 		long organizacija_id, java.lang.String naimenovanie,

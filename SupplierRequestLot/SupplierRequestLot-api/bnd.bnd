@@ -1,0 +1,9 @@
+Bundle-Name: SupplierRequestLot-api
+Bundle-SymbolicName: tj.supplier.request.lot.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.supplier.request.lot.exception,\
+	tj.supplier.request.lot.model,\
+	tj.supplier.request.lot.service,\
+	tj.supplier.request.lot.service.persistence
+-includeresource: META-INF/service.xml=../SupplierRequestLot-service/service.xml

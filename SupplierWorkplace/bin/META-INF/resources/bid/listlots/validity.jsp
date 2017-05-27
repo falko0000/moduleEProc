@@ -35,13 +35,13 @@
 
 	  
 %>
-
+<aui:field-wrapper label="bid_validity_tenders">
 
 <aui:input 
-	name="bid_validity" 
+	name="tenders" 
 	type="textarea" 
 	value="<%=srok_dejstvija%>"  
-	placeholder="validity" 
+	placeholder="bid_validity_tenders" 
 	disabled="<%=true %>"
 >
 
@@ -49,3 +49,4 @@
 
  	</aui:input>
 
+</aui:field-wrapper>

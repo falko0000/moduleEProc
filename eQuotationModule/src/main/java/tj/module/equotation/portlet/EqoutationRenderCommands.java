@@ -1,24 +1,32 @@
 package tj.module.equotation.portlet;
 
 
+import java.util.Date;
+
+//import javax.mail.internet.AddressException;
+//import javax.mail.internet.InternetAddress;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+
 import org.osgi.service.component.annotations.Component;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.mail.kernel.model.MailMessage;
+import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
+
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import tj.bid.queue.model.Bidqueue;
+import tj.bid.queue.service.BidqueueLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
-import tj.spisoklotov.model.Spisoklotov;
+import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+
 
 @Component(
 	    immediate = true,
@@ -102,12 +110,48 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 				
 				IzvewenijaLocalServiceUtil.updateIzvewenija(izvewenija);
 				
+				Date closing_date = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija_id).getData_podvedenija_itogov();
+				
+				long bid_queue_id = CounterLocalServiceUtil.increment(Bidqueue.class.toString());
+				
+				Bidqueue bidqueue = BidqueueLocalServiceUtil.createBidqueue(bid_queue_id);
+				
+				bidqueue.setIzvewenija_id(izvewenija_id);
+				bidqueue.setClosing_date(closing_date);
+				
+				long closing_by_minutes = closing_date.getTime()/6000;
+				
+				
+				bidqueue.setClosing_date(closing_date);
+				bidqueue.setClosing_by_minutes(closing_by_minutes);
+				
+				BidqueueLocalServiceUtil.addBidqueue(bidqueue);
+				
+	//	sendMailUsingTemplate();
 			  } catch (PortalException e) {
 				
 			}
 		  }
-		
+		  
 		return renderRequest.toString();
 	}
-
+	/*private void sendMailUsingTemplate() { 
+		
+		InternetAddress fromAddress = null;
+		InternetAddress toAddress = null;
+		System.out.println("-------------------------------------");
+		
+		
+        try {
+        	toAddress = new InternetAddress("sobirov@zakupki.gov.tj");
+			fromAddress = new InternetAddress("tender@zakupki.gov.tj");
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	   
+	}*/
 }
+
+	
+

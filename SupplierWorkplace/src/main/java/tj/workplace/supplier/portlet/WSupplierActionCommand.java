@@ -54,6 +54,8 @@ import tj.oplachennye.zakazy.model.OplachennyeZakazy;
 import tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil;
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
+import tj.supplier.request.lot.model.SupplierRequestLot;
+import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
 import tj.tariff.model.Tariff;
 import tj.tariff.service.TariffLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov;
@@ -219,6 +221,18 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		    	  ZajavkiOtPostavwikovLocalServiceUtil.addZajavkiOtPostavwikov(postavwikov);
 		    	  ZajavkiOtPostavwikovTempLocalServiceUtil.deleteZajavkiOtPostavwikovTemp(temp);
 		    }
+		    
+		    	long supplier_request_lot_id = CounterLocalServiceUtil.increment(SupplierRequestLot.class.toString());
+		    	
+		    	SupplierRequestLot supplierRequestLot = SupplierRequestLotLocalServiceUtil.createSupplierRequestLot(supplier_request_lot_id);
+		    	
+		    	supplierRequestLot.setOrganization_id(organization_id);
+		    	supplierRequestLot.setSpisok_lotov_id(spisok_lotov_id);
+		        
+		    	System.out.println(supplierRequestLot.toString());
+		    	
+		    	SupplierRequestLotLocalServiceUtil.updateSupplierRequestLot(supplierRequestLot);
+	
 	}
 
 	private void updateApplicationTemp(ActionRequest actionRequest, ActionResponse actionResponse) {
@@ -238,10 +252,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		  
 	     Map<Long, ZajavkiOtPostavwikovTemp> map = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
 		 
-	  for(Map.Entry<Long, ZajavkiOtPostavwikovTemp> entry : map.entrySet())
-	  {
-		  System.out.println(entry.getKey() + " "+ entry.getValue());
-	  }
+
 		
 	    String peredlojenie = "peredlojenie";
         String opisanie = "opisanie";

@@ -45,7 +45,7 @@
 %>
 
 <aui:input 
-		name="bid_assignment_lot_payment" 
+		name="big_payment" 
 		type="textarea" 
 		value="<%=oplata%>"  
 		placeholder="bid_performance_contract"
@@ -57,7 +57,7 @@
 </aui:input>
 
 <aui:input
-		name="bid_assignment_lot_delivery" 
+		name="big_price_of_delivery" 
 		type="textarea" 
 		value="<%=cena_postavki%>"  
 		placeholder="bid_performance_contract"
@@ -69,7 +69,7 @@
 </aui:input>
 
 <aui:input 
-		name="bid_assignment_lot_conditions" 
+		name="big_concomitant_conditions" 
 		type="textarea" 
 		value="<%=soputstvujuwie_uslovija%>"  
 		placeholder="bid_performance_contract"

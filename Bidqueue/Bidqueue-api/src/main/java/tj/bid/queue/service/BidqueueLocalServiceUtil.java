@@ -136,6 +136,10 @@ public class BidqueueLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<tj.bid.queue.model.Bidqueue> getBidqueue() {
+		return getService().getBidqueue();
+	}
+
 	/**
 	* Returns a range of all the bidqueues.
 	*

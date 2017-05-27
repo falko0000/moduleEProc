@@ -39,7 +39,7 @@
 
 %>
 
-<liferay-ui:panel collapsible="false" title="LIST OF GOODS" markupView="lexicon">
+<liferay-ui:panel collapsible="false" title="list_goods" markupView="lexicon">
 
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 

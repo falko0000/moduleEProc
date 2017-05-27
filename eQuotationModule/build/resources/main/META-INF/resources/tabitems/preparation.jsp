@@ -36,7 +36,7 @@
 	        
 			break;
 		case EQuotationConstants.TAB_EVALUATION_AND_AWARDING:
-			long[] esostojanie_ids = {EQuotationConstants.STATE_BID_EVALUATION_AND_AWARDING};
+			long[] esostojanie_ids = {EQuotationConstants.STATE_BID_COMPLETED_TENDERS};
 			long[] estatus_ids = {EQuotationConstants.STATUS_BID_AT_DETERMINING_WINNER};
 			izvewenijas = IzvewenijaLocalServiceUtil.getIzvewenija(companyId, groupId, esostojanie_ids, estatus_ids);
 	        break;

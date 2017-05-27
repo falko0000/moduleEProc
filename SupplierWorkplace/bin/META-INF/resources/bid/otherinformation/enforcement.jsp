@@ -62,7 +62,11 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
+<<<<<<< HEAD
 	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK %>"
+=======
+	value=""
+>>>>>>> 81695383d855f472c43ab5543392a9bcc4a2c0be
 	disabled="<%=true %>"
 		
 />

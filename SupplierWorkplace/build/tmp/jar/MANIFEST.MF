@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SupplierWorkplace
 Bundle-SymbolicName: tj.workplace.supplier
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_112 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  )",com.liferay.counter.kernel.service;version="[1.0,2)",com.liferay.d
  ocument.library.kernel.model;version="[1.0,2)",com.liferay.document.l
@@ -42,10 +42,11 @@ Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  l;version="[1.0,2)",tj.spisok.tovarov.service;version="[1.0,2)",tj.sp
  isoklotov.model;version="[1.0,2)",tj.spisoklotov.service;version="[1.
  0,2)",tj.strany.model;version="[1.0,2)",tj.strany.service;version="[1
- .0,2)",tj.tariff.exception;version="[1.0,2)",tj.tariff.model;version=
- "[1.0,2)",tj.tariff.service;version="[1.0,2)",tj.zajavki.ot.postavwik
- ov.model;version="[1.0,2)",tj.zajavki.ot.postavwikov.service;version=
- "[1.0,2)"
+ .0,2)",tj.supplier.request.lot.model;version="[1.0,2)",tj.supplier.re
+ quest.lot.service;version="[1.0,2)",tj.tariff.exception;version="[1.0
+ ,2)",tj.tariff.model;version="[1.0,2)",tj.tariff.service;version="[1.
+ 0,2)",tj.zajavki.ot.postavwikov.model;version="[1.0,2)",tj.zajavki.ot
+ .postavwikov.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251
