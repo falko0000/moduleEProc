@@ -3138,6 +3138,221 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 		"izvewenija.status_id = ?";
 	private static final String _FINDER_COLUMN_COMPANYIDGROUPIDSOSTOJANIEIDSTATUSID_STATUS_ID_7 =
 		"izvewenija.status_id IN (";
+	public static final FinderPath FINDER_PATH_FETCH_BY_USERGROUPID = new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, IzvewenijaImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByUserGroupId",
+			new String[] { Long.class.getName() },
+			IzvewenijaModelImpl.USERGROUPID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERGROUPID = new FinderPath(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
+			IzvewenijaModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserGroupId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the izvewenija where UserGroupId = &#63; or throws a {@link NoSuchIzvewenijaException} if it could not be found.
+	 *
+	 * @param UserGroupId the user group ID
+	 * @return the matching izvewenija
+	 * @throws NoSuchIzvewenijaException if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija findByUserGroupId(long UserGroupId)
+		throws NoSuchIzvewenijaException {
+		Izvewenija izvewenija = fetchByUserGroupId(UserGroupId);
+
+		if (izvewenija == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("UserGroupId=");
+			msg.append(UserGroupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchIzvewenijaException(msg.toString());
+		}
+
+		return izvewenija;
+	}
+
+	/**
+	 * Returns the izvewenija where UserGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param UserGroupId the user group ID
+	 * @return the matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija fetchByUserGroupId(long UserGroupId) {
+		return fetchByUserGroupId(UserGroupId, true);
+	}
+
+	/**
+	 * Returns the izvewenija where UserGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param UserGroupId the user group ID
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching izvewenija, or <code>null</code> if a matching izvewenija could not be found
+	 */
+	@Override
+	public Izvewenija fetchByUserGroupId(long UserGroupId,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { UserGroupId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_USERGROUPID,
+					finderArgs, this);
+		}
+
+		if (result instanceof Izvewenija) {
+			Izvewenija izvewenija = (Izvewenija)result;
+
+			if ((UserGroupId != izvewenija.getUserGroupId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_IZVEWENIJA_WHERE);
+
+			query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(UserGroupId);
+
+				List<Izvewenija> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_USERGROUPID,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"IzvewenijaPersistenceImpl.fetchByUserGroupId(long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					Izvewenija izvewenija = list.get(0);
+
+					result = izvewenija;
+
+					cacheResult(izvewenija);
+
+					if ((izvewenija.getUserGroupId() != UserGroupId)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_USERGROUPID,
+							finderArgs, izvewenija);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_USERGROUPID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Izvewenija)result;
+		}
+	}
+
+	/**
+	 * Removes the izvewenija where UserGroupId = &#63; from the database.
+	 *
+	 * @param UserGroupId the user group ID
+	 * @return the izvewenija that was removed
+	 */
+	@Override
+	public Izvewenija removeByUserGroupId(long UserGroupId)
+		throws NoSuchIzvewenijaException {
+		Izvewenija izvewenija = findByUserGroupId(UserGroupId);
+
+		return remove(izvewenija);
+	}
+
+	/**
+	 * Returns the number of izvewenijas where UserGroupId = &#63;.
+	 *
+	 * @param UserGroupId the user group ID
+	 * @return the number of matching izvewenijas
+	 */
+	@Override
+	public int countByUserGroupId(long UserGroupId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERGROUPID;
+
+		Object[] finderArgs = new Object[] { UserGroupId };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_IZVEWENIJA_WHERE);
+
+			query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(UserGroupId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_USERGROUPID_USERGROUPID_2 = "izvewenija.UserGroupId = ?";
 
 	public IzvewenijaPersistenceImpl() {
 		setModelClass(Izvewenija.class);
@@ -3152,6 +3367,9 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 	public void cacheResult(Izvewenija izvewenija) {
 		entityCache.putResult(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
 			IzvewenijaImpl.class, izvewenija.getPrimaryKey(), izvewenija);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_USERGROUPID,
+			new Object[] { izvewenija.getUserGroupId() }, izvewenija);
 
 		izvewenija.resetOriginalValues();
 	}
@@ -3205,6 +3423,8 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((IzvewenijaModelImpl)izvewenija, true);
 	}
 
 	@Override
@@ -3215,6 +3435,38 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 		for (Izvewenija izvewenija : izvewenijas) {
 			entityCache.removeResult(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
 				IzvewenijaImpl.class, izvewenija.getPrimaryKey());
+
+			clearUniqueFindersCache((IzvewenijaModelImpl)izvewenija, true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		IzvewenijaModelImpl izvewenijaModelImpl) {
+		Object[] args = new Object[] { izvewenijaModelImpl.getUserGroupId() };
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_USERGROUPID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_USERGROUPID, args,
+			izvewenijaModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		IzvewenijaModelImpl izvewenijaModelImpl, boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] { izvewenijaModelImpl.getUserGroupId() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_USERGROUPID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_USERGROUPID, args);
+		}
+
+		if ((izvewenijaModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_USERGROUPID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					izvewenijaModelImpl.getOriginalUserGroupId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_USERGROUPID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_USERGROUPID, args);
 		}
 	}
 
@@ -3453,6 +3705,9 @@ public class IzvewenijaPersistenceImpl extends BasePersistenceImpl<Izvewenija>
 
 		entityCache.putResult(IzvewenijaModelImpl.ENTITY_CACHE_ENABLED,
 			IzvewenijaImpl.class, izvewenija.getPrimaryKey(), izvewenija, false);
+
+		clearUniqueFindersCache(izvewenijaModelImpl, false);
+		cacheUniqueFindersCache(izvewenijaModelImpl);
 
 		izvewenija.resetOriginalValues();
 

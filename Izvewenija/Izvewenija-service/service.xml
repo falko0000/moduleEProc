@@ -41,7 +41,10 @@
       	<finder-column name="sostojanie_id" comparator="=" arrayable-operator="OR"></finder-column>
   	 	<finder-column name="status_id" comparator="=" arrayable-operator="OR"></finder-column>
   	 </finder>
-  	
+  	  
+  	  <finder return-type="Izvewenija" name="UserGroupId">
+  	  <finder-column name="UserGroupId"></finder-column>
+  	  </finder>
 	</entity>
 	
 </service-builder>

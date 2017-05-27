@@ -1,4 +1,0 @@
-Bundle-Activator: tj.language.HookLanguageActivator
-Bundle-Name: hook-language
-Bundle-SymbolicName: tj.language
-Bundle-Version: 1.0.0

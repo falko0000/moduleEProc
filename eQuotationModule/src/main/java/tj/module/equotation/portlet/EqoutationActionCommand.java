@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
 import com.liferay.portal.kernel.service.permission.UserGroupRolePermissionUtil;
 import com.liferay.portal.kernel.service.persistence.UserGroupRoleUtil;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -1227,16 +1228,18 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	    spisoklotov.setId_jebk(id_jebk);
 	    
 	  
-			try {
+		/*	try {
 				actionResponse.setWindowState(WindowState.NORMAL);
-			  sendRedirect(actionRequest, actionResponse, redirect);
+			  //sendRedirect(actionRequest, actionResponse, redirect);
 			} catch (IOException | WindowStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
-	
+			} */
+      
+	    
 	    spisoklotov = SpisoklotovLocalServiceUtil.updateSpisoklotov(spisoklotov);
 	
+	    SessionMessages.add(actionRequest, "success");
 	}
 
 }

@@ -3,18 +3,20 @@ package tj.module.equotation.portlet;
 
 import java.util.Date;
 
+//import javax.mail.internet.AddressException;
+//import javax.mail.internet.InternetAddress;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
 
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.mail.kernel.model.MailMessage;
+import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
+
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 
@@ -24,7 +26,7 @@ import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
-import tj.spisoklotov.model.Spisoklotov;
+
 
 @Component(
 	    immediate = true,
@@ -125,12 +127,31 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 				
 				BidqueueLocalServiceUtil.addBidqueue(bidqueue);
 				
+	//	sendMailUsingTemplate();
 			  } catch (PortalException e) {
 				
 			}
 		  }
-		
+		  
 		return renderRequest.toString();
 	}
-
+	/*private void sendMailUsingTemplate() { 
+		
+		InternetAddress fromAddress = null;
+		InternetAddress toAddress = null;
+		System.out.println("-------------------------------------");
+		
+		
+        try {
+        	toAddress = new InternetAddress("sobirov@zakupki.gov.tj");
+			fromAddress = new InternetAddress("tender@zakupki.gov.tj");
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	   
+	}*/
 }
+
+	
+

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.supplier.request.lot.model.SupplierRequestLot">
+		<field name="supplier_request_lot_id" type="long" />
+		<field name="organization_id" type="long" />
+		<field name="spisok_lotov_id" type="long" />
+	</model>
+</model-hints>

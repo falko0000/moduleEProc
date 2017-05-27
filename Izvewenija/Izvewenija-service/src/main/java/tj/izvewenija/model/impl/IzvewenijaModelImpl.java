@@ -121,12 +121,13 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.izvewenija.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.izvewenija.model.Izvewenija"),
 			true);
-	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
-	public static final long IZVEWENIJA_ID_COLUMN_BITMASK = 4L;
-	public static final long SOSTOJANIE_ID_COLUMN_BITMASK = 8L;
-	public static final long SOZDAL_COLUMN_BITMASK = 16L;
-	public static final long STATUS_ID_COLUMN_BITMASK = 32L;
+	public static final long USERGROUPID_COLUMN_BITMASK = 1L;
+	public static final long COMPANYID_COLUMN_BITMASK = 2L;
+	public static final long GROUPID_COLUMN_BITMASK = 4L;
+	public static final long IZVEWENIJA_ID_COLUMN_BITMASK = 8L;
+	public static final long SOSTOJANIE_ID_COLUMN_BITMASK = 16L;
+	public static final long SOZDAL_COLUMN_BITMASK = 32L;
+	public static final long STATUS_ID_COLUMN_BITMASK = 64L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.izvewenija.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.izvewenija.model.Izvewenija"));
 
@@ -570,7 +571,19 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 
 	@Override
 	public void setUserGroupId(long UserGroupId) {
+		_columnBitmask |= USERGROUPID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserGroupId) {
+			_setOriginalUserGroupId = true;
+
+			_originalUserGroupId = _UserGroupId;
+		}
+
 		_UserGroupId = UserGroupId;
+	}
+
+	public long getOriginalUserGroupId() {
+		return _originalUserGroupId;
 	}
 
 	public long getColumnBitmask() {
@@ -714,6 +727,10 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 		izvewenijaModelImpl._originalCompanyId = izvewenijaModelImpl._companyId;
 
 		izvewenijaModelImpl._setOriginalCompanyId = false;
+
+		izvewenijaModelImpl._originalUserGroupId = izvewenijaModelImpl._UserGroupId;
+
+		izvewenijaModelImpl._setOriginalUserGroupId = false;
 
 		izvewenijaModelImpl._columnBitmask = 0;
 	}
@@ -944,6 +961,8 @@ public class IzvewenijaModelImpl extends BaseModelImpl<Izvewenija>
 	private boolean _setOriginalCompanyId;
 	private String _UserName;
 	private long _UserGroupId;
+	private long _originalUserGroupId;
+	private boolean _setOriginalUserGroupId;
 	private long _columnBitmask;
 	private Izvewenija _escapedModel;
 }

@@ -13,6 +13,7 @@ if(spisok_lotov_id!=0)
 	spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);
 	
 %>
+<liferay-ui:success key="success" message="Lot saved successfully!"/>
 
 <aui:field-wrapper label="geniralinformation">
 

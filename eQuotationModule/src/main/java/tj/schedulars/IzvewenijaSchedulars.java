@@ -10,25 +10,27 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
-import com.liferay.portal.kernel.messaging.BaseSchedulerEntryMessageListener;
+
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+
+
 import com.liferay.portal.kernel.scheduler.SchedulerEngineHelper;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
+
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.StorageTypeAware;
-import com.liferay.portal.kernel.scheduler.TimeUnit;
+
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerFactory;
-import com.liferay.portal.kernel.scheduler.TriggerFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
+
 
 import tj.bid.queue.model.Bidqueue;
 import tj.bid.queue.service.BidqueueLocalServiceUtil;
@@ -50,8 +52,8 @@ public class IzvewenijaSchedulars extends BaseMessageListener  {
 		 
 		Date date = new Date();
 		
-		//long minutes = date.getTime()/6000;
-		
+		long minutes = date.getTime()/6000;
+	
 	  // SchedulerEngineHelperUtil.getNextFireTime(jobName, groupName, storageType)
 		
 		for( Bidqueue bidqueue : bidqueues)

@@ -229,6 +229,9 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 	public Izvewenija getIzvewenija(long izvewenija_id)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Izvewenija getIzvewenijaByUserGroupId(long UserGroupId);
+
 	public Izvewenija insertIzvewenija(long sostojanie_id, long status_id,
 		long tip_izvewenija_id, long organizacija_id,
 		java.lang.String naimenovanie, ServiceContext serviceContext);
