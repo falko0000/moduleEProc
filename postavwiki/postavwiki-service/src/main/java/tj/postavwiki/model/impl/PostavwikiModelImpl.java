@@ -119,7 +119,11 @@ public class PostavwikiModelImpl extends BaseModelImpl<Postavwiki>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(tj.postavwiki.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.tj.postavwiki.model.Postavwiki"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.postavwiki.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.tj.postavwiki.model.Postavwiki"),
+			true);
+	public static final long OBLAST_ID_COLUMN_BITMASK = 1L;
+	public static final long POSTAVWIKI_ID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -489,7 +493,19 @@ public class PostavwikiModelImpl extends BaseModelImpl<Postavwiki>
 
 	@Override
 	public void setOblast_id(long oblast_id) {
+		_columnBitmask |= OBLAST_ID_COLUMN_BITMASK;
+
+		if (!_setOriginalOblast_id) {
+			_setOriginalOblast_id = true;
+
+			_originalOblast_id = _oblast_id;
+		}
+
 		_oblast_id = oblast_id;
+	}
+
+	public long getOriginalOblast_id() {
+		return _originalOblast_id;
 	}
 
 	@JSON
@@ -516,7 +532,19 @@ public class PostavwikiModelImpl extends BaseModelImpl<Postavwiki>
 
 	@Override
 	public void setPostavwiki_id(long postavwiki_id) {
+		_columnBitmask |= POSTAVWIKI_ID_COLUMN_BITMASK;
+
+		if (!_setOriginalPostavwiki_id) {
+			_setOriginalPostavwiki_id = true;
+
+			_originalPostavwiki_id = _postavwiki_id;
+		}
+
 		_postavwiki_id = postavwiki_id;
+	}
+
+	public long getOriginalPostavwiki_id() {
+		return _originalPostavwiki_id;
 	}
 
 	@JSON
@@ -555,6 +583,10 @@ public class PostavwikiModelImpl extends BaseModelImpl<Postavwiki>
 	@Override
 	public void setSozdal(long sozdal) {
 		_sozdal = sozdal;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -660,6 +692,17 @@ public class PostavwikiModelImpl extends BaseModelImpl<Postavwiki>
 
 	@Override
 	public void resetOriginalValues() {
+		PostavwikiModelImpl postavwikiModelImpl = this;
+
+		postavwikiModelImpl._originalOblast_id = postavwikiModelImpl._oblast_id;
+
+		postavwikiModelImpl._setOriginalOblast_id = false;
+
+		postavwikiModelImpl._originalPostavwiki_id = postavwikiModelImpl._postavwiki_id;
+
+		postavwikiModelImpl._setOriginalPostavwiki_id = false;
+
+		postavwikiModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -906,10 +949,15 @@ public class PostavwikiModelImpl extends BaseModelImpl<Postavwiki>
 	private String _kratkoe_naimenovanie;
 	private String _mesto_registracii;
 	private long _oblast_id;
+	private long _originalOblast_id;
+	private boolean _setOriginalOblast_id;
 	private String _polnoe_naimenovanie;
 	private long _postavwiki_id;
+	private long _originalPostavwiki_id;
+	private boolean _setOriginalPostavwiki_id;
 	private long _rajon_id;
 	private String _sin;
 	private long _sozdal;
+	private long _columnBitmask;
 	private Postavwiki _escapedModel;
 }

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eQuotationModule
 Bundle-SymbolicName: tj.module.equotation
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_112 (Oracle Corporation)
 Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  feray.announcements.kernel.model;version="[1.0,2)",com.liferay.counte
  r.kernel.service;version="[1.0,2)",com.liferay.document.library.kerne
@@ -55,11 +55,12 @@ Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  ",tj.spisok.tovarov.model;version="[1.0,2)",tj.spisok.tovarov.service
  ;version="[1.0,2)",tj.spisoklotov.model;version="[1.0,2)",tj.spisoklo
  tov.service;version="[1.0,2)",tj.strany.model;version="[1.0,2)",tj.st
- rany.service;version="[1.0,2)",tj.tipy.izvewenij.exception;version="[
- 1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.tipy.izvewenij.s
- ervice;version="[1.0,2)",tj.tipy.izvewenij.service.persistence;versio
- n="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj.vbk.service;version="[1
- .0,2)"
+ rany.service;version="[1.0,2)",tj.system.config.model;version="[1.0,2
+ )",tj.system.config.service;version="[1.0,2)",tj.tipy.izvewenij.excep
+ tion;version="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.t
+ ipy.izvewenij.service;version="[1.0,2)",tj.tipy.izvewenij.service.per
+ sistence;version="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj.vbk.serv
+ ice;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

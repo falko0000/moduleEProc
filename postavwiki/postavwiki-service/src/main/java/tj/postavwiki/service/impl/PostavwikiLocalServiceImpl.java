@@ -15,7 +15,8 @@
 package tj.postavwiki.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
-
+import tj.postavwiki.exception.NoSuchPostavwikiException;
+import tj.postavwiki.model.Postavwiki;
 import tj.postavwiki.service.base.PostavwikiLocalServiceBaseImpl;
 
 /**
@@ -34,9 +35,10 @@ import tj.postavwiki.service.base.PostavwikiLocalServiceBaseImpl;
  */
 @ProviderType
 public class PostavwikiLocalServiceImpl extends PostavwikiLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use {@link tj.postavwiki.service.PostavwikiLocalServiceUtil} to access the postavwiki local service.
-	 */
+
+	public Postavwiki getPostavwiki(long postavwiki_id, long oblast_id) throws NoSuchPostavwikiException {
+		
+		return postavwikiPersistence.findBypostavwikiIdOblastId(postavwiki_id, oblast_id);
+		
+	}
 }

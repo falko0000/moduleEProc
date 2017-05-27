@@ -53,7 +53,7 @@
 <aui:input 
 	name="bid_software_application" 
 	type="textarea" 
-	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_obespechenija_zajavki():StringPool.BLANK) %>"  
+	value=""  
 	placeholder="big_term_and_procedure_of_the_software_application" 
 	disabled="<%=disabled %>"
 />
@@ -61,7 +61,7 @@
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value=""
+	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_obespechenija_zajavki():StringPool.BLANK) %>"
 	disabled="<%=true %>"
 		
 />

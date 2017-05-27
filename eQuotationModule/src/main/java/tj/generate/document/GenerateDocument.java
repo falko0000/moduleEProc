@@ -18,8 +18,10 @@ import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFolderLocalServiceUtil;
+import com.liferay.portal.kernel.dao.jdbc.PrimaryKeyRowMapper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileEntrySoap;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -41,12 +43,12 @@ public class GenerateDocument {
 	private ThemeDisplay themeDisplay = null;
     private static String version = "0.0";
     private static  ActionRequest actionRequest = null;
-	
+	private static String outfilename = null;
 
 
 	public GenerateDocument(String folder_name_ftl, String folder_name_html,
 			                     String filenmae,  Map<String, Map<String,Object>> param, 
-			                     String version, ActionRequest actionRequest) {
+			                     String version, String outfilename, ActionRequest actionRequest) {
 		
 		this.folder_name_ftl = folder_name_ftl;
 		this.folder_name_html = folder_name_html;
@@ -55,13 +57,14 @@ public class GenerateDocument {
 	    this.themeDisplay =  (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);;	
 	    this.version = version;	
 		this.actionRequest = actionRequest;
-	    
+	    this.outfilename = outfilename;
 	    generate();
 	}
 
 	private void generate() {
 		
 		  Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
+		
 		  try {
 		
 			  cfg.setDirectoryForTemplateLoading(new File(getTemplate().getParent()));
@@ -92,19 +95,24 @@ public class GenerateDocument {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), this.actionRequest);
 	    	InputStream is = new FileInputStream( f );
 	    	
+	    	
+	    	
 	    	DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folder.getFolderId(),
-	    			filename.substring(0,filename.indexOf(".")+1)+"html", "text/html", 
-	    			filename.substring(0,filename.indexOf(".")+1)+"html", "test", "", is, f.getTotalSpace(), serviceContext);
+	    			outfilename+".html", "text/html", 
+	    			outfilename+".html", "test", "", is, f.length(), serviceContext);
 	    	
 	    	f.delete();
 	    	is.close();
-		  } catch (IOException | TemplateException e) {
+		  } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} catch (TemplateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 	}
 	

@@ -248,6 +248,13 @@ public class PostavwikiLocalServiceWrapper implements PostavwikiLocalService,
 		return _postavwikiLocalService.getPostavwiki(postavwiki_id);
 	}
 
+	@Override
+	public tj.postavwiki.model.Postavwiki getPostavwiki(long postavwiki_id,
+		long oblast_id)
+		throws tj.postavwiki.exception.NoSuchPostavwikiException {
+		return _postavwikiLocalService.getPostavwiki(postavwiki_id, oblast_id);
+	}
+
 	/**
 	* Updates the postavwiki in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

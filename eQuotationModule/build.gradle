@@ -42,4 +42,10 @@ dependencies {
 	compile project (":modules:ObwajaInformacija:ObwajaInformacija-api")
 	compile project (":modules:SpisokTovarov:SpisokTovarov-api")
     compile project (":modules:Criterias:Criterias-api");
+    compile project (":modules:SystemConfig:SystemConfig-api");
+    compile project (":modules:TipyDokumentovPostavwika:TipyDokumentovPostavwika-api");
+    compile project (":modules:DokumentyPostavwika:DokumentyPostavwika-api");
+    compile project (":modules:postavwiki:postavwiki-api");
+    compile project (":modules:ZajavkiOtPostavwikov:ZajavkiOtPostavwikov-api");
+	
 	}

@@ -1,0 +1,9 @@
+Bundle-Name: SystemConfig-api
+Bundle-SymbolicName: tj.system.config.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.system.config.exception,\
+	tj.system.config.model,\
+	tj.system.config.service,\
+	tj.system.config.service.persistence
+-includeresource: META-INF/service.xml=../SystemConfig-service/service.xml

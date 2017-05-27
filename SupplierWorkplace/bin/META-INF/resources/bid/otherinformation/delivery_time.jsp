@@ -25,7 +25,7 @@ if(!informacija_orazmewenii.isNew()){
 	name="delivery_time" 
 	type="radio" 
 	value="0" 
-	label="bid_task_each"  
+	label="bid_own_offer"  
 	inlineLabel="right" 
 	inlineField="true" 
 	checked = "<%=checked_delivery_time %>"
@@ -35,7 +35,7 @@ if(!informacija_orazmewenii.isNew()){
 <aui:input 
 	name="delivery_time" 
 	type="radio" value="1" 
-	label="bid_task_whole" 
+	label="bid_in_accordance_customer" 
 	inlineLabel="right" 
 	inlineField="false" 
 	checked = "<%=(informacija_orazmewenii.isNew() || !checked_delivery_time)?true:false %>"
@@ -47,9 +47,17 @@ if(!informacija_orazmewenii.isNew()){
 <aui:input 
 	name="bid_delivery_time" 
 	type="textarea" 
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_postavki():StringPool.BLANK%>"  
+	value=""  
 	placeholder="bid_delivery_time" 
 	disabled="<%=disabled %>"
+/>
+
+<aui:input
+	name="bid_conditions_of_customer"
+	type="textarea"
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_postavki():StringPool.BLANK%>"
+	disabled="<%=true %>"
+		
 />
 
 

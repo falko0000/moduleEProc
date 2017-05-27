@@ -1,0 +1,5 @@
+Bundle-Name: SystemConfig-service
+Bundle-SymbolicName: tj.system.config.service
+Bundle-Version: 1.0.0
+Liferay-Require-SchemaVersion: 1.0.0
+Liferay-Service: true

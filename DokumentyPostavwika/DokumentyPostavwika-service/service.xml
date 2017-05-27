@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.dokumenty.postavwika">
+	<namespace>Dokumenty_postavwika</namespace>
+	
+	<entity local-service="true" name="DokumentyPostavwika" remote-service="false" uuid="false">
+		
+		<column name="dokumenty_postavwika_id" type="long" primary="true" id-type="increment"></column>
+		<column name="postavwik_id" type="long"></column>
+		<column name="tip_dokumenta" type="int"></column>
+		<column name="nazvanie_dokumenta" type="String"></column>
+		<column name="imja_fajla" type="String"></column>
+		<column name="zagruzil" type="long"></column>
+		<column name="data_zagruzki" type="Date"></column>
+		
+			<finder return-type="DokumentyPostavwika" name="Postavwik_id">
+			<finder-column name="postavwik_id"></finder-column>
+			</finder>
+
+	</entity>
+</service-builder>

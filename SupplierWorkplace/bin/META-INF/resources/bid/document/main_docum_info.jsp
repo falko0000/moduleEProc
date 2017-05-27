@@ -25,7 +25,7 @@ String[] downloaddocuments = new String[]{"download_documents"};
             <portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>"/>
 </liferay-portlet:actionURL>
 
-<liferay-ui:tabs names="LIST OF DOCUMENTS">
+<liferay-ui:tabs names="list_docum">
 
 <jsp:include page="<%=SupplierWorkplaceConstant.SEARCH_CONTENER %>"></jsp:include>
 

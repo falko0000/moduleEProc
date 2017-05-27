@@ -36,7 +36,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		name="assignment_lot_payment" 
 		type="radio" 
 		value="0" 
-		label="big_assignment_for_each_lot_separately"  
+		label="bid_own_offer"  
 		inlineLabel="right" 
 		inlineField="true"  
 		checked = "<%=checked_assignment_lot_payment %>"
@@ -47,7 +47,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		name="assignment_lot_payment" 
 		type="radio" 
 		value="1" 
-		label="big_assignment_for_the_entire_order" 
+		label="bid_in_accordance_customer" 
 		inlineLabel="right" 
 		inlineField="false" 
 		checked = "<%=(informacija_orazmewenii.isNew() || !checked_assignment_lot_payment)?true:false %>"
@@ -57,9 +57,17 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input 
 		name="bid_assignment_lot_payment" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getOplata():StringPool.BLANK%>"  
+		value=""  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
+/>
+
+<aui:input
+	name="bid_conditions_of_customer"
+	type="textarea"
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getOplata():StringPool.BLANK%>"
+	disabled="<%=true %>"
+		
 />
 		
 	</div>
@@ -74,7 +82,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		name="assignment_lot_delivery" 
 		type="radio" 
 		value="0" 
-		label="big_assignment_for_each_lot_separately"  
+		label="bid_own_offer"  
 		inlineLabel="right" 
 		inlineField="true"  
 		checked = "<%=checked_assignment_lot_delivery %>"
@@ -85,22 +93,32 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		name="assignment_lot_delivery" 
 		type="radio" 
 		value="1" 
-		label="big_assignment_for_the_entire_order" 
+		label="bid_in_accordance_customer" 
 		inlineLabel="right" 
 		inlineField="false" 
 		checked = "<%=(informacija_orazmewenii.isNew() || !checked_assignment_lot_delivery)?true:false %>"
 		disabled="<%=disabled %>"
 />
 
-		 
+	 
 	</div>
 	<aui:input
 		name="bid_assignment_lot_delivery" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getCena_postavki():StringPool.BLANK%>"  
+		value=""  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
+
+<aui:input
+	name="bid_conditions_of_customer"
+	type="textarea"
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getCena_postavki():StringPool.BLANK%>"
+	disabled="<%=true %>"
+		
+/>
+
+	
 </aui:field-wrapper>
 
 <aui:field-wrapper label="big_concomitant_conditions">
@@ -111,7 +129,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		name="assignment_lot_conditions" 
 		type="radio" 
 		value="0" 
-		label="big_assignment_for_each_lot_separately"  
+		label="bid_own_offer"  
 		inlineLabel="right" 
 		inlineField="true"  
 		checked = "<%=checked_assignment_lot_conditions %>"
@@ -121,7 +139,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 		name="assignment_lot_conditions" 
 		type="radio" 
 		value="1" 
-		label="big_assignment_for_the_entire_order" 
+		label="bid_in_accordance_customer" 
 		inlineLabel="right" 
 		inlineField="false" 
 		checked = "<%=(informacija_orazmewenii.isNew() || !checked_assignment_lot_conditions)?true:false %>"
@@ -130,9 +148,17 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input 
 		name="bid_assignment_lot_conditions" 
 		type="textarea" 
-		value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSoputstvujuwie_uslovija():StringPool.BLANK%>"  
+		value=""  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
+/>
+
+<aui:input
+	name="bid_conditions_of_customer"
+	type="textarea"
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSoputstvujuwie_uslovija():StringPool.BLANK%>"
+	disabled="<%=true %>"
+		
 />
 		
 	</div>

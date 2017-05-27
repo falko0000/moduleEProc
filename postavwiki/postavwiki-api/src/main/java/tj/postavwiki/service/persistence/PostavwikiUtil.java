@@ -112,6 +112,76 @@ public class PostavwikiUtil {
 	}
 
 	/**
+	* Returns the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; or throws a {@link NoSuchPostavwikiException} if it could not be found.
+	*
+	* @param postavwiki_id the postavwiki_id
+	* @param oblast_id the oblast_id
+	* @return the matching postavwiki
+	* @throws NoSuchPostavwikiException if a matching postavwiki could not be found
+	*/
+	public static Postavwiki findBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id)
+		throws tj.postavwiki.exception.NoSuchPostavwikiException {
+		return getPersistence()
+				   .findBypostavwikiIdOblastId(postavwiki_id, oblast_id);
+	}
+
+	/**
+	* Returns the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param postavwiki_id the postavwiki_id
+	* @param oblast_id the oblast_id
+	* @return the matching postavwiki, or <code>null</code> if a matching postavwiki could not be found
+	*/
+	public static Postavwiki fetchBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id) {
+		return getPersistence()
+				   .fetchBypostavwikiIdOblastId(postavwiki_id, oblast_id);
+	}
+
+	/**
+	* Returns the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param postavwiki_id the postavwiki_id
+	* @param oblast_id the oblast_id
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching postavwiki, or <code>null</code> if a matching postavwiki could not be found
+	*/
+	public static Postavwiki fetchBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchBypostavwikiIdOblastId(postavwiki_id, oblast_id,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; from the database.
+	*
+	* @param postavwiki_id the postavwiki_id
+	* @param oblast_id the oblast_id
+	* @return the postavwiki that was removed
+	*/
+	public static Postavwiki removeBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id)
+		throws tj.postavwiki.exception.NoSuchPostavwikiException {
+		return getPersistence()
+				   .removeBypostavwikiIdOblastId(postavwiki_id, oblast_id);
+	}
+
+	/**
+	* Returns the number of postavwikis where postavwiki_id = &#63; and oblast_id = &#63;.
+	*
+	* @param postavwiki_id the postavwiki_id
+	* @param oblast_id the oblast_id
+	* @return the number of matching postavwikis
+	*/
+	public static int countBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id) {
+		return getPersistence()
+				   .countBypostavwikiIdOblastId(postavwiki_id, oblast_id);
+	}
+
+	/**
 	* Caches the postavwiki in the entity cache if it is enabled.
 	*
 	* @param postavwiki the postavwiki

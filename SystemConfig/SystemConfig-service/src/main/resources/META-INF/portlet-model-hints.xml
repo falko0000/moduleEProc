@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.system.config.model.SystemConfig">
+		<field name="system_config_id_" type="long" />
+		<field name="key" type="String" />
+		<field name="description" type="String" />
+		<field name="value" type="String" />
+		<field name="type" type="String" />
+	</model>
+</model-hints>

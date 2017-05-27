@@ -240,6 +240,12 @@ public class PostavwikiLocalServiceUtil {
 		return getService().getPostavwiki(postavwiki_id);
 	}
 
+	public static tj.postavwiki.model.Postavwiki getPostavwiki(
+		long postavwiki_id, long oblast_id)
+		throws tj.postavwiki.exception.NoSuchPostavwikiException {
+		return getService().getPostavwiki(postavwiki_id, oblast_id);
+	}
+
 	/**
 	* Updates the postavwiki in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*

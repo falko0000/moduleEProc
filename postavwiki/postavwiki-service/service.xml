@@ -21,5 +21,11 @@
         <column name="rajon_id" type="long"></column>
         <column name="sin" type="String"></column>
         <column name="sozdal" type="long"></column>
+        
+        	<finder return-type="Postavwiki" name="postavwikiIdOblastId">
+        	<finder-column name="postavwiki_id"></finder-column>
+        	<finder-column name="oblast_id"></finder-column>        	
+        	</finder>
+        	
     </entity>
 </service-builder>

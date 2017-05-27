@@ -1,0 +1,1 @@
+create index IX_ECCDBECA on Dokumenty_postavwika_DokumentyPostavwika (postavwik_id);
