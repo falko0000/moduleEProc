@@ -1,7 +1,4 @@
 
-
-
-
 <%@ include file="/init.jsp" %>
 
 <%
@@ -51,7 +48,12 @@
 				 	orderable="<%= true %>" 
 				 	
 				 />
-			
+			    <liferay-ui:search-container-column-jsp 
+				 	valign="middle"
+				 	name="actions"  
+				 	align="right"
+			        path="<%=CommissionConstants.ACTION_EVALUAT%>"   
+				 />
 				
 		  </liferay-ui:search-container-row>
 		 <liferay-ui:search-iterator />
