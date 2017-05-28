@@ -47,7 +47,7 @@ if(!informacija_orazmewenii.isNew()){
 <aui:input 
 	name="bid_delivery_time" 
 	type="textarea" 
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_postavki():StringPool.BLANK%>"  
+	value=""  
 	placeholder="bid_delivery_time" 
 	disabled="<%=disabled %>"
 />
@@ -55,7 +55,7 @@ if(!informacija_orazmewenii.isNew()){
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value=""
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_postavki():StringPool.BLANK%>"
 	disabled="<%=true %>"
 		
 />

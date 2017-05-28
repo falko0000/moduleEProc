@@ -127,4 +127,9 @@ public interface EQuotationConstants  {
     static final String   OUT_HTML = "SDB";
     static final String FOLDER_BID = "bid";
     
+    //System config
+    
+    static final String PODACHA_ZAYAVKA = "PODACHA_ZAYAVKA";
+    static final String PRELIMINARY_WINNER = "PRELIMINARY_WINNER";
+    
 }

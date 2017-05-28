@@ -1,0 +1,9 @@
+Bundle-Name: TipyDokumentovPostavwika-api
+Bundle-SymbolicName: tj.tipy.dokumentov.postavwika.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.tipy.dokumentov.postavwika.exception,\
+	tj.tipy.dokumentov.postavwika.model,\
+	tj.tipy.dokumentov.postavwika.service,\
+	tj.tipy.dokumentov.postavwika.service.persistence
+-includeresource: META-INF/service.xml=../TipyDokumentovPostavwika-service/service.xml

@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.AddressWrapper;
+import com.liferay.portal.kernel.model.Country;
+import com.liferay.portal.kernel.model.CountryWrapper;
 import com.liferay.portal.kernel.model.Image;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationWrapper;
@@ -36,6 +38,7 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.AddressLocalServiceUtil;
+import com.liferay.portal.kernel.service.CountryServiceUtil;
 import com.liferay.portal.kernel.service.ImageLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 
@@ -47,6 +50,7 @@ import com.liferay.portal.kernel.service.UserGroupService;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
 import com.liferay.portal.kernel.service.permission.UserGroupRolePermissionUtil;
+import com.liferay.portal.kernel.service.persistence.CountryUtil;
 import com.liferay.portal.kernel.service.persistence.UserGroupRoleUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -66,13 +70,19 @@ import tj.criterias.model.Criteria;
 import tj.criterias.model.CriteriasWeight;
 import tj.criterias.service.CriteriaLocalServiceUtil;
 import tj.criterias.service.CriteriasWeightLocalServiceUtil;
+import tj.dokumenty.postavwika.model.DokumentyPostavwika;
+import tj.dokumenty.postavwika.model.DokumentyPostavwikaWrapper;
+import tj.dokumenty.postavwika.service.DokumentyPostavwikaLocalService;
+import tj.dokumenty.postavwika.service.DokumentyPostavwikaLocalServiceUtil;
 import tj.generate.document.GenerateDocument;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
+import tj.informacija.razmewenii.model.InformacijaORazmeweniiWrapper;
 import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.izvewenieput.model.IzveweniePut;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.document.library.kernel.model.DLFolder;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.journal.kernel.util.JournalConverterManagerUtil;
@@ -88,10 +98,28 @@ import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissiiWrapper;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.postavwiki.model.Postavwiki;
+import tj.postavwiki.model.PostavwikiWrapper;
+import tj.postavwiki.service.PostavwikiLocalServiceUtil;
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
+import tj.spisoklotov.model.SpisoklotovSoap;
+import tj.spisoklotov.model.SpisoklotovWrapper;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
+import tj.strany.model.Strany;
+import tj.strany.service.StranyLocalServiceUtil;
+import tj.system.config.model.SystemConfig;
+import tj.system.config.model.SystemConfigWrapper;
+import tj.system.config.service.SystemConfigLocalService;
+import tj.system.config.service.SystemConfigLocalServiceUtil;
+import tj.tipy.izvewenij.model.TipyIzvewenij;
+import tj.tipy.izvewenij.model.TipyIzvewenijWrapper;
+import tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil;
+import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov;
+import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovWrapper;
+import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
+import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceWrapper;
 
 
 @Component(
@@ -168,56 +196,114 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	  
 	  
 	   String ROOT_FOLDER_NAME_FTL = EQuotationConstants.TEMPLATE_FTL_FOLDER_NAME;
-	   String ROOT_FOLDER_DESCRIPTION = EQuotationConstants.TEMPLATE_FTL_FOLDER_DESCRIPTION;
 	   String ROOT_FOLDER_NAME_OUT_HTML = EQuotationConstants.OUT_HTML;
 	   String template_file_name = ParamUtil.get(actionRequest, "template_file_name", "")+".ftl";
-	   long PARENT_FOLDER_ID = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-		
-	  long izvewenija_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
-	  String name = StringPool.BLANK;
-	  String OrgName = StringPool.BLANK;
-	 
-	    try {
+	   String langId = ParamUtil.getString(actionRequest, "languageId");
+	   long izvewenija_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+	  
+	   
+	  try {
+		  
 		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
-	    name = izvewenija.getNaimenovanie();
+	    izvewenija.getNaimenovanie();	   
+	    
 	
 		Organization organization =  OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
+		
 	    
-	     
-	      
-        OrgName  = organization.getName();
+		TipyIzvewenij tipyIzvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenij(izvewenija.getTip_izvewenija_id());
+		
+		PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija_id);		
+			
+		SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(EQuotationConstants.PODACHA_ZAYAVKA);
+	   
+		int podacha_zayavka = Integer.valueOf(systemConfig.getValue());
+		
+		Calendar cal = CalendarFactoryUtil.getCalendar();
+		   
+		  cal.setTime(porjadokRabotyKomissii.getData_podvedenija_itogov());
+		  cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE)-podacha_zayavka);
+		cal.getTime();
+		
+
+		List<Spisoklotov> spisoklotov = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija_id);
+	
+		
+		Country country = CountryServiceUtil.getCountry(organization.getCountryId()); 
+		country.setNameCurrentLanguageId(langId);
+		
+		InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenija_id);
+		        
 		
         
-		IzvewenijaWrapper izvewenijaWrapper = new IzvewenijaWrapper(izvewenija);
+        
+		new IzvewenijaWrapper(izvewenija);
+		
+		
 		
 		OrganizationWrapper organizationWrapper = new OrganizationWrapper(organization);
 		
-		 Address address = organization.getAddress();
-	      
+		
+		
+		CountryWrapper countryWrapper = new CountryWrapper(country);
+		
+		InformacijaORazmeweniiWrapper informacijaORazmeweniiWrapper = new InformacijaORazmeweniiWrapper(informacijaORazmewenii);
+		
+		Address address = organization.getAddress();
+		 
+		SystemConfigWrapper systemConfigWrapper = new SystemConfigWrapper(systemConfig);
+	     
 	      AddressWrapper addressWrapper = new AddressWrapper(address);
 		
+	      Map<String, Map<String,Object>> inputs = null;
+         
+	      double step = 0.1;
+	      double version = 1.0;
+	      
+	      for(Spisoklotov slotov : spisoklotov )
+	      {
+	    	  SpisoklotovWrapper spisoklotovWrapper = new SpisoklotovWrapper(slotov);
+	    	  inputs  = new HashMap<String, Map<String,Object>>();
         
-       Map<String, Map<String,Object>> inputs = new HashMap<String, Map<String,Object>>();
-        
-       
-       
-       
-       PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija_id);
-       
        PorjadokRabotyKomissiiWrapper porjadokRabotyKomissiiWrapper = new PorjadokRabotyKomissiiWrapper(porjadokRabotyKomissii);
        
-     
-       inputs.put("izvewenija", izvewenijaWrapper.getModelAttributes());
+       Map<String, Object> attributes = porjadokRabotyKomissiiWrapper.getModelAttributes();
+       
+       attributes.put("podacha", cal.getTime());
+       
+       inputs.put("izvewenija", izvewenija.getModelAttributes());  
+       
+      
        
        inputs.put("organization_", organizationWrapper.getModelAttributes());
        
-       inputs.put("address", addressWrapper.getModelAttributes());
-    
-       inputs.put("porjadok_raboty_komissii", porjadokRabotyKomissiiWrapper.getModelAttributes() );
+     
        
-       GenerateDocument generate = new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
+       inputs.put("address", addressWrapper.getModelAttributes());
+       
+       inputs.put("system_config", systemConfigWrapper.getModelAttributes());
+    
+       inputs.put("porjadok_raboty_komissii",attributes );
+       
+       inputs.put("tip_izvewenija", tipyIzvewenij.getModelAttributes());
+       
+       inputs.put("spisok_lotov", spisoklotovWrapper.getModelAttributes());
+       
+     
+       
+       inputs.put("country", countryWrapper.getModelAttributes());
+       
+       inputs.put("informacija_o_razmewenii", informacijaORazmeweniiWrapper.getModelAttributes());
+       
+              
+      String outfilename = slotov.getNaimenovanie_lota() + "_nomer_"+String.valueOf(slotov.getNomer_lota());
+       
+       new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
         												template_file_name,
-        												inputs, "0.0", actionRequest);
+	      										inputs, "0.0",outfilename, actionRequest);
+	   version = version + step;  
+       
+	      }
 	    } catch (PortalException e) {
 		
 	}
@@ -271,11 +357,7 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	  for(int a : Indexes )
 	  {
 	      
-		 PermissionChecker permissionChecker;
-		 ThemeDisplay themeDisplay;
-		
-		
-	      String criteriaName = ParamUtil.getString(actionRequest,key+"_criteriaName"+a); 
+		 String criteriaName = ParamUtil.getString(actionRequest,key+"_criteriaName"+a); 
 	      Number criteriaWeight = ParamUtil.getNumber(actionRequest, key+"_criteriaWeight"+a);
 	      String description_criteria = ParamUtil.getString(actionRequest, key+"_description_criteria"+a);
 	      
@@ -548,7 +630,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		long   id_jebk = ParamUtil.getLong(actionRequest, "id_jebk");
 		//info about customer
 		String zakazchik = ParamUtil.getString(actionRequest, "procuring_entity");
-		String bsc_vbk = ParamUtil.getString(actionRequest, "bsc_vbk");
+		ParamUtil.getString(actionRequest, "bsc_vbk");
 		String kod_zakazchika = ParamUtil.getString(actionRequest, "vbk_id");
 		//deliver address 
 		String mesto_postavki = ParamUtil.getString(actionRequest, "bid_delivery_address");
@@ -748,10 +830,9 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	private void insertOpening(ActionRequest actionRequest, ActionResponse actionResponse) {
 		// TODO Auto-generated method stub
 	
-		Locale g;
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
-		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
+		DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
 		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		//Date startDate = ParamUtil.getDate(actionRequest, "startDate", dateFormat);
 		//bid publication
@@ -915,7 +996,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
-		DateFormat dateFormat = DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
+		DateFormatFactoryUtil.getDate(actionRequest.getLocale() );
 		String redirect = ParamUtil.getString(actionRequest,"redirect");
 		
 		String startDate =  ParamUtil.getString(actionRequest, "startDate");
@@ -1158,7 +1239,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		long   id_jebk = ParamUtil.getLong(actionRequest, "id_jebk");
 		//info about customer
 		String zakazchik = ParamUtil.getString(actionRequest, "procuring_entity");
-		String bsc_vbk = ParamUtil.getString(actionRequest, "bsc_vbk");
+		ParamUtil.getString(actionRequest, "bsc_vbk");
 		String kod_zakazchika = ParamUtil.getString(actionRequest, "vbk_id");
 		//deliver address 
 		String mesto_postavki = ParamUtil.getString(actionRequest, "bid_delivery_address");

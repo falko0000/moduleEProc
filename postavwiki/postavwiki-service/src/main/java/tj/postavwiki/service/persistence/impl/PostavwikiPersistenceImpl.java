@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import tj.postavwiki.exception.NoSuchPostavwikiException;
@@ -82,6 +84,246 @@ public class PostavwikiPersistenceImpl extends BasePersistenceImpl<Postavwiki>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(PostavwikiModelImpl.ENTITY_CACHE_ENABLED,
 			PostavwikiModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID = new FinderPath(PostavwikiModelImpl.ENTITY_CACHE_ENABLED,
+			PostavwikiModelImpl.FINDER_CACHE_ENABLED, PostavwikiImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchBypostavwikiIdOblastId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			PostavwikiModelImpl.POSTAVWIKI_ID_COLUMN_BITMASK |
+			PostavwikiModelImpl.OBLAST_ID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_POSTAVWIKIIDOBLASTID = new FinderPath(PostavwikiModelImpl.ENTITY_CACHE_ENABLED,
+			PostavwikiModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countBypostavwikiIdOblastId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; or throws a {@link NoSuchPostavwikiException} if it could not be found.
+	 *
+	 * @param postavwiki_id the postavwiki_id
+	 * @param oblast_id the oblast_id
+	 * @return the matching postavwiki
+	 * @throws NoSuchPostavwikiException if a matching postavwiki could not be found
+	 */
+	@Override
+	public Postavwiki findBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id) throws NoSuchPostavwikiException {
+		Postavwiki postavwiki = fetchBypostavwikiIdOblastId(postavwiki_id,
+				oblast_id);
+
+		if (postavwiki == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("postavwiki_id=");
+			msg.append(postavwiki_id);
+
+			msg.append(", oblast_id=");
+			msg.append(oblast_id);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchPostavwikiException(msg.toString());
+		}
+
+		return postavwiki;
+	}
+
+	/**
+	 * Returns the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param postavwiki_id the postavwiki_id
+	 * @param oblast_id the oblast_id
+	 * @return the matching postavwiki, or <code>null</code> if a matching postavwiki could not be found
+	 */
+	@Override
+	public Postavwiki fetchBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id) {
+		return fetchBypostavwikiIdOblastId(postavwiki_id, oblast_id, true);
+	}
+
+	/**
+	 * Returns the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param postavwiki_id the postavwiki_id
+	 * @param oblast_id the oblast_id
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching postavwiki, or <code>null</code> if a matching postavwiki could not be found
+	 */
+	@Override
+	public Postavwiki fetchBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { postavwiki_id, oblast_id };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID,
+					finderArgs, this);
+		}
+
+		if (result instanceof Postavwiki) {
+			Postavwiki postavwiki = (Postavwiki)result;
+
+			if ((postavwiki_id != postavwiki.getPostavwiki_id()) ||
+					(oblast_id != postavwiki.getOblast_id())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_POSTAVWIKI_WHERE);
+
+			query.append(_FINDER_COLUMN_POSTAVWIKIIDOBLASTID_POSTAVWIKI_ID_2);
+
+			query.append(_FINDER_COLUMN_POSTAVWIKIIDOBLASTID_OBLAST_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(postavwiki_id);
+
+				qPos.add(oblast_id);
+
+				List<Postavwiki> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"PostavwikiPersistenceImpl.fetchBypostavwikiIdOblastId(long, long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					Postavwiki postavwiki = list.get(0);
+
+					result = postavwiki;
+
+					cacheResult(postavwiki);
+
+					if ((postavwiki.getPostavwiki_id() != postavwiki_id) ||
+							(postavwiki.getOblast_id() != oblast_id)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID,
+							finderArgs, postavwiki);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Postavwiki)result;
+		}
+	}
+
+	/**
+	 * Removes the postavwiki where postavwiki_id = &#63; and oblast_id = &#63; from the database.
+	 *
+	 * @param postavwiki_id the postavwiki_id
+	 * @param oblast_id the oblast_id
+	 * @return the postavwiki that was removed
+	 */
+	@Override
+	public Postavwiki removeBypostavwikiIdOblastId(long postavwiki_id,
+		long oblast_id) throws NoSuchPostavwikiException {
+		Postavwiki postavwiki = findBypostavwikiIdOblastId(postavwiki_id,
+				oblast_id);
+
+		return remove(postavwiki);
+	}
+
+	/**
+	 * Returns the number of postavwikis where postavwiki_id = &#63; and oblast_id = &#63;.
+	 *
+	 * @param postavwiki_id the postavwiki_id
+	 * @param oblast_id the oblast_id
+	 * @return the number of matching postavwikis
+	 */
+	@Override
+	public int countBypostavwikiIdOblastId(long postavwiki_id, long oblast_id) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_POSTAVWIKIIDOBLASTID;
+
+		Object[] finderArgs = new Object[] { postavwiki_id, oblast_id };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_POSTAVWIKI_WHERE);
+
+			query.append(_FINDER_COLUMN_POSTAVWIKIIDOBLASTID_POSTAVWIKI_ID_2);
+
+			query.append(_FINDER_COLUMN_POSTAVWIKIIDOBLASTID_OBLAST_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(postavwiki_id);
+
+				qPos.add(oblast_id);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_POSTAVWIKIIDOBLASTID_POSTAVWIKI_ID_2 =
+		"postavwiki.postavwiki_id = ? AND ";
+	private static final String _FINDER_COLUMN_POSTAVWIKIIDOBLASTID_OBLAST_ID_2 = "postavwiki.oblast_id = ?";
 
 	public PostavwikiPersistenceImpl() {
 		setModelClass(Postavwiki.class);
@@ -96,6 +338,11 @@ public class PostavwikiPersistenceImpl extends BasePersistenceImpl<Postavwiki>
 	public void cacheResult(Postavwiki postavwiki) {
 		entityCache.putResult(PostavwikiModelImpl.ENTITY_CACHE_ENABLED,
 			PostavwikiImpl.class, postavwiki.getPrimaryKey(), postavwiki);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID,
+			new Object[] {
+				postavwiki.getPostavwiki_id(), postavwiki.getOblast_id()
+			}, postavwiki);
 
 		postavwiki.resetOriginalValues();
 	}
@@ -149,6 +396,8 @@ public class PostavwikiPersistenceImpl extends BasePersistenceImpl<Postavwiki>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((PostavwikiModelImpl)postavwiki, true);
 	}
 
 	@Override
@@ -159,6 +408,49 @@ public class PostavwikiPersistenceImpl extends BasePersistenceImpl<Postavwiki>
 		for (Postavwiki postavwiki : postavwikis) {
 			entityCache.removeResult(PostavwikiModelImpl.ENTITY_CACHE_ENABLED,
 				PostavwikiImpl.class, postavwiki.getPrimaryKey());
+
+			clearUniqueFindersCache((PostavwikiModelImpl)postavwiki, true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		PostavwikiModelImpl postavwikiModelImpl) {
+		Object[] args = new Object[] {
+				postavwikiModelImpl.getPostavwiki_id(),
+				postavwikiModelImpl.getOblast_id()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_POSTAVWIKIIDOBLASTID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID, args,
+			postavwikiModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		PostavwikiModelImpl postavwikiModelImpl, boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					postavwikiModelImpl.getPostavwiki_id(),
+					postavwikiModelImpl.getOblast_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_POSTAVWIKIIDOBLASTID,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID,
+				args);
+		}
+
+		if ((postavwikiModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					postavwikiModelImpl.getOriginalPostavwiki_id(),
+					postavwikiModelImpl.getOriginalOblast_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_POSTAVWIKIIDOBLASTID,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_POSTAVWIKIIDOBLASTID,
+				args);
 		}
 	}
 
@@ -269,6 +561,8 @@ public class PostavwikiPersistenceImpl extends BasePersistenceImpl<Postavwiki>
 
 		boolean isNew = postavwiki.isNew();
 
+		PostavwikiModelImpl postavwikiModelImpl = (PostavwikiModelImpl)postavwiki;
+
 		Session session = null;
 
 		try {
@@ -292,12 +586,15 @@ public class PostavwikiPersistenceImpl extends BasePersistenceImpl<Postavwiki>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !PostavwikiModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		entityCache.putResult(PostavwikiModelImpl.ENTITY_CACHE_ENABLED,
 			PostavwikiImpl.class, postavwiki.getPrimaryKey(), postavwiki, false);
+
+		clearUniqueFindersCache(postavwikiModelImpl, false);
+		cacheUniqueFindersCache(postavwikiModelImpl);
 
 		postavwiki.resetOriginalValues();
 
@@ -739,8 +1036,11 @@ public class PostavwikiPersistenceImpl extends BasePersistenceImpl<Postavwiki>
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_POSTAVWIKI = "SELECT postavwiki FROM Postavwiki postavwiki";
 	private static final String _SQL_SELECT_POSTAVWIKI_WHERE_PKS_IN = "SELECT postavwiki FROM Postavwiki postavwiki WHERE postavwiki_id IN (";
+	private static final String _SQL_SELECT_POSTAVWIKI_WHERE = "SELECT postavwiki FROM Postavwiki postavwiki WHERE ";
 	private static final String _SQL_COUNT_POSTAVWIKI = "SELECT COUNT(postavwiki) FROM Postavwiki postavwiki";
+	private static final String _SQL_COUNT_POSTAVWIKI_WHERE = "SELECT COUNT(postavwiki) FROM Postavwiki postavwiki WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "postavwiki.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Postavwiki exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Postavwiki exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(PostavwikiPersistenceImpl.class);
 }

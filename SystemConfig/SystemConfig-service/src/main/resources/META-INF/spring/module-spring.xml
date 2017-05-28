@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="tj.system.config.service.impl.SystemConfigLocalServiceImpl" id="tj.system.config.service.SystemConfigLocalService" />
+	<bean class="tj.system.config.service.persistence.impl.SystemConfigPersistenceImpl" id="tj.system.config.service.persistence.SystemConfigPersistence" parent="basePersistence" />
+</beans>

@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import tj.postavwiki.exception.NoSuchPostavwikiException;
+
 import tj.postavwiki.model.Postavwiki;
 
 import java.io.Serializable;
@@ -216,6 +218,10 @@ public interface PostavwikiLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Postavwiki getPostavwiki(long postavwiki_id)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Postavwiki getPostavwiki(long postavwiki_id, long oblast_id)
+		throws NoSuchPostavwikiException;
 
 	/**
 	* Updates the postavwiki in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

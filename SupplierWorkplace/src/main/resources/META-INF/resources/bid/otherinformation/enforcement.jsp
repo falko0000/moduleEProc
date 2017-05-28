@@ -54,7 +54,7 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 <aui:input 
 	name="bid_enforcement" 
 	type="textarea" 
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK %>"  
+	value=""  
 	placeholder="bid_performance_contract" 
 	disabled="<%=disabled %>"
 />
@@ -62,7 +62,7 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value=""
+	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK %>"
 	disabled="<%=true %>"
 		
 />

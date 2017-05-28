@@ -1,0 +1,9 @@
+Bundle-Name: DokumentyPostavwika-api
+Bundle-SymbolicName: tj.dokumenty.postavwika.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.dokumenty.postavwika.exception,\
+	tj.dokumenty.postavwika.model,\
+	tj.dokumenty.postavwika.service,\
+	tj.dokumenty.postavwika.service.persistence
+-includeresource: META-INF/service.xml=../DokumentyPostavwika-service/service.xml

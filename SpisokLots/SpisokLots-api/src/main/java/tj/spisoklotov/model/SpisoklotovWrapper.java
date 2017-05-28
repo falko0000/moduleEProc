@@ -25,6 +25,7 @@ import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -41,7 +42,7 @@ import java.util.Objects;
 public class SpisoklotovWrapper implements Spisoklotov,
 	ModelWrapper<Spisoklotov> {
 	public SpisoklotovWrapper(Spisoklotov spisoklotov) {
-		_spisoklotov = spisoklotov;
+		_spisoklotov = (Spisoklotov) spisoklotov;
 	}
 
 	@Override

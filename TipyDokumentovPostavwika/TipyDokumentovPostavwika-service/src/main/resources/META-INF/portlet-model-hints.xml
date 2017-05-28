@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.tipy.dokumentov.postavwika.model.TipyDokumentovPostavwika">
+		<field name="tipy_dokumentov_postavwika_id" type="int" />
+		<field name="tip" type="String" />
+	</model>
+</model-hints>

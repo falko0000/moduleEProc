@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.dokumenty.postavwika.model.DokumentyPostavwika" />
+	<class name="tj.dokumenty.postavwika.model.impl.DokumentyPostavwikaImpl" table="Dokumenty_postavwika_DokumentyPostavwika">
+		<id name="dokumenty_postavwika_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="postavwik_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tip_dokumenta" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="nazvanie_dokumenta" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imja_fajla" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zagruzil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_zagruzki" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>
