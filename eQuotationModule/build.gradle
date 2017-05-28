@@ -44,7 +44,7 @@ dependencies {
 	compile project (":modules:IstochnikFinansirovanija:IstochnikFinansirovanija-api")
 	compile project (":modules:ObwajaInformacija:ObwajaInformacija-api")
 	compile project (":modules:SpisokTovarov:SpisokTovarov-api")
-<<<<<<< HEAD
+
     compile project (":modules:Criterias:Criterias-api");
     compile project (":modules:SystemConfig:SystemConfig-api");
     compile project (":modules:TipyDokumentovPostavwika:TipyDokumentovPostavwika-api");
@@ -52,9 +52,9 @@ dependencies {
     compile project (":modules:postavwiki:postavwiki-api");
     compile project (":modules:ZajavkiOtPostavwikov:ZajavkiOtPostavwikov-api");
 	
-=======
+
     compile project (":modules:Criterias:Criterias-api")
     
     compile project (":modules:Bidqueue:Bidqueue-api")
->>>>>>> 81695383d855f472c43ab5543392a9bcc4a2c0be
+
 	}

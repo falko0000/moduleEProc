@@ -13,14 +13,12 @@
 
   boolean checked_delivery_address = false;
   
-  try {
+
 		informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(IzvewenijaID);
 		
+		if(!informacija_orazmewenii.isNew())
 		checked_delivery_address =  (informacija_orazmewenii.getMesto_postavki_dlja_zakaza()==0)?true:false;
-  } catch (NoSuchInformacijaORazmeweniiException e) {
-		
-		e.printStackTrace();
-	}
+
  request.setAttribute("informacija_orazmewenii", informacija_orazmewenii);
 
 	  
@@ -63,11 +61,7 @@
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-<<<<<<< HEAD
 	value="<%=(informacija_orazmewenii != null)?informacija_orazmewenii.getMesto_postavki():StringPool.BLANK%>"
-=======
-	value=""
->>>>>>> 81695383d855f472c43ab5543392a9bcc4a2c0be
 	placeholder="bid_conditions_of_customer"
 	disabled="<%=true %>"
 		
