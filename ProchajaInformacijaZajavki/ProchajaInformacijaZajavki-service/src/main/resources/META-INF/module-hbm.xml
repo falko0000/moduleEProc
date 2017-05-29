@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki" />
+	<class name="tj.prochaja.informacija.dlja.zajavki.model.impl.ProchajaInformacijaDljaZajavkiImpl" table="sapp.prochaja_informacija_dlja_zajavki">
+		<id name="prochaja_informacija_dlja_zajavki_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.prochaja_informacija_dlja_zajavki_id_seq</param>
+			</generator>
+		</id>
+		<property name="cena_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cena_postavki_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lot_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="mesto_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mesto_postavki_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="oplata" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="oplata_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="postavwik_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="soputstvujuwie_uslovija" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="soputstvujuwie_uslovija_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="srok_dejstvija" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_dejstvija_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="srok_ispolnenija_zajavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_ispolnenija_zajavki_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="srok_obespechenija_zajavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_obespechenija_zajavki_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="srok_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="srok_postavki_soglasno_zakazchiku" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+</hibernate-mapping>

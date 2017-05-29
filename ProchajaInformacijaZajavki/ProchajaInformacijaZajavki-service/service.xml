@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.prochaja.informacija.dlja.zajavki">
+	<namespace>prochaja_informacija_dlja_zajavki</namespace>
+    <entity name="ProchajaInformacijaDljaZajavki" local-service="true" table="sapp.prochaja_informacija_dlja_zajavki" remote-service="false">
+        <column name="cena_postavki" type="String"></column>
+        <column name="cena_postavki_soglasno_zakazchiku" type="int"></column>
+        <column name="data_sozdanija" type="Date"></column>
+        <column name="izvewenie_id" type="long"></column>
+        <column name="lot_id" type="long"></column>
+        <column name="mesto_postavki" type="String"></column>
+        <column name="mesto_postavki_soglasno_zakazchiku" type="int"></column>
+        <column name="oplata" type="String"></column>
+        <column name="oplata_soglasno_zakazchiku" type="int"></column>
+        <column name="postavwik_id" type="long"></column>
+        <column name="prochaja_informacija_dlja_zajavki_id" type="long" primary="true" id-type="sequence" id-param="sapp.prochaja_informacija_dlja_zajavki_id_seq"></column>
+        <column name="soputstvujuwie_uslovija" type="String"></column>
+        <column name="soputstvujuwie_uslovija_soglasno_zakazchiku" type="int"></column>
+        <column name="sozdal" type="long"></column>
+        <column name="srok_dejstvija" type="String"></column>
+        <column name="srok_dejstvija_soglasno_zakazchiku" type="int"></column>
+        <column name="srok_ispolnenija_zajavki" type="String"></column>
+        <column name="srok_ispolnenija_zajavki_soglasno_zakazchiku" type="int"></column>
+        <column name="srok_obespechenija_zajavki" type="String"></column>
+        <column name="srok_obespechenija_zajavki_soglasno_zakazchiku" type="int"></column>
+        <column name="srok_postavki" type="String"></column>
+        <column name="srok_postavki_soglasno_zakazchiku" type="int"></column>
+        
+        <finder return-type="ProchajaInformacijaDljaZajavki" name="LotIdPostaveikId">
+       		<finder-column name="lot_id"></finder-column>
+        	<finder-column name="postavwik_id"></finder-column>
+        </finder>
+    </entity>
+</service-builder>

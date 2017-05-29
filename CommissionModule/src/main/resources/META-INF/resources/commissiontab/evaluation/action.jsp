@@ -17,6 +17,6 @@
 	
 	  <liferay-ui:icon-menu>
 		       
-		        <liferay-ui:icon iconCssClass="icon-group" message="evaluat" url="<%= evaluat.toString() %>" />
+		        <liferay-ui:icon iconCssClass="icon-bar-chart" message="evaluat" url="<%= evaluat.toString() %>" />
 		       	 
 	  </liferay-ui:icon-menu>

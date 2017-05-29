@@ -1,0 +1,1 @@
+create index IX_48572346 on sapp.prochaja_informacija_dlja_zajavki (lot_id, postavwik_id);

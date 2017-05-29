@@ -20,6 +20,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 	page import="com.liferay.portal.kernel.model.User" %><%@
 	page import="com.liferay.portal.kernel.model.UserGroup" %><%@
 	page import="com.liferay.portal.kernel.model.Organization"%><%@
+	page import="com.liferay.portal.kernel.language.LanguageUtil"%><%@
 	
 	page import="com.liferay.portal.kernel.service.GroupLocalServiceUtil" %><%@
 	page import="com.liferay.portal.kernel.service.LayoutLocalServiceUtil" %><%@
@@ -31,7 +32,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
     page import="com.liferay.portal.kernel.util.Constants"%><%@
 	page import="com.liferay.portal.kernel.util.ParamUtil"%><%@
 	page import="com.liferay.portal.kernel.util.ListUtil"%><%@
-	
+	page import="com.liferay.portal.kernel.util.StringPool"%><%@
 	
 	
 	page import="tj.module.commission.constants.CommissionConstants"%><%@
@@ -40,7 +41,14 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 	page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil"%><%@
 	page import="tj.izvewenija.model.Izvewenija"%><%@
 	page import="tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil"%><%@
-	page import="tj.supplier.request.lot.model.SupplierRequestLot"%>
+	page import="tj.supplier.request.lot.model.SupplierRequestLot"%><%@
+	page import="tj.strany.service.StranyLocalServiceUtil"%><%@
+	page import="tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil"%><%@
+	page import="tj.edinicy.izmerenija.model.EdinicyIzmerenija"%><%@
+	page import="tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil"%><%@
+	page import="tj.spisok.tovarov.model.SpisokTovarov"%><%@
+	page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil"%><%@
+	page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov"%>
 
 	
 <liferay-theme:defineObjects />

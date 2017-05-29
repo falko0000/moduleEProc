@@ -21,6 +21,7 @@ dependencies {
 			compile project (":modules:Strany:Strany-api")
 			compile project (":modules:ZajavkiOtPostavwikov:ZajavkiOtPostavwikov-api")
 		compile project (":modules:SupplierRequestLot:SupplierRequestLot-api")	
+		compile project (":modules:ProchajaInformacijaZajavki:ProchajaInformacijaZajavki-api")
 }
 
 

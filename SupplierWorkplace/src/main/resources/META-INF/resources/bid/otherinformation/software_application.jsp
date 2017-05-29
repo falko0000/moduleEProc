@@ -1,3 +1,5 @@
+<%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
+<%@page import="tj.spisoklotov.model.Spisoklotov"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -6,15 +8,19 @@
 
 	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
-	 InformacijaORazmewenii informacija_orazmewenii = (InformacijaORazmewenii)request.getAttribute("informacija_orazmewenii");
+	Spisoklotov spisoklotov = (Spisoklotov)request.getAttribute("spisoklotov");
+	ProchajaInformacijaDljaZajavki zajavki =(ProchajaInformacijaDljaZajavki) request.getAttribute("zajavki");
 
-	 boolean checked_software_application = false;
+		boolean software_application = true;
+	 	String software_application_value = spisoklotov.getSrok_obespechenija_zajavki();
+	 	
+	 if(Validator.isNotNull(zajavki))
 	 
-	 if(!informacija_orazmewenii.isNew()){
-	 
- 	 checked_software_application =  (informacija_orazmewenii.getObespechenie_zajavki_dlja_zakaza()==0)?true:false;
-
-	 }
+		if(zajavki.getSrok_obespechenija_zajavki_soglasno_zakazchiku() !=0 )
+		{
+			software_application = false;
+			software_application_value = zajavki.getSrok_obespechenija_zajavki();
+		}
  %>
 
 
@@ -26,22 +32,22 @@
 <aui:input 
 	name="software_application" 
 	type="radio" 
-	value="0" 
+	value="1" 
 	label="bid_own_offer"  
 	inlineLabel="right" 
 	inlineField="true"  
-	checked = "<%=checked_software_application %>"
+	checked = "<%=!software_application %>"
 	disabled="<%=disabled %>" 
 />
 
 <aui:input 
 	name="software_application" 
 	type="radio" 
-	value="1" 
+	value="0" 
 	label="bid_in_accordance_customer" 
 	inlineLabel="right" 
 	inlineField="false" 
-	checked = "<%=(informacija_orazmewenii.isNew() || !checked_software_application)?true:false %>"
+	checked = "<%=software_application %>"
 	disabled="<%=disabled %>"
 />
 
@@ -53,7 +59,7 @@
 <aui:input 
 	name="bid_software_application" 
 	type="textarea" 
-	value=""  
+	value="<%=software_application_value %>"  
 	placeholder="big_term_and_procedure_of_the_software_application" 
 	disabled="<%=disabled %>"
 />
@@ -61,7 +67,7 @@
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_obespechenija_zajavki():StringPool.BLANK) %>"
+	value="<%=spisoklotov.getSrok_obespechenija_zajavki() %>"
 	disabled="<%=true %>"
 		
 />

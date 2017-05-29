@@ -70,6 +70,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="com.liferay.portal.kernel.model.Group"%>
 <%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil" %>
 <%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp" %>
+<%@page import="tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil"%>
+<%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
 
 <%@page import="com.liferay.portal.kernel.model.Organization" %>
 <%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil" %>
@@ -86,5 +88,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 
 
+	<%
 	
+	%>
 

@@ -9,5 +9,8 @@ dependencies {
 		compile project (":modules:Izvewenija:Izvewenija-api")
 	    compile project (":modules:SpisokLots:SpisokLots-api")
 	    compile project (":modules:SupplierRequestLot:SupplierRequestLot-api")
-	    
+	    compile project (":modules:ZajavkiOtPostavwikov:ZajavkiOtPostavwikov-api")
+	    compile project (":modules:SpisokTovarov:SpisokTovarov-api")
+	    	compile project (":modules:Edinicyizmerenija:Edinicyizmerenija-api")
+	    				compile project (":modules:Strany:Strany-api")
 }

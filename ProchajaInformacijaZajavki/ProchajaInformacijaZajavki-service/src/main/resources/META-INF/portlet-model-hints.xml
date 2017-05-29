@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki">
+		<field name="cena_postavki" type="String" />
+		<field name="cena_postavki_soglasno_zakazchiku" type="int" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="izvewenie_id" type="long" />
+		<field name="lot_id" type="long" />
+		<field name="mesto_postavki" type="String" />
+		<field name="mesto_postavki_soglasno_zakazchiku" type="int" />
+		<field name="oplata" type="String" />
+		<field name="oplata_soglasno_zakazchiku" type="int" />
+		<field name="postavwik_id" type="long" />
+		<field name="prochaja_informacija_dlja_zajavki_id" type="long" />
+		<field name="soputstvujuwie_uslovija" type="String" />
+		<field name="soputstvujuwie_uslovija_soglasno_zakazchiku" type="int" />
+		<field name="sozdal" type="long" />
+		<field name="srok_dejstvija" type="String" />
+		<field name="srok_dejstvija_soglasno_zakazchiku" type="int" />
+		<field name="srok_ispolnenija_zajavki" type="String" />
+		<field name="srok_ispolnenija_zajavki_soglasno_zakazchiku" type="int" />
+		<field name="srok_obespechenija_zajavki" type="String" />
+		<field name="srok_obespechenija_zajavki_soglasno_zakazchiku" type="int" />
+		<field name="srok_postavki" type="String" />
+		<field name="srok_postavki_soglasno_zakazchiku" type="int" />
+	</model>
+</model-hints>

@@ -1,30 +1,46 @@
 <%@ include file="/init.jsp" %>
+<%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
+<%@page import="tj.spisoklotov.model.Spisoklotov"%>
 
 <%
 String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
 Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
- InformacijaORazmewenii informacija_orazmewenii = (InformacijaORazmewenii)request.getAttribute("informacija_orazmewenii");
+Spisoklotov spisoklotov = (Spisoklotov)request.getAttribute("spisoklotov");
+ProchajaInformacijaDljaZajavki zajavki =(ProchajaInformacijaDljaZajavki) request.getAttribute("zajavki");
 
- boolean checked_assignment_lot_payment = false;
+ boolean checked_assignment_lot_payment = true;
 
- boolean checked_assignment_lot_delivery = false;
+ boolean checked_assignment_lot_delivery = true;
 
- boolean checked_assignment_lot_conditions = false;
-
+ boolean checked_assignment_lot_conditions = true;
+		
+String lot_payment_value = spisoklotov.getOplata();
+ String lot_delivery_value = spisoklotov.getCena_postavki();
+ String lot_conditions_value = spisoklotov.getSoputstvujuwie_uslovija();
  
- if(informacija_orazmewenii!=null){
-	 
-	 
-
- checked_assignment_lot_payment =  (informacija_orazmewenii.getOplata_dlja_zakaza()==0)?true:false;
  
- checked_assignment_lot_delivery =  (informacija_orazmewenii.getCena_postavki_dlja_zakaza()==0)?true:false;
+ 
+  if(zajavki.getOplata_soglasno_zakazchiku()!=0)
+  {
+	  checked_assignment_lot_payment = false;
+	  lot_payment_value = zajavki.getOplata();
+  }
+  
+  if(zajavki.getCena_postavki_soglasno_zakazchiku()!=0)
+  {
+	  checked_assignment_lot_delivery = false;
+	  lot_delivery_value = zajavki.getCena_postavki();
+  }
 
- checked_assignment_lot_conditions =  (informacija_orazmewenii.getSoputstvujuwie_uslovija_dlja_zakaza()==0)?true:false;
+  
+  if(zajavki.getSoputstvujuwie_uslovija_soglasno_zakazchiku()!=0)
+  {
+	  checked_assignment_lot_conditions = false;
+	  lot_conditions_value = zajavki.getSoputstvujuwie_uslovija();
+  }
 
- }
 
 %>
 
@@ -35,29 +51,29 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input 
 		name="assignment_lot_payment" 
 		type="radio" 
-		value="0" 
+		value="1" 
 		label="bid_own_offer"  
 		inlineLabel="right" 
 		inlineField="true"  
-		checked = "<%=checked_assignment_lot_payment %>"
+		checked = "<%=!checked_assignment_lot_payment %>"
 		disabled="<%=disabled %>"
 />
 		
 	<aui:input 
 		name="assignment_lot_payment" 
 		type="radio" 
-		value="1" 
+		value="0" 
 		label="bid_in_accordance_customer" 
 		inlineLabel="right" 
 		inlineField="false" 
-		checked = "<%=(informacija_orazmewenii.isNew() || !checked_assignment_lot_payment)?true:false %>"
+		checked = "<%=checked_assignment_lot_payment %>"
 		disabled="<%=disabled %>"
 />
 		
 	<aui:input 
 		name="bid_assignment_lot_payment" 
 		type="textarea" 
-		value=""  
+		value="<%=lot_payment_value%>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
@@ -65,7 +81,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getOplata():StringPool.BLANK%>"
+	value="<%=spisoklotov.getOplata()%>"
 	disabled="<%=true %>"
 		
 />
@@ -81,22 +97,22 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input 
 		name="assignment_lot_delivery" 
 		type="radio" 
-		value="0" 
+		value="1" 
 		label="bid_own_offer"  
 		inlineLabel="right" 
 		inlineField="true"  
-		checked = "<%=checked_assignment_lot_delivery %>"
+		checked = "<%=!checked_assignment_lot_delivery %>"
 		disabled="<%=disabled %>"
 />
 		
 	<aui:input 
 		name="assignment_lot_delivery" 
 		type="radio" 
-		value="1" 
+		value="0" 
 		label="bid_in_accordance_customer" 
 		inlineLabel="right" 
 		inlineField="false" 
-		checked = "<%=(informacija_orazmewenii.isNew() || !checked_assignment_lot_delivery)?true:false %>"
+		checked = "<%=checked_assignment_lot_delivery %>"
 		disabled="<%=disabled %>"
 />
 
@@ -105,7 +121,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input
 		name="bid_assignment_lot_delivery" 
 		type="textarea" 
-		value=""  
+		value="<%=lot_delivery_value %>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
@@ -113,7 +129,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getCena_postavki():StringPool.BLANK%>"
+	value="<%=spisoklotov.getCena_postavki()%>"
 	disabled="<%=true %>"
 		
 />
@@ -128,27 +144,27 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 	<aui:input 
 		name="assignment_lot_conditions" 
 		type="radio" 
-		value="0" 
+		value="1" 
 		label="bid_own_offer"  
 		inlineLabel="right" 
 		inlineField="true"  
-		checked = "<%=checked_assignment_lot_conditions %>"
+		checked = "<%=!checked_assignment_lot_conditions %>"
 		disabled="<%=disabled %>"
 />
 	<aui:input 
 		name="assignment_lot_conditions" 
 		type="radio" 
-		value="1" 
+		value="0" 
 		label="bid_in_accordance_customer" 
 		inlineLabel="right" 
 		inlineField="false" 
-		checked = "<%=(informacija_orazmewenii.isNew() || !checked_assignment_lot_conditions)?true:false %>"
+		checked = "<%=checked_assignment_lot_conditions %>"
 		disabled="<%=disabled %>"
 />
 	<aui:input 
 		name="bid_assignment_lot_conditions" 
 		type="textarea" 
-		value=""  
+		value="<%=lot_conditions_value %>"  
 		placeholder="bid_performance_contract"
 		disabled="<%=disabled %>"
 />
@@ -156,7 +172,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSoputstvujuwie_uslovija():StringPool.BLANK%>"
+	value="<%=spisoklotov.getSoputstvujuwie_uslovija()%>"
 	disabled="<%=true %>"
 		
 />

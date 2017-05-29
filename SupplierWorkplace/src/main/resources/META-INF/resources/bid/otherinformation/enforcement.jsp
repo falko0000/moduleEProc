@@ -1,21 +1,25 @@
 <%@ include file="/init.jsp" %>
-
+<%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
+<%@page import="tj.spisoklotov.model.Spisoklotov"%>
 <%
 
 String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
 	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
-	 InformacijaORazmewenii informacija_orazmewenii = (InformacijaORazmewenii)request.getAttribute("informacija_orazmewenii");
+	Spisoklotov spisoklotov = (Spisoklotov)request.getAttribute("spisoklotov");
+	ProchajaInformacijaDljaZajavki zajavki =(ProchajaInformacijaDljaZajavki) request.getAttribute("zajavki");
 
-	 boolean checked_enforcement = false;
-
-	 if(!informacija_orazmewenii.isNew()){
-		 
+		boolean enforcement = true;
+	 	String enforcement_value = spisoklotov.getSrok_ispolnenija_zajavki();
+	 	
+	 if(Validator.isNotNull(zajavki))
 	 
- 	 checked_enforcement =  (informacija_orazmewenii.getObespechenie_ispolnenija_dlja_zakaza()==0)?true:false;
-
-	 }
+		if(zajavki.getSrok_ispolnenija_zajavki_soglasno_zakazchiku()!=0 )
+		{
+			enforcement = false;
+			enforcement_value = zajavki.getSrok_ispolnenija_zajavki();
+		}
 	%>
 
 
@@ -27,22 +31,22 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 <aui:input 
     name="enforcement" 
     type="radio" 
-    value="0" 
+    value="1" 
 	label="bid_own_offer"  
 	inlineLabel="right" 
 	inlineField="true"
-	checked = "<%=checked_enforcement %>"  
+	checked = "<%=!enforcement %>"  
 	disabled="<%=disabled %>" 
 />
 
 <aui:input 
 	name="enforcement" 
 	type="radio" 
-	value="1" 
+	value="0" 
 	label="bid_in_accordance_customer" 
 	inlineLabel="right" 
 	inlineField="false" 
-	checked="<%=(informacija_orazmewenii.isNew() || !checked_enforcement)?true:false %>" 
+	checked="<%=enforcement %>" 
 	disabled="<%=disabled %>"
 />
 
@@ -54,7 +58,7 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 <aui:input 
 	name="bid_enforcement" 
 	type="textarea" 
-	value=""  
+	value="<%=enforcement_value %>"  
 	placeholder="bid_performance_contract" 
 	disabled="<%=disabled %>"
 />
@@ -62,7 +66,7 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value="<%=(!informacija_orazmewenii.isNew())?informacija_orazmewenii.getSrok_ispolnenija_zajavki():StringPool.BLANK %>"
+	value="<%=spisoklotov.getSrok_ispolnenija_zajavki()%>"
 	disabled="<%=true %>"
 		
 />

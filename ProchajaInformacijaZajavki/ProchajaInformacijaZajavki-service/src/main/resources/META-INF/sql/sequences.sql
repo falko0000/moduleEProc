@@ -1,0 +1,1 @@
+create sequence sapp.prochaja_informacija_dlja;

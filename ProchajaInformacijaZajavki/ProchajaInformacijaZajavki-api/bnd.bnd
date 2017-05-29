@@ -1,0 +1,9 @@
+Bundle-Name: ProchajaInformacijaZajavki-api
+Bundle-SymbolicName: tj.prochaja.informacija.dlja.zajavki.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.prochaja.informacija.dlja.zajavki.exception,\
+	tj.prochaja.informacija.dlja.zajavki.model,\
+	tj.prochaja.informacija.dlja.zajavki.service,\
+	tj.prochaja.informacija.dlja.zajavki.service.persistence
+-includeresource: META-INF/service.xml=../ProchajaInformacijaZajavki-service/service.xml

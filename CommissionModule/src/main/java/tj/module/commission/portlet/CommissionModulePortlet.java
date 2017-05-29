@@ -6,7 +6,7 @@ package tj.module.commission.portlet;
 
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 
@@ -55,7 +55,7 @@ public class CommissionModulePortlet extends MVCPortlet {
 		
 	   // PortalUtil.getLayoutFriendlyURL(layout, themeDisplay)
 		  // LayoutLocalServiceUtil.getLayouts
-		 
+		
 	 
 		super.doView(renderRequest, renderResponse);
 	}

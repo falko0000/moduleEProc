@@ -1,3 +1,5 @@
+<%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
+<%@page import="tj.spisoklotov.model.Spisoklotov"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -6,16 +8,19 @@ String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
 Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
- InformacijaORazmewenii informacija_orazmewenii = (InformacijaORazmewenii)request.getAttribute("informacija_orazmewenii");
+Spisoklotov spisoklotov = (Spisoklotov)request.getAttribute("spisoklotov");
+ProchajaInformacijaDljaZajavki zajavki =(ProchajaInformacijaDljaZajavki) request.getAttribute("zajavki");
 
-  boolean checked_validity_tenders = false;
-  
-  if(informacija_orazmewenii.isNew()){
-	  
-	  
-  
-	  checked_validity_tenders =  (informacija_orazmewenii.getSrok_dejstvija_dlja_zakaza()==0)?true:false;
-  }
+	boolean validity_tenders = true;
+ 	String validity_tenders_value = spisoklotov.getSrok_dejstvija();
+ 	
+ if(Validator.isNotNull(zajavki))
+ 
+	if(zajavki.getSrok_dejstvija_soglasno_zakazchiku() !=0 )
+	{
+		validity_tenders = false;
+		validity_tenders_value = zajavki.getSrok_dejstvija();
+	}
   %>
   
   
@@ -27,22 +32,22 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 <aui:input 
 	name="validity_tenders" 
 	type="radio" 
-	value="0" 
+	value="1" 
 	label="bid_own_offer"  
 	inlineLabel="right" 
 	inlineField="true" 
-	checked = "<%=checked_validity_tenders %>"
+	checked = "<%=!validity_tenders %>"
 	disabled="<%=disabled %>"
 />
 
 <aui:input 
 	name="validity_tenders" 
 	type="radio" 
-	value="1" 
+	value="0" 
 	label="bid_in_accordance_customer" 
 	inlineLabel="right" 
 	inlineField="false" 
-	checked = "<%=(informacija_orazmewenii.isNew() || !checked_validity_tenders)?true:false %>"
+	checked = "<%=validity_tenders %>"
 	disabled="<%=disabled %>"
 />
 
@@ -51,7 +56,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 <aui:input 
 	name="bid_validity_tenders" 
 	type="textarea" 
-	value=""  
+	value="<%=validity_tenders_value %>"  
 	placeholder="bid_validity_tenders" 
 	disabled="<%=disabled %>"
 />
@@ -59,7 +64,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 <aui:input
 	name="bid_conditions_of_customer"
 	type="textarea"
-	value="<%=(!informacija_orazmewenii.isNew()?informacija_orazmewenii.getSrok_dejstvija():StringPool.BLANK) %>"
+	value="<%=spisoklotov.getSrok_dejstvija() %>"
 	disabled="<%=true %>"
 		
 />
