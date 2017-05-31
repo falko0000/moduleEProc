@@ -40,6 +40,7 @@ public interface SupplierWorkplaceConstant {
 	static final String FORM_ABOUT_INFO_DOCUMENT = "documentation";
 	static final String FORM_APPLICATION = "application";
 	static final String FORM_SEARCH_CONTENER = "search_contener_form";
+	static final String FORM_GENERATION_DOCUMENT = "FORM_GENERATION_DOCUMENT";
 	//
 	static final String RESOURCE_COMMAND_NAME_LIST = "list";
 	
@@ -76,6 +77,7 @@ public interface SupplierWorkplaceConstant {
     static final String PAGE_DOCUMENTATION = "/bid/document/main_docum_info.jsp";
     static final String PAGE_DOCUMENTATION1 = "/bid/documentation1/info_document.jsp"; 
     static final String PAGE_DOCUMENT = "/bid/document/main_docum_info.jsp";
+    static final String PAGE_GENERATION_DOCUMENT = "/bid/generationdocument/generation_doc.jsp";
     
     static final String PAGE_LISTLOTS_INFO = "/bid/listlots/main_listlots_info.jsp";
     
@@ -103,6 +105,16 @@ public interface SupplierWorkplaceConstant {
     static final int STATE_BID_EVALUATION_AND_AWARDING = 3;
     static final int STATE_BID_UNFULFILLED_TENDERS = 4;
     static final int STATE_BID_COMPLETED_TENDERS = 5;
+    
+    
+  //Generation docum
+    static final String TEMPLATE_FTL_FOLDER_NAME = "template_ftl";
+    static final String   OUT_HTML = "SDB";
+    
+    
+  //System config    
+    static final String PODACHA_ZAYAVKA = "PODACHA_ZAYAVKA";
+    static final String PRELIMINARY_WINNER = "PRELIMINARY_WINNER";
     
     //Status
 

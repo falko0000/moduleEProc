@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +28,14 @@ import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.Address;
+import com.liferay.portal.kernel.model.AddressSoap;
+import com.liferay.portal.kernel.model.AddressWrapper;
+import com.liferay.portal.kernel.model.Country;
+import com.liferay.portal.kernel.model.CountryWrapper;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.OrganizationWrapper;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -34,34 +43,51 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileEntrySoap;
 import com.liferay.portal.kernel.repository.model.FileEntryWrapper;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.service.CountryServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import tj.balans.postavwika.model.BalansPostavwika;
 import tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil;
-
+import tj.generate.document.GenerateDocument;
+import tj.informacija.razmewenii.model.InformacijaORazmewenii;
+import tj.informacija.razmewenii.model.InformacijaORazmeweniiWrapper;
+import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
+import tj.izvewenija.model.Izvewenija;
+import tj.izvewenija.model.IzvewenijaWrapper;
+import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 import tj.oplachennye.zakazy.model.OplachennyeZakazy;
 import tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil;
-import tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki;
-import tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil;
+import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
+import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissiiWrapper;
+import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
+import tj.spisoklotov.model.Spisoklotov;
+import tj.spisoklotov.model.SpisoklotovWrapper;
+import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.supplier.request.lot.model.SupplierRequestLot;
 import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
+import tj.system.config.model.SystemConfig;
+import tj.system.config.model.SystemConfigWrapper;
+import tj.system.config.service.SystemConfigLocalServiceUtil;
 import tj.tariff.model.Tariff;
 import tj.tariff.service.TariffLocalServiceUtil;
+import tj.tipy.izvewenij.model.TipyIzvewenij;
+import tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov;
+import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovSoap;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil;
@@ -103,119 +129,142 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		if(formname.equals(SupplierWorkplaceConstant.FORM_SEARCH_CONTENER))
 			deleteFile(actionRequest, actionResponse);
 		
-		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO))
-			updateOtherInfo(actionRequest, actionResponse);
+		if(formname.equals(SupplierWorkplaceConstant.FORM_GENERATION_DOCUMENT))
+			docgeneration(actionRequest, actionResponse);
 	}
 
-	private void updateOtherInfo(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, IOException {
+	private void docgeneration(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		
-		 User user=(User) actionRequest.getAttribute(WebKeys.USER);
-		 long izvewenie_id =  ParamUtil.getLong(actionRequest,"izvewenie_id");
-		 long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
-		 long postavwik_id = user.getOrganizationIds()[0];
-		 String redirect = ParamUtil.getString(actionRequest, "redirect"); 
 		
-		 int delivery_address = ParamUtil.getInteger(actionRequest, "delivery_address");
-	     
-		 String bid_delivery_address = null;
-		
-		 if(delivery_address != 0)
-			 bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
-		
-		 int delivery_time = ParamUtil.getInteger(actionRequest, "delivery_time");
-	     
-		 String bid_delivery_time = null;
-		
-		 if(delivery_time != 0)
-			 bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
-	
-		 int validity_tenders = ParamUtil.getInteger(actionRequest, "validity_tenders");
-	     
-		 String bid_validity_tenders = null;
-		
-		 if(validity_tenders != 0)
-			 bid_validity_tenders = ParamUtil.getString(actionRequest, "bid_validity_tenders");
-	    
-		 //software_application
-		 
-
-		 int software_application = ParamUtil.getInteger(actionRequest, "software_application");
-	     
-		 String bid_software_application = null;
-		
-		 if(software_application != 0)
-			 bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");
-	    
-	 int enforcement = ParamUtil.getInteger(actionRequest, "enforcement");
-	     
-		 String bid_enforcement = null;
-		
-		 if(enforcement != 0)
-			 bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
-	     
-		    
-		 int assignment_lot_payment = ParamUtil.getInteger(actionRequest, "assignment_lot_payment");
-		     
-			 String bid_assignment_lot_payment = null;
-			
-			 if(assignment_lot_payment != 0)
-				 bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
-		    
-	 int assignment_lot_delivery = ParamUtil.getInteger(actionRequest, "assignment_lot_delivery");
-		     
-			 String bid_assignment_lot_delivery = null;
-			
-			 if(assignment_lot_delivery != 0)
-				 bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
-		   
-			 int assignment_lot_conditions = ParamUtil.getInteger(actionRequest, "assignment_lot_conditions");
-		     
-			 String bid_assignment_lot_conditions = null;
-			
-			 if(assignment_lot_conditions != 0)
-				 bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
+		String ROOT_FOLDER_NAME_FTL = SupplierWorkplaceConstant.TEMPLATE_FTL_FOLDER_NAME;
+		   String ROOT_FOLDER_NAME_OUT_HTML = SupplierWorkplaceConstant.OUT_HTML;
+		   String template_file_name = ParamUtil.get(actionRequest, "template_file_name", "FULLSDB")+".ftl";
+		   String langId = ParamUtil.getString(actionRequest, "languageId");
+		   long izvewenija_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+		   long spisok_lotov_id = ParamUtil.getLong(actionRequest,"spisok_lotov_id");
+		   User user = (User)actionRequest.getAttribute(WebKeys.USER);
+		   Organization orgSupplier = user.getOrganizations().get(0);
 		  
-			 ProchajaInformacijaDljaZajavki zajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.getProchajaInformacijaDljaZajavki(spisok_lotov_id, postavwik_id);
-			 
-			 if(Validator.isNull(zajavki))
-			 {
-				 long zajavki_id = CounterLocalServiceUtil.increment(ProchajaInformacijaDljaZajavki.class.toString());
-				 zajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.createProchajaInformacijaDljaZajavki(zajavki_id);
-				 zajavki.setSozdal(user.getUserId());
-				 zajavki.setData_sozdanija(new Date());
-				 zajavki.setIzvewenie_id(izvewenie_id);
-				 zajavki.setLot_id(spisok_lotov_id);
-				 zajavki.setPostavwik_id(postavwik_id);
-			 }	
+		   
+		  try {
+			  
+			Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
+		    izvewenija.getNaimenovanie();
+		    		    
+		
+			Organization organization =  OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
+				
+		    
+			TipyIzvewenij tipyIzvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenij(izvewenija.getTip_izvewenija_id());
 			
-			     zajavki.setMesto_postavki_soglasno_zakazchiku(delivery_address);
-				 zajavki.setMesto_postavki(bid_delivery_address);
-				 
-				 zajavki.setSrok_postavki_soglasno_zakazchiku(delivery_time);
-				 zajavki.setSrok_postavki(bid_delivery_time);
-				 
-				 zajavki.setSrok_dejstvija_soglasno_zakazchiku(validity_tenders);
-				 zajavki.setSrok_dejstvija(bid_validity_tenders);
-				 
-				 
-				 zajavki.setSrok_obespechenija_zajavki_soglasno_zakazchiku(software_application);
-				 zajavki.setSrok_obespechenija_zajavki(bid_software_application);
-	
-				 zajavki.setSrok_ispolnenija_zajavki_soglasno_zakazchiku(enforcement);
-				 zajavki.setSrok_ispolnenija_zajavki(bid_enforcement);
-				 
-				 zajavki.setOplata_soglasno_zakazchiku(assignment_lot_payment);
-				 zajavki.setOplata(bid_assignment_lot_payment);
-				 
-				 zajavki.setCena_postavki_soglasno_zakazchiku(assignment_lot_delivery);
-				 zajavki.setCena_postavki(bid_assignment_lot_delivery);
-				 
-				 zajavki.setSoputstvujuwie_uslovija_soglasno_zakazchiku(assignment_lot_conditions);
-				 zajavki.setSoputstvujuwie_uslovija(bid_assignment_lot_conditions);
-				 
-			ProchajaInformacijaDljaZajavkiLocalServiceUtil.updateProchajaInformacijaDljaZajavki(zajavki);
-	
-	      sendRedirect(actionRequest, actionResponse, redirect);
+			PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(izvewenija_id);		
+				
+			SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(SupplierWorkplaceConstant.PODACHA_ZAYAVKA);
+		   
+			int podacha_zayavka = Integer.valueOf(systemConfig.getValue());
+			
+			Calendar cal = CalendarFactoryUtil.getCalendar();
+			   
+			  cal.setTime(porjadokRabotyKomissii.getData_podvedenija_itogov());
+			  cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE)-podacha_zayavka);
+			cal.getTime();
+			
+
+			Spisoklotov spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);
+		
+			
+			Country country = CountryServiceUtil.getCountry(organization.getCountryId()); 
+			country.setNameCurrentLanguageId(langId);
+			
+			InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenija_id);
+			        
+			List<ZajavkiOtPostavwikov> zajavkiOtPostavwikovs = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisok_lotov_id, orgSupplier.getOrganizationId());
+	        
+			List<ZajavkiOtPostavwikovSoap> soaps = new ArrayList<ZajavkiOtPostavwikovSoap>();
+			double totalprice = 0.0;
+			for(ZajavkiOtPostavwikov postavwikov : zajavkiOtPostavwikovs){
+				totalprice = totalprice + postavwikov.getItogo_za_tovar();
+	        
+			//new IzvewenijaWrapper(izvewenija);
+			ZajavkiOtPostavwikovSoap soap = new ZajavkiOtPostavwikovSoap();
+			soap.toSoapModel(postavwikov);
+			soaps.add(soap);
+			}
+			
+			OrganizationWrapper organizationWrapper = new OrganizationWrapper(organization);
+			
+			OrganizationWrapper orgSupplierWrapper = new OrganizationWrapper(orgSupplier);
+			
+			CountryWrapper countryWrapper = new CountryWrapper(country);
+			
+			InformacijaORazmeweniiWrapper informacijaORazmeweniiWrapper = new InformacijaORazmeweniiWrapper(informacijaORazmewenii);
+			
+			Address address = organization.getAddress();
+			 
+			SystemConfigWrapper systemConfigWrapper = new SystemConfigWrapper(systemConfig);
+		     
+		      AddressWrapper addressWrapper = new AddressWrapper(address);
+			
+		      
+		     
+		      
+		      Map<String, Object> inputs = new HashMap<String, Object>();
+	         
+		      double step = 0.1;
+		      double version = 1.0;
+		      
+		   
+		 
+		    	  SpisoklotovWrapper spisoklotovWrapper = new SpisoklotovWrapper(spisoklotov);
+	        
+	       PorjadokRabotyKomissiiWrapper porjadokRabotyKomissiiWrapper = new PorjadokRabotyKomissiiWrapper(porjadokRabotyKomissii);
+	       
+	       Map<String, Object> attributes = porjadokRabotyKomissiiWrapper.getModelAttributes();
+	       
+	       attributes.put("podacha", cal.getTime());
+	       
+	       inputs.put("izvewenija", izvewenija.getModelAttributes()); 
+	   	       
+	       inputs.put("organization_", organizationWrapper.getModelAttributes());
+	       
+	       inputs.put("orgsupplier", orgSupplierWrapper.getModelAttributes());
+	       
+	       inputs.put("address", addressWrapper.getModelAttributes());
+	       
+	       inputs.put("system_config", systemConfigWrapper.getModelAttributes());
+	    
+	       inputs.put("porjadok_raboty_komissii",attributes );
+	       
+	       inputs.put("tip_izvewenija", tipyIzvewenij.getModelAttributes());
+	       
+	       inputs.put("spisok_lotov", spisoklotovWrapper.getModelAttributes());
+	       
+	     
+	       
+	       inputs.put("country", countryWrapper.getModelAttributes());
+	       
+	       inputs.put("informacija_o_razmewenii", informacijaORazmeweniiWrapper.getModelAttributes());
+	       
+	              
+	      String outfilename = spisoklotov.getNaimenovanie_lota() + "_nomer_"+String.valueOf(spisoklotov.getNomer_lota());
+	       
+	       new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
+	        												template_file_name,
+		      										inputs, "0.0",outfilename, actionRequest);
+		   version = version + step;  
+	       
+		      
+		    } catch (PortalException e) {
+			
+		}
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		
 	}
 
 	private void deleteFile(ActionRequest actionRequest, ActionResponse actionResponse) {
