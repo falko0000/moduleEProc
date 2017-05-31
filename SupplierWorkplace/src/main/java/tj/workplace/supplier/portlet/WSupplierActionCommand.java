@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
@@ -52,6 +53,8 @@ import tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil;
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 import tj.oplachennye.zakazy.model.OplachennyeZakazy;
 import tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil;
+import tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki;
+import tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil;
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.supplier.request.lot.model.SupplierRequestLot;
@@ -99,6 +102,120 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_SEARCH_CONTENER))
 			deleteFile(actionRequest, actionResponse);
+		
+		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO))
+			updateOtherInfo(actionRequest, actionResponse);
+	}
+
+	private void updateOtherInfo(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, IOException {
+		
+		 User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		 long izvewenie_id =  ParamUtil.getLong(actionRequest,"izvewenie_id");
+		 long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+		 long postavwik_id = user.getOrganizationIds()[0];
+		 String redirect = ParamUtil.getString(actionRequest, "redirect"); 
+		
+		 int delivery_address = ParamUtil.getInteger(actionRequest, "delivery_address");
+	     
+		 String bid_delivery_address = null;
+		
+		 if(delivery_address != 0)
+			 bid_delivery_address = ParamUtil.getString(actionRequest, "bid_delivery_address");
+		
+		 int delivery_time = ParamUtil.getInteger(actionRequest, "delivery_time");
+	     
+		 String bid_delivery_time = null;
+		
+		 if(delivery_time != 0)
+			 bid_delivery_time = ParamUtil.getString(actionRequest, "bid_delivery_time");
+	
+		 int validity_tenders = ParamUtil.getInteger(actionRequest, "validity_tenders");
+	     
+		 String bid_validity_tenders = null;
+		
+		 if(validity_tenders != 0)
+			 bid_validity_tenders = ParamUtil.getString(actionRequest, "bid_validity_tenders");
+	    
+		 //software_application
+		 
+
+		 int software_application = ParamUtil.getInteger(actionRequest, "software_application");
+	     
+		 String bid_software_application = null;
+		
+		 if(software_application != 0)
+			 bid_software_application = ParamUtil.getString(actionRequest, "bid_software_application");
+	    
+	 int enforcement = ParamUtil.getInteger(actionRequest, "enforcement");
+	     
+		 String bid_enforcement = null;
+		
+		 if(enforcement != 0)
+			 bid_enforcement = ParamUtil.getString(actionRequest, "bid_enforcement");
+	     
+		    
+		 int assignment_lot_payment = ParamUtil.getInteger(actionRequest, "assignment_lot_payment");
+		     
+			 String bid_assignment_lot_payment = null;
+			
+			 if(assignment_lot_payment != 0)
+				 bid_assignment_lot_payment = ParamUtil.getString(actionRequest, "bid_assignment_lot_payment");
+		    
+	 int assignment_lot_delivery = ParamUtil.getInteger(actionRequest, "assignment_lot_delivery");
+		     
+			 String bid_assignment_lot_delivery = null;
+			
+			 if(assignment_lot_delivery != 0)
+				 bid_assignment_lot_delivery = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
+		   
+			 int assignment_lot_conditions = ParamUtil.getInteger(actionRequest, "assignment_lot_conditions");
+		     
+			 String bid_assignment_lot_conditions = null;
+			
+			 if(assignment_lot_conditions != 0)
+				 bid_assignment_lot_conditions = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
+		  
+			 ProchajaInformacijaDljaZajavki zajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.getProchajaInformacijaDljaZajavki(spisok_lotov_id, postavwik_id);
+			 
+			 if(Validator.isNull(zajavki))
+			 {
+				 long zajavki_id = CounterLocalServiceUtil.increment(ProchajaInformacijaDljaZajavki.class.toString());
+				 zajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.createProchajaInformacijaDljaZajavki(zajavki_id);
+				 zajavki.setSozdal(user.getUserId());
+				 zajavki.setData_sozdanija(new Date());
+				 zajavki.setIzvewenie_id(izvewenie_id);
+				 zajavki.setLot_id(spisok_lotov_id);
+				 zajavki.setPostavwik_id(postavwik_id);
+			 }	
+			
+			     zajavki.setMesto_postavki_soglasno_zakazchiku(delivery_address);
+				 zajavki.setMesto_postavki(bid_delivery_address);
+				 
+				 zajavki.setSrok_postavki_soglasno_zakazchiku(delivery_time);
+				 zajavki.setSrok_postavki(bid_delivery_time);
+				 
+				 zajavki.setSrok_dejstvija_soglasno_zakazchiku(validity_tenders);
+				 zajavki.setSrok_dejstvija(bid_validity_tenders);
+				 
+				 
+				 zajavki.setSrok_obespechenija_zajavki_soglasno_zakazchiku(software_application);
+				 zajavki.setSrok_obespechenija_zajavki(bid_software_application);
+	
+				 zajavki.setSrok_ispolnenija_zajavki_soglasno_zakazchiku(enforcement);
+				 zajavki.setSrok_ispolnenija_zajavki(bid_enforcement);
+				 
+				 zajavki.setOplata_soglasno_zakazchiku(assignment_lot_payment);
+				 zajavki.setOplata(bid_assignment_lot_payment);
+				 
+				 zajavki.setCena_postavki_soglasno_zakazchiku(assignment_lot_delivery);
+				 zajavki.setCena_postavki(bid_assignment_lot_delivery);
+				 
+				 zajavki.setSoputstvujuwie_uslovija_soglasno_zakazchiku(assignment_lot_conditions);
+				 zajavki.setSoputstvujuwie_uslovija(bid_assignment_lot_conditions);
+				 
+			ProchajaInformacijaDljaZajavkiLocalServiceUtil.updateProchajaInformacijaDljaZajavki(zajavki);
+	
+	      sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
 	private void deleteFile(ActionRequest actionRequest, ActionResponse actionResponse) {

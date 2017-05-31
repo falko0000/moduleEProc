@@ -8,15 +8,9 @@
 
   Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
   
-  Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
-  long lot_id = ParamUtil.getLong(request, "spisok_lotov_id");
-  
-  long postavwik_id = user.getOrganizationIds()[0];
-  
-  Spisoklotov spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(lot_id);
-  
-  ProchajaInformacijaDljaZajavki zajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.getProchajaInformacijaDljaZajavki(lot_id, postavwik_id);
-  
+  Spisoklotov spisoklotov = (Spisoklotov)request.getAttribute("spisoklotov");
+  ProchajaInformacijaDljaZajavki zajavki =(ProchajaInformacijaDljaZajavki) request.getAttribute("zajavki");
+
   	boolean checked_delivery_address = true;
   	String delivery_address_value = spisoklotov.getMesto_postavki();
   
@@ -32,8 +26,7 @@
   
   
 
- request.setAttribute("spisoklotov", spisoklotov);
- request.setAttribute("zajavki", zajavki);
+
 
 	  
 %>

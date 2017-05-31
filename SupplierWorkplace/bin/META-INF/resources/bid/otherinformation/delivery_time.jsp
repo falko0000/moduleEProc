@@ -40,7 +40,7 @@ Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
 
 <aui:input 
 	name="delivery_time" 
-	type="radio" value="1" 
+	type="radio" value="0" 
 	label="bid_in_accordance_customer" 
 	inlineLabel="right" 
 	inlineField="false" 

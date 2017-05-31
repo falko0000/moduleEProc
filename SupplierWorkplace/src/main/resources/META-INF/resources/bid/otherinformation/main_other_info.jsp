@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@ include file="/init.jsp" %>
 
 
@@ -21,9 +22,18 @@ String[] CAT_NAMES = new String[]{ "bid_title_delivery_address",
  String[][] CAT_SECTION = {deliveryaddress,deliverytime,validity,softwareapplication,enforcement,otherconditions};
  
  
-
- Long izvewenie_id = ParamUtil.getLong(request,"izvewenie_id");
- InformacijaORazmewenii informacija_orazmewenii =  InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
+ long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
+ long lot_id = ParamUtil.getLong(request, "spisok_lotov_id");
+ 
+ long postavwik_id = user.getOrganizationIds()[0];
+ 
+ Spisoklotov spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(lot_id);
+ 
+ ProchajaInformacijaDljaZajavki zajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.getProchajaInformacijaDljaZajavki(lot_id, postavwik_id);
+ 
+ request.setAttribute("spisoklotov", spisoklotov);
+ request.setAttribute("zajavki", zajavki);
+ 
  String currentURL = themeDisplay.getURLCurrent();
 
 %>
@@ -31,12 +41,13 @@ String[] CAT_NAMES = new String[]{ "bid_title_delivery_address",
 <liferay-portlet:actionURL name="<%=SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT%>" var="otherinformation">
 <portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
+		    <portlet:param name="spisok_lotov_id" value="<%= String.valueOf(lot_id) %>"/>
 </liferay-portlet:actionURL>
 
 
 <aui:form action="<%=otherinformation%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO%>"> 
 
-<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (informacija_orazmewenii.isNew()) ? Constants.ADD : Constants.UPDATE %>" />
+<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (Validator.isNull(zajavki)) ? Constants.ADD : Constants.UPDATE %>" />
 
 <aui:input name="FormName" type="hidden" value="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO %>" />
 

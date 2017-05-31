@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@ include file="/init.jsp" %>
 <%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
 <%@page import="tj.spisoklotov.model.Spisoklotov"%>
@@ -20,7 +21,8 @@ String lot_payment_value = spisoklotov.getOplata();
  String lot_delivery_value = spisoklotov.getCena_postavki();
  String lot_conditions_value = spisoklotov.getSoputstvujuwie_uslovija();
  
- 
+ if(Validator.isNotNull(zajavki))
+ {
  
   if(zajavki.getOplata_soglasno_zakazchiku()!=0)
   {
@@ -41,7 +43,7 @@ String lot_payment_value = spisoklotov.getOplata();
 	  lot_conditions_value = zajavki.getSoputstvujuwie_uslovija();
   }
 
-
+ }
 %>
 
 <aui:field-wrapper label="big_payment">
