@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -28,6 +29,7 @@ import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.AddressSoap;
 import com.liferay.portal.kernel.model.AddressWrapper;
@@ -59,6 +61,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import tj.balans.postavwika.model.BalansPostavwika;
 import tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil;
+import tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil;
 import tj.generate.document.GenerateDocument;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 import tj.informacija.razmewenii.model.InformacijaORazmeweniiWrapper;
@@ -74,9 +77,11 @@ import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissiiWrapper;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
+import tj.spisok.tovarov.service.SpisokTovarovLocalServiceWrapper;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.model.SpisoklotovWrapper;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
+import tj.strany.service.StranyLocalServiceUtil;
 import tj.supplier.request.lot.model.SupplierRequestLot;
 import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
 import tj.system.config.model.SystemConfig;
@@ -89,6 +94,7 @@ import tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovSoap;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp;
+import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovWrapper;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil;
 
@@ -176,21 +182,39 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 			Country country = CountryServiceUtil.getCountry(organization.getCountryId()); 
 			country.setNameCurrentLanguageId(langId);
 			
+
+			
 			InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenija_id);
 			        
 			List<ZajavkiOtPostavwikov> zajavkiOtPostavwikovs = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisok_lotov_id, orgSupplier.getOrganizationId());
 	        
-			List<ZajavkiOtPostavwikovSoap> soaps = new ArrayList<ZajavkiOtPostavwikovSoap>();
-			double totalprice = 0.0;
-			for(ZajavkiOtPostavwikov postavwikov : zajavkiOtPostavwikovs){
-				totalprice = totalprice + postavwikov.getItogo_za_tovar();
-	        
-			//new IzvewenijaWrapper(izvewenija);
-			ZajavkiOtPostavwikovSoap soap = new ZajavkiOtPostavwikovSoap();
-			soap.toSoapModel(postavwikov);
-			soaps.add(soap);
-			}
+			String countrys[] = new String[zajavkiOtPostavwikovs.size()];
 			
+			String edinica[] = new String[zajavkiOtPostavwikovs.size()];
+			
+			 List<SpisokTovarov> tovarovs = SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(spisok_lotov_id);
+			 
+			 int index = 0;
+			   for(ZajavkiOtPostavwikov z : zajavkiOtPostavwikovs)
+			   {
+				   long tovarId = z.getTovar_id();
+				   
+				   for(SpisokTovarov sp : tovarovs)
+				   {
+					   if(tovarId == sp.getSpisok_tovarov_id())
+					   {
+						   String countryKey = StranyLocalServiceUtil.getStrany(sp.getKod_strany_proizvoditelja()).getKey();
+						   countrys[index] = LanguageUtil.get(PortalUtil.getHttpServletRequest(actionRequest), countryKey);
+						   edinica[index] = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenija(sp.getEdinica_izmerenija_id()).getNazvanie();
+						   
+						   zajavkiOtPostavwikovs.get(index).setOpisanie_tovara(countrys[index]+":"+edinica[index]);
+						  
+						   
+					   }
+				   }
+			   }
+			
+			 
 			OrganizationWrapper organizationWrapper = new OrganizationWrapper(organization);
 			
 			OrganizationWrapper orgSupplierWrapper = new OrganizationWrapper(orgSupplier);
@@ -204,6 +228,8 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 			SystemConfigWrapper systemConfigWrapper = new SystemConfigWrapper(systemConfig);
 		     
 		      AddressWrapper addressWrapper = new AddressWrapper(address);
+		      
+
 			
 		      
 		     
@@ -237,14 +263,16 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 	       
 	       inputs.put("tip_izvewenija", tipyIzvewenij.getModelAttributes());
 	       
-	       inputs.put("spisok_lotov", spisoklotovWrapper.getModelAttributes());
+	       inputs.put("zajavki_ot_postavwikov", zajavkiOtPostavwikovs);
 	       
-	     
+	       inputs.put("spisok_lotov", spisoklotovWrapper.getModelAttributes());
 	       
 	       inputs.put("country", countryWrapper.getModelAttributes());
 	       
 	       inputs.put("informacija_o_razmewenii", informacijaORazmeweniiWrapper.getModelAttributes());
 	       
+	       inputs.put("countrys",  countrys);
+	       inputs.put("edinica",  edinica);
 	              
 	      String outfilename = spisoklotov.getNaimenovanie_lota() + "_nomer_"+String.valueOf(spisoklotov.getNomer_lota());
 	       
