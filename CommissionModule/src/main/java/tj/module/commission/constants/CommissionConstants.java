@@ -22,5 +22,7 @@ public interface CommissionConstants {
 	static final String ACTION_LIST_LOTS = "/commissiontab/action.jsp";
 	static final String ACTION_EVALUAT = "/commissiontab/evaluation/action.jsp";
 	
-	
-}
+	static final String DOCUMENT_ACTION = "/commissiontab/evaluation/supplieritems/action.jsp";
+    
+	  static final String FOLDER_BID = "bid";
+ }
