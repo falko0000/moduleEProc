@@ -46,6 +46,7 @@ public class CriteriaSoap implements Serializable {
 		soapModel.setMax_weight(model.getMax_weight());
 		soapModel.setMin_weight(model.getMin_weight());
 		soapModel.setCriteria_type_id(model.getCriteria_type_id());
+		soapModel.setDoc_mandatory(model.getDoc_mandatory());
 
 		return soapModel;
 	}
@@ -202,6 +203,18 @@ public class CriteriaSoap implements Serializable {
 		_criteria_type_id = criteria_type_id;
 	}
 
+	public boolean getDoc_mandatory() {
+		return _doc_mandatory;
+	}
+
+	public boolean isDoc_mandatory() {
+		return _doc_mandatory;
+	}
+
+	public void setDoc_mandatory(boolean doc_mandatory) {
+		_doc_mandatory = doc_mandatory;
+	}
+
 	private long _criteria_id;
 	private String _criteria_name;
 	private double _criteria_weight;
@@ -215,4 +228,5 @@ public class CriteriaSoap implements Serializable {
 	private int _max_weight;
 	private int _min_weight;
 	private int _criteria_type_id;
+	private boolean _doc_mandatory;
 }

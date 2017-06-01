@@ -18,15 +18,16 @@ if(organizations.size()>0)
 
 
 
-long repositoryId = 20147;
+	long repositoryId =  organizations.get(0).getGroup().getGroupId();
 
     Folder folder = null;
      List<FileEntry> dlFileEntries = Collections.emptyList();
 try {
+	
 	folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID);
 	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenie_id));
 	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
-	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(organization_id));
+	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), SupplierWorkplaceConstant.FOLDER_LOT);
 	
 	dlFileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folder.getFolderId());  
 } catch (PortalException e) {

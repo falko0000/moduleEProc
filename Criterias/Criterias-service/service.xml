@@ -19,7 +19,7 @@
 		<column name="max_weight" type="int"></column>
 	   <column name="min_weight" type="int"></column>
 		<column name="criteria_type_id" type="int"></column>
-		
+		<column name="doc_mandatory" type="boolean"></column>
 		<finder return-type="Collection" name="LotIdAndCategoryId">
 		  <finder-column name="spisok_lotov_id"></finder-column>
 		  <finder-column name="criteria_category_id"></finder-column>

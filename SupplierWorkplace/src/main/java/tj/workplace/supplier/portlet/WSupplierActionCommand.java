@@ -27,6 +27,7 @@ import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
+import com.liferay.document.library.kernel.service.DLFolderLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -46,6 +47,7 @@ import com.liferay.portal.kernel.repository.model.FileEntrySoap;
 import com.liferay.portal.kernel.repository.model.FileEntryWrapper;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.service.CountryServiceUtil;
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -444,7 +446,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 	}
 
-	private void addDocument(ActionRequest actionRequest, ActionResponse actionResponse) {
+	private void addDocument(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		
 		 Long izvewenie_id = ParamUtil.getLong(actionRequest,"izvewenie_id");
 		 Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
@@ -462,13 +464,18 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		  
 		
 		 
-		 long repositoryId = 20147;
+		 long repositoryId =  organizations.get(0).getGroup().getGroupId();
 		 
 		 
-		 
-		Folder folder = createFolder(repositoryId, izvewenie_id, spisok_lotov_id,organization_id, actionRequest );
-		 
-		uploadFile(folder, actionRequest);
+		
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
+		
+		 Folder folder = createFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID, "folder bid" , serviceContext );
+		 		folder = createFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenie_id), "Folder for bid number"+ String.valueOf(izvewenie_id), serviceContext );
+		 		folder = createFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id), "Folder for lot number"+ String.valueOf(spisok_lotov_id), serviceContext );
+		 		folder = createFolder(repositoryId, folder.getFolderId(), SupplierWorkplaceConstant.FOLDER_LOT, "Folder for lot documents", serviceContext );
+		
+		 		uploadFile(folder, actionRequest);
 	}
 
 	private void uploadFile(Folder folder, ActionRequest actionRequest) {
@@ -559,6 +566,10 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
+		 
+		 
+		 
+		 
 		  long organization_id = 0;
 		  
 		  
@@ -566,6 +577,8 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		   List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
 		  if(organizations.size()>0)
 			  organization_id = organizations.get(0).getOrganizationId();
+		 
+		 
 		  
 	     Map<Long, ZajavkiOtPostavwikovTemp> map = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
 		 
@@ -719,14 +732,11 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		    return buuid;
   }
 	   
-		private boolean isFolderExist(long repositoryId, long izvewenija_id, long spisok_lotov_id, long pastavwik_id){
+		private boolean isFolderExist(long repositoryId, long parent, String foldername){
 			boolean folderExist = false;
 		Folder folder = null;
 			try {
-				folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID);
-				folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenija_id));
-				folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
-				folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(pastavwik_id));
+				folder = DLAppServiceUtil.getFolder(repositoryId, parent, foldername);
 				
 				folderExist = true;
 				
@@ -736,47 +746,23 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 			return folderExist;
 	}
 		
-		public Folder createFolder(long repositoryId, long izvewenija_id, long spisok_lotov_id, long pastavwik_id , ActionRequest actionRequest)
+		
+		public Folder createFolder(long repositoryId, long parentFolderId, String foldername, String description, ServiceContext serviceContext) throws PortalException
 		{
-	      boolean folderExist = isFolderExist(repositoryId, izvewenija_id, spisok_lotov_id, pastavwik_id);
+	      boolean folderExist = isFolderExist(repositoryId, parentFolderId, foldername);
 		   
 	      
 	        Folder folder = null;
-			if (!folderExist) {
-				
-				try {
+			if (folderExist) 
+				 	folder = DLAppServiceUtil.getFolder(repositoryId, parentFolderId, foldername);
+		      
+			else
+		
+				folder =  DLAppServiceUtil.addFolder(repositoryId, parentFolderId, foldername, description, serviceContext);
 					
 			
-					ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
-					
-					folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID);
-					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenija_id));
-					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
-					
-					folder = DLAppServiceUtil.addFolder(repositoryId,folder.getFolderId(), String.valueOf(pastavwik_id),"organization "+ String.valueOf(pastavwik_id)+" for lot" + String.valueOf(spisok_lotov_id), serviceContext);
-				} catch (PortalException e1) {
-					e1.printStackTrace();
-				} catch (SystemException e1) {
-					e1.printStackTrace();
-				}
-				
-			}
-			else
-			{
-				try {
-				
-					
-					folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID);
-					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenija_id));
-					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
-					folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(pastavwik_id));
-				} catch (PortalException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
-			}
+			
+			
 			return folder;
 		}
 		

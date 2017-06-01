@@ -65,7 +65,7 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{criteria_id=");
 		sb.append(criteria_id);
@@ -93,6 +93,8 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 		sb.append(min_weight);
 		sb.append(", criteria_type_id=");
 		sb.append(criteria_type_id);
+		sb.append(", doc_mandatory=");
+		sb.append(doc_mandatory);
 		sb.append("}");
 
 		return sb.toString();
@@ -142,6 +144,7 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 		criteriaImpl.setMax_weight(max_weight);
 		criteriaImpl.setMin_weight(min_weight);
 		criteriaImpl.setCriteria_type_id(criteria_type_id);
+		criteriaImpl.setDoc_mandatory(doc_mandatory);
 
 		criteriaImpl.resetOriginalValues();
 
@@ -171,6 +174,8 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 		min_weight = objectInput.readInt();
 
 		criteria_type_id = objectInput.readInt();
+
+		doc_mandatory = objectInput.readBoolean();
 	}
 
 	@Override
@@ -209,6 +214,8 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 		objectOutput.writeInt(min_weight);
 
 		objectOutput.writeInt(criteria_type_id);
+
+		objectOutput.writeBoolean(doc_mandatory);
 	}
 
 	public long criteria_id;
@@ -224,4 +231,5 @@ public class CriteriaCacheModel implements CacheModel<Criteria>, Externalizable 
 	public int max_weight;
 	public int min_weight;
 	public int criteria_type_id;
+	public boolean doc_mandatory;
 }

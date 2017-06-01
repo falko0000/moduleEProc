@@ -74,7 +74,8 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 			{ "updatedby", Types.BIGINT },
 			{ "max_weight", Types.INTEGER },
 			{ "min_weight", Types.INTEGER },
-			{ "criteria_type_id", Types.INTEGER }
+			{ "criteria_type_id", Types.INTEGER },
+			{ "doc_mandatory", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -92,9 +93,10 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		TABLE_COLUMNS_MAP.put("max_weight", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("min_weight", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("criteria_type_id", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("doc_mandatory", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria (criteria_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_weight DOUBLE,criteria_category_id INTEGER,criteria_description VARCHAR(75) null,spisok_lotov_id LONG,created DATE null,updated DATE null,createdby LONG,updatedby LONG,max_weight INTEGER,min_weight INTEGER,criteria_type_id INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria (criteria_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_weight DOUBLE,criteria_category_id INTEGER,criteria_description VARCHAR(75) null,spisok_lotov_id LONG,created DATE null,updated DATE null,createdby LONG,updatedby LONG,max_weight INTEGER,min_weight INTEGER,criteria_type_id INTEGER,doc_mandatory BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteria.criteria_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria.criteria_id ASC";
@@ -167,6 +169,7 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		attributes.put("max_weight", getMax_weight());
 		attributes.put("min_weight", getMin_weight());
 		attributes.put("criteria_type_id", getCriteria_type_id());
+		attributes.put("doc_mandatory", getDoc_mandatory());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -254,6 +257,12 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 
 		if (criteria_type_id != null) {
 			setCriteria_type_id(criteria_type_id);
+		}
+
+		Boolean doc_mandatory = (Boolean)attributes.get("doc_mandatory");
+
+		if (doc_mandatory != null) {
+			setDoc_mandatory(doc_mandatory);
 		}
 	}
 
@@ -433,6 +442,21 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		return _originalCriteria_type_id;
 	}
 
+	@Override
+	public boolean getDoc_mandatory() {
+		return _doc_mandatory;
+	}
+
+	@Override
+	public boolean isDoc_mandatory() {
+		return _doc_mandatory;
+	}
+
+	@Override
+	public void setDoc_mandatory(boolean doc_mandatory) {
+		_doc_mandatory = doc_mandatory;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -477,6 +501,7 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		criteriaImpl.setMax_weight(getMax_weight());
 		criteriaImpl.setMin_weight(getMin_weight());
 		criteriaImpl.setCriteria_type_id(getCriteria_type_id());
+		criteriaImpl.setDoc_mandatory(getDoc_mandatory());
 
 		criteriaImpl.resetOriginalValues();
 
@@ -611,12 +636,14 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 
 		criteriaCacheModel.criteria_type_id = getCriteria_type_id();
 
+		criteriaCacheModel.doc_mandatory = getDoc_mandatory();
+
 		return criteriaCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{criteria_id=");
 		sb.append(getCriteria_id());
@@ -644,6 +671,8 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 		sb.append(getMin_weight());
 		sb.append(", criteria_type_id=");
 		sb.append(getCriteria_type_id());
+		sb.append(", doc_mandatory=");
+		sb.append(getDoc_mandatory());
 		sb.append("}");
 
 		return sb.toString();
@@ -651,7 +680,7 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.Criteria");
@@ -709,6 +738,10 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 			"<column><column-name>criteria_type_id</column-name><column-value><![CDATA[");
 		sb.append(getCriteria_type_id());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>doc_mandatory</column-name><column-value><![CDATA[");
+		sb.append(getDoc_mandatory());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -738,6 +771,7 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	private int _criteria_type_id;
 	private int _originalCriteria_type_id;
 	private boolean _setOriginalCriteria_type_id;
+	private boolean _doc_mandatory;
 	private long _columnBitmask;
 	private Criteria _escapedModel;
 }

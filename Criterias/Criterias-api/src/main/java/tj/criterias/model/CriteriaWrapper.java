@@ -70,6 +70,7 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 		attributes.put("max_weight", getMax_weight());
 		attributes.put("min_weight", getMin_weight());
 		attributes.put("criteria_type_id", getCriteria_type_id());
+		attributes.put("doc_mandatory", getDoc_mandatory());
 
 		return attributes;
 	}
@@ -155,11 +156,37 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 		if (criteria_type_id != null) {
 			setCriteria_type_id(criteria_type_id);
 		}
+
+		Boolean doc_mandatory = (Boolean)attributes.get("doc_mandatory");
+
+		if (doc_mandatory != null) {
+			setDoc_mandatory(doc_mandatory);
+		}
+	}
+
+	/**
+	* Returns the doc_mandatory of this criteria.
+	*
+	* @return the doc_mandatory of this criteria
+	*/
+	@Override
+	public boolean getDoc_mandatory() {
+		return _criteria.getDoc_mandatory();
 	}
 
 	@Override
 	public boolean isCachedModel() {
 		return _criteria.isCachedModel();
+	}
+
+	/**
+	* Returns <code>true</code> if this criteria is doc_mandatory.
+	*
+	* @return <code>true</code> if this criteria is doc_mandatory; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDoc_mandatory() {
+		return _criteria.isDoc_mandatory();
 	}
 
 	@Override
@@ -450,6 +477,16 @@ public class CriteriaWrapper implements Criteria, ModelWrapper<Criteria> {
 	@Override
 	public void setCriteria_weight(double criteria_weight) {
 		_criteria.setCriteria_weight(criteria_weight);
+	}
+
+	/**
+	* Sets whether this criteria is doc_mandatory.
+	*
+	* @param doc_mandatory the doc_mandatory of this criteria
+	*/
+	@Override
+	public void setDoc_mandatory(boolean doc_mandatory) {
+		_criteria.setDoc_mandatory(doc_mandatory);
 	}
 
 	@Override

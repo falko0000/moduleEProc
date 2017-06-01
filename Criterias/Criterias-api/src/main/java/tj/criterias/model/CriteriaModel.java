@@ -246,6 +246,27 @@ public interface CriteriaModel extends BaseModel<Criteria> {
 	 */
 	public void setCriteria_type_id(int criteria_type_id);
 
+	/**
+	 * Returns the doc_mandatory of this criteria.
+	 *
+	 * @return the doc_mandatory of this criteria
+	 */
+	public boolean getDoc_mandatory();
+
+	/**
+	 * Returns <code>true</code> if this criteria is doc_mandatory.
+	 *
+	 * @return <code>true</code> if this criteria is doc_mandatory; <code>false</code> otherwise
+	 */
+	public boolean isDoc_mandatory();
+
+	/**
+	 * Sets whether this criteria is doc_mandatory.
+	 *
+	 * @param doc_mandatory the doc_mandatory of this criteria
+	 */
+	public void setDoc_mandatory(boolean doc_mandatory);
+
 	@Override
 	public boolean isNew();
 

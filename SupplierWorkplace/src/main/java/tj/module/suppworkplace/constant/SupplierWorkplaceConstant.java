@@ -137,5 +137,7 @@ public interface SupplierWorkplaceConstant {
     
     static final int STATUS_BID_COMPLETED_TRADES = 400;
     
-    static final String FOLDER_BID = "bid";
+    static final String FOLDER_BID = "BID";
+    static final String FOLDER_LOT = "LOT DOCUMENTS";
+    static final String FOLDER_CRITERIA = "CRITERIA DOCUMENTS";
 }

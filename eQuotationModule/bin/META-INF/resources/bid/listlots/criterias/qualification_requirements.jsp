@@ -25,16 +25,20 @@
 			</aui:col>
 			
 			 <c:if test="<%= criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE %>"	>
-				<aui:col md="2">
-					<aui:input label="criteria weight" name="qualification_criteriaWeight1" type="number" required="true" value="100" />
+				<aui:col md="1">
+					<aui:input label="weight" name="qualification_criteriaWeight1" type="number" required="true" value="100" />
 		    	</aui:col>
 		    </c:if>
 		    
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"8"%>">
+			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"7"%>">
 			
 				<aui:input  label="description_criteria" name="qualification_description_criteria1" type="text" required="true" />
 				<aui:input name="qualification_criteria_id1" type="hidden" value="0" />
-			</aui:col>	
+			</aui:col>
+			
+				<aui:col md="1">
+					<aui:input label="document" name="qualification_document1" type="checkbox" checked="false"  />
+		    	</aui:col>
 		</aui:row>
 		</div>
 		<aui:input label="Qualification total weight in percent" name="qualification_totalWeight" type="number" value="0" max="100" min="0" required="true" />
@@ -52,15 +56,18 @@
 			</aui:col>
 		
 		 <c:if test="<%= criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE %>"	>	
-			<aui:col md="2">
+			<aui:col md="1">
 				<aui:input label="criteria weight" name="qualification_criteriaWeight1" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
 		    </aui:col>
 		</c:if>	
 			
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"8" %>">
+			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"7" %>">
 				<aui:input  label="description_criteria" name="qualification_description_criteria1" type="text" value="<%=criteria.getCriteria_description() %>" required="true" />
 				<aui:input name="qualification_criteria_id1" type="hidden" value ="<%= criteria.getCriteria_id() %>" />
-			</aui:col>	
+			</aui:col>
+				<aui:col md="1">
+					<aui:input label="document" name="qualification_document1" type="checkbox" checked="false"  />
+		    	</aui:col>	
 		</aui:row>
 		</div>
 		<%} %>

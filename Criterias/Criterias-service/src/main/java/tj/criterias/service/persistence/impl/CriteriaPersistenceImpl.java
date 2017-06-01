@@ -1545,6 +1545,7 @@ public class CriteriaPersistenceImpl extends BasePersistenceImpl<Criteria>
 		criteriaImpl.setMax_weight(criteria.getMax_weight());
 		criteriaImpl.setMin_weight(criteria.getMin_weight());
 		criteriaImpl.setCriteria_type_id(criteria.getCriteria_type_id());
+		criteriaImpl.setDoc_mandatory(criteria.isDoc_mandatory());
 
 		return criteriaImpl;
 	}
