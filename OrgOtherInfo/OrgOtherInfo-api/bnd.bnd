@@ -1,0 +1,9 @@
+Bundle-Name: OrgOtherInfo-api
+Bundle-SymbolicName: tj.organization.other.info.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.organization.other.info.exception,\
+	tj.organization.other.info.model,\
+	tj.organization.other.info.service,\
+	tj.organization.other.info.service.persistence
+-includeresource: META-INF/service.xml=../OrgOtherInfo-service/service.xml

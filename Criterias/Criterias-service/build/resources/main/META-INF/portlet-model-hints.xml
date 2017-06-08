@@ -15,6 +15,7 @@
 		<field name="max_weight" type="int" />
 		<field name="min_weight" type="int" />
 		<field name="criteria_type_id" type="int" />
+		<field name="doc_mandatory" type="boolean" />
 	</model>
 	<model name="tj.criterias.model.CriteriasWeight">
 		<field name="criterias_weight_id" type="long" />
@@ -45,5 +46,6 @@
 		<field name="updated" type="Date" />
 		<field name="createdby" type="long" />
 		<field name="updatedby" type="long" />
+		<field name="organization_id" type="long" />
 	</model>
 </model-hints>

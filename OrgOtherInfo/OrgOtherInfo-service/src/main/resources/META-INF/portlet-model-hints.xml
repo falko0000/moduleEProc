@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.organization.other.info.model.OrgOtherInfo">
+		<field name="organization_id" type="long" />
+		<field name="mesto_registracii" type="String" />
+		<field name="kratkoe_naimenovanie" type="String" />
+		<field name="vbk_id" type="long" />
+		<field name="fbk_id" type="long" />
+		<field name="istochnik_finansirovanija_id" type="int" />
+		<field name="kvalificirovannaja_organizacija" type="boolean" />
+		<field name="data_gosudarstvennoj_registracii" type="Date" />
+		<field name="rajon_id" type="long" />
+		<field name="inn" type="String" />
+		<field name="ein" type="String" />
+		<field name="sin" type="String" />
+		<field name="sozdal" type="long" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="izmenil" type="long" />
+		<field name="data_izmenenija" type="Date" />
+	</model>
+</model-hints>

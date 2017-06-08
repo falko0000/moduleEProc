@@ -24,6 +24,7 @@
 		<property name="max_weight" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="min_weight" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="criteria_type_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="doc_mandatory" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="tj.criterias.model.impl.CriteriasWeightImpl" table="sapp.criterias_weight">
 		<id name="criterias_weight_id" type="long">
@@ -66,5 +67,6 @@
 		<property name="updated" type="org.hibernate.type.TimestampType" />
 		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organization_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

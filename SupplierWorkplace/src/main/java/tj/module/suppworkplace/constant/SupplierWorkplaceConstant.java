@@ -41,7 +41,9 @@ public interface SupplierWorkplaceConstant {
 	static final String FORM_APPLICATION = "application";
 	static final String FORM_SEARCH_CONTENER = "search_contener_form";
 	static final String FORM_GENERATION_DOCUMENT = "FORM_GENERATION_DOCUMENT";
-	//
+	 static final String FORM_QUALIFICATION_REQUIREMENTS = "qualification_requirements";
+	 static final String FORM_SUPPLIER_CRITERIA = "supplier_criteria";
+	 //
 	static final String RESOURCE_COMMAND_NAME_LIST = "list";
 	
 	//
@@ -73,6 +75,7 @@ public interface SupplierWorkplaceConstant {
     
     //
     static final String PAGE_APPLICATION = "/bid/application/main_application_info.jsp";
+    static final String PAGE_QUALIFICATION_REQUIREMENTS = "/bid/application/qualification_requirements.jsp";
     static final String PAGE_OTHER_INFORMATION = "/bid/otherinformation/main_other_info.jsp";
     static final String PAGE_DOCUMENTATION = "/bid/document/main_docum_info.jsp";
     static final String PAGE_DOCUMENTATION1 = "/bid/documentation1/info_document.jsp"; 
@@ -87,6 +90,7 @@ public interface SupplierWorkplaceConstant {
     static final String PAGE_WITHDRAW_APPLICATION = "/bid/withdrawapplication/withdrawapplication.jsp";
     static final String PAGE_REFUSE_PARTICIPATE = "/bid/refuseparticipate/refuseparticipate.jsp";
     
+    static final String PAGE_SUPPLIER_CRITERIA = "/bid/supplier_criteria.jsp";
    /// static final String PAGE_TAKEPART = "bid/takepart/take_part.jsp";
     
     static final String ACTIONS_ITEM = "action_item";
@@ -140,4 +144,8 @@ public interface SupplierWorkplaceConstant {
     static final String FOLDER_BID = "BID";
     static final String FOLDER_LOT = "LOT DOCUMENTS";
     static final String FOLDER_CRITERIA = "CRITERIA DOCUMENTS";
+    
+    static final int CRITERIA_QUALIFICATION = 1;
+    static final int CRITERIA_TECHNICAL = 2;
+    static final int CRITERIA_FINANCIAL = 3;
 }

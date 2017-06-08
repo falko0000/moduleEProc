@@ -1,0 +1,1 @@
+create index IX_9D626FA4 on sapp.supplier_criteria (criteria_id, organization_id);

@@ -34,7 +34,8 @@ create table sapp.criteria_value (
 	created DATE null,
 	updated DATE null,
 	createdby LONG,
-	updatedby LONG
+	updatedby LONG,
+	organization_id LONG
 );
 
 create table sapp.criterias_weight (

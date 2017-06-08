@@ -232,6 +232,12 @@ public class CriteriaValueLocalServiceUtil {
 		return getService().fetchCriteriaValue(criteria_value_id);
 	}
 
+	public static tj.criterias.model.CriteriaValue getCriteriaValue(
+		long criteria_id, long userid, long organization_id) {
+		return getService()
+				   .getCriteriaValue(criteria_id, userid, organization_id);
+	}
+
 	/**
 	* Returns the criteria value with the primary key.
 	*

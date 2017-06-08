@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.fbk.model.Fbk">
+		<field name="fbk_id" type="long" />
+		<field name="pid" type="int" />
+		<field name="kod" type="String" />
+		<field name="nazvanie_ru" type="String" />
+		<field name="nazvanie_en" type="String" />
+		<field name="nazvanie_tj" type="String" />
+	</model>
+</model-hints>

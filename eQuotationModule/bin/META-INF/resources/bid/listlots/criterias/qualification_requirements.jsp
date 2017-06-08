@@ -66,7 +66,7 @@
 				<aui:input name="qualification_criteria_id1" type="hidden" value ="<%= criteria.getCriteria_id() %>" />
 			</aui:col>
 				<aui:col md="1">
-					<aui:input label="document" name="qualification_document1" type="checkbox" checked="false"  />
+					<aui:input label="document" name="qualification_document1" type="checkbox" checked="<%=criteria.getDoc_mandatory() %>"  />
 		    	</aui:col>	
 		</aui:row>
 		</div>

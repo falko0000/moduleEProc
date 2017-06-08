@@ -189,6 +189,20 @@ public interface CriteriaValueModel extends BaseModel<CriteriaValue> {
 	 */
 	public void setUpdatedby(long updatedby);
 
+	/**
+	 * Returns the organization_id of this criteria value.
+	 *
+	 * @return the organization_id of this criteria value
+	 */
+	public long getOrganization_id();
+
+	/**
+	 * Sets the organization_id of this criteria value.
+	 *
+	 * @param organization_id the organization_id of this criteria value
+	 */
+	public void setOrganization_id(long organization_id);
+
 	@Override
 	public boolean isNew();
 

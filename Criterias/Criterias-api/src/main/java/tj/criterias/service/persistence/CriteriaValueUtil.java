@@ -297,6 +297,85 @@ public class CriteriaValueUtil {
 	}
 
 	/**
+	* Returns the criteria value where criteria_id = &#63; and userid = &#63; and organization_id = &#63; or throws a {@link NoSuchCriteriaValueException} if it could not be found.
+	*
+	* @param criteria_id the criteria_id
+	* @param userid the userid
+	* @param organization_id the organization_id
+	* @return the matching criteria value
+	* @throws NoSuchCriteriaValueException if a matching criteria value could not be found
+	*/
+	public static CriteriaValue findByCriteriaIdUserIdOrgId(long criteria_id,
+		long userid, long organization_id)
+		throws tj.criterias.exception.NoSuchCriteriaValueException {
+		return getPersistence()
+				   .findByCriteriaIdUserIdOrgId(criteria_id, userid,
+			organization_id);
+	}
+
+	/**
+	* Returns the criteria value where criteria_id = &#63; and userid = &#63; and organization_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param criteria_id the criteria_id
+	* @param userid the userid
+	* @param organization_id the organization_id
+	* @return the matching criteria value, or <code>null</code> if a matching criteria value could not be found
+	*/
+	public static CriteriaValue fetchByCriteriaIdUserIdOrgId(long criteria_id,
+		long userid, long organization_id) {
+		return getPersistence()
+				   .fetchByCriteriaIdUserIdOrgId(criteria_id, userid,
+			organization_id);
+	}
+
+	/**
+	* Returns the criteria value where criteria_id = &#63; and userid = &#63; and organization_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param criteria_id the criteria_id
+	* @param userid the userid
+	* @param organization_id the organization_id
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching criteria value, or <code>null</code> if a matching criteria value could not be found
+	*/
+	public static CriteriaValue fetchByCriteriaIdUserIdOrgId(long criteria_id,
+		long userid, long organization_id, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByCriteriaIdUserIdOrgId(criteria_id, userid,
+			organization_id, retrieveFromCache);
+	}
+
+	/**
+	* Removes the criteria value where criteria_id = &#63; and userid = &#63; and organization_id = &#63; from the database.
+	*
+	* @param criteria_id the criteria_id
+	* @param userid the userid
+	* @param organization_id the organization_id
+	* @return the criteria value that was removed
+	*/
+	public static CriteriaValue removeByCriteriaIdUserIdOrgId(
+		long criteria_id, long userid, long organization_id)
+		throws tj.criterias.exception.NoSuchCriteriaValueException {
+		return getPersistence()
+				   .removeByCriteriaIdUserIdOrgId(criteria_id, userid,
+			organization_id);
+	}
+
+	/**
+	* Returns the number of criteria values where criteria_id = &#63; and userid = &#63; and organization_id = &#63;.
+	*
+	* @param criteria_id the criteria_id
+	* @param userid the userid
+	* @param organization_id the organization_id
+	* @return the number of matching criteria values
+	*/
+	public static int countByCriteriaIdUserIdOrgId(long criteria_id,
+		long userid, long organization_id) {
+		return getPersistence()
+				   .countByCriteriaIdUserIdOrgId(criteria_id, userid,
+			organization_id);
+	}
+
+	/**
 	* Caches the criteria value in the entity cache if it is enabled.
 	*
 	* @param criteriaValue the criteria value

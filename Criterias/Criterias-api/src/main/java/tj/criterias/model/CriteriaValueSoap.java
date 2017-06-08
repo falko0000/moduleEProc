@@ -42,6 +42,7 @@ public class CriteriaValueSoap implements Serializable {
 		soapModel.setUpdated(model.getUpdated());
 		soapModel.setCreatedby(model.getCreatedby());
 		soapModel.setUpdatedby(model.getUpdatedby());
+		soapModel.setOrganization_id(model.getOrganization_id());
 
 		return soapModel;
 	}
@@ -166,6 +167,14 @@ public class CriteriaValueSoap implements Serializable {
 		_updatedby = updatedby;
 	}
 
+	public long getOrganization_id() {
+		return _organization_id;
+	}
+
+	public void setOrganization_id(long organization_id) {
+		_organization_id = organization_id;
+	}
+
 	private long _criteria_value_id;
 	private long _criteria_id;
 	private long _userid;
@@ -175,4 +184,5 @@ public class CriteriaValueSoap implements Serializable {
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private long _organization_id;
 }

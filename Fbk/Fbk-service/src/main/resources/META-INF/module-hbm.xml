@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.fbk.model.Fbk" />
+	<class name="tj.fbk.model.impl.FbkImpl" table="klassifikatory.fbk">
+		<id name="fbk_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="pid" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="kod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nazvanie_ru" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nazvanie_en" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nazvanie_tj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

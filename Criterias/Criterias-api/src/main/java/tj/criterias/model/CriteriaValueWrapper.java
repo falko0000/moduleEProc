@@ -67,6 +67,7 @@ public class CriteriaValueWrapper implements CriteriaValue,
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("organization_id", getOrganization_id());
 
 		return attributes;
 	}
@@ -125,6 +126,12 @@ public class CriteriaValueWrapper implements CriteriaValue,
 
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
+		}
+
+		Long organization_id = (Long)attributes.get("organization_id");
+
+		if (organization_id != null) {
+			setOrganization_id(organization_id);
 		}
 	}
 
@@ -254,6 +261,16 @@ public class CriteriaValueWrapper implements CriteriaValue,
 	}
 
 	/**
+	* Returns the organization_id of this criteria value.
+	*
+	* @return the organization_id of this criteria value
+	*/
+	@Override
+	public long getOrganization_id() {
+		return _criteriaValue.getOrganization_id();
+	}
+
+	/**
 	* Returns the primary key of this criteria value.
 	*
 	* @return the primary key of this criteria value
@@ -372,6 +389,16 @@ public class CriteriaValueWrapper implements CriteriaValue,
 	@Override
 	public void setNew(boolean n) {
 		_criteriaValue.setNew(n);
+	}
+
+	/**
+	* Sets the organization_id of this criteria value.
+	*
+	* @param organization_id the organization_id of this criteria value
+	*/
+	@Override
+	public void setOrganization_id(long organization_id) {
+		_criteriaValue.setOrganization_id(organization_id);
 	}
 
 	/**

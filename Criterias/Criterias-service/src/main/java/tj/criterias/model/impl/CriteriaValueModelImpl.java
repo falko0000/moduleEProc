@@ -70,7 +70,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 			{ "created", Types.TIMESTAMP },
 			{ "updated", Types.TIMESTAMP },
 			{ "createdby", Types.BIGINT },
-			{ "updatedby", Types.BIGINT }
+			{ "updatedby", Types.BIGINT },
+			{ "organization_id", Types.BIGINT }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -84,9 +85,10 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		TABLE_COLUMNS_MAP.put("updated", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("createdby", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("organization_id", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_value (criteria_value_id LONG not null primary key,criteria_id LONG,userid LONG,value DOUBLE,description VARCHAR(75) null,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_value (criteria_value_id LONG not null primary key,criteria_id LONG,userid LONG,value DOUBLE,description VARCHAR(75) null,created DATE null,updated DATE null,createdby LONG,updatedby LONG,organization_id LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria_value";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteriaValue.criteria_value_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria_value.criteria_value_id ASC";
@@ -103,8 +105,9 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 				"value.object.column.bitmask.enabled.tj.criterias.model.CriteriaValue"),
 			true);
 	public static final long CRITERIA_ID_COLUMN_BITMASK = 1L;
-	public static final long USERID_COLUMN_BITMASK = 2L;
-	public static final long CRITERIA_VALUE_ID_COLUMN_BITMASK = 4L;
+	public static final long ORGANIZATION_ID_COLUMN_BITMASK = 2L;
+	public static final long USERID_COLUMN_BITMASK = 4L;
+	public static final long CRITERIA_VALUE_ID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.criterias.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.criterias.model.CriteriaValue"));
 
@@ -154,6 +157,7 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("organization_id", getOrganization_id());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -215,6 +219,12 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
+		}
+
+		Long organization_id = (Long)attributes.get("organization_id");
+
+		if (organization_id != null) {
+			setOrganization_id(organization_id);
 		}
 	}
 
@@ -337,6 +347,28 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		_updatedby = updatedby;
 	}
 
+	@Override
+	public long getOrganization_id() {
+		return _organization_id;
+	}
+
+	@Override
+	public void setOrganization_id(long organization_id) {
+		_columnBitmask |= ORGANIZATION_ID_COLUMN_BITMASK;
+
+		if (!_setOriginalOrganization_id) {
+			_setOriginalOrganization_id = true;
+
+			_originalOrganization_id = _organization_id;
+		}
+
+		_organization_id = organization_id;
+	}
+
+	public long getOriginalOrganization_id() {
+		return _originalOrganization_id;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -377,6 +409,7 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		criteriaValueImpl.setUpdated(getUpdated());
 		criteriaValueImpl.setCreatedby(getCreatedby());
 		criteriaValueImpl.setUpdatedby(getUpdatedby());
+		criteriaValueImpl.setOrganization_id(getOrganization_id());
 
 		criteriaValueImpl.resetOriginalValues();
 
@@ -447,6 +480,10 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 
 		criteriaValueModelImpl._setOriginalUserid = false;
 
+		criteriaValueModelImpl._originalOrganization_id = criteriaValueModelImpl._organization_id;
+
+		criteriaValueModelImpl._setOriginalOrganization_id = false;
+
 		criteriaValueModelImpl._columnBitmask = 0;
 	}
 
@@ -492,12 +529,14 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 
 		criteriaValueCacheModel.updatedby = getUpdatedby();
 
+		criteriaValueCacheModel.organization_id = getOrganization_id();
+
 		return criteriaValueCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{criteria_value_id=");
 		sb.append(getCriteria_value_id());
@@ -517,6 +556,8 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 		sb.append(getCreatedby());
 		sb.append(", updatedby=");
 		sb.append(getUpdatedby());
+		sb.append(", organization_id=");
+		sb.append(getOrganization_id());
 		sb.append("}");
 
 		return sb.toString();
@@ -524,7 +565,7 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriaValue");
@@ -566,6 +607,10 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 			"<column><column-name>updatedby</column-name><column-value><![CDATA[");
 		sb.append(getUpdatedby());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>organization_id</column-name><column-value><![CDATA[");
+		sb.append(getOrganization_id());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -589,6 +634,9 @@ public class CriteriaValueModelImpl extends BaseModelImpl<CriteriaValue>
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private long _organization_id;
+	private long _originalOrganization_id;
+	private boolean _setOriginalOrganization_id;
 	private long _columnBitmask;
 	private CriteriaValue _escapedModel;
 }

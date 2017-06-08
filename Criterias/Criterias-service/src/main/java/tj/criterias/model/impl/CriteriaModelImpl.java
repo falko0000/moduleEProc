@@ -105,10 +105,10 @@ public class CriteriaModelImpl extends BaseModelImpl<Criteria>
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(tj.criterias.service.util.ServiceProps.get(
 				"value.object.entity.cache.enabled.tj.criterias.model.Criteria"),
-			true);
+			false);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(tj.criterias.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.tj.criterias.model.Criteria"),
-			true);
+			false);
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.criterias.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.criterias.model.Criteria"),
 			true);

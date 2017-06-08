@@ -245,6 +245,13 @@ public class CriteriaValueLocalServiceWrapper
 		return _criteriaValueLocalService.fetchCriteriaValue(criteria_value_id);
 	}
 
+	@Override
+	public tj.criterias.model.CriteriaValue getCriteriaValue(long criteria_id,
+		long userid, long organization_id) {
+		return _criteriaValueLocalService.getCriteriaValue(criteria_id, userid,
+			organization_id);
+	}
+
 	/**
 	* Returns the criteria value with the primary key.
 	*

@@ -46,5 +46,6 @@
 		<field name="updated" type="Date" />
 		<field name="createdby" type="long" />
 		<field name="updatedby" type="long" />
+		<field name="organization_id" type="long" />
 	</model>
 </model-hints>

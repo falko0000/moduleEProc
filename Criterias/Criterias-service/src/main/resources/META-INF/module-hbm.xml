@@ -67,5 +67,6 @@
 		<property name="updated" type="org.hibernate.type.TimestampType" />
 		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organization_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

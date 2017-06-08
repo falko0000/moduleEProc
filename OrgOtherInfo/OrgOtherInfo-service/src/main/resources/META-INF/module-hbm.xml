@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.organization.other.info.model.OrgOtherInfo" />
+	<class name="tj.organization.other.info.model.impl.OrgOtherInfoImpl" table="sapp.org_otherinfo">
+		<id name="organization_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="mesto_registracii" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kratkoe_naimenovanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="vbk_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fbk_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="istochnik_finansirovanija_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="kvalificirovannaja_organizacija" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="data_gosudarstvennoj_registracii" type="org.hibernate.type.TimestampType" />
+		<property name="rajon_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="inn" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ein" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sin" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

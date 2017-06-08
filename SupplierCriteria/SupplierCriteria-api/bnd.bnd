@@ -1,0 +1,9 @@
+Bundle-Name: SupplierCriteria-api
+Bundle-SymbolicName: tj.supplier.criteria.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.supplier.criteria.exception,\
+	tj.supplier.criteria.model,\
+	tj.supplier.criteria.service,\
+	tj.supplier.criteria.service.persistence
+-includeresource: META-INF/service.xml=../SupplierCriteria-service/service.xml

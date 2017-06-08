@@ -36,7 +36,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 
 	page import="com.liferay.portal.kernel.repository.model.Folder"%><%@
     page import="com.liferay.portal.kernel.repository.model.FileEntry"%><%@
-    
+    page import="com.liferay.portal.kernel.util.Validator"%><%@
 	page import="com.liferay.portal.kernel.util.WebKeys"%><%@
 	page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
 	page import="com.liferay.portal.kernel.util.WebKeys" %><%@
@@ -60,7 +60,13 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 	page import="tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil"%><%@
 	page import="tj.spisok.tovarov.model.SpisokTovarov"%><%@
 	page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil"%><%@
-	page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov"%>
+	page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov"%><%@
+	page import="tj.criterias.service.CriteriaLocalServiceUtil"%><%@
+	page import="tj.criterias.model.Criteria"%><%@
+	page import="tj.criterias.service.CriteriaValueLocalServiceUtil"%><%@
+	page import="tj.criterias.model.CriteriaValue"%><%@
+	page import="tj.supplier.criteria.model.SupplirCriteria"%><%@
+	page import="tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil"%>
 
 	
 <liferay-theme:defineObjects />
@@ -72,3 +78,4 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
   
 
 %>
+

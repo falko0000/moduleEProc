@@ -17,6 +17,7 @@ package tj.criterias.service.impl;
 import java.util.List;
 
 import aQute.bnd.annotation.ProviderType;
+import tj.criterias.exception.NoSuchCriteriaValueException;
 import tj.criterias.model.CriteriaValue;
 import tj.criterias.service.base.CriteriaValueLocalServiceBaseImpl;
 
@@ -41,5 +42,18 @@ public class CriteriaValueLocalServiceImpl
 	public List<CriteriaValue> getCriteriaValue(long criteria_id, long userid) {
 		
 		return criteriaValuePersistence.findByCriteriaIdAndUserId(criteria_id, userid);
+	}
+	
+	public CriteriaValue getCriteriaValue(long criteria_id, long userid, long organization_id) {
+		
+		CriteriaValue criteriaValue = null;
+		
+		try {
+			criteriaValue = criteriaValuePersistence.findByCriteriaIdUserIdOrgId(criteria_id, userid, organization_id);
+		} catch (NoSuchCriteriaValueException e) {
+			
+		}
+		
+		return criteriaValue;
 	}
 }

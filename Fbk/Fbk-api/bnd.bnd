@@ -1,0 +1,9 @@
+Bundle-Name: Fbk-api
+Bundle-SymbolicName: tj.fbk.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.fbk.exception,\
+	tj.fbk.model,\
+	tj.fbk.service,\
+	tj.fbk.service.persistence
+-includeresource: META-INF/service.xml=../Fbk-service/service.xml

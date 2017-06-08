@@ -26,6 +26,8 @@ dependencies {
 		compile project (":modules:PorjadokRabotyKomissii:PorjadokRabotyKomissii-api")
 		compile project (":modules:SystemConfig:SystemConfig-api")
 		compile project (":modules:tipy.izvewenij:tipy.izvewenij-api")
+		compile project (":modules:Criterias:Criterias-api")
+		compile project (":modules:SupplierCriteria:SupplierCriteria-api")
 }
 
 

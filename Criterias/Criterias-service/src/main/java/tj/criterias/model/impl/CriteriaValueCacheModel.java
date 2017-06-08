@@ -66,7 +66,7 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{criteria_value_id=");
 		sb.append(criteria_value_id);
@@ -86,6 +86,8 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 		sb.append(createdby);
 		sb.append(", updatedby=");
 		sb.append(updatedby);
+		sb.append(", organization_id=");
+		sb.append(organization_id);
 		sb.append("}");
 
 		return sb.toString();
@@ -123,6 +125,7 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 
 		criteriaValueImpl.setCreatedby(createdby);
 		criteriaValueImpl.setUpdatedby(updatedby);
+		criteriaValueImpl.setOrganization_id(organization_id);
 
 		criteriaValueImpl.resetOriginalValues();
 
@@ -145,6 +148,8 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 		createdby = objectInput.readLong();
 
 		updatedby = objectInput.readLong();
+
+		organization_id = objectInput.readLong();
 	}
 
 	@Override
@@ -171,6 +176,8 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 		objectOutput.writeLong(createdby);
 
 		objectOutput.writeLong(updatedby);
+
+		objectOutput.writeLong(organization_id);
 	}
 
 	public long criteria_value_id;
@@ -182,4 +189,5 @@ public class CriteriaValueCacheModel implements CacheModel<CriteriaValue>,
 	public long updated;
 	public long createdby;
 	public long updatedby;
+	public long organization_id;
 }

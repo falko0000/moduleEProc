@@ -30,7 +30,7 @@
 		    	</aui:col>
 		    </c:if>
 		    
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"8"%>">
+			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"7"%>">
 			
 				<aui:input  label="description_criteria" name="qualification_description_criteria1" type="text" required="true" />
 				<aui:input name="qualification_criteria_id1" type="hidden" value="0" />
@@ -61,12 +61,12 @@
 		    </aui:col>
 		</c:if>	
 			
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"8" %>">
+			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"7" %>">
 				<aui:input  label="description_criteria" name="qualification_description_criteria1" type="text" value="<%=criteria.getCriteria_description() %>" required="true" />
 				<aui:input name="qualification_criteria_id1" type="hidden" value ="<%= criteria.getCriteria_id() %>" />
 			</aui:col>
 				<aui:col md="1">
-					<aui:input label="document" name="qualification_document1" type="checkbox" checked="false"  />
+					<aui:input label="document" name="qualification_document1" type="checkbox" checked="<%=criteria.getDoc_mandatory() %>"  />
 		    	</aui:col>	
 		</aui:row>
 		</div>

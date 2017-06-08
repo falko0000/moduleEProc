@@ -1,3 +1,5 @@
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
@@ -60,6 +62,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@page import="tj.oplachennye.zakazy.model.OplachennyeZakazy" %>
 <%@page import="tj.oplachennye.zakazy.service.OplachennyeZakazyLocalServiceUtil"%>
+
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="tj.edinicy.izmerenija.model.EdinicyIzmerenija" %>
 <%@page import="tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil" %>
@@ -72,7 +75,10 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp" %>
 <%@page import="tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil"%>
 <%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
-
+<%@page import="tj.criterias.model.Criteria"%>
+<%@page import="tj.criterias.service.CriteriaLocalServiceUtil"%>
+<%@page import="tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil"%>
+<%@page import="tj.supplier.criteria.model.SupplirCriteria"%>
 <%@page import="com.liferay.portal.kernel.model.Organization" %>
 <%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil" %>
 
@@ -88,7 +94,10 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 
 
-	<%
-	
-	%>
+<%
+
+%>
+ 
+
+
 

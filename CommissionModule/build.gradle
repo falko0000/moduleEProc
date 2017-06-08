@@ -14,5 +14,7 @@ dependencies {
 	    	compile project (":modules:Edinicyizmerenija:Edinicyizmerenija-api")
 	    				compile project (":modules:Strany:Strany-api")
 	    				compile project (":modules:ProchajaInformacijaZajavki:ProchajaInformacijaZajavki-api")
+	    				compile project (":modules:Criterias:Criterias-api")
+	    				compile project (":modules:SupplierCriteria:SupplierCriteria-api")
 	    				
 }

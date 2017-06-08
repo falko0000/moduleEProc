@@ -10,7 +10,7 @@
   
   Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
   
-  String names = "application,other_information,documentation,generating_docum";
+  String names = "application,other_information,documentation,criterias,generating_docum";
 %>
 
 <portlet:renderURL var="tabs" >
@@ -37,6 +37,9 @@
         			<jsp:include page="<%=SupplierWorkplaceConstant.PAGE_DOCUMENTATION%>" flush="true" />
     		    </liferay-ui:section>
     		    
+    		    <liferay-ui:section>      
+        			<jsp:include page="<%=SupplierWorkplaceConstant.PAGE_SUPPLIER_CRITERIA%>" flush="true" />
+    		    </liferay-ui:section>
     		   
     		    <liferay-ui:section>      
         			<jsp:include page="<%=SupplierWorkplaceConstant.PAGE_GENERATION_DOCUMENT%>" flush="true" />

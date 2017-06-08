@@ -28,6 +28,7 @@ import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFolderLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery.PerformActionMethod;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -58,6 +59,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -87,6 +89,9 @@ import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.model.SpisoklotovWrapper;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.strany.service.StranyLocalServiceUtil;
+import tj.supplier.criteria.model.SupplirCriteria;
+import tj.supplier.criteria.service.SupplirCriteriaLocalService;
+import tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil;
 import tj.supplier.request.lot.model.SupplierRequestLot;
 import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
 import tj.system.config.model.SystemConfig;
@@ -135,7 +140,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 			updateApplication(actionRequest, actionResponse);
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO_DOCUMENT))
-		   addDocument(actionRequest, actionResponse);
+		   addDocument(actionRequest, actionResponse, SupplierWorkplaceConstant.FOLDER_LOT, "Folder for lot documents","","");
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_SEARCH_CONTENER))
 			deleteFile(actionRequest, actionResponse);
@@ -145,6 +150,62 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO))
 			 			updateOtherInfo(actionRequest, actionResponse);
+		
+		if(formname.equals(SupplierWorkplaceConstant.FORM_SUPPLIER_CRITERIA))
+			         updateSpplierCriteria(actionRequest, actionResponse);
+	}
+
+	private void updateSpplierCriteria(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException{
+		
+		String prefixes[] = {"qualification", "technical", "financial"};
+		
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		
+		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		 
+		 User user = themeDisplay.getRealUser();
+		 
+		 if(user.hasOrganization())
+		 {
+			 long organizationId = user.getOrganizationIds()[0];
+		
+		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
+		
+		long[] ids = null;
+		
+		for( int p = 0 ; p < 3 ; p++)
+		{
+			
+			ids = StringUtil.split(
+				ParamUtil.getString(actionRequest,prefixes[p]+"ids"), 0L);
+		
+		for ( int  field = 1; field < ids.length; field++ )
+		{
+		    	String description = ParamUtil.getString(actionRequest, prefixes[p]+"doc_descripton"+String.valueOf(field));
+			    
+		    	addDocument(actionRequest, actionResponse, SupplierWorkplaceConstant.FOLDER_CRITERIA, "Folder for criteria documents", prefixes[p], String.valueOf(field));
+		    	long supplier_criteria_id = 0;
+		    	 SupplirCriteria supplirCriteria =null;
+		    	if(cmd.equals(Constants.ADD))
+		    	{
+		    	   supplier_criteria_id = CounterLocalServiceUtil.increment(SupplirCriteria.class.toString());
+		    	    supplirCriteria = SupplirCriteriaLocalServiceUtil.createSupplirCriteria(supplier_criteria_id);
+		    	}
+		    	else
+		    		supplirCriteria = SupplirCriteriaLocalServiceUtil.getSupplierCriteria(ids[field], organizationId);
+		     
+		    	supplirCriteria.setCriteria_id(ids[field]);
+		    	supplirCriteria.setOrganization_id(organizationId);
+		    	supplirCriteria.setDescription(description);
+		    	
+		    	SupplirCriteriaLocalServiceUtil.updateSupplirCriteria(supplirCriteria);
+		    	
+		}
+		
+		
+		}
+		 }
+		
 	}
 
 	private void updateOtherInfo(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortalException {
@@ -446,7 +507,9 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 	}
 
-	private void addDocument(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+	private void addDocument(ActionRequest actionRequest, ActionResponse actionResponse,
+							String nameParentFolder, String description,
+							String prefix, String suffix)  {
 		
 		 Long izvewenie_id = ParamUtil.getLong(actionRequest,"izvewenie_id");
 		 Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
@@ -454,52 +517,71 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		 
 		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		  long organization_id = 0;
 		  
 		  
-		   long userId = themeDisplay.getUserId();
-		   List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
-		  if(organizations.size()>0)
-			  organization_id = organizations.get(0).getOrganizationId();
 		  
-		
-		 
-		 long repositoryId =  organizations.get(0).getGroup().getGroupId();
-		 
-		 
-		
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
-		
-		 Folder folder = createFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID, "folder bid" , serviceContext );
+		   User user = themeDisplay.getRealUser();
+		   long repositoryId = 0;
+		   
+		  
+			  Organization organization = null;
+			
+			 try {
+				organization = user.getOrganizations().get(0);
+				 repositoryId = organization.getGroup().getGroupId();
+			} catch (PortalException e) {
+				
+			}
+			  
+		  
+		 if(repositoryId != 0 )
+		 {
+		ServiceContext serviceContext;
+		try {
+			serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
+			 Folder folder = createFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, SupplierWorkplaceConstant.FOLDER_BID, "folder bid" , serviceContext );
 		 		folder = createFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenie_id), "Folder for bid number"+ String.valueOf(izvewenie_id), serviceContext );
 		 		folder = createFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id), "Folder for lot number"+ String.valueOf(spisok_lotov_id), serviceContext );
-		 		folder = createFolder(repositoryId, folder.getFolderId(), SupplierWorkplaceConstant.FOLDER_LOT, "Folder for lot documents", serviceContext );
+		 		folder = createFolder(repositoryId, folder.getFolderId(), nameParentFolder, description, serviceContext );
 		
-		 		uploadFile(folder, actionRequest);
-	}
+		 		uploadFile(folder, actionRequest, prefix, suffix);
+		} catch (PortalException e) {
+			
+		}
+		 		
+		 }
+		 }
 
-	private void uploadFile(Folder folder, ActionRequest actionRequest) {
+	private void uploadFile(Folder folder, ActionRequest actionRequest , String prefix, String suffix) {
 		
-				String doc_name = ParamUtil.getString(actionRequest, "doc_name");
-				String description = ParamUtil.getString(actionRequest, "doc_descripton");
+		
+				String doc_name = ParamUtil.getString(actionRequest, prefix+"doc_name"+suffix, null);
+				String description = ParamUtil.getString(actionRequest, prefix+"doc_descripton"+suffix);
 				
+				if(Validator.isNotNull(doc_name))
+				{
+					
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
-				String title=uploadPortletRequest.getFileName("doc_file");	
-				String mimeType = uploadPortletRequest.getContentType("doc_file");
-				File file = uploadPortletRequest.getFile("doc_file");
+			
+				String title=uploadPortletRequest.getFileName(prefix+"doc_file"+suffix);	
+				String mimeType = uploadPortletRequest.getContentType(prefix+"doc_file"+suffix);
+				File file = uploadPortletRequest.getFile(prefix+"doc_file"+suffix);
 				 
 				 try {
 					 ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
 					InputStream is = new FileInputStream( file );
+					
+					System.out.println(folder.getRepositoryId()+ " "+ folder.getFolderId());
+					
 					DLAppServiceUtil.addFileEntry(folder.getRepositoryId(), folder.getFolderId(), title, mimeType, 
 							doc_name, description, "", is, file.length(), serviceContext);
 					
 					 
 				} catch (FileNotFoundException | PortalException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
 				}
 				
+				}
 					
 	}
 

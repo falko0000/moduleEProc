@@ -5,7 +5,7 @@
 
 	Long spisok_lotov_id =  ParamUtil.getLong(request,"spisok_lotov_id");
 
-	String names = "application,other_information,documentation";
+	String names = "application,other_information,documentation,criteria";
 
 %>
 
@@ -26,4 +26,7 @@
         			<jsp:include page="<%=CommissionConstants.PAGE_DOCUMENTATION%>" flush="true" />
     		    </liferay-ui:section>
                  
+                  <liferay-ui:section>      
+        			<jsp:include page="<%=CommissionConstants.PAGE_CRITERIA%>" flush="true" />
+    		    </liferay-ui:section>
     </liferay-ui:tabs> 

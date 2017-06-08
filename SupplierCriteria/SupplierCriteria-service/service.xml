@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.supplier.criteria">
+	<namespace>supplier_criteria</namespace>
+	
+	<entity local-service="true" name="SupplirCriteria" remote-service="false" uuid="false" table="sapp.supplier_criteria" cache-enabled="false">
+    
+    <column name="supplier_criteria_id" type="long" primary="true" id-type="sequence" id-param="sapp.supplier_criteria_seq"></column>
+	<column name="criteria_id" type="long"></column>
+	<column name="organization_id" type="long"></column>
+	<column name="description" type="String"></column>
+	
+	<finder return-type="SupplirCriteria" name="criteriaIdorgId">
+	<finder-column name="criteria_id"></finder-column>
+	<finder-column name="organization_id"></finder-column>
+	</finder>
+	</entity>
+</service-builder>

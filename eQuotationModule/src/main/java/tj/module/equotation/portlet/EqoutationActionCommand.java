@@ -90,6 +90,7 @@ import com.liferay.journal.kernel.util.JournalConverterManagerUtil;
 import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.model.IzvewenijaWrapper;
+import tj.izvewenija.service.IzvewenijaLocalService;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.izvewenija.service.IzvewenijaLocalServiceWrapper;
 import tj.module.equotation.constants.EQuotationConstants;
@@ -188,6 +189,8 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	
 	   if(form_name.equals(EQuotationConstants.FORM_TENDER_DOCUMENTATION))
 		   generateDocument(actionRequest,actionResponse);
+
+	
 	}
 
 
@@ -357,10 +360,12 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	  for(int a : Indexes )
 	  {
 	      
-		 String criteriaName = ParamUtil.getString(actionRequest,key+"_criteriaName"+a); 
-	      Number criteriaWeight = ParamUtil.getNumber(actionRequest, key+"_criteriaWeight"+a);
-	      String description_criteria = ParamUtil.getString(actionRequest, key+"_description_criteria"+a);
-	      
+		  String criteriaName = ParamUtil.getString(actionRequest, key + "_criteriaName" + a); 
+	      Number criteriaWeight = ParamUtil.getNumber(actionRequest, key + "_criteriaWeight" + a);
+	      String description_criteria = ParamUtil.getString(actionRequest, key + "_description_criteria" + a);
+	     
+	      boolean document = ParamUtil.getBoolean(actionRequest,  key + "_document" + a, false);
+	     
 	      long criteria_id = ParamUtil.getLong(actionRequest, key+"_criteria_id"+a);
 	    
 	       ids = ids.replaceAll(String.valueOf(criteria_id)+",","");
@@ -368,11 +373,11 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	      if(criteria_id != 0)
 	    	  updateCriteria(criteria_id, criteriaName,
 	    			  		criteriaWeight, 
-	    			  		0, user.getUserId(),description_criteria);
+	    			  		0, user.getUserId(), description_criteria, document);
 	      else
 	    	 insertCriteria( criteriaName,criteriaWeight,
   			  				0, user.getUserId(), category_id,
-  			  				spisok_lotov_id, description_criteria, criteria_type_id);  
+  			  				spisok_lotov_id, description_criteria, criteria_type_id , document);  
 	      
 		
 	  }
@@ -420,7 +425,7 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 
 private void insertCriteria(String qualification_criteriaName,Number qualification_criteriaWeight, 
 							Number qualification_weightMin, long userId, int category_id,
-							long spisok_lotov_id, String descriptionCriteria, int criteria_type_id) {
+							long spisok_lotov_id, String descriptionCriteria, int criteria_type_id , boolean document) {
 	
 	 long qualification_criteria_id = CounterLocalServiceUtil.increment(Criteria.class.toString());
 	 
@@ -429,6 +434,7 @@ private void insertCriteria(String qualification_criteriaName,Number qualificati
         criteria.setCriteria_weight(qualification_criteriaWeight.doubleValue());
         criteria.setMax_weight(qualification_criteriaWeight.intValue());
         criteria.setMin_weight(qualification_weightMin.intValue());
+        criteria.setDoc_mandatory(document);
         criteria.setSpisok_lotov_id(spisok_lotov_id);
         criteria.setCreated(new Date());
         criteria.setUpdated(new Date());
@@ -443,7 +449,7 @@ private void insertCriteria(String qualification_criteriaName,Number qualificati
 
 private void updateCriteria(long qualification_criteria_id, String qualification_criteriaName,
 							Number qualification_criteriaWeight,
-							Number qualification_weightMin, long userId, String descriptionCriteria) {
+							Number qualification_weightMin, long userId, String descriptionCriteria, boolean document) {
 	
 	Criteria criteria = null;
 	Criteria cloneCriteria = null;
@@ -456,10 +462,11 @@ private void updateCriteria(long qualification_criteria_id, String qualification
          cloneCriteria.setMax_weight(qualification_criteriaWeight.intValue());
          cloneCriteria.setMin_weight(qualification_weightMin.intValue());
          cloneCriteria.setCriteria_description(descriptionCriteria);
-         
+         cloneCriteria.setDoc_mandatory(document);
         if(criteria.getCriteria_weight()!=cloneCriteria.getCriteria_weight() ||
         	!criteria.getCriteria_name().equals(cloneCriteria.getCriteria_name()) ||
-        	!criteria.getCriteria_description().equals(cloneCriteria.getCriteria_description()))
+        	!criteria.getCriteria_description().equals(cloneCriteria.getCriteria_description())
+        	|| criteria.getDoc_mandatory() != cloneCriteria.getDoc_mandatory())
         {
         cloneCriteria.setUpdated(new Date());
     	cloneCriteria.setUpdatedby(userId);

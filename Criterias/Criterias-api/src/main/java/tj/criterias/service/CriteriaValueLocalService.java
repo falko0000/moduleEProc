@@ -209,6 +209,10 @@ public interface CriteriaValueLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CriteriaValue fetchCriteriaValue(long criteria_value_id);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CriteriaValue getCriteriaValue(long criteria_id, long userid,
+		long organization_id);
+
 	/**
 	* Returns the criteria value with the primary key.
 	*

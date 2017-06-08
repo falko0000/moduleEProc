@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.supplier.criteria.model.SupplirCriteria">
+		<field name="supplier_criteria_id" type="long" />
+		<field name="criteria_id" type="long" />
+		<field name="organization_id" type="long" />
+		<field name="description" type="String" />
+	</model>
+</model-hints>

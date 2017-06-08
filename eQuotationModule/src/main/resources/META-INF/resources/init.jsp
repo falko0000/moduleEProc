@@ -194,6 +194,15 @@ if (portletName.equals(portletId) || permissionChecker.hasPermission(scopeGroup.
 %>
 
 
-
+<liferay-ui:input-date
+				cssClass="form-group form-group-inline"
+				dayParam="publication_day"
+		
+				monthParam="publication_month"
+				
+				name="date-state-registration"
+				yearParam="publication_year"
+				required="true"
+			/>
 
 
