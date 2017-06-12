@@ -175,6 +175,57 @@ public interface SupplierRequestLotPersistence extends BasePersistence<SupplierR
 	public int countBySpisokLotovId(long spisok_lotov_id);
 
 	/**
+	* Returns the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; or throws a {@link NoSuchSupplierRequestLotException} if it could not be found.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @return the matching supplier request lot
+	* @throws NoSuchSupplierRequestLotException if a matching supplier request lot could not be found
+	*/
+	public SupplierRequestLot findBylotIdorgId(long spisok_lotov_id,
+		long organization_id) throws NoSuchSupplierRequestLotException;
+
+	/**
+	* Returns the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @return the matching supplier request lot, or <code>null</code> if a matching supplier request lot could not be found
+	*/
+	public SupplierRequestLot fetchBylotIdorgId(long spisok_lotov_id,
+		long organization_id);
+
+	/**
+	* Returns the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching supplier request lot, or <code>null</code> if a matching supplier request lot could not be found
+	*/
+	public SupplierRequestLot fetchBylotIdorgId(long spisok_lotov_id,
+		long organization_id, boolean retrieveFromCache);
+
+	/**
+	* Removes the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; from the database.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @return the supplier request lot that was removed
+	*/
+	public SupplierRequestLot removeBylotIdorgId(long spisok_lotov_id,
+		long organization_id) throws NoSuchSupplierRequestLotException;
+
+	/**
+	* Returns the number of supplier request lots where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @return the number of matching supplier request lots
+	*/
+	public int countBylotIdorgId(long spisok_lotov_id, long organization_id);
+
+	/**
 	* Caches the supplier request lot in the entity cache if it is enabled.
 	*
 	* @param supplierRequestLot the supplier request lot

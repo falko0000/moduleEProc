@@ -1,4 +1,6 @@
 
+<%@page import="tj.izvewenija.model.Izvewenija"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -39,18 +41,47 @@
 
       <aui:select id="bid_method" label="bid_method" name="bid_method" >
        
+       <c:if test = "<%=Validator.isNotNull(izvewenija) %>">
+      
        <%for(TipyIzvewenij type : typeizvewenij) 
          { %>
       
-      <aui:option value = "<%=type.getTipy_izvewenij_id()%>" label="<%=type.getTip()%>"></aui:option>
+      
+      <aui:option 
+              value = "<%=type.getTipy_izvewenij_id()%>" 
+              label="<%=type.getTip()%>"
+               selected="<%=(izvewenija.getTip_izvewenija_id() == type.getTipy_izvewenij_id())?true:false %>"
+               
+              />
+               
+               
       
        <%} %>
+       </c:if>
+       
+         <c:if test = "<%=Validator.isNull(izvewenija) %>">
+      
+       <%for(TipyIzvewenij type : typeizvewenij) 
+         { %>
+      
+      
+      <aui:option 
+              value = "<%=type.getTipy_izvewenij_id()%>" 
+              label="<%=type.getTip()%>"
+             
+               
+              />
+               
+               
+      
+       <%} %>
+       </c:if>
       </aui:select> 
 
       
 <aui:input 
 		id="bid_related_conditions" 
-        type="text"  
+        type="hidden"  
         name="bid_related_conditions" 
         value= "<%=LanguageUtil.get(request,"bid_related_conditions_value")%>" 
         disabled="true"
@@ -58,7 +89,7 @@
      
 <aui:input 
 		id="bid_approval_publication" 
-		type="text"  
+		type="hidden"  
 		name="bid_approval_publication" 
 		value= "<%=LanguageUtil.get(request,"bid_approval_publication_value")%>" 
 		disabled="true"

@@ -17,6 +17,7 @@ package tj.supplier.request.lot.service.impl;
 import java.util.List;
 
 import aQute.bnd.annotation.ProviderType;
+import tj.supplier.request.lot.exception.NoSuchSupplierRequestLotException;
 import tj.supplier.request.lot.model.SupplierRequestLot;
 import tj.supplier.request.lot.service.base.SupplierRequestLotLocalServiceBaseImpl;
 
@@ -63,4 +64,17 @@ public class SupplierRequestLotLocalServiceImpl
 	   
 	   return oraganizationIds;
 	}
+		public SupplierRequestLot getSupplierRequestLot(long spisok_lotov_id, long organization_id ) {
+			
+			SupplierRequestLot supplierRequestLot = null;
+			
+			try {
+				supplierRequestLot = supplierRequestLotPersistence.findBylotIdorgId(spisok_lotov_id, organization_id);
+			} catch (NoSuchSupplierRequestLotException e) {
+				
+			}
+			
+			return supplierRequestLot;
+			
+		}
 }

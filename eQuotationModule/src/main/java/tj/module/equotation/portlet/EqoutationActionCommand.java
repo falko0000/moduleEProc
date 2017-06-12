@@ -352,7 +352,7 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	  int criteria_type_id = ParamUtil.getInteger(actionRequest, "criteria_type_id");
 	 
 	  ids = ids.replaceAll("on,","");
-	  ids = (ids.length()>0)?ids+",":ids;
+	  ids = (ids.length()>0)? ids+"," : ids;
 	  
       
 	   
@@ -708,14 +708,14 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	    spisoklotov.setId_jebk(id_jebk);
 	    
 	  
-			try {
+	/*		try {
 				actionResponse.setWindowState(WindowState.NORMAL);
 			  sendRedirect(actionRequest, actionResponse, redirect);
 			} catch (IOException | WindowStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-	
+	*/
 	    spisoklotov = SpisoklotovLocalServiceUtil.addSpisoklotov(spisoklotov); 
 	    Folder folder = null;
 		
@@ -1083,7 +1083,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
        try {
 		serviceContext = ServiceContextFactory.getInstance(actionRequest);
 	} catch (PortalException e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
 	}
        long org_ids[] = UserLocalServiceUtil.getOrganizationPrimaryKeys(serviceContext.getUserId());

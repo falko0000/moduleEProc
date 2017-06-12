@@ -88,8 +88,9 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.supplier.request.lot.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.supplier.request.lot.model.SupplierRequestLot"),
 			true);
-	public static final long SPISOK_LOTOV_ID_COLUMN_BITMASK = 1L;
-	public static final long SUPPLIER_REQUEST_LOT_ID_COLUMN_BITMASK = 2L;
+	public static final long ORGANIZATION_ID_COLUMN_BITMASK = 1L;
+	public static final long SPISOK_LOTOV_ID_COLUMN_BITMASK = 2L;
+	public static final long SUPPLIER_REQUEST_LOT_ID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.supplier.request.lot.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.supplier.request.lot.model.SupplierRequestLot"));
 
@@ -179,7 +180,19 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 
 	@Override
 	public void setOrganization_id(long organization_id) {
+		_columnBitmask |= ORGANIZATION_ID_COLUMN_BITMASK;
+
+		if (!_setOriginalOrganization_id) {
+			_setOriginalOrganization_id = true;
+
+			_originalOrganization_id = _organization_id;
+		}
+
 		_organization_id = organization_id;
+	}
+
+	public long getOriginalOrganization_id() {
+		return _originalOrganization_id;
 	}
 
 	@Override
@@ -300,6 +313,10 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 	public void resetOriginalValues() {
 		SupplierRequestLotModelImpl supplierRequestLotModelImpl = this;
 
+		supplierRequestLotModelImpl._originalOrganization_id = supplierRequestLotModelImpl._organization_id;
+
+		supplierRequestLotModelImpl._setOriginalOrganization_id = false;
+
 		supplierRequestLotModelImpl._originalSpisok_lotov_id = supplierRequestLotModelImpl._spisok_lotov_id;
 
 		supplierRequestLotModelImpl._setOriginalSpisok_lotov_id = false;
@@ -367,6 +384,8 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 		};
 	private long _supplier_request_lot_id;
 	private long _organization_id;
+	private long _originalOrganization_id;
+	private boolean _setOriginalOrganization_id;
 	private long _spisok_lotov_id;
 	private long _originalSpisok_lotov_id;
 	private boolean _setOriginalSpisok_lotov_id;

@@ -3,4 +3,3 @@ create table sapp.supplier_request_lot (
 	organization_id LONG,
 	spisok_lotov_id LONG
 );
-

@@ -256,6 +256,13 @@ public class SupplierRequestLotLocalServiceWrapper
 		return _supplierRequestLotLocalService.fetchSupplierRequestLot(supplier_request_lot_id);
 	}
 
+	@Override
+	public tj.supplier.request.lot.model.SupplierRequestLot getSupplierRequestLot(
+		long spisok_lotov_id, long organization_id) {
+		return _supplierRequestLotLocalService.getSupplierRequestLot(spisok_lotov_id,
+			organization_id);
+	}
+
 	/**
 	* Returns the supplier request lot with the primary key.
 	*

@@ -171,6 +171,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
 		
+	
 		long[] ids = null;
 		
 		for( int p = 0 ; p < 3 ; p++)
@@ -511,8 +512,8 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 							String nameParentFolder, String description,
 							String prefix, String suffix)  {
 		
-		 Long izvewenie_id = ParamUtil.getLong(actionRequest,"izvewenie_id");
-		 Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+		 long izvewenie_id = ParamUtil.getLong(actionRequest,"izvewenie_id");
+		 long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
 		
 		 
 		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
@@ -563,6 +564,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 					
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
 			
+				
 				String title=uploadPortletRequest.getFileName(prefix+"doc_file"+suffix);	
 				String mimeType = uploadPortletRequest.getContentType(prefix+"doc_file"+suffix);
 				File file = uploadPortletRequest.getFile(prefix+"doc_file"+suffix);

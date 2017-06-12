@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import tj.supplier.request.lot.exception.NoSuchSupplierRequestLotException;
@@ -602,6 +603,245 @@ public class SupplierRequestLotPersistenceImpl extends BasePersistenceImpl<Suppl
 	}
 
 	private static final String _FINDER_COLUMN_SPISOKLOTOVID_SPISOK_LOTOV_ID_2 = "supplierRequestLot.spisok_lotov_id = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_LOTIDORGID = new FinderPath(SupplierRequestLotModelImpl.ENTITY_CACHE_ENABLED,
+			SupplierRequestLotModelImpl.FINDER_CACHE_ENABLED,
+			SupplierRequestLotImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchBylotIdorgId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			SupplierRequestLotModelImpl.SPISOK_LOTOV_ID_COLUMN_BITMASK |
+			SupplierRequestLotModelImpl.ORGANIZATION_ID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_LOTIDORGID = new FinderPath(SupplierRequestLotModelImpl.ENTITY_CACHE_ENABLED,
+			SupplierRequestLotModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBylotIdorgId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; or throws a {@link NoSuchSupplierRequestLotException} if it could not be found.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @return the matching supplier request lot
+	 * @throws NoSuchSupplierRequestLotException if a matching supplier request lot could not be found
+	 */
+	@Override
+	public SupplierRequestLot findBylotIdorgId(long spisok_lotov_id,
+		long organization_id) throws NoSuchSupplierRequestLotException {
+		SupplierRequestLot supplierRequestLot = fetchBylotIdorgId(spisok_lotov_id,
+				organization_id);
+
+		if (supplierRequestLot == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("spisok_lotov_id=");
+			msg.append(spisok_lotov_id);
+
+			msg.append(", organization_id=");
+			msg.append(organization_id);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchSupplierRequestLotException(msg.toString());
+		}
+
+		return supplierRequestLot;
+	}
+
+	/**
+	 * Returns the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @return the matching supplier request lot, or <code>null</code> if a matching supplier request lot could not be found
+	 */
+	@Override
+	public SupplierRequestLot fetchBylotIdorgId(long spisok_lotov_id,
+		long organization_id) {
+		return fetchBylotIdorgId(spisok_lotov_id, organization_id, true);
+	}
+
+	/**
+	 * Returns the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching supplier request lot, or <code>null</code> if a matching supplier request lot could not be found
+	 */
+	@Override
+	public SupplierRequestLot fetchBylotIdorgId(long spisok_lotov_id,
+		long organization_id, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { spisok_lotov_id, organization_id };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_LOTIDORGID,
+					finderArgs, this);
+		}
+
+		if (result instanceof SupplierRequestLot) {
+			SupplierRequestLot supplierRequestLot = (SupplierRequestLot)result;
+
+			if ((spisok_lotov_id != supplierRequestLot.getSpisok_lotov_id()) ||
+					(organization_id != supplierRequestLot.getOrganization_id())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_SUPPLIERREQUESTLOT_WHERE);
+
+			query.append(_FINDER_COLUMN_LOTIDORGID_SPISOK_LOTOV_ID_2);
+
+			query.append(_FINDER_COLUMN_LOTIDORGID_ORGANIZATION_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				qPos.add(organization_id);
+
+				List<SupplierRequestLot> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_LOTIDORGID,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"SupplierRequestLotPersistenceImpl.fetchBylotIdorgId(long, long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					SupplierRequestLot supplierRequestLot = list.get(0);
+
+					result = supplierRequestLot;
+
+					cacheResult(supplierRequestLot);
+
+					if ((supplierRequestLot.getSpisok_lotov_id() != spisok_lotov_id) ||
+							(supplierRequestLot.getOrganization_id() != organization_id)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_LOTIDORGID,
+							finderArgs, supplierRequestLot);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_LOTIDORGID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (SupplierRequestLot)result;
+		}
+	}
+
+	/**
+	 * Removes the supplier request lot where spisok_lotov_id = &#63; and organization_id = &#63; from the database.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @return the supplier request lot that was removed
+	 */
+	@Override
+	public SupplierRequestLot removeBylotIdorgId(long spisok_lotov_id,
+		long organization_id) throws NoSuchSupplierRequestLotException {
+		SupplierRequestLot supplierRequestLot = findBylotIdorgId(spisok_lotov_id,
+				organization_id);
+
+		return remove(supplierRequestLot);
+	}
+
+	/**
+	 * Returns the number of supplier request lots where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @return the number of matching supplier request lots
+	 */
+	@Override
+	public int countBylotIdorgId(long spisok_lotov_id, long organization_id) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_LOTIDORGID;
+
+		Object[] finderArgs = new Object[] { spisok_lotov_id, organization_id };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_SUPPLIERREQUESTLOT_WHERE);
+
+			query.append(_FINDER_COLUMN_LOTIDORGID_SPISOK_LOTOV_ID_2);
+
+			query.append(_FINDER_COLUMN_LOTIDORGID_ORGANIZATION_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				qPos.add(organization_id);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_LOTIDORGID_SPISOK_LOTOV_ID_2 = "supplierRequestLot.spisok_lotov_id = ? AND ";
+	private static final String _FINDER_COLUMN_LOTIDORGID_ORGANIZATION_ID_2 = "supplierRequestLot.organization_id = ?";
 
 	public SupplierRequestLotPersistenceImpl() {
 		setModelClass(SupplierRequestLot.class);
@@ -617,6 +857,12 @@ public class SupplierRequestLotPersistenceImpl extends BasePersistenceImpl<Suppl
 		entityCache.putResult(SupplierRequestLotModelImpl.ENTITY_CACHE_ENABLED,
 			SupplierRequestLotImpl.class, supplierRequestLot.getPrimaryKey(),
 			supplierRequestLot);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_LOTIDORGID,
+			new Object[] {
+				supplierRequestLot.getSpisok_lotov_id(),
+				supplierRequestLot.getOrganization_id()
+			}, supplierRequestLot);
 
 		supplierRequestLot.resetOriginalValues();
 	}
@@ -671,6 +917,9 @@ public class SupplierRequestLotPersistenceImpl extends BasePersistenceImpl<Suppl
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((SupplierRequestLotModelImpl)supplierRequestLot,
+			true);
 	}
 
 	@Override
@@ -681,6 +930,47 @@ public class SupplierRequestLotPersistenceImpl extends BasePersistenceImpl<Suppl
 		for (SupplierRequestLot supplierRequestLot : supplierRequestLots) {
 			entityCache.removeResult(SupplierRequestLotModelImpl.ENTITY_CACHE_ENABLED,
 				SupplierRequestLotImpl.class, supplierRequestLot.getPrimaryKey());
+
+			clearUniqueFindersCache((SupplierRequestLotModelImpl)supplierRequestLot,
+				true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		SupplierRequestLotModelImpl supplierRequestLotModelImpl) {
+		Object[] args = new Object[] {
+				supplierRequestLotModelImpl.getSpisok_lotov_id(),
+				supplierRequestLotModelImpl.getOrganization_id()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_LOTIDORGID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_LOTIDORGID, args,
+			supplierRequestLotModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		SupplierRequestLotModelImpl supplierRequestLotModelImpl,
+		boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					supplierRequestLotModelImpl.getSpisok_lotov_id(),
+					supplierRequestLotModelImpl.getOrganization_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_LOTIDORGID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_LOTIDORGID, args);
+		}
+
+		if ((supplierRequestLotModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_LOTIDORGID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					supplierRequestLotModelImpl.getOriginalSpisok_lotov_id(),
+					supplierRequestLotModelImpl.getOriginalOrganization_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_LOTIDORGID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_LOTIDORGID, args);
 		}
 	}
 
@@ -847,6 +1137,9 @@ public class SupplierRequestLotPersistenceImpl extends BasePersistenceImpl<Suppl
 		entityCache.putResult(SupplierRequestLotModelImpl.ENTITY_CACHE_ENABLED,
 			SupplierRequestLotImpl.class, supplierRequestLot.getPrimaryKey(),
 			supplierRequestLot, false);
+
+		clearUniqueFindersCache(supplierRequestLotModelImpl, false);
+		cacheUniqueFindersCache(supplierRequestLotModelImpl);
 
 		supplierRequestLot.resetOriginalValues();
 

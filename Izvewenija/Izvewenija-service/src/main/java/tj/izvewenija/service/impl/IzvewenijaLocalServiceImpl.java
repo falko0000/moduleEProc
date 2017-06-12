@@ -63,7 +63,7 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 		  UserGroup userGroup = null;
 		try {
 			userGroup = UserGroupLocalServiceUtil.addUserGroup(serviceContext.getUserId(), serviceContext.getCompanyId(),
-					naimenovanie,description, serviceContext);
+					groupName,description, serviceContext);
 			    
 		
 		} catch (PortalException e1) {

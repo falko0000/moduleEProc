@@ -27,7 +27,9 @@ public interface CommissionConstants {
 	
 	static final String DOCUMENT_ACTION = "/commissiontab/evaluation/supplieritems/action.jsp";
     
-	  static final String FOLDER_BID = "bid";
+    static final String FOLDER_BID = "BID";
+    static final String FOLDER_LOT = "LOT DOCUMENTS";
+    static final String FOLDER_CRITERIA = "CRITERIA DOCUMENTS";
 	  
 	  static final int CRITERIA_QUALIFICATION = 1;
 	    static final int CRITERIA_TECHNICAL = 2;

@@ -47,7 +47,7 @@ public class SpisoklotovLocalServiceImpl extends SpisoklotovLocalServiceBaseImpl
 	 */
 	
 	public List<Spisoklotov> getLotsByIzvewenijaID( long IzvewenijaID) 
-			throws SystemException {
+			 {
 		
 		/* String spisoklotov = spisoklotovs.get(0).getKod_zakazchika();
 		  

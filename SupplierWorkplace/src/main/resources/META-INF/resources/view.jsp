@@ -32,7 +32,7 @@
         			<jsp:include page="<%=SupplierWorkplaceConstant.PAGE_FILING_APPLICATION%>" flush="true" />
     		</liferay-ui:section>
     		 <liferay-ui:section>
-    		   <p>OPENING_AND_DETERMINING_THE_WINNER</p>
+    		  <jsp:include page="<%=SupplierWorkplaceConstant.PAGE_OPENING_AND_DETERMINING_THE_WINNER%>" flush="true" />
     		</liferay-ui:section>
     		 <liferay-ui:section>
     		   <p>INCOMING_ORDERS</p>

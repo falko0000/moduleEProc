@@ -240,6 +240,12 @@ public class SupplierRequestLotLocalServiceUtil {
 		return getService().fetchSupplierRequestLot(supplier_request_lot_id);
 	}
 
+	public static tj.supplier.request.lot.model.SupplierRequestLot getSupplierRequestLot(
+		long spisok_lotov_id, long organization_id) {
+		return getService()
+				   .getSupplierRequestLot(spisok_lotov_id, organization_id);
+	}
+
 	/**
 	* Returns the supplier request lot with the primary key.
 	*

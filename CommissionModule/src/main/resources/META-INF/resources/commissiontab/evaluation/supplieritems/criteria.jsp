@@ -48,7 +48,7 @@ String[] CAT_NAMES = new String[]{ "qualification_proposal",
 
 <aui:form action="<%=criteriacommission%>" cssClass="container-fluid-1280" method="post" name="<%=CommissionConstants.FORM_COMMISSION_CRITERIA%>"> 
 
-<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (Validator.isNull(supplirCriteria)) ? Constants.ADD : Constants.UPDATE %>" />
+<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (Validator.isNull(criteriaValue)) ? Constants.ADD : Constants.UPDATE %>" />
 
 <aui:input name="FormName" type="hidden" value="<%= CommissionConstants.FORM_COMMISSION_CRITERIA %>" />
 

@@ -13,7 +13,10 @@
 	 <finder return-type="Collection" name="SpisokLotovId">
 	   <finder-column name="spisok_lotov_id"></finder-column>
 	 </finder>
-	
+	<finder return-type="SupplierRequestLot" name="lotIdorgId">
+	<finder-column name="spisok_lotov_id"></finder-column>
+	<finder-column name="organization_id"></finder-column>
+	</finder>
 	
 	
 

@@ -219,6 +219,10 @@ public interface SupplierRequestLotLocalService extends BaseLocalService,
 	public SupplierRequestLot fetchSupplierRequestLot(
 		long supplier_request_lot_id);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public SupplierRequestLot getSupplierRequestLot(long spisok_lotov_id,
+		long organization_id);
+
 	/**
 	* Returns the supplier request lot with the primary key.
 	*

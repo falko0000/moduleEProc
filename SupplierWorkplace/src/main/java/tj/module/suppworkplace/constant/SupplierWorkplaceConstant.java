@@ -13,6 +13,7 @@ public interface SupplierWorkplaceConstant {
 	
 	//Path  pages  jsp 
     //main
+	static final String PAGE_OPENING_ACTIONS = "/tabiteams/actions.jsp";
 	static final String PAGE_ACTIONS = "/actions.jsp";
 	static final String PAGE_ACTIONS_LOTS = "/bid/actions.jsp";
 	static final String PAGE_DOCUMENT_ACTION = "/bid/document/action.jsp";
@@ -23,7 +24,7 @@ public interface SupplierWorkplaceConstant {
 	static final String PAGE_ADDPRODUCTS = "/bid/listlots/addproducts.jsp";
 	//tabitems
 	static final String PAGE_FILING_APPLICATION = "/tabiteams/filing_applications.jsp";
-	static final String PAGE_SUBMISSION = "/tabitems/submission.jsp";
+	static final String PAGE_OPENING_AND_DETERMINING_THE_WINNER = "/tabiteams/open_determining_winner.jsp";
 	static final String PAGE_EVALUATION = "/tabitems/evaluation.jsp";
 	static final String PAGE_UNFULFILLED = "/tabitems/unfulfilled.jsp";
 	static final String PAGE_COMPLETED = "/tabitems/completed.jsp";
@@ -84,6 +85,8 @@ public interface SupplierWorkplaceConstant {
     
     static final String PAGE_LISTLOTS_INFO = "/bid/listlots/main_listlots_info.jsp";
     
+    static final String PAGE_LIST_SUPPLIER = "/bid/list_supplier.jsp";
+    
     static final String PAGE_INFO_DOCUMENT = "/bid/documentation1/info_document.jsp";
     static final String PAGE_TAKE_PART = "/bid/takepart/take_part.jsp";
     static final String PAGE_VIEW_APPLICATION = "/bid/viewapplication/main_viewapplication_info.jsp";
@@ -109,7 +112,7 @@ public interface SupplierWorkplaceConstant {
     static final int STATE_BID_EVALUATION_AND_AWARDING = 3;
     static final int STATE_BID_UNFULFILLED_TENDERS = 4;
     static final int STATE_BID_COMPLETED_TENDERS = 5;
-    
+  
     
   //Generation docum
     static final String TEMPLATE_FTL_FOLDER_NAME = "template_ftl";
