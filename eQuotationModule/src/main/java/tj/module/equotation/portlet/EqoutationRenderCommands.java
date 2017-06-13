@@ -46,13 +46,18 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		
 		StringBuilder names = new StringBuilder();
 		
+		long izvewenie_id = ParamUtil.getLong(renderRequest, "izvewenie_id");
+		
 		names.append(EQuotationConstants.TAB_BID_GENERALINFO);
+		
+		if(izvewenie_id !=0)
+		{
 		names.append("," + EQuotationConstants.TAB_BID_OPENING);
 		names.append("," + EQuotationConstants.TAB_BID_ABOUTINFO);
 		names.append("," + EQuotationConstants.TAB_BID_LISTLOTS);
 		names.append("," + EQuotationConstants.TAB_BID_COMMISSION);
 		names.append("," + EQuotationConstants.TAB_BID_TENDER_DOCUMENTATION);
-		
+		}
 		renderRequest.setAttribute("editnametabs", names.toString());
 		
 		String service = ParamUtil.getString(renderRequest, "good_work_service", "0");

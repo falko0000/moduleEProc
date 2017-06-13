@@ -19,6 +19,7 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -57,6 +58,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -947,18 +949,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	                   
 		
 	                     
-		Folder folder = null;
 		
-			long repositoryId = themeDisplay.getScopeGroupId();		
-			try {
-				folder = DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, EQuotationConstants.FOLDER_BID);
-				ServiceContext serviceContexts = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
-				folder = DLAppServiceUtil.addFolder(repositoryId,folder.getFolderId(), String.valueOf(inserted_izvewenija.getIzvewenija_id()),"this folder for bid number " + String.valueOf(inserted_izvewenija.getIzvewenija_id()), serviceContexts);
-			} catch (PortalException e1) {
-				e1.printStackTrace();
-			} catch (SystemException e1) {
-				e1.printStackTrace();
-			}			
 		
 		
     
@@ -986,13 +977,24 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	 obwajaInformacija.setData_sozdanija(new Date());
 	 obwajaInformacija.setData_izmenenija(new Date());
 	 
+	/* Http http = ;
+	redirect = http.setParameter(redirect,  actionResponse.getNamespace() + "izvewenie_id",
+			 						inserted_izvewenija.getIzvewenija_id());
+	redirect = http.setParameter(redirect,  actionResponse.getNamespace() + "edit_tab",
+						EQuotationConstants.TAB_BID_GENERALINFO);
+						*/
+	 String sizvewenie_id = "izvewenie_id="+String.valueOf(inserted_izvewenija.getIzvewenija_id());
 	 String param = "_edit_tab=";
 		
 	    int indextab = redirect.indexOf(param)+param.length();
 		int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
 		
 		redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_GENERALINFO+redirect.substring(indexamp);
-   
+		redirect = redirect.replace("izvewenie_id=0", sizvewenie_id);
+		
+		
+	 ObwajaInformacijaLocalServiceUtil.addObwajaInformacija(obwajaInformacija);
+	 
 		try {
 			 sendRedirect(actionRequest, actionResponse, redirect);
 		} catch (IOException e) {
@@ -1000,7 +1002,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 			e.printStackTrace();
 		}        
    
-	 ObwajaInformacijaLocalServiceUtil.addObwajaInformacija(obwajaInformacija);
+	
     
 	}
 	
@@ -1335,5 +1337,6 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	
 	    SessionMessages.add(actionRequest, "success");
 	}
-
+	
+	
 }
