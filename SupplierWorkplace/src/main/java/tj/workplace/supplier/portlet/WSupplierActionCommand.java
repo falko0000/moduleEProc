@@ -460,11 +460,16 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 	       inputs.put("informacija_o_razmewenii", informacijaORazmeweniiWrapper.getModelAttributes());
 	       
 
-	              
+	           String foldersaved[] = {SupplierWorkplaceConstant.FOLDER_BID,
+	        		   					String.valueOf(izvewenija_id),
+	        		   					String.valueOf(spisok_lotov_id),
+	        		   					String.valueOf(user.getOrganizationIds()[0]),
+	        		   					SupplierWorkplaceConstant.FOLDER_GENERATE_DOC};
+	           
 	      String outfilename = spisoklotov.getNaimenovanie_lota() + "_nomer_"+String.valueOf(spisoklotov.getNomer_lota());
 	       
-	       new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
-	        												template_file_name,
+	       new GenerateDocument(ROOT_FOLDER_NAME_FTL , foldersaved,
+	        											template_file_name,
 		      										inputs, "0.0",outfilename, actionRequest);
 		   version = version + step;  
 	       

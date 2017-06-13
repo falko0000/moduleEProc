@@ -14,6 +14,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import com.liferay.document.library.kernel.model.DLFileEntry;
+import com.liferay.document.library.kernel.model.DLFolder;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
@@ -38,7 +39,7 @@ public class GenerateDocument {
     
 	private static String filename = StringPool.BLANK;
 	private static String folder_name_ftl = StringPool.BLANK;
-	private static String folder_name_html = StringPool.BLANK;
+	private static String folder_saved_html[] ;
 	private static  Map<String, Object> param = null;
 	private ThemeDisplay themeDisplay = null;
     private static String version = "0.0";
@@ -46,12 +47,12 @@ public class GenerateDocument {
 	private static String outfilename = null;
 
 
-	public GenerateDocument(String folder_name_ftl, String folder_name_html,
+	public GenerateDocument(String folder_name_ftl, String[] foldersaved,
 			                     String filenmae,  Map<String, Object> param, 
 			                     String version, String outfilename, ActionRequest actionRequest) {
 		
 		this.folder_name_ftl = folder_name_ftl;
-		this.folder_name_html = folder_name_html;
+		this.folder_saved_html = foldersaved;
 		this.filename = filenmae;
 		this.param = param;
 	    this.themeDisplay =  (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);;	
@@ -90,13 +91,25 @@ public class GenerateDocument {
 			
 			File f = new File(filename.substring(0,filename.indexOf(".")+1)+"html");
 			
-			Folder folder = getFolder(this.folder_name_html);
+			Folder folder = null;
+			ServiceContext fserviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
+		
+			for( int i = 0 ; i < folder_saved_html.length; i++)
+			{
+				if( i == 0)
+					 folder = getFolder(  folder_saved_html[i], fserviceContext);
+				else
+					folder = getFolder(folder.getFolderId(), folder_saved_html[i], fserviceContext);
+			}
+				 
 	    	
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), this.actionRequest);
-	    	InputStream is = new FileInputStream( f );
+			
+			
+			InputStream is = new FileInputStream( f );
 	    	
-	    	
-	    	
+			
+			deleteFile(folder.getFolderId(),outfilename+".html" );
 	    	DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folder.getFolderId(),
 	    			outfilename+".html", "text/html", 
 	    			outfilename+".html", "test", "", is, f.length(), serviceContext);
@@ -126,7 +139,7 @@ public class GenerateDocument {
 			
 		long repositoryId = themeDisplay.getScopeGroupId();
 		try {
-			Folder folder =getFolder(this.folder_name_ftl);
+			Folder folder = getFolder(this.folder_name_ftl);
 			
 			
 			List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folder.getFolderId());
@@ -157,10 +170,52 @@ public class GenerateDocument {
 		try {
 			folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, folderName);
 		} catch (Exception e) {	
-			System.out.println(e.getMessage());
+		
+			
 		}
 		
 		return folder;
+	}
+	
+	private Folder getFolder(String folderName, ServiceContext serviceContext){
+		
+		Folder folder = null;
+		try {
+			folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, folderName);
+		} catch (Exception e) {	
+			try {
+				folder =  DLAppServiceUtil.addFolder(themeDisplay.getScopeGroupId(),  DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, folderName, folderName, serviceContext);
+			} catch (PortalException e1) {
+				
+			}
+		}
+		
+		return folder;
+	}
+	
+	private Folder getFolder(long parentFolderId, String folderName, ServiceContext serviceContext){
+		
+		Folder folder = null;
+		try {
+			folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), parentFolderId , folderName);
+		} catch (Exception e) {	
+			try {
+				folder =  DLAppServiceUtil.addFolder(themeDisplay.getScopeGroupId(), parentFolderId, folderName, folderName, serviceContext);
+			} catch (PortalException e1) {
+				
+			}
+		}
+		
+		return folder;
+	}
+	
+	private void deleteFile(long folderId, String title)
+	{
+		try {
+			DLAppServiceUtil.getFileEntry(themeDisplay.getScopeGroupId(), folderId, title);
+		} catch (PortalException e) {
+		
+		}
 	}
 	
 }

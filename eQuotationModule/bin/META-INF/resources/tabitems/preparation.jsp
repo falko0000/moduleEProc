@@ -60,7 +60,7 @@
 %>	
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
-				delta = "<%=5%>"
+				delta = "<%=50%>"
 				iteratorURL="<%=viewUrl %>" 
 				total="<%=izvewenijas.size() %>"
 				rowChecker="<%= new RowChecker(renderResponse) %>"

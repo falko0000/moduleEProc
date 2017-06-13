@@ -147,6 +147,7 @@ public interface SupplierWorkplaceConstant {
     static final String FOLDER_BID = "BID";
     static final String FOLDER_LOT = "LOT DOCUMENTS";
     static final String FOLDER_CRITERIA = "CRITERIA DOCUMENTS";
+    static final String FOLDER_GENERATE_DOC = "GENERATE DOCUMENT";
     
     static final int CRITERIA_QUALIFICATION = 1;
     static final int CRITERIA_TECHNICAL = 2;

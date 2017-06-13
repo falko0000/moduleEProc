@@ -94,6 +94,7 @@ import tj.izvewenija.service.IzvewenijaLocalService;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.izvewenija.service.IzvewenijaLocalServiceWrapper;
 import tj.module.equotation.constants.EQuotationConstants;
+
 import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
@@ -258,7 +259,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	     
 	      AddressWrapper addressWrapper = new AddressWrapper(address);
 		
-	      Map<String, Map<String,Object>> inputs = null;
+	      Map<String, Object> inputs = null;
          
 	      double step = 0.1;
 	      double version = 1.0;
@@ -266,7 +267,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	      for(Spisoklotov slotov : spisoklotov )
 	      {
 	    	  SpisoklotovWrapper spisoklotovWrapper = new SpisoklotovWrapper(slotov);
-	    	  inputs  = new HashMap<String, Map<String,Object>>();
+	    	  inputs  = new HashMap<String, Object>();
         
        PorjadokRabotyKomissiiWrapper porjadokRabotyKomissiiWrapper = new PorjadokRabotyKomissiiWrapper(porjadokRabotyKomissii);
        
@@ -301,10 +302,15 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
               
       String outfilename = slotov.getNaimenovanie_lota() + "_nomer_"+String.valueOf(slotov.getNomer_lota());
        
-       new GenerateDocument(ROOT_FOLDER_NAME_FTL , ROOT_FOLDER_NAME_OUT_HTML,
-        												template_file_name,
-	      										inputs, "0.0",outfilename, actionRequest);
-	   version = version + step;  
+      String foldersaved[] = {EQuotationConstants.FOLDER_BID,
+					String.valueOf(izvewenija_id),
+					EQuotationConstants.FOLDER_GENERATE_DOC};
+      
+      new GenerateDocument(ROOT_FOLDER_NAME_FTL , foldersaved,
+							template_file_name,
+							inputs, "0.0",outfilename, actionRequest);
+	  
+      version = version + step;  
        
 	      }
 	    } catch (PortalException e) {
