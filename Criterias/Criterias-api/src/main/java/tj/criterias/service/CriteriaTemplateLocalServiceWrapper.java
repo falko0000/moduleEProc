@@ -146,6 +146,12 @@ public class CriteriaTemplateLocalServiceWrapper
 		return _criteriaTemplateLocalService.getCriteriaTemplate(criteria_category_id);
 	}
 
+	@Override
+	public java.util.List<tj.criterias.model.CriteriaTemplate> getCriteriaTemplateTypeId(
+		int criteria_type_id) {
+		return _criteriaTemplateLocalService.getCriteriaTemplateTypeId(criteria_type_id);
+	}
+
 	/**
 	* Returns a range of all the criteria templates.
 	*
@@ -244,6 +250,14 @@ public class CriteriaTemplateLocalServiceWrapper
 	public tj.criterias.model.CriteriaTemplate fetchCriteriaTemplate(
 		long criteria_template_id) {
 		return _criteriaTemplateLocalService.fetchCriteriaTemplate(criteria_template_id);
+	}
+
+	@Override
+	public tj.criterias.model.CriteriaTemplate getCriteriaTemplate(
+		int criteria_category_id, int criteria_type_id)
+		throws tj.criterias.exception.NoSuchCriteriaTemplateException {
+		return _criteriaTemplateLocalService.getCriteriaTemplate(criteria_category_id,
+			criteria_type_id);
 	}
 
 	/**

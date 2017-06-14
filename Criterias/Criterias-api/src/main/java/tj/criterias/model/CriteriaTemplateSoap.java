@@ -40,6 +40,8 @@ public class CriteriaTemplateSoap implements Serializable {
 		soapModel.setUpdated(model.getUpdated());
 		soapModel.setCreatedby(model.getCreatedby());
 		soapModel.setUpdatedby(model.getUpdatedby());
+		soapModel.setCriteria_type_id(model.getCriteria_type_id());
+		soapModel.setAccess(model.getAccess());
 
 		return soapModel;
 	}
@@ -150,6 +152,22 @@ public class CriteriaTemplateSoap implements Serializable {
 		_updatedby = updatedby;
 	}
 
+	public int getCriteria_type_id() {
+		return _criteria_type_id;
+	}
+
+	public void setCriteria_type_id(int criteria_type_id) {
+		_criteria_type_id = criteria_type_id;
+	}
+
+	public int getAccess() {
+		return _access;
+	}
+
+	public void setAccess(int access) {
+		_access = access;
+	}
+
 	private long _criteria_template_id;
 	private String _criteria_name;
 	private int _criteria_category_id;
@@ -157,4 +175,6 @@ public class CriteriaTemplateSoap implements Serializable {
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private int _criteria_type_id;
+	private int _access;
 }

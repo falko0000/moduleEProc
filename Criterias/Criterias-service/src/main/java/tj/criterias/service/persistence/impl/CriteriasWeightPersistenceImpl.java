@@ -630,6 +630,7 @@ public class CriteriasWeightPersistenceImpl extends BasePersistenceImpl<Criteria
 		criteriasWeightImpl.setUpdated(criteriasWeight.getUpdated());
 		criteriasWeightImpl.setCreatedby(criteriasWeight.getCreatedby());
 		criteriasWeightImpl.setUpdatedby(criteriasWeight.getUpdatedby());
+		criteriasWeightImpl.setPassing_score(criteriasWeight.getPassing_score());
 
 		return criteriasWeightImpl;
 	}

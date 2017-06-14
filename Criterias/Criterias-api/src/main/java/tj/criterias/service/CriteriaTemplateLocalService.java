@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import tj.criterias.exception.NoSuchCriteriaTemplateException;
+
 import tj.criterias.model.CriteriaTemplate;
 
 import java.io.Serializable;
@@ -137,6 +139,10 @@ public interface CriteriaTemplateLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CriteriaTemplate> getCriteriaTemplate(int criteria_category_id);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CriteriaTemplate> getCriteriaTemplateTypeId(
+		int criteria_type_id);
+
 	/**
 	* Returns a range of all the criteria templates.
 	*
@@ -210,6 +216,10 @@ public interface CriteriaTemplateLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CriteriaTemplate fetchCriteriaTemplate(long criteria_template_id);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CriteriaTemplate getCriteriaTemplate(int criteria_category_id,
+		int criteria_type_id) throws NoSuchCriteriaTemplateException;
 
 	/**
 	* Returns the criteria template with the primary key.

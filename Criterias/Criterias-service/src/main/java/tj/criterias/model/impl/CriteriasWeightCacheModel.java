@@ -65,7 +65,7 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{criterias_weight_id=");
 		sb.append(criterias_weight_id);
@@ -83,6 +83,8 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 		sb.append(createdby);
 		sb.append(", updatedby=");
 		sb.append(updatedby);
+		sb.append(", passing_score=");
+		sb.append(passing_score);
 		sb.append("}");
 
 		return sb.toString();
@@ -113,6 +115,7 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 
 		criteriasWeightImpl.setCreatedby(createdby);
 		criteriasWeightImpl.setUpdatedby(updatedby);
+		criteriasWeightImpl.setPassing_score(passing_score);
 
 		criteriasWeightImpl.resetOriginalValues();
 
@@ -134,6 +137,8 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 		createdby = objectInput.readLong();
 
 		updatedby = objectInput.readLong();
+
+		passing_score = objectInput.readDouble();
 	}
 
 	@Override
@@ -152,6 +157,8 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 		objectOutput.writeLong(createdby);
 
 		objectOutput.writeLong(updatedby);
+
+		objectOutput.writeDouble(passing_score);
 	}
 
 	public long criterias_weight_id;
@@ -162,4 +169,5 @@ public class CriteriasWeightCacheModel implements CacheModel<CriteriasWeight>,
 	public long updated;
 	public long createdby;
 	public long updatedby;
+	public double passing_score;
 }

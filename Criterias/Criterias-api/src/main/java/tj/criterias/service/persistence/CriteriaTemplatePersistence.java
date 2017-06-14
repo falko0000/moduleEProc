@@ -180,6 +180,193 @@ public interface CriteriaTemplatePersistence extends BasePersistence<CriteriaTem
 	public int countByCriteriaCategoryId(int criteria_category_id);
 
 	/**
+	* Returns the criteria template where criteria_category_id = &#63; and criteria_type_id = &#63; or throws a {@link NoSuchCriteriaTemplateException} if it could not be found.
+	*
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @return the matching criteria template
+	* @throws NoSuchCriteriaTemplateException if a matching criteria template could not be found
+	*/
+	public CriteriaTemplate findBycategoryIdAndTypeId(
+		int criteria_category_id, int criteria_type_id)
+		throws NoSuchCriteriaTemplateException;
+
+	/**
+	* Returns the criteria template where criteria_category_id = &#63; and criteria_type_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @return the matching criteria template, or <code>null</code> if a matching criteria template could not be found
+	*/
+	public CriteriaTemplate fetchBycategoryIdAndTypeId(
+		int criteria_category_id, int criteria_type_id);
+
+	/**
+	* Returns the criteria template where criteria_category_id = &#63; and criteria_type_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching criteria template, or <code>null</code> if a matching criteria template could not be found
+	*/
+	public CriteriaTemplate fetchBycategoryIdAndTypeId(
+		int criteria_category_id, int criteria_type_id,
+		boolean retrieveFromCache);
+
+	/**
+	* Removes the criteria template where criteria_category_id = &#63; and criteria_type_id = &#63; from the database.
+	*
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @return the criteria template that was removed
+	*/
+	public CriteriaTemplate removeBycategoryIdAndTypeId(
+		int criteria_category_id, int criteria_type_id)
+		throws NoSuchCriteriaTemplateException;
+
+	/**
+	* Returns the number of criteria templates where criteria_category_id = &#63; and criteria_type_id = &#63;.
+	*
+	* @param criteria_category_id the criteria_category_id
+	* @param criteria_type_id the criteria_type_id
+	* @return the number of matching criteria templates
+	*/
+	public int countBycategoryIdAndTypeId(int criteria_category_id,
+		int criteria_type_id);
+
+	/**
+	* Returns all the criteria templates where criteria_type_id = &#63;.
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @return the matching criteria templates
+	*/
+	public java.util.List<CriteriaTemplate> findBytypeId(int criteria_type_id);
+
+	/**
+	* Returns a range of all the criteria templates where criteria_type_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaTemplateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @param start the lower bound of the range of criteria templates
+	* @param end the upper bound of the range of criteria templates (not inclusive)
+	* @return the range of matching criteria templates
+	*/
+	public java.util.List<CriteriaTemplate> findBytypeId(int criteria_type_id,
+		int start, int end);
+
+	/**
+	* Returns an ordered range of all the criteria templates where criteria_type_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaTemplateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @param start the lower bound of the range of criteria templates
+	* @param end the upper bound of the range of criteria templates (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching criteria templates
+	*/
+	public java.util.List<CriteriaTemplate> findBytypeId(int criteria_type_id,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CriteriaTemplate> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the criteria templates where criteria_type_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaTemplateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @param start the lower bound of the range of criteria templates
+	* @param end the upper bound of the range of criteria templates (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching criteria templates
+	*/
+	public java.util.List<CriteriaTemplate> findBytypeId(int criteria_type_id,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<CriteriaTemplate> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first criteria template in the ordered set where criteria_type_id = &#63;.
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching criteria template
+	* @throws NoSuchCriteriaTemplateException if a matching criteria template could not be found
+	*/
+	public CriteriaTemplate findBytypeId_First(int criteria_type_id,
+		com.liferay.portal.kernel.util.OrderByComparator<CriteriaTemplate> orderByComparator)
+		throws NoSuchCriteriaTemplateException;
+
+	/**
+	* Returns the first criteria template in the ordered set where criteria_type_id = &#63;.
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching criteria template, or <code>null</code> if a matching criteria template could not be found
+	*/
+	public CriteriaTemplate fetchBytypeId_First(int criteria_type_id,
+		com.liferay.portal.kernel.util.OrderByComparator<CriteriaTemplate> orderByComparator);
+
+	/**
+	* Returns the last criteria template in the ordered set where criteria_type_id = &#63;.
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching criteria template
+	* @throws NoSuchCriteriaTemplateException if a matching criteria template could not be found
+	*/
+	public CriteriaTemplate findBytypeId_Last(int criteria_type_id,
+		com.liferay.portal.kernel.util.OrderByComparator<CriteriaTemplate> orderByComparator)
+		throws NoSuchCriteriaTemplateException;
+
+	/**
+	* Returns the last criteria template in the ordered set where criteria_type_id = &#63;.
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching criteria template, or <code>null</code> if a matching criteria template could not be found
+	*/
+	public CriteriaTemplate fetchBytypeId_Last(int criteria_type_id,
+		com.liferay.portal.kernel.util.OrderByComparator<CriteriaTemplate> orderByComparator);
+
+	/**
+	* Returns the criteria templates before and after the current criteria template in the ordered set where criteria_type_id = &#63;.
+	*
+	* @param criteria_template_id the primary key of the current criteria template
+	* @param criteria_type_id the criteria_type_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next criteria template
+	* @throws NoSuchCriteriaTemplateException if a criteria template with the primary key could not be found
+	*/
+	public CriteriaTemplate[] findBytypeId_PrevAndNext(
+		long criteria_template_id, int criteria_type_id,
+		com.liferay.portal.kernel.util.OrderByComparator<CriteriaTemplate> orderByComparator)
+		throws NoSuchCriteriaTemplateException;
+
+	/**
+	* Removes all the criteria templates where criteria_type_id = &#63; from the database.
+	*
+	* @param criteria_type_id the criteria_type_id
+	*/
+	public void removeBytypeId(int criteria_type_id);
+
+	/**
+	* Returns the number of criteria templates where criteria_type_id = &#63;.
+	*
+	* @param criteria_type_id the criteria_type_id
+	* @return the number of matching criteria templates
+	*/
+	public int countBytypeId(int criteria_type_id);
+
+	/**
 	* Caches the criteria template in the entity cache if it is enabled.
 	*
 	* @param criteriaTemplate the criteria template
@@ -298,4 +485,7 @@ public interface CriteriaTemplatePersistence extends BasePersistence<CriteriaTem
 	* @return the number of criteria templates
 	*/
 	public int countAll();
+
+	@Override
+	public java.util.Set<java.lang.String> getBadColumnNames();
 }

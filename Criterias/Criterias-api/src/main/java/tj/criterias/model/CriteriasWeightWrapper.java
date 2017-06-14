@@ -66,6 +66,7 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("passing_score", getPassing_score());
 
 		return attributes;
 	}
@@ -120,6 +121,12 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
+
+		Double passing_score = (Double)attributes.get("passing_score");
+
+		if (passing_score != null) {
+			setPassing_score(passing_score);
+		}
 	}
 
 	@Override
@@ -155,6 +162,16 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 	@Override
 	public double getCriterias_weight() {
 		return _criteriasWeight.getCriterias_weight();
+	}
+
+	/**
+	* Returns the passing_score of this criterias weight.
+	*
+	* @return the passing_score of this criterias weight
+	*/
+	@Override
+	public double getPassing_score() {
+		return _criteriasWeight.getPassing_score();
 	}
 
 	@Override
@@ -356,6 +373,16 @@ public class CriteriasWeightWrapper implements CriteriasWeight,
 	@Override
 	public void setNew(boolean n) {
 		_criteriasWeight.setNew(n);
+	}
+
+	/**
+	* Sets the passing_score of this criterias weight.
+	*
+	* @param passing_score the passing_score of this criterias weight
+	*/
+	@Override
+	public void setPassing_score(double passing_score) {
+		_criteriasWeight.setPassing_score(passing_score);
 	}
 
 	/**

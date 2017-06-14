@@ -41,6 +41,7 @@ public class CriteriasWeightSoap implements Serializable {
 		soapModel.setUpdated(model.getUpdated());
 		soapModel.setCreatedby(model.getCreatedby());
 		soapModel.setUpdatedby(model.getUpdatedby());
+		soapModel.setPassing_score(model.getPassing_score());
 
 		return soapModel;
 	}
@@ -159,6 +160,14 @@ public class CriteriasWeightSoap implements Serializable {
 		_updatedby = updatedby;
 	}
 
+	public double getPassing_score() {
+		return _passing_score;
+	}
+
+	public void setPassing_score(double passing_score) {
+		_passing_score = passing_score;
+	}
+
 	private long _criterias_weight_id;
 	private long _spisok_lotov_id;
 	private int _criteria_category_id;
@@ -167,4 +176,5 @@ public class CriteriasWeightSoap implements Serializable {
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private double _passing_score;
 }

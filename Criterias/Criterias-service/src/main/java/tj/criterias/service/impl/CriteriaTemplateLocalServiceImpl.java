@@ -17,6 +17,7 @@ package tj.criterias.service.impl;
 import java.util.List;
 
 import aQute.bnd.annotation.ProviderType;
+import tj.criterias.exception.NoSuchCriteriaTemplateException;
 import tj.criterias.model.CriteriaTemplate;
 import tj.criterias.service.base.CriteriaTemplateLocalServiceBaseImpl;
 
@@ -42,4 +43,15 @@ public class CriteriaTemplateLocalServiceImpl
 		
 		return criteriaTemplatePersistence.findByCriteriaCategoryId(criteria_category_id);
 	}
+	
+	public CriteriaTemplate getCriteriaTemplate( int criteria_category_id, int criteria_type_id) throws NoSuchCriteriaTemplateException {
+	
+     	return criteriaTemplatePersistence.findBycategoryIdAndTypeId(criteria_category_id, criteria_type_id);
+	}
+	
+	public List<CriteriaTemplate> getCriteriaTemplateTypeId(int criteria_type_id) {
+		
+		return criteriaTemplatePersistence.findBytypeId(criteria_type_id);
+	}
+	
 }

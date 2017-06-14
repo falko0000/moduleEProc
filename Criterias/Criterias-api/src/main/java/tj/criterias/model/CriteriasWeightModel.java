@@ -173,6 +173,20 @@ public interface CriteriasWeightModel extends BaseModel<CriteriasWeight> {
 	 */
 	public void setUpdatedby(long updatedby);
 
+	/**
+	 * Returns the passing_score of this criterias weight.
+	 *
+	 * @return the passing_score of this criterias weight
+	 */
+	public double getPassing_score();
+
+	/**
+	 * Sets the passing_score of this criterias weight.
+	 *
+	 * @param passing_score the passing_score of this criterias weight
+	 */
+	public void setPassing_score(double passing_score);
+
 	@Override
 	public boolean isNew();
 

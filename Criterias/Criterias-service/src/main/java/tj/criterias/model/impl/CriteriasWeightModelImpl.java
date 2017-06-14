@@ -68,7 +68,8 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 			{ "created", Types.TIMESTAMP },
 			{ "updated", Types.TIMESTAMP },
 			{ "createdby", Types.BIGINT },
-			{ "updatedby", Types.BIGINT }
+			{ "updatedby", Types.BIGINT },
+			{ "passing_score", Types.DOUBLE }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -81,9 +82,10 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 		TABLE_COLUMNS_MAP.put("updated", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("createdby", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("passing_score", Types.DOUBLE);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criterias_weight (criterias_weight_id LONG not null primary key,spisok_lotov_id LONG,criteria_category_id INTEGER,criterias_weight DOUBLE,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criterias_weight (criterias_weight_id LONG not null primary key,spisok_lotov_id LONG,criteria_category_id INTEGER,criterias_weight DOUBLE,created DATE null,updated DATE null,createdby LONG,updatedby LONG,passing_score DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criterias_weight";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteriasWeight.criterias_weight_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criterias_weight.criterias_weight_id ASC";
@@ -150,6 +152,7 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("passing_score", getPassing_score());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -206,6 +209,12 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
+		}
+
+		Double passing_score = (Double)attributes.get("passing_score");
+
+		if (passing_score != null) {
+			setPassing_score(passing_score);
 		}
 	}
 
@@ -313,6 +322,16 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 		_updatedby = updatedby;
 	}
 
+	@Override
+	public double getPassing_score() {
+		return _passing_score;
+	}
+
+	@Override
+	public void setPassing_score(double passing_score) {
+		_passing_score = passing_score;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -352,6 +371,7 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 		criteriasWeightImpl.setUpdated(getUpdated());
 		criteriasWeightImpl.setCreatedby(getCreatedby());
 		criteriasWeightImpl.setUpdatedby(getUpdatedby());
+		criteriasWeightImpl.setPassing_score(getPassing_score());
 
 		criteriasWeightImpl.resetOriginalValues();
 
@@ -459,12 +479,14 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 
 		criteriasWeightCacheModel.updatedby = getUpdatedby();
 
+		criteriasWeightCacheModel.passing_score = getPassing_score();
+
 		return criteriasWeightCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{criterias_weight_id=");
 		sb.append(getCriterias_weight_id());
@@ -482,6 +504,8 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 		sb.append(getCreatedby());
 		sb.append(", updatedby=");
 		sb.append(getUpdatedby());
+		sb.append(", passing_score=");
+		sb.append(getPassing_score());
 		sb.append("}");
 
 		return sb.toString();
@@ -489,7 +513,7 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriasWeight");
@@ -527,6 +551,10 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 			"<column><column-name>updatedby</column-name><column-value><![CDATA[");
 		sb.append(getUpdatedby());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>passing_score</column-name><column-value><![CDATA[");
+		sb.append(getPassing_score());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -549,6 +577,7 @@ public class CriteriasWeightModelImpl extends BaseModelImpl<CriteriasWeight>
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private double _passing_score;
 	private long _columnBitmask;
 	private CriteriasWeight _escapedModel;
 }

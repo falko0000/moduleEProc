@@ -4,15 +4,17 @@
 <%
 
  String[] CAT_NAMES = new String[]{"qualification_requirements",
+		 							"other_conditions",
 		                            "technical_proposal",
 		                            "financial_proposal"};
  
 String[] qualification = new String[]{"qualification_requirements"};
+String[] otherconditions = new String[]{"other_conditions"};
  String[] technical = new String[]{"technical_proposal"};
  String[] financial = new String[]{"financial_proposal"};
 
  
- String[][] CAT_SECTION = {qualification, technical, financial};
+ String[][] CAT_SECTION = {qualification, otherconditions, technical, financial};
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");

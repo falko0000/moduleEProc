@@ -69,8 +69,10 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import tj.criterias.model.Criteria;
+import tj.criterias.model.CriteriaTemplate;
 import tj.criterias.model.CriteriasWeight;
 import tj.criterias.service.CriteriaLocalServiceUtil;
+import tj.criterias.service.CriteriaTemplateLocalServiceUtil;
 import tj.criterias.service.CriteriasWeightLocalServiceUtil;
 import tj.dokumenty.postavwika.model.DokumentyPostavwika;
 import tj.dokumenty.postavwika.model.DokumentyPostavwikaWrapper;
@@ -334,16 +336,17 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 
 private void criteria(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
-	   
-	  criteriaInsertAndUpdate(actionRequest, actionResponse, "qualification", EQuotationConstants.CRITERIA_QUALIFICATION);
-      
-	  criteriaInsertAndUpdate(actionRequest, actionResponse, "technical", EQuotationConstants.CRITERIA_TECHNICAL);
+	 int criteria_type_id = ParamUtil.getInteger(actionRequest, "criteria_type_id");
+	 
+	List<CriteriaTemplate> criteriaTemplates = CriteriaTemplateLocalServiceUtil.getCriteriaTemplateTypeId(criteria_type_id);
 	  
-	  criteriaInsertAndUpdate(actionRequest, actionResponse, "financial", EQuotationConstants.CRITERIA_FINANCIAL);
+	for( CriteriaTemplate criteriaTemplate : criteriaTemplates)
+     	  criteriaInsertAndUpdate(actionRequest, actionResponse, criteriaTemplate.getCriteria_name(), criteriaTemplate.getCriteria_category_id());
 	  
-	  	 updateCriteriasWeight(actionRequest, actionResponse, "qualification_totalWeight", EQuotationConstants.CRITERIA_QUALIFICATION);
-	     updateCriteriasWeight(actionRequest, actionResponse, "technical_totalWeight", EQuotationConstants.CRITERIA_TECHNICAL);
-	     updateCriteriasWeight(actionRequest, actionResponse, "financial_totalWeight", EQuotationConstants.CRITERIA_FINANCIAL);
+
+	for( CriteriaTemplate criteriaTemplate : criteriaTemplates)
+	  	 updateCriteriasWeight(actionRequest, actionResponse,  criteriaTemplate.getCriteria_name(), criteriaTemplate.getCriteria_category_id());
+	  	
 	     
 	}
 
@@ -397,8 +400,9 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	
 	  
 	  
-	double totalWeight = ParamUtil.getDouble(actionRequest, key);
-  	
+	double totalWeight = ParamUtil.getDouble(actionRequest, key + "_totalWeight");
+	double passing_score = ParamUtil.getDouble(actionRequest, key + "_PassingScore");
+	
   	User user=(User) actionRequest.getAttribute(WebKeys.USER);
 	  long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
 	  
@@ -418,11 +422,13 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
     		criteriasWeight.setUpdated(new Date());
     		criteriasWeight.setCreatedby(user.getUserId());
     		criteriasWeight.setUpdatedby(user.getUserId());
+    		criteriasWeight.setPassing_score(passing_score);
     		CriteriasWeightLocalServiceUtil.addCriteriasWeight(criteriasWeight);
     	}
       else
       {
     	  Weight.setCriterias_weight(totalWeight);
+    	  Weight.setPassing_score(passing_score);
           Weight.setUpdated(new Date());
           Weight.setCreatedby(user.getUserId());
           CriteriasWeightLocalServiceUtil.updateCriteriasWeight(Weight);

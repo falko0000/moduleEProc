@@ -161,6 +161,34 @@ public interface CriteriaTemplateModel extends BaseModel<CriteriaTemplate> {
 	 */
 	public void setUpdatedby(long updatedby);
 
+	/**
+	 * Returns the criteria_type_id of this criteria template.
+	 *
+	 * @return the criteria_type_id of this criteria template
+	 */
+	public int getCriteria_type_id();
+
+	/**
+	 * Sets the criteria_type_id of this criteria template.
+	 *
+	 * @param criteria_type_id the criteria_type_id of this criteria template
+	 */
+	public void setCriteria_type_id(int criteria_type_id);
+
+	/**
+	 * Returns the access of this criteria template.
+	 *
+	 * @return the access of this criteria template
+	 */
+	public int getAccess();
+
+	/**
+	 * Sets the access of this criteria template.
+	 *
+	 * @param access the access of this criteria template
+	 */
+	public void setAccess(int access);
+
 	@Override
 	public boolean isNew();
 

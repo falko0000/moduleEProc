@@ -22,7 +22,9 @@ create table sapp.criteria_template (
 	created DATE null,
 	updated DATE null,
 	createdby LONG,
-	updatedby LONG
+	updatedby LONG,
+	criteria_type_id INTEGER,
+	access_ INTEGER
 );
 
 create table sapp.criteria_value (
@@ -46,5 +48,6 @@ create table sapp.criterias_weight (
 	created DATE null,
 	updated DATE null,
 	createdby LONG,
-	updatedby LONG
+	updatedby LONG,
+	passing_score DOUBLE
 );

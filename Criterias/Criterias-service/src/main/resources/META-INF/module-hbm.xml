@@ -39,6 +39,7 @@
 		<property name="updated" type="org.hibernate.type.TimestampType" />
 		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="passing_score" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 	<class name="tj.criterias.model.impl.CriteriaTemplateImpl" table="sapp.criteria_template">
 		<id name="criteria_template_id" type="long">
@@ -52,6 +53,8 @@
 		<property name="updated" type="org.hibernate.type.TimestampType" />
 		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="criteria_type_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property column="access_" name="access" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="tj.criterias.model.impl.CriteriaValueImpl" table="sapp.criteria_value">
 		<id name="criteria_value_id" type="long">

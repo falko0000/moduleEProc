@@ -66,7 +66,7 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{criteria_template_id=");
 		sb.append(criteria_template_id);
@@ -82,6 +82,10 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 		sb.append(createdby);
 		sb.append(", updatedby=");
 		sb.append(updatedby);
+		sb.append(", criteria_type_id=");
+		sb.append(criteria_type_id);
+		sb.append(", access=");
+		sb.append(access);
 		sb.append("}");
 
 		return sb.toString();
@@ -118,6 +122,8 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 
 		criteriaTemplateImpl.setCreatedby(createdby);
 		criteriaTemplateImpl.setUpdatedby(updatedby);
+		criteriaTemplateImpl.setCriteria_type_id(criteria_type_id);
+		criteriaTemplateImpl.setAccess(access);
 
 		criteriaTemplateImpl.resetOriginalValues();
 
@@ -136,6 +142,10 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 		createdby = objectInput.readLong();
 
 		updatedby = objectInput.readLong();
+
+		criteria_type_id = objectInput.readInt();
+
+		access = objectInput.readInt();
 	}
 
 	@Override
@@ -157,6 +167,10 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 		objectOutput.writeLong(createdby);
 
 		objectOutput.writeLong(updatedby);
+
+		objectOutput.writeInt(criteria_type_id);
+
+		objectOutput.writeInt(access);
 	}
 
 	public long criteria_template_id;
@@ -166,4 +180,6 @@ public class CriteriaTemplateCacheModel implements CacheModel<CriteriaTemplate>,
 	public long updated;
 	public long createdby;
 	public long updatedby;
+	public int criteria_type_id;
+	public int access;
 }

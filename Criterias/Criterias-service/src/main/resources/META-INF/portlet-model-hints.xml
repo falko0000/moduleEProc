@@ -26,6 +26,7 @@
 		<field name="updated" type="Date" />
 		<field name="createdby" type="long" />
 		<field name="updatedby" type="long" />
+		<field name="passing_score" type="double" />
 	</model>
 	<model name="tj.criterias.model.CriteriaTemplate">
 		<field name="criteria_template_id" type="long" />
@@ -35,6 +36,8 @@
 		<field name="updated" type="Date" />
 		<field name="createdby" type="long" />
 		<field name="updatedby" type="long" />
+		<field name="criteria_type_id" type="int" />
+		<field name="access" type="int" />
 	</model>
 	<model name="tj.criterias.model.CriteriaValue">
 		<field name="criteria_value_id" type="long" />

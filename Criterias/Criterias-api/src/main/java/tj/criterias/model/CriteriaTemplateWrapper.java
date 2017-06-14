@@ -65,6 +65,8 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("criteria_type_id", getCriteria_type_id());
+		attributes.put("access", getAccess());
 
 		return attributes;
 	}
@@ -113,6 +115,18 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
 		}
+
+		Integer criteria_type_id = (Integer)attributes.get("criteria_type_id");
+
+		if (criteria_type_id != null) {
+			setCriteria_type_id(criteria_type_id);
+		}
+
+		Integer access = (Integer)attributes.get("access");
+
+		if (access != null) {
+			setAccess(access);
+		}
 	}
 
 	@Override
@@ -146,6 +160,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	}
 
 	/**
+	* Returns the access of this criteria template.
+	*
+	* @return the access of this criteria template
+	*/
+	@Override
+	public int getAccess() {
+		return _criteriaTemplate.getAccess();
+	}
+
+	/**
 	* Returns the criteria_category_id of this criteria template.
 	*
 	* @return the criteria_category_id of this criteria template
@@ -153,6 +177,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	@Override
 	public int getCriteria_category_id() {
 		return _criteriaTemplate.getCriteria_category_id();
+	}
+
+	/**
+	* Returns the criteria_type_id of this criteria template.
+	*
+	* @return the criteria_type_id of this criteria template
+	*/
+	@Override
+	public int getCriteria_type_id() {
+		return _criteriaTemplate.getCriteria_type_id();
 	}
 
 	@Override
@@ -265,6 +299,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 		_criteriaTemplate.persist();
 	}
 
+	/**
+	* Sets the access of this criteria template.
+	*
+	* @param access the access of this criteria template
+	*/
+	@Override
+	public void setAccess(int access) {
+		_criteriaTemplate.setAccess(access);
+	}
+
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_criteriaTemplate.setCachedModel(cachedModel);
@@ -318,6 +362,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	@Override
 	public void setCriteria_template_id(long criteria_template_id) {
 		_criteriaTemplate.setCriteria_template_id(criteria_template_id);
+	}
+
+	/**
+	* Sets the criteria_type_id of this criteria template.
+	*
+	* @param criteria_type_id the criteria_type_id of this criteria template
+	*/
+	@Override
+	public void setCriteria_type_id(int criteria_type_id) {
+		_criteriaTemplate.setCriteria_type_id(criteria_type_id);
 	}
 
 	@Override

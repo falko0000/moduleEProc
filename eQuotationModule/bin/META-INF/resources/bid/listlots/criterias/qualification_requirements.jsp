@@ -1,4 +1,5 @@
 
+
 <%@ include file="/init.jsp" %>
 
 <%
@@ -12,37 +13,75 @@
 	if(!criterias.isEmpty())	
        criteriasWeight = CriteriasWeightLocalServiceUtil.getCriteriasWeight(spisok_lotov_id, EQuotationConstants.CRITERIA_QUALIFICATION);
  
-	String initial_data_ids = "on"; 
+	CriteriaTemplate criteriaTemplate = CriteriaTemplateLocalServiceUtil.getCriteriaTemplate(EQuotationConstants.CRITERIA_QUALIFICATION, criteria_type_id);
+	
+	int bin[] = {0,0,0,0,0,0};
+	int k = bin.length;
+	
+	int n = criteriaTemplate.getAccess();
+	
+	String binary = "";
+    while (n > 0) {
+    	k--;
+        int rem = n % 2;
+        bin[k] = rem;
+       
+        n = n / 2;
+    }
+   
+    
+			String initial_data_ids = "on"; 
+			String prefix = criteriaTemplate.getCriteria_name();
 %>
-  <div id="qualification-auto-fields-container">
+  <div id=<%=prefix+"-auto-fields-container" %>>
   	
   	<c:if test="<%=criterias.isEmpty() %>">
   	
   	<div class="lfr-form-row lfr-form-row-inline">
 		<aui:row>
+		
+		<c:if test = "<%=bin[bin.length-1]!= 0 %>">
 			<aui:col md="4">
-				<aui:input label="criteria name" name="qualification_criteriaName1" required="true" />
+				<aui:input label="criteria name" name="<%=prefix+"_criteriaName1" %>" required="true" />
 			</aui:col>
+		</c:if>
 			
-			 <c:if test="<%= criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE %>"	>
+			 	<c:if test = "<%=bin[bin.length-2]!= 0 %>">
 				<aui:col md="1">
-					<aui:input label="weight" name="qualification_criteriaWeight1" type="number" required="true" value="100" />
+					<aui:input label="weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
 		    	</aui:col>
 		    </c:if>
 		    
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"7"%>">
+		    <c:if test = "<%=bin[bin.length-3]!= 0 %>">
+			<aui:col md="<%= String.valueOf(7-bin[bin.length-2])%>">
 			
-				<aui:input  label="description_criteria" name="qualification_description_criteria1" type="text" required="true" />
-				<aui:input name="qualification_criteria_id1" type="hidden" value="0" />
+				<aui:input  label="description_criteria" name="<%=prefix+ "_description_criteria1" %>" type="text" required="true" />
+				<aui:input name="<%=prefix+"_criteria_id1" %>" type="hidden" value="0" />
 			</aui:col>
-			
+			</c:if>
+			<c:if test = "<%=bin[bin.length-4]!= 0 %>">
 				<aui:col md="1">
-					<aui:input label="document" name="qualification_document1" type="checkbox" checked="false"  />
+					<aui:input label="document" name="<%=prefix+"_document1" %>" type="checkbox" checked="false"  />
 		    	</aui:col>
+		    </c:if>	
 		</aui:row>
 		</div>
-		<aui:input label="Qualification total weight in percent" name="qualification_totalWeight" type="number" value="0" max="100" min="0" required="true" />
+		
+		<aui:row>
+		<c:if test = "<%=bin[bin.length-5]!= 0 %>">
+		  <aui:col md="2">
+		     <aui:input label="passing_score"  name="<%=prefix + "_PassingScore"%>" type="number" />
+		  </aui:col>
+		  </c:if>
+		  <c:if test = "<%=bin[bin.length-6]!= 0 %>">
+		  <aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
+		<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="0" max="100" min="0" required="true" />
+		   </aui:col>
+		   </c:if>
+		</aui:row>
 		</c:if>
+		
+		
 			<c:if test="<%= !criterias.isEmpty() %>" >
 			
 			<% for( Criteria criteria : criterias) { 
@@ -51,32 +90,56 @@
 			%>
 			<div class="lfr-form-row lfr-form-row-inline">
 		<aui:row>
-			<aui:col md="4">
-				<aui:input label="criteria name" name="qualification_criteriaName1" required="true" value ="<%= criteria.getCriteria_name() %>" />
-			</aui:col>
 		
-		 <c:if test="<%= criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE %>"	>	
+		<c:if test = "<%=bin[bin.length-1]!= 0 %>">
+			<aui:col md="4">
+				<aui:input label="criteria name" name="<%=prefix+"_criteriaName1" %>" required="true" value ="<%= criteria.getCriteria_name() %>" />
+			</aui:col>
+			</c:if>
+		
+		<c:if test = "<%=bin[bin.length-2]!= 0 %>">	
 			<aui:col md="1">
-				<aui:input label="criteria weight" name="qualification_criteriaWeight1" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
+				<aui:input label="criteria weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
 		    </aui:col>
 		</c:if>	
 			
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"7" %>">
-				<aui:input  label="description_criteria" name="qualification_description_criteria1" type="text" value="<%=criteria.getCriteria_description() %>" required="true" />
-				<aui:input name="qualification_criteria_id1" type="hidden" value ="<%= criteria.getCriteria_id() %>" />
-			</aui:col>
+			 <c:if test = "<%=bin[bin.length-3]!= 0 %>">
+			
+				<aui:col md="<%= String.valueOf(7-bin[bin.length-2])%>">
+					<aui:input  label="description_criteria" name="<%=prefix+ "_description_criteria1" %>" type="text" value="<%=criteria.getCriteria_description() %>" required="true" />
+					<aui:input name="<%=prefix+"_criteria_id1" %>" type="hidden" value ="<%= criteria.getCriteria_id() %>" />
+				</aui:col>
+			</c:if>
+			
+			<c:if test = "<%=bin[bin.length-4]!= 0 %>">	
 				<aui:col md="1">
-					<aui:input label="document" name="qualification_document1" type="checkbox" checked="<%=criteria.getDoc_mandatory() %>"  />
+					<aui:input label="document" name="<%=prefix+"_document1" %>" type="checkbox" checked="<%=criteria.getDoc_mandatory() %>"  />
 		    	</aui:col>	
+			</c:if>
+			
 		</aui:row>
 		</div>
 		<%} %>
-			<aui:input label="Qualification total weight in percent" name="qualification_totalWeight" type="number" value="<%=criteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
-		   
-		</c:if>
+		  <aui:row>
+			<c:if test = "<%=bin[bin.length-5]!= 0 %>">
+		  		<aui:col md="2">
+		     			<aui:input label="passing_score" name="<%=prefix + "_PassingScore"%>" type="number" value="<%=criteriasWeight.getPassing_score() %>"/>
+		  		</aui:col>
+		  	</c:if>
+		  	<c:if test = "<%=bin[bin.length-6]!= 0 %>">
+		  
+		  		<aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
+					
+					<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="<%=criteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
+		
+		  		</aui:col>
+		  
+		  	</c:if>
+		</aui:row>
+   </c:if>
 		
 		
-		 <aui:input name="qualification_initial_data_ids" type="hidden" value="<%=initial_data_ids %>" />
+		 <aui:input name="<%=prefix+"_initial_data_ids" %>" type="hidden" value="<%=initial_data_ids %>" />
 	
 	</div>
 	

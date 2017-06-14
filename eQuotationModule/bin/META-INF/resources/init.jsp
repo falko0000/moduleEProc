@@ -158,6 +158,10 @@
 <%@page import="tj.vbk.model.Vbk"%>
 <%@page import="tj.vbk.service.VbkLocalServiceUtil"%>
 
+<%@page import="tj.criterias.service.CriteriaTemplateLocalServiceUtil"%>
+
+<%@page import="tj.criterias.model.CriteriaTemplate"%>
+
 <%@page import="com.liferay.portal.kernel.exception.PortalException" %>
 
 <%@page import="com.liferay.portal.kernel.service.UserGroupLocalServiceUtil" %>

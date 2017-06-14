@@ -68,7 +68,9 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 			{ "created", Types.TIMESTAMP },
 			{ "updated", Types.TIMESTAMP },
 			{ "createdby", Types.BIGINT },
-			{ "updatedby", Types.BIGINT }
+			{ "updatedby", Types.BIGINT },
+			{ "criteria_type_id", Types.INTEGER },
+			{ "access_", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -80,9 +82,11 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		TABLE_COLUMNS_MAP.put("updated", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("createdby", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("criteria_type_id", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("access_", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_template (criteria_template_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_category_id INTEGER,created DATE null,updated DATE null,createdby LONG,updatedby LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_template (criteria_template_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_category_id INTEGER,created DATE null,updated DATE null,createdby LONG,updatedby LONG,criteria_type_id INTEGER,access_ INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria_template";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteriaTemplate.criteria_template_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria_template.criteria_template_id ASC";
@@ -99,7 +103,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 				"value.object.column.bitmask.enabled.tj.criterias.model.CriteriaTemplate"),
 			true);
 	public static final long CRITERIA_CATEGORY_ID_COLUMN_BITMASK = 1L;
-	public static final long CRITERIA_TEMPLATE_ID_COLUMN_BITMASK = 2L;
+	public static final long CRITERIA_TYPE_ID_COLUMN_BITMASK = 2L;
+	public static final long CRITERIA_TEMPLATE_ID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.criterias.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.criterias.model.CriteriaTemplate"));
 
@@ -147,6 +152,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		attributes.put("updated", getUpdated());
 		attributes.put("createdby", getCreatedby());
 		attributes.put("updatedby", getUpdatedby());
+		attributes.put("criteria_type_id", getCriteria_type_id());
+		attributes.put("access", getAccess());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -197,6 +204,18 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 		if (updatedby != null) {
 			setUpdatedby(updatedby);
+		}
+
+		Integer criteria_type_id = (Integer)attributes.get("criteria_type_id");
+
+		if (criteria_type_id != null) {
+			setCriteria_type_id(criteria_type_id);
+		}
+
+		Integer access = (Integer)attributes.get("access");
+
+		if (access != null) {
+			setAccess(access);
 		}
 	}
 
@@ -287,6 +306,38 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		_updatedby = updatedby;
 	}
 
+	@Override
+	public int getCriteria_type_id() {
+		return _criteria_type_id;
+	}
+
+	@Override
+	public void setCriteria_type_id(int criteria_type_id) {
+		_columnBitmask |= CRITERIA_TYPE_ID_COLUMN_BITMASK;
+
+		if (!_setOriginalCriteria_type_id) {
+			_setOriginalCriteria_type_id = true;
+
+			_originalCriteria_type_id = _criteria_type_id;
+		}
+
+		_criteria_type_id = criteria_type_id;
+	}
+
+	public int getOriginalCriteria_type_id() {
+		return _originalCriteria_type_id;
+	}
+
+	@Override
+	public int getAccess() {
+		return _access;
+	}
+
+	@Override
+	public void setAccess(int access) {
+		_access = access;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -325,6 +376,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		criteriaTemplateImpl.setUpdated(getUpdated());
 		criteriaTemplateImpl.setCreatedby(getCreatedby());
 		criteriaTemplateImpl.setUpdatedby(getUpdatedby());
+		criteriaTemplateImpl.setCriteria_type_id(getCriteria_type_id());
+		criteriaTemplateImpl.setAccess(getAccess());
 
 		criteriaTemplateImpl.resetOriginalValues();
 
@@ -391,6 +444,10 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 		criteriaTemplateModelImpl._setOriginalCriteria_category_id = false;
 
+		criteriaTemplateModelImpl._originalCriteria_type_id = criteriaTemplateModelImpl._criteria_type_id;
+
+		criteriaTemplateModelImpl._setOriginalCriteria_type_id = false;
+
 		criteriaTemplateModelImpl._columnBitmask = 0;
 	}
 
@@ -432,12 +489,16 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 		criteriaTemplateCacheModel.updatedby = getUpdatedby();
 
+		criteriaTemplateCacheModel.criteria_type_id = getCriteria_type_id();
+
+		criteriaTemplateCacheModel.access = getAccess();
+
 		return criteriaTemplateCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{criteria_template_id=");
 		sb.append(getCriteria_template_id());
@@ -453,6 +514,10 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		sb.append(getCreatedby());
 		sb.append(", updatedby=");
 		sb.append(getUpdatedby());
+		sb.append(", criteria_type_id=");
+		sb.append(getCriteria_type_id());
+		sb.append(", access=");
+		sb.append(getAccess());
 		sb.append("}");
 
 		return sb.toString();
@@ -460,7 +525,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriaTemplate");
@@ -494,6 +559,14 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 			"<column><column-name>updatedby</column-name><column-value><![CDATA[");
 		sb.append(getUpdatedby());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>criteria_type_id</column-name><column-value><![CDATA[");
+		sb.append(getCriteria_type_id());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>access</column-name><column-value><![CDATA[");
+		sb.append(getAccess());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -513,6 +586,10 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	private Date _updated;
 	private long _createdby;
 	private long _updatedby;
+	private int _criteria_type_id;
+	private int _originalCriteria_type_id;
+	private boolean _setOriginalCriteria_type_id;
+	private int _access;
 	private long _columnBitmask;
 	private CriteriaTemplate _escapedModel;
 }

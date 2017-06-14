@@ -1,3 +1,4 @@
+<%@page import="tj.criterias.model.Criteria"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -8,45 +9,81 @@
 		criterias = CriteriaLocalServiceUtil.getCriteria(spisok_lotov_id, EQuotationConstants.CRITERIA_TECHNICAL, criteria_type_id);
 		
 		CriteriasWeight tcriteriasWeight = null;
-		CriteriasWeight fcriteriasWeight = null;
+		
 	    
 	if(!criterias.isEmpty())	
        tcriteriasWeight = CriteriasWeightLocalServiceUtil.getCriteriasWeight(spisok_lotov_id, EQuotationConstants.CRITERIA_TECHNICAL);
 	
-
-	String initial_data_ids = "on"; 
+	CriteriaTemplate criteriaTemplate = CriteriaTemplateLocalServiceUtil.getCriteriaTemplate(EQuotationConstants.CRITERIA_TECHNICAL, criteria_type_id);
+	
+	int bin[] = {0,0,0,0,0,0};
+	int k = bin.length;
+	
+	int n = criteriaTemplate.getAccess();
+	
+	String binary = "";
+    while (n > 0) {
+    	k--;
+        int rem = n % 2;
+        bin[k] = rem;
+       
+        n = n / 2;
+    }
+   
+    
+			String initial_data_ids = "on"; 
+			String prefix = criteriaTemplate.getCriteria_name();
 %>
-  <div id="technical-auto-fields-container">
-  <c:if test="<%=criterias.isEmpty() %>">
-  
-		<div class="lfr-form-row lfr-form-row-inline">
+  <div id=<%=prefix+"-auto-fields-container" %>>
+  	
+  	<c:if test="<%=criterias.isEmpty() %>">
+  	
+  	<div class="lfr-form-row lfr-form-row-inline">
 		<aui:row>
+		
+		<c:if test = "<%=bin[bin.length-1]!= 0 %>">
 			<aui:col md="4">
-			
-				<aui:input label="criteria name" name="technical_criteriaName1" required="true" />
-			
+				<aui:input label="criteria name" name="<%=prefix+"_criteriaName1" %>" required="true" />
 			</aui:col>
-			 
-			 <c:if test="<%= criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE %>"	>
-			<aui:col md="2">
-				<aui:input label="criteria weight" name="technical_criteriaWeight1" type="number" required="true" value="100" />
+		</c:if>
+			
+			 	<c:if test = "<%=bin[bin.length-2]!= 0 %>">
+				<aui:col md="1">
+					<aui:input label="weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
+		    	</aui:col>
+		    </c:if>
+		    
+		    <c:if test = "<%=bin[bin.length-3]!= 0 %>">
+			<aui:col md="<%= String.valueOf(7-bin[bin.length-2])%>">
+			
+				<aui:input  label="description_criteria" name="<%=prefix+ "_description_criteria1" %>" type="text" required="true" />
+				<aui:input name="<%=prefix+"_criteria_id1" %>" type="hidden" value="0" />
 			</aui:col>
 			</c:if>
-			
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"8" %>">
-			         <aui:input  label="description_criteria" name="technical_description_criteria1" type="text"  required="true" />
-					<aui:input name="technical_criteria_id1" type="hidden" value="0" />
-			</aui:col>
-			
+			<c:if test = "<%=bin[bin.length-4]!= 0 %>">
+				<aui:col md="1">
+					<aui:input label="document" name="<%=prefix+"_document1" %>" type="checkbox" checked="false"  />
+		    	</aui:col>
+		    </c:if>	
 		</aui:row>
-			
 		</div>
 		
-		<aui:input label="Technical total weight in percent" name="technical_totalWeight" type="number" value="0" max="100" min="0" required="true" />
-		
+		<aui:row>
+		<c:if test = "<%=bin[bin.length-5]!= 0 %>">
+		  <aui:col md="2">
+		     <aui:input label="passing_score"  name="<%=prefix + "_PassingScore"%>" type="number" />
+		  </aui:col>
+		  </c:if>
+		  <c:if test = "<%=bin[bin.length-6]!= 0 %>">
+		  <aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
+		<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="0" max="100" min="0" required="true" />
+		   </aui:col>
+		   </c:if>
+		</aui:row>
 		</c:if>
 		
-		<c:if test="<%= !criterias.isEmpty() %>" >
+		
+			<c:if test="<%= !criterias.isEmpty() %>" >
 			
 			<% for( Criteria criteria : criterias) { 
 			
@@ -54,45 +91,69 @@
 			%>
 			<div class="lfr-form-row lfr-form-row-inline">
 		<aui:row>
+		
+		<c:if test = "<%=bin[bin.length-1]!= 0 %>">
 			<aui:col md="4">
-				<aui:input label="criteria name" name="technical_criteriaName1" required="true" value ="<%= criteria.getCriteria_name() %>" />
+				<aui:input label="criteria name" name="<%=prefix+"_criteriaName1" %>" required="true" value ="<%= criteria.getCriteria_name() %>" />
 			</aui:col>
-			 
-			 <c:if test="<%= criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE %>"	>
-				<aui:col md="2">
-					<aui:input label="criteria weight" name="technical_criteriaWeight1" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
-		    	</aui:col>
+			</c:if>
+		
+		<c:if test = "<%=bin[bin.length-2]!= 0 %>">	
+			<aui:col md="1">
+				<aui:input label="criteria weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
+		    </aui:col>
+		</c:if>	
+			
+			 <c:if test = "<%=bin[bin.length-3]!= 0 %>">
+			
+				<aui:col md="<%= String.valueOf(7-bin[bin.length-2])%>">
+					<aui:input  label="description_criteria" name="<%=prefix+ "_description_criteria1" %>" type="text" value="<%=criteria.getCriteria_description() %>" required="true" />
+					<aui:input name="<%=prefix+"_criteria_id1" %>" type="hidden" value ="<%= criteria.getCriteria_id() %>" />
+				</aui:col>
 			</c:if>
 			
-			<aui:col md="<%= (criteria_type_id == EQuotationConstants.CRITERIA_LOW_PRICE)?"6":"8" %>">
-			    <aui:input  label="description_criteria" name="technical_description_criteria1" type="text" value="<%=criteria.getCriteria_description() %>" required="true" />
-				<aui:input name="technical_criteria_id1" type="hidden" value ="<%= criteria.getCriteria_id() %>" />
-			</aui:col>	
+			<c:if test = "<%=bin[bin.length-4]!= 0 %>">	
+				<aui:col md="1">
+					<aui:input label="document" name="<%=prefix+"_document1" %>" type="checkbox" checked="<%=criteria.getDoc_mandatory() %>"  />
+		    	</aui:col>	
+			</c:if>
+			
 		</aui:row>
 		</div>
 		<%} %>
-			<aui:input label="Technical total weight in percent" name="technical_totalWeight" type="number" value="<%=tcriteriasWeight.getCriterias_weight() %>"  max="100" min="0" required="true"/>
-		   
-		</c:if>
+		  <aui:row>
+			<c:if test = "<%=bin[bin.length-5]!= 0 %>">
+		  		<aui:col md="2">
+		     		<aui:input label="passing_score" name="<%=prefix + "_PassingScore"%>" type="number" value="<%=tcriteriasWeight.getPassing_score() %>"/>
+		  		</aui:col>
+		  	</c:if>
+		  	<c:if test = "<%=bin[bin.length-6]!= 0 %>">
+		  
+		  		<aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
+					
+					<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="<%=tcriteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
+		
+		  		</aui:col>
+		  
+		  	</c:if>
+		</aui:row>
+   </c:if>
 		
 		
-		 <aui:input name="technical_initial_data_ids" type="hidden" value="<%=initial_data_ids %>" />
+		 <aui:input name="<%=prefix+"_initial_data_ids" %>" type="hidden" value="<%=initial_data_ids %>" />
 	
-	
-		
-	 
-	 </div>
+	</div>
 	
 	<aui:script use="liferay-auto-fields">
 	AUI().use('liferay-auto-fields',function (A) {
 	new Liferay.AutoFields({
-	contentBox: '#technical-auto-fields-container',
-	fieldIndexes: '<portlet:namespace />technical_rowIndexes',
+	contentBox: '#<%=prefix%>-auto-fields-container',
+	fieldIndexes: '<portlet:namespace /><%=prefix%>_rowIndexes',
 	on: {
 		'clone': function(event) {
 			var row = event.row;
 			var guid = event.guid;
-			A.one('#<portlet:namespace/>technical_criteria_id'+guid).set('value',"0");
+			A.one('#<portlet:namespace/><%=prefix%>_criteria_id'+guid).set('value',"0");
 		},
 		'delete': function(event) {
 			

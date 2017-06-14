@@ -42,10 +42,22 @@
 	<column name="updated" type="Date"></column>
 	<column name="createdby" type="long"></column>
 	<column name="updatedby" type="long"></column>
+	<column name="criteria_type_id" type="int"></column>
+	<column name="access" type="int"></column>
 	
 	<finder return-type="Collection" name="CriteriaCategoryId">
 	<finder-column name="criteria_category_id"></finder-column>
 	</finder>
+	
+	<finder return-type="CriteriaTemplate" name="categoryIdAndTypeId">
+		<finder-column name="criteria_category_id"></finder-column>
+		<finder-column name="criteria_type_id"></finder-column>
+	</finder>
+	
+	<finder return-type="Collection" name="typeId">
+		<finder-column name="criteria_type_id"></finder-column>
+	</finder>
+	
 	</entity>
 	
 		<entity local-service="true" name="CriteriaValue" remote-service="false" uuid="false" table="sapp.criteria_value">
@@ -85,6 +97,7 @@
 	<column name="updated" type="Date"></column>
 	<column name="createdby" type="long"></column>
 	<column name="updatedby" type="long"></column>
+	<column name="passing_score" type="double"></column>
 	
 	<finder return-type="CriteriasWeight" name="LotovIdAndCategoryId">
 	<finder-column name="spisok_lotov_id"></finder-column>
