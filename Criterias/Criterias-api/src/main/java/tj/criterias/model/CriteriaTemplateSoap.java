@@ -42,6 +42,7 @@ public class CriteriaTemplateSoap implements Serializable {
 		soapModel.setUpdatedby(model.getUpdatedby());
 		soapModel.setCriteria_type_id(model.getCriteria_type_id());
 		soapModel.setAccess(model.getAccess());
+		soapModel.setHidden(model.getHidden());
 
 		return soapModel;
 	}
@@ -168,6 +169,18 @@ public class CriteriaTemplateSoap implements Serializable {
 		_access = access;
 	}
 
+	public boolean getHidden() {
+		return _hidden;
+	}
+
+	public boolean isHidden() {
+		return _hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		_hidden = hidden;
+	}
+
 	private long _criteria_template_id;
 	private String _criteria_name;
 	private int _criteria_category_id;
@@ -177,4 +190,5 @@ public class CriteriaTemplateSoap implements Serializable {
 	private long _updatedby;
 	private int _criteria_type_id;
 	private int _access;
+	private boolean _hidden;
 }

@@ -55,6 +55,7 @@
 		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="criteria_type_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property column="access_" name="access" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property column="hidden_" name="hidden" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="tj.criterias.model.impl.CriteriaValueImpl" table="sapp.criteria_value">
 		<id name="criteria_value_id" type="long">

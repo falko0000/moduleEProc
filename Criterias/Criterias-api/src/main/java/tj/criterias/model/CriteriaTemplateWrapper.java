@@ -67,6 +67,7 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 		attributes.put("updatedby", getUpdatedby());
 		attributes.put("criteria_type_id", getCriteria_type_id());
 		attributes.put("access", getAccess());
+		attributes.put("hidden", getHidden());
 
 		return attributes;
 	}
@@ -127,6 +128,22 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 		if (access != null) {
 			setAccess(access);
 		}
+
+		Boolean hidden = (Boolean)attributes.get("hidden");
+
+		if (hidden != null) {
+			setHidden(hidden);
+		}
+	}
+
+	/**
+	* Returns the hidden of this criteria template.
+	*
+	* @return the hidden of this criteria template
+	*/
+	@Override
+	public boolean getHidden() {
+		return _criteriaTemplate.getHidden();
 	}
 
 	@Override
@@ -137,6 +154,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	@Override
 	public boolean isEscapedModel() {
 		return _criteriaTemplate.isEscapedModel();
+	}
+
+	/**
+	* Returns <code>true</code> if this criteria template is hidden.
+	*
+	* @return <code>true</code> if this criteria template is hidden; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isHidden() {
+		return _criteriaTemplate.isHidden();
 	}
 
 	@Override
@@ -388,6 +415,16 @@ public class CriteriaTemplateWrapper implements CriteriaTemplate,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_criteriaTemplate.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	* Sets whether this criteria template is hidden.
+	*
+	* @param hidden the hidden of this criteria template
+	*/
+	@Override
+	public void setHidden(boolean hidden) {
+		_criteriaTemplate.setHidden(hidden);
 	}
 
 	@Override

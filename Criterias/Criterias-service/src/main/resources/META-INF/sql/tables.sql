@@ -24,7 +24,8 @@ create table sapp.criteria_template (
 	createdby LONG,
 	updatedby LONG,
 	criteria_type_id INTEGER,
-	access_ INTEGER
+	access_ INTEGER,
+	hidden_ BOOLEAN
 );
 
 create table sapp.criteria_value (

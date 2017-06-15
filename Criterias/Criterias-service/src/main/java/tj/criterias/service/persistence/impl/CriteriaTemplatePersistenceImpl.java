@@ -1724,6 +1724,7 @@ public class CriteriaTemplatePersistenceImpl extends BasePersistenceImpl<Criteri
 		criteriaTemplateImpl.setUpdatedby(criteriaTemplate.getUpdatedby());
 		criteriaTemplateImpl.setCriteria_type_id(criteriaTemplate.getCriteria_type_id());
 		criteriaTemplateImpl.setAccess(criteriaTemplate.getAccess());
+		criteriaTemplateImpl.setHidden(criteriaTemplate.isHidden());
 
 		return criteriaTemplateImpl;
 	}
@@ -2146,6 +2147,6 @@ public class CriteriaTemplatePersistenceImpl extends BasePersistenceImpl<Criteri
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CriteriaTemplate exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(CriteriaTemplatePersistenceImpl.class);
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"access"
+				"access", "hidden"
 			});
 }

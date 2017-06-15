@@ -189,6 +189,27 @@ public interface CriteriaTemplateModel extends BaseModel<CriteriaTemplate> {
 	 */
 	public void setAccess(int access);
 
+	/**
+	 * Returns the hidden of this criteria template.
+	 *
+	 * @return the hidden of this criteria template
+	 */
+	public boolean getHidden();
+
+	/**
+	 * Returns <code>true</code> if this criteria template is hidden.
+	 *
+	 * @return <code>true</code> if this criteria template is hidden; <code>false</code> otherwise
+	 */
+	public boolean isHidden();
+
+	/**
+	 * Sets whether this criteria template is hidden.
+	 *
+	 * @param hidden the hidden of this criteria template
+	 */
+	public void setHidden(boolean hidden);
+
 	@Override
 	public boolean isNew();
 

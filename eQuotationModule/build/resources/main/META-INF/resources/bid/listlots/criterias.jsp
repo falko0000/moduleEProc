@@ -1,24 +1,39 @@
+<%@page import="tj.criterias.service.CriteriaTemplateLocalServiceUtil"%>
+<%@page import="tj.criterias.model.CriteriaTemplate"%>
 <%@ include file="/init.jsp" %>
 
 
 <%
 
- String[] CAT_NAMES = new String[]{"qualification_requirements",
-		 							"other_conditions",
-		                            "technical_proposal",
-		                            "financial_proposal"};
+Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
+long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
+int criteria_type_id = ParamUtil.getInteger(request,"criteria_type_id");
+
+  List<CriteriaTemplate> criteriaTemplates = CriteriaTemplateLocalServiceUtil.getCriteriaTemplateTypeId(criteria_type_id);
+
+  String[] CAT_NAMES = new String[]{"qualification",
+		 							  "other_conditions",
+		                              "technical",
+		                              "financial"
+		                            };
  
-String[] qualification = new String[]{"qualification_requirements"};
-String[] otherconditions = new String[]{"other_conditions"};
- String[] technical = new String[]{"technical_proposal"};
- String[] financial = new String[]{"financial_proposal"};
+ int sequence[] = {1 , 3, 4, 2}; 
+
+
+
+String qualification[] = new String[CAT_NAMES.length+1];
 
  
- String[][] CAT_SECTION = {qualification, otherconditions, technical, financial};
+ for(CriteriaTemplate criterias : criteriaTemplates)
+ {
+	 if(!criterias.getHidden())
+	 qualification[sequence[criterias.getCriteria_category_id()-1]] = criterias.getCriteria_name();
+ }
+
  
- Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
- long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
- String criteria_type_id = ParamUtil.getString(request,"criteria_type_id");
+ String[][] CAT_SECTION = {qualification};
+ 
+
  String currentURL = themeDisplay.getURLCurrent();
 %>
 
@@ -26,7 +41,7 @@ String[] otherconditions = new String[]{"other_conditions"};
 		   <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="<%= (izvewenija == null) ? "0" : String.valueOf(izvewenija.getIzvewenija_id()) %>"/>
           <portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>"/>
-     		 <portlet:param name="criteria_type_id" value="<%= criteria_type_id %>"/>
+     		 <portlet:param name="criteria_type_id" value="<%= String.valueOf(criteria_type_id) %>"/>
 </liferay-portlet:actionURL>
 
 

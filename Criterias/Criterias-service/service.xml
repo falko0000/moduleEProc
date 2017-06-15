@@ -44,6 +44,7 @@
 	<column name="updatedby" type="long"></column>
 	<column name="criteria_type_id" type="int"></column>
 	<column name="access" type="int"></column>
+	<column name="hidden" type="boolean"></column>
 	
 	<finder return-type="Collection" name="CriteriaCategoryId">
 	<finder-column name="criteria_category_id"></finder-column>

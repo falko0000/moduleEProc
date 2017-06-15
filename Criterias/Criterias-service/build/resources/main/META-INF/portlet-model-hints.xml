@@ -38,6 +38,7 @@
 		<field name="updatedby" type="long" />
 		<field name="criteria_type_id" type="int" />
 		<field name="access" type="int" />
+		<field name="hidden" type="boolean" />
 	</model>
 	<model name="tj.criterias.model.CriteriaValue">
 		<field name="criteria_value_id" type="long" />

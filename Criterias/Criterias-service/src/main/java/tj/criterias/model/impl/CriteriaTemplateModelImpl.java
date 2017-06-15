@@ -70,7 +70,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 			{ "createdby", Types.BIGINT },
 			{ "updatedby", Types.BIGINT },
 			{ "criteria_type_id", Types.INTEGER },
-			{ "access_", Types.INTEGER }
+			{ "access_", Types.INTEGER },
+			{ "hidden_", Types.BOOLEAN }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -84,9 +85,10 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		TABLE_COLUMNS_MAP.put("updatedby", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("criteria_type_id", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("access_", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("hidden_", Types.BOOLEAN);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_template (criteria_template_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_category_id INTEGER,created DATE null,updated DATE null,createdby LONG,updatedby LONG,criteria_type_id INTEGER,access_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_template (criteria_template_id LONG not null primary key,criteria_name VARCHAR(75) null,criteria_category_id INTEGER,created DATE null,updated DATE null,createdby LONG,updatedby LONG,criteria_type_id INTEGER,access_ INTEGER,hidden_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria_template";
 	public static final String ORDER_BY_JPQL = " ORDER BY criteriaTemplate.criteria_template_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria_template.criteria_template_id ASC";
@@ -154,6 +156,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		attributes.put("updatedby", getUpdatedby());
 		attributes.put("criteria_type_id", getCriteria_type_id());
 		attributes.put("access", getAccess());
+		attributes.put("hidden", getHidden());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -216,6 +219,12 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 		if (access != null) {
 			setAccess(access);
+		}
+
+		Boolean hidden = (Boolean)attributes.get("hidden");
+
+		if (hidden != null) {
+			setHidden(hidden);
 		}
 	}
 
@@ -338,6 +347,21 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		_access = access;
 	}
 
+	@Override
+	public boolean getHidden() {
+		return _hidden;
+	}
+
+	@Override
+	public boolean isHidden() {
+		return _hidden;
+	}
+
+	@Override
+	public void setHidden(boolean hidden) {
+		_hidden = hidden;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -378,6 +402,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		criteriaTemplateImpl.setUpdatedby(getUpdatedby());
 		criteriaTemplateImpl.setCriteria_type_id(getCriteria_type_id());
 		criteriaTemplateImpl.setAccess(getAccess());
+		criteriaTemplateImpl.setHidden(getHidden());
 
 		criteriaTemplateImpl.resetOriginalValues();
 
@@ -493,12 +518,14 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 		criteriaTemplateCacheModel.access = getAccess();
 
+		criteriaTemplateCacheModel.hidden = getHidden();
+
 		return criteriaTemplateCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{criteria_template_id=");
 		sb.append(getCriteria_template_id());
@@ -518,6 +545,8 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 		sb.append(getCriteria_type_id());
 		sb.append(", access=");
 		sb.append(getAccess());
+		sb.append(", hidden=");
+		sb.append(getHidden());
 		sb.append("}");
 
 		return sb.toString();
@@ -525,7 +554,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriaTemplate");
@@ -567,6 +596,10 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 			"<column><column-name>access</column-name><column-value><![CDATA[");
 		sb.append(getAccess());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hidden</column-name><column-value><![CDATA[");
+		sb.append(getHidden());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -590,6 +623,7 @@ public class CriteriaTemplateModelImpl extends BaseModelImpl<CriteriaTemplate>
 	private int _originalCriteria_type_id;
 	private boolean _setOriginalCriteria_type_id;
 	private int _access;
+	private boolean _hidden;
 	private long _columnBitmask;
 	private CriteriaTemplate _escapedModel;
 }
