@@ -48,7 +48,7 @@
 			
 			 	<c:if test = "<%=bin[bin.length-2]!= 0 %>">
 				<aui:col md="1">
-					<aui:input label="weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
+					<aui:input label="max" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
 		    	</aui:col>
 		    </c:if>
 		    
@@ -99,7 +99,7 @@
 		
 		<c:if test = "<%=bin[bin.length-2]!= 0 %>">	
 			<aui:col md="1">
-				<aui:input label="criteria weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
+				<aui:input label="max" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
 		    </aui:col>
 		</c:if>	
 			
@@ -148,13 +148,13 @@
 	AUI().use('liferay-auto-fields',function (A) {
 	
 	new Liferay.AutoFields({
-	contentBox: '#qualification-auto-fields-container',
-	fieldIndexes: '<portlet:namespace />qualification_rowIndexes',
+	contentBox: '#<%=prefix%>-auto-fields-container',
+	fieldIndexes: '<portlet:namespace /><%=prefix%>_rowIndexes',
 	on: {
 		'clone': function(event) {
 			var row = event.row;
 			var guid = event.guid;
-	A.one('#<portlet:namespace/>qualification_criteria_id'+guid).set('value',"0");
+	A.one('#<portlet:namespace/><%=prefix%>_criteria_id'+guid).set('value',"0");
 		 
 		},
 		'delete': function(event) {
@@ -166,8 +166,13 @@
 	sortable: true,
 	sortableHandle: '.lfr-form-row'
 }).render();
+	   
 	
-	A.one("#<portlet:namespace/>qualification_totalWeight").on('keyup',function(){
+	var qualification = A.one("#<portlet:namespace/><%=prefix%>_totalWeight");
+	
+	if(qualification)
+		{
+		qualification.on('keyup',function(){
 		
 		var qualification_totalWeight = A.one('#<portlet:namespace/>qualification_totalWeight');
 	    var technical_totalWeight = A.one('#<portlet:namespace/>technical_totalWeight');
@@ -175,12 +180,18 @@
 	   
 	    var qualification_value =100 - qualification_totalWeight.get('value');
 	    
-	    technical_totalWeight.set('max',qualification_value);
+	    if(technical_totalWeight)
+	    	{
+	    	   technical_totalWeight.set('max',qualification_value);
+	    	   technical_totalWeight.set('value',qualification_value/2);
+	    	}
+	    if(financial_totalWeight)
+	    	{
 	    financial_totalWeight.set('max',qualification_value);
-	    technical_totalWeight.set('value',qualification_value/2);
 	    financial_totalWeight.set('value',qualification_value/2);
-		
+	    	}
 	});
+		}
 	});
 	
 </aui:script>

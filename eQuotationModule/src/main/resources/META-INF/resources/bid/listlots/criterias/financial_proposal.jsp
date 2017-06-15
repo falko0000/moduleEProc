@@ -52,7 +52,7 @@
 			
 			 	<c:if test = "<%=bin[bin.length-2]!= 0 %>">
 				<aui:col md="1">
-					<aui:input label="weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
+					<aui:input label="max" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
 		    	</aui:col>
 		    </c:if>
 		    
@@ -79,7 +79,7 @@
 		  </c:if>
 		  <c:if test = "<%=bin[bin.length-6]!= 0 %>">
 		  <aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
-		<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="0" max="100" min="0" required="true" />
+		<aui:input label="Financial total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="0" max="100" min="0" required="true" />
 		   </aui:col>
 		   </c:if>
 		</aui:row>
@@ -103,7 +103,7 @@
 		
 		<c:if test = "<%=bin[bin.length-2]!= 0 %>">	
 			<aui:col md="1">
-				<aui:input label="criteria weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
+				<aui:input label="max" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
 		    </aui:col>
 		</c:if>	
 			
@@ -134,7 +134,7 @@
 		  
 		  		<aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
 					
-					<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="<%=criteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
+					<aui:input label="Financial total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="<%=criteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
 		
 		  		</aui:col>
 		  

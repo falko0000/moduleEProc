@@ -457,6 +457,7 @@ private void insertCriteria(String qualification_criteriaName,Number qualificati
         criteria.setCriteria_description(descriptionCriteria);
         criteria.setCriteria_category_id(category_id);
         criteria.setCriteria_type_id(criteria_type_id);
+        
         CriteriaLocalServiceUtil.addCriteria(criteria);
 }
 
@@ -477,6 +478,7 @@ private void updateCriteria(long qualification_criteria_id, String qualification
          cloneCriteria.setMin_weight(qualification_weightMin.intValue());
          cloneCriteria.setCriteria_description(descriptionCriteria);
          cloneCriteria.setDoc_mandatory(document);
+         
         if(criteria.getCriteria_weight()!=cloneCriteria.getCriteria_weight() ||
         	!criteria.getCriteria_name().equals(cloneCriteria.getCriteria_name()) ||
         	!criteria.getCriteria_description().equals(cloneCriteria.getCriteria_description())
@@ -484,6 +486,7 @@ private void updateCriteria(long qualification_criteria_id, String qualification
         {
         cloneCriteria.setUpdated(new Date());
     	cloneCriteria.setUpdatedby(userId);
+    
       CriteriaLocalServiceUtil.updateCriteria(cloneCriteria);
         }
                
@@ -529,7 +532,7 @@ private void deleteProduct(ActionRequest actionRequest, ActionResponse actionRes
 	     ids = cmd.substring(3, cmd.indexOf("_"+Constants.DELETE));
 	  else
 		    ids = cmd.substring(0, cmd.indexOf("_"+Constants.DELETE));  
-	  System.out.println(ids);
+	
 		
 	  String id[] = ids.split(",");
 	  

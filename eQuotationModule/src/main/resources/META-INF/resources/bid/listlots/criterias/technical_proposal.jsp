@@ -49,7 +49,7 @@
 			
 			 	<c:if test = "<%=bin[bin.length-2]!= 0 %>">
 				<aui:col md="1">
-					<aui:input label="weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
+					<aui:input label="max" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value="100" />
 		    	</aui:col>
 		    </c:if>
 		    
@@ -76,7 +76,7 @@
 		  </c:if>
 		  <c:if test = "<%=bin[bin.length-6]!= 0 %>">
 		  <aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
-		<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="0" max="100" min="0" required="true" />
+		<aui:input label="technical total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="0" max="100" min="0" required="true" />
 		   </aui:col>
 		   </c:if>
 		</aui:row>
@@ -100,7 +100,7 @@
 		
 		<c:if test = "<%=bin[bin.length-2]!= 0 %>">	
 			<aui:col md="1">
-				<aui:input label="criteria weight" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
+				<aui:input label="max" name="<%=prefix+"_criteriaWeight1"%>" type="number" required="true" value ="<%= criteria.getCriteria_weight() %>" />
 		    </aui:col>
 		</c:if>	
 			
@@ -131,7 +131,7 @@
 		  
 		  		<aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
 					
-					<aui:input label="Qualification total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="<%=tcriteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
+					<aui:input label="Technical total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="<%=tcriteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
 		
 		  		</aui:col>
 		  
@@ -145,6 +145,7 @@
 	</div>
 	
 	<aui:script use="liferay-auto-fields">
+	
 	AUI().use('liferay-auto-fields',function (A) {
 	new Liferay.AutoFields({
 	contentBox: '#<%=prefix%>-auto-fields-container',
@@ -163,15 +164,23 @@
 	sortableHandle: '.lfr-form-row'
 }).render();
 	
-	A.one("#<portlet:namespace/>technical_totalWeight").on('keyup',function(){
-		
+	  var technical = A.one("#<portlet:namespace/><%=prefix%>_totalWeight");
+	  
+	  if(technical)
+		  {
+	A.one("#<portlet:namespace/><%=prefix%>_totalWeight").on('keyup',function(){
+	
 		  var technical_totalWeight = A.one('#<portlet:namespace/>technical_totalWeight');
 		    var financial_totalWeight = A.one('#<portlet:namespace/>financial_totalWeight');
 		   
 		    var technical_value = technical_totalWeight.get('max') - technical_totalWeight.get('value');
-		    
+	
+		    if(financial_totalWeight)
+		    	{
 		    financial_totalWeight.set('max',technical_value);
 		    financial_totalWeight.set('value',technical_value);
+		    	}
 	});
+		  }
 	});
 </aui:script>
