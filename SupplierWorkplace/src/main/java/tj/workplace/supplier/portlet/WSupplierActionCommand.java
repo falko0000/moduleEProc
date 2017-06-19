@@ -578,7 +578,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 					 ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
 					InputStream is = new FileInputStream( file );
 					
-					System.out.println(folder.getRepositoryId()+ " "+ folder.getFolderId());
+					
 					
 					DLAppServiceUtil.addFileEntry(folder.getRepositoryId(), folder.getFolderId(), title, mimeType, 
 							doc_name, description, "", is, file.length(), serviceContext);

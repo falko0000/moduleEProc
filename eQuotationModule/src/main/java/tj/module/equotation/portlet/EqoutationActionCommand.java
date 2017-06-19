@@ -358,6 +358,8 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	 
 	  User user=(User) actionRequest.getAttribute(WebKeys.USER);
 	  
+	  long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+	  
 	  long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
 	  
 	  int criteria_type_id = ParamUtil.getInteger(actionRequest, "criteria_type_id");
@@ -365,9 +367,14 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	  ids = ids.replaceAll("on,","");
 	  ids = (ids.length()>0)? ids+"," : ids;
 	  
-      
-	   
-	  
+      Criteria criteria = null;
+    
+      String treefile[] = {EQuotationConstants.FOLDER_BID,
+    		                String.valueOf(izvewenie_id),
+    		                String.valueOf(spisok_lotov_id),
+    		                EQuotationConstants.FOLDER_CRITERIA};
+    
+      GenerateDocument generateDocument;
 	  for(int a : Indexes )
 	  {
 	      
@@ -382,14 +389,15 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 	       ids = ids.replaceAll(String.valueOf(criteria_id)+",","");
 	       
 	      if(criteria_id != 0)
-	    	  updateCriteria(criteria_id, criteriaName,
+	    	  criteria = updateCriteria(criteria_id, criteriaName,
 	    			  		criteriaWeight, 
 	    			  		0, user.getUserId(), description_criteria, document);
 	      else
-	    	 insertCriteria( criteriaName,criteriaWeight,
+	    	  criteria = insertCriteria( criteriaName,criteriaWeight,
   			  				0, user.getUserId(), category_id,
   			  				spisok_lotov_id, description_criteria, criteria_type_id , document);  
 	      
+	    generateDocument = new GenerateDocument(treefile, key+"_document_file"+a, actionRequest, String.valueOf(criteria.getCriteria_id()));
 		
 	  }
 	  
@@ -437,7 +445,7 @@ private void criteria(ActionRequest actionRequest, ActionResponse actionResponse
 }
 
 
-private void insertCriteria(String qualification_criteriaName,Number qualification_criteriaWeight, 
+private Criteria insertCriteria(String qualification_criteriaName,Number qualification_criteriaWeight, 
 							Number qualification_weightMin, long userId, int category_id,
 							long spisok_lotov_id, String descriptionCriteria, int criteria_type_id , boolean document) {
 	
@@ -458,11 +466,13 @@ private void insertCriteria(String qualification_criteriaName,Number qualificati
         criteria.setCriteria_category_id(category_id);
         criteria.setCriteria_type_id(criteria_type_id);
         
-        CriteriaLocalServiceUtil.addCriteria(criteria);
+        criteria = CriteriaLocalServiceUtil.addCriteria(criteria);
+        
+        return criteria;
 }
 
 
-private void updateCriteria(long qualification_criteria_id, String qualification_criteriaName,
+private Criteria updateCriteria(long qualification_criteria_id, String qualification_criteriaName,
 							Number qualification_criteriaWeight,
 							Number qualification_weightMin, long userId, String descriptionCriteria, boolean document) {
 	
@@ -487,7 +497,7 @@ private void updateCriteria(long qualification_criteria_id, String qualification
         cloneCriteria.setUpdated(new Date());
     	cloneCriteria.setUpdatedby(userId);
     
-      CriteriaLocalServiceUtil.updateCriteria(cloneCriteria);
+    	criteria = CriteriaLocalServiceUtil.updateCriteria(cloneCriteria);
         }
                
 	} catch (PortalException e) {
@@ -496,7 +506,7 @@ private void updateCriteria(long qualification_criteria_id, String qualification
 	
 	  
 	
-	
+	return criteria;
 }
 
 

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eQuotationModule
 Bundle-SymbolicName: tj.module.equotation
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_51 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  feray.announcements.kernel.model;version="[1.0,2)",com.liferay.counte
  r.kernel.service;version="[1.0,2)",com.liferay.document.library.kerne

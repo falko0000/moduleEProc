@@ -16,7 +16,7 @@
 	
 	CriteriaTemplate criteriaTemplate = CriteriaTemplateLocalServiceUtil.getCriteriaTemplate(EQuotationConstants.CRITERIA_TECHNICAL, criteria_type_id);
 	
-	int bin[] = {0,0,0,0,0,0};
+	int bin[] = {0,0,0,0,0,0,0};
 	int k = bin.length;
 	
 	int n = criteriaTemplate.getAccess();
@@ -65,20 +65,31 @@
 					<aui:input label="document" name="<%=prefix+"_document1" %>" type="checkbox" checked="false"  />
 		    	</aui:col>
 		    </c:if>	
+		    	<c:if test = "<%=bin[bin.length-7]!= 0 %>">
+		  
+		  		<aui:col  >
+					
+					<aui:input label="Document" name="<%=prefix + "_document_file1"%>" type="file"/>
+					
+		  		</aui:col>
+		  
+		  	</c:if>
 		</aui:row>
 		</div>
 		
 		<aui:row>
 		<c:if test = "<%=bin[bin.length-5]!= 0 %>">
 		  <aui:col md="2">
-		     <aui:input label="passing_score"  name="<%=prefix + "_PassingScore"%>" type="number" />
+		     <aui:input label="passing_score"  name="<%=prefix + "_PassingScore1"%>" type="number" />
 		  </aui:col>
 		  </c:if>
 		  <c:if test = "<%=bin[bin.length-6]!= 0 %>">
 		  <aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
-		<aui:input label="technical total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="0" max="100" min="0" required="true" />
+		<aui:input label="technical total weight in percent" name="<%=prefix + "_totalWeight1"%>" type="number" value="0" max="100" min="0" required="true" />
 		   </aui:col>
 		   </c:if>
+		
+		   
 		</aui:row>
 		</c:if>
 		
@@ -117,25 +128,35 @@
 					<aui:input label="document" name="<%=prefix+"_document1" %>" type="checkbox" checked="<%=criteria.getDoc_mandatory() %>"  />
 		    	</aui:col>	
 			</c:if>
-			
+				<c:if test = "<%=bin[bin.length-7]!= 0 %>">
+		  
+		  		<aui:col >
+					
+					<aui:input label="Document" name="<%=prefix + "_document_file1"%>" type="file"/>
+					
+		  		</aui:col>
+		  
+		  	</c:if>
 		</aui:row>
 		</div>
 		<%} %>
 		  <aui:row>
 			<c:if test = "<%=bin[bin.length-5]!= 0 %>">
 		  		<aui:col md="2">
-		     		<aui:input label="passing_score" name="<%=prefix + "_PassingScore"%>" type="number" value="<%=tcriteriasWeight.getPassing_score() %>"/>
+		     		<aui:input label="passing_score" name="<%=prefix + "_PassingScore1"%>" type="number" value="<%=tcriteriasWeight.getPassing_score() %>"/>
 		  		</aui:col>
 		  	</c:if>
 		  	<c:if test = "<%=bin[bin.length-6]!= 0 %>">
 		  
 		  		<aui:col md="<%=String.valueOf(12-2*bin[bin.length-5]) %>">
 					
-					<aui:input label="Technical total weight in percent" name="<%=prefix + "_totalWeight"%>" type="number" value="<%=tcriteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
+					<aui:input label="Technical total weight in percent" name="<%=prefix + "_totalWeight1"%>" type="number" value="<%=tcriteriasWeight.getCriterias_weight() %>" max="100" min="0" required="true"/>
 		
 		  		</aui:col>
 		  
 		  	</c:if>
+		  	
+		  
 		</aui:row>
    </c:if>
 		

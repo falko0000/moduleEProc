@@ -2,6 +2,7 @@ package tj.generate.document;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.xml.transform.Source;
 
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFolder;
@@ -21,12 +23,15 @@ import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFolderLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.PrimaryKeyRowMapper;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileEntrySoap;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -61,7 +66,25 @@ public class GenerateDocument {
 			this.outfilename = outfilename;
 			generate();
 	}
+	
 
+	public GenerateDocument( String[] foldersaved, String filenmae,
+			                 ActionRequest actionRequest, String outfilename)
+	{
+
+			
+			this.folder_saved_html = foldersaved;
+			this.outfilename = outfilename;
+			
+			this.filename = filenmae;
+			
+			this.themeDisplay =  (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);;	
+			
+			this.actionRequest = actionRequest;
+		uploadFile();
+			
+	}
+	
 	private void generate() {
 
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
@@ -78,9 +101,6 @@ public class GenerateDocument {
 			Writer fileOut = null;
 
 			fileOut = new FileWriter (new File(filename.substring(0,filename.indexOf(".")+1)+"html"));
-
-//Map<String, Object> izvewenija = new HashMap<String, Object>();
-//izvewenija.put("izvewenija", param);
 
 			template.process(this.param, fileOut);
 
@@ -110,6 +130,7 @@ public class GenerateDocument {
 
 
 			deleteFile(folder.getFolderId(),outfilename+".html" );
+			
 			DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folder.getFolderId(),
 					outfilename+".html", "text/html", 
 					outfilename+".html", "test", "", is, f.length(), serviceContext);
@@ -128,6 +149,41 @@ public class GenerateDocument {
 		} 
 
 	}
+	
+	private void uploadFile()
+	{
+		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
+		String title=uploadPortletRequest.getFileName(this.filename);	
+		String mimeType = uploadPortletRequest.getContentType(this.filename);
+		File file = uploadPortletRequest.getFile(this.filename);
+		long size = uploadPortletRequest.getSize(this.filename);
+		
+		Folder folder = null;
+		
+		if(size > 0)
+		{
+			ServiceContext serviceContext;
+			try {
+				serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), actionRequest);
+			
+				  folder = getFolder(folder_saved_html[0],serviceContext );
+				
+				  for(int i = 1; i < this.folder_saved_html.length; i++)
+					{
+					  System.out.println(folder_saved_html[i]);
+						folder = getFolder(folder.getFolderId(),folder_saved_html[i], serviceContext);
+					}
+					InputStream is = new FileInputStream( file );
+					 ServiceContext fserviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
+					
+					 DLAppServiceUtil.addFileEntry(folder.getRepositoryId(), folder.getFolderId(), title, mimeType, 
+							         	           this.outfilename, "", "", is, file.length(), fserviceContext);
+			} catch (PortalException | FileNotFoundException e) {
+				
+			}
+	}
+		}
+	
 
 	private File getTemplate()
 	{
@@ -180,6 +236,8 @@ public class GenerateDocument {
 	private Folder getFolder(String folderName, ServiceContext serviceContext){
 
 		Folder folder = null;
+		User user = themeDisplay.getUser();
+		if(user.hasOrganization())
 		try {
 			folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, folderName);
 		} catch (Exception e) {	

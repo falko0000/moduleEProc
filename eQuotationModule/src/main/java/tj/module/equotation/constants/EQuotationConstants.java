@@ -127,6 +127,7 @@ public interface EQuotationConstants  {
     static final String   OUT_HTML = "SDB";
     static final String FOLDER_BID = "BID";
     static final String FOLDER_GENERATE_DOC = "GENERATE DOCUMENT";
+    static final String FOLDER_CRITERIA = "CRITERIA DOCUMENTS";
     
     //System config
     
