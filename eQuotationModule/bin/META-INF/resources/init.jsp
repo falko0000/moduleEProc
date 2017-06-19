@@ -58,6 +58,7 @@
  <%@ page import ="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
 <%@ page import ="com.liferay.portal.kernel.util.DateUtil" %>
 <%@page import="com.liferay.portal.kernel.util.StringPool" %> 
+<%@page import="com.liferay.portal.kernel.util.StringUtil"%>
 <%@page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %>
 <%@ page import="com.liferay.admin.kernel.util.PortalMyAccountApplicationType" %>
 <%@page import="com.liferay.user.groups.admin.constants.UserGroupsAdminPortletKeys" %>

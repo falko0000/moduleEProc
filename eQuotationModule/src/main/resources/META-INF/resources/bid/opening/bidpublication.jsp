@@ -2,7 +2,7 @@
 
 <%
 
-	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+	Calendar cal = CalendarFactoryUtil.getCalendar();
 
 	Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 	
