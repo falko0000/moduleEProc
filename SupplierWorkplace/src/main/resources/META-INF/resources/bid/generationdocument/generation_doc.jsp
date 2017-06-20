@@ -73,7 +73,7 @@
         		</th>
       
        			<th align="center">
-     				action
+     				Action
        			</th>
       
        		</tr>
@@ -108,8 +108,6 @@
  <aui:button-row>
 	
 		<aui:button id="pay_now" name="save" value="generating_docum" type="submit" />
-  			
-		<aui:button id="pay_now_cancel" name="cancle" lable="cancle" type="cancel" />
   
   </aui:button-row>
 
