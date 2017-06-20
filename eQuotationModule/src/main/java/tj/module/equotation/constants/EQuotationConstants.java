@@ -133,5 +133,6 @@ public interface EQuotationConstants  {
     
     static final String PODACHA_ZAYAVKA = "PODACHA_ZAYAVKA";
     static final String PRELIMINARY_WINNER = "PRELIMINARY_WINNER";
+    static final String EVALUATION_PERIOD  = "EVALUATION_PERIOD";
     
 }

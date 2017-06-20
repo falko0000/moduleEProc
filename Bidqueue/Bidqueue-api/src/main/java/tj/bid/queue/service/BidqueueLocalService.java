@@ -137,6 +137,9 @@ public interface BidqueueLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Bidqueue> getBidqueue();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Bidqueue> getBidqueue(int state, int status);
+
 	/**
 	* Returns a range of all the bidqueues.
 	*

@@ -111,6 +111,178 @@ public class BidqueueUtil {
 	}
 
 	/**
+	* Returns all the bidqueues where state = &#63; and status = &#63;.
+	*
+	* @param state the state
+	* @param status the status
+	* @return the matching bidqueues
+	*/
+	public static List<Bidqueue> findByStateStatus(int state, int status) {
+		return getPersistence().findByStateStatus(state, status);
+	}
+
+	/**
+	* Returns a range of all the bidqueues where state = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BidqueueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param state the state
+	* @param status the status
+	* @param start the lower bound of the range of bidqueues
+	* @param end the upper bound of the range of bidqueues (not inclusive)
+	* @return the range of matching bidqueues
+	*/
+	public static List<Bidqueue> findByStateStatus(int state, int status,
+		int start, int end) {
+		return getPersistence().findByStateStatus(state, status, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the bidqueues where state = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BidqueueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param state the state
+	* @param status the status
+	* @param start the lower bound of the range of bidqueues
+	* @param end the upper bound of the range of bidqueues (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching bidqueues
+	*/
+	public static List<Bidqueue> findByStateStatus(int state, int status,
+		int start, int end, OrderByComparator<Bidqueue> orderByComparator) {
+		return getPersistence()
+				   .findByStateStatus(state, status, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the bidqueues where state = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BidqueueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param state the state
+	* @param status the status
+	* @param start the lower bound of the range of bidqueues
+	* @param end the upper bound of the range of bidqueues (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching bidqueues
+	*/
+	public static List<Bidqueue> findByStateStatus(int state, int status,
+		int start, int end, OrderByComparator<Bidqueue> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByStateStatus(state, status, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first bidqueue in the ordered set where state = &#63; and status = &#63;.
+	*
+	* @param state the state
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching bidqueue
+	* @throws NoSuchBidqueueException if a matching bidqueue could not be found
+	*/
+	public static Bidqueue findByStateStatus_First(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator)
+		throws tj.bid.queue.exception.NoSuchBidqueueException {
+		return getPersistence()
+				   .findByStateStatus_First(state, status, orderByComparator);
+	}
+
+	/**
+	* Returns the first bidqueue in the ordered set where state = &#63; and status = &#63;.
+	*
+	* @param state the state
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching bidqueue, or <code>null</code> if a matching bidqueue could not be found
+	*/
+	public static Bidqueue fetchByStateStatus_First(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator) {
+		return getPersistence()
+				   .fetchByStateStatus_First(state, status, orderByComparator);
+	}
+
+	/**
+	* Returns the last bidqueue in the ordered set where state = &#63; and status = &#63;.
+	*
+	* @param state the state
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching bidqueue
+	* @throws NoSuchBidqueueException if a matching bidqueue could not be found
+	*/
+	public static Bidqueue findByStateStatus_Last(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator)
+		throws tj.bid.queue.exception.NoSuchBidqueueException {
+		return getPersistence()
+				   .findByStateStatus_Last(state, status, orderByComparator);
+	}
+
+	/**
+	* Returns the last bidqueue in the ordered set where state = &#63; and status = &#63;.
+	*
+	* @param state the state
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching bidqueue, or <code>null</code> if a matching bidqueue could not be found
+	*/
+	public static Bidqueue fetchByStateStatus_Last(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator) {
+		return getPersistence()
+				   .fetchByStateStatus_Last(state, status, orderByComparator);
+	}
+
+	/**
+	* Returns the bidqueues before and after the current bidqueue in the ordered set where state = &#63; and status = &#63;.
+	*
+	* @param bid_queue_id the primary key of the current bidqueue
+	* @param state the state
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next bidqueue
+	* @throws NoSuchBidqueueException if a bidqueue with the primary key could not be found
+	*/
+	public static Bidqueue[] findByStateStatus_PrevAndNext(long bid_queue_id,
+		int state, int status, OrderByComparator<Bidqueue> orderByComparator)
+		throws tj.bid.queue.exception.NoSuchBidqueueException {
+		return getPersistence()
+				   .findByStateStatus_PrevAndNext(bid_queue_id, state, status,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the bidqueues where state = &#63; and status = &#63; from the database.
+	*
+	* @param state the state
+	* @param status the status
+	*/
+	public static void removeByStateStatus(int state, int status) {
+		getPersistence().removeByStateStatus(state, status);
+	}
+
+	/**
+	* Returns the number of bidqueues where state = &#63; and status = &#63;.
+	*
+	* @param state the state
+	* @param status the status
+	* @return the number of matching bidqueues
+	*/
+	public static int countByStateStatus(int state, int status) {
+		return getPersistence().countByStateStatus(state, status);
+	}
+
+	/**
 	* Caches the bidqueue in the entity cache if it is enabled.
 	*
 	* @param bidqueue the bidqueue
@@ -255,6 +427,10 @@ public class BidqueueUtil {
 	*/
 	public static int countAll() {
 		return getPersistence().countAll();
+	}
+
+	public static java.util.Set<java.lang.String> getBadColumnNames() {
+		return getPersistence().getBadColumnNames();
 	}
 
 	public static BidqueuePersistence getPersistence() {

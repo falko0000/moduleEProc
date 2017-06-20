@@ -169,6 +169,12 @@ public class CriteriaLocalServiceWrapper implements CriteriaLocalService,
 		return _criteriaLocalService.getCriterias(start, end);
 	}
 
+	@Override
+	public java.util.List<tj.criterias.model.Criteria> getCriterias(
+		long spisok_lotov_id) {
+		return _criteriaLocalService.getCriterias(spisok_lotov_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

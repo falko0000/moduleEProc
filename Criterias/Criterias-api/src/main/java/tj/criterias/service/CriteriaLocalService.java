@@ -156,6 +156,9 @@ public interface CriteriaLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Criteria> getCriterias(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Criteria> getCriterias(long spisok_lotov_id);
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

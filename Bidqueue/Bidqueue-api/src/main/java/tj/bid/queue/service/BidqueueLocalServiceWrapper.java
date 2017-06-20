@@ -143,6 +143,12 @@ public class BidqueueLocalServiceWrapper implements BidqueueLocalService,
 		return _bidqueueLocalService.getBidqueue();
 	}
 
+	@Override
+	public java.util.List<tj.bid.queue.model.Bidqueue> getBidqueue(int state,
+		int status) {
+		return _bidqueueLocalService.getBidqueue(state, status);
+	}
+
 	/**
 	* Returns a range of all the bidqueues.
 	*

@@ -37,5 +37,31 @@ public interface CommissionConstants {
 	  
 	  static final String FORM_COMMISSION_CRITERIA = "commission_criteria";
 	  
-	  
+	    // State
+	    static final int STATE_BID_PREPARATION = 1;
+	    static final int STATE_BID_SUBMISSION_OF_PROPOSALS = 2;
+	    static final int STATE_BID_EVALUATION_AND_AWARDING = 3;
+	    static final int STATE_BID_UNFULFILLED_TENDERS = 4;
+	    static final int STATE_BID_COMPLETED_TENDERS = 5;
+	    
+	    //Status
+
+	    static final int STATUS_BID_PREPARATION = 100;
+	    static final int STATUS_BID_SUBMISSION_OF_PROPOSALS = 200;
+	   //Sending for publication approval
+	    static final int STATUS_BID_TO_APPROVE = 101;
+	    static final int STATUS_BID_BEFORE_PUBLICATION = 102;
+	    static final int STATUS_BID_FINALIZING_ORDER = 103;
+	    static final int STATUS_BID_CANCELLATION_AGREEMENT = 201;
+	    //CANCELED BY THE OPERATOR OF THE AUTHORIZED BODY
+	    static final int STATUS_BID_CANCELED_BODY = 202;
+	    static final int STATUS_BID_WINNER_IDENTIFIED = 300;
+	    //At the stage of opening and determining the winner
+	    static final int STATUS_BID_AT_DETERMINING_WINNER = 500;
+	    //Customer's refusal to sign a contract
+	    static final int STATUS_BID_CUSTOMER_CONTRACT = 301;
+	    //Refusal of the supplier to sign the contract
+	    static final int STATUS_BID_REFUSAL_CONTRACT = 302;
+	    
+	    static final int STATUS_BID_COMPLETED_TRADES = 400;
  }

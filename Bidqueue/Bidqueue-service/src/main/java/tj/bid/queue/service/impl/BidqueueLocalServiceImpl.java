@@ -41,4 +41,9 @@ public class BidqueueLocalServiceImpl extends BidqueueLocalServiceBaseImpl {
 		
 		return bidqueuePersistence.findAll();
 	}
+	
+	public List<Bidqueue> getBidqueue(int state, int status) {
+		
+		return bidqueuePersistence.findByStateStatus(state, status);
+	}
 }

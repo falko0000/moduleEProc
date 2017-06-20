@@ -37,6 +37,8 @@ public class BidqueueSoap implements Serializable {
 		soapModel.setIzvewenija_id(model.getIzvewenija_id());
 		soapModel.setClosing_date(model.getClosing_date());
 		soapModel.setClosing_by_minutes(model.getClosing_by_minutes());
+		soapModel.setState(model.getState());
+		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
 	}
@@ -121,8 +123,26 @@ public class BidqueueSoap implements Serializable {
 		_closing_by_minutes = closing_by_minutes;
 	}
 
+	public int getState() {
+		return _state;
+	}
+
+	public void setState(int state) {
+		_state = state;
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
 	private long _bid_queue_id;
 	private long _izvewenija_id;
 	private Date _closing_date;
 	private long _closing_by_minutes;
+	private int _state;
+	private int _status;
 }
