@@ -22,10 +22,14 @@ import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.AuditedModel;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.UserGroup;
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.sites.kernel.util.SitesUtil;
 
 import aQute.bnd.annotation.ProviderType;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
@@ -56,21 +60,27 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 	{
 		
 		long  izvewenija_id = CounterLocalServiceUtil.increment(Izvewenija.class.toString());
-		     
-		      String description = "This group for member commission bid number "+String.valueOf(izvewenija_id);
-		      String groupName = "bid number " + String.valueOf(izvewenija_id);
+		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.createIzvewenija(izvewenija_id);  
+		
+		      String description = "This group for member commission bid number "+String.valueOf(izvewenija.getIzvewenija_id());
+		      String groupName = "bid number " + String.valueOf(izvewenija.getIzvewenija_id());
 		
 		  UserGroup userGroup = null;
 		try {
 			userGroup = UserGroupLocalServiceUtil.addUserGroup(serviceContext.getUserId(), serviceContext.getCompanyId(),
 					groupName,description, serviceContext);
 			    
-		
+			Group userGroupGroup = userGroup.getGroup();
+			
+			userGroupGroup.setSite(true);
+			userGroupGroup.setFriendlyURL("group-"+String.valueOf(userGroup.getUserGroupId()));
+			GroupLocalServiceUtil.updateGroup(userGroupGroup);
+			
 		} catch (PortalException e1) {
 			
 		
 		}
-		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.createIzvewenija(izvewenija_id);
+		
 		
 		izvewenija.setSostojanie_id(sostojanie_id);
 		izvewenija.setStatus_id(status_id);
