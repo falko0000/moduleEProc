@@ -63,12 +63,13 @@ Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  ="[1.0,2)",tj.spisok.tovarov.model;version="[1.0,2)",tj.spisok.tovaro
  v.service;version="[1.0,2)",tj.spisoklotov.model;version="[1.0,2)",tj
  .spisoklotov.service;version="[1.0,2)",tj.strany.model;version="[1.0,
- 2)",tj.strany.service;version="[1.0,2)",tj.system.config.model;versio
- n="[1.0,2)",tj.system.config.service;version="[1.0,2)",tj.tipy.izvewe
- nij.exception;version="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0
- ,2)",tj.tipy.izvewenij.service;version="[1.0,2)",tj.tipy.izvewenij.se
- rvice.persistence;version="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj
- .vbk.service;version="[1.0,2)"
+ 2)",tj.strany.service;version="[1.0,2)",tj.system.config.exception;ve
+ rsion="[1.0,2)",tj.system.config.model;version="[1.0,2)",tj.system.co
+ nfig.service;version="[1.0,2)",tj.tipy.izvewenij.exception;version="[
+ 1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.tipy.izvewenij.s
+ ervice;version="[1.0,2)",tj.tipy.izvewenij.service.persistence;versio
+ n="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj.vbk.service;version="[1
+ .0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

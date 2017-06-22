@@ -8,9 +8,11 @@ package tj.module.equotation.portlet;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.kernel.service.ResourceLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupService;
 
@@ -21,7 +23,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
-
+import tj.izvewenija.model.Izvewenija;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
@@ -75,7 +77,13 @@ public class EqoutationModulePortlet extends MVCPortlet {
 		
 	List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(0, OrganizationLocalServiceUtil.getOrganizationsCount());
 		
-
+	/*try {
+		ResourceLocalServiceUtil.deleteResource(20116,
+			    Izvewenija.class.toString(), ResourceConstants.SCOPE_INDIVIDUAL,
+			    2589);
+	} catch (PortalException e) {
+		
+	}*/
 		
 		//	"javax.portlet.security-role-ref=power-user,user",
 		
