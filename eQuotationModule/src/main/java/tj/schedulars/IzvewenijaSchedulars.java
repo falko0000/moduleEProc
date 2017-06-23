@@ -3,7 +3,9 @@ package tj.schedulars;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -75,8 +77,10 @@ public class IzvewenijaSchedulars extends BaseMessageListener  {
 		
 		for( Bidqueue bidqueue : bidqueues)
 		{
-			if(minutes >= bidqueue.getClosing_by_minutes())
+			System.out.println(TimeZone.getDefault()+" "+date +" after "+bidqueue.getClosing_date()+"=" +date.after(bidqueue.getClosing_date()));
+			if(date.after(bidqueue.getClosing_date()) || date.equals(bidqueue.getClosing_date()))
 			{
+				System.out.println(date+">=" + bidqueue.getClosing_date());
 				long izvewenija_id = bidqueue.getIzvewenija_id();
 				
 				try {
@@ -125,7 +129,7 @@ public class IzvewenijaSchedulars extends BaseMessageListener  {
 	    String listenerClass = getClass().getName();
 	    Trigger jobTrigger = _triggerFactory.createTrigger(listenerClass, listenerClass, new Date(), null, cronExpression);
 
-	  
+	   
 	    _schedulerEntryImpl = new SchedulerEntryImpl();
 	  
 	    _schedulerEntryImpl.setEventListenerClass(getClass().getName());
@@ -142,7 +146,6 @@ public class IzvewenijaSchedulars extends BaseMessageListener  {
 	      deactivate();
 	    }
 
-	 
 	    _schedulerEngineHelper.register(this, _schedulerEntryImpl, DestinationNames.SCHEDULER_DISPATCH);
 
 	 

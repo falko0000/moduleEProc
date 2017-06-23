@@ -17,7 +17,7 @@
 		<order-column name="closing_by_minutes"></order-column>
 		</order>
 		
-		<finder return-type="Collection" name="StateStatus">
+		<finder return-type="Collection" name="StateStatus" >
 			<finder-column name="state"></finder-column>
 			<finder-column name="status"></finder-column>
 		</finder>

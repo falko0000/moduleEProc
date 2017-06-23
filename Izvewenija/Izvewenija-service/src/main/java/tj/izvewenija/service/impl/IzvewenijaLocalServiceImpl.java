@@ -133,8 +133,8 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 			}
 		     String templateUuid = pageTemplate.getUuid();
 		     ServiceContext tserviceContext = new ServiceContext();
-		     serviceContext.setAttribute("layoutPrototypeUuid", templateUuid);
-		     serviceContext.setAttribute("layoutPrototypeLinkedEnabled", true);
+		     tserviceContext.setAttribute("layoutPrototypeUuid", templateUuid);
+		     tserviceContext.setAttribute("layoutPrototypeLinkedEnabled", true);
 				
 		     try {
 				LayoutLocalServiceUtil.addLayout(serviceContext.getUserId(), userGroupGroup.getGroupId(),

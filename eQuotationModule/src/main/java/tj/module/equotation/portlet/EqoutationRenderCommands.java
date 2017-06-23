@@ -129,7 +129,8 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 				
 				bidqueue.setClosing_date(closing_date);
 				bidqueue.setClosing_by_minutes(closing_by_minutes);
-				
+				bidqueue.setState(EQuotationConstants.STATE_BID_SUBMISSION_OF_PROPOSALS);
+			    bidqueue.setStatus(EQuotationConstants.STATUS_BID_SUBMISSION_OF_PROPOSALS);
 				BidqueueLocalServiceUtil.addBidqueue(bidqueue);
 				
 	//	sendMailUsingTemplate();

@@ -51,33 +51,26 @@ public class WinnerSchedulars extends BaseMessageListener  {
 	 @Override
 	  protected void doReceive(Message message)  {
 
-		 List<Bidqueue> bidqueues = BidqueueLocalServiceUtil.getBidqueue(CommissionConstants.STATE_BID_SUBMISSION_OF_PROPOSALS, 
-				 															CommissionConstants.STATUS_BID_SUBMISSION_OF_PROPOSALS);
+		 List<Bidqueue> bidqueues = BidqueueLocalServiceUtil.getBidqueue(CommissionConstants.STATE_BID_COMPLETED_TENDERS, 
+				 															CommissionConstants.STATUS_BID_AT_DETERMINING_WINNER);
 		 
 		Date date = new Date();
 		
 		long minutes = date.getTime()/6000;
 
 		
-	
-		 
-	  // SchedulerEngineHelperUtil.getNextFireTime(jobName, groupName, storageType)
-		
+	  
 		for( Bidqueue bidqueue : bidqueues)
 		{
-			if(minutes >= bidqueue.getClosing_by_minutes())
+			if(date.after(bidqueue.getClosing_date()) || date.equals(bidqueue.getClosing_date()))
 			{
 				long izvewenija_id = bidqueue.getIzvewenija_id();
 				
 				try {
 					Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
 			        
-					/*izvewenija.setSostojanie_id(EQuotationConstants.STATE_BID_COMPLETED_TENDERS);
-					izvewenija.setStatus_id(EQuotationConstants.STATUS_BID_AT_DETERMINING_WINNER);
-					
-					IzvewenijaLocalServiceUtil.updateIzvewenija(izvewenija);
-					*/
-		
+			
+		    
 					
 					BidqueueLocalServiceUtil.deleteBidqueue(bidqueue);
 			
