@@ -5,13 +5,11 @@
 
 <%
 String[] CAT_NAMES = new String[]{ "qualification_proposal",
-		                            "other_conditions",
 		                            "technical_proposal",
 		                            "financial_proposal"
 		                            }; 
 
  String[] qualification_proposal = new String[]{"qualification_proposal"};
- String[] other_conditions = new String[]{"other_conditions"};
  String[] technical_proposal = new String[]{"technical_proposal"}; 
  String[] financial_proposal = new String[]{"financial_proposal"};
  
@@ -20,7 +18,7 @@ String[] CAT_NAMES = new String[]{ "qualification_proposal",
 
 
  
- 	String[][] CAT_SECTION = {qualification_proposal,other_conditions,technical_proposal,financial_proposal};
+ 	String[][] CAT_SECTION = {qualification_proposal,technical_proposal,financial_proposal};
  
  
 

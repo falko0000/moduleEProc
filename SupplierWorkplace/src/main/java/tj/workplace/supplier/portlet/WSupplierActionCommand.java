@@ -157,7 +157,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 
 	private void updateSpplierCriteria(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException{
 		
-		String prefixes[] = {"qualification", "other_conditions", "technical", "financial"};
+		String prefixes[] = {"qualification", "technical", "financial"};
 		
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 		
@@ -174,7 +174,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 	
 		long[] ids = null;
 		
-		for( int p = 0 ; p < 4 ; p++)
+		for( int p = 0 ; p < 3 ; p++)
 		{
 			
 			ids = StringUtil.split(
