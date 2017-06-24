@@ -164,6 +164,11 @@ public class CriteriaLocalServiceUtil {
 		return getService().getCriterias(start, end);
 	}
 
+	public static java.util.List<tj.criterias.model.Criteria> getCriterias(
+		long spisok_lotov_id) {
+		return getService().getCriterias(spisok_lotov_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

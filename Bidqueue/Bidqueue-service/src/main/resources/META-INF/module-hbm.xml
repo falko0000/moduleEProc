@@ -10,5 +10,7 @@
 		<property name="izvewenija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="closing_date" type="org.hibernate.type.TimestampType" />
 		<property name="closing_by_minutes" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property column="state_" name="state" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 </hibernate-mapping>

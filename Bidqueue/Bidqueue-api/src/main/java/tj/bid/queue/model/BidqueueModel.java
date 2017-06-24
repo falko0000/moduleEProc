@@ -117,6 +117,34 @@ public interface BidqueueModel extends BaseModel<Bidqueue> {
 	 */
 	public void setClosing_by_minutes(long closing_by_minutes);
 
+	/**
+	 * Returns the state of this bidqueue.
+	 *
+	 * @return the state of this bidqueue
+	 */
+	public int getState();
+
+	/**
+	 * Sets the state of this bidqueue.
+	 *
+	 * @param state the state of this bidqueue
+	 */
+	public void setState(int state);
+
+	/**
+	 * Returns the status of this bidqueue.
+	 *
+	 * @return the status of this bidqueue
+	 */
+	public int getStatus();
+
+	/**
+	 * Sets the status of this bidqueue.
+	 *
+	 * @param status the status of this bidqueue
+	 */
+	public void setStatus(int status);
+
 	@Override
 	public boolean isNew();
 

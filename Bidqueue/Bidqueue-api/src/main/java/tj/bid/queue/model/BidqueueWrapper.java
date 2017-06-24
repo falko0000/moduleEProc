@@ -61,6 +61,8 @@ public class BidqueueWrapper implements Bidqueue, ModelWrapper<Bidqueue> {
 		attributes.put("izvewenija_id", getIzvewenija_id());
 		attributes.put("closing_date", getClosing_date());
 		attributes.put("closing_by_minutes", getClosing_by_minutes());
+		attributes.put("state", getState());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -89,6 +91,18 @@ public class BidqueueWrapper implements Bidqueue, ModelWrapper<Bidqueue> {
 
 		if (closing_by_minutes != null) {
 			setClosing_by_minutes(closing_by_minutes);
+		}
+
+		Integer state = (Integer)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -120,6 +134,26 @@ public class BidqueueWrapper implements Bidqueue, ModelWrapper<Bidqueue> {
 	@Override
 	public int compareTo(tj.bid.queue.model.Bidqueue bidqueue) {
 		return _bidqueue.compareTo(bidqueue);
+	}
+
+	/**
+	* Returns the state of this bidqueue.
+	*
+	* @return the state of this bidqueue
+	*/
+	@Override
+	public int getState() {
+		return _bidqueue.getState();
+	}
+
+	/**
+	* Returns the status of this bidqueue.
+	*
+	* @return the status of this bidqueue
+	*/
+	@Override
+	public int getStatus() {
+		return _bidqueue.getStatus();
 	}
 
 	@Override
@@ -291,6 +325,26 @@ public class BidqueueWrapper implements Bidqueue, ModelWrapper<Bidqueue> {
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_bidqueue.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the state of this bidqueue.
+	*
+	* @param state the state of this bidqueue
+	*/
+	@Override
+	public void setState(int state) {
+		_bidqueue.setState(state);
+	}
+
+	/**
+	* Sets the status of this bidqueue.
+	*
+	* @param status the status of this bidqueue
+	*/
+	@Override
+	public void setStatus(int status) {
+		_bidqueue.setStatus(status);
 	}
 
 	@Override

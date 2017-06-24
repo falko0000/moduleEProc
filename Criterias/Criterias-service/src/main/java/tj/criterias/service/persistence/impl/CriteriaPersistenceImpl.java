@@ -83,6 +83,511 @@ public class CriteriaPersistenceImpl extends BasePersistenceImpl<Criteria>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CriteriaModelImpl.ENTITY_CACHE_ENABLED,
 			CriteriaModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_LOTID = new FinderPath(CriteriaModelImpl.ENTITY_CACHE_ENABLED,
+			CriteriaModelImpl.FINDER_CACHE_ENABLED, CriteriaImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByLotId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTID = new FinderPath(CriteriaModelImpl.ENTITY_CACHE_ENABLED,
+			CriteriaModelImpl.FINDER_CACHE_ENABLED, CriteriaImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByLotId",
+			new String[] { Long.class.getName() },
+			CriteriaModelImpl.SPISOK_LOTOV_ID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_LOTID = new FinderPath(CriteriaModelImpl.ENTITY_CACHE_ENABLED,
+			CriteriaModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByLotId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the criterias where spisok_lotov_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @return the matching criterias
+	 */
+	@Override
+	public List<Criteria> findByLotId(long spisok_lotov_id) {
+		return findByLotId(spisok_lotov_id, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the criterias where spisok_lotov_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param start the lower bound of the range of criterias
+	 * @param end the upper bound of the range of criterias (not inclusive)
+	 * @return the range of matching criterias
+	 */
+	@Override
+	public List<Criteria> findByLotId(long spisok_lotov_id, int start, int end) {
+		return findByLotId(spisok_lotov_id, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the criterias where spisok_lotov_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param start the lower bound of the range of criterias
+	 * @param end the upper bound of the range of criterias (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching criterias
+	 */
+	@Override
+	public List<Criteria> findByLotId(long spisok_lotov_id, int start, int end,
+		OrderByComparator<Criteria> orderByComparator) {
+		return findByLotId(spisok_lotov_id, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the criterias where spisok_lotov_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CriteriaModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param start the lower bound of the range of criterias
+	 * @param end the upper bound of the range of criterias (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching criterias
+	 */
+	@Override
+	public List<Criteria> findByLotId(long spisok_lotov_id, int start, int end,
+		OrderByComparator<Criteria> orderByComparator, boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTID;
+			finderArgs = new Object[] { spisok_lotov_id };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_LOTID;
+			finderArgs = new Object[] {
+					spisok_lotov_id,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Criteria> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<Criteria>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Criteria criteria : list) {
+					if ((spisok_lotov_id != criteria.getSpisok_lotov_id())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_CRITERIA_WHERE);
+
+			query.append(_FINDER_COLUMN_LOTID_SPISOK_LOTOV_ID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CriteriaModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				if (!pagination) {
+					list = (List<Criteria>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<Criteria>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first criteria in the ordered set where spisok_lotov_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching criteria
+	 * @throws NoSuchCriteriaException if a matching criteria could not be found
+	 */
+	@Override
+	public Criteria findByLotId_First(long spisok_lotov_id,
+		OrderByComparator<Criteria> orderByComparator)
+		throws NoSuchCriteriaException {
+		Criteria criteria = fetchByLotId_First(spisok_lotov_id,
+				orderByComparator);
+
+		if (criteria != null) {
+			return criteria;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("spisok_lotov_id=");
+		msg.append(spisok_lotov_id);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCriteriaException(msg.toString());
+	}
+
+	/**
+	 * Returns the first criteria in the ordered set where spisok_lotov_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching criteria, or <code>null</code> if a matching criteria could not be found
+	 */
+	@Override
+	public Criteria fetchByLotId_First(long spisok_lotov_id,
+		OrderByComparator<Criteria> orderByComparator) {
+		List<Criteria> list = findByLotId(spisok_lotov_id, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last criteria in the ordered set where spisok_lotov_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching criteria
+	 * @throws NoSuchCriteriaException if a matching criteria could not be found
+	 */
+	@Override
+	public Criteria findByLotId_Last(long spisok_lotov_id,
+		OrderByComparator<Criteria> orderByComparator)
+		throws NoSuchCriteriaException {
+		Criteria criteria = fetchByLotId_Last(spisok_lotov_id, orderByComparator);
+
+		if (criteria != null) {
+			return criteria;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("spisok_lotov_id=");
+		msg.append(spisok_lotov_id);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCriteriaException(msg.toString());
+	}
+
+	/**
+	 * Returns the last criteria in the ordered set where spisok_lotov_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching criteria, or <code>null</code> if a matching criteria could not be found
+	 */
+	@Override
+	public Criteria fetchByLotId_Last(long spisok_lotov_id,
+		OrderByComparator<Criteria> orderByComparator) {
+		int count = countByLotId(spisok_lotov_id);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Criteria> list = findByLotId(spisok_lotov_id, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the criterias before and after the current criteria in the ordered set where spisok_lotov_id = &#63;.
+	 *
+	 * @param criteria_id the primary key of the current criteria
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next criteria
+	 * @throws NoSuchCriteriaException if a criteria with the primary key could not be found
+	 */
+	@Override
+	public Criteria[] findByLotId_PrevAndNext(long criteria_id,
+		long spisok_lotov_id, OrderByComparator<Criteria> orderByComparator)
+		throws NoSuchCriteriaException {
+		Criteria criteria = findByPrimaryKey(criteria_id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Criteria[] array = new CriteriaImpl[3];
+
+			array[0] = getByLotId_PrevAndNext(session, criteria,
+					spisok_lotov_id, orderByComparator, true);
+
+			array[1] = criteria;
+
+			array[2] = getByLotId_PrevAndNext(session, criteria,
+					spisok_lotov_id, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Criteria getByLotId_PrevAndNext(Session session,
+		Criteria criteria, long spisok_lotov_id,
+		OrderByComparator<Criteria> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CRITERIA_WHERE);
+
+		query.append(_FINDER_COLUMN_LOTID_SPISOK_LOTOV_ID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CriteriaModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(spisok_lotov_id);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(criteria);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Criteria> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the criterias where spisok_lotov_id = &#63; from the database.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 */
+	@Override
+	public void removeByLotId(long spisok_lotov_id) {
+		for (Criteria criteria : findByLotId(spisok_lotov_id,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(criteria);
+		}
+	}
+
+	/**
+	 * Returns the number of criterias where spisok_lotov_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @return the number of matching criterias
+	 */
+	@Override
+	public int countByLotId(long spisok_lotov_id) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_LOTID;
+
+		Object[] finderArgs = new Object[] { spisok_lotov_id };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CRITERIA_WHERE);
+
+			query.append(_FINDER_COLUMN_LOTID_SPISOK_LOTOV_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_LOTID_SPISOK_LOTOV_ID_2 = "criteria.spisok_lotov_id = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_LOTIDANDCATEGORYID =
 		new FinderPath(CriteriaModelImpl.ENTITY_CACHE_ENABLED,
 			CriteriaModelImpl.FINDER_CACHE_ENABLED, CriteriaImpl.class,
@@ -1465,6 +1970,23 @@ public class CriteriaPersistenceImpl extends BasePersistenceImpl<Criteria>
 		}
 
 		else {
+			if ((criteriaModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						criteriaModelImpl.getOriginalSpisok_lotov_id()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_LOTID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTID,
+					args);
+
+				args = new Object[] { criteriaModelImpl.getSpisok_lotov_id() };
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_LOTID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTID,
+					args);
+			}
+
 			if ((criteriaModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTIDANDCATEGORYID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {

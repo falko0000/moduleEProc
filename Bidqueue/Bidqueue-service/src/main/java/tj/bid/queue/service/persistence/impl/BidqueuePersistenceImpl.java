@@ -20,12 +20,14 @@ import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -80,6 +82,550 @@ public class BidqueuePersistenceImpl extends BasePersistenceImpl<Bidqueue>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(BidqueueModelImpl.ENTITY_CACHE_ENABLED,
 			BidqueueModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_STATESTATUS =
+		new FinderPath(BidqueueModelImpl.ENTITY_CACHE_ENABLED,
+			BidqueueModelImpl.FINDER_CACHE_ENABLED, BidqueueImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByStateStatus",
+			new String[] {
+				Integer.class.getName(), Integer.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATESTATUS =
+		new FinderPath(BidqueueModelImpl.ENTITY_CACHE_ENABLED,
+			BidqueueModelImpl.FINDER_CACHE_ENABLED, BidqueueImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByStateStatus",
+			new String[] { Integer.class.getName(), Integer.class.getName() },
+			BidqueueModelImpl.STATE_COLUMN_BITMASK |
+			BidqueueModelImpl.STATUS_COLUMN_BITMASK |
+			BidqueueModelImpl.CLOSING_BY_MINUTES_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_STATESTATUS = new FinderPath(BidqueueModelImpl.ENTITY_CACHE_ENABLED,
+			BidqueueModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByStateStatus",
+			new String[] { Integer.class.getName(), Integer.class.getName() });
+
+	/**
+	 * Returns all the bidqueues where state = &#63; and status = &#63;.
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @return the matching bidqueues
+	 */
+	@Override
+	public List<Bidqueue> findByStateStatus(int state, int status) {
+		return findByStateStatus(state, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the bidqueues where state = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BidqueueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @param start the lower bound of the range of bidqueues
+	 * @param end the upper bound of the range of bidqueues (not inclusive)
+	 * @return the range of matching bidqueues
+	 */
+	@Override
+	public List<Bidqueue> findByStateStatus(int state, int status, int start,
+		int end) {
+		return findByStateStatus(state, status, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the bidqueues where state = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BidqueueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @param start the lower bound of the range of bidqueues
+	 * @param end the upper bound of the range of bidqueues (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching bidqueues
+	 */
+	@Override
+	public List<Bidqueue> findByStateStatus(int state, int status, int start,
+		int end, OrderByComparator<Bidqueue> orderByComparator) {
+		return findByStateStatus(state, status, start, end, orderByComparator,
+			true);
+	}
+
+	/**
+	 * Returns an ordered range of all the bidqueues where state = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link BidqueueModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @param start the lower bound of the range of bidqueues
+	 * @param end the upper bound of the range of bidqueues (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching bidqueues
+	 */
+	@Override
+	public List<Bidqueue> findByStateStatus(int state, int status, int start,
+		int end, OrderByComparator<Bidqueue> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATESTATUS;
+			finderArgs = new Object[] { state, status };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_STATESTATUS;
+			finderArgs = new Object[] {
+					state, status,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Bidqueue> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<Bidqueue>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Bidqueue bidqueue : list) {
+					if ((state != bidqueue.getState()) ||
+							(status != bidqueue.getStatus())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_BIDQUEUE_WHERE);
+
+			query.append(_FINDER_COLUMN_STATESTATUS_STATE_2);
+
+			query.append(_FINDER_COLUMN_STATESTATUS_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(BidqueueModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(state);
+
+				qPos.add(status);
+
+				if (!pagination) {
+					list = (List<Bidqueue>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<Bidqueue>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first bidqueue in the ordered set where state = &#63; and status = &#63;.
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching bidqueue
+	 * @throws NoSuchBidqueueException if a matching bidqueue could not be found
+	 */
+	@Override
+	public Bidqueue findByStateStatus_First(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator)
+		throws NoSuchBidqueueException {
+		Bidqueue bidqueue = fetchByStateStatus_First(state, status,
+				orderByComparator);
+
+		if (bidqueue != null) {
+			return bidqueue;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("state=");
+		msg.append(state);
+
+		msg.append(", status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchBidqueueException(msg.toString());
+	}
+
+	/**
+	 * Returns the first bidqueue in the ordered set where state = &#63; and status = &#63;.
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching bidqueue, or <code>null</code> if a matching bidqueue could not be found
+	 */
+	@Override
+	public Bidqueue fetchByStateStatus_First(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator) {
+		List<Bidqueue> list = findByStateStatus(state, status, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last bidqueue in the ordered set where state = &#63; and status = &#63;.
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching bidqueue
+	 * @throws NoSuchBidqueueException if a matching bidqueue could not be found
+	 */
+	@Override
+	public Bidqueue findByStateStatus_Last(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator)
+		throws NoSuchBidqueueException {
+		Bidqueue bidqueue = fetchByStateStatus_Last(state, status,
+				orderByComparator);
+
+		if (bidqueue != null) {
+			return bidqueue;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("state=");
+		msg.append(state);
+
+		msg.append(", status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchBidqueueException(msg.toString());
+	}
+
+	/**
+	 * Returns the last bidqueue in the ordered set where state = &#63; and status = &#63;.
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching bidqueue, or <code>null</code> if a matching bidqueue could not be found
+	 */
+	@Override
+	public Bidqueue fetchByStateStatus_Last(int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator) {
+		int count = countByStateStatus(state, status);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Bidqueue> list = findByStateStatus(state, status, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the bidqueues before and after the current bidqueue in the ordered set where state = &#63; and status = &#63;.
+	 *
+	 * @param bid_queue_id the primary key of the current bidqueue
+	 * @param state the state
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next bidqueue
+	 * @throws NoSuchBidqueueException if a bidqueue with the primary key could not be found
+	 */
+	@Override
+	public Bidqueue[] findByStateStatus_PrevAndNext(long bid_queue_id,
+		int state, int status, OrderByComparator<Bidqueue> orderByComparator)
+		throws NoSuchBidqueueException {
+		Bidqueue bidqueue = findByPrimaryKey(bid_queue_id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Bidqueue[] array = new BidqueueImpl[3];
+
+			array[0] = getByStateStatus_PrevAndNext(session, bidqueue, state,
+					status, orderByComparator, true);
+
+			array[1] = bidqueue;
+
+			array[2] = getByStateStatus_PrevAndNext(session, bidqueue, state,
+					status, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Bidqueue getByStateStatus_PrevAndNext(Session session,
+		Bidqueue bidqueue, int state, int status,
+		OrderByComparator<Bidqueue> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_BIDQUEUE_WHERE);
+
+		query.append(_FINDER_COLUMN_STATESTATUS_STATE_2);
+
+		query.append(_FINDER_COLUMN_STATESTATUS_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(BidqueueModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(state);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(bidqueue);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Bidqueue> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the bidqueues where state = &#63; and status = &#63; from the database.
+	 *
+	 * @param state the state
+	 * @param status the status
+	 */
+	@Override
+	public void removeByStateStatus(int state, int status) {
+		for (Bidqueue bidqueue : findByStateStatus(state, status,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(bidqueue);
+		}
+	}
+
+	/**
+	 * Returns the number of bidqueues where state = &#63; and status = &#63;.
+	 *
+	 * @param state the state
+	 * @param status the status
+	 * @return the number of matching bidqueues
+	 */
+	@Override
+	public int countByStateStatus(int state, int status) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_STATESTATUS;
+
+		Object[] finderArgs = new Object[] { state, status };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_BIDQUEUE_WHERE);
+
+			query.append(_FINDER_COLUMN_STATESTATUS_STATE_2);
+
+			query.append(_FINDER_COLUMN_STATESTATUS_STATUS_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(state);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_STATESTATUS_STATE_2 = "bidqueue.state = ? AND ";
+	private static final String _FINDER_COLUMN_STATESTATUS_STATUS_2 = "bidqueue.status = ?";
 
 	public BidqueuePersistenceImpl() {
 		setModelClass(Bidqueue.class);
@@ -265,6 +811,8 @@ public class BidqueuePersistenceImpl extends BasePersistenceImpl<Bidqueue>
 
 		boolean isNew = bidqueue.isNew();
 
+		BidqueueModelImpl bidqueueModelImpl = (BidqueueModelImpl)bidqueue;
+
 		Session session = null;
 
 		try {
@@ -288,8 +836,31 @@ public class BidqueuePersistenceImpl extends BasePersistenceImpl<Bidqueue>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !BidqueueModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+
+		else {
+			if ((bidqueueModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATESTATUS.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						bidqueueModelImpl.getOriginalState(),
+						bidqueueModelImpl.getOriginalStatus()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_STATESTATUS, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATESTATUS,
+					args);
+
+				args = new Object[] {
+						bidqueueModelImpl.getState(),
+						bidqueueModelImpl.getStatus()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_STATESTATUS, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATESTATUS,
+					args);
+			}
 		}
 
 		entityCache.putResult(BidqueueModelImpl.ENTITY_CACHE_ENABLED,
@@ -314,6 +885,8 @@ public class BidqueuePersistenceImpl extends BasePersistenceImpl<Bidqueue>
 		bidqueueImpl.setIzvewenija_id(bidqueue.getIzvewenija_id());
 		bidqueueImpl.setClosing_date(bidqueue.getClosing_date());
 		bidqueueImpl.setClosing_by_minutes(bidqueue.getClosing_by_minutes());
+		bidqueueImpl.setState(bidqueue.getState());
+		bidqueueImpl.setStatus(bidqueue.getStatus());
 
 		return bidqueueImpl;
 	}
@@ -698,6 +1271,11 @@ public class BidqueuePersistenceImpl extends BasePersistenceImpl<Bidqueue>
 	}
 
 	@Override
+	public Set<String> getBadColumnNames() {
+		return _badColumnNames;
+	}
+
+	@Override
 	protected Map<String, Integer> getTableColumnsMap() {
 		return BidqueueModelImpl.TABLE_COLUMNS_MAP;
 	}
@@ -721,8 +1299,14 @@ public class BidqueuePersistenceImpl extends BasePersistenceImpl<Bidqueue>
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_BIDQUEUE = "SELECT bidqueue FROM Bidqueue bidqueue";
 	private static final String _SQL_SELECT_BIDQUEUE_WHERE_PKS_IN = "SELECT bidqueue FROM Bidqueue bidqueue WHERE bid_queue_id IN (";
+	private static final String _SQL_SELECT_BIDQUEUE_WHERE = "SELECT bidqueue FROM Bidqueue bidqueue WHERE ";
 	private static final String _SQL_COUNT_BIDQUEUE = "SELECT COUNT(bidqueue) FROM Bidqueue bidqueue";
+	private static final String _SQL_COUNT_BIDQUEUE_WHERE = "SELECT COUNT(bidqueue) FROM Bidqueue bidqueue WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "bidqueue.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Bidqueue exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Bidqueue exists with the key {";
 	private static final Log _log = LogFactoryUtil.getLog(BidqueuePersistenceImpl.class);
+	private static final Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+				"state"
+			});
 }

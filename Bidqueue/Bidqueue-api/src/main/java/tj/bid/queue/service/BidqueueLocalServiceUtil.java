@@ -140,6 +140,11 @@ public class BidqueueLocalServiceUtil {
 		return getService().getBidqueue();
 	}
 
+	public static java.util.List<tj.bid.queue.model.Bidqueue> getBidqueue(
+		int state, int status) {
+		return getService().getBidqueue(state, status);
+	}
+
 	/**
 	* Returns a range of all the bidqueues.
 	*

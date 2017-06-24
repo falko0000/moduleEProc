@@ -10,9 +10,17 @@
 		<column name="izvewenija_id" type="long"></column>
 		<column name="closing_date" type="Date"></column>
 		<column name="closing_by_minutes" type="long"></column>
+		<column name="state" type="int"></column>
+		<column name="status" type="int"></column>
 		
 		<order by="asc">
 		<order-column name="closing_by_minutes"></order-column>
 		</order>
+		
+		<finder return-type="Collection" name="StateStatus" >
+			<finder-column name="state"></finder-column>
+			<finder-column name="status"></finder-column>
+		</finder>
+		
 	</entity>
 </service-builder>

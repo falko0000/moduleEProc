@@ -4,6 +4,7 @@ package tj.module.commission.portlet;
 
 
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.StringPool;
@@ -23,6 +24,7 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import tj.module.commission.constants.CommissionConstants;
+import tj.schedulars.Winner;
 import tj.supplier.request.lot.model.SupplierRequestLot;
 /**
  * @author Falko
@@ -50,6 +52,12 @@ public class CommissionModulePortlet extends MVCPortlet {
 		
 	Organization or;
 	
+	try {
+		System.out.println(2576);
+		Winner win = new Winner(2576);
+	} catch (PortalException e) {
+		System.out.println("nashud");
+	}
 		
 	//	OrganizationLocalServiceUtil.getUserOrganizationIds(userId, includeAdministrative)
 		

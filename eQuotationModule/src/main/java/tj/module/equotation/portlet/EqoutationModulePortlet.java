@@ -5,14 +5,16 @@ package tj.module.equotation.portlet;
 
 
 
+import com.liferay.mail.kernel.model.MailMessage;
+import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
-import com.liferay.portal.kernel.model.Organization;
+
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+
+
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserGroupService;
+
 
 import com.liferay.portal.kernel.service.UserService;
 
@@ -25,11 +27,14 @@ import com.liferay.portal.kernel.util.StringUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
-import tj.strany.service.StranyLocalServiceUtil;
+
 
 import java.io.IOException;
-import java.util.Collections;
+
 import java.util.List;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 
@@ -39,10 +44,7 @@ import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.swing.text.AbstractDocument.Content;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.language.Language;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -73,33 +75,34 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		
-	List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(0, OrganizationLocalServiceUtil.getOrganizationsCount());
-		
+	
 
-		
-		//	"javax.portlet.security-role-ref=power-user,user",
-		
-		//WebKeys.SEARCH_CONTAINER_RESULT_ROW;
 	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 	
-	/*for (Spisoklotov spisoklotov : spisoklots) {
-		
-	System.out.println(spisoklotov);
-	}*/
-	boolean t = false;
-	/*try {
-		t = UserGroupRoleLocalServiceUtil.hasUserGroupRole(68216, 180701,"Owner");
-	} catch (PortalException e) {
-		
-		
-	}*/
+
+	/*InternetAddress fromAddress = null;
+	InternetAddress toAddress = null;
+
+		try {
+			
+			
+			MailMessage mailMessage = new MailMessage();
+			mailMessage.setTo( new InternetAddress("falko_0000@mail.ru"));
+			mailMessage.setFrom(new InternetAddress("tender@zakupki.gov.tj"));
+			mailMessage.setSubject("Testing mail with Plain Text");
+			mailMessage.setBody("This Mail Comes From Liferay Is Easy");
+			MailServiceUtil.sendEmail(mailMessage);
+			
+			System.out.println("Send mail with Plain Text");
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
-   System.out.println("UserGroupRoleLocalServiceUtil.hasUserGroupRole="+t );
-	
+		
+		*/
    
-   
-   PermissionChecker checker;
-	
+
 	StringBuilder names = new StringBuilder();
 	
 	names.append(EQuotationConstants.TAB_PREPARATION);
@@ -110,8 +113,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 
 	
 	
-	UserGroupService _userGroupService;
-
+	
 		renderRequest.setAttribute("editnametabs", names.toString());
 		super.doView(renderRequest, renderResponse);
 	}

@@ -1,0 +1,1 @@
+create index IX_CBF586FD on sapp.bid_queue (state_, status);

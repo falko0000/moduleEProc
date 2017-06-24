@@ -64,7 +64,7 @@ public class BidqueueCacheModel implements CacheModel<Bidqueue>, Externalizable 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{bid_queue_id=");
 		sb.append(bid_queue_id);
@@ -74,6 +74,10 @@ public class BidqueueCacheModel implements CacheModel<Bidqueue>, Externalizable 
 		sb.append(closing_date);
 		sb.append(", closing_by_minutes=");
 		sb.append(closing_by_minutes);
+		sb.append(", state=");
+		sb.append(state);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append("}");
 
 		return sb.toString();
@@ -94,6 +98,8 @@ public class BidqueueCacheModel implements CacheModel<Bidqueue>, Externalizable 
 		}
 
 		bidqueueImpl.setClosing_by_minutes(closing_by_minutes);
+		bidqueueImpl.setState(state);
+		bidqueueImpl.setStatus(status);
 
 		bidqueueImpl.resetOriginalValues();
 
@@ -108,6 +114,10 @@ public class BidqueueCacheModel implements CacheModel<Bidqueue>, Externalizable 
 		closing_date = objectInput.readLong();
 
 		closing_by_minutes = objectInput.readLong();
+
+		state = objectInput.readInt();
+
+		status = objectInput.readInt();
 	}
 
 	@Override
@@ -119,10 +129,16 @@ public class BidqueueCacheModel implements CacheModel<Bidqueue>, Externalizable 
 		objectOutput.writeLong(closing_date);
 
 		objectOutput.writeLong(closing_by_minutes);
+
+		objectOutput.writeInt(state);
+
+		objectOutput.writeInt(status);
 	}
 
 	public long bid_queue_id;
 	public long izvewenija_id;
 	public long closing_date;
 	public long closing_by_minutes;
+	public int state;
+	public int status;
 }

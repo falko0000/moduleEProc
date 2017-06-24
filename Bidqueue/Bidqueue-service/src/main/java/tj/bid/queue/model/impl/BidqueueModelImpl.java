@@ -64,7 +64,9 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 			{ "bid_queue_id", Types.BIGINT },
 			{ "izvewenija_id", Types.BIGINT },
 			{ "closing_date", Types.TIMESTAMP },
-			{ "closing_by_minutes", Types.BIGINT }
+			{ "closing_by_minutes", Types.BIGINT },
+			{ "state_", Types.INTEGER },
+			{ "status", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -73,9 +75,11 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 		TABLE_COLUMNS_MAP.put("izvewenija_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("closing_date", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("closing_by_minutes", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("state_", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.bid_queue (bid_queue_id LONG not null primary key,izvewenija_id LONG,closing_date DATE null,closing_by_minutes LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.bid_queue (bid_queue_id LONG not null primary key,izvewenija_id LONG,closing_date DATE null,closing_by_minutes LONG,state_ INTEGER,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.bid_queue";
 	public static final String ORDER_BY_JPQL = " ORDER BY bidqueue.closing_by_minutes ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.bid_queue.closing_by_minutes ASC";
@@ -88,7 +92,12 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(tj.bid.queue.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.tj.bid.queue.model.Bidqueue"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.bid.queue.service.util.ServiceProps.get(
+				"value.object.column.bitmask.enabled.tj.bid.queue.model.Bidqueue"),
+			true);
+	public static final long STATE_COLUMN_BITMASK = 1L;
+	public static final long STATUS_COLUMN_BITMASK = 2L;
+	public static final long CLOSING_BY_MINUTES_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.bid.queue.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.bid.queue.model.Bidqueue"));
 
@@ -133,6 +142,8 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 		attributes.put("izvewenija_id", getIzvewenija_id());
 		attributes.put("closing_date", getClosing_date());
 		attributes.put("closing_by_minutes", getClosing_by_minutes());
+		attributes.put("state", getState());
+		attributes.put("status", getStatus());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -164,6 +175,18 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 		if (closing_by_minutes != null) {
 			setClosing_by_minutes(closing_by_minutes);
+		}
+
+		Integer state = (Integer)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -204,7 +227,57 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 	@Override
 	public void setClosing_by_minutes(long closing_by_minutes) {
+		_columnBitmask = -1L;
+
 		_closing_by_minutes = closing_by_minutes;
+	}
+
+	@Override
+	public int getState() {
+		return _state;
+	}
+
+	@Override
+	public void setState(int state) {
+		_columnBitmask |= STATE_COLUMN_BITMASK;
+
+		if (!_setOriginalState) {
+			_setOriginalState = true;
+
+			_originalState = _state;
+		}
+
+		_state = state;
+	}
+
+	public int getOriginalState() {
+		return _originalState;
+	}
+
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_columnBitmask |= STATUS_COLUMN_BITMASK;
+
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
+		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -238,6 +311,8 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 		bidqueueImpl.setIzvewenija_id(getIzvewenija_id());
 		bidqueueImpl.setClosing_date(getClosing_date());
 		bidqueueImpl.setClosing_by_minutes(getClosing_by_minutes());
+		bidqueueImpl.setState(getState());
+		bidqueueImpl.setStatus(getStatus());
 
 		bidqueueImpl.resetOriginalValues();
 
@@ -304,6 +379,17 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 	@Override
 	public void resetOriginalValues() {
+		BidqueueModelImpl bidqueueModelImpl = this;
+
+		bidqueueModelImpl._originalState = bidqueueModelImpl._state;
+
+		bidqueueModelImpl._setOriginalState = false;
+
+		bidqueueModelImpl._originalStatus = bidqueueModelImpl._status;
+
+		bidqueueModelImpl._setOriginalStatus = false;
+
+		bidqueueModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -325,12 +411,16 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 		bidqueueCacheModel.closing_by_minutes = getClosing_by_minutes();
 
+		bidqueueCacheModel.state = getState();
+
+		bidqueueCacheModel.status = getStatus();
+
 		return bidqueueCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{bid_queue_id=");
 		sb.append(getBid_queue_id());
@@ -340,6 +430,10 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 		sb.append(getClosing_date());
 		sb.append(", closing_by_minutes=");
 		sb.append(getClosing_by_minutes());
+		sb.append(", state=");
+		sb.append(getState());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -347,7 +441,7 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.bid.queue.model.Bidqueue");
@@ -369,6 +463,14 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 			"<column><column-name>closing_by_minutes</column-name><column-value><![CDATA[");
 		sb.append(getClosing_by_minutes());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -383,5 +485,12 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 	private long _izvewenija_id;
 	private Date _closing_date;
 	private long _closing_by_minutes;
+	private int _state;
+	private int _originalState;
+	private boolean _setOriginalState;
+	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
+	private long _columnBitmask;
 	private Bidqueue _escapedModel;
 }

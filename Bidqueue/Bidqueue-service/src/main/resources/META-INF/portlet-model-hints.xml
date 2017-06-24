@@ -6,5 +6,7 @@
 		<field name="izvewenija_id" type="long" />
 		<field name="closing_date" type="Date" />
 		<field name="closing_by_minutes" type="long" />
+		<field name="state" type="int" />
+		<field name="status" type="int" />
 	</model>
 </model-hints>

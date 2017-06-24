@@ -22,10 +22,19 @@ import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.AuditedModel;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.LayoutPrototype;
+import com.liferay.portal.kernel.model.LayoutTypePortletConstants;
 import com.liferay.portal.kernel.model.UserGroup;
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
+import com.liferay.portal.kernel.service.LayoutPrototypeLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.sites.kernel.util.SitesUtil;
 
 import aQute.bnd.annotation.ProviderType;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
@@ -56,21 +65,27 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 	{
 		
 		long  izvewenija_id = CounterLocalServiceUtil.increment(Izvewenija.class.toString());
-		     
-		      String description = "This group for member commission bid number "+String.valueOf(izvewenija_id);
-		      String groupName = "bid number " + String.valueOf(izvewenija_id);
+		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.createIzvewenija(izvewenija_id);  
+		
+		      String description = description = "This group for member commission bid number "+String.valueOf(izvewenija.getIzvewenija_id());;
+		      String groupName = "bid number " + String.valueOf(izvewenija.getIzvewenija_id());
 		
 		  UserGroup userGroup = null;
+		  Group userGroupGroup = null;
 		try {
 			userGroup = UserGroupLocalServiceUtil.addUserGroup(serviceContext.getUserId(), serviceContext.getCompanyId(),
 					groupName,description, serviceContext);
 			    
-		
+			userGroupGroup = userGroup.getGroup();
+			
+	
+			System.out.println(userGroup.toString());
+			
 		} catch (PortalException e1) {
 			
 		
 		}
-		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.createIzvewenija(izvewenija_id);
+		
 		
 		izvewenija.setSostojanie_id(sostojanie_id);
 		izvewenija.setStatus_id(status_id);
@@ -91,17 +106,52 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 	    
 		izvewenija.setUserGroupId(userGroup.getUserGroupId());
 		
-		izvewenija = addIzvewenija(izvewenija);
+		izvewenija = IzvewenijaLocalServiceUtil.addIzvewenija(izvewenija);
 		
 		
 		try {
 			resourceLocalService.addModelResources(izvewenija, serviceContext);
+			
 			} catch (PortalException e) {
 			e.printStackTrace();
 			} catch (SystemException e) {
 			e.printStackTrace();
 			}
 		
+		if(Validator.isNotNull(userGroup) && Validator.isNotNull(userGroupGroup))
+		{
+			 description = "This group for member commission bid number "+String.valueOf(izvewenija.getIzvewenija_id());
+		     groupName = "bid number " + String.valueOf(izvewenija.getIzvewenija_id());
+		     
+		     
+		     long layoutPrototypeId = 341821;
+		     LayoutPrototype pageTemplate = null;
+			try {
+				pageTemplate = LayoutPrototypeLocalServiceUtil.getLayoutPrototype(layoutPrototypeId);
+			} catch (PortalException e) {
+				
+			}
+		     String templateUuid = pageTemplate.getUuid();
+		     ServiceContext tserviceContext = new ServiceContext();
+		     tserviceContext.setAttribute("layoutPrototypeUuid", templateUuid);
+		     tserviceContext.setAttribute("layoutPrototypeLinkedEnabled", true);
+				
+		     try {
+				LayoutLocalServiceUtil.addLayout(serviceContext.getUserId(), userGroupGroup.getGroupId(),
+						                         false, 0, "BID NUMBER "+ String.valueOf(izvewenija.getIzvewenija_id()),
+						                         "BID NUMBER "+ String.valueOf(izvewenija.getIzvewenija_id()),
+						                         "BID NUMBER "+ String.valueOf(izvewenija.getIzvewenija_id()),
+			
+						                         "portlet", false, "/group-"+String.valueOf(userGroup.getUserGroupId()), tserviceContext);
+				userGroup.setDescription(description);
+				userGroup.setName(groupName);
+				
+				UserGroupLocalServiceUtil.updateUserGroup(userGroup);
+		     } catch (PortalException e) {
+			System.out.println("layout don't created");
+			}
+		  
+		}
 		return izvewenija;
 	}
 	 
