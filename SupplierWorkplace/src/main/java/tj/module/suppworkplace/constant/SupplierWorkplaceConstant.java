@@ -98,20 +98,20 @@ public interface SupplierWorkplaceConstant {
     
     static final String ACTIONS_ITEM = "action_item";
     
-    static final String ACTIONS_ITEM_FORMING = "Forming an application";
-    static final String ACTIONS_ITEM_LOT_NAME = "Lot name";
-    static final String ACTIONS_ITEM_INFO_DOCUM = "Info docum";
-    static final String ACTIONS_ITEM_TAKE_PART = "Take part";
-    static final String ACTIONS_ITEM_VIEW_APPLICATION = "View application";
-    static final String ACTION_ITEM_WITHDRAW_APPLICATION = "Withdraw the application";
-    static final String ACTIONS_ITEM_REFUSE_PARTICIPATE = "Refuse to participate";
+    static final String ACTIONS_ITEM_FORMING 				= "Forming an application";
+    static final String ACTIONS_ITEM_LOT_NAME	 			= "Lot name";
+    static final String ACTIONS_ITEM_INFO_DOCUM 			= "Info docum";
+    static final String ACTIONS_ITEM_TAKE_PART 				= "Take part";
+    static final String ACTIONS_ITEM_VIEW_APPLICATION 		= "View application";
+    static final String ACTION_ITEM_WITHDRAW_APPLICATION 	= "Withdraw the application";
+    static final String ACTIONS_ITEM_REFUSE_PARTICIPATE 	= "Refuse to participate";
 
  // State
-    static final int STATE_BID_PREPARATION = 1;
-    static final int STATE_BID_SUBMISSION_OF_PROPOSALS = 2;
-    static final int STATE_BID_EVALUATION_AND_AWARDING = 3;
-    static final int STATE_BID_UNFULFILLED_TENDERS = 4;
-    static final int STATE_BID_COMPLETED_TENDERS = 5;
+    static final int STATE_BID_PREPARATION 				= 1;
+    static final int STATE_BID_SUBMISSION_OF_PROPOSALS 	= 2;
+    static final int STATE_BID_EVALUATION_AND_AWARDING 	= 3;
+    static final int STATE_BID_UNFULFILLED_TENDERS 		= 4;
+    static final int STATE_BID_COMPLETED_TENDERS 		= 5;
   
     
   //Generation docum
@@ -125,31 +125,32 @@ public interface SupplierWorkplaceConstant {
     
     //Status
 
-    static final int STATUS_BID_PREPARATION = 100;
+    static final int STATUS_BID_PREPARATION 			= 100;
     static final int STATUS_BID_SUBMISSION_OF_PROPOSALS = 200;
    //Sending for publication approval
-    static final int STATUS_BID_TO_APPROVE = 101;
-    static final int STATUS_BID_BEFORE_PUBLICATION = 102;
-    static final int STATUS_BID_FINALIZING_ORDER = 103;
-    static final int STATUS_BID_CANCELLATION_AGREEMENT = 201;
+    static final int STATUS_BID_TO_APPROVE 				= 101;
+    static final int STATUS_BID_BEFORE_PUBLICATION 		= 102;
+    static final int STATUS_BID_FINALIZING_ORDER 		= 103;
+    static final int STATUS_BID_CANCELLATION_AGREEMENT 	= 201;
     //CANCELED BY THE OPERATOR OF THE AUTHORIZED BODY
-    static final int STATUS_BID_CANCELED_BODY = 202;
-    static final int STATUS_BID_WINNER_IDENTIFIED = 300;
+    static final int STATUS_BID_CANCELED_BODY 			= 202;
+    static final int STATUS_BID_WINNER_IDENTIFIED 		= 300;
     //At the stage of opening and determining the winner
-    static final int STATUS_BID_AT_DETERMINING_WINNER = 500;
+    static final int STATUS_BID_AT_DETERMINING_WINNER 	= 500;
     //Customer's refusal to sign a contract
-    static final int STATUS_BID_CUSTOMER_CONTRACT = 301;
+    static final int STATUS_BID_CUSTOMER_CONTRACT 		= 301;
     //Refusal of the supplier to sign the contract
-    static final int STATUS_BID_REFUSAL_CONTRACT = 302;
+    static final int STATUS_BID_REFUSAL_CONTRACT 		= 302;
     
-    static final int STATUS_BID_COMPLETED_TRADES = 400;
+    static final int STATUS_BID_COMPLETED_TRADES 		= 400;
     
     static final String FOLDER_BID = "BID";
     static final String FOLDER_LOT = "LOT DOCUMENTS";
     static final String FOLDER_CRITERIA = "CRITERIA DOCUMENTS";
     static final String FOLDER_GENERATE_DOC = "GENERATE DOCUMENT";
     
-    static final int CRITERIA_QUALIFICATION = 1;
-    static final int CRITERIA_TECHNICAL = 2;
-    static final int CRITERIA_FINANCIAL = 3;
+    static final int CRITERIA_QUALIFICATION 	= 1;
+    static final int CRITERIA_TECHNICAL 		= 2;
+    static final int CRITERIA_FINANCIAL 		= 3;
+    static final int CRITERIA_OTHER_CONDITIONS 	= 4;
 }
