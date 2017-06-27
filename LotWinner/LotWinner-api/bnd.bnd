@@ -1,0 +1,9 @@
+Bundle-Name: LotWinner-api
+Bundle-SymbolicName: tj.lots.winner.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.lots.winner.exception,\
+	tj.lots.winner.model,\
+	tj.lots.winner.service,\
+	tj.lots.winner.service.persistence
+-includeresource: META-INF/service.xml=../LotWinner-service/service.xml

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="tj.lots.winner.service.impl.LotsWinnerLocalServiceImpl" id="tj.lots.winner.service.LotsWinnerLocalService" />
+	<bean class="tj.lots.winner.service.persistence.impl.LotsWinnerPersistenceImpl" id="tj.lots.winner.service.persistence.LotsWinnerPersistence" parent="basePersistence" />
+</beans>

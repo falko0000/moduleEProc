@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.lots.winner.model.LotsWinner" />
+	<class name="tj.lots.winner.model.impl.LotsWinnerImpl" table="sapp.lot_winner">
+		<id name="lot_winner_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="spisok_lotov_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organization_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="total_price" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="attribute" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="serial_number" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="point" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+	</class>
+</hibernate-mapping>

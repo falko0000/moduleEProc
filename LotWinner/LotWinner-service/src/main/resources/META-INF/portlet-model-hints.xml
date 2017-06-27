@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.lots.winner.model.LotsWinner">
+		<field name="lot_winner_id" type="long" />
+		<field name="spisok_lotov_id" type="long" />
+		<field name="organization_id" type="long" />
+		<field name="total_price" type="double" />
+		<field name="attribute" type="String" />
+		<field name="serial_number" type="int" />
+		<field name="point" type="double" />
+	</model>
+</model-hints>

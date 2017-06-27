@@ -1,0 +1,1 @@
+create index IX_6C53CCA9 on sapp.lot_winner (spisok_lotov_id, serial_number);
