@@ -71,7 +71,7 @@ public class CommissionActionCommand extends BaseMVCActionCommand{
 
 	private void insertEvaluation(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		
-		 String prefixes[] = {"qualification", "technical", "financial"};
+		 String prefixes[] = {"qualification", "other_conditions", "technical", "financial"};
 		
 		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		

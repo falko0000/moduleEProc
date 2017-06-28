@@ -53,8 +53,11 @@ public class CommissionModulePortlet extends MVCPortlet {
 	Organization or;
 	
 	try {
-		System.out.println(2576);
-		Winner win = new Winner(2576);
+		System.out.println(2594);
+		Winner win = new Winner(2594);
+		
+
+		
 	} catch (PortalException e) {
 		System.out.println("nashud");
 	}

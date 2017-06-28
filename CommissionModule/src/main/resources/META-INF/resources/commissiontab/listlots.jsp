@@ -8,14 +8,14 @@
 String sgroup = "group-";
 String current = themeDisplay.getURLCurrent();
  int bindex = current.indexOf(sgroup)+sgroup.length();
- int eent = current.lastIndexOf("/");
+ int eent = current.indexOf("?", bindex);
  
  String UserGroupId = "0";
  
-   if(bindex < eent)
-       UserGroupId = current.substring(current.indexOf(sgroup)+sgroup.length(),current.lastIndexOf("/"));
-   else
-	   UserGroupId = current.substring(current.indexOf(sgroup)+sgroup.length(),current.length());
+
+   
+  
+       System.out.println(UserGroupId);
  
    Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenijaByUserGroupId(Long.valueOf(UserGroupId));
   

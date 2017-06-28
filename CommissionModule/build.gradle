@@ -17,5 +17,5 @@ dependencies {
 	    				compile project (":modules:Criterias:Criterias-api")
 	    				compile project (":modules:SupplierCriteria:SupplierCriteria-api")
 	    				    compile project (":modules:Bidqueue:Bidqueue-api")
-	    				
+	    				compile project (":modules:LotWinner:LotWinner-api")
 }

@@ -152,4 +152,5 @@ public interface SupplierWorkplaceConstant {
     static final int CRITERIA_QUALIFICATION = 1;
     static final int CRITERIA_TECHNICAL = 2;
     static final int CRITERIA_FINANCIAL = 3;
+    static final int CRITERIA_OTHER_CONDITIONS = 4;
 }

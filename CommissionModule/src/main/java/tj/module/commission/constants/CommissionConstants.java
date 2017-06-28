@@ -12,6 +12,7 @@ public interface CommissionConstants {
 	public final String ACTION_COMMAND = "action_command";
 	
 	static final String PAGE_LIST_LOTS = "/commissiontab/listlots.jsp";
+	static final String PAGE_PROTOCOL = "/commissiontab/protocol.jsp";
 	static final String PAGE_SUPPLIER_LIST = "/commissiontab/evaluation/supplierlist.jsp";
     static final String PAGE_SUPPLIER = "/commissiontab/evaluation/supplier.jsp";
 	
