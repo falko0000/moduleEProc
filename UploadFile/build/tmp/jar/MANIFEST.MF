@@ -3,18 +3,22 @@ Bundle-ManifestVersion: 2
 Bundle-Name: UploadFile
 Bundle-SymbolicName: UploadFile
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_51 (Oracle Corporation)
 Import-Package: com.liferay.document.library.kernel.model;version="[1.
  0,2)",com.liferay.document.library.kernel.service;version="[1.0,2)",c
  om.liferay.document.library.kernel.store;version="[1.0,2)",com.lifera
- y.portal.kernel.exception;version="[7.0,8)",com.liferay.portal.kernel
- .portlet.bridges.mvc;version="[1.0,2)",com.liferay.portal.kernel.repo
- sitory.model;version="[7.0,8)",com.liferay.portal.kernel.service;vers
- ion="[1.0,2)",com.liferay.portal.kernel.theme;version="[1.0,2)",com.l
- iferay.portal.kernel.upload;version="[6.3,7)",com.liferay.portal.kern
- el.util;version="[7.0,8)",freemarker.template;version="[2.3,3)",javax
- .portlet;version="[2.0,3)",javax.servlet;version="[3.0,4)",javax.serv
- let.http;version="[3.0,4)"
+ y.portal.kernel.annotation;version="[6.3,7)",com.liferay.portal.kerne
+ l.dao.orm;version="[7.0,8)",com.liferay.portal.kernel.exception;versi
+ on="[7.0,8)",com.liferay.portal.kernel.language;version="[7.0,8)",com
+ .liferay.portal.kernel.model;version="[1.0,2)",com.liferay.portal.ker
+ nel.portlet.bridges.mvc;version="[1.0,2)",com.liferay.portal.kernel.r
+ epository.model;version="[7.0,8)",com.liferay.portal.kernel.service;v
+ ersion="[1.0,2)",com.liferay.portal.kernel.theme;version="[1.0,2)",co
+ m.liferay.portal.kernel.upload;version="[6.3,7)",com.liferay.portal.k
+ ernel.util;version="[7.0,8)",freemarker.template;version="[2.3,3)",ja
+ vax.portlet;version="[2.0,3)",javax.servlet;version="[3.0,4)",javax.s
+ ervlet.http;version="[3.0,4)",tj.izvewenija.model;version="[1.0,2)",t
+ j.izvewenija.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

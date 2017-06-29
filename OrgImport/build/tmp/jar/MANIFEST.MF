@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: OrgImport
 Bundle-SymbolicName: tj.orgimport
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_51 (Oracle Corporation)
 Import-Package: com.liferay.portal.kernel.model;version="[1.0,2)",com.
  liferay.portal.kernel.portlet.bridges.mvc;version="[1.0,2)",com.lifer
  ay.portal.kernel.service;version="[1.0,2)",com.liferay.portal.kernel.

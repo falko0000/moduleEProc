@@ -10,9 +10,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
-
-
-
+import java.math.BigInteger;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -59,14 +57,10 @@ public class CommissionModulePortlet extends MVCPortlet {
 
 		
 	} catch (PortalException e) {
-		System.out.println("nashud");
+		//System.out.println("nashud");
 	}
 		
-	//	OrganizationLocalServiceUtil.getUserOrganizationIds(userId, includeAdministrative)
-		
-	   // PortalUtil.getLayoutFriendlyURL(layout, themeDisplay)
-		  // LayoutLocalServiceUtil.getLayouts
-		
+	   
 	 
 		super.doView(renderRequest, renderResponse);
 	}

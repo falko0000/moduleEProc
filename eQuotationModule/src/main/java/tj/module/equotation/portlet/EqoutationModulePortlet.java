@@ -75,7 +75,6 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		
-	
 
 	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 	
@@ -101,7 +100,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	
 		
 		*/
-   
+
 
 	StringBuilder names = new StringBuilder();
 	
