@@ -6,7 +6,7 @@
 	<class name="tj.postavwiki.model.impl.PostavwikiImpl" table="sapp.postavwiki">
 		<id name="postavwiki_id" type="long">
 			<generator class="sequence">
-				<param name="sequence">seq_postawki</param>
+				<param name="sequence">sapp.seq_postavwiki</param>
 			</generator>
 		</id>
 		<property name="adres" type="com.liferay.portal.dao.orm.hibernate.StringType" />

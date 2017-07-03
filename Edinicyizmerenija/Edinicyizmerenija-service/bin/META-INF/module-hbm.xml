@@ -6,7 +6,7 @@
 	<class name="tj.edinicy.izmerenija.model.impl.EdinicyIzmerenijaImpl" table="sapp.edinicy_izmerenija">
 		<id name="edinicy_izmerenija_id" type="long">
 			<generator class="sequence">
-				<param name="sequence">seq_ed_izmerenija</param>
+				<param name="sequence">sapp.seq_ed_izmerenija</param>
 			</generator>
 		</id>
 		<property name="nazvanie" type="com.liferay.portal.dao.orm.hibernate.StringType" />

@@ -6,7 +6,7 @@
 	 <entity name="Strany" local-service="true" table="sapp.strany" remote-service="false">
         <column name="nazvanie" type="String"></column>
         <column name="nazvanie_tj" type="String"></column>
-        <column name="strany_id" type="long" primary="true" id-type="sequence" id-param="seq_strany"></column>
+        <column name="strany_id" type="long" primary="true" id-type="sequence" id-param="sapp.seq_strany"></column>
         <column name="key" type="String"></column>
     
     <order>

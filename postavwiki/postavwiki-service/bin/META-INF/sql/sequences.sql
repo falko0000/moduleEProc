@@ -1,1 +1,1 @@
-create sequence seq_postawki;
+create sequence sapp.seq_postavwiki;

@@ -6,7 +6,7 @@
 	<class name="tj.tipy.izvewenij.model.impl.TipyIzvewenijImpl" table="sapp.tipy_izvewenij">
 		<id name="tipy_izvewenij_id" type="long">
 			<generator class="sequence">
-				<param name="sequence">seq_type_izvesheniya</param>
+				<param name="sequence">sapp.seq_type_izvesheniya</param>
 			</generator>
 		</id>
 		<property name="tip" type="com.liferay.portal.dao.orm.hibernate.StringType" />

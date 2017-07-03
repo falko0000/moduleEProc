@@ -1,1 +1,1 @@
-create sequence seq_strany;
+create sequence sapp.seq_strany;

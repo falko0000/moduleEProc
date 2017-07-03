@@ -12,10 +12,7 @@ String current = themeDisplay.getURLCurrent();
  
  String UserGroupId = "0";
  
-
-   
-  
-       System.out.println(UserGroupId);
+System.out.println(UserGroupId);
  
    Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenijaByUserGroupId(Long.valueOf(UserGroupId));
   

@@ -61,13 +61,14 @@ import tj.izvewenija.service.persistence.IzvewenijaPersistence;
 public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 
 	public Izvewenija insertIzvewenija( long sostojanie_id, long status_id, long tip_izvewenija_id, 
-			                            long organizacija_id, String naimenovanie, ServiceContext serviceContext )
+			                            long organizacija_id, String naimenovanie, long layoutPrototypeId, ServiceContext serviceContext )
 	{
 		
 		long  izvewenija_id = CounterLocalServiceUtil.increment(Izvewenija.class.toString());
 		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.createIzvewenija(izvewenija_id);  
+	    
 		
-		      String description = description = "This group for member commission bid number "+String.valueOf(izvewenija.getIzvewenija_id());;
+		     String description = description = "This group for member commission bid number "+String.valueOf(izvewenija.getIzvewenija_id());;
 		      String groupName = "bid number " + String.valueOf(izvewenija.getIzvewenija_id());
 		
 		  UserGroup userGroup = null;
@@ -124,7 +125,7 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 		     groupName = "bid number " + String.valueOf(izvewenija.getIzvewenija_id());
 		     
 		     
-		     long layoutPrototypeId = 341821;
+		     
 		     LayoutPrototype pageTemplate = null;
 			try {
 				pageTemplate = LayoutPrototypeLocalServiceUtil.getLayoutPrototype(layoutPrototypeId);

@@ -234,7 +234,8 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 
 	public Izvewenija insertIzvewenija(long sostojanie_id, long status_id,
 		long tip_izvewenija_id, long organizacija_id,
-		java.lang.String naimenovanie, ServiceContext serviceContext);
+		java.lang.String naimenovanie, long layoutPrototypeId,
+		ServiceContext serviceContext);
 
 	public Izvewenija updateIzvewenija(long izvewenija_id, long sostojanie_id,
 		long status_id, long tip_izvewenija_id, long organizacija_id,

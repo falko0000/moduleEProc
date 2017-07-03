@@ -16,7 +16,7 @@ import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-
+import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 
@@ -74,7 +74,7 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 			return publish(renderRequest, renderResponse);
 		if(cmd.equals(Constants.APPROVE))
 			return approve(renderRequest, renderResponse);
-		
+		FormNavigatorEntryUtil.getFormNavigatorEntries(formNavigatorId, user, formModelBean)
 		return EQuotationConstants.PAGE_EDIT;
 	}
 

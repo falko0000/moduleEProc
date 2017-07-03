@@ -1,1 +1,1 @@
-create sequence seq_ed_izmerenija;
+create sequence sapp.seq_ed_izmerenija;

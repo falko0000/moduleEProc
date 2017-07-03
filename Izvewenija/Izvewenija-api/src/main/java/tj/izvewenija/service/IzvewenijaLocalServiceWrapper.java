@@ -277,11 +277,11 @@ public class IzvewenijaLocalServiceWrapper implements IzvewenijaLocalService,
 	@Override
 	public tj.izvewenija.model.Izvewenija insertIzvewenija(long sostojanie_id,
 		long status_id, long tip_izvewenija_id, long organizacija_id,
-		java.lang.String naimenovanie,
+		java.lang.String naimenovanie, long layoutPrototypeId,
 		com.liferay.portal.kernel.service.ServiceContext serviceContext) {
 		return _izvewenijaLocalService.insertIzvewenija(sostojanie_id,
 			status_id, tip_izvewenija_id, organizacija_id, naimenovanie,
-			serviceContext);
+			layoutPrototypeId, serviceContext);
 	}
 
 	@Override

@@ -1,1 +1,1 @@
-create sequence seq_type_izvesheniya;
+create sequence sapp.seq_type_izvesheniya;

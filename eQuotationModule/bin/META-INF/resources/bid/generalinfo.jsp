@@ -8,7 +8,7 @@
  String[] generalinfo = new String[]{"bidgeneralinfo"};
  String[] contactinformation = new String[]{"bidcontactinformation"};
 
- 
+
  String[][] CAT_SECTION = {stateinfo, generalinfo, contactinformation};
  
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");

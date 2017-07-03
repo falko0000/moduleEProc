@@ -115,6 +115,7 @@ import tj.spisoklotov.model.SpisoklotovWrapper;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.strany.model.Strany;
 import tj.strany.service.StranyLocalServiceUtil;
+import tj.system.config.exception.NoSuchSystemConfigException;
 import tj.system.config.model.SystemConfig;
 import tj.system.config.model.SystemConfigWrapper;
 import tj.system.config.service.SystemConfigLocalService;
@@ -956,21 +957,20 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	}
        long org_ids[] = UserLocalServiceUtil.getOrganizationPrimaryKeys(serviceContext.getUserId());
       
+       String layoutPrototypeId = "0";
+	try {
+		layoutPrototypeId = SystemConfigLocalServiceUtil.getSystemConfig(EQuotationConstants.SITE_TEMPLATE).getValue();
+	} catch (NoSuchSystemConfigException e1) {
+	
+	}
+      
        Izvewenija inserted_izvewenija =  IzvewenijaLocalServiceUtil
     		                            .insertIzvewenija(EQuotationConstants.STATE_BID_PREPARATION, 
     		                                              EQuotationConstants.STATUS_BID_PREPARATION,
-    		                                              bid_method,org_ids[0],name, serviceContext);
+    		                                              bid_method,org_ids[0],name,Long.valueOf(layoutPrototypeId), serviceContext);
 
       
      
-  
-		
-	                   
-		
-	                     
-		
-		
-		
     
 	 IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(inserted_izvewenija.getIzvewenija_id());
 		
