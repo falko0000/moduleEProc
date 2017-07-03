@@ -17,7 +17,8 @@
      String names =(String) request.getAttribute("editnametabs");
     
      String tab = ParamUtil.getString(request, "izvewenija_tab","preparation");
-    String currentURL = themeDisplay.getURLCurrent();
+ 
+     String currentURL = themeDisplay.getURLCurrent();
 
     String portlet = portletDisplay.getRootPortletId();
     long  companyId = themeDisplay.getCompanyId();

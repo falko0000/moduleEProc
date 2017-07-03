@@ -3,14 +3,15 @@ Bundle-ManifestVersion: 2
 Bundle-Name: OrgImport
 Bundle-SymbolicName: tj.orgimport
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
-Import-Package: com.liferay.portal.kernel.exception;version="[7.0,8)",
- com.liferay.portal.kernel.model;version="[1.0,2)",com.liferay.portal.
- kernel.portlet.bridges.mvc;version="[1.0,2)",com.liferay.portal.kerne
- l.service;version="[1.0,2)",com.liferay.portal.kernel.util;version="[
- 7.0,8)",javax.portlet;version="[2.0,3)",javax.servlet;version="[3.0,4
- )",javax.servlet.http;version="[3.0,4)",tj.vbk.model;version="[1.0,2)
- ",tj.vbk.service;version="[1.0,2)"
+Created-By: 1.8.0_51 (Oracle Corporation)
+Import-Package: com.liferay.portal.kernel.model;version="[1.0,2)",com.
+ liferay.portal.kernel.portlet.bridges.mvc;version="[1.0,2)",com.lifer
+ ay.portal.kernel.service;version="[1.0,2)",com.liferay.portal.kernel.
+ util;version="[7.0,8)",javax.portlet;version="[2.0,3)",javax.servlet;
+ version="[3.0,4)",javax.servlet.http;version="[3.0,4)",tj.postavwiki.
+ model;version="[1.0,2)",tj.postavwiki.service;version="[1.0,2)",tj.sa
+ pp.services.model;version="[1.0,2)",tj.sapp.services.service;version=
+ "[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

@@ -70,12 +70,12 @@ public class UploadFilePortlet extends MVCPortlet {
 		
 		String[] file_nmae = DLStoreUtil.getFileNames(themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(), "template_ftl") ;
 		File f = DLFileEntryLocalServiceUtil.getFile(120727, "1.0", false);
-	System.out.println(f.getAbsolutePath());
+	
 		Scanner in = new Scanner(f);
 		
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
 		cfg.setDirectoryForTemplateLoading(new File(f.getParent()));
-		System.out.println("name="+f.getName());
+		
 		cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 		
@@ -91,7 +91,7 @@ public class UploadFilePortlet extends MVCPortlet {
 		
 		  Map<String,String> urlMap = getAllFileLink(themeDisplay);
 		  actionRequest.setAttribute("urlMap", urlMap);
-		  actionResponse.setRenderParameter("jspPage","/download.jsp");
+		  actionResponse.setRenderParameter("jspPage","/protocol.jsp");
 	}
 	public Folder createFolder(ActionRequest actionRequest,ThemeDisplay themeDisplay)
 	{
@@ -129,7 +129,7 @@ public class UploadFilePortlet extends MVCPortlet {
 		try {
 			folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), PARENT_FOLDER_ID, ROOT_FOLDER_NAME);
 		} catch (Exception e) {	
-			System.out.println(e.getMessage());
+			
 		}
 		return folder;
 	}
@@ -145,7 +145,7 @@ public class UploadFilePortlet extends MVCPortlet {
                         String title = fileName;
 			String description = "This file is added via programatically";
 			long repositoryId = themeDisplay.getScopeGroupId();
-			System.out.println("Title=>"+title);
+			
 		    try
 		    {  
 		    	Folder folder = getFolder(themeDisplay);
@@ -156,7 +156,7 @@ public class UploadFilePortlet extends MVCPortlet {
 		    	
 		     } catch (Exception e)
 		    {
-		       System.out.println(e.getMessage());
+		     
 		    	e.printStackTrace();
 		    }
 

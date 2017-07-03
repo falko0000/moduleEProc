@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Okgz-service
 Bundle-SymbolicName: tj.okgz.service
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_51 (Oracle Corporation)
 Import-Package: com.liferay.counter.kernel.service;version="[1.0,2)",c
  om.liferay.expando.kernel.model;version="[1.0,2)",com.liferay.expando
  .kernel.util;version="[1.0,2)",com.liferay.portal.kernel.bean;version

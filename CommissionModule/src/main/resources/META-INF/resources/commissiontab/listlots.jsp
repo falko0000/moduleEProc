@@ -1,6 +1,6 @@
 
 
-
+<%@page import="tj.izvewenija.model.Izvewenija"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -8,15 +8,28 @@
 String sgroup = "group-";
 String current = themeDisplay.getURLCurrent();
  int bindex = current.indexOf(sgroup)+sgroup.length();
- int eent = current.indexOf("?", bindex);
+// int eent = current.indexOf("?", bindex);
  
- String UserGroupId = "0";
+ String UserGroupId = "";
  
-System.out.println(UserGroupId);
+ for( int i = bindex; i < current.length(); i++)
+ {
+	
+	 if(current.charAt(i) >='0' && current.charAt(i) <= '9')
+		 UserGroupId += current.charAt(i);
+	 else
+		 break;
+ }
+    
+ if(UserGroupId.equals(""))
+	 UserGroupId = "353701";
+
  
    Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenijaByUserGroupId(Long.valueOf(UserGroupId));
   
-  
+   request.setAttribute("izvewenie_id",izvewenija.getIzvewenija_id() ) ;  
+
+
 	PortletURL listlotsUrl = renderResponse.createRenderURL();
 	
 	listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenija.getIzvewenija_id()));
@@ -26,7 +39,7 @@ System.out.println(UserGroupId);
 %>
 
 
-
+ <span><%=LanguageUtil.format(request, "bid-number", izvewenija.getIzvewenija_id()) %> </span>
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
 				delta = "<%=5%>"
