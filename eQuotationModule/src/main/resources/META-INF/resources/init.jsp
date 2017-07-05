@@ -199,5 +199,3 @@ if (portletName.equals(portletId) || permissionChecker.hasPermission(scopeGroup.
 %>
 
 
-
-

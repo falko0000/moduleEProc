@@ -4,7 +4,7 @@ create table sapp.izvewenija (
 	izmenil LONG,
 	izvewenija_id LONG not null primary key,
 	kod_id LONG,
-	naimenovanie VARCHAR(75) null,
+	naimenovanie VARCHAR(400) null,
 	organizacija_id LONG,
 	sostojanie_id LONG,
 	sozdal LONG,

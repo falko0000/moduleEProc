@@ -74,7 +74,7 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 			return publish(renderRequest, renderResponse);
 		if(cmd.equals(Constants.APPROVE))
 			return approve(renderRequest, renderResponse);
-		FormNavigatorEntryUtil.getFormNavigatorEntries(formNavigatorId, user, formModelBean)
+	//	FormNavigatorEntryUtil.getFormNavigatorEntries(formNavigatorId, user, formModelBean)
 		return EQuotationConstants.PAGE_EDIT;
 	}
 

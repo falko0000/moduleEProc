@@ -234,5 +234,9 @@ public class OrgimportPortlet extends MVCPortlet {
 		}
 		return index;
 	}
+	public void doIndex(ActionRequest actionRequest, ActionResponse actionResponse)
+	{
+	     	
+	}
 }
 

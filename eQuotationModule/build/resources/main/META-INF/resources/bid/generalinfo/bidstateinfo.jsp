@@ -1,5 +1,6 @@
 <%@ include file="/init.jsp" %>
 <%
+System.out.println("Bid state info");
 	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
     Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
     Organization bidorg = (Organization) request.getAttribute("bidorg");

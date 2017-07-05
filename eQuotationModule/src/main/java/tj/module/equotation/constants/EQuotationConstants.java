@@ -62,7 +62,7 @@ public interface EQuotationConstants  {
     //static final long AUTHORIZED_BODY_ID = 38548; // sobirov_j
     // static final long AUTHORIZED_BODY_ID = 94344; // ashurov_sh
     
-    static final long AUTHORIZED_BODY_ID = 112916;
+    static final String AUTHORIZED_BODY_ID = "AUTHORIZED_BODY_ID";
     
     static final String amount = "Сомони";
     

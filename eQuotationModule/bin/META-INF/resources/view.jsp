@@ -26,7 +26,7 @@
     String primKey = portletDisplay.getResourcePK(); 
     long role[] = permissionChecker.getRoleIds(permissionChecker.getUserId(), themeDisplay.getScopeGroupId());
     
-    
+   
 %>
 
   

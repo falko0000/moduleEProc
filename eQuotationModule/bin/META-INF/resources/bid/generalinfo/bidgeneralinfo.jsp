@@ -4,7 +4,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-
+System.out.println("Bid general info");
 	List<TipyIzvewenij> typeizvewenij = TipyIzvewenijLocalServiceUtil.getTipyIzvewenijs(0,TipyIzvewenijLocalServiceUtil.getTipyIzvewenijsCount()); 
 
 	Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
@@ -28,6 +28,8 @@
 	String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
 	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
+	
+	
 %>
 
       <aui:input 

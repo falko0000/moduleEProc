@@ -3,14 +3,12 @@
 
 <%
 
- String[] CAT_NAMES = new String[]{"bid_state_info","bid_general_info","bid_contact_information"};
- String[] stateinfo = new String[]{"bidstateinfo"};
- String[] generalinfo = new String[]{"bidgeneralinfo"};
- String[] contactinformation = new String[]{"bidcontactinformation"};
 
- 
- String[][] CAT_SECTION = {stateinfo, generalinfo, contactinformation};
- 
+String[] CAT_NAMES = new String[]{"bid"};
+ String[] deprecatedCategorySections = new String[]{"bidstateinfo","bidgeneralinfo","bidcontactinformation"};
+String[][] CAT_SECTION = {deprecatedCategorySections};
+
+
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  
  String currentURL = themeDisplay.getURLCurrent();
@@ -33,8 +31,9 @@
  
  <liferay-ui:form-navigator 
  formName = "<%= EQuotationConstants.FORM_GENERAL_INFO%>"
- categoryNames="<%= CAT_NAMES %>"
- categorySections="<%= CAT_SECTION %>"
+ categoryNames = "<%= CAT_NAMES%>"
+  categorySections = "<%=CAT_SECTION %>"
+
  jspPath="/bid/generalinfo/"
  markupView="lexicon"
  

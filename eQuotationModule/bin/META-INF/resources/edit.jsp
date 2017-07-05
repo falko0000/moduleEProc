@@ -1,4 +1,6 @@
 
+<%@page import="tj.system.config.model.SystemConfig"%>
+<%@page import="tj.system.config.service.SystemConfigLocalServiceUtil"%>
 <%@ include file="/init.jsp" %>
 
 
@@ -16,7 +18,11 @@
   
   User biduser = null;
   
-  Organization authorized_body_org = OrganizationLocalServiceUtil.getOrganization(EQuotationConstants.AUTHORIZED_BODY_ID);
+  SystemConfig authorized_body = SystemConfigLocalServiceUtil.getSystemConfig(EQuotationConstants.AUTHORIZED_BODY_ID);
+   
+   long authorized_body_id  = Long.valueOf(authorized_body.getValue());
+  
+  Organization authorized_body_org = OrganizationLocalServiceUtil.getOrganization(authorized_body_id);
 		  
   if(izvewenie_id != 0)
 	  izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenie_id);
@@ -24,7 +30,7 @@
   if(izvewenija != null )
 	{
 		//bidorg = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
-		bidorg = OrganizationLocalServiceUtil.getOrganization(EQuotationConstants.AUTHORIZED_BODY_ID);
+		bidorg = OrganizationLocalServiceUtil.getOrganization(authorized_body_id);
 		biduser = UserLocalServiceUtil.getUser(izvewenija.getUserId());
 	}
 	else if(OrganizationLocalServiceUtil.hasUserOrganizations(UserServiceUtil.getCurrentUser().getUserId()))
@@ -42,6 +48,7 @@
   request.setAttribute("bidorg", bidorg);
   request.setAttribute("biduser", biduser);
   request.setAttribute("authorized_body_org", authorized_body_org);
+  
   
 %>
 
