@@ -1,3 +1,5 @@
+<%@page import="com.liferay.portal.kernel.service.CountryServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.CountryService"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -14,6 +16,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
  productUrl.setParameter(Constants.CMD,cmd);
  String displayStyle = ParamUtil.getString(request, "displayStyle");
 
+ System.out.println("Country in Strany");
 %>
 
 <liferay-frontend:management-bar
@@ -111,7 +114,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 				   <liferay-ui:search-container-column-text 
 				 	
 				 	name="country_origin"  
-				 	value = "<%=StranyLocalServiceUtil.getStrany(spisok_tovarov.getKod_strany_proizvoditelja()).getNazvanie() %>"
+				 	value = "<%=(spisok_tovarov.getKod_strany_proizvoditelja() == 0 )? "" : CountryServiceUtil.getCountry(spisok_tovarov.getKod_strany_proizvoditelja()).getNameCurrentLanguageId() %>"
 				 	orderable="<%= true %>" 
 				 	
 				 />

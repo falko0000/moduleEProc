@@ -75,6 +75,28 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 
     
 <%
+    String sgroup = "group-";
+	String current = themeDisplay.getURLCurrent();
+ 		int bindex = current.indexOf(sgroup)+sgroup.length();
+
+ 
+    String UserGroupId = "";
+ 
+ for( int i = bindex; i < current.length(); i++)
+ {
+	
+	 if(current.charAt(i) >='0' && current.charAt(i) <= '9')
+		 UserGroupId += current.charAt(i);
+	 else
+		 break;
+ }
     
+ if(UserGroupId.equals(""))
+	 UserGroupId = "353701";
+
+ 
+   Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenijaByUserGroupId(Long.valueOf(UserGroupId));
+   
+   request.setAttribute("izvewenie_id",izvewenija.getIzvewenija_id() ) ; 
 %>
 

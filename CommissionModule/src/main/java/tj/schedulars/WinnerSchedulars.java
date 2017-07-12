@@ -71,6 +71,7 @@ public class WinnerSchedulars extends BaseMessageListener  {
 			        
 			
 		    
+					Winner winner = new Winner(izvewenija_id);
 					
 					BidqueueLocalServiceUtil.deleteBidqueue(bidqueue);
 			

@@ -50,7 +50,7 @@ public class CommissionModulePortlet extends MVCPortlet {
 		
 	Organization or;
 	
-	try {
+/*	try {
 		System.out.println(2594);
 		Winner win = new Winner(2594);
 		
@@ -60,7 +60,7 @@ public class CommissionModulePortlet extends MVCPortlet {
 		//System.out.println("nashud");
 	}
 		
-	   
+	   */
 	 
 		super.doView(renderRequest, renderResponse);
 	}

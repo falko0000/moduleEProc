@@ -1,0 +1,1 @@
+create index IX_5182D8F2 on sapp.protocol_contracts (izvewenie_id);

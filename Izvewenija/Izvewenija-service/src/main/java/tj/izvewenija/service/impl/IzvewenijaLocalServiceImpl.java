@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutPrototype;
 import com.liferay.portal.kernel.model.LayoutTypePortletConstants;
 import com.liferay.portal.kernel.model.UserGroup;
@@ -124,11 +125,17 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 			 description = "This group for member commission bid number "+String.valueOf(izvewenija.getIzvewenija_id());
 		     groupName = "bid number " + String.valueOf(izvewenija.getIzvewenija_id());
 		     
-		     
+		 	
+			userGroup.setDescription(description);
+				userGroup.setName(groupName);
+				
+				UserGroupLocalServiceUtil.updateUserGroup(userGroup);
 		     
 		     LayoutPrototype pageTemplate = null;
 			try {
 				pageTemplate = LayoutPrototypeLocalServiceUtil.getLayoutPrototype(layoutPrototypeId);
+			
+				
 			} catch (PortalException e) {
 				
 			}
@@ -138,16 +145,14 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 		     tserviceContext.setAttribute("layoutPrototypeLinkedEnabled", true);
 				
 		     try {
-				LayoutLocalServiceUtil.addLayout(serviceContext.getUserId(), userGroupGroup.getGroupId(),
+			Layout layout =	LayoutLocalServiceUtil.addLayout(serviceContext.getUserId(), userGroupGroup.getGroupId(),
 						                         false, 0, "BID NUMBER "+ String.valueOf(izvewenija.getIzvewenija_id()),
 						                         "BID NUMBER "+ String.valueOf(izvewenija.getIzvewenija_id()),
 						                         "BID NUMBER "+ String.valueOf(izvewenija.getIzvewenija_id()),
 			
 						                         "portlet", false, "/group-"+String.valueOf(userGroup.getUserGroupId()), tserviceContext);
-				userGroup.setDescription(description);
-				userGroup.setName(groupName);
 				
-				UserGroupLocalServiceUtil.updateUserGroup(userGroup);
+			System.out.println(layout.getFriendlyURL());
 		     } catch (PortalException e) {
 			System.out.println("layout don't created");
 			}

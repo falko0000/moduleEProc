@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.protocol.contracts.model.ProtocolContracts" />
+	<class name="tj.protocol.contracts.model.impl.ProtocolContractsImpl" table="sapp.protocol_contracts">
+		<id name="protocol_contracts_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.protocol_contracts_id_seq</param>
+			</generator>
+		</id>
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="created" type="org.hibernate.type.TimestampType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

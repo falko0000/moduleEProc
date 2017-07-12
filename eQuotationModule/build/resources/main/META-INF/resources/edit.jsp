@@ -49,7 +49,10 @@
   request.setAttribute("biduser", biduser);
   request.setAttribute("authorized_body_org", authorized_body_org);
   
-  
+  if(izvewenie_id == 0)
+  renderResponse.setTitle("add new bid");
+  else
+	  renderResponse.setTitle("edit bid number X");  
 %>
 
 <portlet:renderURL var="tabs" >

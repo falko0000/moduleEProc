@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.protocol.contracts.model.ProtocolContracts">
+		<field name="protocol_contracts_id" type="long" />
+		<field name="izvewenie_id" type="long" />
+		<field name="created" type="Date" />
+		<field name="updated" type="Date" />
+	</model>
+</model-hints>

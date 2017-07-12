@@ -96,7 +96,7 @@ CriteriaValue criteriaValue = null;
       <aui:col md="3">
           
           <c:choose >
-      <c:when test="<%=criteria.getCriteria_type_id() == 1 %>">
+      <c:when test="<%=criteria.getMax_weight()!=0 %>">
       
       <aui:input 
             name="<%=prefix+"mark"+String.valueOf(k) %>"

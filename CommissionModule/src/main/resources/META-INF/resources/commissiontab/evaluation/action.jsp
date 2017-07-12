@@ -7,15 +7,14 @@
 	ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
     Organization organization = (Organization)row.getObject();
     long spisok_lotov_id = ParamUtil.getLong(request, "spisok_lotov_id");
-    long izvewenie_id = ParamUtil.getLong(request, "izvewenie_id");
-    
+   
     List<ZajavkiOtPostavwikov> otPostavwikovs = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisok_lotov_id, organization.getOrganizationId());
 	  double sum = 0.0;
 	  for( ZajavkiOtPostavwikov postavwikov : otPostavwikovs)
 		  	sum += postavwikov.getItogo_za_tovar();
 	  
 	  
-		Izvewenija izvewenija =  IzvewenijaLocalServiceUtil.getIzvewenija(izvewenie_id);
+	
 		Spisoklotov spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);
 	
 		boolean showSum = false;
@@ -33,7 +32,7 @@
 			 	<portlet:param name="mvcPath" value="<%= CommissionConstants.PAGE_SUPPLIER%>" />
              	<portlet:param name="organization_id" value="<%=String.valueOf(organization.getOrganizationId())%>" /> 
             	 <portlet:param name="spisok_lotov_id" value="<%=String.valueOf(spisok_lotov_id)%>" /> 
-            	 <portlet:param name="izvewenie_id" value="<%=String.valueOf(izvewenie_id)%>" /> 
+            	 <portlet:param name="izvewenie_id" value="<%=String.valueOf(izvewenija.getIzvewenija_id())%>" /> 
 		     
 	</portlet:renderURL>
 	

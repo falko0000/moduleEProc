@@ -79,27 +79,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 	
 
-	/*InternetAddress fromAddress = null;
-	InternetAddress toAddress = null;
 
-		try {
-			
-			
-			MailMessage mailMessage = new MailMessage();
-			mailMessage.setTo( new InternetAddress("falko_0000@mail.ru"));
-			mailMessage.setFrom(new InternetAddress("tender@zakupki.gov.tj"));
-			mailMessage.setSubject("Testing mail with Plain Text");
-			mailMessage.setBody("This Mail Comes From Liferay Is Easy");
-			MailServiceUtil.sendEmail(mailMessage);
-			
-			System.out.println("Send mail with Plain Text");
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-		
-		*/
 
 
 	StringBuilder names = new StringBuilder();

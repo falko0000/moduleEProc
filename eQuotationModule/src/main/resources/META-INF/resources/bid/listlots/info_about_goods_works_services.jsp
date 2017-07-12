@@ -1,4 +1,8 @@
 
+<%@page import="com.liferay.portal.kernel.model.Country"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.liferay.portal.kernel.service.CountryServiceUtil"%>
+<%@page import="java.util.List"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -6,6 +10,10 @@
 List<EdinicyIzmerenija> edinicy_izmerenijas = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijas(0, EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijasCount());
 
 List<Strany> strany = StranyLocalServiceUtil.getStranies(0, StranyLocalServiceUtil.getStraniesCount());
+
+
+List<Country> countries = CountryServiceUtil.getCountries(true);
+
 Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
 
 Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
@@ -76,18 +84,19 @@ Long spisok_tovarov_id = ParamUtil.getLong(request,"spisok_tovarov_id");
 
 <aui:select label="country_origin" name="country_origin" >
 	
-	<c:if test="<%=(spisok_tovarov_id ==0 )%>">
-	<% for (Strany strana : strany) {%>
+	<aui:option label="" value ="0"/>
+	<c:if test="<%=(spisok_tovarov_id == 0 )%>">
+	<% for (Country country : countries) {%>
 		
-		<aui:option label="<%=strana.getNazvanie() %>"  value="<%= strana.getStrany_id() %>" />
+		<aui:option label="<%=country.getNameCurrentLanguageId() %>"  value="<%= country.getCountryId() %>" />
 	<%} %>
 	</c:if>
 	
 	<c:if test="<%=(spisok_tovarov_id !=0 )%>">
 	  
-	  <% for (Strany strana : strany) {%>
+	  <% for (Country country : countries) {%>
 		
-		<aui:option label="<%=strana.getNazvanie() %>"  value="<%= strana.getStrany_id() %>" selected = "<%=strana.getStrany_id() == spisokTovarov.getKod_strany_proizvoditelja() %>" />
+		<aui:option label="<%=country.getNameCurrentLanguageId() %>"  value="<%= country.getCountryId() %>" selected = "<%=country.getCountryId() == spisokTovarov.getKod_strany_proizvoditelja() %>" />
 	<%} %>
 	
 	</c:if>

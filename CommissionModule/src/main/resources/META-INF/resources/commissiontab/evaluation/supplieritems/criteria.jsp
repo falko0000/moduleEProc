@@ -26,7 +26,7 @@ String[] CAT_NAMES = new String[]{ "qualification_proposal",
     CriteriaValue criteriaValue = CriteriaValueLocalServiceUtil.getCriteriaValue(criterias.get(0).getCriteria_id(), realUser.getUserId(), organization_id);
 
  
- 	String[][] CAT_SECTION = {qualification_proposal,technical_proposal,financial_proposal};
+ 	String[][] CAT_SECTION = {qualification_proposal,other_conditions,technical_proposal,financial_proposal};
  
  
 

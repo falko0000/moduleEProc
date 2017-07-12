@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
+import com.liferay.counter.kernel.model.Counter;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Organization;
@@ -30,6 +33,8 @@ import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.lots.winner.model.LotsWinner;
 import tj.lots.winner.service.LotsWinnerLocalServiceUtil;
 import tj.module.commission.constants.CommissionConstants;
+import tj.protocol.contracts.model.ProtocolContracts;
+import tj.protocol.contracts.service.ProtocolContractsLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
@@ -260,6 +265,9 @@ public class Winner {
 		double sec_ws = 0.0;
 		double sec_worgPrice = 0.0;
 		
+		Map<Double, LotsWinner> listSupplier =new TreeMap<Double, LotsWinner>(); 
+		long lot_winner_id = CounterLocalServiceUtil.increment(LotsWinner.class.getName());
+	
 		for(Map.Entry<Long, List<Double[]>> entry : orgPoints.entrySet())
 		{
 			List<Double[]> points = entry.getValue();
@@ -280,19 +288,58 @@ public class Winner {
 			
 			double s = (FS*F)/100 + (TS*T)/100;
 			
-			if(s > ws)
-			{   
-				sec_ws = ws;
-				sec_winnerOrgId = winnerOrgId;
-				sec_worgPrice = worgPrice;
-				
-				ws = s;
-				winnerOrgId = organizationId;
-				worgPrice = orgPrice;
-			}
+		LotsWinner lotsWinner = LotsWinnerLocalServiceUtil.createLotsWinner(lot_winner_id);
+		lotsWinner.setAttribute("C");
+		lotsWinner.setOrganization_id(organizationId);
+		lotsWinner.setSpisok_lotov_id(spisok_lotov_id);
+		lotsWinner.setSerial_number(0);
+		lotsWinner.setPoint(s);
+		lotsWinner.setTotal_price(orgPrice);
+			
+		listSupplier.put(s, lotsWinner);
 		}
 		
-		if(ws!= 0 && winnerOrgId!= 0 )
+		int serialNumber = 1;
+		for(Map.Entry<Double, LotsWinner> entry : listSupplier.entrySet())
+		{
+			LotsWinner lotWinner = LotsWinnerLocalServiceUtil.getSerialWinner(spisok_lotov_id, serialNumber);
+			
+			long winnerId = lot_winner_id;
+			
+			if(Validator.isNotNull(lotWinner))
+				winnerId = lotWinner.getLot_winner_id(); 
+				
+		 if( serialNumber == 1)
+            lotWinner.setAttribute("W");
+		 
+		     lotWinner.setSerial_number(serialNumber);
+		      lotWinner.setPrimaryKey(winnerId);
+		 
+		 LotsWinnerLocalServiceUtil.updateLotsWinner(lotWinner);     
+			    
+			
+		}
+		
+		ProtocolContracts contracts = ProtocolContractsLocalServiceUtil.getProtocolContractsByBid(izvewenie_id);
+	
+		if(Validator.isNotNull(contracts))
+		{
+			contracts.setUpdated(new Date());
+			
+		}
+		else
+		{    
+			 long protocol_contracts_id =  CounterLocalServiceUtil.increment(ProtocolContracts.class.toString());
+			contracts = ProtocolContractsLocalServiceUtil.createProtocolContracts(protocol_contracts_id);
+			
+			contracts.setIzvewenie_id(izvewenie_id);
+			contracts.setCreated(new Date());
+			contracts.setUpdated(new Date());
+			
+		}
+		
+		ProtocolContractsLocalServiceUtil.updateProtocolContracts(contracts);
+		/*	if(ws!= 0 && winnerOrgId!= 0 )
 		{
 			LotsWinner lotsWinner = LotsWinnerLocalServiceUtil.getSerialWinner(spisok_lotov_id, 1);
 			   
@@ -331,7 +378,7 @@ public class Winner {
 			
 			LotsWinnerLocalServiceUtil.updateLotsWinner(lotsWinner);
 		}
-
+*/
 			
  		orgPoints.clear();
 	}

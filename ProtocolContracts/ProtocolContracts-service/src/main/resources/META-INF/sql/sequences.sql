@@ -1,0 +1,1 @@
+create sequence sapp.protocol_contracts_id_seq;

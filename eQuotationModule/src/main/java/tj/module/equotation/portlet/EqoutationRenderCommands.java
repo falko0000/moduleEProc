@@ -65,8 +65,11 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 		
 		if(cmd.equals(EQuotationConstants.ACTION_COMMAND_NAME_ADDPRODUCT))
+		{
+
+			 System.out.println("Country in Strany");
 			return EQuotationConstants.PAGE_ADDPRODUCTS;
-	    	
+		}	
 		if(cmd.equals(EQuotationConstants.ACTION_COMMAND_NAME_EDIT_LOT))
 			return EQuotationConstants.PAGE_NEWLOT;
 	    
@@ -75,6 +78,8 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		if(cmd.equals(Constants.APPROVE))
 			return approve(renderRequest, renderResponse);
 	//	FormNavigatorEntryUtil.getFormNavigatorEntries(formNavigatorId, user, formModelBean)
+		
+	
 		return EQuotationConstants.PAGE_EDIT;
 	}
 

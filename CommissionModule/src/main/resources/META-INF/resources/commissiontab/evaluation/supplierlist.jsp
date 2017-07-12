@@ -12,7 +12,7 @@
 
 <%
     long spisok_lotov_id = ParamUtil.getLong(request, "spisok_lotov_id");
-	long izvewenie_id = ParamUtil.getLong(request, "izvewenie_id");
+
 	long ids[] = SupplierRequestLotLocalServiceUtil.getOraganizationIds(spisok_lotov_id);
 	
 	List<Organization> organizations = Collections.emptyList();
@@ -28,7 +28,7 @@
 	
 	Map<Long, Double> totalOrg = new HashMap<Long, Double>();
 	
-	Izvewenija izvewenija =  IzvewenijaLocalServiceUtil.getIzvewenija(izvewenie_id);
+	
 	
 	boolean showSum = false;
 	
