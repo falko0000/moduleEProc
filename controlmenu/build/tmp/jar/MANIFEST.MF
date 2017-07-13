@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: controlmenu
 Bundle-SymbolicName: tj.controlmenu
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_51 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Import-Package: com.liferay.portal.kernel.exception;version="[7.0,8)",
  com.liferay.portal.kernel.language;version="[7.0,8)",com.liferay.port
  al.kernel.util;version="[7.0,8)",com.liferay.product.navigation.contr

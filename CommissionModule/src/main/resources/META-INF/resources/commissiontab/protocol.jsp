@@ -11,8 +11,17 @@
        List<Spisoklotov> spisoklotovs = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id());
        
        ProtocolContracts protocolContracts = ProtocolContractsLocalServiceUtil.getProtocolContractsByBid(izvewenija.getIzvewenija_id());
+ 
+       String viewMode = ParamUtil.getString(request, "viewMode");
+       
+       String orgName = organization.getName();
+         
+       orgName = orgName.substring(orgName.indexOf(" "));
+       
  %>
-
+     
+     <%@ include file="/commissiontab/evaluation/print.jspf" %>
+     
         <%=LanguageUtil.format(request, "pratacol-number", protocolContracts.getPrimaryKey()) %> 
  
         <%=LanguageUtil.format(request, "automated-system", "zakupki.gov.tj") %> 
@@ -25,7 +34,7 @@
         <%=LanguageUtil.format(request, "bid-number",izvewenija.getIzvewenija_id()) %> 
         
         <p><%=LanguageUtil.format(request, "created-by-x", izvewenija.getUserName()) %></p>
-        <%= LanguageUtil.format(request, "organization-name",organization.getName())%>
+        <%= LanguageUtil.format(request, "organization-name", orgName)%>
         
         <%= LanguageUtil.format(request, "date-time-protocol-generation", protocolContracts.getCreated()) %>
        
@@ -43,7 +52,7 @@
         
         %>
 
-        
+      
         
            <%=LanguageUtil.format(request, "lot-number", lotInfo) %>
             <%=LanguageUtil.format(request,"procuring-entity", zakazchik) %>
@@ -68,7 +77,7 @@
             
              <%@ include file="/commissiontab/evaluation/tableconditions.jspf" %>
              
-                 <%=LanguageUtil.format(request, "conclusion-agreement", lotInfo[0]) %>
+            <%=LanguageUtil.format(request, "conclusion-agreement", lotInfo[0]) %>
             <%=LanguageUtil.format(request,"recommend-procuring", new Object[]{orgWin.getName(), total}) %>
             <%=LanguageUtil.get(request,"oblige-procuring") %>
             <%=LanguageUtil.get(request,"oblige-procuring-entity") %>

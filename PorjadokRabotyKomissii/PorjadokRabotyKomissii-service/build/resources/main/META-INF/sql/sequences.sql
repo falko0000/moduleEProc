@@ -1,1 +1,2 @@
 create sequence sapp.porjadok_raboty_komissii_;
+create sequence sapp.porjadok_raboty_komissii_id_seq

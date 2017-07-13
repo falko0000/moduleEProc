@@ -1,1 +1,2 @@
 create sequence sapp.informacija_o_razmewenii_;
+create sequence sapp.informacija_o_razmewenii_id_seq
