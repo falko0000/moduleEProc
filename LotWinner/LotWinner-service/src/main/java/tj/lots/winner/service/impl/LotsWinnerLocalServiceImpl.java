@@ -54,4 +54,16 @@ public class LotsWinnerLocalServiceImpl extends LotsWinnerLocalServiceBaseImpl {
 		}
 		 return lotsWinner;
 	 }
+	 
+	 public LotsWinner getAttributeWinner(long spisok_lotov_id, String attribute)
+	 { 
+		 LotsWinner lotsWinner = null;
+		 
+		 try {
+			lotsWinner = lotsWinnerPersistence.findByWinnerAttribute(spisok_lotov_id, attribute);
+		} catch (NoSuchLotsWinnerException e) {
+			
+		}
+		 return lotsWinner;
+	 }
 }

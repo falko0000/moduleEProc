@@ -1,14 +1,7 @@
 
 
-
-<%@ include file="/init.jsp" %>
-
 <%
-   long organization_id = ParamUtil.getLong(request,"organization_id");
-   long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
-   
-  Spisoklotov spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);
-  ProchajaInformacijaDljaZajavki dljaZajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.getProchajaInformacijaDljaZajavki(spisok_lotov_id, organization_id);
+  ProchajaInformacijaDljaZajavki dljaZajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.getProchajaInformacijaDljaZajavki(spisoklotov.getSpisok_lotov_id(), orgWinner);
    
 %>
 
@@ -40,9 +33,7 @@
  	    			<strong><%=LanguageUtil.get(request, "delivery_address")+": " %></strong>
  	    			<%=(dljaZajavki.getMesto_postavki_soglasno_zakazchiku()!=0)?dljaZajavki.getMesto_postavki():spisoklotov.getMesto_postavki() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getMesto_postavki_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr>
  	    	
  	    	<tr>
@@ -54,9 +45,7 @@
  	    			<strong><%=LanguageUtil.get(request, "delivery_time")+": " %></strong>
  	    			<%=(dljaZajavki.getSrok_postavki_soglasno_zakazchiku()!=0)?dljaZajavki.getSrok_postavki():spisoklotov.getSrok_postavki() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getSrok_postavki_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr>
  	    	
  	  		 <tr>
@@ -68,9 +57,7 @@
  	    			<strong><%=LanguageUtil.get(request, "validity")+": " %></strong>
  	    			<%=(dljaZajavki.getSrok_dejstvija_soglasno_zakazchiku()!=0)?dljaZajavki.getSrok_dejstvija():spisoklotov.getSrok_dejstvija() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getSrok_dejstvija_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr> 	 
  	    	
  	    	 <tr>
@@ -82,9 +69,7 @@
  	    			<strong><%=LanguageUtil.get(request, "software_application")+": " %></strong>
  	    			<%=(dljaZajavki.getSrok_obespechenija_zajavki_soglasno_zakazchiku()!=0)?dljaZajavki.getSrok_obespechenija_zajavki():spisoklotov.getSrok_obespechenija_zajavki() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getSrok_obespechenija_zajavki_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr> 
  	    	
  	    	 <tr>
@@ -96,9 +81,7 @@
  	    			<strong><%=LanguageUtil.get(request, "enforcement")+": " %></strong>
  	    			<%=(dljaZajavki.getSrok_ispolnenija_zajavki_soglasno_zakazchiku()!=0)?dljaZajavki.getSrok_ispolnenija_zajavki():spisoklotov.getSrok_ispolnenija_zajavki() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getSrok_ispolnenija_zajavki_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr> 
  	    	  
  	    	<tr>
@@ -116,9 +99,7 @@
  	    			<strong><%=LanguageUtil.get(request, "big_payment")+": " %></strong>
  	    			<%=(dljaZajavki.getOplata_soglasno_zakazchiku()!=0)?dljaZajavki.getOplata():spisoklotov.getOplata() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getOplata_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr> 	
  	    	
  	    	<tr>
@@ -130,9 +111,7 @@
  	    			<strong><%=LanguageUtil.get(request, "big_price_of_delivery")+": " %></strong>
  	    			<%=(dljaZajavki.getCena_postavki_soglasno_zakazchiku()!=0)?dljaZajavki.getCena_postavki():spisoklotov.getCena_postavki() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getCena_postavki_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr>
  	    	
  	    	<tr>
@@ -144,9 +123,7 @@
  	    			<strong><%=LanguageUtil.get(request, "big_concomitant_conditions")+": " %></strong>
  	    			<%=(dljaZajavki.getSoputstvujuwie_uslovija_soglasno_zakazchiku()!=0)?dljaZajavki.getSoputstvujuwie_uslovija():spisoklotov.getSoputstvujuwie_uslovija() %>
  	    		</td>
- 	    		<td>
- 	    			 <liferay-ui:icon iconCssClass="<%=(dljaZajavki.getSoputstvujuwie_uslovija_soglasno_zakazchiku()!=0)?"icon-question-sign":"icon-ok-sign" %>" />
- 	    		</td>
+ 	    		
  	    	</tr>
  	    	 		
  	  </tbody>

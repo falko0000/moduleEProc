@@ -232,6 +232,11 @@ public class LotsWinnerLocalServiceUtil {
 		return getService().fetchLotsWinner(lot_winner_id);
 	}
 
+	public static tj.lots.winner.model.LotsWinner getAttributeWinner(
+		long spisok_lotov_id, java.lang.String attribute) {
+		return getService().getAttributeWinner(spisok_lotov_id, attribute);
+	}
+
 	/**
 	* Returns the lots winner with the primary key.
 	*

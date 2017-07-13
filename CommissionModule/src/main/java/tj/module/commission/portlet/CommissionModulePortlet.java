@@ -9,6 +9,7 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.awt.List;
 import java.io.IOException;
 import java.math.BigInteger;
 
@@ -24,6 +25,7 @@ import org.osgi.service.component.annotations.Component;
 import tj.module.commission.constants.CommissionConstants;
 import tj.schedulars.Winner;
 import tj.supplier.request.lot.model.SupplierRequestLot;
+import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
 /**
  * @author Falko
  */
@@ -46,7 +48,6 @@ public class CommissionModulePortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		
 		
 	Organization or;
 	

@@ -83,8 +83,8 @@ public class LotsWinnerModelImpl extends BaseModelImpl<LotsWinner>
 
 	public static final String TABLE_SQL_CREATE = "create table sapp.lot_winner (lot_winner_id LONG not null primary key,spisok_lotov_id LONG,organization_id LONG,total_price DOUBLE,attribute VARCHAR(75) null,serial_number INTEGER,point DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.lot_winner";
-	public static final String ORDER_BY_JPQL = " ORDER BY lotsWinner.lot_winner_id ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY sapp.lot_winner.lot_winner_id ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY lotsWinner.serial_number ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY sapp.lot_winner.serial_number ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -97,9 +97,9 @@ public class LotsWinnerModelImpl extends BaseModelImpl<LotsWinner>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.lots.winner.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.lots.winner.model.LotsWinner"),
 			true);
-	public static final long SERIAL_NUMBER_COLUMN_BITMASK = 1L;
-	public static final long SPISOK_LOTOV_ID_COLUMN_BITMASK = 2L;
-	public static final long LOT_WINNER_ID_COLUMN_BITMASK = 4L;
+	public static final long ATTRIBUTE_COLUMN_BITMASK = 1L;
+	public static final long SERIAL_NUMBER_COLUMN_BITMASK = 2L;
+	public static final long SPISOK_LOTOV_ID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.lots.winner.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.lots.winner.model.LotsWinner"));
 
@@ -263,7 +263,17 @@ public class LotsWinnerModelImpl extends BaseModelImpl<LotsWinner>
 
 	@Override
 	public void setAttribute(String attribute) {
+		_columnBitmask |= ATTRIBUTE_COLUMN_BITMASK;
+
+		if (_originalAttribute == null) {
+			_originalAttribute = _attribute;
+		}
+
 		_attribute = attribute;
+	}
+
+	public String getOriginalAttribute() {
+		return GetterUtil.getString(_originalAttribute);
 	}
 
 	@Override
@@ -273,7 +283,7 @@ public class LotsWinnerModelImpl extends BaseModelImpl<LotsWinner>
 
 	@Override
 	public void setSerial_number(int serial_number) {
-		_columnBitmask |= SERIAL_NUMBER_COLUMN_BITMASK;
+		_columnBitmask = -1L;
 
 		if (!_setOriginalSerial_number) {
 			_setOriginalSerial_number = true;
@@ -344,17 +354,23 @@ public class LotsWinnerModelImpl extends BaseModelImpl<LotsWinner>
 
 	@Override
 	public int compareTo(LotsWinner lotsWinner) {
-		long primaryKey = lotsWinner.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getSerial_number() < lotsWinner.getSerial_number()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getSerial_number() > lotsWinner.getSerial_number()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override
@@ -401,6 +417,8 @@ public class LotsWinnerModelImpl extends BaseModelImpl<LotsWinner>
 		lotsWinnerModelImpl._originalSpisok_lotov_id = lotsWinnerModelImpl._spisok_lotov_id;
 
 		lotsWinnerModelImpl._setOriginalSpisok_lotov_id = false;
+
+		lotsWinnerModelImpl._originalAttribute = lotsWinnerModelImpl._attribute;
 
 		lotsWinnerModelImpl._originalSerial_number = lotsWinnerModelImpl._serial_number;
 
@@ -512,6 +530,7 @@ public class LotsWinnerModelImpl extends BaseModelImpl<LotsWinner>
 	private long _organization_id;
 	private double _total_price;
 	private String _attribute;
+	private String _originalAttribute;
 	private int _serial_number;
 	private int _originalSerial_number;
 	private boolean _setOriginalSerial_number;

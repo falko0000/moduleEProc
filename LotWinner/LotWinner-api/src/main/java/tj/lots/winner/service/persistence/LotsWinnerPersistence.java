@@ -225,6 +225,58 @@ public interface LotsWinnerPersistence extends BasePersistence<LotsWinner> {
 	public int countByLotovIdNumber(long spisok_lotov_id, int serial_number);
 
 	/**
+	* Returns the lots winner where spisok_lotov_id = &#63; and attribute = &#63; or throws a {@link NoSuchLotsWinnerException} if it could not be found.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param attribute the attribute
+	* @return the matching lots winner
+	* @throws NoSuchLotsWinnerException if a matching lots winner could not be found
+	*/
+	public LotsWinner findByWinnerAttribute(long spisok_lotov_id,
+		java.lang.String attribute) throws NoSuchLotsWinnerException;
+
+	/**
+	* Returns the lots winner where spisok_lotov_id = &#63; and attribute = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param attribute the attribute
+	* @return the matching lots winner, or <code>null</code> if a matching lots winner could not be found
+	*/
+	public LotsWinner fetchByWinnerAttribute(long spisok_lotov_id,
+		java.lang.String attribute);
+
+	/**
+	* Returns the lots winner where spisok_lotov_id = &#63; and attribute = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param attribute the attribute
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching lots winner, or <code>null</code> if a matching lots winner could not be found
+	*/
+	public LotsWinner fetchByWinnerAttribute(long spisok_lotov_id,
+		java.lang.String attribute, boolean retrieveFromCache);
+
+	/**
+	* Removes the lots winner where spisok_lotov_id = &#63; and attribute = &#63; from the database.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param attribute the attribute
+	* @return the lots winner that was removed
+	*/
+	public LotsWinner removeByWinnerAttribute(long spisok_lotov_id,
+		java.lang.String attribute) throws NoSuchLotsWinnerException;
+
+	/**
+	* Returns the number of lots winners where spisok_lotov_id = &#63; and attribute = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param attribute the attribute
+	* @return the number of matching lots winners
+	*/
+	public int countByWinnerAttribute(long spisok_lotov_id,
+		java.lang.String attribute);
+
+	/**
 	* Caches the lots winner in the entity cache if it is enabled.
 	*
 	* @param lotsWinner the lots winner

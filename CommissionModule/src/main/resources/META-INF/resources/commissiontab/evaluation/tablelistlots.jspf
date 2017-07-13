@@ -1,0 +1,70 @@
+
+
+
+
+
+
+
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%
+   
+   List<LotsWinner> lotsWinners =  LotsWinnerLocalServiceUtil.getSerialWinners(spisoklotov.getSpisok_lotov_id());
+   long orgWinner = 0;
+%>
+
+   <table class="table table-autofit">
+      
+      <thead>
+    	<tr>
+    		<th><%=LanguageUtil.get(request, "number") %></th>
+    		<th><%=LanguageUtil.get(request, "name-and-address") %></th>
+    		<th><%=LanguageUtil.get(request, "number-positions") %></th>
+    		<th><%=LanguageUtil.get(request, "allocated-amount") %></th>
+    		<th><%=LanguageUtil.get(request, "bid-price-participant") %></th>
+    		<th><%=LanguageUtil.get(request, "sum-savings") %></th>
+    		<th><%=LanguageUtil.get(request, "economy") %></th>
+    		<th><%=LanguageUtil.get(request, "info-bid") %></th>
+    		<th><%=LanguageUtil.get(request, "member-status") %></th>
+    		
+    	</tr>
+      </thead>
+      
+      <tbody>	
+		<% for(LotsWinner lotw : lotsWinners){
+		    
+			Organization org = OrganizationLocalServiceUtil.getOrganization(lotw.getOrganization_id());
+	
+			if(lotw.getAttribute().equals("W"))
+				orgWinner = org.getOrganizationId();
+			
+			String name_address = org.getName()+", ";
+			Address address = org.getAddress();
+			name_address += LanguageUtil.get(request, "country."+address.getCountry().getName())+" "+address.getCity()+" "+address.getStreet1(); 
+		    
+		  int countProduct = ZajavkiOtPostavwikovLocalServiceUtil.getCountZajavkiOtPostavwikovs(lotw.getSpisok_lotov_id(), org.getOrganizationId());
+			
+			double priceCont =  spisoklotov.getCena_kontrakta();
+			double priceTotal = lotw.getTotal_price();
+			
+			double procent = 100*(1 - priceTotal/priceCont);
+		  
+			%>
+    
+      		<tr>
+      		  
+      		   <td><%=lotw.getSerial_number() %></td>
+      		   <td><%= name_address%></td>
+      		   <td><%= countProduct%></td>
+      		   <td><%= priceCont%></td>
+      		   <td><%= priceTotal%></td>
+      		   <td><%= priceCont - priceTotal%></td>
+      		   <td><%=procent%><%=StringPool.PERCENT%></td>
+      		   <td><%=LanguageUtil.get(request, "bid-details") %></td>
+      		   <td><%=LanguageUtil.get(request, "Approved") %></td>
+      	
+      	
+      		</tr>   
+        
+		<%}%>
+      </tbody>
+  </table>

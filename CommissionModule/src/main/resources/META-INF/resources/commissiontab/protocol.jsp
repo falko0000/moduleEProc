@@ -1,14 +1,5 @@
-<%@page import="tj.protocol.contracts.service.ProtocolContractsLocalServiceUtil"%>
-<%@page import="tj.protocol.contracts.model.ProtocolContracts"%>
-<%@page import="tj.spisoklotov.service.SpisoklotovLocalServiceUtil"%>
-<%@page import="tj.spisoklotov.model.Spisoklotov"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Date"%>
-<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
-<%@page import="com.liferay.portal.kernel.model.Organization"%>
-<%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil"%>
-<%@page import="tj.izvewenija.model.Izvewenija"%>
-<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+
+
 <%@ include file="/init.jsp" %>
 
 
@@ -49,7 +40,9 @@
         String zak_vbk = spisoklotov.getZakazchik();
         String zakazchik = zak_vbk.substring(zak_vbk.indexOf(" "));
         String vbk = zak_vbk.substring(0, zak_vbk.indexOf(" "));
+        
         %>
+
         
         
            <%=LanguageUtil.format(request, "lot-number", lotInfo) %>
@@ -58,8 +51,36 @@
             <%=LanguageUtil.format(request,"i-comparison-quotations", lotInfo[0]) %>
             <%=LanguageUtil.get(request, "approve-ranking") %>
             
+            <%@ include file="/commissiontab/evaluation/tablelistlots.jspf" %>
+            
+            <p><strong><%=LanguageUtil.get(request, "bid-details")%></strong></p>
+           
+           <%@ include file="/commissiontab/evaluation/tableproduct.jspf" %>
+           
+           <%=LanguageUtil.format(request, "evaluation-proposals", lotInfo[0]) %>
+           <%=LanguageUtil.get(request, "approve-procedure")%>
+           <%=LanguageUtil.format(request, "choice-best", lotInfo[0]) %>
+            
+            <%Organization orgWin = OrganizationLocalServiceUtil.getOrganization(orgWinner); %>
+            
+            <%=LanguageUtil.format(request, "recognize-proposal", organization.getName()) %>
             
             
+             <%@ include file="/commissiontab/evaluation/tableconditions.jspf" %>
+             
+                 <%=LanguageUtil.format(request, "conclusion-agreement", lotInfo[0]) %>
+            <%=LanguageUtil.format(request,"recommend-procuring", new Object[]{orgWin.getName(), total}) %>
+            <%=LanguageUtil.get(request,"oblige-procuring") %>
+            <%=LanguageUtil.get(request,"oblige-procuring-entity") %>
+            
+            <% 
+               LotsWinner winner1 = LotsWinnerLocalServiceUtil.getAttributeWinner(spisoklotov.getSpisok_lotov_id(), "W");
+               LotsWinner winner2 = LotsWinnerLocalServiceUtil.getSerialWinner(spisoklotov.getSpisok_lotov_id(), winner1.getSerial_number()+1);
+             %>
+            
+              <c:if test="<%=Validator.isNotNull(winner2) %>">
+            		<%=LanguageUtil.format(request,"recommend-procuring", new Object[]{OrganizationLocalServiceUtil.getOrganization(winner2.getOrganization_id()).getName(), winner2.getTotal_price()}) %>
+              </c:if>
         <%} %>
        
         

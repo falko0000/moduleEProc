@@ -209,6 +209,10 @@ public interface LotsWinnerLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public LotsWinner fetchLotsWinner(long lot_winner_id);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public LotsWinner getAttributeWinner(long spisok_lotov_id,
+		java.lang.String attribute);
+
 	/**
 	* Returns the lots winner with the primary key.
 	*

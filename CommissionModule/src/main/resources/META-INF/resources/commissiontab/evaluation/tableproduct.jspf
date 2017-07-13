@@ -1,0 +1,74 @@
+
+
+
+
+
+<% List<ZajavkiOtPostavwikov> zajavkiOtPostavwikovs = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisoklotov.getSpisok_lotov_id(), orgWinner); %>
+
+ <div class="table-responsive">
+   <table class="table table-bordered table-hover">
+		
+		    <thead>
+      			 <tr>
+    				<th><%=LanguageUtil.get(request, "number") %></th>
+    				<th><%=LanguageUtil.get(request, "goods") %></th>
+    				<th><%=LanguageUtil.get(request, "producing-country") %></th>
+    				<th><%=LanguageUtil.get(request, "unit") %></th>
+    				<th><%=LanguageUtil.get(request, "amount") %></th>
+    				<th><%=LanguageUtil.get(request, "amount-per-uni") %></th>
+    				<th><%=LanguageUtil.get(request, "total-goods") %></th>
+  				</tr>
+     		 </thead>
+     		 
+     		 <tbody>
+				<% 
+				  int counterGoods = 1; 
+				  double total = 0.0;
+				
+				  for(ZajavkiOtPostavwikov postavwikov : zajavkiOtPostavwikovs){
+    
+		  			SpisokTovarov spisokTovarov = SpisokTovarovLocalServiceUtil.getSpisokTovarov(postavwikov.getTovar_id());
+	  				Country country = CountryServiceUtil.getCountry(postavwikov.getKod_strany_proizvoditelja());
+     	 			EdinicyIzmerenija edinicyIzmerenija = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenija(spisokTovarov.getEdinica_izmerenija_id());
+   				
+     	 			StringBuilder infoTovar = new StringBuilder();
+     	 			
+     	 			 //
+     	 			 
+     	 			 infoTovar.append("<strong>"+spisokTovarov.getNaimenovanie_tovara()+"</strong><br>");
+     	 			 infoTovar.append("<strong>"+spisokTovarov.getOpisanie_tovara()+"</strong><br>");
+     	 			 infoTovar.append("<strong>"+spisokTovarov.getKod_po_okdp()+"</strong> - "+spisokTovarov.getKlassifikacija_po_okdp()+"<br>");
+     	 			 
+     	 			 infoTovar.append("<strong>"+postavwikov.getPredlozhenie_postavwika()+"</strong><br>");
+     	 			 infoTovar.append(postavwikov.getOpisanie_tovara());
+     	 			 
+     	 			 total+= postavwikov.getItogo_za_tovar();
+   				%>
+
+   
+  
+
+  					<tr>
+    					 <td><%=counterGoods %></td>
+   						 <td><%=infoTovar %></td>
+   						 <td><%=LanguageUtil.get(request, "country."+country.getName()) %></td>
+   						 <td><%=edinicyIzmerenija.getNazvanie() %></td>
+   						  <td><%=spisokTovarov.getKolichestvo() %></td>
+   						  <td><%=postavwikov.getSumma_za_edinicu_tovara() %></td>
+   						  <td><%=postavwikov.getItogo_za_tovar() %></td>
+ 				    </tr>
+
+
+    
+			<%
+				counterGoods++;
+		     }
+		     %>
+		     <tr>
+		       <td colspan="7" align="right">
+		           <%=LanguageUtil.format(request, "total-price", total) %>
+		       </td>
+		     </tr>
+		  </tbody>
+	</table>	
+ </div>	

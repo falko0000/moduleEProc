@@ -241,6 +241,13 @@ public class LotsWinnerLocalServiceWrapper implements LotsWinnerLocalService,
 		return _lotsWinnerLocalService.fetchLotsWinner(lot_winner_id);
 	}
 
+	@Override
+	public tj.lots.winner.model.LotsWinner getAttributeWinner(
+		long spisok_lotov_id, java.lang.String attribute) {
+		return _lotsWinnerLocalService.getAttributeWinner(spisok_lotov_id,
+			attribute);
+	}
+
 	/**
 	* Returns the lots winner with the primary key.
 	*

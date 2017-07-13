@@ -22,8 +22,18 @@
      <finder return-type="LotsWinner" name="LotovIdNumber">
      	<finder-column name="spisok_lotov_id"></finder-column>
      	<finder-column name="serial_number"></finder-column>
+     	
      </finder>
      
+     <finder return-type="LotsWinner" name="WinnerAttribute">
+     	<finder-column name="spisok_lotov_id"></finder-column>
+     	<finder-column name="attribute"></finder-column>
+     	
+     </finder>
+     
+     <order by="asc">
+        <order-column name="serial_number" ></order-column>
+      </order>
      
         
 </entity>

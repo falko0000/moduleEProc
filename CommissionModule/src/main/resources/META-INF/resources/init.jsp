@@ -19,17 +19,20 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 	
 	page import="com.liferay.portal.kernel.language.LanguageUtil"%><%@
 	
+	page import="com.liferay.portal.kernel.model.Address"%><%@
 	page import="com.liferay.portal.kernel.model.Group" %><%@
 	page import="com.liferay.portal.kernel.model.Layout" %><%@
 	page import="com.liferay.portal.kernel.model.User" %><%@
 	page import="com.liferay.portal.kernel.model.UserGroup" %><%@
 	page import="com.liferay.portal.kernel.model.Organization"%><%@
+	page import="com.liferay.portal.kernel.model.Country"%><%@
 	page import="com.liferay.document.library.kernel.model.DLFolderConstants"%><%@
 	
 	
 	page import="com.liferay.portal.kernel.service.GroupLocalServiceUtil" %><%@
 	page import="com.liferay.portal.kernel.service.LayoutLocalServiceUtil" %><%@
 	page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%><%@
+	page import="com.liferay.portal.kernel.service.CountryServiceUtil"%><%@
 	page import="com.liferay.document.library.kernel.service.DLAppServiceUtil"%><%@
 	
 	page import="com.liferay.portal.kernel.theme.NavItem" %><%@
@@ -38,6 +41,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
     page import="com.liferay.portal.kernel.repository.model.FileEntry"%><%@
     page import="com.liferay.portal.kernel.util.Validator"%><%@
 	page import="com.liferay.portal.kernel.util.WebKeys"%><%@
+	
+
 	page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
 	page import="com.liferay.portal.kernel.util.WebKeys" %><%@
     page import="com.liferay.portal.kernel.util.Constants"%><%@
@@ -66,8 +71,13 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 	page import="tj.criterias.service.CriteriaValueLocalServiceUtil"%><%@
 	page import="tj.criterias.model.CriteriaValue"%><%@
 	page import="tj.supplier.criteria.model.SupplirCriteria"%><%@
-	page import="tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil"%>
-
+	page import="tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil"%><%@
+	page import="tj.protocol.contracts.service.ProtocolContractsLocalServiceUtil"%><%@
+	page import="tj.protocol.contracts.model.ProtocolContracts"%><%@
+	page import="tj.lots.winner.service.LotsWinnerLocalServiceUtil"%><%@
+	page import="tj.lots.winner.model.LotsWinner"%><%@
+	page import="tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil"%><%@
+	page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
 	
 <liferay-theme:defineObjects />
 

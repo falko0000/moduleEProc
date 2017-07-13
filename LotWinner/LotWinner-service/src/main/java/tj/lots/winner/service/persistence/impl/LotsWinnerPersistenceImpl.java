@@ -46,6 +46,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -97,7 +98,8 @@ public class LotsWinnerPersistenceImpl extends BasePersistenceImpl<LotsWinner>
 			LotsWinnerModelImpl.FINDER_CACHE_ENABLED, LotsWinnerImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySpisokLotovId",
 			new String[] { Long.class.getName() },
-			LotsWinnerModelImpl.SPISOK_LOTOV_ID_COLUMN_BITMASK);
+			LotsWinnerModelImpl.SPISOK_LOTOV_ID_COLUMN_BITMASK |
+			LotsWinnerModelImpl.SERIAL_NUMBER_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_SPISOKLOTOVID = new FinderPath(LotsWinnerModelImpl.ENTITY_CACHE_ENABLED,
 			LotsWinnerModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBySpisokLotovId",
@@ -831,6 +833,276 @@ public class LotsWinnerPersistenceImpl extends BasePersistenceImpl<LotsWinner>
 
 	private static final String _FINDER_COLUMN_LOTOVIDNUMBER_SPISOK_LOTOV_ID_2 = "lotsWinner.spisok_lotov_id = ? AND ";
 	private static final String _FINDER_COLUMN_LOTOVIDNUMBER_SERIAL_NUMBER_2 = "lotsWinner.serial_number = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_WINNERATTRIBUTE = new FinderPath(LotsWinnerModelImpl.ENTITY_CACHE_ENABLED,
+			LotsWinnerModelImpl.FINDER_CACHE_ENABLED, LotsWinnerImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByWinnerAttribute",
+			new String[] { Long.class.getName(), String.class.getName() },
+			LotsWinnerModelImpl.SPISOK_LOTOV_ID_COLUMN_BITMASK |
+			LotsWinnerModelImpl.ATTRIBUTE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_WINNERATTRIBUTE = new FinderPath(LotsWinnerModelImpl.ENTITY_CACHE_ENABLED,
+			LotsWinnerModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByWinnerAttribute",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the lots winner where spisok_lotov_id = &#63; and attribute = &#63; or throws a {@link NoSuchLotsWinnerException} if it could not be found.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param attribute the attribute
+	 * @return the matching lots winner
+	 * @throws NoSuchLotsWinnerException if a matching lots winner could not be found
+	 */
+	@Override
+	public LotsWinner findByWinnerAttribute(long spisok_lotov_id,
+		String attribute) throws NoSuchLotsWinnerException {
+		LotsWinner lotsWinner = fetchByWinnerAttribute(spisok_lotov_id,
+				attribute);
+
+		if (lotsWinner == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("spisok_lotov_id=");
+			msg.append(spisok_lotov_id);
+
+			msg.append(", attribute=");
+			msg.append(attribute);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchLotsWinnerException(msg.toString());
+		}
+
+		return lotsWinner;
+	}
+
+	/**
+	 * Returns the lots winner where spisok_lotov_id = &#63; and attribute = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param attribute the attribute
+	 * @return the matching lots winner, or <code>null</code> if a matching lots winner could not be found
+	 */
+	@Override
+	public LotsWinner fetchByWinnerAttribute(long spisok_lotov_id,
+		String attribute) {
+		return fetchByWinnerAttribute(spisok_lotov_id, attribute, true);
+	}
+
+	/**
+	 * Returns the lots winner where spisok_lotov_id = &#63; and attribute = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param attribute the attribute
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching lots winner, or <code>null</code> if a matching lots winner could not be found
+	 */
+	@Override
+	public LotsWinner fetchByWinnerAttribute(long spisok_lotov_id,
+		String attribute, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { spisok_lotov_id, attribute };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE,
+					finderArgs, this);
+		}
+
+		if (result instanceof LotsWinner) {
+			LotsWinner lotsWinner = (LotsWinner)result;
+
+			if ((spisok_lotov_id != lotsWinner.getSpisok_lotov_id()) ||
+					!Objects.equals(attribute, lotsWinner.getAttribute())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_LOTSWINNER_WHERE);
+
+			query.append(_FINDER_COLUMN_WINNERATTRIBUTE_SPISOK_LOTOV_ID_2);
+
+			boolean bindAttribute = false;
+
+			if (attribute == null) {
+				query.append(_FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_1);
+			}
+			else if (attribute.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_3);
+			}
+			else {
+				bindAttribute = true;
+
+				query.append(_FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				if (bindAttribute) {
+					qPos.add(attribute);
+				}
+
+				List<LotsWinner> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"LotsWinnerPersistenceImpl.fetchByWinnerAttribute(long, String, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					LotsWinner lotsWinner = list.get(0);
+
+					result = lotsWinner;
+
+					cacheResult(lotsWinner);
+
+					if ((lotsWinner.getSpisok_lotov_id() != spisok_lotov_id) ||
+							(lotsWinner.getAttribute() == null) ||
+							!lotsWinner.getAttribute().equals(attribute)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE,
+							finderArgs, lotsWinner);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (LotsWinner)result;
+		}
+	}
+
+	/**
+	 * Removes the lots winner where spisok_lotov_id = &#63; and attribute = &#63; from the database.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param attribute the attribute
+	 * @return the lots winner that was removed
+	 */
+	@Override
+	public LotsWinner removeByWinnerAttribute(long spisok_lotov_id,
+		String attribute) throws NoSuchLotsWinnerException {
+		LotsWinner lotsWinner = findByWinnerAttribute(spisok_lotov_id, attribute);
+
+		return remove(lotsWinner);
+	}
+
+	/**
+	 * Returns the number of lots winners where spisok_lotov_id = &#63; and attribute = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param attribute the attribute
+	 * @return the number of matching lots winners
+	 */
+	@Override
+	public int countByWinnerAttribute(long spisok_lotov_id, String attribute) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_WINNERATTRIBUTE;
+
+		Object[] finderArgs = new Object[] { spisok_lotov_id, attribute };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_LOTSWINNER_WHERE);
+
+			query.append(_FINDER_COLUMN_WINNERATTRIBUTE_SPISOK_LOTOV_ID_2);
+
+			boolean bindAttribute = false;
+
+			if (attribute == null) {
+				query.append(_FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_1);
+			}
+			else if (attribute.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_3);
+			}
+			else {
+				bindAttribute = true;
+
+				query.append(_FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				if (bindAttribute) {
+					qPos.add(attribute);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_WINNERATTRIBUTE_SPISOK_LOTOV_ID_2 =
+		"lotsWinner.spisok_lotov_id = ? AND ";
+	private static final String _FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_1 = "lotsWinner.attribute IS NULL";
+	private static final String _FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_2 = "lotsWinner.attribute = ?";
+	private static final String _FINDER_COLUMN_WINNERATTRIBUTE_ATTRIBUTE_3 = "(lotsWinner.attribute IS NULL OR lotsWinner.attribute = '')";
 
 	public LotsWinnerPersistenceImpl() {
 		setModelClass(LotsWinner.class);
@@ -849,6 +1121,11 @@ public class LotsWinnerPersistenceImpl extends BasePersistenceImpl<LotsWinner>
 		finderCache.putResult(FINDER_PATH_FETCH_BY_LOTOVIDNUMBER,
 			new Object[] {
 				lotsWinner.getSpisok_lotov_id(), lotsWinner.getSerial_number()
+			}, lotsWinner);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE,
+			new Object[] {
+				lotsWinner.getSpisok_lotov_id(), lotsWinner.getAttribute()
 			}, lotsWinner);
 
 		lotsWinner.resetOriginalValues();
@@ -931,6 +1208,16 @@ public class LotsWinnerPersistenceImpl extends BasePersistenceImpl<LotsWinner>
 			Long.valueOf(1), false);
 		finderCache.putResult(FINDER_PATH_FETCH_BY_LOTOVIDNUMBER, args,
 			lotsWinnerModelImpl, false);
+
+		args = new Object[] {
+				lotsWinnerModelImpl.getSpisok_lotov_id(),
+				lotsWinnerModelImpl.getAttribute()
+			};
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_WINNERATTRIBUTE, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE, args,
+			lotsWinnerModelImpl, false);
 	}
 
 	protected void clearUniqueFindersCache(
@@ -954,6 +1241,27 @@ public class LotsWinnerPersistenceImpl extends BasePersistenceImpl<LotsWinner>
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_LOTOVIDNUMBER, args);
 			finderCache.removeResult(FINDER_PATH_FETCH_BY_LOTOVIDNUMBER, args);
+		}
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					lotsWinnerModelImpl.getSpisok_lotov_id(),
+					lotsWinnerModelImpl.getAttribute()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_WINNERATTRIBUTE, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE, args);
+		}
+
+		if ((lotsWinnerModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_WINNERATTRIBUTE.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					lotsWinnerModelImpl.getOriginalSpisok_lotov_id(),
+					lotsWinnerModelImpl.getOriginalAttribute()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_WINNERATTRIBUTE, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_WINNERATTRIBUTE, args);
 		}
 	}
 
