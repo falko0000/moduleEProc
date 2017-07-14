@@ -1,3 +1,8 @@
+<%@page import="tj.izvewenija.model.Izvewenija"%>
+<%@page import="tj.module.commission.constants.CommissionConstants"%>
+<%@page import="com.liferay.portal.kernel.util.Constants"%>
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
 <c:choose>
 	<c:when test="<%= viewMode.equals(Constants.PRINT) %>">
 		<aui:script>
@@ -7,7 +12,9 @@
 	<c:otherwise>
 		<portlet:renderURL var="printPageURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 			
+			<portlet:param name="izvewenija_id" value="<%= String.valueOf(izvewenija.getIzvewenija_id()) %>" />
 			<portlet:param name="viewMode" value="<%= Constants.PRINT %>" />
+			<portlet:param name="mvcPath"     value="<%=CommissionConstants.PROTOCOL %>"/>
 		</portlet:renderURL>
 
 		<div class="print-action user-tool-asset-addon-entry">
@@ -15,7 +22,7 @@
 				icon="print"
 				label="<%= true %>"
 				markupView="lexicon"
-				message='<%= LanguageUtil.format(request, "print-x-x", new Object[] {"hide-accessible", HtmlUtil.escape(articleDisplay.getTitle())}, false) %>'
+				message='<%= LanguageUtil.format(request, "print-x-x", new Object[] {"hide-accessible", HtmlUtil.escape("Shohin")}, false) %>'
 				url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
 			/>
 		</div>

@@ -21,6 +21,7 @@ public interface CommissionConstants {
     static final String PAGE_OTHER_INFORMATION = "/commissiontab/evaluation/supplieritems/other_information.jsp";
     static final String PAGE_DOCUMENTATION = "/commissiontab/evaluation/supplieritems/documentation.jsp";
     static final String PAGE_CRITERIA = "/commissiontab/evaluation/supplieritems/criteria.jsp";
+    static final String PROTOCOL = "/commissiontab/evaluation/print/protocol.jsp";
     //actions
 	
 	static final String ACTION_LIST_LOTS = "/commissiontab/action.jsp";

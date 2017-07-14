@@ -1,11 +1,16 @@
 
 
+<%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil"%>
+<%@page import="tj.izvewenija.model.Izvewenija"%>
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@ include file="/init.jsp" %>
 
 
  <%
        
-       
+       long izvewenija_id = ParamUtil.getLong(request, "izvewenija_id");  
+       Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
+      
        Organization organization = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
         
        List<Spisoklotov> spisoklotovs = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id());
@@ -13,13 +18,13 @@
        ProtocolContracts protocolContracts = ProtocolContractsLocalServiceUtil.getProtocolContractsByBid(izvewenija.getIzvewenija_id());
  
        String viewMode = ParamUtil.getString(request, "viewMode");
-     
+       
        String orgName = organization.getName();
          
        orgName = orgName.substring(orgName.indexOf(" "));
        
  %>
-     
+     <span>xfdsdfsdf</span>
      <%@ include file="/commissiontab/evaluation/print.jspf" %>
      
         <%=LanguageUtil.format(request, "pratacol-number", protocolContracts.getPrimaryKey()) %> 
