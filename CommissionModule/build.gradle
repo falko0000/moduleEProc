@@ -19,4 +19,6 @@ dependencies {
 	    				    compile project (":modules:Bidqueue:Bidqueue-api")
 	    				compile project (":modules:LotWinner:LotWinner-api")
 	    				compile project (":modules:ProtocolContracts:ProtocolContracts-api")
+	    				compile project (":modules:SystemConfig:SystemConfig-api")
+	    				
 }

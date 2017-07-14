@@ -1,5 +1,19 @@
 
 
+
+<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="com.liferay.portal.kernel.model.RoleConstants"%>
+<%@page import="com.liferay.portal.kernel.model.Role"%>
+<%@page import="com.liferay.portal.kernel.service.UserServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.User"%>
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portal.kernel.model.Organization"%>
+<%@page import="tj.module.commission.constants.CommissionConstants"%>
+<%@page import="tj.system.config.service.SystemConfigLocalServiceUtil"%>
+<%@page import="tj.system.config.model.SystemConfig"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil"%>
 <%@page import="tj.izvewenija.model.Izvewenija"%>
 <%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
@@ -8,9 +22,30 @@
 
  <%
        
-       long izvewenija_id = ParamUtil.getLong(request, "izvewenija_id");  
-       Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
-      
+  SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.AUTHORIZED_BODY_ID);
+  
+  Organization headOrg = OrganizationLocalServiceUtil.getOrganization(Long.valueOf(systemConfig.getValue()));
+  List<User>  users = UserServiceUtil.getOrganizationUsers(headOrg.getOrganizationId());
+  
+   User userHead = null;
+   
+       for(User usr : users)
+       {
+    	   List<Role> roles = usr.getRoles();
+    	   
+    	   for(Role role : roles)
+    	   {
+    		   if(role.getType() == RoleConstants.TYPE_ORGANIZATION && role.getName().equals("Head"))
+    		   {
+    			   userHead = usr;
+    			   break;
+    		   }
+    	   }
+    	    
+    	   if(Validator.isNotNull(userHead))
+    		   break;
+       }
+    
        Organization organization = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
         
        List<Spisoklotov> spisoklotovs = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id());
@@ -23,9 +58,20 @@
          
        orgName = orgName.substring(orgName.indexOf(" "));
        
+       String headOrgName = headOrg.getName();
+       headOrgName = headOrgName.substring(headOrgName.indexOf(" "));
+       
  %>
-     <span>xfdsdfsdf</span>
-     <%@ include file="/commissiontab/evaluation/print.jspf" %>
+     <head>
+  <title><%=LanguageUtil.get(request, "title") %></title>
+</head>
+       
+       <aui:row>
+    		<aui:col span="6"/>
+    		<aui:col span="6">
+    		<%=LanguageUtil.format(request,"approved-organization",new String[]{headOrgName, userHead.getFullName()}) %>
+    		</aui:col>
+      </aui:row>
      
         <%=LanguageUtil.format(request, "pratacol-number", protocolContracts.getPrimaryKey()) %> 
  

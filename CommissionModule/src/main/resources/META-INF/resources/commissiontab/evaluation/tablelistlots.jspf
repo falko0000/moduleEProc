@@ -10,6 +10,7 @@
    
    List<LotsWinner> lotsWinners =  LotsWinnerLocalServiceUtil.getSerialWinners(spisoklotov.getSpisok_lotov_id());
    long orgWinner = 0;
+   
 %>
 
    <table class="table table-autofit">
@@ -23,7 +24,11 @@
     		<th><%=LanguageUtil.get(request, "bid-price-participant") %></th>
     		<th><%=LanguageUtil.get(request, "sum-savings") %></th>
     		<th><%=LanguageUtil.get(request, "economy") %></th>
-    		<th><%=LanguageUtil.get(request, "info-bid") %></th>
+    	  
+    	    <c:if  test="<%=!viewMode.equals(Constants.PRINT)%>">
+    			<th><%=LanguageUtil.get(request, "info-bid") %></th>
+    		</c:if>
+    		
     		<th><%=LanguageUtil.get(request, "member-status") %></th>
     		
     	</tr>
@@ -59,7 +64,11 @@
       		   <td><%= priceTotal%></td>
       		   <td><%= priceCont - priceTotal%></td>
       		   <td><%=procent%><%=StringPool.PERCENT%></td>
-      		   <td><%=LanguageUtil.get(request, "bid-details") %></td>
+      		   
+      		   <c:if  test="<%=!viewMode.equals(Constants.PRINT)%>">
+      		   		<td><%=LanguageUtil.get(request, "bid-details") %></td>
+      		   </c:if>
+      		   
       		   <td><%=LanguageUtil.get(request, "Approved") %></td>
       	
       	
