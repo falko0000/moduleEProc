@@ -16,9 +16,9 @@ dependencies {
 	    				compile project (":modules:ProchajaInformacijaZajavki:ProchajaInformacijaZajavki-api")
 	    				compile project (":modules:Criterias:Criterias-api")
 	    				compile project (":modules:SupplierCriteria:SupplierCriteria-api")
-	    				    compile project (":modules:Bidqueue:Bidqueue-api")
+	    				compile project (":modules:Bidqueue:Bidqueue-api")
 	    				compile project (":modules:LotWinner:LotWinner-api")
 	    				compile project (":modules:ProtocolContracts:ProtocolContracts-api")
 	    				compile project (":modules:SystemConfig:SystemConfig-api")
-	    				
+	    				compile project (":modules:PorjadokRabotyKomissii:PorjadokRabotyKomissii-api")
 }

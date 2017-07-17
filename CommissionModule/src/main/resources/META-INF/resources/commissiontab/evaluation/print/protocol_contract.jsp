@@ -1,10 +1,36 @@
 
 
+
 <%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.liferay.portal.kernel.service.RoleLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="com.liferay.portal.kernel.model.RoleConstants"%>
+<%@page import="com.liferay.portal.kernel.model.Role"%>
+<%@page import="com.liferay.portal.kernel.service.UserServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.User"%>
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portal.kernel.model.Organization"%>
+<%@page import="tj.module.commission.constants.CommissionConstants"%>
+<%@page import="tj.system.config.service.SystemConfigLocalServiceUtil"%>
+<%@page import="tj.system.config.model.SystemConfig"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%@page import="tj.izvewenija.service.IzvewenijaLocalServiceUtil"%>
+<%@page import="tj.izvewenija.model.Izvewenija"%>
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@ include file="/init.jsp" %>
 
 
  <%
+       
+  SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.ORGANIZATION_HEAD_ID);
+  
+  
+   User userHead = UserLocalServiceUtil.getUser(Long.valueOf(systemConfig.getValue()));
+
+   Organization headOrg = userHead.getOrganizations().get(0);
+       
        
        
        Organization organization = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
@@ -14,15 +40,23 @@
        ProtocolContracts protocolContracts = ProtocolContractsLocalServiceUtil.getProtocolContractsByBid(izvewenija.getIzvewenija_id());
  
        String viewMode = ParamUtil.getString(request, "viewMode");
-     
+       
        String orgName = organization.getName();
          
        orgName = orgName.substring(orgName.indexOf(" "));
        
-       SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:MM");
+       String headOrgName = headOrg.getName();
+       headOrgName = headOrgName.substring(headOrgName.indexOf(" "));
+       
+       SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
        
  %>
      
+       
+      
+    		<%=LanguageUtil.format(request,"approved-organization",new String[]{headOrgName, userHead.getFullName()}) %>
+      	
+    	
      <%@ include file="/commissiontab/evaluation/print.jspf" %>
      
         <%=LanguageUtil.format(request, "pratacol-number", protocolContracts.getPrimaryKey()) %> 
@@ -39,7 +73,7 @@
         <p><%=LanguageUtil.format(request, "created-by-x", izvewenija.getUserName()) %></p>
         <%= LanguageUtil.format(request, "organization-name", orgName)%>
         
-        <%= LanguageUtil.format(request, "date-time-protocol-generation",dateFormat.format(protocolContracts.getCreated())) %>
+      <%= LanguageUtil.format(request, "date-time-protocol-generation",dateFormat.format(protocolContracts.getCreated())) %>
        
         <%=LanguageUtil.get(request, "subject-procurement") %> 
         
@@ -73,11 +107,15 @@
            <%=LanguageUtil.get(request, "approve-procedure")%>
            <%=LanguageUtil.format(request, "choice-best", lotInfo[0]) %>
             
+            
+            
             <%
               Organization orgWin = OrganizationLocalServiceUtil.getOrganization(orgWinner); 
-           
-            String orgWinName = orgWin.getName();
-           
+            
+              String orgWinName = orgWin.getName();
+              
+              
+              
               
             %>
             
