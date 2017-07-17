@@ -16,4 +16,18 @@
           </finder>
 		
 	</entity>
+	
+	<entity local-service="true" name="ProtocolOpening" remote-service="false" uuid="false" cache-enabled="false" table="sapp.protocol_opening">
+
+          <column name="protocol_opening_id" type="long" primary="true" id-type="sequence" id-param="sapp.protocol_opening_id_seq"></column>
+          <column name="izvewenie_id" type="long"></column>
+          <column name="created" type="Date"></column>
+          <column name="updated" type="Date"></column>
+          
+          <finder return-type="ProtocolOpening" name="IzvewenieId">
+                 <finder-column name="izvewenie_id"></finder-column>
+          </finder>
+		
+	</entity>
+	
 </service-builder>

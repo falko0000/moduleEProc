@@ -1,6 +1,8 @@
 
 
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.liferay.portal.kernel.service.RoleLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@page import="com.liferay.portal.kernel.model.RoleConstants"%>
@@ -22,30 +24,15 @@
 
  <%
        
-  SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.AUTHORIZED_BODY_ID);
+  SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.ORGANIZATION_HEAD_ID);
   
-  Organization headOrg = OrganizationLocalServiceUtil.getOrganization(Long.valueOf(systemConfig.getValue()));
-  List<User>  users = UserServiceUtil.getOrganizationUsers(headOrg.getOrganizationId());
   
-   User userHead = null;
-   
-       for(User usr : users)
-       {
-    	   List<Role> roles = usr.getRoles();
-    	   
-    	   for(Role role : roles)
-    	   {
-    		   if(role.getType() == RoleConstants.TYPE_ORGANIZATION && role.getName().equals("Head"))
-    		   {
-    			   userHead = usr;
-    			   break;
-    		   }
-    	   }
-    	    
-    	   if(Validator.isNotNull(userHead))
-    		   break;
-       }
-    
+   User userHead = UserLocalServiceUtil.getUser(Long.valueOf(systemConfig.getValue()));
+
+   Organization headOrg = userHead.getOrganizations().get(0);
+       
+       
+       
        Organization organization = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
         
        List<Spisoklotov> spisoklotovs = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id());
@@ -61,17 +48,16 @@
        String headOrgName = headOrg.getName();
        headOrgName = headOrgName.substring(headOrgName.indexOf(" "));
        
- %>
-     <head>
-  <title><%=LanguageUtil.get(request, "title") %></title>
-</head>
+       SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:MM");
        
-       <aui:row>
-    		<aui:col span="6"/>
-    		<aui:col span="6">
+ %>
+     
+       
+      
     		<%=LanguageUtil.format(request,"approved-organization",new String[]{headOrgName, userHead.getFullName()}) %>
-    		</aui:col>
-      </aui:row>
+      	
+    	
+     <%@ include file="/commissiontab/evaluation/print.jspf" %>
      
         <%=LanguageUtil.format(request, "pratacol-number", protocolContracts.getPrimaryKey()) %> 
  
@@ -87,7 +73,7 @@
         <p><%=LanguageUtil.format(request, "created-by-x", izvewenija.getUserName()) %></p>
         <%= LanguageUtil.format(request, "organization-name", orgName)%>
         
-        <%= LanguageUtil.format(request, "date-time-protocol-generation", protocolContracts.getCreated()) %>
+      <%= LanguageUtil.format(request, "date-time-protocol-generation",dateFormat.format(protocolContracts.getCreated())) %>
        
         <%=LanguageUtil.get(request, "subject-procurement") %> 
         
@@ -121,9 +107,21 @@
            <%=LanguageUtil.get(request, "approve-procedure")%>
            <%=LanguageUtil.format(request, "choice-best", lotInfo[0]) %>
             
-            <%Organization orgWin = OrganizationLocalServiceUtil.getOrganization(orgWinner); %>
             
-            <%=LanguageUtil.format(request, "recognize-proposal", organization.getName()) %>
+            
+            <%
+              Organization orgWin = OrganizationLocalServiceUtil.getOrganization(orgWinner); 
+            
+              String orgWinName = orgWin.getName();
+              
+              
+              
+              
+            %>
+            
+             
+            
+            <%=LanguageUtil.format(request, "recognize-proposal", orgWinName) %>
             
             
              <%@ include file="/commissiontab/evaluation/tableconditions.jspf" %>

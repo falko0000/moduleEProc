@@ -12,8 +12,8 @@
    long orgWinner = 0;
    
 %>
-
-   <table class="table table-autofit">
+<div class="table-responsive">
+   <table class="table table-bordered table-hover">
       
       <thead>
     	<tr>
@@ -77,3 +77,4 @@
 		<%}%>
       </tbody>
   </table>
+  </div class="table-responsive">

@@ -1,12 +1,17 @@
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="tj.izvewenija.model.Izvewenija"%>
 <%@page import="tj.module.commission.constants.CommissionConstants"%>
 <%@page import="com.liferay.portal.kernel.util.Constants"%>
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
+
+
 <c:choose>
 	<c:when test="<%= viewMode.equals(Constants.PRINT) %>">
 		<aui:script>
+			window.document.title = '<%=LanguageUtil.get(request, "title")%>'
 			print();
+			
 		</aui:script>
 	</c:when>
 	<c:otherwise>
@@ -17,20 +22,26 @@
 			<portlet:param name="mvcPath"     value="<%=CommissionConstants.PROTOCOL %>"/>
 		</portlet:renderURL>
 
+<% String popupURL="javascript:showPopup('" + printPageURL + "'" + ",'" + LanguageUtil.get(request, "title") +"');";%>
+		
 		<div class="print-action user-tool-asset-addon-entry">
 			<liferay-ui:icon
 				icon="print"
 				label="<%= true %>"
 				markupView="lexicon"
 				message='<%= LanguageUtil.format(request, "print-x-x", new Object[] {"hide-accessible", HtmlUtil.escape("Shohin")}, false) %>'
-				url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
+				url='<%= popupURL %>'
 			/>
 		</div>
 
-		<aui:script>
-			function <portlet:namespace />printPage() {
-				window.open('<%= printPageURL %>', '', 'directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640');
-			}
-		</aui:script>
+		
+<aui:script>
+function showPopup(url, title)
+{
+   var win = window.open(url, '', 'directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640');   
+   
+}
+</aui:script>
+		
 	</c:otherwise>
 </c:choose>

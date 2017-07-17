@@ -320,65 +320,7 @@ public class Winner {
 			
 		}
 		
-		ProtocolContracts contracts = ProtocolContractsLocalServiceUtil.getProtocolContractsByBid(izvewenie_id);
 	
-		if(Validator.isNotNull(contracts))
-		{
-			contracts.setUpdated(new Date());
-			
-		}
-		else
-		{    
-			 long protocol_contracts_id =  CounterLocalServiceUtil.increment(ProtocolContracts.class.toString());
-			contracts = ProtocolContractsLocalServiceUtil.createProtocolContracts(protocol_contracts_id);
-			
-			contracts.setIzvewenie_id(izvewenie_id);
-			contracts.setCreated(new Date());
-			contracts.setUpdated(new Date());
-			
-		}
-		
-		ProtocolContractsLocalServiceUtil.updateProtocolContracts(contracts);
-		/*	if(ws!= 0 && winnerOrgId!= 0 )
-		{
-			LotsWinner lotsWinner = LotsWinnerLocalServiceUtil.getSerialWinner(spisok_lotov_id, 1);
-			   
-			if(Validator.isNull(lotsWinner))
-			{ 
-			  long lot_winner_id = CounterLocalServiceUtil.increment(LotsWinner.class.getName());
-			  lotsWinner = LotsWinnerLocalServiceUtil.createLotsWinner(lot_winner_id);
-			}
-			lotsWinner.setAttribute("W");
-			lotsWinner.setOrganization_id(winnerOrgId);
-			lotsWinner.setSpisok_lotov_id(spisok_lotov_id);
-			lotsWinner.setSerial_number(1);
-			lotsWinner.setPoint(ws);
-			lotsWinner.setTotal_price(worgPrice);
-			
-			LotsWinnerLocalServiceUtil.updateLotsWinner(lotsWinner);
-		}
-			
-		if(sec_ws!= 0 && sec_winnerOrgId!= 0 )
-		{
-			
-			
-			LotsWinner lotsWinner = LotsWinnerLocalServiceUtil.getSerialWinner(spisok_lotov_id, 2);
-			   
-			if(Validator.isNull(lotsWinner))
-			{ 
-			  long lot_winner_id = CounterLocalServiceUtil.increment(LotsWinner.class.getName());
-			  lotsWinner = LotsWinnerLocalServiceUtil.createLotsWinner(lot_winner_id);
-			}
-			lotsWinner.setAttribute("C");
-			lotsWinner.setOrganization_id(sec_winnerOrgId);
-			lotsWinner.setSpisok_lotov_id(spisok_lotov_id);
-			lotsWinner.setSerial_number(2);
-			lotsWinner.setPoint(sec_ws);
-			lotsWinner.setTotal_price(sec_worgPrice);
-			
-			LotsWinnerLocalServiceUtil.updateLotsWinner(lotsWinner);
-		}
-*/
 			
  		orgPoints.clear();
 	}

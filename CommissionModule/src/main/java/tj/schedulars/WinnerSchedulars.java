@@ -11,7 +11,7 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
-
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,12 +32,19 @@ import com.liferay.portal.kernel.scheduler.StorageTypeAware;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerFactory;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.Validator;
 
 import tj.bid.queue.model.Bidqueue;
 import tj.bid.queue.service.BidqueueLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.commission.constants.CommissionConstants;
+import tj.protocol.contracts.model.ProtocolContracts;
+import tj.protocol.contracts.model.ProtocolOpening;
+import tj.protocol.contracts.service.ProtocolContractsLocalServiceUtil;
+import tj.protocol.contracts.service.ProtocolOpeningLocalServiceUtil;
+import tj.system.config.service.SystemConfigLocalServiceUtil;
 
 
 
@@ -62,19 +69,77 @@ public class WinnerSchedulars extends BaseMessageListener  {
 	  
 		for( Bidqueue bidqueue : bidqueues)
 		{
+				long izvewenija_id = bidqueue.getIzvewenija_id();
+				ProtocolOpening opening = ProtocolOpeningLocalServiceUtil.getProtocolOpeningByBid(izvewenija_id);
+			
 			if(date.after(bidqueue.getClosing_date()) || date.equals(bidqueue.getClosing_date()))
 			{
-				long izvewenija_id = bidqueue.getIzvewenija_id();
-				
-				try {
-					Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
-			        
+				boolean isNullOpening = Validator.isNull(opening);
 			
-		    
+				try {
+					 if(isNullOpening)
+					 {
+					
+			        
 					Winner winner = new Winner(izvewenija_id);
 					
-					BidqueueLocalServiceUtil.deleteBidqueue(bidqueue);
-			
+					   if(Validator.isNotNull(winner) )
+					   {
+						
+							if(Validator.isNotNull(opening))
+							{
+								opening.setUpdated(new Date());
+								
+							}
+							else
+							{    
+								 long protocol_opening_id =  CounterLocalServiceUtil.increment(ProtocolOpening.class.toString());
+								 opening = ProtocolOpeningLocalServiceUtil.createProtocolOpening(protocol_opening_id);
+								
+								 opening.setIzvewenie_id(izvewenija_id);
+								 opening.setCreated(new Date());
+								 opening.setUpdated(new Date());
+								
+							}
+							
+							ProtocolOpeningLocalServiceUtil.updateProtocolOpening(opening);
+							
+							Calendar cal = CalendarFactoryUtil.getCalendar();
+						    cal.setTime(bidqueue.getClosing_date());
+							String value = SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.COMPLAINTS_PERIOD).getValue();
+							cal.set(Calendar.DATE, cal.get(Calendar.DATE) + Integer.valueOf(value));
+							
+							bidqueue.setClosing_date(cal.getTime());
+							long minut = cal.getTimeInMillis()/6000;
+							bidqueue.setClosing_by_minutes(minut);
+							
+							BidqueueLocalServiceUtil.updateBidqueue(bidqueue);
+					   }
+					
+					 }
+					 else
+					 {
+						ProtocolContracts contracts =  ProtocolContractsLocalServiceUtil.getProtocolContractsByBid(izvewenija_id); 
+					    
+						if(Validator.isNotNull(contracts))
+						{
+							contracts.setUpdated(new Date());
+							
+						}
+						else
+						{    
+							 long protocol_contracts_id =  CounterLocalServiceUtil.increment(ProtocolContracts.class.toString());
+							 contracts = ProtocolContractsLocalServiceUtil.createProtocolContracts(protocol_contracts_id);
+							
+							 contracts.setIzvewenie_id(izvewenija_id);
+							 contracts.setCreated(new Date());
+							 contracts.setUpdated(new Date());
+							
+						}
+						
+						ProtocolContractsLocalServiceUtil.updateProtocolContracts(contracts);
+						BidqueueLocalServiceUtil.deleteBidqueue(bidqueue);
+					 }
 				} catch (PortalException e) {
 					
 				
@@ -85,7 +150,7 @@ public class WinnerSchedulars extends BaseMessageListener  {
 			else
 				break;
 		}
-	   
+		
 	  }
 
 	

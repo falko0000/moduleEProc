@@ -77,10 +77,10 @@ public class IzvewenijaSchedulars extends BaseMessageListener  {
 		
 		for( Bidqueue bidqueue : bidqueues)
 		{
-			System.out.println(TimeZone.getDefault()+" "+date +" after "+bidqueue.getClosing_date()+"=" +date.after(bidqueue.getClosing_date()));
+			
 			if(date.after(bidqueue.getClosing_date()) || date.equals(bidqueue.getClosing_date()))
 			{
-				System.out.println(date+">=" + bidqueue.getClosing_date());
+			
 				long izvewenija_id = bidqueue.getIzvewenija_id();
 				
 				try {

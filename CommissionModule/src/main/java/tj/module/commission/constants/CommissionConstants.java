@@ -68,4 +68,6 @@ public interface CommissionConstants {
 	    static final int STATUS_BID_COMPLETED_TRADES = 400;
 	    
 	    static final String AUTHORIZED_BODY_ID = "AUTHORIZED_BODY_ID";
+	    static final String ORGANIZATION_HEAD_ID  = "ORGANIZATION_HEAD_ID";
+	    static final String COMPLAINTS_PERIOD = "COMPLAINTS_PERIOD";
  }

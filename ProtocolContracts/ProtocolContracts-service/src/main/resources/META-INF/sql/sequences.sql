@@ -1,1 +1,2 @@
 create sequence sapp.protocol_contracts_id_seq;
+create sequence sapp.protocol_opening_id_seq;

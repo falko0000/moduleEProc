@@ -1,5 +1,6 @@
 
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ include file="/init.jsp" %>
 
 
@@ -18,7 +19,7 @@
          
        orgName = orgName.substring(orgName.indexOf(" "));
        
-       
+       SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:MM");
        
  %>
      
@@ -38,7 +39,7 @@
         <p><%=LanguageUtil.format(request, "created-by-x", izvewenija.getUserName()) %></p>
         <%= LanguageUtil.format(request, "organization-name", orgName)%>
         
-        <%= LanguageUtil.format(request, "date-time-protocol-generation", protocolContracts.getCreated()) %>
+        <%= LanguageUtil.format(request, "date-time-protocol-generation",dateFormat.format(protocolContracts.getCreated())) %>
        
         <%=LanguageUtil.get(request, "subject-procurement") %> 
         
@@ -72,9 +73,17 @@
            <%=LanguageUtil.get(request, "approve-procedure")%>
            <%=LanguageUtil.format(request, "choice-best", lotInfo[0]) %>
             
-            <%Organization orgWin = OrganizationLocalServiceUtil.getOrganization(orgWinner); %>
+            <%
+              Organization orgWin = OrganizationLocalServiceUtil.getOrganization(orgWinner); 
+           
+            String orgWinName = orgWin.getName();
+           
+              
+            %>
             
-            <%=LanguageUtil.format(request, "recognize-proposal", organization.getName()) %>
+             
+            
+            <%=LanguageUtil.format(request, "recognize-proposal", orgWinName) %>
             
             
              <%@ include file="/commissiontab/evaluation/tableconditions.jspf" %>
