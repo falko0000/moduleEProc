@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Jekb-api
 Bundle-SymbolicName: tj.jekb.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_51 (Oracle Corporation)
 Export-Package: tj.jekb.exception;uses:="com.liferay.portal.kernel.exc
  eption";version="1.0.0",tj.jekb.model;uses:="com.liferay.expando.kern
  el.model,com.liferay.portal.kernel.annotation,com.liferay.portal.kern

@@ -49,7 +49,7 @@
        headOrgName = headOrgName.substring(headOrgName.indexOf(" "));
        
        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
-       
+       String commission_tab = ParamUtil.getString(request, "commission_tab");
  %>
      
        
@@ -57,7 +57,7 @@
     		<%=LanguageUtil.format(request,"approved-organization",new String[]{headOrgName, userHead.getFullName()}) %>
       	
     	
-     <%@ include file="/commissiontab/evaluation/print.jspf" %>
+     <%@ include file="/commissiontab/evaluation/print/print.jspf" %>
      
         <%=LanguageUtil.format(request, "pratacol-number", protocolContracts.getPrimaryKey()) %> 
  
@@ -97,11 +97,11 @@
             <%=LanguageUtil.format(request,"i-comparison-quotations", lotInfo[0]) %>
             <%=LanguageUtil.get(request, "approve-ranking") %>
             
-            <%@ include file="/commissiontab/evaluation/tablelistlots.jspf" %>
+            <%@ include file="/commissiontab/evaluation/contract/list_suppliers.jspf" %>
             
             <p><strong><%=LanguageUtil.get(request, "bid-details")%></strong></p>
            
-           <%@ include file="/commissiontab/evaluation/tableproduct.jspf" %>
+           <%@ include file="/commissiontab/evaluation/contract/winner_lot_products.jspf" %>
            
            <%=LanguageUtil.format(request, "evaluation-proposals", lotInfo[0]) %>
            <%=LanguageUtil.get(request, "approve-procedure")%>
@@ -124,7 +124,7 @@
             <%=LanguageUtil.format(request, "recognize-proposal", orgWinName) %>
             
             
-             <%@ include file="/commissiontab/evaluation/tableconditions.jspf" %>
+             <%@ include file="/commissiontab/evaluation/contract/winner_conditions.jspf" %>
              
             <%=LanguageUtil.format(request, "conclusion-agreement", lotInfo[0]) %>
             <%=LanguageUtil.format(request,"recommend-procuring", new Object[]{orgWin.getName(), total}) %>

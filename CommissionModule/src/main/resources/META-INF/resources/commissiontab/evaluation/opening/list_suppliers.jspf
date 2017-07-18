@@ -1,0 +1,54 @@
+
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%
+   
+   List<LotsWinner> lotsWinners =  LotsWinnerLocalServiceUtil.getSerialWinners(spisoklotov.getSpisok_lotov_id());
+   long orgWinner = 0;
+   
+%>
+<div class="table-responsive">
+   <table class="table table-bordered table-hover">
+      
+      <thead>
+    	<tr>
+    		<th><%=LanguageUtil.get(request, "number") %></th>
+    		<th><%=LanguageUtil.get(request, "name-and-address") %></th>
+    		<th><%=LanguageUtil.format(request, "price-for-lot", lotInfo[0])%>
+    		<th><%=LanguageUtil.get(request, "conformity-check") %></th>
+    		
+    	</tr>
+      </thead>
+      
+      <tbody>	
+		<% for(LotsWinner lotw : lotsWinners){
+		    
+			Organization org = OrganizationLocalServiceUtil.getOrganization(lotw.getOrganization_id());
+	
+			if(lotw.getAttribute().equals("W"))
+				orgWinner = org.getOrganizationId();
+			
+			String name_address = org.getName()+", ";
+			Address address = org.getAddress();
+			name_address += LanguageUtil.get(request, "country."+address.getCountry().getName())+" "+address.getCity()+" "+address.getStreet1(); 
+		    
+		
+			double priceTotal = lotw.getTotal_price();
+			
+			
+		  
+			%>
+    
+      		<tr>
+      		  
+      		   <td><%=lotw.getSerial_number() %></td>
+      		   <td><%= name_address%></td>
+      		    <td><%= priceTotal%></td>
+      		   <td><%=LanguageUtil.get(request, "Approved") %></td>
+      	
+      	
+      		</tr>   
+        
+		<%}%>
+      </tbody>
+  </table>
+  </div class="table-responsive">

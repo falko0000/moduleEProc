@@ -16,7 +16,7 @@
     ProtocolOpening   opening = ProtocolOpeningLocalServiceUtil.getProtocolOpeningByBid(izvewenija.getIzvewenija_id());
    
     if(Validator.isNotNull(opening))
-    	names.append(","+LanguageUtil.get(request, "protocol-opening"));
+    	names.append(","+"protocol-opening");
     
     if(Validator.isNotNull(contracts))
     	names.append(",protocol");

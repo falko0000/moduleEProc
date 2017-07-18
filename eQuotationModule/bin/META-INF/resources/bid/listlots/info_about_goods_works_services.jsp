@@ -88,7 +88,7 @@ Long spisok_tovarov_id = ParamUtil.getLong(request,"spisok_tovarov_id");
 	<c:if test="<%=(spisok_tovarov_id == 0 )%>">
 	<% for (Country country : countries) {%>
 		
-		<aui:option label="<%=country.getNameCurrentLanguageId() %>"  value="<%= country.getCountryId() %>" />
+		<aui:option label="<%="country."+ country.getName()%>"  value="<%= country.getCountryId() %>" />
 	<%} %>
 	</c:if>
 	
@@ -96,7 +96,7 @@ Long spisok_tovarov_id = ParamUtil.getLong(request,"spisok_tovarov_id");
 	  
 	  <% for (Country country : countries) {%>
 		
-		<aui:option label="<%=country.getNameCurrentLanguageId() %>"  value="<%= country.getCountryId() %>" selected = "<%=country.getCountryId() == spisokTovarov.getKod_strany_proizvoditelja() %>" />
+		<aui:option label="<%="country."+ country.getName()%>"  value="<%= country.getCountryId() %>" selected = "<%=country.getCountryId() == spisokTovarov.getKod_strany_proizvoditelja() %>" />
 	<%} %>
 	
 	</c:if>

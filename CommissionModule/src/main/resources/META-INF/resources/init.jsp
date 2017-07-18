@@ -144,4 +144,9 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
       }
+      
+      th {
+    font-weight: bold;
+    text-align: -internal-center;
+     }
 </style>

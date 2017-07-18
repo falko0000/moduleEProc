@@ -71,7 +71,7 @@
  	  			
  	  			
  	  			
- 	  			zak.append("<strong>"+LanguageUtil.get(request, "vendor-proposal") + ": </strong>");
+ 	  			zak.append("<strong>"+LanguageUtil.get(request, "customer-proposal") + ": </strong>");
  	  			zak.append(spisokTovarov.getNaimenovanie_tovara()+"." + "<br>");
  	  			
  	  			zak.append("<strong>"+LanguageUtil.get(request, "description-of-goods") + ": </strong>");
