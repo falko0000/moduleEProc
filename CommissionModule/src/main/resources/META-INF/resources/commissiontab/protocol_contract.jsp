@@ -23,7 +23,7 @@
        
        String commission_tab = ParamUtil.getString(request, "commission_tab","listlots");
        
-       String commission_tab = ParamUtil.getString(request, "commission_tab");
+       
        
        
  %>

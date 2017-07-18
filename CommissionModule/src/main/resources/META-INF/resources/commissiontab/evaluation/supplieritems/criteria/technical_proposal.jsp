@@ -1,4 +1,5 @@
 
+<%@page import="com.liferay.document.library.kernel.service.DLAppServiceUtil"%>
 <%@page import="tj.criterias.model.Criteria"%>
 <%@ include file="/init.jsp" %>
 
@@ -25,11 +26,18 @@
     long organizationId = user.getOrganizationIds()[0];
    
     System.out.println(repositoryId);
+    Folder  folder = null;
     
-   Folder  folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, CommissionConstants.FOLDER_BID);
-	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenie_id));
-	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
-	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), CommissionConstants.FOLDER_CRITERIA);
+    try {
+	
+    	folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, CommissionConstants.FOLDER_BID);
+    	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenie_id));
+    	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
+    	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), CommissionConstants.FOLDER_CRITERIA);	
+	} catch (Exception e) {	
+		
+	}
+   
     
     %>
 

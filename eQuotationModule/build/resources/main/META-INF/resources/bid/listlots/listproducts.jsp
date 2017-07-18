@@ -32,7 +32,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 	String removeProducts = "javascript:" + renderResponse.getNamespace()+"removeProducts()";
 	String editProducts = "javascript:" + renderResponse.getNamespace()+"editProducts()";
 	
-	System.out.println(editProducts);
+	
 	%>
 	    <liferay-frontend:management-bar-button href="<%= editProducts%>" icon="edit" id="editProduct" label="edit"/>
 		<liferay-frontend:management-bar-button href="<%=removeProducts %>" icon="trash" id="removeProduct" label="remove" />
@@ -199,7 +199,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 			var idForEdit = ids.substring(ids.lastIndexOf(",")+1, ids.length);
 			
 			editProducts.setParameter("spisok_tovarov_id",idForEdit);
-			alert(idForEdit);
+		
 			Liferay.Util.openWindow({
 				dialog: {
 					centered: true,

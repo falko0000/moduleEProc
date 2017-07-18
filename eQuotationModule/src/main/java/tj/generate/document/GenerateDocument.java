@@ -78,7 +78,7 @@ public class GenerateDocument {
 			
 			this.filename = filenmae;
 			
-			this.themeDisplay =  (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);;	
+			this.themeDisplay =  (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			
 			this.actionRequest = actionRequest;
 		uploadFile();
@@ -170,8 +170,7 @@ public class GenerateDocument {
 				
 				  for(int i = 1; i < this.folder_saved_html.length; i++)
 					{
-					  System.out.println(folder_saved_html[i]);
-						folder = getFolder(folder.getFolderId(),folder_saved_html[i], serviceContext);
+								folder = getFolder(folder.getFolderId(),folder_saved_html[i], serviceContext);
 					}
 					InputStream is = new FileInputStream( file );
 					 ServiceContext fserviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
@@ -253,17 +252,23 @@ public class GenerateDocument {
 
 	private Folder getFolder(long parentFolderId, String folderName, ServiceContext serviceContext){
 
+		
 		Folder folder = null;
 		try {
-				folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), parentFolderId , folderName);
+				folder = DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), parentFolderId , folderName);
 		} catch (Exception e) {	
-			try {
-				folder =  DLAppServiceUtil.addFolder(themeDisplay.getScopeGroupId(), parentFolderId, folderName, folderName, serviceContext);
-			} catch (PortalException e1) {
-
-			}
-		}
-
+		
+				
+					try {
+						folder =  DLAppServiceUtil.addFolder(themeDisplay.getScopeGroupId(), parentFolderId, folderName, folderName, serviceContext);
+					} catch (PortalException e1) {
+						
+						e1.printStackTrace();
+					}
+			
+            }
+		
+         
 		return folder;
 	}
 

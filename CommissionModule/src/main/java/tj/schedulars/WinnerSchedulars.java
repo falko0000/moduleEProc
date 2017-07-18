@@ -71,7 +71,9 @@ public class WinnerSchedulars extends BaseMessageListener  {
 		{
 				long izvewenija_id = bidqueue.getIzvewenija_id();
 				ProtocolOpening opening = ProtocolOpeningLocalServiceUtil.getProtocolOpeningByBid(izvewenija_id);
-			
+				
+				 System.out.println(date+"<="+ bidqueue.getClosing_date());
+				
 			if(date.after(bidqueue.getClosing_date()) || date.equals(bidqueue.getClosing_date()))
 			{
 				boolean isNullOpening = Validator.isNull(opening);

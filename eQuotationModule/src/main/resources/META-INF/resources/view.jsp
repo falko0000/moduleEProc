@@ -6,6 +6,7 @@
  */
 --%>
 
+
 <%@page import="com.liferay.portal.kernel.security.permission.ActionKeys"%>
 <%@ include file="/init.jsp" %>
 
@@ -13,7 +14,7 @@
  
 <%
    
-    
+
      String names =(String) request.getAttribute("editnametabs");
     
      String tab = ParamUtil.getString(request, "izvewenija_tab","preparation");
@@ -26,7 +27,7 @@
     String primKey = portletDisplay.getResourcePK(); 
     long role[] = permissionChecker.getRoleIds(permissionChecker.getUserId(), themeDisplay.getScopeGroupId());
     
-   
+    String BidCopy = "javascript:" + renderResponse.getNamespace()+"bidCopy()";
 %>
 
   
@@ -42,8 +43,8 @@
 		   <portlet:param name="izvewenie_id" value="0"/>
 		</portlet:renderURL>
 
-		<liferay-frontend:add-menu-item title='ADD' url="<%= addIzvewenijaURL.toString() %>" />
-	
+		<liferay-frontend:add-menu-item title="ADD" url="<%= addIzvewenijaURL.toString() %>" />
+	    <liferay-frontend:add-menu-item title="COPY"  url="<%= BidCopy %>" />
 	</liferay-frontend:add-menu>
 	</c:if>
 			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="izvewenija_tab" > 
@@ -75,7 +76,31 @@
 			<liferay-ui:input-editor name="content" initMethod="initEditor" width="100" height="400" 
   resizable="true" ></liferay-ui:input-editor>
 			<aui:script>
- function <portlet:namespace/>initEditor(){
+			function <portlet:namespace />bidCopy()
+			{
+				<portlet:renderURL var="bidCopy" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+				<portlet:param name="mvcPath" value="/bidcopy.jsp" />
+				
+				<portlet:param name="<%=Constants.CMD%>" value="<%=Constants.COPY%>" />
+				</portlet:renderURL>
+				
+				Liferay.Util.openWindow({
+					dialog: {
+						centered: true,
+					
+						modal: true
+						
+					},
+					id: '<portlet:namespace/>bidCopy',
+					title: 'Bid Copy',
+					uri: '<%=bidCopy%>'
+				});
+			}
+   
+			
+function <portlet:namespace/>initEditor(){
  return  "Sample CKEDITOR";
  }
+ 
+ 
 </aui:script>

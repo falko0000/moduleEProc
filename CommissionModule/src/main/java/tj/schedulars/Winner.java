@@ -216,7 +216,7 @@ public class Winner {
 				{
 					List<Criteria> criterias = CriteriaLocalServiceUtil.getCriteria(spisok_lotov_id, i);
 					
-					System.out.println("point["+i+"] = " +  point[i]);
+					
 					
 					if(criterias.size() > 0)
 					
@@ -280,13 +280,18 @@ public class Winner {
 				TS += point[CommissionConstants.CRITERIA_TECHNICAL];
 				
 			}
+			System.out.println("TS = "+TS+" "+"points.size = " + points.size());
 			TS = TS / points.size();
 		
 			
 			double orgPrice = totalPrice(spisok_lotov_id, organizationId);
+			
+			System.out.println("orgPrice = " + orgPrice);
 			double FS = 100*getMinTotalPrice()/orgPrice;
 			
 			double s = (FS*F)/100 + (TS*T)/100;
+	
+			System.out.println("lot_winner_id= "+lot_winner_id);
 			
 		LotsWinner lotsWinner = LotsWinnerLocalServiceUtil.createLotsWinner(lot_winner_id);
 		lotsWinner.setAttribute("C");
@@ -296,18 +301,25 @@ public class Winner {
 		lotsWinner.setPoint(s);
 		lotsWinner.setTotal_price(orgPrice);
 			
+		System.out.println(lotsWinner);
 		listSupplier.put(s, lotsWinner);
 		}
 		
 		int serialNumber = 1;
+		
 		for(Map.Entry<Double, LotsWinner> entry : listSupplier.entrySet())
 		{
 			LotsWinner lotWinner = LotsWinnerLocalServiceUtil.getSerialWinner(spisok_lotov_id, serialNumber);
-			
+			System.out.println(entry.getValue());
 			long winnerId = lot_winner_id;
 			
 			if(Validator.isNotNull(lotWinner))
+			
 				winnerId = lotWinner.getLot_winner_id(); 
+			   
+			else
+				
+				lotWinner = entry.getValue();
 				
 		 if( serialNumber == 1)
             lotWinner.setAttribute("W");
@@ -316,8 +328,8 @@ public class Winner {
 		      lotWinner.setPrimaryKey(winnerId);
 		 
 		 LotsWinnerLocalServiceUtil.updateLotsWinner(lotWinner);     
-			    
-			
+			    System.out.println("serialNumber = "+ serialNumber);
+			serialNumber++;
 		}
 		
 	
