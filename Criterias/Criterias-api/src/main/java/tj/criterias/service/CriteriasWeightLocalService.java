@@ -148,6 +148,9 @@ public interface CriteriasWeightLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CriteriasWeight> getCriteriasWeights(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CriteriasWeight> getCriteriasWeights(long spisok_lotov_id);
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

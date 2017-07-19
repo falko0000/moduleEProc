@@ -157,6 +157,12 @@ public class CriteriasWeightLocalServiceWrapper
 		return _criteriasWeightLocalService.getCriteriasWeights(start, end);
 	}
 
+	@Override
+	public java.util.List<tj.criterias.model.CriteriasWeight> getCriteriasWeights(
+		long spisok_lotov_id) {
+		return _criteriasWeightLocalService.getCriteriasWeights(spisok_lotov_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

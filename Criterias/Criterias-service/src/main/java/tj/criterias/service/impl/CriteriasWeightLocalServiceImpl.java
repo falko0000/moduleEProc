@@ -48,5 +48,8 @@ public class CriteriasWeightLocalServiceImpl
 		return null;
 		}
 	}
-	
+  public List<CriteriasWeight> getCriteriasWeights(long spisok_lotov_id) {
+		
+		return criteriasWeightPersistence.findByLotovId(spisok_lotov_id);
+	}
 }

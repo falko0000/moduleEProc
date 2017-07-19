@@ -152,6 +152,11 @@ public class CriteriasWeightLocalServiceUtil {
 		return getService().getCriteriasWeights(start, end);
 	}
 
+	public static java.util.List<tj.criterias.model.CriteriasWeight> getCriteriasWeights(
+		long spisok_lotov_id) {
+		return getService().getCriteriasWeights(spisok_lotov_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

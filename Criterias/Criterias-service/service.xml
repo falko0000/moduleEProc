@@ -109,5 +109,9 @@
 	<finder-column name="spisok_lotov_id"></finder-column>
 	<finder-column name="criteria_category_id"></finder-column>
 	</finder>
+	
+	<finder return-type="Collection" name="LotovId">
+	<finder-column name="spisok_lotov_id"></finder-column>
+	</finder>
 	</entity>
 </service-builder>

@@ -147,7 +147,9 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		
 	   String form_name = ParamUtil.getString(actionRequest, "FormName");
 	   String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
+     
+	   System.out.println("FormName="+form_name +" "+ "cmd="+cmd);
+	   
 	  if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
 		   
 		   insertGeneralInfo( actionRequest , actionResponse);
@@ -195,12 +197,163 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	
 	   if(form_name.equals(EQuotationConstants.FORM_TENDER_DOCUMENTATION))
 		   generateDocument(actionRequest,actionResponse);
-
-	
+       
+	   if(form_name.equals(Constants.COPY) && cmd.equals(Constants.COPY))
+		   copyBid(actionRequest,actionResponse);
 	}
 
 
-  private void generateDocument(ActionRequest actionRequest, ActionResponse actionResponse) {
+  private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+	  long ids[] = ParamUtil.getLongValues(actionRequest, "bidCopyId", new long[0]);
+    
+	    String layoutPrototypeId = "0";
+			try {
+				layoutPrototypeId = SystemConfigLocalServiceUtil.getSystemConfig(EQuotationConstants.SITE_TEMPLATE).getValue();
+			} catch (NoSuchSystemConfigException e1) {
+			
+			}
+			
+	  for(int i= 0; i<ids.length; i++)
+	  {
+			ServiceContext serviceContext = null;
+		       
+		       try {
+				serviceContext = ServiceContextFactory.getInstance(actionRequest);
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		     
+		  try {
+			Izvewenija oldIzvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(ids[i]);
+			Izvewenija newIzvewenija = IzvewenijaLocalServiceUtil.insertIzvewenija(EQuotationConstants.STATE_BID_PREPARATION, 
+                    											  EQuotationConstants.STATUS_BID_PREPARATION,
+                    											  oldIzvewenija.getTip_izvewenija_id(),oldIzvewenija.getOrganizacija_id(),
+                    											  oldIzvewenija.getNaimenovanie(),Long.valueOf(layoutPrototypeId), serviceContext);
+		
+			IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.getIzveweniePut(oldIzvewenija.getIzvewenija_id());
+			
+			izveweniePut.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
+			izveweniePut.setIzvewenie_put_id(0);
+			
+			izveweniePut = IzveweniePutLocalServiceUtil.addIzveweniePut(izveweniePut);
+			
+			 ObwajaInformacija obwajaInformacija = ObwajaInformacijaLocalServiceUtil
+                     								.getObInfoByIzvewenieId(oldIzvewenija.getIzvewenija_id(),serviceContext.getUserId() );
+			 
+			 obwajaInformacija.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
+			 obwajaInformacija.setObwaja_informacija_id(0);
+			 obwajaInformacija.setData_sozdanija(new Date());
+			 obwajaInformacija.setData_izmenenija(new Date());
+			 
+			 obwajaInformacija = ObwajaInformacijaLocalServiceUtil.addObwajaInformacija(obwajaInformacija);
+			 
+		   PorjadokRabotyKomissii porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(oldIzvewenija.getIzvewenija_id());
+			   
+		   porjadokRabotyKomissii.setPorjadok_raboty_komissii_id(0);
+		   porjadokRabotyKomissii.setData_publikacii(new Date());
+		   
+		   Calendar calendar = CalendarFactoryUtil.getCalendar();
+		   calendar.setTime(new Date());
+		   
+		   calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)+3);
+		   
+		   porjadokRabotyKomissii.setData_podvedenija_itogov(calendar.getTime());
+		   
+		   porjadokRabotyKomissii.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
+		   porjadokRabotyKomissii.setPo_istecheniju_dnej(3);
+		   porjadokRabotyKomissii.setData_sozdanija(new Date());
+		   porjadokRabotyKomissii.setData_izmenenija(new Date());
+		   
+		   porjadokRabotyKomissii = PorjadokRabotyKomissiiLocalServiceUtil.addPorjadokRabotyKomissii(porjadokRabotyKomissii);
+		   
+		   InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(oldIzvewenija.getIzvewenija_id());
+		   informacijaORazmewenii.setInformacija_o_razmewenii_id(0);
+		   informacijaORazmewenii.setInformacija_o_razmewenii_id(newIzvewenija.getIzvewenija_id());
+		   informacijaORazmewenii.setData_izmenenija(new Date());
+		   informacijaORazmewenii.setData_izmenenija(new Date());
+		   
+		   informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.addInformacijaORazmewenii(informacijaORazmewenii);
+		   
+		   List<Spisoklotov> spisoklotovs = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(oldIzvewenija.getIzvewenija_id());
+		   
+		   for(Spisoklotov spisoklotov : spisoklotovs)
+		   {
+			   Spisoklotov newspisoklotov = (Spisoklotov) spisoklotov.clone();
+			      
+			     newspisoklotov.setSpisok_lotov_id(0);
+			     newspisoklotov.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
+			     newspisoklotov.setData_sozdanija(new Date());
+			     newspisoklotov.setData_izmenenija(new Date());
+			     
+			     newspisoklotov = SpisoklotovLocalServiceUtil.addSpisoklotov(newspisoklotov);
+			    
+			    
+			     List<SpisokTovarov> spisokTovarovs = SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(spisoklotov.getSpisok_lotov_id());
+			   
+			     for(SpisokTovarov spisokTovarov : spisokTovarovs)
+			     {
+			    	 SpisokTovarov newspisokTovarov = (SpisokTovarov) spisokTovarov.clone();
+			    	    newspisokTovarov.setSpisok_tovarov_id(0);
+			    	    newspisokTovarov.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
+			    	    newspisokTovarov.setLot_id(newspisoklotov.getSpisok_lotov_id());
+			    	    newspisokTovarov.setData_sozdanija(new Date());
+			    	    newspisokTovarov.setData_izmenenija(new Date());
+			    	    
+			    	    SpisokTovarovLocalServiceUtil.addSpisokTovarov(newspisokTovarov);
+			    }
+			     
+			     List<Criteria> criterias = CriteriaLocalServiceUtil.getCriterias(spisoklotov.getSpisok_lotov_id());
+			     
+			     for(Criteria criteria : criterias)
+			     {
+			    	 Criteria newcriteria = (Criteria) criteria.clone();
+			    	 newcriteria.setCriteria_id(0);
+			    	 newcriteria.setSpisok_lotov_id(newspisoklotov.getSpisok_lotov_id());
+			    	 
+			    	 newcriteria.setCreated(new Date());
+			    	 newcriteria.setUpdated(new Date());
+			    	   
+			    	 CriteriaLocalServiceUtil.addCriteria(newcriteria);
+			    	   
+			    }
+			    
+			     List<CriteriasWeight> criteriasWeights = CriteriasWeightLocalServiceUtil.getCriteriasWeights(spisoklotov.getSpisok_lotov_id());
+			     
+			     for(CriteriasWeight criteriasWeight : criteriasWeights)
+			     {
+			    	 CriteriasWeight newcriteriasWeight = (CriteriasWeight) criteriasWeight.clone();
+			    	 criteriasWeight.setCriterias_weight_id(0);
+			    	 criteriasWeight.setSpisok_lotov_id(newspisoklotov.getSpisok_lotov_id());
+			    	 
+			    	 criteriasWeight.setCreated(new Date());
+			    	 criteriasWeight.setUpdated(new Date());
+			    	   
+			    	 CriteriasWeightLocalServiceUtil.addCriteriasWeight(newcriteriasWeight);
+			    	   
+			    }
+			     
+			}
+		   
+		  
+		  
+		   
+		   List<User> userList = UserLocalServiceUtil.getUserGroupUsers(oldIzvewenija.getUserGroupId());
+		   
+		  UserLocalServiceUtil.addUserGroupUsers(newIzvewenija.getUserGroupId(), userList);
+		  
+		   
+		  } catch (PortalException e) {
+			
+			e.printStackTrace();
+		}
+	  }
+		
+	}
+
+
+private void generateDocument(ActionRequest actionRequest, ActionResponse actionResponse) {
 	
 	  
 	  

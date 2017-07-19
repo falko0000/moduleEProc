@@ -23,6 +23,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
  listlotsUrl.setParameter("mvcRenderCommandName", EQuotationConstants.RENDER_COMMAND_NAME_EDIT);
  listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenie_id));
  listlotsUrl.setParameter(Constants.CMD,cmd);
+ 
  Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
  String currentURL = themeDisplay.getURLCurrent();
  request.setAttribute("redirect", currentURL);

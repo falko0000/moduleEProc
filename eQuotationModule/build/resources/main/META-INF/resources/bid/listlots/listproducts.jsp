@@ -16,7 +16,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
  productUrl.setParameter(Constants.CMD,cmd);
  String displayStyle = ParamUtil.getString(request, "displayStyle");
 
- System.out.println("Country in Strany");
+ 
 %>
 
 <liferay-frontend:management-bar
@@ -34,7 +34,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 	
 	
 	%>
-	    <liferay-frontend:management-bar-button href="<%= editProducts%>" icon="edit" id="editProduct" label="edit"/>
+	    <liferay-frontend:management-bar-button href="<%= editProducts%>" icon="icon-edit" id="editProduct" label="edit"/>
 		<liferay-frontend:management-bar-button href="<%=removeProducts %>" icon="trash" id="removeProduct" label="remove" />
 	
 	</liferay-frontend:management-bar-action-buttons>

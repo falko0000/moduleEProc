@@ -1,4 +1,5 @@
 
+<%@page import="com.liferay.portal.kernel.util.Constants"%>
 <%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@ include file="/init.jsp" %>
 
@@ -33,9 +34,22 @@
 		
        
 			izvewenijas = IzvewenijaLocalServiceUtil.getIzvewenija(companyId, groupId, sostojanie_ids, status_ids);
+
+			String submitCopy =  renderResponse.getNamespace()+Constants.COPY+ "();";
 %>	
 
 
+<liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="Copy">
+			
+			<portlet:param name="mvcPath" value="<%=EQuotationConstants.VIEW_TEMPLATE%>" />
+		   <portlet:param name="<%=Constants.CMD %>" value="<%= Constants.COPY%>"/>
+		    <portlet:param name="FormName" value="<%=Constants.COPY%>"/>
+		   
+</liferay-portlet:actionURL>
+
+<aui:form action="<%=Copy%>" cssClass="container-fluid-1280" method="post" name="fm">
+    
+<aui:input name="bidCopyId" type="hidden" value="" />
 
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
@@ -76,6 +90,35 @@
 		 <liferay-ui:search-iterator />
 		</liferay-ui:search-container>
 		
-		
+		    <aui:button-row>
+		      <aui:button 
+		         name="bbidCopy"
+		          value="copy" 
+		          type="button" 
+		           primary="true"
+		            icon="icon-file" 
+		            iconAlign="left"
+		            onClick='<%=submitCopy%>'  />
+             </aui:button-row>
+           
+              </aui:form>
+      
+       <aui:script>
+     	Liferay.provide(
+		window,
+		'<portlet:namespace /><%=Constants.COPY%>',
+		function() {
+			
+			var copyIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');	
+			
+			if (copyIds && confirm('are-you-sure-you-want-to-copy-the-selected-messages')) {
+				document.<portlet:namespace />fm.<portlet:namespace />bidCopyId.value = copyIds;
 
-	
+				submitForm(document.<portlet:namespace />fm);
+			} else {
+				
+			}
+		},
+		['liferay-util-list-fields']
+	);
+</aui:script>
