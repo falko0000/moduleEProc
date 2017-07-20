@@ -641,8 +641,8 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		    	
 		    	supplierRequestLot.setOrganization_id(organization_id);
 		    	supplierRequestLot.setSpisok_lotov_id(spisok_lotov_id);
-		        
-		    	System.out.println(supplierRequestLot.toString());
+		        supplierRequestLot.setSub_application(true);
+		    	
 		    	
 		    	SupplierRequestLotLocalServiceUtil.updateSupplierRequestLot(supplierRequestLot);
 	

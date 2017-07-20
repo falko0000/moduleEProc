@@ -63,7 +63,7 @@ public class SupplierRequestLotCacheModel implements CacheModel<SupplierRequestL
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{supplier_request_lot_id=");
 		sb.append(supplier_request_lot_id);
@@ -71,6 +71,10 @@ public class SupplierRequestLotCacheModel implements CacheModel<SupplierRequestL
 		sb.append(organization_id);
 		sb.append(", spisok_lotov_id=");
 		sb.append(spisok_lotov_id);
+		sb.append(", sub_application=");
+		sb.append(sub_application);
+		sb.append(", withdrawn=");
+		sb.append(withdrawn);
 		sb.append("}");
 
 		return sb.toString();
@@ -83,6 +87,8 @@ public class SupplierRequestLotCacheModel implements CacheModel<SupplierRequestL
 		supplierRequestLotImpl.setSupplier_request_lot_id(supplier_request_lot_id);
 		supplierRequestLotImpl.setOrganization_id(organization_id);
 		supplierRequestLotImpl.setSpisok_lotov_id(spisok_lotov_id);
+		supplierRequestLotImpl.setSub_application(sub_application);
+		supplierRequestLotImpl.setWithdrawn(withdrawn);
 
 		supplierRequestLotImpl.resetOriginalValues();
 
@@ -96,6 +102,10 @@ public class SupplierRequestLotCacheModel implements CacheModel<SupplierRequestL
 		organization_id = objectInput.readLong();
 
 		spisok_lotov_id = objectInput.readLong();
+
+		sub_application = objectInput.readBoolean();
+
+		withdrawn = objectInput.readInt();
 	}
 
 	@Override
@@ -106,9 +116,15 @@ public class SupplierRequestLotCacheModel implements CacheModel<SupplierRequestL
 		objectOutput.writeLong(organization_id);
 
 		objectOutput.writeLong(spisok_lotov_id);
+
+		objectOutput.writeBoolean(sub_application);
+
+		objectOutput.writeInt(withdrawn);
 	}
 
 	public long supplier_request_lot_id;
 	public long organization_id;
 	public long spisok_lotov_id;
+	public boolean sub_application;
+	public int withdrawn;
 }

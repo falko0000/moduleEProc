@@ -149,8 +149,7 @@ public class WinnerSchedulars extends BaseMessageListener  {
 				
 				
 			}
-			else
-				break;
+		
 		}
 		
 	  }

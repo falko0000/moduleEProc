@@ -35,6 +35,8 @@ public class SupplierRequestLotSoap implements Serializable {
 		soapModel.setSupplier_request_lot_id(model.getSupplier_request_lot_id());
 		soapModel.setOrganization_id(model.getOrganization_id());
 		soapModel.setSpisok_lotov_id(model.getSpisok_lotov_id());
+		soapModel.setSub_application(model.getSub_application());
+		soapModel.setWithdrawn(model.getWithdrawn());
 
 		return soapModel;
 	}
@@ -114,7 +116,29 @@ public class SupplierRequestLotSoap implements Serializable {
 		_spisok_lotov_id = spisok_lotov_id;
 	}
 
+	public boolean getSub_application() {
+		return _sub_application;
+	}
+
+	public boolean isSub_application() {
+		return _sub_application;
+	}
+
+	public void setSub_application(boolean sub_application) {
+		_sub_application = sub_application;
+	}
+
+	public int getWithdrawn() {
+		return _withdrawn;
+	}
+
+	public void setWithdrawn(int withdrawn) {
+		_withdrawn = withdrawn;
+	}
+
 	private long _supplier_request_lot_id;
 	private long _organization_id;
 	private long _spisok_lotov_id;
+	private boolean _sub_application;
+	private int _withdrawn;
 }

@@ -9,5 +9,7 @@
 		</id>
 		<property name="organization_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="spisok_lotov_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sub_application" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="withdrawn" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 </hibernate-mapping>

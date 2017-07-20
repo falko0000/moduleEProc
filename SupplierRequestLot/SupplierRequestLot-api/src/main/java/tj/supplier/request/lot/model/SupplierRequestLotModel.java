@@ -101,6 +101,41 @@ public interface SupplierRequestLotModel extends BaseModel<SupplierRequestLot> {
 	 */
 	public void setSpisok_lotov_id(long spisok_lotov_id);
 
+	/**
+	 * Returns the sub_application of this supplier request lot.
+	 *
+	 * @return the sub_application of this supplier request lot
+	 */
+	public boolean getSub_application();
+
+	/**
+	 * Returns <code>true</code> if this supplier request lot is sub_application.
+	 *
+	 * @return <code>true</code> if this supplier request lot is sub_application; <code>false</code> otherwise
+	 */
+	public boolean isSub_application();
+
+	/**
+	 * Sets whether this supplier request lot is sub_application.
+	 *
+	 * @param sub_application the sub_application of this supplier request lot
+	 */
+	public void setSub_application(boolean sub_application);
+
+	/**
+	 * Returns the withdrawn of this supplier request lot.
+	 *
+	 * @return the withdrawn of this supplier request lot
+	 */
+	public int getWithdrawn();
+
+	/**
+	 * Sets the withdrawn of this supplier request lot.
+	 *
+	 * @param withdrawn the withdrawn of this supplier request lot
+	 */
+	public void setWithdrawn(int withdrawn);
+
 	@Override
 	public boolean isNew();
 

@@ -1160,6 +1160,8 @@ public class SupplierRequestLotPersistenceImpl extends BasePersistenceImpl<Suppl
 		supplierRequestLotImpl.setSupplier_request_lot_id(supplierRequestLot.getSupplier_request_lot_id());
 		supplierRequestLotImpl.setOrganization_id(supplierRequestLot.getOrganization_id());
 		supplierRequestLotImpl.setSpisok_lotov_id(supplierRequestLot.getSpisok_lotov_id());
+		supplierRequestLotImpl.setSub_application(supplierRequestLot.isSub_application());
+		supplierRequestLotImpl.setWithdrawn(supplierRequestLot.getWithdrawn());
 
 		return supplierRequestLotImpl;
 	}

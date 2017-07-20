@@ -1,3 +1,13 @@
+<%@page import="com.liferay.portal.kernel.service.persistence.CountryUtil"%>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.User"%>
+<%@page import="com.liferay.portal.kernel.service.CountryServiceUtil"%>
+<%@page import="com.liferay.counter.kernel.service.CounterLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Country"%>
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil"%>
+<%@page import="tj.supplier.request.lot.model.SupplierRequestLot"%>
 <%@page import="com.liferay.portal.kernel.util.Constants"%>
 <%@ include file="/init.jsp" %>
 
@@ -11,16 +21,28 @@
 
  List<EdinicyIzmerenija> edinicy_izmerenijas = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijas(0, EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijasCount());
 
-  List<Strany> strany = StranyLocalServiceUtil.getStranies(0, StranyLocalServiceUtil.getStraniesCount());
-
+  
+  List<Country> countries  = CountryServiceUtil.getCountries(true);
+ 
   long organization_id = 0;
   
   
-  long userId = themeDisplay.getUserId();
-  List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
- if(organizations.size()>0)
-	  organization_id = organizations.get(0).getOrganizationId();
   
+ 
+ if( user.hasOrganization())
+    organization_id = user.getOrganizationIds()[0];
+    
+
+ 
+  SupplierRequestLot requestLot =  SupplierRequestLotLocalServiceUtil.getSupplierRequestLot(spisok_lotov_id, organization_id);
+   
+  boolean sub_application = false;
+  
+    if(Validator.isNotNull(requestLot))
+    	sub_application = requestLot.isSub_application();
+ 
+    boolean withdrown = (sub_application && requestLot.getWithdrawn() < 1);
+    
 	int countSpisokTovarov =	SpisokTovarovLocalServiceUtil.getCountSpisokTovarovByLotId(spisok_lotov_id);
 	int countZajavk        =    ZajavkiOtPostavwikovTempLocalServiceUtil.getCountZajavkiOtPostavwikovs(spisok_lotov_id , organization_id);
 
@@ -40,11 +62,13 @@
 	productUrl.setParameter(Constants.CMD, Constants.ADD);
 	
 	  Map<Long, ZajavkiOtPostavwikovTemp> map = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
- 
+   
     double stotal = 0;
 
  String currentURL = themeDisplay.getURLCurrent();
 
+ System.out.println(currentURL);
+ 
 %>
 
 <liferay-portlet:actionURL name="<%=SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT%>" var="forming">
@@ -96,7 +120,8 @@
 				    long strany_id = 44;
 				    double pricevalue = 0;
 				    double totalsvalue = 0;
-				    
+				     
+				   
 				    		
 				    if(map.containsKey(spisok_tovarov.getSpisok_tovarov_id()))
 				    {
@@ -124,6 +149,7 @@
 				         name="<%=peredlojenie+String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>"
 				          type="text"
 				          value="<%=Naimenovanie_tovara %>" 
+				          disabled="<%= !withdrown%>"
 				 /> 
 			 
 			  		</liferay-ui:search-container-column-text>
@@ -135,24 +161,31 @@
 				 	   type="text" 
 				 	   name="<%=opisanie + String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>"
 				 	   value="<%=Opisanie_tovara %>"
+				 	   disabled="<%= !withdrown%>"
 				 	   /> 
 				 	</liferay-ui:search-container-column-text>
 				 	
 			 <liferay-ui:search-container-column-text name="country-of-origin" >
 			 	
 			 	
-			
+			<c:if test="<%=!withdrown %>">
 			<aui:select label="" name="<%=country + String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>" >
 	
 
-	               <% for (Strany strana : strany) {%>
-		     <c:if test="<%=Validator.isNotNull(strana.getKey())%>">
-		         <aui:option label="<%=LanguageUtil.get(request, strana.getKey()) %>"  value="<%= strana.getStrany_id() %>" selected ="<%=strany_id ==  strana.getStrany_id()%>"/>
+	               <% for (Country countryOriginal : countries) {%>
+		     <c:if test="<%=Validator.isNotNull(countryOriginal.getName())%>">
+		         <aui:option label="<%="country."+countryOriginal.getName() %>"  value="<%= countryOriginal.getCountryId() %>" selected ="<%=strany_id ==  countryOriginal.getCountryId()%>"/>
 	         </c:if>
 	             <%} %>
            
            </aui:select>
+			</c:if>
 			
+			<c:if test="<%=withdrown %>">
+			    <% String countryName = CountryServiceUtil.fetchCountry(strany_id).getName(); %>
+			<aui:input name="country-of-origin" type="text" value="<%="country."+countryName %>" />
+			
+			</c:if>
 			 </liferay-ui:search-container-column-text>
 				 
 				  <liferay-ui:search-container-column-text name="unit-price" >
@@ -165,6 +198,7 @@
 				     value = "<%=String.valueOf(pricevalue) %>"
 				      min="0.0"
 				      title = "<%=LanguageUtil.get(request, "the_price_for")+" "+ EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenija(spisok_tovarov.getEdinica_izmerenija_id()).getNazvanie() %>"
+				      disabled="<%= withdrown%>"
 				      />  
 				  
 				  </liferay-ui:search-container-column-text>
@@ -201,7 +235,9 @@
 
  <aui:button-row>
  	   
+ 	   <c:choose>
  	   
+    <c:when  test="<%=!sub_application %>">	
  	
  	 <c:if test="<%=countSpisokTovarov == countZajavk %>" >   
 		  <aui:button 
@@ -212,7 +248,15 @@
  	     />
  	     </c:if>
 		<aui:button id="pay_now" name="save" value="save" type="submit" />
-  			
+  		
+  		</c:when>
+  		
+  		 <c:when test="<%=withdrown %>">
+  		    
+  		      <aui:button id="withdrawn_now" name="Withdrawn" value="Withdrawn" type="submit" />
+  		       
+  		 </c:when>
+  		</c:choose>	
 		<aui:button id="pay_now_cancel" name="cancle" lable="cancle" type="cancel" />
   
   </aui:button-row>
@@ -274,7 +318,7 @@ AUI().use('event', 'node', function(A) {
 AUI().use('aui-io-request', function(A){
 A.one('#<portlet:namespace/>filing_an_application').on('click', function(event) {
 	
-	alert('<%=forming.toString()%>');
+
    
     var url = '<%=forming.toString()%>';
     A.io.request(

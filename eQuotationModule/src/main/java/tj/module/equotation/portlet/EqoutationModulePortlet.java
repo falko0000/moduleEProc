@@ -1,41 +1,13 @@
 package tj.module.equotation.portlet;
 
 
+import java.io.IOException;
+import java.util.List;
 
-
-
+import javax.mail.internet.InternetAddress;
 
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
-import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
-import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
-
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
-
-import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
-
-
-import com.liferay.portal.kernel.service.UserService;
-
-
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-
-
-import tj.module.equotation.constants.EQuotationConstants;
-import tj.spisoklotov.model.Spisoklotov;
-import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
-
-
-import java.io.IOException;
-
-import java.util.List;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -47,6 +19,19 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
+import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserService;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+
+import tj.module.equotation.constants.EQuotationConstants;
+import tj.spisoklotov.model.Spisoklotov;
+import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 
 
 
@@ -78,10 +63,11 @@ public class EqoutationModulePortlet extends MVCPortlet {
 
 	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 	
+	MailMessage body = new MailMessage();
+	
+	MailServiceUtil.sendEmail(body);
 
-
-
-
+	
 	StringBuilder names = new StringBuilder();
 	
 	names.append(EQuotationConstants.TAB_PREPARATION);

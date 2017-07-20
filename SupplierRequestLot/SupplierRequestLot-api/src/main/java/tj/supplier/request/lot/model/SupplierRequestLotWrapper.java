@@ -60,6 +60,8 @@ public class SupplierRequestLotWrapper implements SupplierRequestLot,
 		attributes.put("supplier_request_lot_id", getSupplier_request_lot_id());
 		attributes.put("organization_id", getOrganization_id());
 		attributes.put("spisok_lotov_id", getSpisok_lotov_id());
+		attributes.put("sub_application", getSub_application());
+		attributes.put("withdrawn", getWithdrawn());
 
 		return attributes;
 	}
@@ -84,6 +86,28 @@ public class SupplierRequestLotWrapper implements SupplierRequestLot,
 		if (spisok_lotov_id != null) {
 			setSpisok_lotov_id(spisok_lotov_id);
 		}
+
+		Boolean sub_application = (Boolean)attributes.get("sub_application");
+
+		if (sub_application != null) {
+			setSub_application(sub_application);
+		}
+
+		Integer withdrawn = (Integer)attributes.get("withdrawn");
+
+		if (withdrawn != null) {
+			setWithdrawn(withdrawn);
+		}
+	}
+
+	/**
+	* Returns the sub_application of this supplier request lot.
+	*
+	* @return the sub_application of this supplier request lot
+	*/
+	@Override
+	public boolean getSub_application() {
+		return _supplierRequestLot.getSub_application();
 	}
 
 	@Override
@@ -101,6 +125,16 @@ public class SupplierRequestLotWrapper implements SupplierRequestLot,
 		return _supplierRequestLot.isNew();
 	}
 
+	/**
+	* Returns <code>true</code> if this supplier request lot is sub_application.
+	*
+	* @return <code>true</code> if this supplier request lot is sub_application; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isSub_application() {
+		return _supplierRequestLot.isSub_application();
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _supplierRequestLot.getExpandoBridge();
@@ -115,6 +149,16 @@ public class SupplierRequestLotWrapper implements SupplierRequestLot,
 	public int compareTo(
 		tj.supplier.request.lot.model.SupplierRequestLot supplierRequestLot) {
 		return _supplierRequestLot.compareTo(supplierRequestLot);
+	}
+
+	/**
+	* Returns the withdrawn of this supplier request lot.
+	*
+	* @return the withdrawn of this supplier request lot
+	*/
+	@Override
+	public int getWithdrawn() {
+		return _supplierRequestLot.getWithdrawn();
 	}
 
 	@Override
@@ -259,6 +303,16 @@ public class SupplierRequestLotWrapper implements SupplierRequestLot,
 	}
 
 	/**
+	* Sets whether this supplier request lot is sub_application.
+	*
+	* @param sub_application the sub_application of this supplier request lot
+	*/
+	@Override
+	public void setSub_application(boolean sub_application) {
+		_supplierRequestLot.setSub_application(sub_application);
+	}
+
+	/**
 	* Sets the supplier_request_lot_id of this supplier request lot.
 	*
 	* @param supplier_request_lot_id the supplier_request_lot_id of this supplier request lot
@@ -266,6 +320,16 @@ public class SupplierRequestLotWrapper implements SupplierRequestLot,
 	@Override
 	public void setSupplier_request_lot_id(long supplier_request_lot_id) {
 		_supplierRequestLot.setSupplier_request_lot_id(supplier_request_lot_id);
+	}
+
+	/**
+	* Sets the withdrawn of this supplier request lot.
+	*
+	* @param withdrawn the withdrawn of this supplier request lot
+	*/
+	@Override
+	public void setWithdrawn(int withdrawn) {
+		_supplierRequestLot.setWithdrawn(withdrawn);
 	}
 
 	@Override

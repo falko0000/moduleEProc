@@ -62,7 +62,9 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "supplier_request_lot_id", Types.BIGINT },
 			{ "organization_id", Types.BIGINT },
-			{ "spisok_lotov_id", Types.BIGINT }
+			{ "spisok_lotov_id", Types.BIGINT },
+			{ "sub_application", Types.BOOLEAN },
+			{ "withdrawn", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -70,9 +72,11 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 		TABLE_COLUMNS_MAP.put("supplier_request_lot_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("organization_id", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("spisok_lotov_id", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("sub_application", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("withdrawn", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.supplier_request_lot (supplier_request_lot_id LONG not null primary key,organization_id LONG,spisok_lotov_id LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.supplier_request_lot (supplier_request_lot_id LONG not null primary key,organization_id LONG,spisok_lotov_id LONG,sub_application BOOLEAN,withdrawn INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.supplier_request_lot";
 	public static final String ORDER_BY_JPQL = " ORDER BY supplierRequestLot.supplier_request_lot_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.supplier_request_lot.supplier_request_lot_id ASC";
@@ -134,6 +138,8 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 		attributes.put("supplier_request_lot_id", getSupplier_request_lot_id());
 		attributes.put("organization_id", getOrganization_id());
 		attributes.put("spisok_lotov_id", getSpisok_lotov_id());
+		attributes.put("sub_application", getSub_application());
+		attributes.put("withdrawn", getWithdrawn());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -160,6 +166,18 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 
 		if (spisok_lotov_id != null) {
 			setSpisok_lotov_id(spisok_lotov_id);
+		}
+
+		Boolean sub_application = (Boolean)attributes.get("sub_application");
+
+		if (sub_application != null) {
+			setSub_application(sub_application);
+		}
+
+		Integer withdrawn = (Integer)attributes.get("withdrawn");
+
+		if (withdrawn != null) {
+			setWithdrawn(withdrawn);
 		}
 	}
 
@@ -217,6 +235,31 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 		return _originalSpisok_lotov_id;
 	}
 
+	@Override
+	public boolean getSub_application() {
+		return _sub_application;
+	}
+
+	@Override
+	public boolean isSub_application() {
+		return _sub_application;
+	}
+
+	@Override
+	public void setSub_application(boolean sub_application) {
+		_sub_application = sub_application;
+	}
+
+	@Override
+	public int getWithdrawn() {
+		return _withdrawn;
+	}
+
+	@Override
+	public void setWithdrawn(int withdrawn) {
+		_withdrawn = withdrawn;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -251,6 +294,8 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 		supplierRequestLotImpl.setSupplier_request_lot_id(getSupplier_request_lot_id());
 		supplierRequestLotImpl.setOrganization_id(getOrganization_id());
 		supplierRequestLotImpl.setSpisok_lotov_id(getSpisok_lotov_id());
+		supplierRequestLotImpl.setSub_application(getSub_application());
+		supplierRequestLotImpl.setWithdrawn(getWithdrawn());
 
 		supplierRequestLotImpl.resetOriginalValues();
 
@@ -334,12 +379,16 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 
 		supplierRequestLotCacheModel.spisok_lotov_id = getSpisok_lotov_id();
 
+		supplierRequestLotCacheModel.sub_application = getSub_application();
+
+		supplierRequestLotCacheModel.withdrawn = getWithdrawn();
+
 		return supplierRequestLotCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{supplier_request_lot_id=");
 		sb.append(getSupplier_request_lot_id());
@@ -347,6 +396,10 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 		sb.append(getOrganization_id());
 		sb.append(", spisok_lotov_id=");
 		sb.append(getSpisok_lotov_id());
+		sb.append(", sub_application=");
+		sb.append(getSub_application());
+		sb.append(", withdrawn=");
+		sb.append(getWithdrawn());
 		sb.append("}");
 
 		return sb.toString();
@@ -354,7 +407,7 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.supplier.request.lot.model.SupplierRequestLot");
@@ -371,6 +424,14 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 		sb.append(
 			"<column><column-name>spisok_lotov_id</column-name><column-value><![CDATA[");
 		sb.append(getSpisok_lotov_id());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sub_application</column-name><column-value><![CDATA[");
+		sb.append(getSub_application());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>withdrawn</column-name><column-value><![CDATA[");
+		sb.append(getWithdrawn());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -389,6 +450,8 @@ public class SupplierRequestLotModelImpl extends BaseModelImpl<SupplierRequestLo
 	private long _spisok_lotov_id;
 	private long _originalSpisok_lotov_id;
 	private boolean _setOriginalSpisok_lotov_id;
+	private boolean _sub_application;
+	private int _withdrawn;
 	private long _columnBitmask;
 	private SupplierRequestLot _escapedModel;
 }

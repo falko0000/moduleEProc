@@ -5,5 +5,7 @@
 		<field name="supplier_request_lot_id" type="long" />
 		<field name="organization_id" type="long" />
 		<field name="spisok_lotov_id" type="long" />
+		<field name="sub_application" type="boolean" />
+		<field name="withdrawn" type="int" />
 	</model>
 </model-hints>

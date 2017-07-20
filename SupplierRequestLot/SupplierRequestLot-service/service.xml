@@ -9,13 +9,15 @@
      <column name="supplier_request_lot_id" type="long" primary="true" id-type="increment"></column>
 		<column name="organization_id" type="long"></column>
 		<column name="spisok_lotov_id" type="long"></column>
+	 <column name="sub_application" type="boolean"></column>
+	 <column name="withdrawn" type="int"></column>
 	 
 	 <finder return-type="Collection" name="SpisokLotovId">
 	   <finder-column name="spisok_lotov_id"></finder-column>
 	 </finder>
 	<finder return-type="SupplierRequestLot" name="lotIdorgId">
-	<finder-column name="spisok_lotov_id"></finder-column>
-	<finder-column name="organization_id"></finder-column>
+		<finder-column name="spisok_lotov_id"></finder-column>
+		<finder-column name="organization_id"></finder-column>
 	</finder>
 	
 	
