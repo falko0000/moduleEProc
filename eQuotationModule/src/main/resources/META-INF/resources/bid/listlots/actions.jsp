@@ -68,17 +68,17 @@
 	 
     <liferay-ui:icon-menu>
     <c:if test="<%=tab.equals(EQuotationConstants.TAB_PREPARATION) %>">
-    	<liferay-ui:icon id="lot_edit" iconCssClass="icon-edit" message="Edit" url="<%= taglibUrl%>" />  
+    	<liferay-ui:icon id="lot_edit" iconCssClass="icon-edit" message="action.EDIT" url="<%= taglibUrl%>" />  
       </c:if>
       <c:if test="<%=tab.equals(EQuotationConstants.TAB_SUBMISSION_OF_PROPOSALS) %>">
-        <liferay-ui:icon iconCssClass="icon-info-sign" message="Info" url="<%= info.toString() %>" />
+        <liferay-ui:icon iconCssClass="icon-info-sign" message="info" url="<%= info.toString() %>" />
       </c:if>
 
-	 	<liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
-        <liferay-ui:icon  message="GOODS, WORKS, SERVICES" url="<%= addproducts.toString() %>" />
+	 	<liferay-ui:icon iconCssClass="icon-trash" message="action.DELETE" url="<%= deleteURL.toString() %>" />
+        <liferay-ui:icon  message="action.goods-works-services" url="<%= addproducts.toString() %>" />
          
-          <liferay-ui:icon message="CRITERIA LOW PRICE"  url="<%= criteriaA.toString() %>" />
-          <liferay-ui:icon message="CRITERIA LOWEST COST"  url="<%= criteriaB.toString() %>" />
+          <liferay-ui:icon message="action.criteria_low_price"  url="<%= criteriaA.toString() %>" />
+          <liferay-ui:icon message="action.criteria_lowest_cost"  url="<%= criteriaB.toString() %>" />
           
     	
     </liferay-ui:icon-menu>

@@ -53,6 +53,7 @@ String qualification[] = new String[CAT_NAMES.length+1];
           <aui:button name="default" value="default" type="submit" />
        </aui:button-row>
      </aui:form>
+     
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="criterias">
 		   <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>

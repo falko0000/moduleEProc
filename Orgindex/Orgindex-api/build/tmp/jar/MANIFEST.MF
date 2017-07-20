@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Orgindex-api
 Bundle-SymbolicName: tj.orgindex.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_112 (Oracle Corporation)
 Export-Package: tj.orgindex.exception;uses:="com.liferay.portal.kernel
  .exception";version="1.0.0",tj.orgindex.model;uses:="com.liferay.expa
  ndo.kernel.model,com.liferay.portal.kernel.annotation,com.liferay.por
