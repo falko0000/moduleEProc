@@ -15,6 +15,14 @@ create table sapp.criteria (
 	doc_mandatory BOOLEAN
 );
 
+create table sapp.criteria_default_value (
+	criteria_default_value_id LONG not null primary key,
+	criteria_category_id INTEGER,
+	criteria_type_id INTEGER,
+	value VARCHAR(75) null,
+	description VARCHAR(75) null
+);
+
 create table sapp.criteria_template (
 	criteria_template_id LONG not null primary key,
 	criteria_name VARCHAR(75) null,

@@ -1,5 +1,7 @@
 create index IX_19E66D4D on sapp.criteria (spisok_lotov_id, criteria_category_id, criteria_type_id);
 
+create index IX_A792354D on sapp.criteria_default_value (criteria_type_id);
+
 create index IX_C10AF9E4 on sapp.criteria_template (criteria_category_id, criteria_type_id);
 create index IX_7D7EF9D4 on sapp.criteria_template (criteria_type_id);
 

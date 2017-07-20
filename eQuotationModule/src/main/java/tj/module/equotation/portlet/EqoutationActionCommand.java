@@ -69,8 +69,10 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import tj.criterias.model.Criteria;
+import tj.criterias.model.CriteriaDefaultValue;
 import tj.criterias.model.CriteriaTemplate;
 import tj.criterias.model.CriteriasWeight;
+import tj.criterias.service.CriteriaDefaultValueLocalServiceUtil;
 import tj.criterias.service.CriteriaLocalServiceUtil;
 import tj.criterias.service.CriteriaTemplateLocalServiceUtil;
 import tj.criterias.service.CriteriasWeightLocalServiceUtil;
@@ -148,7 +150,7 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   String form_name = ParamUtil.getString(actionRequest, "FormName");
 	   String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
      
-	   System.out.println("FormName="+form_name +" "+ "cmd="+cmd);
+	  
 	   
 	  if(form_name.equals(EQuotationConstants.FORM_GENERAL_INFO) && cmd.equals(Constants.ADD))
 		   
@@ -200,13 +202,64 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
        
 	   if(form_name.equals(Constants.COPY) && cmd.equals(Constants.COPY))
 		   copyBid(actionRequest,actionResponse);
+	   
+	   if(form_name.equals("criteria_default"))
+		   criteriaDefaultValue(actionRequest,actionResponse);
 	}
 
 
-  private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse) {
+  private void criteriaDefaultValue(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+	  String redirect = ParamUtil.get(actionRequest, "redirect", "");
+	  long spisok_lotov_id = ParamUtil.get(actionRequest, "spisok_lotov_id",0);
+	  int criteria_type_id = ParamUtil.get(actionRequest, "criteria_type_id", 0);
+	  User user=(User) actionRequest.getAttribute(WebKeys.USER);
+	  
+	  if(spisok_lotov_id!=0)
+	  {
+		  List<CriteriaDefaultValue> defaultValues = CriteriaDefaultValueLocalServiceUtil.getCriteriaDefaultValues(criteria_type_id);
+	     
+		  for(CriteriaDefaultValue defaultValue : defaultValues)
+		  {
+			  Criteria criteria = CriteriaLocalServiceUtil.createCriteria(0);
+			  
+			  criteria.setCriteria_name(defaultValue.getValue());
+			  criteria.setCriteria_category_id(defaultValue.getCriteria_category_id());
+			  criteria.setCriteria_description(defaultValue.getDescription());
+			  criteria.setSpisok_lotov_id(spisok_lotov_id);
+			  criteria.setCreated(new Date());
+			  criteria.setUpdated(new Date());
+			  criteria.setCreatedby(user.getUserId());
+			  criteria.setUpdatedby(user.getUserId());
+			  criteria.setCriteria_type_id(criteria_type_id);
+			  
+			  criteria = CriteriaLocalServiceUtil.addCriteria(criteria);
+			  
+			  CriteriasWeight criteriasWeight = CriteriasWeightLocalServiceUtil.createCriteriasWeight(0);
+		     criteriasWeight.setSpisok_lotov_id(spisok_lotov_id);
+		     criteriasWeight.setCriteria_category_id(defaultValue.getCriteria_category_id());
+		     criteriasWeight.setCreated(new Date());
+		     criteriasWeight.setUpdated(new Date());
+		     criteriasWeight.setCreatedby(user.getUserId());
+		     criteriasWeight.setUpdatedby(user.getUserId());
+		     
+		     criteriasWeight = CriteriasWeightLocalServiceUtil.addCriteriasWeight(criteriasWeight);
+		  }
+	  }
+	  try {
+		sendRedirect(actionRequest, actionResponse, redirect);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+
+
+private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse) {
 		
 	  long ids[] = ParamUtil.getLongValues(actionRequest, "bidCopyId", new long[0]);
-    
+      String redirect = ParamUtil.get(actionRequest, "redirect","");
+      
 	    String layoutPrototypeId = "0";
 			try {
 				layoutPrototypeId = SystemConfigLocalServiceUtil.getSystemConfig(EQuotationConstants.SITE_TEMPLATE).getValue();
@@ -343,8 +396,9 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 		   
 		  UserLocalServiceUtil.addUserGroupUsers(newIzvewenija.getUserGroupId(), userList);
 		  
+		   sendRedirect(actionRequest, actionResponse, redirect);
 		   
-		  } catch (PortalException e) {
+		  } catch (PortalException | IOException e) {
 			
 			e.printStackTrace();
 		}

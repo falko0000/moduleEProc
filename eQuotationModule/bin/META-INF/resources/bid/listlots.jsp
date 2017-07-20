@@ -120,10 +120,10 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 
 
 <aui:script> 
-Liferay.provide(window,'<portlet:namespace/>closePopUp', function(dialogId) {
+	Liferay.provide(window,'<portlet:namespace/>closePopUp', function(dialogId) {
 	
-var A = AUI(); var dialog = Liferay.Util.Window.getById(dialogId); 
-dialog.destroy();
+	var A = AUI(); var dialog = Liferay.Util.Window.getById(dialogId); 
+	dialog.destroy();
 },
 ['liferay-util-window'] ); 
 </aui:script> 

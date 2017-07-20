@@ -1,4 +1,5 @@
 
+
 <%@page import="com.liferay.portal.kernel.util.Constants"%>
 <%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@ include file="/init.jsp" %>
@@ -36,6 +37,7 @@
 			izvewenijas = IzvewenijaLocalServiceUtil.getIzvewenija(companyId, groupId, sostojanie_ids, status_ids);
 
 			String submitCopy =  renderResponse.getNamespace()+Constants.COPY+ "();";
+            String redirect = ParamUtil.get(request, "redirect","");
 %>	
 
 
@@ -49,8 +51,9 @@
 
 <aui:form action="<%=Copy%>" cssClass="container-fluid-1280" method="post" name="fm">
     
-<aui:input name="bidCopyId" type="hidden" value="" />
-
+   <aui:input name="bidCopyId" type="hidden" value="" />
+    <aui:input name="redirect" type="hidden" value="<%=redirect%>" />
+    
 <liferay-ui:search-container
 				emptyResultsMessage="no-leaves-found" 
 				delta = "<%=50%>"
@@ -115,10 +118,13 @@
 				document.<portlet:namespace />fm.<portlet:namespace />bidCopyId.value = copyIds;
 
 				submitForm(document.<portlet:namespace />fm);
+				
+				var dialog = Liferay.Util.Window.getById('<portlet:namespace/>bidCopy'); 
+				dialog.destroy();
 			} else {
 				
 			}
 		},
-		['liferay-util-list-fields']
+		['liferay-util-list-fields','liferay-util-window']
 	);
 </aui:script>

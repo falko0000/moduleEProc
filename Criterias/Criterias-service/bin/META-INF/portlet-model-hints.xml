@@ -17,6 +17,13 @@
 		<field name="criteria_type_id" type="int" />
 		<field name="doc_mandatory" type="boolean" />
 	</model>
+	<model name="tj.criterias.model.CriteriaDefaultValue">
+		<field name="criteria_default_value_id" type="long" />
+		<field name="criteria_category_id" type="int" />
+		<field name="criteria_type_id" type="int" />
+		<field name="value" type="String" />
+		<field name="description" type="String" />
+	</model>
 	<model name="tj.criterias.model.CriteriasWeight">
 		<field name="criterias_weight_id" type="long" />
 		<field name="spisok_lotov_id" type="long" />

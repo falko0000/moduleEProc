@@ -44,6 +44,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 import tj.criterias.model.CriteriasWeight;
 
 import tj.criterias.service.CriteriasWeightLocalService;
+import tj.criterias.service.persistence.CriteriaDefaultValuePersistence;
 import tj.criterias.service.persistence.CriteriaPersistence;
 import tj.criterias.service.persistence.CriteriaTemplatePersistence;
 import tj.criterias.service.persistence.CriteriaValuePersistence;
@@ -358,6 +359,44 @@ public abstract class CriteriasWeightLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the criteria default value local service.
+	 *
+	 * @return the criteria default value local service
+	 */
+	public tj.criterias.service.CriteriaDefaultValueLocalService getCriteriaDefaultValueLocalService() {
+		return criteriaDefaultValueLocalService;
+	}
+
+	/**
+	 * Sets the criteria default value local service.
+	 *
+	 * @param criteriaDefaultValueLocalService the criteria default value local service
+	 */
+	public void setCriteriaDefaultValueLocalService(
+		tj.criterias.service.CriteriaDefaultValueLocalService criteriaDefaultValueLocalService) {
+		this.criteriaDefaultValueLocalService = criteriaDefaultValueLocalService;
+	}
+
+	/**
+	 * Returns the criteria default value persistence.
+	 *
+	 * @return the criteria default value persistence
+	 */
+	public CriteriaDefaultValuePersistence getCriteriaDefaultValuePersistence() {
+		return criteriaDefaultValuePersistence;
+	}
+
+	/**
+	 * Sets the criteria default value persistence.
+	 *
+	 * @param criteriaDefaultValuePersistence the criteria default value persistence
+	 */
+	public void setCriteriaDefaultValuePersistence(
+		CriteriaDefaultValuePersistence criteriaDefaultValuePersistence) {
+		this.criteriaDefaultValuePersistence = criteriaDefaultValuePersistence;
+	}
+
+	/**
 	 * Returns the criterias weight local service.
 	 *
 	 * @return the criterias weight local service
@@ -640,6 +679,10 @@ public abstract class CriteriasWeightLocalServiceBaseImpl
 	protected tj.criterias.service.CriteriaLocalService criteriaLocalService;
 	@BeanReference(type = CriteriaPersistence.class)
 	protected CriteriaPersistence criteriaPersistence;
+	@BeanReference(type = tj.criterias.service.CriteriaDefaultValueLocalService.class)
+	protected tj.criterias.service.CriteriaDefaultValueLocalService criteriaDefaultValueLocalService;
+	@BeanReference(type = CriteriaDefaultValuePersistence.class)
+	protected CriteriaDefaultValuePersistence criteriaDefaultValuePersistence;
 	@BeanReference(type = CriteriasWeightLocalService.class)
 	protected CriteriasWeightLocalService criteriasWeightLocalService;
 	@BeanReference(type = CriteriasWeightPersistence.class)

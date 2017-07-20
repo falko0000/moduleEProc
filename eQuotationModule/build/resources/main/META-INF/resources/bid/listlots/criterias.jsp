@@ -39,7 +39,20 @@ String qualification[] = new String[CAT_NAMES.length+1];
 
  String currentURL = themeDisplay.getURLCurrent();
 %>
+  <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="defaultCriteria">
+		  
+		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
+          <portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>"/>
+     		 <portlet:param name="criteria_type_id" value="<%= String.valueOf(criteria_type_id) %>"/>
+</liferay-portlet:actionURL>
 
+     <aui:form action="<%=defaultCriteria%>" cssClass="container-fluid-1280" method="post" name="criteria_default">
+        <aui:input name="FormName" type="hidden" value="criteria_default" />
+        <aui:input name="redirect" type="hidden" value="<%=currentURL %>" />
+       <aui:button-row>
+          <aui:button name="default" value="default" type="submit" />
+       </aui:button-row>
+     </aui:form>
 <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="criterias">
 		   <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>

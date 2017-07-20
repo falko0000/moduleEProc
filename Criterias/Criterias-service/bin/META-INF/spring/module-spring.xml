@@ -3,6 +3,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean class="tj.criterias.service.impl.CriteriaLocalServiceImpl" id="tj.criterias.service.CriteriaLocalService" />
 	<bean class="tj.criterias.service.persistence.impl.CriteriaPersistenceImpl" id="tj.criterias.service.persistence.CriteriaPersistence" parent="basePersistence" />
+	<bean class="tj.criterias.service.impl.CriteriaDefaultValueLocalServiceImpl" id="tj.criterias.service.CriteriaDefaultValueLocalService" />
+	<bean class="tj.criterias.service.persistence.impl.CriteriaDefaultValuePersistenceImpl" id="tj.criterias.service.persistence.CriteriaDefaultValuePersistence" parent="basePersistence" />
 	<bean class="tj.criterias.service.impl.CriteriasWeightLocalServiceImpl" id="tj.criterias.service.CriteriasWeightLocalService" />
 	<bean class="tj.criterias.service.persistence.impl.CriteriasWeightPersistenceImpl" id="tj.criterias.service.persistence.CriteriasWeightPersistence" parent="basePersistence" />
 	<bean class="tj.criterias.service.impl.CriteriaTemplateLocalServiceImpl" id="tj.criterias.service.CriteriaTemplateLocalService" />

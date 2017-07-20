@@ -113,5 +113,21 @@
 	<finder return-type="Collection" name="LotovId">
 	<finder-column name="spisok_lotov_id"></finder-column>
 	</finder>
+	  
 	</entity>
+	
+	
+	<entity local-service="true" name="CriteriaDefaultValue" table="sapp.criteria_default_value" remote-service="false" uuid="false" cache-enabled="true">
+	    
+	    <column name="criteria_default_value_id" type="long" primary="true" id-type="sequence" id-param="sapp.criteria_default_value_id_seq"></column>
+	     <column name="criteria_category_id" type="int"></column>
+	     <column name="criteria_type_id" type="int"></column>
+	     <column name="value" type="String"></column>
+	     <column name="description" type="String"></column>
+	     
+	     <finder return-type="Collection" name="criteriaTypeId">
+	     	<finder-column name="criteria_type_id"></finder-column>
+	     </finder>
+	</entity>
+	
 </service-builder>

@@ -80,7 +80,7 @@
 			{
 				<portlet:renderURL var="bidCopy" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 				<portlet:param name="mvcPath" value="/bidcopy.jsp" />
-				
+				<portlet:param name="redirect" value="<%=currentURL%>"/>
 				<portlet:param name="<%=Constants.CMD%>" value="<%=Constants.COPY%>" />
 				</portlet:renderURL>
 				

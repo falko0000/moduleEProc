@@ -3,6 +3,7 @@
 
 <hibernate-mapping auto-import="false" default-lazy="false">
 	<import class="tj.criterias.model.Criteria" />
+	<import class="tj.criterias.model.CriteriaDefaultValue" />
 	<import class="tj.criterias.model.CriteriasWeight" />
 	<import class="tj.criterias.model.CriteriaTemplate" />
 	<import class="tj.criterias.model.CriteriaValue" />
@@ -25,6 +26,17 @@
 		<property name="min_weight" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="criteria_type_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="doc_mandatory" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="tj.criterias.model.impl.CriteriaDefaultValueImpl" table="sapp.criteria_default_value">
+		<id name="criteria_default_value_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.criteria_default_value_id_seq</param>
+			</generator>
+		</id>
+		<property name="criteria_category_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="criteria_type_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="tj.criterias.model.impl.CriteriasWeightImpl" table="sapp.criterias_weight">
 		<id name="criterias_weight_id" type="long">
