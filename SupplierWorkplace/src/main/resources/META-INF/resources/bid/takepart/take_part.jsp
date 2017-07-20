@@ -20,7 +20,7 @@
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 </liferay-portlet:actionURL>
 
-<liferay-ui:tabs names="TAKEPART">
+<liferay-ui:tabs names="take_part">
 
 <aui:form action="<%=takepart%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_ABOUT_INFO_DOCUMENT%>"> 
 
@@ -36,7 +36,7 @@
 <c:if test="<%= tariff.getTariff_value()>balanspostavwik.getBalans()%>">
 <liferay-ui:alert timeout="100000"  message="befor_participating" type="danger"></liferay-ui:alert>
 </c:if>
-<liferay-ui:panel collapsible="false" title="BALANCE INFORMATION" markupView="lexicon">
+<liferay-ui:panel collapsible="false" title="balance_information" markupView="lexicon">
 
 
 
