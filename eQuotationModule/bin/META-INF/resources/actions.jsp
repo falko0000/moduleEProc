@@ -73,16 +73,16 @@
     <liferay-ui:icon-menu>
     
     <c:if test="<%=tab.equals(EQuotationConstants.TAB_PREPARATION) && (ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, "EDIT" )) %>">
-    	<liferay-ui:icon iconCssClass="icon-edit" message="Edit" url="<%= edit.toString() %>" />  
+    	<liferay-ui:icon iconCssClass="icon-edit" message="edit" url="<%= edit.toString() %>" />  
       </c:if>
       <c:if test="<%=tab.equals(EQuotationConstants.TAB_SUBMISSION_OF_PROPOSALS) %>">
-        <liferay-ui:icon iconCssClass="icon-info-sign" message="Info" url="<%= info.toString() %>" />
+        <liferay-ui:icon iconCssClass="icon-info-sign" message="info" url="<%= info.toString() %>" />
       </c:if>
-        <liferay-ui:icon iconCssClass="icon-trash" message="Delete" url="<%= deleteURL.toString() %>" />
+        <liferay-ui:icon iconCssClass="icon-trash" message="action.DELETE" url="<%= deleteURL.toString() %>" />
         
         <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, ActionKeys.PERMISSIONS ) %>"> 
         
-        <liferay-ui:icon image="permissions" message="Permissions" url="<%= permissionsURL %>" />
+        <liferay-ui:icon image="permissions" message="action.PERMISSIONS" url="<%= permissionsURL %>" />
        
        </c:if>
     

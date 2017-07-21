@@ -18,7 +18,7 @@
 <c:if test="<%= tariff.getTariff_value()>balanspostavwik.getBalans()%>">
 <liferay-ui:alert timeout="100000"  message="befor_participating" type="danger"></liferay-ui:alert>
 </c:if>
-<liferay-ui:panel collapsible="false" title="BALANCE INFORMATION" markupView="lexicon">
+<liferay-ui:panel collapsible="false" title="balance_information" markupView="lexicon">
 
 
 

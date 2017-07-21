@@ -16,7 +16,6 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -26,33 +25,22 @@ import com.liferay.document.library.kernel.model.DLFolder;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
-import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
-import com.liferay.document.library.kernel.service.DLFolderLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery.PerformActionMethod;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Address;
-import com.liferay.portal.kernel.model.AddressSoap;
 import com.liferay.portal.kernel.model.AddressWrapper;
 import com.liferay.portal.kernel.model.Country;
 import com.liferay.portal.kernel.model.CountryWrapper;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationWrapper;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.FileEntrySoap;
-import com.liferay.portal.kernel.repository.model.FileEntryWrapper;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.service.CountryServiceUtil;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
-import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -72,7 +60,6 @@ import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 import tj.informacija.razmewenii.model.InformacijaORazmeweniiWrapper;
 import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
-import tj.izvewenija.model.IzvewenijaWrapper;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.suppworkplace.constant.SupplierWorkplaceConstant;
 import tj.oplachennye.zakazy.model.OplachennyeZakazy;
@@ -84,13 +71,11 @@ import tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki
 import tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil;
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
-import tj.spisok.tovarov.service.SpisokTovarovLocalServiceWrapper;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.model.SpisoklotovWrapper;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.strany.service.StranyLocalServiceUtil;
 import tj.supplier.criteria.model.SupplirCriteria;
-import tj.supplier.criteria.service.SupplirCriteriaLocalService;
 import tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil;
 import tj.supplier.request.lot.model.SupplierRequestLot;
 import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
@@ -102,9 +87,7 @@ import tj.tariff.service.TariffLocalServiceUtil;
 import tj.tipy.izvewenij.model.TipyIzvewenij;
 import tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov;
-import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovSoap;
 import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovTemp;
-import tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikovWrapper;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
 import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil;
 
@@ -138,6 +121,9 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION) && cmd.equals(Constants.ADD))
 			updateApplication(actionRequest, actionResponse);
+	
+		if(formname.equals(SupplierWorkplaceConstant.FORM_APPLICATION) && cmd.equals(Constants.CANCEL))
+			withdrownApplication(actionRequest, actionResponse);
 		
 		if(formname.equals(SupplierWorkplaceConstant.FORM_ABOUT_INFO_DOCUMENT))
 		   addDocument(actionRequest, actionResponse, SupplierWorkplaceConstant.FOLDER_LOT, "Folder for lot documents","","");
@@ -155,6 +141,51 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 			         updateSpplierCriteria(actionRequest, actionResponse);
 	}
 
+	private void withdrownApplication(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
+		
+
+		Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+		
+		  User user=(User) actionRequest.getAttribute(WebKeys.USER);
+		  
+		 long organization_id = 0;
+		 
+		  if(user.hasOrganization())
+			  organization_id = user.getOrganizationIds()[0];
+		  
+		 List<ZajavkiOtPostavwikov> otPostavwikovs = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisok_lotov_id, organization_id); 
+		
+		 for(ZajavkiOtPostavwikov otPostavwikov : otPostavwikovs)
+		 {
+			 long zajavki_ot_postavwikov_temp_id = CounterLocalServiceUtil.increment(ZajavkiOtPostavwikovTemp.class.toString());
+	    	  ZajavkiOtPostavwikovTemp postavwikov = ZajavkiOtPostavwikovTempLocalServiceUtil.createZajavkiOtPostavwikovTemp(zajavki_ot_postavwikov_temp_id);
+	    	  postavwikov.setIzvewenie_id(otPostavwikov.getIzvewenie_id());
+	    	  postavwikov.setLot_id(otPostavwikov.getLot_id());
+	    	  postavwikov.setTovar_id(otPostavwikov.getTovar_id());
+	    	  postavwikov.setPostavwik_id(otPostavwikov.getPostavwik_id());
+	    	  postavwikov.setKolichestvo(otPostavwikov.getKolichestvo());
+	    	  postavwikov.setSumma_za_edinicu_tovara(otPostavwikov.getSumma_za_edinicu_tovara());
+	    	  postavwikov.setItogo_za_tovar(otPostavwikov.getItogo_za_tovar());
+	    	  postavwikov.setSozdal(otPostavwikov.getSozdal());
+	    	  postavwikov.setIzmenil(otPostavwikov.getIzmenil());
+	    	  postavwikov.setData_sozdanija(otPostavwikov.getData_sozdanija());
+	    	  postavwikov.setData_izmenenija(otPostavwikov.getData_izmenenija());
+	    	  postavwikov.setKod_po_obshhemu_klassifikatoru(otPostavwikov.getKod_po_obshhemu_klassifikatoru());
+	    	  postavwikov.setKod_strany_proizvoditelja(otPostavwikov.getKod_strany_proizvoditelja());
+	    	  postavwikov.setOpisanie_tovara(otPostavwikov.getOpisanie_tovara());
+	    	  postavwikov.setPredlozhenie_postavwika(otPostavwikov.getPredlozhenie_postavwika());
+	    	  
+	    	  ZajavkiOtPostavwikovTempLocalServiceUtil.addZajavkiOtPostavwikovTemp(postavwikov);
+	    	  ZajavkiOtPostavwikovLocalServiceUtil.deleteZajavkiOtPostavwikov(otPostavwikov);
+		 }
+		 SupplierRequestLot requestLot = SupplierRequestLotLocalServiceUtil.getSupplierRequestLot(spisok_lotov_id, organization_id);
+		 
+		 requestLot.setWithdrawn(requestLot.getWithdrawn()+1);
+		 requestLot.setSub_application(false);
+		 
+		 SupplierRequestLotLocalServiceUtil.updateSupplierRequestLot(requestLot);
+	}
+
 	private void updateSpplierCriteria(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException{
 		
 		String prefixes[] = {"qualification","other_conditions","technical", "financial"};
@@ -163,7 +194,7 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		
 		 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		 
-		 User user = themeDisplay.getRealUser();
+		 User user = themeDisplay.getUser();
 		 
 		 if(user.hasOrganization())
 		 {
@@ -592,22 +623,17 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 					
 	}
 
-	private void updateApplication(ActionRequest actionRequest, ActionResponse actionResponse) {
+	private void updateApplication(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {
 		
-		com.liferay.portal.kernel.repository.model.FileEntry entry;
-
-
+		
 			Long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
 			
-			 ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-			  long organization_id = 0;
+			  User user=(User) actionRequest.getAttribute(WebKeys.USER);
 			  
-			  
-			   long userId = themeDisplay.getUserId();
-			   List<Organization> organizations =  OrganizationLocalServiceUtil.getUserOrganizations(userId);
-			  if(organizations.size()>0)
-				  organization_id = organizations.get(0).getOrganizationId();
+			 long organization_id = 0;
+			 
+			  if(user.hasOrganization())
+				  organization_id = user.getOrganizationIds()[0];
 			  
 		    List<ZajavkiOtPostavwikovTemp> postavwikovTemps = ZajavkiOtPostavwikovTempLocalServiceUtil.getZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
 		    
@@ -635,10 +661,16 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 		    	  ZajavkiOtPostavwikovTempLocalServiceUtil.deleteZajavkiOtPostavwikovTemp(temp);
 		    }
 		    
-		    	long supplier_request_lot_id = CounterLocalServiceUtil.increment(SupplierRequestLot.class.toString());
+		       SupplierRequestLot supplierRequestLot = SupplierRequestLotLocalServiceUtil.getSupplierRequestLot(spisok_lotov_id, organization_id);
 		    	
-		    	SupplierRequestLot supplierRequestLot = SupplierRequestLotLocalServiceUtil.createSupplierRequestLot(supplier_request_lot_id);
+		       
+		       if(Validator.isNull(supplierRequestLot))
+		       {
+		       long supplier_request_lot_id = CounterLocalServiceUtil.increment(SupplierRequestLot.class.toString());
 		    	
+		    	 supplierRequestLot = SupplierRequestLotLocalServiceUtil.createSupplierRequestLot(supplier_request_lot_id);
+		       }
+		       
 		    	supplierRequestLot.setOrganization_id(organization_id);
 		    	supplierRequestLot.setSpisok_lotov_id(spisok_lotov_id);
 		        supplierRequestLot.setSub_application(true);

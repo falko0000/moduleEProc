@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SupplierWorkplace
 Bundle-SymbolicName: tj.workplace.supplier
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_51 (Oracle Corporation)
 Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  )",com.liferay.counter.kernel.model;version="[1.0,2)",com.liferay.cou
  nter.kernel.service;version="[1.0,2)",com.liferay.document.library.ke
@@ -25,40 +25,41 @@ Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  2,7)",com.liferay.portal.kernel.search;version="[7.0,8)",com.liferay.
  portal.kernel.security.permission;version="[1.0,2)",com.liferay.porta
  l.kernel.service;version="[1.0,2)",com.liferay.portal.kernel.service.
- permission;version="[1.0,2)",com.liferay.portal.kernel.servlet.taglib
- .ui;version="[6.3,7)",com.liferay.portal.kernel.theme;version="[1.0,2
- )",com.liferay.portal.kernel.transaction;version="[7.0,8)",com.lifera
- y.portal.kernel.upload;version="[6.3,7)",com.liferay.portal.kernel.ut
- il;version="[7.0,8)",com.liferay.portal.kernel.uuid;version="[6.2,7)"
- ,freemarker.template;version="[2.3,3)",javax.portlet;version="[2.0,3)
- ",javax.servlet;version="[3.0,4)",javax.servlet.http;version="[3.0,4)
- ",tj.balans.postavwika.exception;version="[1.0,2)",tj.balans.postavwi
- ka.model;version="[1.0,2)",tj.balans.postavwika.service;version="[1.0
- ,2)",tj.criterias.model;version="[1.0,2)",tj.criterias.service;versio
- n="[1.0,2)",tj.edinicy.izmerenija.model;version="[1.0,2)",tj.edinicy.
- izmerenija.service;version="[1.0,2)",tj.informacija.razmewenii.except
- ion;version="[1.0,2)",tj.informacija.razmewenii.model;version="[1.0,2
- )",tj.informacija.razmewenii.service;version="[1.0,2)",tj.istochnik.f
- inansirovanija.model;version="[1.0,2)",tj.istochnik.finansirovanija.s
- ervice;version="[1.0,2)",tj.izvewenieput.model;version="[1.0,2)",tj.i
- zvewenija.model;version="[1.0,2)",tj.izvewenija.service;version="[1.0
- ,2)",tj.oplachennye.zakazy.model;version="[1.0,2)",tj.oplachennye.zak
- azy.service;version="[1.0,2)",tj.porjadok.raboty.komissii.model;versi
- on="[1.0,2)",tj.porjadok.raboty.komissii.service;version="[1.0,2)",tj
- .prochaja.informacija.dlja.zajavki.model;version="[1.0,2)",tj.prochaj
- a.informacija.dlja.zajavki.service;version="[1.0,2)",tj.spisok.tovaro
- v.model;version="[1.0,2)",tj.spisok.tovarov.service;version="[1.0,2)"
- ,tj.spisoklotov.model;version="[1.0,2)",tj.spisoklotov.service;versio
- n="[1.0,2)",tj.strany.model;version="[1.0,2)",tj.strany.service;versi
- on="[1.0,2)",tj.supplier.criteria.model;version="[1.0,2)",tj.supplier
- .criteria.service;version="[1.0,2)",tj.supplier.request.lot.model;ver
- sion="[1.0,2)",tj.supplier.request.lot.service;version="[1.0,2)",tj.s
- ystem.config.model;version="[1.0,2)",tj.system.config.service;version
- ="[1.0,2)",tj.tariff.exception;version="[1.0,2)",tj.tariff.model;vers
- ion="[1.0,2)",tj.tariff.service;version="[1.0,2)",tj.tipy.izvewenij.m
- odel;version="[1.0,2)",tj.tipy.izvewenij.service;version="[1.0,2)",tj
- .zajavki.ot.postavwikov.model;version="[1.0,2)",tj.zajavki.ot.postavw
- ikov.service;version="[1.0,2)"
+ permission;version="[1.0,2)",com.liferay.portal.kernel.service.persis
+ tence;version="[1.0,2)",com.liferay.portal.kernel.servlet.taglib.ui;v
+ ersion="[6.3,7)",com.liferay.portal.kernel.theme;version="[1.0,2)",co
+ m.liferay.portal.kernel.transaction;version="[7.0,8)",com.liferay.por
+ tal.kernel.upload;version="[6.3,7)",com.liferay.portal.kernel.util;ve
+ rsion="[7.0,8)",com.liferay.portal.kernel.uuid;version="[6.2,7)",free
+ marker.template;version="[2.3,3)",javax.portlet;version="[2.0,3)",jav
+ ax.servlet;version="[3.0,4)",javax.servlet.http;version="[3.0,4)",tj.
+ balans.postavwika.exception;version="[1.0,2)",tj.balans.postavwika.mo
+ del;version="[1.0,2)",tj.balans.postavwika.service;version="[1.0,2)",
+ tj.criterias.model;version="[1.0,2)",tj.criterias.service;version="[1
+ .0,2)",tj.edinicy.izmerenija.model;version="[1.0,2)",tj.edinicy.izmer
+ enija.service;version="[1.0,2)",tj.informacija.razmewenii.exception;v
+ ersion="[1.0,2)",tj.informacija.razmewenii.model;version="[1.0,2)",tj
+ .informacija.razmewenii.service;version="[1.0,2)",tj.istochnik.finans
+ irovanija.model;version="[1.0,2)",tj.istochnik.finansirovanija.servic
+ e;version="[1.0,2)",tj.izvewenieput.model;version="[1.0,2)",tj.izvewe
+ nija.model;version="[1.0,2)",tj.izvewenija.service;version="[1.0,2)",
+ tj.oplachennye.zakazy.model;version="[1.0,2)",tj.oplachennye.zakazy.s
+ ervice;version="[1.0,2)",tj.porjadok.raboty.komissii.model;version="[
+ 1.0,2)",tj.porjadok.raboty.komissii.service;version="[1.0,2)",tj.proc
+ haja.informacija.dlja.zajavki.model;version="[1.0,2)",tj.prochaja.inf
+ ormacija.dlja.zajavki.service;version="[1.0,2)",tj.spisok.tovarov.mod
+ el;version="[1.0,2)",tj.spisok.tovarov.service;version="[1.0,2)",tj.s
+ pisoklotov.model;version="[1.0,2)",tj.spisoklotov.service;version="[1
+ .0,2)",tj.strany.model;version="[1.0,2)",tj.strany.service;version="[
+ 1.0,2)",tj.supplier.criteria.model;version="[1.0,2)",tj.supplier.crit
+ eria.service;version="[1.0,2)",tj.supplier.request.lot.model;version=
+ "[1.0,2)",tj.supplier.request.lot.service;version="[1.0,2)",tj.system
+ .config.model;version="[1.0,2)",tj.system.config.service;version="[1.
+ 0,2)",tj.tariff.exception;version="[1.0,2)",tj.tariff.model;version="
+ [1.0,2)",tj.tariff.service;version="[1.0,2)",tj.tipy.izvewenij.model;
+ version="[1.0,2)",tj.tipy.izvewenij.service;version="[1.0,2)",tj.zaja
+ vki.ot.postavwikov.model;version="[1.0,2)",tj.zajavki.ot.postavwikov.
+ service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

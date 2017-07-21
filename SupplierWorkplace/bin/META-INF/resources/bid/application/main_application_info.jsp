@@ -1,3 +1,7 @@
+<%@page import="tj.module.suppworkplace.constant.SupplierWorkplaceConstant"%>
+<%@page import="java.util.Map"%>
+<%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portal.kernel.service.persistence.CountryUtil"%>
 <%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.model.User"%>
@@ -62,12 +66,16 @@
 	productUrl.setParameter(Constants.CMD, Constants.ADD);
 	
 	  Map<Long, ZajavkiOtPostavwikovTemp> map = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
+      
+	  Map<Long, ZajavkiOtPostavwikov> otPostavwikovs = ZajavkiOtPostavwikovLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, organization_id);
    
-    double stotal = 0;
+	  double stotal = 0;
 
- String currentURL = themeDisplay.getURLCurrent();
-
- System.out.println(currentURL);
+	  String submitAdd =  renderResponse.getNamespace()+Constants.ADD+ "();";
+	  
+	  String currentURL = themeDisplay.getURLCurrent();
+ 
+ System.out.println("version ================================================== 4");
  
 %>
 
@@ -82,9 +90,17 @@
 <portlet:param name="mvcRenderCommandName" value="<%=SupplierWorkplaceConstant.RENDER_COMMAND_NAME_EDIT%>" />
 		   <portlet:param name="izvewenie_id" value="<%= String.valueOf(izvewenie_id) %>"/>
 		   <portlet:param name="spisok_lotov_id" value="<%= String.valueOf(spisok_lotov_id) %>"/>
-		  <portlet:param name="<%=Constants.CMD %>" value="<%= Constants.ADD_TEMP %>"/>
+		  <portlet:param name="<%=Constants.CMD %>" value="<%=(withdrown)?Constants.CANCEL:Constants.ADD_TEMP %>"/>
 </liferay-portlet:actionURL>
 
+<aui:form action="<%=forming%>" cssClass="container-fluid-1280" method="post" name="fm">
+   
+   
+  <aui:input name="FormName" type="hidden" value="<%=SupplierWorkplaceConstant.FORM_APPLICATION %>" />
+
+  <aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+  
+</aui:form>
 
 
 <aui:form action="<%=forming_temp%>" cssClass="container-fluid-1280" method="post" name="<%=SupplierWorkplaceConstant.FORM_APPLICATION%>"> 
@@ -134,6 +150,18 @@
 				    	 totalsvalue = otPostavwikovTemp.getItogo_za_tovar();
 				    	 stotal += totalsvalue;
 				    }
+				    
+				    else if(otPostavwikovs.containsKey(spisok_tovarov.getSpisok_tovarov_id()))
+				    {
+				    	ZajavkiOtPostavwikov otPostavwikov = otPostavwikovs.get(spisok_tovarov.getSpisok_tovarov_id());
+				        
+				    	 Naimenovanie_tovara = otPostavwikov.getPredlozhenie_postavwika();
+				    	 Opisanie_tovara = otPostavwikov.getOpisanie_tovara();
+				    	 strany_id = otPostavwikov.getKod_strany_proizvoditelja();
+				    	 pricevalue = otPostavwikov.getSumma_za_edinicu_tovara();
+				    	 totalsvalue = otPostavwikov.getItogo_za_tovar();
+				    	 stotal += totalsvalue;
+				    }
 				 
 				 %>
 				 	
@@ -149,7 +177,7 @@
 				         name="<%=peredlojenie+String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>"
 				          type="text"
 				          value="<%=Naimenovanie_tovara %>" 
-				          disabled="<%= !withdrown%>"
+				          disabled="<%= withdrown%>"
 				 /> 
 			 
 			  		</liferay-ui:search-container-column-text>
@@ -161,7 +189,7 @@
 				 	   type="text" 
 				 	   name="<%=opisanie + String.valueOf(spisok_tovarov.getSpisok_tovarov_id())%>"
 				 	   value="<%=Opisanie_tovara %>"
-				 	   disabled="<%= !withdrown%>"
+				 	   disabled="<%= withdrown%>"
 				 	   /> 
 				 	</liferay-ui:search-container-column-text>
 				 	
@@ -183,7 +211,7 @@
 			
 			<c:if test="<%=withdrown %>">
 			    <% String countryName = CountryServiceUtil.fetchCountry(strany_id).getName(); %>
-			<aui:input name="country-of-origin" type="text" value="<%="country."+countryName %>" />
+			<aui:input name="country-of-origin" label="" type="text" value="<%=LanguageUtil.get(request, "country."+countryName) %>" disabled="true" />
 			
 			</c:if>
 			 </liferay-ui:search-container-column-text>
@@ -245,6 +273,7 @@
  	        name="filing_an_application" 
  	        value="filing_an_application" type="button"  
  	        primary="true"
+ 	        onclick='<%=submitAdd%>'
  	     />
  	     </c:if>
 		<aui:button id="pay_now" name="save" value="save" type="submit" />
@@ -253,6 +282,7 @@
   		
   		 <c:when test="<%=withdrown %>">
   		    
+  		  
   		      <aui:button id="withdrawn_now" name="Withdrawn" value="Withdrawn" type="submit" />
   		       
   		 </c:when>
@@ -313,30 +343,25 @@ AUI().use('event', 'node', function(A) {
 
 
 
-<c:if test="<%=countSpisokTovarov == countZajavk %>" >   
-<aui:script>
-AUI().use('aui-io-request', function(A){
-A.one('#<portlet:namespace/>filing_an_application').on('click', function(event) {
-	
+<c:if test="<%=!sub_application && countSpisokTovarov == countZajavk %>" >   
 
-   
-    var url = '<%=forming.toString()%>';
-    A.io.request(
-         url,
-         {
-            method: 'POST',
-             form: {id: '<portlet:namespace/><%=SupplierWorkplaceConstant.FORM_APPLICATION %>'},
-             on: {
-                 success: function() {
-                   
-                	 
-                 }
-             }
-        }
-     );
- });
-});
+       <aui:script>
+     	Liferay.provide(
+		window,
+		'<portlet:namespace /><%=Constants.ADD%>',
+		function() {
+			
+			if (confirm('are-you-sure-you-want-filling an application')) {
+				
 
+				submitForm(document.<portlet:namespace />fm);
+		
+			} else {
+				
+			}
+		},
+		['liferay-util-list-fields','liferay-util-window']
+	);
 </aui:script>
 
  

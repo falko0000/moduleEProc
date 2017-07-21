@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: InformacijaRazmewenii-api
 Bundle-SymbolicName: tj.informacija.razmewenii.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_112 (Oracle Corporation)
+Created-By: 1.8.0_51 (Oracle Corporation)
 Export-Package: tj.informacija.razmewenii.exception;uses:="com.liferay
  .portal.kernel.exception";version="1.0.0",tj.informacija.razmewenii.m
  odel;uses:="com.liferay.expando.kernel.model,com.liferay.portal.kerne
