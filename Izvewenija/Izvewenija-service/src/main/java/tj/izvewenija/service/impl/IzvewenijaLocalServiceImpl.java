@@ -26,10 +26,14 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutPrototype;
 import com.liferay.portal.kernel.model.LayoutTypePortletConstants;
+import com.liferay.portal.kernel.model.ResourceAction;
 import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutPrototypeLocalServiceUtil;
+import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -44,6 +48,9 @@ import tj.izvewenija.exception.NoSuchIzvewenijaException;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.model.impl.IzvewenijaImpl;
 import tj.izvewenija.service.persistence.IzvewenijaPersistence;
+import tj.system.config.exception.NoSuchSystemConfigException;
+import tj.system.config.model.SystemConfig;
+import tj.system.config.service.SystemConfigLocalServiceUtil;
 /**
  * The implementation of the izvewenija local service.
  *
@@ -64,6 +71,8 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 	public Izvewenija insertIzvewenija( long sostojanie_id, long status_id, long tip_izvewenija_id, 
 			                            long organizacija_id, String naimenovanie, long layoutPrototypeId, ServiceContext serviceContext )
 	{
+		final String ECONOMIC_OPERATOR = "ECONOMIC_OPERATOR";
+		final String actionId[] = {"VIEW"};
 		
 		long  izvewenija_id = CounterLocalServiceUtil.increment(Izvewenija.class.toString());
 		Izvewenija izvewenija = IzvewenijaLocalServiceUtil.createIzvewenija(izvewenija_id);  
@@ -81,7 +90,7 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 			userGroupGroup = userGroup.getGroup();
 			
 	
-			System.out.println(userGroup.toString());
+			
 			
 		} catch (PortalException e1) {
 			
@@ -152,12 +161,35 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 			
 						                         "portlet", false, "/group-"+String.valueOf(userGroup.getUserGroupId()), tserviceContext);
 				
-			System.out.println(layout.getFriendlyURL());
+			
 		     } catch (PortalException e) {
 			System.out.println("layout don't created");
 			}
 		  
 		}
+		SystemConfig config = null;
+		
+		try {
+			  config = SystemConfigLocalServiceUtil.getSystemConfig(ECONOMIC_OPERATOR);
+		} catch (NoSuchSystemConfigException e) {
+			
+			e.printStackTrace();
+		}
+		
+	
+		
+	
+			//ResourcePermissionLocalServiceUtil.addResourcePermission(serviceContext.getCompanyId(), Izvewenija.class.toString(), 4 ,String.valueOf(izvewenija.getIzvewenija_id()) , Long.valueOf(config.getValue()), actionId);
+			try {
+				ResourcePermissionLocalServiceUtil.setResourcePermissions(serviceContext.getCompanyId(), "tj.izvewenija.model.Izvewenija", 4 ,String.valueOf(izvewenija.getIzvewenija_id()) , Long.valueOf(config.getValue()), actionId);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		return izvewenija;
 	}
 	 

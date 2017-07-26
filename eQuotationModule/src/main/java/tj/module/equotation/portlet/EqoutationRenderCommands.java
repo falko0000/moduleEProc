@@ -2,6 +2,7 @@ package tj.module.equotation.portlet;
 
 
 import java.util.Date;
+import java.util.List;
 
 //import javax.mail.internet.AddressException;
 //import javax.mail.internet.InternetAddress;
@@ -15,7 +16,11 @@ import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.service.UserGroupServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserServiceUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -138,7 +143,12 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 			    bidqueue.setStatus(EQuotationConstants.STATUS_BID_SUBMISSION_OF_PROPOSALS);
 				BidqueueLocalServiceUtil.addBidqueue(bidqueue);
 				
-	//	sendMailUsingTemplate();
+          List<User> users = UserLocalServiceUtil.getUserGroupUsers(izvewenija.getUserGroupId());
+          
+              for(User user : users)
+              {
+            	//  UserServiceUtil.sendPasswordByEmailAddress(companyId, emailAddress)
+              }
 			  } catch (PortalException e) {
 				
 			}

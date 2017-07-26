@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.model.CountryWrapper;
 import com.liferay.portal.kernel.model.Image;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationWrapper;
+import com.liferay.portal.kernel.model.ResourcePermission;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
@@ -42,6 +43,7 @@ import com.liferay.portal.kernel.service.AddressLocalServiceUtil;
 import com.liferay.portal.kernel.service.CountryServiceUtil;
 import com.liferay.portal.kernel.service.ImageLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -376,6 +378,13 @@ private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse)
 		   
 		  UserLocalServiceUtil.addUserGroupUsers(newIzvewenija.getUserGroupId(), userList);
 		  
+		 List<ResourcePermission> resourcePermissions = ResourcePermissionLocalServiceUtil.getResourcePermissions(oldIzvewenija.getCompanyId(), "tj.izvewenija.model.Izvewenija", 4, String.valueOf(oldIzvewenija.getIzvewenija_id()));
+		 String actionId[] = {"VIEW"};
+		 for(ResourcePermission permission : resourcePermissions)
+		 {
+			 ResourcePermissionLocalServiceUtil.setResourcePermissions(permission.getCompanyId(), "tj.izvewenija.model.Izvewenija", permission.getScope(),String.valueOf(newIzvewenija.getIzvewenija_id()), permission.getRoleId(), actionId);
+		 }
+		 
 		   sendRedirect(actionRequest, actionResponse, redirect);
 		   
 		  } catch (PortalException | IOException e) {

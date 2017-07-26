@@ -55,7 +55,7 @@
 	        break;
 	 }
  
-
+ System.out.println("Version----------------------------------------------"+1);
     
 %>	
 <liferay-ui:search-container

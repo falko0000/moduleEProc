@@ -95,7 +95,7 @@ public class GenerateDocument {
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
-			Template template=null;
+			Template template = null;
 			template = cfg.getTemplate(this.version);
 
 			Writer fileOut = null;
@@ -175,6 +175,8 @@ public class GenerateDocument {
 					InputStream is = new FileInputStream( file );
 					 ServiceContext fserviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
 					
+					 deleteFile(folder.getFolderId(),outfilename+".html" );
+					 
 					 DLAppServiceUtil.addFileEntry(folder.getRepositoryId(), folder.getFolderId(), title, mimeType, 
 							         	           this.outfilename, "", "", is, file.length(), fserviceContext);
 			} catch (PortalException | FileNotFoundException e) {

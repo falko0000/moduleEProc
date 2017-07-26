@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Vbk-api
 Bundle-SymbolicName: tj.vbk.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_112 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Export-Package: tj.vbk.exception;uses:="com.liferay.portal.kernel.exce
  ption";version="1.0.0",tj.vbk.model;uses:="com.liferay.expando.kernel
  .model,com.liferay.portal.kernel.annotation,com.liferay.portal.kernel

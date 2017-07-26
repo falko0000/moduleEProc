@@ -22,7 +22,9 @@ Import-Package: com.liferay.counter.kernel.service;version="[1.0,2)",c
  til;version="[7.3,8)",com.liferay.portal.spring.extender.service;vers
  ion="[1.0,2)",javax.sql,tj.izvewenija.exception;version="[1.0,2)",tj.
  izvewenija.model;version="[1.0,1.1)",tj.izvewenija.service;version="[
- 1.0,1.1)",tj.izvewenija.service.persistence;version="[1.0,1.1)"
+ 1.0,1.1)",tj.izvewenija.service.persistence;version="[1.0,1.1)",tj.sy
+ stem.config.exception;version="[1.0,2)",tj.system.config.model;versio
+ n="[1.0,2)",tj.system.config.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

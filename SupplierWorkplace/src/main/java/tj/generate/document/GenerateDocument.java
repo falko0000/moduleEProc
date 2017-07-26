@@ -100,6 +100,8 @@ public class GenerateDocument {
 					 folder = getFolder(  folder_saved_html[i], fserviceContext);
 				else
 					folder = getFolder(folder.getFolderId(), folder_saved_html[i], fserviceContext);
+			
+			System.out.println(folder.toString());
 			}
 				 
 	    	
@@ -110,6 +112,7 @@ public class GenerateDocument {
 	    	
 			
 			deleteFile(folder.getFolderId(),outfilename+".html" );
+			
 	    	DLAppServiceUtil.addFileEntry(themeDisplay.getScopeGroupId(), folder.getFolderId(),
 	    			outfilename+".html", "text/html", 
 	    			outfilename+".html", "test", "", is, f.length(), serviceContext);
@@ -133,13 +136,17 @@ public class GenerateDocument {
 	{
 		File file = null;
 		boolean lastVersion = false;
+		ServiceContext serviceContext = null;
 		
 		if(this.version.equals("0.0"))
 			lastVersion = true;
 			
 		long repositoryId = themeDisplay.getScopeGroupId();
 		try {
-			Folder folder = getFolder(this.folder_name_ftl);
+			
+			 serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), this.actionRequest);
+			
+			 Folder folder = getFolder(this.folder_name_ftl, serviceContext);
 			
 			
 			List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folder.getFolderId());
@@ -202,7 +209,7 @@ public class GenerateDocument {
 			try {
 				folder =  DLAppServiceUtil.addFolder(themeDisplay.getScopeGroupId(), parentFolderId, folderName, folderName, serviceContext);
 			} catch (PortalException e1) {
-				
+				System.out.println("folder not created");
 			}
 		}
 		
