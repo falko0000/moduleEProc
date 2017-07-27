@@ -20,12 +20,13 @@ public interface EQuotationConstants  {
 	static final String PAGE_EDIT = "/edit.jsp";
 	static final String PAGE_ADDPRODUCTS = "/bid/listlots/addproducts.jsp";
 	//tabitems
+	
 	static final String PAGE_PREPARATION = "/tabitems/preparation.jsp";
 	static final String PAGE_SUBMISSION = "/tabitems/submission.jsp";
 	static final String PAGE_EVALUATION = "/tabitems/evaluation.jsp";
 	static final String PAGE_UNFULFILLED = "/tabitems/unfulfilled.jsp";
 	static final String PAGE_COMPLETED = "/tabitems/completed.jsp";
-	
+	static final String PAGE_APPROVAL = "/tabitems/approval.jsp";
 	//bid
 	
 	static final String PAGE_GENERALINFO = "/bid/generalinfo.jsp";
@@ -77,6 +78,7 @@ public interface EQuotationConstants  {
     //add izvewenija data tab
     //BID_GENERALINFO,BID_OPENING,BID_ABOUTINFO,BID_LISTLOTS,BID_COMMISSION;
    
+    static final  String TAB_FOR_APPROVAL = "for_approval";
     static final  String TAB_BID_GENERALINFO = "bid_generalinfo";
     static final  String TAB_BID_OPENING 	 = "bid_opening";
     static final  String TAB_BID_ABOUTINFO 	 = "bid_aboutinfo";
@@ -136,4 +138,5 @@ public interface EQuotationConstants  {
     static final String EVALUATION_PERIOD  = "EVALUATION_PERIOD";
     static final String SITE_TEMPLATE = "SITE_TEMPLATE";
     static final String AUTHORIZED_BODY_ID = "AUTHORIZED_BODY_ID";
-}
+    static final String AUTHORIZED_BODY = "authorized_body";
+}                                          

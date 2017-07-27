@@ -20,7 +20,8 @@ create table sapp.criteria_default_value (
 	criteria_category_id INTEGER,
 	criteria_type_id INTEGER,
 	value VARCHAR(75) null,
-	description VARCHAR(75) null
+	description VARCHAR(75) null,
+	serial_number INTEGER
 );
 
 create table sapp.criteria_template (

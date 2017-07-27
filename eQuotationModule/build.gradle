@@ -14,8 +14,9 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.trash.taglib", version: "2.0.0"
 	
+	  compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.5'
 	  
-     compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.5'
+  
 
      
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"

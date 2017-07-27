@@ -132,6 +132,20 @@ public interface CriteriaDefaultValueModel extends BaseModel<CriteriaDefaultValu
 	 */
 	public void setDescription(String description);
 
+	/**
+	 * Returns the serial_number of this criteria default value.
+	 *
+	 * @return the serial_number of this criteria default value
+	 */
+	public int getSerial_number();
+
+	/**
+	 * Sets the serial_number of this criteria default value.
+	 *
+	 * @param serial_number the serial_number of this criteria default value
+	 */
+	public void setSerial_number(int serial_number);
+
 	@Override
 	public boolean isNew();
 

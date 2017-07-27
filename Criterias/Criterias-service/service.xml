@@ -124,10 +124,19 @@
 	     <column name="criteria_type_id" type="int"></column>
 	     <column name="value" type="String"></column>
 	     <column name="description" type="String"></column>
+	     <column name="serial_number" type="int"></column>
+	     
+	     <order by="asc">
+	     	<order-column name="serial_number"></order-column>
+	     </order>
 	     
 	     <finder return-type="Collection" name="criteriaTypeId">
 	     	<finder-column name="criteria_type_id"></finder-column>
+	     	
 	     </finder>
-	</entity>
 	
+	  
+	</entity>
+	     
+	  
 </service-builder>

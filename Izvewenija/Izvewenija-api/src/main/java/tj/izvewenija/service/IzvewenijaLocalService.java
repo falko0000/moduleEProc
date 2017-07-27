@@ -92,6 +92,10 @@ public interface IzvewenijaLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getIzvewenijasCount();
 
+	public java.lang.Boolean sendEmailMessage(java.lang.String from,
+		java.lang.String to, java.lang.String subject, java.lang.String body,
+		boolean htmlFormat);
+
 	/**
 	* Returns the OSGi service identifier.
 	*

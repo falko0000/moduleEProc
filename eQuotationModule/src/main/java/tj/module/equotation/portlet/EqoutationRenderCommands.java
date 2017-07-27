@@ -16,6 +16,7 @@ import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.service.UserGroupServiceUtil;
@@ -24,6 +25,7 @@ import com.liferay.portal.kernel.service.UserServiceUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import tj.bid.queue.model.Bidqueue;
 import tj.bid.queue.service.BidqueueLocalServiceUtil;
@@ -48,20 +50,30 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse)  {
 		
 		
-		
+		 User user = (User) renderRequest.getAttribute(WebKeys.USER);
+		 Organization organization = null;
+		 if(user.hasOrganization())
+			try {
+				organization = user.getOrganizations().get(0);
+			} catch (PortalException e) {
+				
+			}
 		StringBuilder names = new StringBuilder();
 		
 		long izvewenie_id = ParamUtil.getLong(renderRequest, "izvewenie_id");
 		
 		names.append(EQuotationConstants.TAB_BID_GENERALINFO);
 		
+		
+		
 		if(izvewenie_id !=0)
 		{
-		names.append("," + EQuotationConstants.TAB_BID_OPENING);
-		names.append("," + EQuotationConstants.TAB_BID_ABOUTINFO);
-		names.append("," + EQuotationConstants.TAB_BID_LISTLOTS);
-		names.append("," + EQuotationConstants.TAB_BID_COMMISSION);
-		names.append("," + EQuotationConstants.TAB_BID_TENDER_DOCUMENTATION);
+		
+		  names.append("," + EQuotationConstants.TAB_BID_OPENING);
+		  names.append("," + EQuotationConstants.TAB_BID_ABOUTINFO);
+		  names.append("," + EQuotationConstants.TAB_BID_LISTLOTS);
+		  names.append("," + EQuotationConstants.TAB_BID_COMMISSION);
+		  names.append("," + EQuotationConstants.TAB_BID_TENDER_DOCUMENTATION);
 		}
 		renderRequest.setAttribute("editnametabs", names.toString());
 		

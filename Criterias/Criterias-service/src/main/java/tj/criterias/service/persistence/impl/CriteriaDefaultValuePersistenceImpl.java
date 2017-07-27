@@ -102,7 +102,8 @@ public class CriteriaDefaultValuePersistenceImpl extends BasePersistenceImpl<Cri
 			CriteriaDefaultValueImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBycriteriaTypeId",
 			new String[] { Integer.class.getName() },
-			CriteriaDefaultValueModelImpl.CRITERIA_TYPE_ID_COLUMN_BITMASK);
+			CriteriaDefaultValueModelImpl.CRITERIA_TYPE_ID_COLUMN_BITMASK |
+			CriteriaDefaultValueModelImpl.SERIAL_NUMBER_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_CRITERIATYPEID = new FinderPath(CriteriaDefaultValueModelImpl.ENTITY_CACHE_ENABLED,
 			CriteriaDefaultValueModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBycriteriaTypeId",
@@ -879,6 +880,7 @@ public class CriteriaDefaultValuePersistenceImpl extends BasePersistenceImpl<Cri
 		criteriaDefaultValueImpl.setCriteria_type_id(criteriaDefaultValue.getCriteria_type_id());
 		criteriaDefaultValueImpl.setValue(criteriaDefaultValue.getValue());
 		criteriaDefaultValueImpl.setDescription(criteriaDefaultValue.getDescription());
+		criteriaDefaultValueImpl.setSerial_number(criteriaDefaultValue.getSerial_number());
 
 		return criteriaDefaultValueImpl;
 	}

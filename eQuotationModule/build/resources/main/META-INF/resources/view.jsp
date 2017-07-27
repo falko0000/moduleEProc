@@ -7,6 +7,7 @@
 --%>
 
 
+<%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@page import="com.liferay.portal.kernel.security.permission.ActionKeys"%>
 <%@ include file="/init.jsp" %>
 
@@ -16,7 +17,7 @@
    
 
      String names =(String) request.getAttribute("editnametabs");
-    
+     
      String tab = ParamUtil.getString(request, "izvewenija_tab","preparation");
  
      String currentURL = themeDisplay.getURLCurrent();
@@ -28,6 +29,7 @@
     long role[] = permissionChecker.getRoleIds(permissionChecker.getUserId(), themeDisplay.getScopeGroupId());
     
     String BidCopy = "javascript:" + renderResponse.getNamespace()+"bidCopy()";
+
 %>
 
   
@@ -53,8 +55,12 @@
     		    <jsp:include page="<%=EQuotationConstants.PAGE_PREPARATION%>" flush="true" />
     		</liferay-ui:section>
     		
-     
-    			 <liferay-ui:section>     
+            <c:if test="<%= names.contains(EQuotationConstants.TAB_FOR_APPROVAL)  %>">
+             <liferay-ui:section>
+    		    <jsp:include page="<%=EQuotationConstants.PAGE_APPROVAL%>" flush="true" />
+    		</liferay-ui:section>
+           </c:if>
+              <liferay-ui:section>     
         			<jsp:include page="<%=EQuotationConstants.PAGE_SUBMISSION%>" flush="true" />
     		</liferay-ui:section>
      
@@ -72,10 +78,7 @@
     			
  
 			</liferay-ui:tabs>
-			
-			<liferay-ui:input-editor name="content" initMethod="initEditor" width="100" height="400" 
-  resizable="true" ></liferay-ui:input-editor>
-			<aui:script>
+		<aui:script>
 			function <portlet:namespace />bidCopy()
 			{
 				<portlet:renderURL var="bidCopy" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
@@ -97,10 +100,7 @@
 				});
 			}
    
-			
-function <portlet:namespace/>initEditor(){
- return  "Sample CKEDITOR";
- }
- 
+
  
 </aui:script>
+		

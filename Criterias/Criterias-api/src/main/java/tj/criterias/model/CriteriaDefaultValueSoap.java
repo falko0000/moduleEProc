@@ -38,6 +38,7 @@ public class CriteriaDefaultValueSoap implements Serializable {
 		soapModel.setCriteria_type_id(model.getCriteria_type_id());
 		soapModel.setValue(model.getValue());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setSerial_number(model.getSerial_number());
 
 		return soapModel;
 	}
@@ -133,9 +134,18 @@ public class CriteriaDefaultValueSoap implements Serializable {
 		_description = description;
 	}
 
+	public int getSerial_number() {
+		return _serial_number;
+	}
+
+	public void setSerial_number(int serial_number) {
+		_serial_number = serial_number;
+	}
+
 	private long _criteria_default_value_id;
 	private int _criteria_category_id;
 	private int _criteria_type_id;
 	private String _value;
 	private String _description;
+	private int _serial_number;
 }

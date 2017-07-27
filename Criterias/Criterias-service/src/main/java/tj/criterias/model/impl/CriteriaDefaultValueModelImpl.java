@@ -65,7 +65,8 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 			{ "criteria_category_id", Types.INTEGER },
 			{ "criteria_type_id", Types.INTEGER },
 			{ "value", Types.VARCHAR },
-			{ "description", Types.VARCHAR }
+			{ "description", Types.VARCHAR },
+			{ "serial_number", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -75,12 +76,13 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 		TABLE_COLUMNS_MAP.put("criteria_type_id", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("value", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("serial_number", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_default_value (criteria_default_value_id LONG not null primary key,criteria_category_id INTEGER,criteria_type_id INTEGER,value VARCHAR(75) null,description VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.criteria_default_value (criteria_default_value_id LONG not null primary key,criteria_category_id INTEGER,criteria_type_id INTEGER,value VARCHAR(75) null,description VARCHAR(75) null,serial_number INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.criteria_default_value";
-	public static final String ORDER_BY_JPQL = " ORDER BY criteriaDefaultValue.criteria_default_value_id ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria_default_value.criteria_default_value_id ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY criteriaDefaultValue.serial_number ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY sapp.criteria_default_value.serial_number ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -94,7 +96,7 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 				"value.object.column.bitmask.enabled.tj.criterias.model.CriteriaDefaultValue"),
 			true);
 	public static final long CRITERIA_TYPE_ID_COLUMN_BITMASK = 1L;
-	public static final long CRITERIA_DEFAULT_VALUE_ID_COLUMN_BITMASK = 2L;
+	public static final long SERIAL_NUMBER_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.criterias.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.criterias.model.CriteriaDefaultValue"));
 
@@ -141,6 +143,7 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 		attributes.put("criteria_type_id", getCriteria_type_id());
 		attributes.put("value", getValue());
 		attributes.put("description", getDescription());
+		attributes.put("serial_number", getSerial_number());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -180,6 +183,12 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 
 		if (description != null) {
 			setDescription(description);
+		}
+
+		Integer serial_number = (Integer)attributes.get("serial_number");
+
+		if (serial_number != null) {
+			setSerial_number(serial_number);
 		}
 	}
 
@@ -255,6 +264,18 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 		_description = description;
 	}
 
+	@Override
+	public int getSerial_number() {
+		return _serial_number;
+	}
+
+	@Override
+	public void setSerial_number(int serial_number) {
+		_columnBitmask = -1L;
+
+		_serial_number = serial_number;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -291,6 +312,7 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 		criteriaDefaultValueImpl.setCriteria_type_id(getCriteria_type_id());
 		criteriaDefaultValueImpl.setValue(getValue());
 		criteriaDefaultValueImpl.setDescription(getDescription());
+		criteriaDefaultValueImpl.setSerial_number(getSerial_number());
 
 		criteriaDefaultValueImpl.resetOriginalValues();
 
@@ -299,17 +321,23 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 
 	@Override
 	public int compareTo(CriteriaDefaultValue criteriaDefaultValue) {
-		long primaryKey = criteriaDefaultValue.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getSerial_number() < criteriaDefaultValue.getSerial_number()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getSerial_number() > criteriaDefaultValue.getSerial_number()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override
@@ -386,12 +414,14 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 			criteriaDefaultValueCacheModel.description = null;
 		}
 
+		criteriaDefaultValueCacheModel.serial_number = getSerial_number();
+
 		return criteriaDefaultValueCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{criteria_default_value_id=");
 		sb.append(getCriteria_default_value_id());
@@ -403,6 +433,8 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 		sb.append(getValue());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", serial_number=");
+		sb.append(getSerial_number());
 		sb.append("}");
 
 		return sb.toString();
@@ -410,7 +442,7 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.criterias.model.CriteriaDefaultValue");
@@ -436,6 +468,10 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>serial_number</column-name><column-value><![CDATA[");
+		sb.append(getSerial_number());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -453,6 +489,7 @@ public class CriteriaDefaultValueModelImpl extends BaseModelImpl<CriteriaDefault
 	private boolean _setOriginalCriteria_type_id;
 	private String _value;
 	private String _description;
+	private int _serial_number;
 	private long _columnBitmask;
 	private CriteriaDefaultValue _escapedModel;
 }

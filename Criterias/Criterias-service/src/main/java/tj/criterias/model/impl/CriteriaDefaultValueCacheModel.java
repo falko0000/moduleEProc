@@ -64,7 +64,7 @@ public class CriteriaDefaultValueCacheModel implements CacheModel<CriteriaDefaul
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{criteria_default_value_id=");
 		sb.append(criteria_default_value_id);
@@ -76,6 +76,8 @@ public class CriteriaDefaultValueCacheModel implements CacheModel<CriteriaDefaul
 		sb.append(value);
 		sb.append(", description=");
 		sb.append(description);
+		sb.append(", serial_number=");
+		sb.append(serial_number);
 		sb.append("}");
 
 		return sb.toString();
@@ -103,6 +105,8 @@ public class CriteriaDefaultValueCacheModel implements CacheModel<CriteriaDefaul
 			criteriaDefaultValueImpl.setDescription(description);
 		}
 
+		criteriaDefaultValueImpl.setSerial_number(serial_number);
+
 		criteriaDefaultValueImpl.resetOriginalValues();
 
 		return criteriaDefaultValueImpl;
@@ -117,6 +121,8 @@ public class CriteriaDefaultValueCacheModel implements CacheModel<CriteriaDefaul
 		criteria_type_id = objectInput.readInt();
 		value = objectInput.readUTF();
 		description = objectInput.readUTF();
+
+		serial_number = objectInput.readInt();
 	}
 
 	@Override
@@ -141,6 +147,8 @@ public class CriteriaDefaultValueCacheModel implements CacheModel<CriteriaDefaul
 		else {
 			objectOutput.writeUTF(description);
 		}
+
+		objectOutput.writeInt(serial_number);
 	}
 
 	public long criteria_default_value_id;
@@ -148,4 +156,5 @@ public class CriteriaDefaultValueCacheModel implements CacheModel<CriteriaDefaul
 	public int criteria_type_id;
 	public String value;
 	public String description;
+	public int serial_number;
 }

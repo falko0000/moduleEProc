@@ -385,14 +385,20 @@ private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse)
 			 ResourcePermissionLocalServiceUtil.setResourcePermissions(permission.getCompanyId(), "tj.izvewenija.model.Izvewenija", permission.getScope(),String.valueOf(newIzvewenija.getIzvewenija_id()), permission.getRoleId(), actionId);
 		 }
 		 
-		   sendRedirect(actionRequest, actionResponse, redirect);
+		  
 		   
-		  } catch (PortalException | IOException e) {
+		  } catch (PortalException  e) {
 			
 			e.printStackTrace();
 		}
 	  }
-		
+	  
+	  try {
+		sendRedirect(actionRequest, actionResponse, redirect);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	}
 
 

@@ -64,6 +64,7 @@ public class CriteriaDefaultValueWrapper implements CriteriaDefaultValue,
 		attributes.put("criteria_type_id", getCriteria_type_id());
 		attributes.put("value", getValue());
 		attributes.put("description", getDescription());
+		attributes.put("serial_number", getSerial_number());
 
 		return attributes;
 	}
@@ -100,6 +101,12 @@ public class CriteriaDefaultValueWrapper implements CriteriaDefaultValue,
 
 		if (description != null) {
 			setDescription(description);
+		}
+
+		Integer serial_number = (Integer)attributes.get("serial_number");
+
+		if (serial_number != null) {
+			setSerial_number(serial_number);
 		}
 	}
 
@@ -152,6 +159,16 @@ public class CriteriaDefaultValueWrapper implements CriteriaDefaultValue,
 	@Override
 	public int getCriteria_type_id() {
 		return _criteriaDefaultValue.getCriteria_type_id();
+	}
+
+	/**
+	* Returns the serial_number of this criteria default value.
+	*
+	* @return the serial_number of this criteria default value
+	*/
+	@Override
+	public int getSerial_number() {
+		return _criteriaDefaultValue.getSerial_number();
 	}
 
 	@Override
@@ -313,6 +330,16 @@ public class CriteriaDefaultValueWrapper implements CriteriaDefaultValue,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_criteriaDefaultValue.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the serial_number of this criteria default value.
+	*
+	* @param serial_number the serial_number of this criteria default value
+	*/
+	@Override
+	public void setSerial_number(int serial_number) {
+		_criteriaDefaultValue.setSerial_number(serial_number);
 	}
 
 	/**

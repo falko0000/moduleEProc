@@ -2,10 +2,13 @@ package tj.module.equotation.portlet;
 
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
-import javax.mail.internet.InternetAddress;
 
+
+import com.liferay.admin.kernel.util.Omniadmin;
 import com.liferay.mail.kernel.model.MailMessage;
 import com.liferay.mail.kernel.service.MailServiceUtil;
 //import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
@@ -20,19 +23,26 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserService;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
+import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 
+import javax.mail.internet.InternetAddress;
 
 
 @Component(
@@ -63,22 +73,43 @@ public class EqoutationModulePortlet extends MVCPortlet {
 
 	List<Spisoklotov> spisoklots = SpisoklotovLocalServiceUtil.getSpisoklotovs(0, 10);
 	
-	MailMessage body = new MailMessage();
+	
+	/*MailMessage body = new MailMessage();
 	
 	MailServiceUtil.sendEmail(body);
-
+*/
 	
+	System.out.println("version 10");
+			
+	 User user = (User) renderRequest.getAttribute(WebKeys.USER);
+	 
+	 Organization organization = null;
+	 if(user.hasOrganization() )
+		try {
+			organization = user.getOrganizations().get(0);
+		} catch (PortalException e) {
+			
+		}
+	
+
 	StringBuilder names = new StringBuilder();
 	
 	names.append(EQuotationConstants.TAB_PREPARATION);
+	
+ if(Validator.isNotNull(organization))
+	if(organization.getType().equals(EQuotationConstants.AUTHORIZED_BODY) )
+		  names.append("," + EQuotationConstants.TAB_FOR_APPROVAL);
+	
 	names.append(","+EQuotationConstants.TAB_SUBMISSION_OF_PROPOSALS);
 	names.append(","+EQuotationConstants.TAB_EVALUATION_AND_AWARDING);
 	names.append(","+EQuotationConstants.TAB_UNFULFILLED_TENDERS);
 	names.append(","+EQuotationConstants.TAB_COMPLETED_TENDERS);
 
-	
-	
-	
+
+	 String  subject = "Open tender commission";
+	 String body = "You are invited to evaluate supplier proposal";
+	   IzvewenijaLocalServiceUtil.sendEmailMessage("admin@zakupki.gov.tj", "sobirov@zakupki.gov.tj", subject, body, false);
+	   
 		renderRequest.setAttribute("editnametabs", names.toString());
 		super.doView(renderRequest, renderResponse);
 	}

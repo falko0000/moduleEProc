@@ -80,6 +80,14 @@ public class IzvewenijaLocalServiceWrapper implements IzvewenijaLocalService,
 		return _izvewenijaLocalService.getIzvewenijasCount();
 	}
 
+	@Override
+	public java.lang.Boolean sendEmailMessage(java.lang.String from,
+		java.lang.String to, java.lang.String subject, java.lang.String body,
+		boolean htmlFormat) {
+		return _izvewenijaLocalService.sendEmailMessage(from, to, subject,
+			body, htmlFormat);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

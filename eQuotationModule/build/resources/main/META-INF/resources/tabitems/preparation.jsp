@@ -1,4 +1,5 @@
 
+<%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -18,11 +19,17 @@
 		case EQuotationConstants.TAB_PREPARATION:
 			long[] psostojanie_ids = {EQuotationConstants.STATE_BID_PREPARATION};
 			long[] pstatus_ids = {EQuotationConstants.STATUS_BID_PREPARATION, 
-								EQuotationConstants.STATUS_BID_TO_APPROVE,
-								EQuotationConstants.STATUS_BID_BEFORE_PUBLICATION,
+							 	EQuotationConstants.STATUS_BID_BEFORE_PUBLICATION,
 								EQuotationConstants.STATUS_BID_FINALIZING_ORDER};
 			
 			izvewenijas = IzvewenijaLocalServiceUtil.getIzvewenija(companyId, groupId,psostojanie_ids, pstatus_ids);
+	        break;
+	        
+		case EQuotationConstants.TAB_FOR_APPROVAL:
+			long[] apsostojanie_ids = {EQuotationConstants.STATE_BID_PREPARATION};
+			long[] apstatus_ids = {EQuotationConstants.STATUS_BID_TO_APPROVE};
+			
+			izvewenijas = IzvewenijaLocalServiceUtil.getIzvewenija(companyId, groupId,apsostojanie_ids, apstatus_ids);
 	        break;
 		case EQuotationConstants.TAB_SUBMISSION_OF_PROPOSALS:
 			
@@ -55,7 +62,7 @@
 	        break;
 	 }
  
- System.out.println("Version----------------------------------------------"+1);
+
     
 %>	
 <liferay-ui:search-container

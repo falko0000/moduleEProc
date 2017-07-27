@@ -81,6 +81,12 @@ public class IzvewenijaLocalServiceUtil {
 		return getService().getIzvewenijasCount();
 	}
 
+	public static java.lang.Boolean sendEmailMessage(java.lang.String from,
+		java.lang.String to, java.lang.String subject, java.lang.String body,
+		boolean htmlFormat) {
+		return getService().sendEmailMessage(from, to, subject, body, htmlFormat);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

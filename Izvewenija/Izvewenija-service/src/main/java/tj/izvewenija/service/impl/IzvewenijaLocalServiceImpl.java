@@ -14,40 +14,34 @@
 
 package tj.izvewenija.service.impl;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.mail.kernel.model.MailMessage;
+import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutPrototype;
-import com.liferay.portal.kernel.model.LayoutTypePortletConstants;
-import com.liferay.portal.kernel.model.ResourceAction;
 import com.liferay.portal.kernel.model.UserGroup;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutPrototypeLocalServiceUtil;
-import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil;
-import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserGroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.sites.kernel.util.SitesUtil;
 
 import aQute.bnd.annotation.ProviderType;
-import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
-import tj.izvewenija.service.base.IzvewenijaLocalServiceBaseImpl;
 import tj.izvewenija.exception.NoSuchIzvewenijaException;
 import tj.izvewenija.model.Izvewenija;
-import tj.izvewenija.model.impl.IzvewenijaImpl;
-import tj.izvewenija.service.persistence.IzvewenijaPersistence;
+import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
+import tj.izvewenija.service.base.IzvewenijaLocalServiceBaseImpl;
 import tj.system.config.exception.NoSuchSystemConfigException;
 import tj.system.config.model.SystemConfig;
 import tj.system.config.service.SystemConfigLocalServiceUtil;
@@ -221,6 +215,30 @@ public class IzvewenijaLocalServiceImpl extends IzvewenijaLocalServiceBaseImpl {
 
 return izvewenija;
 }
+	public Boolean sendEmailMessage(String from , String to, String subject, String body, boolean htmlFormat) 
+	{
+		
+		boolean sended = false;
+		try {
+		
+			InternetAddress sender = new InternetAddress(from);
+			InternetAddress receiver = new InternetAddress(to);
+			
+			MailMessage mailMessage = new MailMessage(sender,receiver, subject, body, htmlFormat) ;
+			
+		
+			
+		    MailServiceUtil.sendEmail(mailMessage);
+		
+		
+		} catch (AddressException e) {
+			
+			System.out.println(e.getMessage());
+		}
+			
+	
+		return sended;
+	}
 	
 	public List<Izvewenija> getIzvewenija( long companyId, long groupId) 
 			throws SystemException {
