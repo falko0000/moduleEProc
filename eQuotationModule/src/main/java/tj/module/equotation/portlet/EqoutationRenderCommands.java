@@ -9,20 +9,14 @@ import java.util.List;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
-import com.liferay.mail.kernel.model.MailMessage;
-import com.liferay.mail.kernel.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import com.liferay.portal.kernel.service.UserGroupServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserServiceUtil;
-import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -159,7 +153,15 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
           
               for(User user : users)
               {
-            	//  UserServiceUtil.sendPasswordByEmailAddress(companyId, emailAddress)
+            	if(user.isEmailAddressVerified())
+            	{
+            		String email = user.getEmailAddress();
+            		
+            		 String  subject = "Open tender commission";
+            		  String body = "You are invited to evaluate supplier proposal";
+            		   IzvewenijaLocalServiceUtil.sendEmailMessage("admin@zakupki.gov.tj", email, subject, body, false);	
+            		
+            	}
               }
 			  } catch (PortalException e) {
 				

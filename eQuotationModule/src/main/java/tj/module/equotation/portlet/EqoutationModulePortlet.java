@@ -79,7 +79,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	MailServiceUtil.sendEmail(body);
 */
 	
-	System.out.println("version 10");
+	
 			
 	 User user = (User) renderRequest.getAttribute(WebKeys.USER);
 	 
@@ -106,9 +106,7 @@ public class EqoutationModulePortlet extends MVCPortlet {
 	names.append(","+EQuotationConstants.TAB_COMPLETED_TENDERS);
 
 
-	 String  subject = "Open tender commission";
-	 String body = "You are invited to evaluate supplier proposal";
-	   IzvewenijaLocalServiceUtil.sendEmailMessage("admin@zakupki.gov.tj", "sobirov@zakupki.gov.tj", subject, body, false);
+	 
 	   
 		renderRequest.setAttribute("editnametabs", names.toString());
 		super.doView(renderRequest, renderResponse);
