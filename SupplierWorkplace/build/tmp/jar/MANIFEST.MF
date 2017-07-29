@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SupplierWorkplace
 Bundle-SymbolicName: tj.workplace.supplier
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_131 (Oracle Corporation)
 Import-Package: com.liferay.announcements.kernel.model;version="[1.0,2
  )",com.liferay.counter.kernel.model;version="[1.0,2)",com.liferay.cou
  nter.kernel.service;version="[1.0,2)",com.liferay.document.library.ke

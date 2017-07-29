@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eQuotationModuleHook
 Bundle-SymbolicName: tj.equotationmodule.hook
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_131 (Oracle Corporation)
 Import-Package: com.liferay.portal.kernel.portlet.bridges.mvc;version=
  "[1.0,2)",javax.portlet;version="[2.0,3)",javax.servlet;version="[3.0
  ,4)",javax.servlet.http;version="[3.0,4)"

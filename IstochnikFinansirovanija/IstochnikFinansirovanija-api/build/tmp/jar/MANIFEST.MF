@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: IstochnikFinansirovanija-api
 Bundle-SymbolicName: tj.istochnik.finansirovanija.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_51 (Oracle Corporation)
+Created-By: 1.8.0_131 (Oracle Corporation)
 Export-Package: tj.istochnik.finansirovanija.exception;uses:="com.life
  ray.portal.kernel.exception";version="1.0.0",tj.istochnik.finansirova
  nija.model;uses:="com.liferay.expando.kernel.model,com.liferay.portal
