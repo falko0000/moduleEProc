@@ -31,6 +31,11 @@
 			<h6 class="text-default">
 				<span><%= user2.getScreenName() %></span>
 			</h6>
+			<c:if test="<%=!showActions %>">
+			<h6 class="text-default">
+				<span><%=user2.getOrganizations().get(0).getName() %></span>
+			</h6>
+			</c:if>
 		</liferay-ui:search-container-column-text>
 
 		<c:if test="<%= showActions %>">
@@ -52,7 +57,7 @@
 				cssClass="entry-display-style"
 				resultRow="<%= row %>"
 				rowChecker="<%= rowChecker %>"
-				subtitle="<%= user2.getScreenName() %>"
+				subtitle="<%=(!showActions)? user2.getScreenName()+"\n"+user2.getOrganizations().get(0).getName(): user2.getScreenName()  %>"
 				title="<%= user2.getFullName() %>"
 				userId="<%= user2.getUserId() %>"
 			/>
@@ -70,8 +75,17 @@
 			property="screenName"
 			truncate="<%= true %>"
 		/>
-
+		<c:if test="<%=!showActions%>" >
+        <liferay-ui:search-container-column-text
+			name="organization"
+			value="<%=user2.getOrganizations().get(0).getName() %>"
+			truncate="<%= true %>"
+		/>
+		</c:if>
 		<c:if test="<%= showActions %>">
+		
+		 
+		
 			<liferay-ui:search-container-column-jsp
 				path="/bid/commission/user_action.jsp"
 			/>

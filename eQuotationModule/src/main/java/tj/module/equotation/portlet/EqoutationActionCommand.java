@@ -267,7 +267,7 @@ private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse)
                     											  oldIzvewenija.getTip_izvewenija_id(),oldIzvewenija.getOrganizacija_id(),
                     											  oldIzvewenija.getNaimenovanie(),Long.valueOf(layoutPrototypeId), serviceContext);
 		
-			IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.getIzveweniePut(oldIzvewenija.getIzvewenija_id());
+			IzveweniePut izveweniePut = IzveweniePutLocalServiceUtil.getIzvewenijaPutByIzvewenieId(oldIzvewenija.getIzvewenija_id());
 			
 			izveweniePut.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
 			izveweniePut.setIzvewenie_put_id(0);

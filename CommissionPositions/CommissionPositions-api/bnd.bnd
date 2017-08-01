@@ -1,0 +1,9 @@
+Bundle-Name: CommissionPositions-api
+Bundle-SymbolicName: tj.commission.positions.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.commission.positions.exception,\
+	tj.commission.positions.model,\
+	tj.commission.positions.service,\
+	tj.commission.positions.service.persistence
+-includeresource: META-INF/service.xml=../CommissionPositions-service/service.xml

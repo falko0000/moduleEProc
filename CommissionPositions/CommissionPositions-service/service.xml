@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.commission.positions">
+	<namespace>commission_position</namespace>
+	
+	<entity local-service="true" remote-service="false" uuid="false" name="CommissionPosition" table="sapp.сommission_position" cache-enabled="false">
+
+    <column name="сommission_position_id" type="long" primary="true" id-type="sequence" id-param="sapp.seq_сommission_position_id"></column>
+    <column name="usergroupid" type="long"></column>
+    <column name="userid" type="long"></column>
+    <column name="roleid" type="long"></column>
+    
+    <finder return-type="CommissionPosition" name="UserIdAndUserGroupId">
+     	<finder-column name="usergroupid"></finder-column>
+     	<finder-column name="userid"></finder-column>
+    </finder>
+	
+	</entity>
+</service-builder>

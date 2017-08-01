@@ -94,10 +94,10 @@ public class PorjadokRabotyKomissiiModelImpl extends BaseModelImpl<PorjadokRabot
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(tj.porjadok.raboty.komissii.service.util.ServiceProps.get(
 				"value.object.entity.cache.enabled.tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii"),
-			true);
+			false);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(tj.porjadok.raboty.komissii.service.util.ServiceProps.get(
 				"value.object.finder.cache.enabled.tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii"),
-			true);
+			false);
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.porjadok.raboty.komissii.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii"),
 			true);

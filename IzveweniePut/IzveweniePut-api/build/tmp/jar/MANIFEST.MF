@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: IzveweniePut-api
 Bundle-SymbolicName: tj.izvewenieput.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_131 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Export-Package: tj.izvewenieput.exception;uses:="com.liferay.portal.ke
  rnel.exception";version="1.0.0",tj.izvewenieput.model;uses:="com.life
  ray.expando.kernel.model,com.liferay.portal.kernel.annotation,com.lif

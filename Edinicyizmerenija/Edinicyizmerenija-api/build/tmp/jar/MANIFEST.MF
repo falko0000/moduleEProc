@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Edinicyizmerenija-api
 Bundle-SymbolicName: tj.edinicy.izmerenija.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_131 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Export-Package: tj.edinicy.izmerenija.exception;uses:="com.liferay.por
  tal.kernel.exception";version="1.0.0",tj.edinicy.izmerenija.model;use
  s:="com.liferay.expando.kernel.model,com.liferay.portal.kernel.annota

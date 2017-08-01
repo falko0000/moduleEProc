@@ -41,7 +41,7 @@
 	calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)+Integer.valueOf(systemConfig.getValue()));
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
-
+	String commission_tab = ParamUtil.getString(request, "commission_tab");
 %>
     <%@ include file="/commissiontab/evaluation/print/print.jspf" %>
     

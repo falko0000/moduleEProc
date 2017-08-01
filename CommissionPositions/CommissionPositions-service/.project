@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>CommissionPosition-service</name>
-	<comment>Project CommissionPosition-service created by Buildship.</comment>
+	<name>CommissionPositions-service</name>
+	<comment>Project CommissionPositions-service created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>

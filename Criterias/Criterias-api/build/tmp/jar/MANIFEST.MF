@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Criterias-api
 Bundle-SymbolicName: tj.criterias.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_131 (Oracle Corporation)
+Created-By: 1.8.0_111 (Oracle Corporation)
 Export-Package: tj.criterias.exception;uses:="com.liferay.portal.kerne
  l.exception";version="1.0.0",tj.criterias.model;uses:="com.liferay.ex
  pando.kernel.model,com.liferay.portal.kernel.annotation,com.liferay.p
