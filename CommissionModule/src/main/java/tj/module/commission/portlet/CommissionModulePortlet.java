@@ -11,6 +11,7 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.awt.List;
 import java.io.IOException;
+
 import java.math.BigInteger;
 
 import javax.portlet.Portlet;
@@ -50,7 +51,7 @@ public class CommissionModulePortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		
 	Organization or;
-	
+
 /*	try {
 		System.out.println(2594);
 		Winner win = new Winner(2594);

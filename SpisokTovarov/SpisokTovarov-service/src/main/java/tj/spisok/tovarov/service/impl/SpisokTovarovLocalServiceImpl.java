@@ -47,4 +47,9 @@ public class SpisokTovarovLocalServiceImpl
 		
 		return spisokTovarovPersistence.countByLotId(lot_id);
 	}
+	
+	 public List<SpisokTovarov> getSpisokTovarovByIzvewenieId(long izvewenie_id)
+	 {
+		 return spisokTovarovPersistence.findByIzvewenieId(izvewenie_id); 
+	 }
 }

@@ -139,4 +139,11 @@ public interface EQuotationConstants  {
     static final String SITE_TEMPLATE = "SITE_TEMPLATE";
     static final String AUTHORIZED_BODY_ID = "AUTHORIZED_BODY_ID";
     static final String AUTHORIZED_BODY = "authorized_body";
+    
+    //role commission
+    
+    static final String ROLE_CHAIRPERSON = "Chairperson";
+    static final String ROLE_DEPUTY = "Deputy";
+    static final String ROLE_MEMBER = "Member";
+    static final String ROLE_SECRETARY = "Secretary";
 }                                          

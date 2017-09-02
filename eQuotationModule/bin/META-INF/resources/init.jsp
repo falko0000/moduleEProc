@@ -103,6 +103,12 @@
 <%@page import="com.liferay.portlet.usersadmin.search.UserSearch" %>
 <%@page import="com.liferay.portlet.usersadmin.search.UserSearchTerms" %>
 <%@page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@page import="com.liferay.portal.kernel.exception.PortalException" %>
+
+<%@page import="com.liferay.portal.kernel.service.UserGroupLocalServiceUtil" %>
+<%@page import="com.liferay.portal.kernel.model.Role"%>
+
+<%@page import="com.liferay.portal.kernel.service.RoleLocalServiceUtil"%>  
 
 <%@page import="tj.tipy.izvewenij.model.TipyIzvewenij"%>
 <%@page import="tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil"%>
@@ -162,10 +168,9 @@
 <%@page import="tj.criterias.service.CriteriaTemplateLocalServiceUtil"%>
 
 <%@page import="tj.criterias.model.CriteriaTemplate"%>
+<%@page import="tj.commission.positions.service.CommissionPositionLocalServiceUtil"%>
+<%@page import="tj.commission.positions.model.CommissionPosition"%>
 
-<%@page import="com.liferay.portal.kernel.exception.PortalException" %>
-
-<%@page import="com.liferay.portal.kernel.service.UserGroupLocalServiceUtil" %>
 
 <liferay-theme:defineObjects />
 

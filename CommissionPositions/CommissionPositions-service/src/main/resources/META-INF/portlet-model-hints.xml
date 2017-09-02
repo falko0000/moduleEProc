@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.commission.positions.model.CommissionPosition">
+		<field name="position_id" type="long" />
+		<field name="userId" type="long" />
+		<field name="usergroupId" type="long" />
+		<field name="roleId" type="long" />
+	</model>
+</model-hints>

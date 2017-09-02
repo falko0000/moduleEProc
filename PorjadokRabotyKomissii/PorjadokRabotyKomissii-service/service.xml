@@ -21,18 +21,6 @@
    
     </entity>
     
-       <entity name="CommissionPosition" local-service="true"   table="sapp.сommission_position" remote-service="false"   cache-enabled="false">
-
- 	  	 <column name="сommission_position_id" type="long" primary="true" id-type="sequence" id-param="sapp.seq_сommission_position_id"></column>
-   		 <column name="usergroupid" type="long"></column>
-   		 <column name="userid" type="long"></column>
-   		 <column name="roleid" type="long"></column>
-    
-    <finder return-type="CommissionPosition" name="UserIdAndUserGroupId">
-     	<finder-column name="usergroupid"></finder-column>
-     	<finder-column name="userid"></finder-column>
-    </finder>
-	
-	</entity>
+       
     
 </service-builder>

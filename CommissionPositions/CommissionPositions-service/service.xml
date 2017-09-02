@@ -6,15 +6,39 @@
 	
 	<entity local-service="true" remote-service="false" uuid="false" name="CommissionPosition" table="sapp.сommission_position" cache-enabled="false">
 
-    <column name="сommission_position_id" type="long" primary="true" id-type="sequence" id-param="sapp.seq_сommission_position_id"></column>
-    <column name="usergroupid" type="long"></column>
-    <column name="userid" type="long"></column>
-    <column name="roleid" type="long"></column>
-    
-    <finder return-type="CommissionPosition" name="UserIdAndUserGroupId">
-     	<finder-column name="usergroupid"></finder-column>
-     	<finder-column name="userid"></finder-column>
-    </finder>
+   <!-- PK fields -->
+
+		<column name="position_id" primary="true" type="long" id-type="sequence" id-param="sapp.seq_сommission_position_id"/>
+
+		<!-- Group instance -->
+
 	
+
+		<!-- Audit fields -->
+
+	
+		<column name="userId" type="long" />
+		
+
+		<!-- Other fields -->
+
+       <column name="usergroupId" type="long"></column>
+    
+        <column name="roleId" type="long"></column>
+    
+
+		<!-- Order -->
+
+	
+		<!-- Finder methods -->
+
+    <finder return-type="CommissionPosition" name="UserIdAndUserGroupId">
+     	<finder-column name="usergroupId"></finder-column>
+     	<finder-column name="userId"></finder-column>
+    </finder>
+    
+    <finder return-type="Collection" name="UserGroupId">
+       <finder-column name="usergroupId"></finder-column>
+    </finder>
 	</entity>
 </service-builder>

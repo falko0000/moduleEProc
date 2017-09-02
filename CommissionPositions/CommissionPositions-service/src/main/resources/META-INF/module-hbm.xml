@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.commission.positions.model.CommissionPosition" />
+	<class name="tj.commission.positions.model.impl.CommissionPositionImpl" table="sapp.сommission_position">
+		<id name="position_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.seq_сommission_position_id</param>
+			</generator>
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="usergroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

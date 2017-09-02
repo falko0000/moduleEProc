@@ -58,11 +58,13 @@
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.VIEW%>" /> 
 		</portlet:renderURL>
 	 
-	 <portlet:renderURL var="deleteURL"  > 
-	     <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>"/>
-		 <portlet:param name="izvewenija_id" value="<%=Long.toString(izvewenie.getIzvewenija_id())%>" /> 
-		 <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.DELETE%>" />
-	 </portlet:renderURL>
+
+	 
+	  <portlet:actionURL name="deleteIzvewenija" var="deleteURL">
+          
+              <portlet:param name="izvewenie_id" value="<%=Long.toString(izvewenie.getIzvewenija_id())%>" /> 
+          
+      </portlet:actionURL>
 	 
 	 <liferay-security:permissionsURL
 			modelResource="<%= Izvewenija.class.getName() %>"
@@ -78,8 +80,10 @@
       <c:if test="<%=tab.equals(EQuotationConstants.TAB_SUBMISSION_OF_PROPOSALS) %>">
         <liferay-ui:icon iconCssClass="icon-info-sign" message="info" url="<%= info.toString() %>" />
       </c:if>
+       
+      <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, ActionKeys.DELETE) %>"> 
         <liferay-ui:icon iconCssClass="icon-trash" message="action.DELETE" url="<%= deleteURL.toString() %>" />
-        
+     </c:if>   
         <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, ActionKeys.PERMISSIONS ) %>"> 
         
         <liferay-ui:icon image="permissions" message="action.PERMISSIONS" url="<%= permissionsURL %>" />

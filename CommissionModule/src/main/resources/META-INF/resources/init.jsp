@@ -11,7 +11,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
   
    page import="java.util.Collections" %><%@
    page import="java.util.List" %><%@
-   
+   page import="java.io.StringWriter"%><%@
 
 
 	page import="com.liferay.portal.kernel.dao.search.ResultRow"%><%@
@@ -51,6 +51,11 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 	page import="com.liferay.portal.kernel.util.StringPool"%><%@
 	page import="com.liferay.portal.kernel.exception.PortalException"%><%@
 	
+
+	page import="freemarker.template.Configuration"%><%@
+	page import="freemarker.template.Template"%><%@
+	page import="freemarker.template.TemplateException"%><%@
+	page import="freemarker.template.TemplateExceptionHandler"%><%@
 	
 	page import="tj.module.commission.constants.CommissionConstants"%><%@
 	page import="tj.spisoklotov.service.SpisoklotovLocalServiceUtil"%><%@ 
@@ -149,4 +154,6 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
     font-weight: bold;
     text-align: -internal-center;
      }
+     
+     
 </style>

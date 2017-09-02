@@ -21,6 +21,14 @@
 
 <%
 
+long roleIds[] = { 0, 0, 0, 0};
+
+roleIds[0] = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(),  EQuotationConstants.ROLE_CHAIRPERSON).getRoleId();
+roleIds[1] = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(),  EQuotationConstants.ROLE_DEPUTY).getRoleId();
+roleIds[2] = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(),  EQuotationConstants.ROLE_MEMBER).getRoleId();
+roleIds[3] = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(),  EQuotationConstants.ROLE_SECRETARY).getRoleId();
+
+
 Izvewenija izvewenija = null;
 		 
 		long izvewenie_id = ParamUtil.getLong(request, "izvewenie_id");

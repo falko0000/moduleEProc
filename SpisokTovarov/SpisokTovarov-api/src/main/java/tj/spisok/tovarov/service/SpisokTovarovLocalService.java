@@ -138,6 +138,9 @@ public interface SpisokTovarovLocalService extends BaseLocalService,
 		int end, OrderByComparator<T> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<SpisokTovarov> getSpisokTovarovByIzvewenieId(long izvewenie_id);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<SpisokTovarov> getSpisokTovarovByLotId(long lot_id);
 
 	/**

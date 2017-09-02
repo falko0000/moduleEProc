@@ -14,6 +14,23 @@
  */
 --%>
 
+
+
+
+
+<%
+   
+  
+   long roleId = roleIds[2];
+		 
+ CommissionPosition commissionPosition = CommissionPositionLocalServiceUtil.getCommissionPosition(userGroupId,  user2.getUserId());	 
+
+		 if( Validator.isNotNull(commissionPosition))
+		 {
+			
+			roleId =  commissionPosition.getRoleId();
+		 }
+%>
 <c:choose>
 	<c:when test='<%= displayStyle.equals("descriptive") %>'>
 		<liferay-ui:search-container-column-text>
@@ -84,8 +101,54 @@
 		</c:if>
 		<c:if test="<%= showActions %>">
 		
-		 
-		
+		  <liferay-ui:search-container-column-text
+			name="<%=EQuotationConstants.ROLE_CHAIRPERSON %>"
+			>
+			<aui:input 
+	             name="<%="roleUser"+String.valueOf(user2.getUserId()) %>" 
+	             type="radio" value="<%=roleIds[0] %>" 
+	             label=""  
+	             checked = "<%=(roleIds[0] == roleId)?true:false %>"
+	            
+              />
+		    </liferay-ui:search-container-column-text>
+		       
+		 <liferay-ui:search-container-column-text
+			name="<%=EQuotationConstants.ROLE_DEPUTY %>"
+			>
+			<aui:input 
+	             name="<%="roleUser"+String.valueOf(user2.getUserId()) %>" 
+	             type="radio" value="<%=roleIds[1] %>" 
+	             label=""  
+	             checked = "<%=(roleIds[1] == roleId)?true:false %>"
+	            
+              />
+		      </liferay-ui:search-container-column-text>
+		       
+		       <liferay-ui:search-container-column-text
+			name="<%=EQuotationConstants.ROLE_MEMBER %>"
+			>
+			<aui:input 
+	             name="<%="roleUser"+String.valueOf(user2.getUserId()) %>" 
+	             type="radio" value="<%=roleIds[2] %>" 
+	             label=""  
+	             checked = "<%=(roleIds[2] == roleId)?true:false %>"
+	            
+              />
+		     </liferay-ui:search-container-column-text>
+		     
+		       <liferay-ui:search-container-column-text
+			name="<%=EQuotationConstants.ROLE_SECRETARY %>"
+			>
+			<aui:input 
+	             name="<%="roleUser"+String.valueOf(user2.getUserId()) %>" 
+	             type="radio" value="<%=roleIds[3] %>" 
+	             label=""  
+	             checked = "<%=(roleIds[3] == roleId)?true:false %>"
+	            
+              />
+		    </liferay-ui:search-container-column-text>
+		     
 			<liferay-ui:search-container-column-jsp
 				path="/bid/commission/user_action.jsp"
 			/>

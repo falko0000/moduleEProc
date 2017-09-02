@@ -51,9 +51,15 @@ public class ObwajaInformacijaLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil} to access the obwaja informacija local service.
 	 */
-	public ObwajaInformacija getObInfoByIzvewenieId(long izvewenie_id) throws NoSuchObwajaInformacijaException
+	public ObwajaInformacija getObInfoByIzvewenieId(long izvewenie_id) 
 	{
-		return obwajaInformacijaPersistence.findByIzvewenieID(izvewenie_id);
+		ObwajaInformacija informacija = null;
+		try {
+			informacija = obwajaInformacijaPersistence.findByIzvewenieID(izvewenie_id);
+		} catch (NoSuchObwajaInformacijaException e) {
+		   
+		}
+		return informacija;
 	}
 	
 	

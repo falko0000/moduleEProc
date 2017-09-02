@@ -102,7 +102,7 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		  {
 			  try {
 				Izvewenija izvewenija = IzvewenijaLocalServiceUtil.getIzvewenija(izvewenija_id);
-			    
+			 
 				
 				izvewenija.setStatus_id(EQuotationConstants.STATUS_BID_TO_APPROVE);
 				

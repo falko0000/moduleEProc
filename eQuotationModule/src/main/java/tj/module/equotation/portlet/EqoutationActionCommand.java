@@ -274,8 +274,7 @@ private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse)
 			
 			izveweniePut = IzveweniePutLocalServiceUtil.addIzveweniePut(izveweniePut);
 			
-			 ObwajaInformacija obwajaInformacija = ObwajaInformacijaLocalServiceUtil
-                     								.getObInfoByIzvewenieId(oldIzvewenija.getIzvewenija_id(),serviceContext.getUserId() );
+			 ObwajaInformacija obwajaInformacija = ObwajaInformacijaLocalServiceUtil.getObInfoByIzvewenieId(oldIzvewenija.getIzvewenija_id());
 			 
 			 obwajaInformacija.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
 			 obwajaInformacija.setObwaja_informacija_id(0);

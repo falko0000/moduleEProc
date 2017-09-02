@@ -19,8 +19,12 @@
     	names.append(","+"protocol-opening");
     
     if(Validator.isNotNull(contracts))
+    {
+    	names.append(",protocol-evaluation");
     	names.append(",protocol");
     
+    	
+    }	
     String tab = ParamUtil.getString(request, "commission_tab","listlots");
 %>
 <portlet:renderURL var="tabURL" />
@@ -38,6 +42,10 @@
    </c:if>
    
   <c:if test="<%=Validator.isNotNull(contracts) %>">
+
+ <liferay-ui:section>
+    		    <jsp:include page="<%=CommissionConstants.PAGE_PROTOCOL_EVALUATION%>"  flush="true"/>
+   </liferay-ui:section>
  <liferay-ui:section>
     		    <jsp:include page="<%=CommissionConstants.PAGE_PROTOCOL_CONTRACT%>"  flush="true"/>
    </liferay-ui:section>

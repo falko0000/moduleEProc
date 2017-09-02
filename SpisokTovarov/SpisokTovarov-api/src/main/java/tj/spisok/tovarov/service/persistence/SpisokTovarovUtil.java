@@ -269,6 +269,168 @@ public class SpisokTovarovUtil {
 	}
 
 	/**
+	* Returns all the spisok tovarovs where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @return the matching spisok tovarovs
+	*/
+	public static List<SpisokTovarov> findByIzvewenieId(long izvewenie_id) {
+		return getPersistence().findByIzvewenieId(izvewenie_id);
+	}
+
+	/**
+	* Returns a range of all the spisok tovarovs where izvewenie_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link SpisokTovarovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param start the lower bound of the range of spisok tovarovs
+	* @param end the upper bound of the range of spisok tovarovs (not inclusive)
+	* @return the range of matching spisok tovarovs
+	*/
+	public static List<SpisokTovarov> findByIzvewenieId(long izvewenie_id,
+		int start, int end) {
+		return getPersistence().findByIzvewenieId(izvewenie_id, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the spisok tovarovs where izvewenie_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link SpisokTovarovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param start the lower bound of the range of spisok tovarovs
+	* @param end the upper bound of the range of spisok tovarovs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching spisok tovarovs
+	*/
+	public static List<SpisokTovarov> findByIzvewenieId(long izvewenie_id,
+		int start, int end, OrderByComparator<SpisokTovarov> orderByComparator) {
+		return getPersistence()
+				   .findByIzvewenieId(izvewenie_id, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the spisok tovarovs where izvewenie_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link SpisokTovarovModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param start the lower bound of the range of spisok tovarovs
+	* @param end the upper bound of the range of spisok tovarovs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching spisok tovarovs
+	*/
+	public static List<SpisokTovarov> findByIzvewenieId(long izvewenie_id,
+		int start, int end, OrderByComparator<SpisokTovarov> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByIzvewenieId(izvewenie_id, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first spisok tovarov in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching spisok tovarov
+	* @throws NoSuchSpisokTovarovException if a matching spisok tovarov could not be found
+	*/
+	public static SpisokTovarov findByIzvewenieId_First(long izvewenie_id,
+		OrderByComparator<SpisokTovarov> orderByComparator)
+		throws tj.spisok.tovarov.exception.NoSuchSpisokTovarovException {
+		return getPersistence()
+				   .findByIzvewenieId_First(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the first spisok tovarov in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching spisok tovarov, or <code>null</code> if a matching spisok tovarov could not be found
+	*/
+	public static SpisokTovarov fetchByIzvewenieId_First(long izvewenie_id,
+		OrderByComparator<SpisokTovarov> orderByComparator) {
+		return getPersistence()
+				   .fetchByIzvewenieId_First(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last spisok tovarov in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching spisok tovarov
+	* @throws NoSuchSpisokTovarovException if a matching spisok tovarov could not be found
+	*/
+	public static SpisokTovarov findByIzvewenieId_Last(long izvewenie_id,
+		OrderByComparator<SpisokTovarov> orderByComparator)
+		throws tj.spisok.tovarov.exception.NoSuchSpisokTovarovException {
+		return getPersistence()
+				   .findByIzvewenieId_Last(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last spisok tovarov in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching spisok tovarov, or <code>null</code> if a matching spisok tovarov could not be found
+	*/
+	public static SpisokTovarov fetchByIzvewenieId_Last(long izvewenie_id,
+		OrderByComparator<SpisokTovarov> orderByComparator) {
+		return getPersistence()
+				   .fetchByIzvewenieId_Last(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the spisok tovarovs before and after the current spisok tovarov in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param spisok_tovarov_id the primary key of the current spisok tovarov
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next spisok tovarov
+	* @throws NoSuchSpisokTovarovException if a spisok tovarov with the primary key could not be found
+	*/
+	public static SpisokTovarov[] findByIzvewenieId_PrevAndNext(
+		long spisok_tovarov_id, long izvewenie_id,
+		OrderByComparator<SpisokTovarov> orderByComparator)
+		throws tj.spisok.tovarov.exception.NoSuchSpisokTovarovException {
+		return getPersistence()
+				   .findByIzvewenieId_PrevAndNext(spisok_tovarov_id,
+			izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Removes all the spisok tovarovs where izvewenie_id = &#63; from the database.
+	*
+	* @param izvewenie_id the izvewenie_id
+	*/
+	public static void removeByIzvewenieId(long izvewenie_id) {
+		getPersistence().removeByIzvewenieId(izvewenie_id);
+	}
+
+	/**
+	* Returns the number of spisok tovarovs where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @return the number of matching spisok tovarovs
+	*/
+	public static int countByIzvewenieId(long izvewenie_id) {
+		return getPersistence().countByIzvewenieId(izvewenie_id);
+	}
+
+	/**
 	* Caches the spisok tovarov in the entity cache if it is enabled.
 	*
 	* @param spisokTovarov the spisok tovarov

@@ -59,4 +59,5 @@ dependencies {
     
     compile project (":modules:Bidqueue:Bidqueue-api")
 
+    compile project (":modules:CommissionPositions:CommissionPositions-api")
 	}

@@ -99,6 +99,7 @@ public class GenerateDocument {
 			template = cfg.getTemplate(this.version);
 
 			Writer fileOut = null;
+			
 
 			fileOut = new FileWriter (new File(filename.substring(0,filename.indexOf(".")+1)+"html"));
 

@@ -145,6 +145,12 @@ public class SpisokTovarovLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<tj.spisok.tovarov.model.SpisokTovarov> getSpisokTovarovByIzvewenieId(
+		long izvewenie_id) {
+		return _spisokTovarovLocalService.getSpisokTovarovByIzvewenieId(izvewenie_id);
+	}
+
+	@Override
 	public java.util.List<tj.spisok.tovarov.model.SpisokTovarov> getSpisokTovarovByLotId(
 		long lot_id) {
 		return _spisokTovarovLocalService.getSpisokTovarovByLotId(lot_id);

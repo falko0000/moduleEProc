@@ -140,6 +140,11 @@ public class SpisokTovarovLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<tj.spisok.tovarov.model.SpisokTovarov> getSpisokTovarovByIzvewenieId(
+		long izvewenie_id) {
+		return getService().getSpisokTovarovByIzvewenieId(izvewenie_id);
+	}
+
 	public static java.util.List<tj.spisok.tovarov.model.SpisokTovarov> getSpisokTovarovByLotId(
 		long lot_id) {
 		return getService().getSpisokTovarovByLotId(lot_id);

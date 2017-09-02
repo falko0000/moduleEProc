@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: tipy.izvewenij-api
 Bundle-SymbolicName: tj.tipy.izvewenij.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_144 (Oracle Corporation)
 Export-Package: tj.tipy.izvewenij.exception;uses:="com.liferay.portal.
  kernel.exception";version="1.0.0",tj.tipy.izvewenij.model;uses:="com.
  liferay.expando.kernel.model,com.liferay.portal.kernel.annotation,com

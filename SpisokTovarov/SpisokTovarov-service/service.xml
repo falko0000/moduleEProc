@@ -20,8 +20,14 @@
         <column name="opisanie_tovara" type="String"></column>
         <column name="sozdal" type="long"></column>
         <column name="spisok_tovarov_id" type="long" primary="true" id-type="sequence" id-param="sapp.spisok_tovarov_id_seq"></column>
+   
    	<finder return-type="Collection" name="LotId">
    		<finder-column name="lot_id"></finder-column>
    	</finder>
+   
+     <finder return-type="Collection" name="IzvewenieId">
+        <finder-column name="izvewenie_id"></finder-column>
+     </finder>
+     
     </entity>
 </service-builder>

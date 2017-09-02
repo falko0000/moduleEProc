@@ -114,8 +114,9 @@ public class SpisokTovarovModelImpl extends BaseModelImpl<SpisokTovarov>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.spisok.tovarov.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.spisok.tovarov.model.SpisokTovarov"),
 			true);
-	public static final long LOT_ID_COLUMN_BITMASK = 1L;
-	public static final long SPISOK_TOVAROV_ID_COLUMN_BITMASK = 2L;
+	public static final long IZVEWENIE_ID_COLUMN_BITMASK = 1L;
+	public static final long LOT_ID_COLUMN_BITMASK = 2L;
+	public static final long SPISOK_TOVAROV_ID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.spisok.tovarov.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.spisok.tovarov.model.SpisokTovarov"));
 
@@ -325,7 +326,19 @@ public class SpisokTovarovModelImpl extends BaseModelImpl<SpisokTovarov>
 
 	@Override
 	public void setIzvewenie_id(long izvewenie_id) {
+		_columnBitmask |= IZVEWENIE_ID_COLUMN_BITMASK;
+
+		if (!_setOriginalIzvewenie_id) {
+			_setOriginalIzvewenie_id = true;
+
+			_originalIzvewenie_id = _izvewenie_id;
+		}
+
 		_izvewenie_id = izvewenie_id;
+	}
+
+	public long getOriginalIzvewenie_id() {
+		return _originalIzvewenie_id;
 	}
 
 	@Override
@@ -569,6 +582,10 @@ public class SpisokTovarovModelImpl extends BaseModelImpl<SpisokTovarov>
 	public void resetOriginalValues() {
 		SpisokTovarovModelImpl spisokTovarovModelImpl = this;
 
+		spisokTovarovModelImpl._originalIzvewenie_id = spisokTovarovModelImpl._izvewenie_id;
+
+		spisokTovarovModelImpl._setOriginalIzvewenie_id = false;
+
 		spisokTovarovModelImpl._originalLot_id = spisokTovarovModelImpl._lot_id;
 
 		spisokTovarovModelImpl._setOriginalLot_id = false;
@@ -775,6 +792,8 @@ public class SpisokTovarovModelImpl extends BaseModelImpl<SpisokTovarov>
 	private long _edinica_izmerenija_id;
 	private long _izmenil;
 	private long _izvewenie_id;
+	private long _originalIzvewenie_id;
+	private boolean _setOriginalIzvewenie_id;
 	private String _klassifikacija_po_okdp;
 	private String _kod_po_okdp;
 	private long _kod_po_spravochniku_naimenovanij;

@@ -12,10 +12,14 @@ public interface CommissionConstants {
 	public final String ACTION_COMMAND = "action_command";
 	
 	static final String PAGE_LIST_LOTS = "/commissiontab/listlots.jsp";
-	static final String PAGE_PROTOCOL_CONTRACT = "/commissiontab/protocol_contract.jsp";
-	static final String PAGE_PROTOCOL_OPENING = "/commissiontab/protocol_opening.jsp";
 	static final String PAGE_SUPPLIER_LIST = "/commissiontab/evaluation/supplierlist.jsp";
     static final String PAGE_SUPPLIER = "/commissiontab/evaluation/supplier.jsp";
+	
+    //protocols 
+    
+    static final String PAGE_PROTOCOL_CONTRACT = "/commissiontab/protocol_contract.jsp";
+	static final String PAGE_PROTOCOL_OPENING = "/commissiontab/protocol_opening.jsp";
+	static final String PAGE_PROTOCOL_EVALUATION = "/commissiontab/protocol_evaluation.jsp";
 	
     //supplier items
     static final String PAGE_APPLICATION = "/commissiontab/evaluation/supplieritems/application.jsp";
@@ -73,4 +77,10 @@ public interface CommissionConstants {
 	    static final String ORGANIZATION_HEAD_ID  = "ORGANIZATION_HEAD_ID";
 	    static final String COMPLAINTS_PERIOD = "COMPLAINTS_PERIOD";
 	    static final String EVALUATION_PERIOD = "EVALUATION_PERIOD";
+	    
+	    
+	    static final String ROLE_CHAIRPERSON = "Chairperson";
+	    static final String ROLE_DEPUTY = "Deputy";
+	    static final String ROLE_MEMBER = "Member";
+	    static final String ROLE_SECRETARY = "Secretary";
  }

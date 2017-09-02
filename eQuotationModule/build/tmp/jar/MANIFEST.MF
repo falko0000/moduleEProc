@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: eQuotationModule
 Bundle-SymbolicName: tj.module.equotation
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_111 (Oracle Corporation)
+Created-By: 1.8.0_144 (Oracle Corporation)
 Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  feray.announcements.kernel.model;version="[1.0,2)",com.liferay.counte
  r.kernel.service;version="[1.0,2)",com.liferay.document.library.kerne
@@ -44,34 +44,36 @@ Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  onstants,freemarker.template;version="[2.3,3)",javax.portlet;version=
  "[2.0,3)",javax.servlet;version="[3.0,4)",javax.servlet.http;version=
  "[3.0,4)",tj.bid.queue.model;version="[1.0,2)",tj.bid.queue.service;v
- ersion="[1.0,2)",tj.criterias.exception;version="[1.0,2)",tj.criteria
- s.model;version="[1.0,2)",tj.criterias.service;version="[1.0,2)",tj.e
- dinicy.izmerenija.model;version="[1.0,2)",tj.edinicy.izmerenija.servi
- ce;version="[1.0,2)",tj.informacija.razmewenii.exception;version="[1.
- 0,2)",tj.informacija.razmewenii.model;version="[1.0,2)",tj.informacij
- a.razmewenii.service;version="[1.0,2)",tj.istochnik.finansirovanija.m
- odel;version="[1.0,2)",tj.istochnik.finansirovanija.service;version="
- [1.0,2)",tj.izvewenieput.exception;version="[1.0,2)",tj.izvewenieput.
- model;version="[1.0,2)",tj.izvewenieput.service;version="[1.0,2)",tj.
- izvewenija.model;version="[1.0,2)",tj.izvewenija.service;version="[1.
- 0,2)",tj.jekb.model;version="[1.0,2)",tj.jekb.service;version="[1.0,2
- )",tj.obwaja.informacija.exception;version="[1.0,2)",tj.obwaja.inform
- acija.model;version="[1.0,2)",tj.obwaja.informacija.service;version="
- [1.0,2)",tj.okgz.model;version="[1.0,2)",tj.okgz.service;version="[1.
- 0,2)",tj.orgindex.exception;version="[1.0,2)",tj.orgindex.model;versi
- on="[1.0,2)",tj.orgindex.service;version="[1.0,2)",tj.orgindex.servic
- e.persistence;version="[1.0,2)",tj.porjadok.raboty.komissii.exception
- ;version="[1.0,2)",tj.porjadok.raboty.komissii.model;version="[1.0,2)
- ",tj.porjadok.raboty.komissii.service;version="[1.0,2)",tj.spisok.tov
- arov.model;version="[1.0,2)",tj.spisok.tovarov.service;version="[1.0,
- 2)",tj.spisoklotov.model;version="[1.0,2)",tj.spisoklotov.service;ver
- sion="[1.0,2)",tj.strany.model;version="[1.0,2)",tj.strany.service;ve
- rsion="[1.0,2)",tj.system.config.exception;version="[1.0,2)",tj.syste
- m.config.model;version="[1.0,2)",tj.system.config.service;version="[1
- .0,2)",tj.tipy.izvewenij.exception;version="[1.0,2)",tj.tipy.izveweni
- j.model;version="[1.0,2)",tj.tipy.izvewenij.service;version="[1.0,2)"
- ,tj.tipy.izvewenij.service.persistence;version="[1.0,2)",tj.vbk.model
- ;version="[1.0,2)",tj.vbk.service;version="[1.0,2)"
+ ersion="[1.0,2)",tj.commission.positions.model;version="[1.0,2)",tj.c
+ ommission.positions.service;version="[1.0,2)",tj.criterias.exception;
+ version="[1.0,2)",tj.criterias.model;version="[1.0,2)",tj.criterias.s
+ ervice;version="[1.0,2)",tj.edinicy.izmerenija.model;version="[1.0,2)
+ ",tj.edinicy.izmerenija.service;version="[1.0,2)",tj.informacija.razm
+ ewenii.exception;version="[1.0,2)",tj.informacija.razmewenii.model;ve
+ rsion="[1.0,2)",tj.informacija.razmewenii.service;version="[1.0,2)",t
+ j.istochnik.finansirovanija.model;version="[1.0,2)",tj.istochnik.fina
+ nsirovanija.service;version="[1.0,2)",tj.izvewenieput.exception;versi
+ on="[1.0,2)",tj.izvewenieput.model;version="[1.0,2)",tj.izvewenieput.
+ service;version="[1.0,2)",tj.izvewenija.model;version="[1.0,2)",tj.iz
+ vewenija.service;version="[1.0,2)",tj.jekb.model;version="[1.0,2)",tj
+ .jekb.service;version="[1.0,2)",tj.obwaja.informacija.exception;versi
+ on="[1.0,2)",tj.obwaja.informacija.model;version="[1.0,2)",tj.obwaja.
+ informacija.service;version="[1.0,2)",tj.okgz.model;version="[1.0,2)"
+ ,tj.okgz.service;version="[1.0,2)",tj.orgindex.exception;version="[1.
+ 0,2)",tj.orgindex.model;version="[1.0,2)",tj.orgindex.service;version
+ ="[1.0,2)",tj.orgindex.service.persistence;version="[1.0,2)",tj.porja
+ dok.raboty.komissii.exception;version="[1.0,2)",tj.porjadok.raboty.ko
+ missii.model;version="[1.0,2)",tj.porjadok.raboty.komissii.service;ve
+ rsion="[1.0,2)",tj.spisok.tovarov.model;version="[1.0,2)",tj.spisok.t
+ ovarov.service;version="[1.0,2)",tj.spisoklotov.model;version="[1.0,2
+ )",tj.spisoklotov.service;version="[1.0,2)",tj.strany.model;version="
+ [1.0,2)",tj.strany.service;version="[1.0,2)",tj.system.config.excepti
+ on;version="[1.0,2)",tj.system.config.model;version="[1.0,2)",tj.syst
+ em.config.service;version="[1.0,2)",tj.tipy.izvewenij.exception;versi
+ on="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.tipy.izvewe
+ nij.service;version="[1.0,2)",tj.tipy.izvewenij.service.persistence;v
+ ersion="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj.vbk.service;versio
+ n="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251
