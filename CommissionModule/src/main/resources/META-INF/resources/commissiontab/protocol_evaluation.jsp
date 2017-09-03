@@ -134,6 +134,8 @@
 	    recipes.put(spisoklotov.getSpisok_lotov_id(), sum);
 	}
 	
+	SupplierRequestLotLocalServiceUtil.
+	
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
 	
 	
