@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: IstochnikFinansirovanija-api
 Bundle-SymbolicName: tj.istochnik.finansirovanija.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_144 (Oracle Corporation)
+Created-By: 1.8.0_92 (Oracle Corporation)
 Export-Package: tj.istochnik.finansirovanija.exception;uses:="com.life
  ray.portal.kernel.exception";version="1.0.0",tj.istochnik.finansirova
  nija.model;uses:="com.liferay.expando.kernel.model,com.liferay.portal
@@ -32,6 +32,6 @@ Import-Package: com.liferay.expando.kernel.model;version="[1.0,2)",com
  ik.finansirovanija.exception,tj.istochnik.finansirovanija.model
 Javac-Debug: on
 Javac-Deprecation: off
-Javac-Encoding: Cp1251
+Javac-Encoding: Cp1252
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Tool: Bnd-3.2.0.201605172007

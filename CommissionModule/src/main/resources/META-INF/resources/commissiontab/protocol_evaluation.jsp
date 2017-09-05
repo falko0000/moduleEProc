@@ -1,4 +1,10 @@
 
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil"%>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalService"%>
+<%@page import="com.liferay.portal.kernel.service.AddressLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Address"%>
+<%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov"%>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil"%>
 <%@page import="tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Collection"%>
@@ -50,7 +56,7 @@
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.VIEW%>" /> 
    </portlet:renderURL>
 <%
-  System.out.println("version 7");
+  System.out.println("version 11");
  	File file = DLFileEntryLocalServiceUtil.getFile(119372, "1.0", false);
 
 	Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
@@ -65,6 +71,7 @@
 	 Map<Long, String> orgPosition = new HashMap<Long, String>();
 	 Map<Long, String> agency = new HashMap<Long, String>();
 	 Map<Long, String> fullname = new HashMap<Long, String>();
+	 Map<Long, String> orgAddress = new HashMap<Long, String>();
 	 
 	 long roleIds[] = {RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), CommissionConstants.ROLE_CHAIRPERSON).getRoleId(),
 			           RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), CommissionConstants.ROLE_DEPUTY).getRoleId(),
@@ -90,7 +97,8 @@
 	      orgPosition.put(commissionPosition.getUserId(), usr.getJobTitle());
 	  
 	       Organization org = usr.getOrganizations().get(0);
-	       
+
+	 
 	       fullname.put(usr.getUserId(), usr.getFullName());
 	       
 	       String agen = LanguageUtil.get(request, "agency.procuring-entity");
@@ -127,14 +135,43 @@
 	Recipe  recipe = null;
 	Map<Long, String> recipes = new HashMap<Long, String>();
 	
+	Map<Long, Object> suprequest = new HashMap<Long, Object>();
+	ArrayList<ZajavkiOtPostavwikov> otPostavwikovs = new ArrayList<ZajavkiOtPostavwikov>();
+	
 	for(Spisoklotov spisoklotov : spisoklotovs)
 	{
 	    recipe = new Recipe(spisoklotov.getCena_kontrakta());
 	    String sum = recipe.num2str(true,true);
 	    recipes.put(spisoklotov.getSpisok_lotov_id(), sum);
+	long orgIds[] =SupplierRequestLotLocalServiceUtil.getOraganizationIds(spisoklotov.getSpisok_lotov_id()); 
+	    List<Organization> reqOrganization = OrganizationLocalServiceUtil.getOrganizations(orgIds);
+		suprequest.put(spisoklotov.getSpisok_lotov_id(), reqOrganization);
+	
+		
+		
+		for(int i = 0; i < orgIds.length; i++){
+			ZajavkiOtPostavwikov otPostavwikov = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisoklotov.getSpisok_lotov_id(), orgIds[i]).get(0);
+	
+			Organization org = OrganizationLocalServiceUtil.getOrganizations(orgIds[]);
+			       String orgAddr = org.getAddress().getCity()+" "+org.getAddress().getStreet1();   
+	       //orgAddress.put(request, orgAddr) ;
+	       System.out.println("orgAddress------->"+orgAddr);
+			int index = (otPostavwikovs.size() == 0)?0:otPostavwikovs.size()-1;
+			for (int j = 0; j < otPostavwikovs.size(); j++){
+				ZajavkiOtPostavwikov postavwikov = otPostavwikovs.get(j);
+				if (otPostavwikov.getData_sozdanija().before(postavwikov.getData_sozdanija()))
+				{
+					index = j;
+					break;
+				}
+			}
+			otPostavwikovs.add(index,otPostavwikov); 
+		}
+			
+		
 	}
 	
-	SupplierRequestLotLocalServiceUtil.
+	
 	
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(izvewenija.getOrganizacija_id());
 	
@@ -163,7 +200,9 @@
 	param.put("headFromDate",komissii.getData_sozdanija());
 	param.put("units", units);
 	param.put("recipes", recipes);
-	
+	param.put("suprequest", suprequest);
+	param.put("appDateLot", otPostavwikovs);
+	//param.put("orgAddress", orgAddress);
 	template.process(param, out);
 	
 	String html = outs.toString();

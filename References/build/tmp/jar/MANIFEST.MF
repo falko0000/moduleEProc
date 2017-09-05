@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: References
 Bundle-SymbolicName: tj.sapp.references
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_131 (Oracle Corporation)
+Created-By: 1.8.0_92 (Oracle Corporation)
 Import-Package: com.liferay.expando.kernel.model;version="[1.0,2)",com
  .liferay.exportimport.kernel.lar;version="[1.0,2)",com.liferay.portal
  .kernel.annotation;version="[6.3,7)",com.liferay.portal.kernel.dao.or
@@ -21,7 +21,7 @@ Import-Package: com.liferay.expando.kernel.model;version="[1.0,2)",com
  .services.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
-Javac-Encoding: Cp1251
+Javac-Encoding: Cp1252
 Private-Package: content,tj.sapp.references.portlet
 Provide-Capability: osgi.service;objectClass:List<String>="com.liferay
  .portal.kernel.portlet.bridges.mvc.MVCActionCommand",osgi.service;obj
