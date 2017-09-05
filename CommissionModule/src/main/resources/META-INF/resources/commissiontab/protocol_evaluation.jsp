@@ -153,9 +153,9 @@
 			ZajavkiOtPostavwikov otPostavwikov = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisoklotov.getSpisok_lotov_id(), orgIds[i]).get(0);
 	
 			Organization org = OrganizationLocalServiceUtil.getOrganizations(orgIds[]);
-			       String orgAddr = org.getAddress().getCity()+" "+org.getAddress().getStreet1();   
+			String orgAddr = org.getAddress().getCity()+" "+org.getAddress().getStreet1();   
 	       //orgAddress.put(request, orgAddr) ;
-	       System.out.println("orgAddress------->"+orgAddr);
+	        System.out.println("orgAddress------->"+orgAddr);
 			int index = (otPostavwikovs.size() == 0)?0:otPostavwikovs.size()-1;
 			for (int j = 0; j < otPostavwikovs.size(); j++){
 				ZajavkiOtPostavwikov postavwikov = otPostavwikovs.get(j);
