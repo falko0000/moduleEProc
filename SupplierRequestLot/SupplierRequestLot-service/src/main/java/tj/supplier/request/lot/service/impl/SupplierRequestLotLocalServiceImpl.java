@@ -58,8 +58,10 @@ public class SupplierRequestLotLocalServiceImpl
 	   
 	   for( SupplierRequestLot requestLot : supplierRequestLots)
 	    {
+		   if (requestLot.getSub_application()){
 	    	oraganizationIds[index] = requestLot.getOrganization_id();
 	    	index++;
+		   }
 	    }
 	   
 	   return oraganizationIds;
