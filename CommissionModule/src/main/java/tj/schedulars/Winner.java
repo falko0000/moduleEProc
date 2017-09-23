@@ -34,7 +34,9 @@ import tj.lots.winner.model.LotsWinner;
 import tj.lots.winner.service.LotsWinnerLocalServiceUtil;
 import tj.module.commission.constants.CommissionConstants;
 import tj.protocol.contracts.model.ProtocolContracts;
+import tj.protocol.contracts.model.ProtocolEvaluate;
 import tj.protocol.contracts.service.ProtocolContractsLocalServiceUtil;
+import tj.protocol.contracts.service.ProtocolEvaluateLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
@@ -44,6 +46,7 @@ import tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil;
 public class Winner {
 
 	private long izvewenie_id;
+	private long userId;
 	private Izvewenija izvewenija;
 	private List<Spisoklotov> spisoklotovs = new ArrayList<>();
 	private List<User> users = new ArrayList<>();
@@ -53,11 +56,12 @@ public class Winner {
 	
 	
 
-	public Winner(long izvewenie_id) throws PortalException
+	public Winner(long izvewenie_id, long userId) throws PortalException
 	{
 		this.izvewenie_id = izvewenie_id;
+		this.userId = userId;
 		init();
-		//determiningWinner();
+		
 	}
 
 	private void init() throws PortalException {
@@ -335,6 +339,25 @@ public class Winner {
 	
 			
  		orgPoints.clear();
+ 		createProtocolEvaluated();
+	}
+	
+	private void createProtocolEvaluated()
+	{
+		ProtocolEvaluate evaluate = ProtocolEvaluateLocalServiceUtil.getProtocolEvaluateByBid(this.izvewenie_id);
+		
+		if(Validator.isNull(evaluate))
+		{
+			evaluate = ProtocolEvaluateLocalServiceUtil.createProtocolEvaluate(0);
+			 evaluate.setCreated(new Date());
+		}
+		
+		 evaluate.setIzvewenie_id(this.izvewenie_id);
+		 evaluate.setUserid(this.userId);
+		
+		 evaluate.setUpdated(new Date());
+		 
+		ProtocolEvaluateLocalServiceUtil.updateProtocolEvaluate(evaluate);
 	}
 	
 	public double getMinTotalPrice() {

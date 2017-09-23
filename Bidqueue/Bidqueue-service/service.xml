@@ -14,7 +14,7 @@
 		<column name="status" type="int"></column>
 		
 		<order by="asc">
-		<order-column name="closing_by_minutes"></order-column>
+		<order-column name="closing_date"></order-column>
 		</order>
 		
 		<finder return-type="Collection" name="StateStatus" >

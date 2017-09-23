@@ -24,5 +24,7 @@ create table sapp.informacija_o_razmewenii (
 	srok_ispolnenija_zajavki VARCHAR(75) null,
 	srok_obespechenija_zajavki VARCHAR(75) null,
 	srok_postavki VARCHAR(75) null,
-	srok_postavki_dlja_zakaza LONG
+	srok_postavki_dlja_zakaza LONG,
+	required_documents_dlja_zakaza INTEGER,
+	required_documents VARCHAR(75) null
 );

@@ -13,7 +13,12 @@
 	listlotsUrl.setParameter("izvewenie_id",String.valueOf(izvewenija.getIzvewenija_id()));
 	listlotsUrl.setParameter(Constants.CMD,"cmd");
 
- 
+
+   long izvewenija_id = 0;
+		   
+   if(izvewenija.getStatus_id() == 500 &&  izvewenija.getSostojanie_id() ==5)
+   	  izvewenija_id = izvewenija.getIzvewenija_id();
+   
 %>
 
 
@@ -22,11 +27,11 @@
 				emptyResultsMessage="no-leaves-found" 
 				delta = "<%=5%>"
 				iteratorURL="<%=listlotsUrl %>" 
-				total="<%= SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenija.getIzvewenija_id())%>"
+				total="<%= SpisoklotovLocalServiceUtil.getCountSpisoklotov(izvewenija_id)%>"
 				rowChecker="<%= new RowChecker(renderResponse) %>"
 			> 
 			 <liferay-ui:search-container-results 
-		     results="<%=  SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id()) %>">
+		     results="<%=  SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija_id) %>">
 		  
 		 	</liferay-ui:search-container-results>
 		 

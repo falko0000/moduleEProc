@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.log.evaluated.model.LogEvaluated">
+		<field name="log_evaluated_id" type="long" />
+		<field name="spisok_lotov_id" type="long" />
+		<field name="organization_id" type="long" />
+		<field name="userid" type="long" />
+		<field name="status" type="int" />
+		<field name="evaluated_des" type="String" />
+		<field name="opening_status" type="int" />
+		<field name="opening_des" type="String" />
+		<field name="result_opening_id" type="long" />
+	</model>
+</model-hints>

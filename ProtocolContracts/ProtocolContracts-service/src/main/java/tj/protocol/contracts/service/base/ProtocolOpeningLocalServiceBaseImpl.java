@@ -44,6 +44,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 import tj.protocol.contracts.model.ProtocolOpening;
 import tj.protocol.contracts.service.ProtocolOpeningLocalService;
 import tj.protocol.contracts.service.persistence.ProtocolContractsPersistence;
+import tj.protocol.contracts.service.persistence.ProtocolEvaluatePersistence;
 import tj.protocol.contracts.service.persistence.ProtocolOpeningPersistence;
 
 import java.io.Serializable;
@@ -356,6 +357,44 @@ public abstract class ProtocolOpeningLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the protocol evaluate local service.
+	 *
+	 * @return the protocol evaluate local service
+	 */
+	public tj.protocol.contracts.service.ProtocolEvaluateLocalService getProtocolEvaluateLocalService() {
+		return protocolEvaluateLocalService;
+	}
+
+	/**
+	 * Sets the protocol evaluate local service.
+	 *
+	 * @param protocolEvaluateLocalService the protocol evaluate local service
+	 */
+	public void setProtocolEvaluateLocalService(
+		tj.protocol.contracts.service.ProtocolEvaluateLocalService protocolEvaluateLocalService) {
+		this.protocolEvaluateLocalService = protocolEvaluateLocalService;
+	}
+
+	/**
+	 * Returns the protocol evaluate persistence.
+	 *
+	 * @return the protocol evaluate persistence
+	 */
+	public ProtocolEvaluatePersistence getProtocolEvaluatePersistence() {
+		return protocolEvaluatePersistence;
+	}
+
+	/**
+	 * Sets the protocol evaluate persistence.
+	 *
+	 * @param protocolEvaluatePersistence the protocol evaluate persistence
+	 */
+	public void setProtocolEvaluatePersistence(
+		ProtocolEvaluatePersistence protocolEvaluatePersistence) {
+		this.protocolEvaluatePersistence = protocolEvaluatePersistence;
+	}
+
+	/**
 	 * Returns the protocol opening local service.
 	 *
 	 * @return the protocol opening local service
@@ -562,6 +601,10 @@ public abstract class ProtocolOpeningLocalServiceBaseImpl
 	protected tj.protocol.contracts.service.ProtocolContractsLocalService protocolContractsLocalService;
 	@BeanReference(type = ProtocolContractsPersistence.class)
 	protected ProtocolContractsPersistence protocolContractsPersistence;
+	@BeanReference(type = tj.protocol.contracts.service.ProtocolEvaluateLocalService.class)
+	protected tj.protocol.contracts.service.ProtocolEvaluateLocalService protocolEvaluateLocalService;
+	@BeanReference(type = ProtocolEvaluatePersistence.class)
+	protected ProtocolEvaluatePersistence protocolEvaluatePersistence;
 	@BeanReference(type = ProtocolOpeningLocalService.class)
 	protected ProtocolOpeningLocalService protocolOpeningLocalService;
 	@BeanReference(type = ProtocolOpeningPersistence.class)

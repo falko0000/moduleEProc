@@ -1,0 +1,9 @@
+Bundle-Name: ResultOpening-api
+Bundle-SymbolicName: tj.result.opening.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.result.opening.exception,\
+	tj.result.opening.model,\
+	tj.result.opening.service,\
+	tj.result.opening.service.persistence
+-includeresource: META-INF/service.xml=../ResultOpening-service/service.xml

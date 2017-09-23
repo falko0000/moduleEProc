@@ -149,6 +149,10 @@ public interface ProchajaInformacijaDljaZajavkiLocalService
 	public List<ProchajaInformacijaDljaZajavki> getProchajaInformacijaDljaZajavkis(
 		int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<ProchajaInformacijaDljaZajavki> getProchajaInformacijaDljaZajavkis(
+		long izvewenie_id);
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

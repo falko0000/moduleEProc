@@ -151,6 +151,9 @@ public interface CriteriaValueLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CriteriaValue> getCriteriaValues(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CriteriaValue> getCriteriaValues(long criteria_id);
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

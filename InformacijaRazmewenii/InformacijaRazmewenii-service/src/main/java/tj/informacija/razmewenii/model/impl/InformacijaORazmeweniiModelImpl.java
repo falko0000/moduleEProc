@@ -87,7 +87,9 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 			{ "srok_ispolnenija_zajavki", Types.VARCHAR },
 			{ "srok_obespechenija_zajavki", Types.VARCHAR },
 			{ "srok_postavki", Types.VARCHAR },
-			{ "srok_postavki_dlja_zakaza", Types.BIGINT }
+			{ "srok_postavki_dlja_zakaza", Types.BIGINT },
+			{ "required_documents_dlja_zakaza", Types.INTEGER },
+			{ "required_documents", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -121,9 +123,11 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 		TABLE_COLUMNS_MAP.put("srok_obespechenija_zajavki", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("srok_postavki", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("srok_postavki_dlja_zakaza", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("required_documents_dlja_zakaza", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("required_documents", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.informacija_o_razmewenii (cena_postavki VARCHAR(75) null,cena_postavki_dlja_zakaza DOUBLE,data_izmenenija DATE null,data_sozdanija DATE null,informacija_o_razmewenii_id LONG not null primary key,izmenil LONG,izvewenie_id LONG,mesto_postavki VARCHAR(75) null,mesto_postavki_dlja_zakaza LONG,obespechenie_ispolnenija LONG,obespechenie_ispolnenija_dlja_zakaza LONG,obespechenie_ispolnenija_v_procentah DOUBLE,obespechenie_v_procentah DOUBLE,obespechenie_zajavki LONG,obespechenie_zajavki_dlja_zakaza LONG,oplata VARCHAR(75) null,oplata_dlja_zakaza LONG,soputstvujuwie_uslovija VARCHAR(75) null,soputstvujuwie_uslovija_dlja_zakaza LONG,sozdal LONG,srok_dejstvija VARCHAR(75) null,srok_dejstvija_dlja_zakaza LONG,srok_ispolnenija_zajavki VARCHAR(75) null,srok_obespechenija_zajavki VARCHAR(75) null,srok_postavki VARCHAR(75) null,srok_postavki_dlja_zakaza LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.informacija_o_razmewenii (cena_postavki VARCHAR(75) null,cena_postavki_dlja_zakaza DOUBLE,data_izmenenija DATE null,data_sozdanija DATE null,informacija_o_razmewenii_id LONG not null primary key,izmenil LONG,izvewenie_id LONG,mesto_postavki VARCHAR(75) null,mesto_postavki_dlja_zakaza LONG,obespechenie_ispolnenija LONG,obespechenie_ispolnenija_dlja_zakaza LONG,obespechenie_ispolnenija_v_procentah DOUBLE,obespechenie_v_procentah DOUBLE,obespechenie_zajavki LONG,obespechenie_zajavki_dlja_zakaza LONG,oplata VARCHAR(75) null,oplata_dlja_zakaza LONG,soputstvujuwie_uslovija VARCHAR(75) null,soputstvujuwie_uslovija_dlja_zakaza LONG,sozdal LONG,srok_dejstvija VARCHAR(75) null,srok_dejstvija_dlja_zakaza LONG,srok_ispolnenija_zajavki VARCHAR(75) null,srok_obespechenija_zajavki VARCHAR(75) null,srok_postavki VARCHAR(75) null,srok_postavki_dlja_zakaza LONG,required_documents_dlja_zakaza INTEGER,required_documents VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.informacija_o_razmewenii";
 	public static final String ORDER_BY_JPQL = " ORDER BY informacijaORazmewenii.informacija_o_razmewenii_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.informacija_o_razmewenii.informacija_o_razmewenii_id ASC";
@@ -217,6 +221,9 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 		attributes.put("srok_postavki", getSrok_postavki());
 		attributes.put("srok_postavki_dlja_zakaza",
 			getSrok_postavki_dlja_zakaza());
+		attributes.put("required_documents_dlja_zakaza",
+			getRequired_documents_dlja_zakaza());
+		attributes.put("required_documents", getRequired_documents());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -394,6 +401,19 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 
 		if (srok_postavki_dlja_zakaza != null) {
 			setSrok_postavki_dlja_zakaza(srok_postavki_dlja_zakaza);
+		}
+
+		Integer required_documents_dlja_zakaza = (Integer)attributes.get(
+				"required_documents_dlja_zakaza");
+
+		if (required_documents_dlja_zakaza != null) {
+			setRequired_documents_dlja_zakaza(required_documents_dlja_zakaza);
+		}
+
+		String required_documents = (String)attributes.get("required_documents");
+
+		if (required_documents != null) {
+			setRequired_documents(required_documents);
 		}
 	}
 
@@ -713,6 +733,32 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 		_srok_postavki_dlja_zakaza = srok_postavki_dlja_zakaza;
 	}
 
+	@Override
+	public int getRequired_documents_dlja_zakaza() {
+		return _required_documents_dlja_zakaza;
+	}
+
+	@Override
+	public void setRequired_documents_dlja_zakaza(
+		int required_documents_dlja_zakaza) {
+		_required_documents_dlja_zakaza = required_documents_dlja_zakaza;
+	}
+
+	@Override
+	public String getRequired_documents() {
+		if (_required_documents == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _required_documents;
+		}
+	}
+
+	@Override
+	public void setRequired_documents(String required_documents) {
+		_required_documents = required_documents;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -770,6 +816,8 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 		informacijaORazmeweniiImpl.setSrok_obespechenija_zajavki(getSrok_obespechenija_zajavki());
 		informacijaORazmeweniiImpl.setSrok_postavki(getSrok_postavki());
 		informacijaORazmeweniiImpl.setSrok_postavki_dlja_zakaza(getSrok_postavki_dlja_zakaza());
+		informacijaORazmeweniiImpl.setRequired_documents_dlja_zakaza(getRequired_documents_dlja_zakaza());
+		informacijaORazmeweniiImpl.setRequired_documents(getRequired_documents());
 
 		informacijaORazmeweniiImpl.resetOriginalValues();
 
@@ -960,12 +1008,22 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 
 		informacijaORazmeweniiCacheModel.srok_postavki_dlja_zakaza = getSrok_postavki_dlja_zakaza();
 
+		informacijaORazmeweniiCacheModel.required_documents_dlja_zakaza = getRequired_documents_dlja_zakaza();
+
+		informacijaORazmeweniiCacheModel.required_documents = getRequired_documents();
+
+		String required_documents = informacijaORazmeweniiCacheModel.required_documents;
+
+		if ((required_documents != null) && (required_documents.length() == 0)) {
+			informacijaORazmeweniiCacheModel.required_documents = null;
+		}
+
 		return informacijaORazmeweniiCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{cena_postavki=");
 		sb.append(getCena_postavki());
@@ -1019,6 +1077,10 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 		sb.append(getSrok_postavki());
 		sb.append(", srok_postavki_dlja_zakaza=");
 		sb.append(getSrok_postavki_dlja_zakaza());
+		sb.append(", required_documents_dlja_zakaza=");
+		sb.append(getRequired_documents_dlja_zakaza());
+		sb.append(", required_documents=");
+		sb.append(getRequired_documents());
 		sb.append("}");
 
 		return sb.toString();
@@ -1026,7 +1088,7 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.informacija.razmewenii.model.InformacijaORazmewenii");
@@ -1136,6 +1198,14 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 			"<column><column-name>srok_postavki_dlja_zakaza</column-name><column-value><![CDATA[");
 		sb.append(getSrok_postavki_dlja_zakaza());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>required_documents_dlja_zakaza</column-name><column-value><![CDATA[");
+		sb.append(getRequired_documents_dlja_zakaza());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>required_documents</column-name><column-value><![CDATA[");
+		sb.append(getRequired_documents());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1174,6 +1244,8 @@ public class InformacijaORazmeweniiModelImpl extends BaseModelImpl<InformacijaOR
 	private String _srok_obespechenija_zajavki;
 	private String _srok_postavki;
 	private long _srok_postavki_dlja_zakaza;
+	private int _required_documents_dlja_zakaza;
+	private String _required_documents;
 	private long _columnBitmask;
 	private InformacijaORazmewenii _escapedModel;
 }

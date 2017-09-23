@@ -92,6 +92,11 @@
 	 	<finder-column name="userid"></finder-column>
 	 	<finder-column name="organization_id"></finder-column>
 	 </finder>
+	 
+	 <finder return-type="Collection" name="CriteriaId">
+	  	<finder-column name="criteria_id"></finder-column>
+	 </finder>
+	 
 	</entity>
 	
 	<entity local-service="true" name="CriteriasWeight" remote-service="false" uuid="false" table="sapp.criterias_weight">

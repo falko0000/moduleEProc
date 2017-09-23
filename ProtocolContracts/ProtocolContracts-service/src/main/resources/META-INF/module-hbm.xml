@@ -3,6 +3,7 @@
 
 <hibernate-mapping auto-import="false" default-lazy="false">
 	<import class="tj.protocol.contracts.model.ProtocolContracts" />
+	<import class="tj.protocol.contracts.model.ProtocolEvaluate" />
 	<import class="tj.protocol.contracts.model.ProtocolOpening" />
 	<class name="tj.protocol.contracts.model.impl.ProtocolContractsImpl" table="sapp.protocol_contracts">
 		<id name="protocol_contracts_id" type="long">
@@ -13,6 +14,17 @@
 		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="created" type="org.hibernate.type.TimestampType" />
 		<property name="updated" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="tj.protocol.contracts.model.impl.ProtocolEvaluateImpl" table="sapp.protocol_evaluate">
+		<id name="protocol_evaluate_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.protocol_evaluate_id_seq</param>
+			</generator>
+		</id>
+		<property name="izvewenie_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="created" type="org.hibernate.type.TimestampType" />
+		<property name="updated" type="org.hibernate.type.TimestampType" />
+		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="tj.protocol.contracts.model.impl.ProtocolOpeningImpl" table="sapp.protocol_opening">
 		<id name="protocol_opening_id" type="long">

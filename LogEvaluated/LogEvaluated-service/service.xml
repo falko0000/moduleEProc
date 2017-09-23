@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.log.evaluated">
+	<namespace>log_evaluated</namespace>
+
+	<entity local-service="true" name="LogEvaluated" table="sapp.log_evaluated" remote-service="false" uuid="false" cache-enabled="false">
+          
+          <!--column primary key -->
+          <column name="log_evaluated_id" type="long" primary="true" id-type="sequence" id-param="sapp.log_evaluated_id_seq"></column>
+          
+          <!-- Others columns -->
+          <column name="spisok_lotov_id" type="long"></column>
+          <column name="organization_id" type="long"></column> 
+          <column name="userid" type="long"></column>
+          <column name="status" type="int"></column>
+          
+          
+          <column name="evaluated_des" type="String"></column>
+          <column name="opening_status" type="int"></column>
+          <column name="opening_des" type="String"></column>
+          <column name="result_opening_id" type="long"></column>
+          
+      
+         <finder return-type="LogEvaluated" name="SpIdOrgIdUserId">
+         	<finder-column name="spisok_lotov_id"></finder-column>
+         	<finder-column name="organization_id"></finder-column>
+         	<finder-column name="userid"></finder-column>
+         </finder>  
+         
+          <finder return-type="Collection" name="SpIdUserId">
+         	
+         	<finder-column name="spisok_lotov_id"></finder-column>
+         	<finder-column name="userid"></finder-column>
+         	
+         </finder>  
+        
+          <finder return-type="Collection" name="SpId">
+         	
+         	<finder-column name="spisok_lotov_id"></finder-column>
+         	
+         	
+         </finder> 
+         
+         <finder return-type="Collection" name="UserIdROId">
+         	<finder-column name="userid"></finder-column>
+            <finder-column name="result_opening_id"></finder-column>
+         </finder>
+         
+	</entity>
+</service-builder>

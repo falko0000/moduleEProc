@@ -32,7 +32,9 @@
         <column name="srok_obespechenija_zajavki" type="String"></column>
         <column name="srok_postavki" type="String"></column>
         <column name="srok_postavki_dlja_zakaza" type="long"></column>
-       
+        <column name="required_documents_dlja_zakaza" type="int"></column>
+        <column name="required_documents" type="String"></column>
+        
         <finder name="IzvewenijaID" return-type="InformacijaORazmewenii">
         <finder-column name="izvewenie_id"></finder-column>
         </finder>

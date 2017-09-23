@@ -89,14 +89,14 @@
 				 	property="izvewenija_id" 
 				 	name="id_bid"  
 				 	orderable="<%= true %>"  
-				 	href="${rowURL}"		 	
+				 	
 				 /> 
 			  			
 				 <liferay-ui:search-container-column-text 
 				 	property="naimenovanie" 
 				 	name="bid_name"  
 				 	orderable="<%= true %>" 
-				 	href="${rowURL}"
+				 	
 				 />
 			
 				 <liferay-ui:search-container-column-jsp 

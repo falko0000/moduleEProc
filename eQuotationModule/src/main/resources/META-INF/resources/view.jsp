@@ -7,6 +7,7 @@
 --%>
 
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@page import="com.liferay.portal.kernel.security.permission.ActionKeys"%>
 <%@ include file="/init.jsp" %>
@@ -45,8 +46,8 @@
 		   <portlet:param name="izvewenie_id" value="0"/>
 		</portlet:renderURL>
 
-		<liferay-frontend:add-menu-item title="ADD" url="<%= addIzvewenijaURL.toString() %>" />
-	    <liferay-frontend:add-menu-item title="COPY"  url="<%= BidCopy %>" />
+		<liferay-frontend:add-menu-item  title="<%=LanguageUtil.get(request, "add") %>" url="<%= addIzvewenijaURL.toString() %>" />
+	    <liferay-frontend:add-menu-item title="<%=LanguageUtil.get(request, "copy") %>"  url="<%= BidCopy %>" />
 	</liferay-frontend:add-menu>
 	</c:if>
 			<liferay-ui:tabs names="<%=names %>" url="<%=tabURL.toString()%>" param="izvewenija_tab" > 

@@ -56,24 +56,29 @@ Import-Package: com.liferay.admin.kernel.util;version="[1.0,2)",com.li
  on="[1.0,2)",tj.izvewenieput.model;version="[1.0,2)",tj.izvewenieput.
  service;version="[1.0,2)",tj.izvewenija.model;version="[1.0,2)",tj.iz
  vewenija.service;version="[1.0,2)",tj.jekb.model;version="[1.0,2)",tj
- .jekb.service;version="[1.0,2)",tj.obwaja.informacija.exception;versi
- on="[1.0,2)",tj.obwaja.informacija.model;version="[1.0,2)",tj.obwaja.
- informacija.service;version="[1.0,2)",tj.okgz.model;version="[1.0,2)"
- ,tj.okgz.service;version="[1.0,2)",tj.orgindex.exception;version="[1.
- 0,2)",tj.orgindex.model;version="[1.0,2)",tj.orgindex.service;version
- ="[1.0,2)",tj.orgindex.service.persistence;version="[1.0,2)",tj.porja
- dok.raboty.komissii.exception;version="[1.0,2)",tj.porjadok.raboty.ko
- missii.model;version="[1.0,2)",tj.porjadok.raboty.komissii.service;ve
- rsion="[1.0,2)",tj.spisok.tovarov.model;version="[1.0,2)",tj.spisok.t
- ovarov.service;version="[1.0,2)",tj.spisoklotov.model;version="[1.0,2
- )",tj.spisoklotov.service;version="[1.0,2)",tj.strany.model;version="
- [1.0,2)",tj.strany.service;version="[1.0,2)",tj.system.config.excepti
- on;version="[1.0,2)",tj.system.config.model;version="[1.0,2)",tj.syst
- em.config.service;version="[1.0,2)",tj.tipy.izvewenij.exception;versi
- on="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2)",tj.tipy.izvewe
- nij.service;version="[1.0,2)",tj.tipy.izvewenij.service.persistence;v
- ersion="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj.vbk.service;versio
- n="[1.0,2)"
+ .jekb.service;version="[1.0,2)",tj.log.evaluated.model;version="[1.0,
+ 2)",tj.log.evaluated.service;version="[1.0,2)",tj.obwaja.informacija.
+ exception;version="[1.0,2)",tj.obwaja.informacija.model;version="[1.0
+ ,2)",tj.obwaja.informacija.service;version="[1.0,2)",tj.okgz.model;ve
+ rsion="[1.0,2)",tj.okgz.service;version="[1.0,2)",tj.orgindex.excepti
+ on;version="[1.0,2)",tj.orgindex.model;version="[1.0,2)",tj.orgindex.
+ service;version="[1.0,2)",tj.orgindex.service.persistence;version="[1
+ .0,2)",tj.porjadok.raboty.komissii.exception;version="[1.0,2)",tj.por
+ jadok.raboty.komissii.model;version="[1.0,2)",tj.porjadok.raboty.komi
+ ssii.service;version="[1.0,2)",tj.protocol.contracts.model;version="[
+ 1.0,2)",tj.protocol.contracts.service;version="[1.0,2)",tj.result.ope
+ ning.model;version="[1.0,2)",tj.result.opening.service;version="[1.0,
+ 2)",tj.spisok.tovarov.model;version="[1.0,2)",tj.spisok.tovarov.servi
+ ce;version="[1.0,2)",tj.spisoklotov.model;version="[1.0,2)",tj.spisok
+ lotov.service;version="[1.0,2)",tj.strany.model;version="[1.0,2)",tj.
+ strany.service;version="[1.0,2)",tj.supplier.request.lot.model;versio
+ n="[1.0,2)",tj.supplier.request.lot.service;version="[1.0,2)",tj.syst
+ em.config.exception;version="[1.0,2)",tj.system.config.model;version=
+ "[1.0,2)",tj.system.config.service;version="[1.0,2)",tj.tipy.izveweni
+ j.exception;version="[1.0,2)",tj.tipy.izvewenij.model;version="[1.0,2
+ )",tj.tipy.izvewenij.service;version="[1.0,2)",tj.tipy.izvewenij.serv
+ ice.persistence;version="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj.v
+ bk.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

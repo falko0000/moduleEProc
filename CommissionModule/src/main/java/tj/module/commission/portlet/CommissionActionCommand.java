@@ -3,6 +3,7 @@ package tj.module.commission.portlet;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -38,8 +39,13 @@ import tj.criterias.model.Criteria;
 import tj.criterias.model.CriteriaValue;
 import tj.criterias.service.CriteriaLocalServiceUtil;
 import tj.criterias.service.CriteriaValueLocalServiceUtil;
+import tj.log.evaluated.model.LogEvaluated;
+import tj.log.evaluated.service.LogEvaluatedLocalService;
+import tj.log.evaluated.service.LogEvaluatedLocalServiceUtil;
 import tj.module.commission.constants.CommissionConstants;
-
+import tj.result.opening.model.ResultOpening;
+import tj.result.opening.service.ResultOpeningLocalServiceUtil;
+import tj.schedulars.Winner;
 import tj.supplier.criteria.model.SupplirCriteria;
 import tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil;
 
@@ -68,6 +74,86 @@ public class CommissionActionCommand extends BaseMVCActionCommand{
 		if(formname.equals(CommissionConstants.FORM_COMMISSION_CRITERIA))
 			insertEvaluation(actionRequest, actionResponse);
 		
+		if(formname.equals(CommissionConstants.FORM_TOLERANCE))
+			tolerance(actionRequest, actionResponse);
+		
+		if(formname.equals(CommissionConstants.FORM_COMMISSION_GENERATE_PROTOCOL))
+		{
+			
+			User usr = (User) actionRequest.getAttribute(WebKeys.USER);
+			long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
+			
+			Winner winner = new Winner(izvewenie_id, usr.getUserId());
+		}
+		
+		if(formname.equals(CommissionConstants.FORM_END_EVALUATED))
+	           updateLogEvaluated(actionRequest, actionResponse);
+			
+		
+	}
+
+	private void updateLogEvaluated(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+		long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+		long organization_id = ParamUtil.getLong(actionRequest, "organization_id");
+		long userid = (long) actionRequest.getAttribute(WebKeys.USER_ID);
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		
+		 LogEvaluated logEvaluated = LogEvaluatedLocalServiceUtil.getLogEvaluated(spisok_lotov_id, organization_id,userid);
+		
+		 if(Validator.isNotNull(logEvaluated))
+		 {
+			 logEvaluated.setStatus(logEvaluated.getStatus()+1);
+			 LogEvaluatedLocalServiceUtil.updateLogEvaluated(logEvaluated);
+		 }
+		  try {
+				sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
+	private void tolerance(ActionRequest actionRequest, ActionResponse actionResponse) {
+		
+		long spisok_lotov_id = ParamUtil.getLong(actionRequest, "spisok_lotov_id");
+        long organization_id = ParamUtil.getLong(actionRequest, "organization_id");
+        long userid =(long) actionRequest.getAttribute(WebKeys.USER_ID);
+        
+        LogEvaluated evaluated = LogEvaluatedLocalServiceUtil.getLogEvaluated(spisok_lotov_id, organization_id, userid);
+      
+        
+        ResultOpening resultOpening = ResultOpeningLocalServiceUtil.getResultOpening(spisok_lotov_id, organization_id);
+		
+        int tolerance = ParamUtil.getInteger(actionRequest, "tolerance");
+        String tolerance_description = ParamUtil.getString(actionRequest, "tolerance_description");
+        
+        String redirect =  ParamUtil.getString(actionRequest, "redirect");
+        
+        resultOpening.setStatus(tolerance);
+        resultOpening.setDescription(tolerance_description);
+        
+        ResultOpeningLocalServiceUtil.updateResultOpening(resultOpening);
+        
+        
+        if(Validator.isNotNull(evaluated))
+        {
+        	evaluated.setOpening_status(tolerance);
+        	evaluated.setOpening_des(tolerance_description);
+        	
+        	LogEvaluatedLocalServiceUtil.updateLogEvaluated(evaluated);
+        	
+        }
+        
+        
+        
+        
+        try {
+			sendRedirect(actionRequest, actionResponse, redirect);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void insertEvaluation(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException {

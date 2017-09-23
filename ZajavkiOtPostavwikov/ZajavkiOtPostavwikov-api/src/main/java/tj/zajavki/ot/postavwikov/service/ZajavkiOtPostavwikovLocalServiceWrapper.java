@@ -67,6 +67,12 @@ public class ZajavkiOtPostavwikovLocalServiceWrapper
 	}
 
 	@Override
+	public double getTotalPrice(long lot_id, long postavwik_id) {
+		return _zajavkiOtPostavwikovLocalService.getTotalPrice(lot_id,
+			postavwik_id);
+	}
+
+	@Override
 	public int getCountLotId(long lot_id) {
 		return _zajavkiOtPostavwikovLocalService.getCountLotId(lot_id);
 	}

@@ -109,7 +109,7 @@
      </div>
      
 <aui:button-row>
-<aui:input type="text" name="template_file_name" label="template_file_name"/>
+
  <aui:button type="submit" value="generate doc"></aui:button>
  <aui:button type="cancel" value="cancel"></aui:button>
 </aui:button-row>

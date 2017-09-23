@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.result.opening">
+	<namespace>result_opening</namespace>
+	
+	<entity local-service="true" name="ResultOpening" remote-service="false" uuid="false" table="sapp.result_opening" cache-enabled="false">
+
+		<!-- PK fields -->
+
+		<column name="result_opening_id" primary="true" type="long"  id-type="sequence" id-param="sapp.result_opening_id_seq"/>
+
+		<column name="spisok_lotov_id" type="long"></column>
+        
+        <column name="protocol_opening_id" type="long"></column>
+	    
+	    <column name="postavwik_id" type="long"></column>
+	    
+	    <column name="status" type="int"></column>
+	    
+	    <column name="description" type="String"></column>
+	    
+	    <finder return-type="Collection" name="ProtocolOpeningId">
+	        <finder-column name="protocol_opening_id"></finder-column>
+	    </finder>
+	    
+	    
+	    <finder return-type="Collection" name="SpisokLotovIdAndStatus">
+	        <finder-column name="spisok_lotov_id"></finder-column>
+	        <finder-column name="status"></finder-column>
+	    </finder>
+	    
+	    
+	     <finder return-type="ResultOpening" name="SpisokLotovIdAndPostavwikId">
+	        <finder-column name="spisok_lotov_id"></finder-column>
+	        <finder-column name="postavwik_id"></finder-column>
+	    </finder>
+	    
+	    <finder return-type="Collection" name="SpisokLotovId">
+	        <finder-column name="spisok_lotov_id"></finder-column>
+	    </finder>
+	    
+	</entity>
+</service-builder>

@@ -25,6 +25,12 @@
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 
+<%@page import="com.liferay.portal.kernel.json.JSONFactoryUtil"%>
+<%@page import="com.liferay.portal.kernel.json.JSONObject"%>
+
+<%@page import="com.liferay.dynamic.data.mapping.kernel.DDMStructure"%>
+<%@page import="com.liferay.dynamic.data.mapping.kernel.DDMStructureManagerUtil"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 
@@ -198,8 +204,6 @@ boolean filterManageableUserGroups = true;
 if (portletName.equals(portletId) || permissionChecker.hasPermission(scopeGroup.getGroupId(), UserGroup.class.getName(), UserGroup.class.getName(), ActionKeys.VIEW)) {
 	filterManageableUserGroups = false;
 }
-
-
 
 %>
 

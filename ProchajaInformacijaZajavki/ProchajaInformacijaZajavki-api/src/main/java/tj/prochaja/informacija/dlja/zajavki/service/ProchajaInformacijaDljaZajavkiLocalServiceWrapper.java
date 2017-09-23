@@ -158,6 +158,12 @@ public class ProchajaInformacijaDljaZajavkiLocalServiceWrapper
 			end);
 	}
 
+	@Override
+	public java.util.List<tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki> getProchajaInformacijaDljaZajavkis(
+		long izvewenie_id) {
+		return _prochajaInformacijaDljaZajavkiLocalService.getProchajaInformacijaDljaZajavkis(izvewenie_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

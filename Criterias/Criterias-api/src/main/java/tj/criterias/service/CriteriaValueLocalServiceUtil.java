@@ -157,6 +157,11 @@ public class CriteriaValueLocalServiceUtil {
 		return getService().getCriteriaValues(start, end);
 	}
 
+	public static java.util.List<tj.criterias.model.CriteriaValue> getCriteriaValues(
+		long criteria_id) {
+		return getService().getCriteriaValues(criteria_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

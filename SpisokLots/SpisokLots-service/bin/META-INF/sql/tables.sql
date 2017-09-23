@@ -25,5 +25,6 @@ create table sapp.spisok_lotov (
 	srok_ispolnenija_zajavki VARCHAR(75) null,
 	srok_obespechenija_zajavki VARCHAR(75) null,
 	srok_postavki VARCHAR(75) null,
-	zakazchik VARCHAR(75) null
+	zakazchik VARCHAR(75) null,
+	required_documents VARCHAR(75) null
 );

@@ -60,6 +60,7 @@ public class SpisoklotovSoap implements Serializable {
 		soapModel.setSrok_obespechenija_zajavki(model.getSrok_obespechenija_zajavki());
 		soapModel.setSrok_postavki(model.getSrok_postavki());
 		soapModel.setZakazchik(model.getZakazchik());
+		soapModel.setRequired_documents(model.getRequired_documents());
 
 		return soapModel;
 	}
@@ -330,6 +331,14 @@ public class SpisoklotovSoap implements Serializable {
 		_zakazchik = zakazchik;
 	}
 
+	public String getRequired_documents() {
+		return _required_documents;
+	}
+
+	public void setRequired_documents(String required_documents) {
+		_required_documents = required_documents;
+	}
+
 	private double _cena_kontrakta;
 	private String _cena_postavki;
 	private Date _data_izmenenija;
@@ -357,4 +366,5 @@ public class SpisoklotovSoap implements Serializable {
 	private String _srok_obespechenija_zajavki;
 	private String _srok_postavki;
 	private String _zakazchik;
+	private String _required_documents;
 }

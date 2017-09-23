@@ -152,6 +152,11 @@ public class ProchajaInformacijaDljaZajavkiLocalServiceUtil {
 		return getService().getProchajaInformacijaDljaZajavkis(start, end);
 	}
 
+	public static java.util.List<tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki> getProchajaInformacijaDljaZajavkis(
+		long izvewenie_id) {
+		return getService().getProchajaInformacijaDljaZajavkis(izvewenie_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

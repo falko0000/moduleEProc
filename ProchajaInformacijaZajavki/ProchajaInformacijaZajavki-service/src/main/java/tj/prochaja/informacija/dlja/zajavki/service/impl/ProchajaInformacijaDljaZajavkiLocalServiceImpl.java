@@ -14,6 +14,8 @@
 
 package tj.prochaja.informacija.dlja.zajavki.service.impl;
 
+import java.util.List;
+
 import aQute.bnd.annotation.ProviderType;
 import tj.prochaja.informacija.dlja.zajavki.exception.NoSuchProchajaInformacijaDljaZajavkiException;
 import tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki;
@@ -48,5 +50,10 @@ public class ProchajaInformacijaDljaZajavkiLocalServiceImpl
 			
 		}
 	return prochajaInformacijaDljaZajavki;	
+	}
+	
+	public List<ProchajaInformacijaDljaZajavki> getProchajaInformacijaDljaZajavkis(long izvewenie_id)
+	{
+		return prochajaInformacijaDljaZajavkiPersistence.findByIzvewenieId(izvewenie_id);
 	}
 }

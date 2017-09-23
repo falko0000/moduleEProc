@@ -1,0 +1,1013 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package tj.protocol.contracts.service.persistence.impl;
+
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.dao.orm.EntityCache;
+import com.liferay.portal.kernel.dao.orm.FinderCache;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
+import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.spring.extender.service.ServiceReference;
+
+import tj.protocol.contracts.exception.NoSuchProtocolEvaluateException;
+import tj.protocol.contracts.model.ProtocolEvaluate;
+import tj.protocol.contracts.model.impl.ProtocolEvaluateImpl;
+import tj.protocol.contracts.model.impl.ProtocolEvaluateModelImpl;
+import tj.protocol.contracts.service.persistence.ProtocolEvaluatePersistence;
+
+import java.io.Serializable;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * The persistence implementation for the protocol evaluate service.
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ProtocolEvaluatePersistence
+ * @see tj.protocol.contracts.service.persistence.ProtocolEvaluateUtil
+ * @generated
+ */
+@ProviderType
+public class ProtocolEvaluatePersistenceImpl extends BasePersistenceImpl<ProtocolEvaluate>
+	implements ProtocolEvaluatePersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link ProtocolEvaluateUtil} to access the protocol evaluate persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
+	public static final String FINDER_CLASS_NAME_ENTITY = ProtocolEvaluateImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
+		".List1";
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
+		".List2";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateModelImpl.FINDER_CACHE_ENABLED,
+			ProtocolEvaluateImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateModelImpl.FINDER_CACHE_ENABLED,
+			ProtocolEvaluateImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_IZVEWENIEID = new FinderPath(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateModelImpl.FINDER_CACHE_ENABLED,
+			ProtocolEvaluateImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByIzvewenieId", new String[] { Long.class.getName() },
+			ProtocolEvaluateModelImpl.IZVEWENIE_ID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_IZVEWENIEID = new FinderPath(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByIzvewenieId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the protocol evaluate where izvewenie_id = &#63; or throws a {@link NoSuchProtocolEvaluateException} if it could not be found.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @return the matching protocol evaluate
+	 * @throws NoSuchProtocolEvaluateException if a matching protocol evaluate could not be found
+	 */
+	@Override
+	public ProtocolEvaluate findByIzvewenieId(long izvewenie_id)
+		throws NoSuchProtocolEvaluateException {
+		ProtocolEvaluate protocolEvaluate = fetchByIzvewenieId(izvewenie_id);
+
+		if (protocolEvaluate == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("izvewenie_id=");
+			msg.append(izvewenie_id);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchProtocolEvaluateException(msg.toString());
+		}
+
+		return protocolEvaluate;
+	}
+
+	/**
+	 * Returns the protocol evaluate where izvewenie_id = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @return the matching protocol evaluate, or <code>null</code> if a matching protocol evaluate could not be found
+	 */
+	@Override
+	public ProtocolEvaluate fetchByIzvewenieId(long izvewenie_id) {
+		return fetchByIzvewenieId(izvewenie_id, true);
+	}
+
+	/**
+	 * Returns the protocol evaluate where izvewenie_id = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching protocol evaluate, or <code>null</code> if a matching protocol evaluate could not be found
+	 */
+	@Override
+	public ProtocolEvaluate fetchByIzvewenieId(long izvewenie_id,
+		boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { izvewenie_id };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+					finderArgs, this);
+		}
+
+		if (result instanceof ProtocolEvaluate) {
+			ProtocolEvaluate protocolEvaluate = (ProtocolEvaluate)result;
+
+			if ((izvewenie_id != protocolEvaluate.getIzvewenie_id())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_PROTOCOLEVALUATE_WHERE);
+
+			query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(izvewenie_id);
+
+				List<ProtocolEvaluate> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"ProtocolEvaluatePersistenceImpl.fetchByIzvewenieId(long, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					ProtocolEvaluate protocolEvaluate = list.get(0);
+
+					result = protocolEvaluate;
+
+					cacheResult(protocolEvaluate);
+
+					if ((protocolEvaluate.getIzvewenie_id() != izvewenie_id)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+							finderArgs, protocolEvaluate);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (ProtocolEvaluate)result;
+		}
+	}
+
+	/**
+	 * Removes the protocol evaluate where izvewenie_id = &#63; from the database.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @return the protocol evaluate that was removed
+	 */
+	@Override
+	public ProtocolEvaluate removeByIzvewenieId(long izvewenie_id)
+		throws NoSuchProtocolEvaluateException {
+		ProtocolEvaluate protocolEvaluate = findByIzvewenieId(izvewenie_id);
+
+		return remove(protocolEvaluate);
+	}
+
+	/**
+	 * Returns the number of protocol evaluates where izvewenie_id = &#63;.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @return the number of matching protocol evaluates
+	 */
+	@Override
+	public int countByIzvewenieId(long izvewenie_id) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_IZVEWENIEID;
+
+		Object[] finderArgs = new Object[] { izvewenie_id };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_PROTOCOLEVALUATE_WHERE);
+
+			query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(izvewenie_id);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2 = "protocolEvaluate.izvewenie_id = ?";
+
+	public ProtocolEvaluatePersistenceImpl() {
+		setModelClass(ProtocolEvaluate.class);
+	}
+
+	/**
+	 * Caches the protocol evaluate in the entity cache if it is enabled.
+	 *
+	 * @param protocolEvaluate the protocol evaluate
+	 */
+	@Override
+	public void cacheResult(ProtocolEvaluate protocolEvaluate) {
+		entityCache.putResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateImpl.class, protocolEvaluate.getPrimaryKey(),
+			protocolEvaluate);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID,
+			new Object[] { protocolEvaluate.getIzvewenie_id() },
+			protocolEvaluate);
+
+		protocolEvaluate.resetOriginalValues();
+	}
+
+	/**
+	 * Caches the protocol evaluates in the entity cache if it is enabled.
+	 *
+	 * @param protocolEvaluates the protocol evaluates
+	 */
+	@Override
+	public void cacheResult(List<ProtocolEvaluate> protocolEvaluates) {
+		for (ProtocolEvaluate protocolEvaluate : protocolEvaluates) {
+			if (entityCache.getResult(
+						ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+						ProtocolEvaluateImpl.class,
+						protocolEvaluate.getPrimaryKey()) == null) {
+				cacheResult(protocolEvaluate);
+			}
+			else {
+				protocolEvaluate.resetOriginalValues();
+			}
+		}
+	}
+
+	/**
+	 * Clears the cache for all protocol evaluates.
+	 *
+	 * <p>
+	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * </p>
+	 */
+	@Override
+	public void clearCache() {
+		entityCache.clearCache(ProtocolEvaluateImpl.class);
+
+		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+	}
+
+	/**
+	 * Clears the cache for the protocol evaluate.
+	 *
+	 * <p>
+	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
+	 * </p>
+	 */
+	@Override
+	public void clearCache(ProtocolEvaluate protocolEvaluate) {
+		entityCache.removeResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateImpl.class, protocolEvaluate.getPrimaryKey());
+
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((ProtocolEvaluateModelImpl)protocolEvaluate,
+			true);
+	}
+
+	@Override
+	public void clearCache(List<ProtocolEvaluate> protocolEvaluates) {
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ProtocolEvaluate protocolEvaluate : protocolEvaluates) {
+			entityCache.removeResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+				ProtocolEvaluateImpl.class, protocolEvaluate.getPrimaryKey());
+
+			clearUniqueFindersCache((ProtocolEvaluateModelImpl)protocolEvaluate,
+				true);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		ProtocolEvaluateModelImpl protocolEvaluateModelImpl) {
+		Object[] args = new Object[] { protocolEvaluateModelImpl.getIzvewenie_id() };
+
+		finderCache.putResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args,
+			Long.valueOf(1), false);
+		finderCache.putResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args,
+			protocolEvaluateModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		ProtocolEvaluateModelImpl protocolEvaluateModelImpl,
+		boolean clearCurrent) {
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+					protocolEvaluateModelImpl.getIzvewenie_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args);
+		}
+
+		if ((protocolEvaluateModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_IZVEWENIEID.getColumnBitmask()) != 0) {
+			Object[] args = new Object[] {
+					protocolEvaluateModelImpl.getOriginalIzvewenie_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_IZVEWENIEID, args);
+		}
+	}
+
+	/**
+	 * Creates a new protocol evaluate with the primary key. Does not add the protocol evaluate to the database.
+	 *
+	 * @param protocol_evaluate_id the primary key for the new protocol evaluate
+	 * @return the new protocol evaluate
+	 */
+	@Override
+	public ProtocolEvaluate create(long protocol_evaluate_id) {
+		ProtocolEvaluate protocolEvaluate = new ProtocolEvaluateImpl();
+
+		protocolEvaluate.setNew(true);
+		protocolEvaluate.setPrimaryKey(protocol_evaluate_id);
+
+		return protocolEvaluate;
+	}
+
+	/**
+	 * Removes the protocol evaluate with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param protocol_evaluate_id the primary key of the protocol evaluate
+	 * @return the protocol evaluate that was removed
+	 * @throws NoSuchProtocolEvaluateException if a protocol evaluate with the primary key could not be found
+	 */
+	@Override
+	public ProtocolEvaluate remove(long protocol_evaluate_id)
+		throws NoSuchProtocolEvaluateException {
+		return remove((Serializable)protocol_evaluate_id);
+	}
+
+	/**
+	 * Removes the protocol evaluate with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the protocol evaluate
+	 * @return the protocol evaluate that was removed
+	 * @throws NoSuchProtocolEvaluateException if a protocol evaluate with the primary key could not be found
+	 */
+	@Override
+	public ProtocolEvaluate remove(Serializable primaryKey)
+		throws NoSuchProtocolEvaluateException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ProtocolEvaluate protocolEvaluate = (ProtocolEvaluate)session.get(ProtocolEvaluateImpl.class,
+					primaryKey);
+
+			if (protocolEvaluate == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+				}
+
+				throw new NoSuchProtocolEvaluateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					primaryKey);
+			}
+
+			return remove(protocolEvaluate);
+		}
+		catch (NoSuchProtocolEvaluateException nsee) {
+			throw nsee;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	protected ProtocolEvaluate removeImpl(ProtocolEvaluate protocolEvaluate) {
+		protocolEvaluate = toUnwrappedModel(protocolEvaluate);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			if (!session.contains(protocolEvaluate)) {
+				protocolEvaluate = (ProtocolEvaluate)session.get(ProtocolEvaluateImpl.class,
+						protocolEvaluate.getPrimaryKeyObj());
+			}
+
+			if (protocolEvaluate != null) {
+				session.delete(protocolEvaluate);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		if (protocolEvaluate != null) {
+			clearCache(protocolEvaluate);
+		}
+
+		return protocolEvaluate;
+	}
+
+	@Override
+	public ProtocolEvaluate updateImpl(ProtocolEvaluate protocolEvaluate) {
+		protocolEvaluate = toUnwrappedModel(protocolEvaluate);
+
+		boolean isNew = protocolEvaluate.isNew();
+
+		ProtocolEvaluateModelImpl protocolEvaluateModelImpl = (ProtocolEvaluateModelImpl)protocolEvaluate;
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			if (protocolEvaluate.isNew()) {
+				session.save(protocolEvaluate);
+
+				protocolEvaluate.setNew(false);
+			}
+			else {
+				protocolEvaluate = (ProtocolEvaluate)session.merge(protocolEvaluate);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+
+		if (!ProtocolEvaluateModelImpl.COLUMN_BITMASK_ENABLED) {
+			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+		else
+		 if (isNew) {
+			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
+				FINDER_ARGS_EMPTY);
+		}
+
+		entityCache.putResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+			ProtocolEvaluateImpl.class, protocolEvaluate.getPrimaryKey(),
+			protocolEvaluate, false);
+
+		clearUniqueFindersCache(protocolEvaluateModelImpl, false);
+		cacheUniqueFindersCache(protocolEvaluateModelImpl);
+
+		protocolEvaluate.resetOriginalValues();
+
+		return protocolEvaluate;
+	}
+
+	protected ProtocolEvaluate toUnwrappedModel(
+		ProtocolEvaluate protocolEvaluate) {
+		if (protocolEvaluate instanceof ProtocolEvaluateImpl) {
+			return protocolEvaluate;
+		}
+
+		ProtocolEvaluateImpl protocolEvaluateImpl = new ProtocolEvaluateImpl();
+
+		protocolEvaluateImpl.setNew(protocolEvaluate.isNew());
+		protocolEvaluateImpl.setPrimaryKey(protocolEvaluate.getPrimaryKey());
+
+		protocolEvaluateImpl.setProtocol_evaluate_id(protocolEvaluate.getProtocol_evaluate_id());
+		protocolEvaluateImpl.setIzvewenie_id(protocolEvaluate.getIzvewenie_id());
+		protocolEvaluateImpl.setCreated(protocolEvaluate.getCreated());
+		protocolEvaluateImpl.setUpdated(protocolEvaluate.getUpdated());
+		protocolEvaluateImpl.setUserid(protocolEvaluate.getUserid());
+
+		return protocolEvaluateImpl;
+	}
+
+	/**
+	 * Returns the protocol evaluate with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the protocol evaluate
+	 * @return the protocol evaluate
+	 * @throws NoSuchProtocolEvaluateException if a protocol evaluate with the primary key could not be found
+	 */
+	@Override
+	public ProtocolEvaluate findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchProtocolEvaluateException {
+		ProtocolEvaluate protocolEvaluate = fetchByPrimaryKey(primaryKey);
+
+		if (protocolEvaluate == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
+			}
+
+			throw new NoSuchProtocolEvaluateException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				primaryKey);
+		}
+
+		return protocolEvaluate;
+	}
+
+	/**
+	 * Returns the protocol evaluate with the primary key or throws a {@link NoSuchProtocolEvaluateException} if it could not be found.
+	 *
+	 * @param protocol_evaluate_id the primary key of the protocol evaluate
+	 * @return the protocol evaluate
+	 * @throws NoSuchProtocolEvaluateException if a protocol evaluate with the primary key could not be found
+	 */
+	@Override
+	public ProtocolEvaluate findByPrimaryKey(long protocol_evaluate_id)
+		throws NoSuchProtocolEvaluateException {
+		return findByPrimaryKey((Serializable)protocol_evaluate_id);
+	}
+
+	/**
+	 * Returns the protocol evaluate with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the protocol evaluate
+	 * @return the protocol evaluate, or <code>null</code> if a protocol evaluate with the primary key could not be found
+	 */
+	@Override
+	public ProtocolEvaluate fetchByPrimaryKey(Serializable primaryKey) {
+		Serializable serializable = entityCache.getResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+				ProtocolEvaluateImpl.class, primaryKey);
+
+		if (serializable == nullModel) {
+			return null;
+		}
+
+		ProtocolEvaluate protocolEvaluate = (ProtocolEvaluate)serializable;
+
+		if (protocolEvaluate == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				protocolEvaluate = (ProtocolEvaluate)session.get(ProtocolEvaluateImpl.class,
+						primaryKey);
+
+				if (protocolEvaluate != null) {
+					cacheResult(protocolEvaluate);
+				}
+				else {
+					entityCache.putResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+						ProtocolEvaluateImpl.class, primaryKey, nullModel);
+				}
+			}
+			catch (Exception e) {
+				entityCache.removeResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+					ProtocolEvaluateImpl.class, primaryKey);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return protocolEvaluate;
+	}
+
+	/**
+	 * Returns the protocol evaluate with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param protocol_evaluate_id the primary key of the protocol evaluate
+	 * @return the protocol evaluate, or <code>null</code> if a protocol evaluate with the primary key could not be found
+	 */
+	@Override
+	public ProtocolEvaluate fetchByPrimaryKey(long protocol_evaluate_id) {
+		return fetchByPrimaryKey((Serializable)protocol_evaluate_id);
+	}
+
+	@Override
+	public Map<Serializable, ProtocolEvaluate> fetchByPrimaryKeys(
+		Set<Serializable> primaryKeys) {
+		if (primaryKeys.isEmpty()) {
+			return Collections.emptyMap();
+		}
+
+		Map<Serializable, ProtocolEvaluate> map = new HashMap<Serializable, ProtocolEvaluate>();
+
+		if (primaryKeys.size() == 1) {
+			Iterator<Serializable> iterator = primaryKeys.iterator();
+
+			Serializable primaryKey = iterator.next();
+
+			ProtocolEvaluate protocolEvaluate = fetchByPrimaryKey(primaryKey);
+
+			if (protocolEvaluate != null) {
+				map.put(primaryKey, protocolEvaluate);
+			}
+
+			return map;
+		}
+
+		Set<Serializable> uncachedPrimaryKeys = null;
+
+		for (Serializable primaryKey : primaryKeys) {
+			Serializable serializable = entityCache.getResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+					ProtocolEvaluateImpl.class, primaryKey);
+
+			if (serializable != nullModel) {
+				if (serializable == null) {
+					if (uncachedPrimaryKeys == null) {
+						uncachedPrimaryKeys = new HashSet<Serializable>();
+					}
+
+					uncachedPrimaryKeys.add(primaryKey);
+				}
+				else {
+					map.put(primaryKey, (ProtocolEvaluate)serializable);
+				}
+			}
+		}
+
+		if (uncachedPrimaryKeys == null) {
+			return map;
+		}
+
+		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
+				1);
+
+		query.append(_SQL_SELECT_PROTOCOLEVALUATE_WHERE_PKS_IN);
+
+		for (Serializable primaryKey : uncachedPrimaryKeys) {
+			query.append((long)primaryKey);
+
+			query.append(StringPool.COMMA);
+		}
+
+		query.setIndex(query.index() - 1);
+
+		query.append(StringPool.CLOSE_PARENTHESIS);
+
+		String sql = query.toString();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createQuery(sql);
+
+			for (ProtocolEvaluate protocolEvaluate : (List<ProtocolEvaluate>)q.list()) {
+				map.put(protocolEvaluate.getPrimaryKeyObj(), protocolEvaluate);
+
+				cacheResult(protocolEvaluate);
+
+				uncachedPrimaryKeys.remove(protocolEvaluate.getPrimaryKeyObj());
+			}
+
+			for (Serializable primaryKey : uncachedPrimaryKeys) {
+				entityCache.putResult(ProtocolEvaluateModelImpl.ENTITY_CACHE_ENABLED,
+					ProtocolEvaluateImpl.class, primaryKey, nullModel);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		return map;
+	}
+
+	/**
+	 * Returns all the protocol evaluates.
+	 *
+	 * @return the protocol evaluates
+	 */
+	@Override
+	public List<ProtocolEvaluate> findAll() {
+		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the protocol evaluates.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProtocolEvaluateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of protocol evaluates
+	 * @param end the upper bound of the range of protocol evaluates (not inclusive)
+	 * @return the range of protocol evaluates
+	 */
+	@Override
+	public List<ProtocolEvaluate> findAll(int start, int end) {
+		return findAll(start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the protocol evaluates.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProtocolEvaluateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of protocol evaluates
+	 * @param end the upper bound of the range of protocol evaluates (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of protocol evaluates
+	 */
+	@Override
+	public List<ProtocolEvaluate> findAll(int start, int end,
+		OrderByComparator<ProtocolEvaluate> orderByComparator) {
+		return findAll(start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the protocol evaluates.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProtocolEvaluateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of protocol evaluates
+	 * @param end the upper bound of the range of protocol evaluates (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of protocol evaluates
+	 */
+	@Override
+	public List<ProtocolEvaluate> findAll(int start, int end,
+		OrderByComparator<ProtocolEvaluate> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderArgs = FINDER_ARGS_EMPTY;
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
+			finderArgs = new Object[] { start, end, orderByComparator };
+		}
+
+		List<ProtocolEvaluate> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<ProtocolEvaluate>)finderCache.getResult(finderPath,
+					finderArgs, this);
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 2));
+
+				query.append(_SQL_SELECT_PROTOCOLEVALUATE);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_PROTOCOLEVALUATE;
+
+				if (pagination) {
+					sql = sql.concat(ProtocolEvaluateModelImpl.ORDER_BY_JPQL);
+				}
+			}
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				if (!pagination) {
+					list = (List<ProtocolEvaluate>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<ProtocolEvaluate>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Removes all the protocol evaluates from the database.
+	 *
+	 */
+	@Override
+	public void removeAll() {
+		for (ProtocolEvaluate protocolEvaluate : findAll()) {
+			remove(protocolEvaluate);
+		}
+	}
+
+	/**
+	 * Returns the number of protocol evaluates.
+	 *
+	 * @return the number of protocol evaluates
+	 */
+	@Override
+	public int countAll() {
+		Long count = (Long)finderCache.getResult(FINDER_PATH_COUNT_ALL,
+				FINDER_ARGS_EMPTY, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(_SQL_COUNT_PROTOCOLEVALUATE);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY,
+					count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_COUNT_ALL,
+					FINDER_ARGS_EMPTY);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	@Override
+	protected Map<String, Integer> getTableColumnsMap() {
+		return ProtocolEvaluateModelImpl.TABLE_COLUMNS_MAP;
+	}
+
+	/**
+	 * Initializes the protocol evaluate persistence.
+	 */
+	public void afterPropertiesSet() {
+	}
+
+	public void destroy() {
+		entityCache.removeCache(ProtocolEvaluateImpl.class.getName());
+		finderCache.removeCache(FINDER_CLASS_NAME_ENTITY);
+		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+	}
+
+	@ServiceReference(type = EntityCache.class)
+	protected EntityCache entityCache;
+	@ServiceReference(type = FinderCache.class)
+	protected FinderCache finderCache;
+	private static final String _SQL_SELECT_PROTOCOLEVALUATE = "SELECT protocolEvaluate FROM ProtocolEvaluate protocolEvaluate";
+	private static final String _SQL_SELECT_PROTOCOLEVALUATE_WHERE_PKS_IN = "SELECT protocolEvaluate FROM ProtocolEvaluate protocolEvaluate WHERE protocol_evaluate_id IN (";
+	private static final String _SQL_SELECT_PROTOCOLEVALUATE_WHERE = "SELECT protocolEvaluate FROM ProtocolEvaluate protocolEvaluate WHERE ";
+	private static final String _SQL_COUNT_PROTOCOLEVALUATE = "SELECT COUNT(protocolEvaluate) FROM ProtocolEvaluate protocolEvaluate";
+	private static final String _SQL_COUNT_PROTOCOLEVALUATE_WHERE = "SELECT COUNT(protocolEvaluate) FROM ProtocolEvaluate protocolEvaluate WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "protocolEvaluate.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ProtocolEvaluate exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ProtocolEvaluate exists with the key {";
+	private static final Log _log = LogFactoryUtil.getLog(ProtocolEvaluatePersistenceImpl.class);
+}

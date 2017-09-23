@@ -1,0 +1,1 @@
+create sequence sapp.log_evaluated_id_seq;

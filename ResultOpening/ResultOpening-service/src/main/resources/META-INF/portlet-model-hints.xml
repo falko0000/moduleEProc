@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.result.opening.model.ResultOpening">
+		<field name="result_opening_id" type="long" />
+		<field name="spisok_lotov_id" type="long" />
+		<field name="protocol_opening_id" type="long" />
+		<field name="postavwik_id" type="long" />
+		<field name="status" type="int" />
+		<field name="description" type="String" />
+	</model>
+</model-hints>

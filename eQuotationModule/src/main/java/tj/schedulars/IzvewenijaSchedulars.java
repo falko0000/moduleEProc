@@ -1,5 +1,6 @@
 package tj.schedulars;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -7,20 +8,25 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
 
-
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 
 
@@ -33,15 +39,24 @@ import com.liferay.portal.kernel.scheduler.StorageTypeAware;
 
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerFactory;
+import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import tj.bid.queue.model.Bidqueue;
 import tj.bid.queue.service.BidqueueLocalServiceUtil;
+import tj.commission.positions.model.CommissionPosition;
+import tj.commission.positions.service.CommissionPositionLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.protocol.contracts.model.ProtocolOpening;
+import tj.protocol.contracts.service.ProtocolOpeningLocalServiceUtil;
 import tj.system.config.exception.NoSuchSystemConfigException;
 import tj.system.config.model.SystemConfig;
 import tj.system.config.service.SystemConfigLocalServiceUtil;
@@ -104,7 +119,65 @@ public class IzvewenijaSchedulars extends BaseMessageListener  {
 					bidqueue.setStatus(EQuotationConstants.STATUS_BID_AT_DETERMINING_WINNER);
 					
 					BidqueueLocalServiceUtil.updateBidqueue(bidqueue);
-			
+			     
+					  long usergroupId = izvewenija.getUserGroupId();	
+			          
+					  List<User> users = UserLocalServiceUtil.getUserGroupUsers(usergroupId);
+			          
+					   ProtocolOpening opening = ProtocolOpeningLocalServiceUtil.getProtocolOpeningByBid(izvewenija_id);
+					   boolean isNullOpening = Validator.isNull(opening);
+					   
+					   CreateProtocolOpening createOpening = null;
+					   
+					   if( isNullOpening)
+					   {
+						  createOpening = new CreateProtocolOpening(izvewenija_id);  
+						  opening = createOpening.create();   
+					   }
+					  
+					   
+			              for(User user : users)
+			              {
+			            	if(user.isEmailAddressVerified())
+			            	{
+			            		String email = user.getEmailAddress();
+			            		StringBuilder builder = new StringBuilder();
+			            		
+			            		CommissionPosition commissionPosition = CommissionPositionLocalServiceUtil.getCommissionPosition(usergroupId, user.getUserId()); 
+			            	
+			            	if(Validator.isNotNull(commissionPosition))
+			            	{
+			            		Role role = RoleLocalServiceUtil.getRole(commissionPosition.getRoleId());  
+			            		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
+			            		String email_key = "EMAIL_AFTER_OPENING";
+			            		String body = SystemConfigLocalServiceUtil.getSystemConfig(email_key).getValue();
+			            		
+			            	    String[] param = new String[]{"[$FULLNAME$]", "[$POSITION$]", "[$BIDNUMBER$]", "[$CLOSED$]"};
+			            		String[] paramValue = new String[param.length];
+			            		
+			            		paramValue[0] = user.getFullName();
+			            		paramValue[1] = LanguageUtil.get(user.getLocale(), "role."+role.getName().toLowerCase()).toLowerCase();
+			            		paramValue[2] = String.valueOf(izvewenija_id);
+			            		paramValue[3] = dateFormat.format(bidqueue.getClosing_date());
+			            		
+			            		 String  subject = "Электронные закупки Республики Таджикистан";
+			            		 
+			            		 body = StringUtil.replace(body, param, paramValue);
+			            		
+			            		  
+			            		
+			            		 
+			            		  boolean sendM = IzvewenijaLocalServiceUtil.sendEmailMessage("admin@zakupki.gov.tj", email, subject, body, true);	
+			            	
+			            		  if(sendM)
+			            			  System.out.println("messages to the address "+ email+ " sent successfully!");
+			            		  else
+			            			  System.out.println("messages to the address "+ email+ " sent failed!");
+			            	}	
+			            	}
+			              }	
+					
 				} catch (PortalException e) {
 					
 				
@@ -112,8 +185,7 @@ public class IzvewenijaSchedulars extends BaseMessageListener  {
 				
 				
 			}
-			else
-				break;
+			
 		}
 	   
 	  }

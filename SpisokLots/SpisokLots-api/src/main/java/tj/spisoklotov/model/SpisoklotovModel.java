@@ -455,6 +455,21 @@ public interface SpisoklotovModel extends BaseModel<Spisoklotov> {
 	 */
 	public void setZakazchik(String zakazchik);
 
+	/**
+	 * Returns the required_documents of this spisoklotov.
+	 *
+	 * @return the required_documents of this spisoklotov
+	 */
+	@AutoEscape
+	public String getRequired_documents();
+
+	/**
+	 * Sets the required_documents of this spisoklotov.
+	 *
+	 * @param required_documents the required_documents of this spisoklotov
+	 */
+	public void setRequired_documents(String required_documents);
+
 	@Override
 	public boolean isNew();
 

@@ -21,6 +21,7 @@ public interface CommissionConstants {
 	static final String PAGE_PROTOCOL_OPENING = "/commissiontab/protocol_opening.jsp";
 	static final String PAGE_PROTOCOL_EVALUATION = "/commissiontab/protocol_evaluation.jsp";
 	
+	static final String PAGE_STATUS = "/commissiontab/state_evaluated.jsp";
     //supplier items
     static final String PAGE_APPLICATION = "/commissiontab/evaluation/supplieritems/application.jsp";
     static final String PAGE_OTHER_INFORMATION = "/commissiontab/evaluation/supplieritems/other_information.jsp";
@@ -44,7 +45,9 @@ public interface CommissionConstants {
 	    static final int CRITERIA_FINANCIAL = 3;
 	  
 	  static final String FORM_COMMISSION_CRITERIA = "commission_criteria";
-	  
+	  static final String FORM_COMMISSION_GENERATE_PROTOCOL = "generate_protocol";
+	  static final String FORM_END_EVALUATED = "end_evaluated";
+	  static final String FORM_TOLERANCE ="tolerance";
 	    // State
 	    static final int STATE_BID_PREPARATION = 1;
 	    static final int STATE_BID_SUBMISSION_OF_PROPOSALS = 2;

@@ -181,6 +181,175 @@ public class ProchajaInformacijaDljaZajavkiUtil {
 	}
 
 	/**
+	* Returns all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @return the matching prochaja informacija dlja zajavkis
+	*/
+	public static List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id) {
+		return getPersistence().findByIzvewenieId(izvewenie_id);
+	}
+
+	/**
+	* Returns a range of all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProchajaInformacijaDljaZajavkiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param start the lower bound of the range of prochaja informacija dlja zajavkis
+	* @param end the upper bound of the range of prochaja informacija dlja zajavkis (not inclusive)
+	* @return the range of matching prochaja informacija dlja zajavkis
+	*/
+	public static List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id, int start, int end) {
+		return getPersistence().findByIzvewenieId(izvewenie_id, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProchajaInformacijaDljaZajavkiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param start the lower bound of the range of prochaja informacija dlja zajavkis
+	* @param end the upper bound of the range of prochaja informacija dlja zajavkis (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching prochaja informacija dlja zajavkis
+	*/
+	public static List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id, int start, int end,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator) {
+		return getPersistence()
+				   .findByIzvewenieId(izvewenie_id, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns an ordered range of all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProchajaInformacijaDljaZajavkiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param start the lower bound of the range of prochaja informacija dlja zajavkis
+	* @param end the upper bound of the range of prochaja informacija dlja zajavkis (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching prochaja informacija dlja zajavkis
+	*/
+	public static List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id, int start, int end,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator,
+		boolean retrieveFromCache) {
+		return getPersistence()
+				   .findByIzvewenieId(izvewenie_id, start, end,
+			orderByComparator, retrieveFromCache);
+	}
+
+	/**
+	* Returns the first prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching prochaja informacija dlja zajavki
+	* @throws NoSuchProchajaInformacijaDljaZajavkiException if a matching prochaja informacija dlja zajavki could not be found
+	*/
+	public static ProchajaInformacijaDljaZajavki findByIzvewenieId_First(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator)
+		throws tj.prochaja.informacija.dlja.zajavki.exception.NoSuchProchajaInformacijaDljaZajavkiException {
+		return getPersistence()
+				   .findByIzvewenieId_First(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the first prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching prochaja informacija dlja zajavki, or <code>null</code> if a matching prochaja informacija dlja zajavki could not be found
+	*/
+	public static ProchajaInformacijaDljaZajavki fetchByIzvewenieId_First(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator) {
+		return getPersistence()
+				   .fetchByIzvewenieId_First(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching prochaja informacija dlja zajavki
+	* @throws NoSuchProchajaInformacijaDljaZajavkiException if a matching prochaja informacija dlja zajavki could not be found
+	*/
+	public static ProchajaInformacijaDljaZajavki findByIzvewenieId_Last(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator)
+		throws tj.prochaja.informacija.dlja.zajavki.exception.NoSuchProchajaInformacijaDljaZajavkiException {
+		return getPersistence()
+				   .findByIzvewenieId_Last(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the last prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching prochaja informacija dlja zajavki, or <code>null</code> if a matching prochaja informacija dlja zajavki could not be found
+	*/
+	public static ProchajaInformacijaDljaZajavki fetchByIzvewenieId_Last(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator) {
+		return getPersistence()
+				   .fetchByIzvewenieId_Last(izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Returns the prochaja informacija dlja zajavkis before and after the current prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	*
+	* @param prochaja_informacija_dlja_zajavki_id the primary key of the current prochaja informacija dlja zajavki
+	* @param izvewenie_id the izvewenie_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next prochaja informacija dlja zajavki
+	* @throws NoSuchProchajaInformacijaDljaZajavkiException if a prochaja informacija dlja zajavki with the primary key could not be found
+	*/
+	public static ProchajaInformacijaDljaZajavki[] findByIzvewenieId_PrevAndNext(
+		long prochaja_informacija_dlja_zajavki_id, long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator)
+		throws tj.prochaja.informacija.dlja.zajavki.exception.NoSuchProchajaInformacijaDljaZajavkiException {
+		return getPersistence()
+				   .findByIzvewenieId_PrevAndNext(prochaja_informacija_dlja_zajavki_id,
+			izvewenie_id, orderByComparator);
+	}
+
+	/**
+	* Removes all the prochaja informacija dlja zajavkis where izvewenie_id = &#63; from the database.
+	*
+	* @param izvewenie_id the izvewenie_id
+	*/
+	public static void removeByIzvewenieId(long izvewenie_id) {
+		getPersistence().removeByIzvewenieId(izvewenie_id);
+	}
+
+	/**
+	* Returns the number of prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	*
+	* @param izvewenie_id the izvewenie_id
+	* @return the number of matching prochaja informacija dlja zajavkis
+	*/
+	public static int countByIzvewenieId(long izvewenie_id) {
+		return getPersistence().countByIzvewenieId(izvewenie_id);
+	}
+
+	/**
 	* Caches the prochaja informacija dlja zajavki in the entity cache if it is enabled.
 	*
 	* @param prochajaInformacijaDljaZajavki the prochaja informacija dlja zajavki

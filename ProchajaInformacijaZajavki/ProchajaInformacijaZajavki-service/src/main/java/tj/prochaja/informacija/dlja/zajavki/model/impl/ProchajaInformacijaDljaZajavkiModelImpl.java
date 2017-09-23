@@ -134,10 +134,11 @@ public class ProchajaInformacijaDljaZajavkiModelImpl extends BaseModelImpl<Proch
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(tj.prochaja.informacija.dlja.zajavki.service.util.ServiceProps.get(
 				"value.object.column.bitmask.enabled.tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"),
 			true);
-	public static final long LOT_ID_COLUMN_BITMASK = 1L;
-	public static final long POSTAVWIK_ID_COLUMN_BITMASK = 2L;
+	public static final long IZVEWENIE_ID_COLUMN_BITMASK = 1L;
+	public static final long LOT_ID_COLUMN_BITMASK = 2L;
+	public static final long POSTAVWIK_ID_COLUMN_BITMASK = 4L;
 	public static final long PROCHAJA_INFORMACIJA_DLJA_ZAJAVKI_ID_COLUMN_BITMASK =
-		4L;
+		8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.prochaja.informacija.dlja.zajavki.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"));
 
@@ -407,7 +408,19 @@ public class ProchajaInformacijaDljaZajavkiModelImpl extends BaseModelImpl<Proch
 
 	@Override
 	public void setIzvewenie_id(long izvewenie_id) {
+		_columnBitmask |= IZVEWENIE_ID_COLUMN_BITMASK;
+
+		if (!_setOriginalIzvewenie_id) {
+			_setOriginalIzvewenie_id = true;
+
+			_originalIzvewenie_id = _izvewenie_id;
+		}
+
 		_izvewenie_id = izvewenie_id;
+	}
+
+	public long getOriginalIzvewenie_id() {
+		return _originalIzvewenie_id;
 	}
 
 	@Override
@@ -773,6 +786,10 @@ public class ProchajaInformacijaDljaZajavkiModelImpl extends BaseModelImpl<Proch
 		ProchajaInformacijaDljaZajavkiModelImpl prochajaInformacijaDljaZajavkiModelImpl =
 			this;
 
+		prochajaInformacijaDljaZajavkiModelImpl._originalIzvewenie_id = prochajaInformacijaDljaZajavkiModelImpl._izvewenie_id;
+
+		prochajaInformacijaDljaZajavkiModelImpl._setOriginalIzvewenie_id = false;
+
 		prochajaInformacijaDljaZajavkiModelImpl._originalLot_id = prochajaInformacijaDljaZajavkiModelImpl._lot_id;
 
 		prochajaInformacijaDljaZajavkiModelImpl._setOriginalLot_id = false;
@@ -1058,6 +1075,8 @@ public class ProchajaInformacijaDljaZajavkiModelImpl extends BaseModelImpl<Proch
 	private int _cena_postavki_soglasno_zakazchiku;
 	private Date _data_sozdanija;
 	private long _izvewenie_id;
+	private long _originalIzvewenie_id;
+	private boolean _setOriginalIzvewenie_id;
 	private long _lot_id;
 	private long _originalLot_id;
 	private boolean _setOriginalLot_id;

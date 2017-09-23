@@ -7,6 +7,13 @@
 		<field name="created" type="Date" />
 		<field name="updated" type="Date" />
 	</model>
+	<model name="tj.protocol.contracts.model.ProtocolEvaluate">
+		<field name="protocol_evaluate_id" type="long" />
+		<field name="izvewenie_id" type="long" />
+		<field name="created" type="Date" />
+		<field name="updated" type="Date" />
+		<field name="userid" type="long" />
+	</model>
 	<model name="tj.protocol.contracts.model.ProtocolOpening">
 		<field name="protocol_opening_id" type="long" />
 		<field name="izvewenie_id" type="long" />

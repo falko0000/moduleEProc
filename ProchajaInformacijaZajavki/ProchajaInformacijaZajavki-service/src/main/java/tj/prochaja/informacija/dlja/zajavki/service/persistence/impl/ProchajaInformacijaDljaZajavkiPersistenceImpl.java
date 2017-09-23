@@ -328,6 +328,532 @@ public class ProchajaInformacijaDljaZajavkiPersistenceImpl
 
 	private static final String _FINDER_COLUMN_LOTIDPOSTAVEIKID_LOT_ID_2 = "prochajaInformacijaDljaZajavki.lot_id = ? AND ";
 	private static final String _FINDER_COLUMN_LOTIDPOSTAVEIKID_POSTAVWIK_ID_2 = "prochajaInformacijaDljaZajavki.postavwik_id = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIEID =
+		new FinderPath(ProchajaInformacijaDljaZajavkiModelImpl.ENTITY_CACHE_ENABLED,
+			ProchajaInformacijaDljaZajavkiModelImpl.FINDER_CACHE_ENABLED,
+			ProchajaInformacijaDljaZajavkiImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByIzvewenieId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID =
+		new FinderPath(ProchajaInformacijaDljaZajavkiModelImpl.ENTITY_CACHE_ENABLED,
+			ProchajaInformacijaDljaZajavkiModelImpl.FINDER_CACHE_ENABLED,
+			ProchajaInformacijaDljaZajavkiImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByIzvewenieId",
+			new String[] { Long.class.getName() },
+			ProchajaInformacijaDljaZajavkiModelImpl.IZVEWENIE_ID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_IZVEWENIEID = new FinderPath(ProchajaInformacijaDljaZajavkiModelImpl.ENTITY_CACHE_ENABLED,
+			ProchajaInformacijaDljaZajavkiModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByIzvewenieId", new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @return the matching prochaja informacija dlja zajavkis
+	 */
+	@Override
+	public List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id) {
+		return findByIzvewenieId(izvewenie_id, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProchajaInformacijaDljaZajavkiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param start the lower bound of the range of prochaja informacija dlja zajavkis
+	 * @param end the upper bound of the range of prochaja informacija dlja zajavkis (not inclusive)
+	 * @return the range of matching prochaja informacija dlja zajavkis
+	 */
+	@Override
+	public List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id, int start, int end) {
+		return findByIzvewenieId(izvewenie_id, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProchajaInformacijaDljaZajavkiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param start the lower bound of the range of prochaja informacija dlja zajavkis
+	 * @param end the upper bound of the range of prochaja informacija dlja zajavkis (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching prochaja informacija dlja zajavkis
+	 */
+	@Override
+	public List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id, int start, int end,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator) {
+		return findByIzvewenieId(izvewenie_id, start, end, orderByComparator,
+			true);
+	}
+
+	/**
+	 * Returns an ordered range of all the prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProchajaInformacijaDljaZajavkiModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param start the lower bound of the range of prochaja informacija dlja zajavkis
+	 * @param end the upper bound of the range of prochaja informacija dlja zajavkis (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching prochaja informacija dlja zajavkis
+	 */
+	@Override
+	public List<ProchajaInformacijaDljaZajavki> findByIzvewenieId(
+		long izvewenie_id, int start, int end,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID;
+			finderArgs = new Object[] { izvewenie_id };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_IZVEWENIEID;
+			finderArgs = new Object[] {
+					izvewenie_id,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<ProchajaInformacijaDljaZajavki> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<ProchajaInformacijaDljaZajavki>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (ProchajaInformacijaDljaZajavki prochajaInformacijaDljaZajavki : list) {
+					if ((izvewenie_id != prochajaInformacijaDljaZajavki.getIzvewenie_id())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_PROCHAJAINFORMACIJADLJAZAJAVKI_WHERE);
+
+			query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ProchajaInformacijaDljaZajavkiModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(izvewenie_id);
+
+				if (!pagination) {
+					list = (List<ProchajaInformacijaDljaZajavki>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<ProchajaInformacijaDljaZajavki>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching prochaja informacija dlja zajavki
+	 * @throws NoSuchProchajaInformacijaDljaZajavkiException if a matching prochaja informacija dlja zajavki could not be found
+	 */
+	@Override
+	public ProchajaInformacijaDljaZajavki findByIzvewenieId_First(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator)
+		throws NoSuchProchajaInformacijaDljaZajavkiException {
+		ProchajaInformacijaDljaZajavki prochajaInformacijaDljaZajavki = fetchByIzvewenieId_First(izvewenie_id,
+				orderByComparator);
+
+		if (prochajaInformacijaDljaZajavki != null) {
+			return prochajaInformacijaDljaZajavki;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("izvewenie_id=");
+		msg.append(izvewenie_id);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchProchajaInformacijaDljaZajavkiException(msg.toString());
+	}
+
+	/**
+	 * Returns the first prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching prochaja informacija dlja zajavki, or <code>null</code> if a matching prochaja informacija dlja zajavki could not be found
+	 */
+	@Override
+	public ProchajaInformacijaDljaZajavki fetchByIzvewenieId_First(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator) {
+		List<ProchajaInformacijaDljaZajavki> list = findByIzvewenieId(izvewenie_id,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching prochaja informacija dlja zajavki
+	 * @throws NoSuchProchajaInformacijaDljaZajavkiException if a matching prochaja informacija dlja zajavki could not be found
+	 */
+	@Override
+	public ProchajaInformacijaDljaZajavki findByIzvewenieId_Last(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator)
+		throws NoSuchProchajaInformacijaDljaZajavkiException {
+		ProchajaInformacijaDljaZajavki prochajaInformacijaDljaZajavki = fetchByIzvewenieId_Last(izvewenie_id,
+				orderByComparator);
+
+		if (prochajaInformacijaDljaZajavki != null) {
+			return prochajaInformacijaDljaZajavki;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("izvewenie_id=");
+		msg.append(izvewenie_id);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchProchajaInformacijaDljaZajavkiException(msg.toString());
+	}
+
+	/**
+	 * Returns the last prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching prochaja informacija dlja zajavki, or <code>null</code> if a matching prochaja informacija dlja zajavki could not be found
+	 */
+	@Override
+	public ProchajaInformacijaDljaZajavki fetchByIzvewenieId_Last(
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator) {
+		int count = countByIzvewenieId(izvewenie_id);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<ProchajaInformacijaDljaZajavki> list = findByIzvewenieId(izvewenie_id,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the prochaja informacija dlja zajavkis before and after the current prochaja informacija dlja zajavki in the ordered set where izvewenie_id = &#63;.
+	 *
+	 * @param prochaja_informacija_dlja_zajavki_id the primary key of the current prochaja informacija dlja zajavki
+	 * @param izvewenie_id the izvewenie_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next prochaja informacija dlja zajavki
+	 * @throws NoSuchProchajaInformacijaDljaZajavkiException if a prochaja informacija dlja zajavki with the primary key could not be found
+	 */
+	@Override
+	public ProchajaInformacijaDljaZajavki[] findByIzvewenieId_PrevAndNext(
+		long prochaja_informacija_dlja_zajavki_id, long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator)
+		throws NoSuchProchajaInformacijaDljaZajavkiException {
+		ProchajaInformacijaDljaZajavki prochajaInformacijaDljaZajavki = findByPrimaryKey(prochaja_informacija_dlja_zajavki_id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ProchajaInformacijaDljaZajavki[] array = new ProchajaInformacijaDljaZajavkiImpl[3];
+
+			array[0] = getByIzvewenieId_PrevAndNext(session,
+					prochajaInformacijaDljaZajavki, izvewenie_id,
+					orderByComparator, true);
+
+			array[1] = prochajaInformacijaDljaZajavki;
+
+			array[2] = getByIzvewenieId_PrevAndNext(session,
+					prochajaInformacijaDljaZajavki, izvewenie_id,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ProchajaInformacijaDljaZajavki getByIzvewenieId_PrevAndNext(
+		Session session,
+		ProchajaInformacijaDljaZajavki prochajaInformacijaDljaZajavki,
+		long izvewenie_id,
+		OrderByComparator<ProchajaInformacijaDljaZajavki> orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_PROCHAJAINFORMACIJADLJAZAJAVKI_WHERE);
+
+		query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ProchajaInformacijaDljaZajavkiModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(izvewenie_id);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(prochajaInformacijaDljaZajavki);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ProchajaInformacijaDljaZajavki> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the prochaja informacija dlja zajavkis where izvewenie_id = &#63; from the database.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 */
+	@Override
+	public void removeByIzvewenieId(long izvewenie_id) {
+		for (ProchajaInformacijaDljaZajavki prochajaInformacijaDljaZajavki : findByIzvewenieId(
+				izvewenie_id, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(prochajaInformacijaDljaZajavki);
+		}
+	}
+
+	/**
+	 * Returns the number of prochaja informacija dlja zajavkis where izvewenie_id = &#63;.
+	 *
+	 * @param izvewenie_id the izvewenie_id
+	 * @return the number of matching prochaja informacija dlja zajavkis
+	 */
+	@Override
+	public int countByIzvewenieId(long izvewenie_id) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_IZVEWENIEID;
+
+		Object[] finderArgs = new Object[] { izvewenie_id };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_PROCHAJAINFORMACIJADLJAZAJAVKI_WHERE);
+
+			query.append(_FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(izvewenie_id);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_IZVEWENIEID_IZVEWENIE_ID_2 = "prochajaInformacijaDljaZajavki.izvewenie_id = ?";
 
 	public ProchajaInformacijaDljaZajavkiPersistenceImpl() {
 		setModelClass(ProchajaInformacijaDljaZajavki.class);
@@ -604,9 +1130,43 @@ public class ProchajaInformacijaDljaZajavkiPersistenceImpl
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew ||
-				!ProchajaInformacijaDljaZajavkiModelImpl.COLUMN_BITMASK_ENABLED) {
+		if (!ProchajaInformacijaDljaZajavkiModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+		else
+		 if (isNew) {
+			Object[] args = new Object[] {
+					prochajaInformacijaDljaZajavkiModelImpl.getIzvewenie_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID,
+				args);
+
+			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
+				FINDER_ARGS_EMPTY);
+		}
+
+		else {
+			if ((prochajaInformacijaDljaZajavkiModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						prochajaInformacijaDljaZajavkiModelImpl.getOriginalIzvewenie_id()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID,
+					args);
+
+				args = new Object[] {
+						prochajaInformacijaDljaZajavkiModelImpl.getIzvewenie_id()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_IZVEWENIEID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IZVEWENIEID,
+					args);
+			}
 		}
 
 		entityCache.putResult(ProchajaInformacijaDljaZajavkiModelImpl.ENTITY_CACHE_ENABLED,
@@ -814,7 +1374,7 @@ public class ProchajaInformacijaDljaZajavkiPersistenceImpl
 		query.append(_SQL_SELECT_PROCHAJAINFORMACIJADLJAZAJAVKI_WHERE_PKS_IN);
 
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
-			query.append(String.valueOf(primaryKey));
+			query.append((long)primaryKey);
 
 			query.append(StringPool.COMMA);
 		}

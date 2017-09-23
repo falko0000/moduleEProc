@@ -88,7 +88,8 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 			{ "srok_ispolnenija_zajavki", Types.VARCHAR },
 			{ "srok_obespechenija_zajavki", Types.VARCHAR },
 			{ "srok_postavki", Types.VARCHAR },
-			{ "zakazchik", Types.VARCHAR }
+			{ "zakazchik", Types.VARCHAR },
+			{ "required_documents", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -121,9 +122,10 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 		TABLE_COLUMNS_MAP.put("srok_obespechenija_zajavki", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("srok_postavki", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("zakazchik", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("required_documents", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table sapp.spisok_lotov (cena_kontrakta DOUBLE,cena_postavki VARCHAR(75) null,data_izmenenija DATE null,data_sozdanija DATE null,id_jebk LONG,istochnik_finansirovanija_id LONG,izmenil LONG,izvewenie_id LONG,klassifikacija_po_jekb VARCHAR(75) null,kod_jekb VARCHAR(75) null,kod_zakazchika VARCHAR(75) null,mesto_postavki VARCHAR(75) null,naimenovanie_lota VARCHAR(75) null,nomer_lota LONG,obespechenie_ispolnenija LONG,obespechenie_ispolnenija_v_procentah DOUBLE,obespechenie_v_procentah DOUBLE,obespechenie_zajavki LONG,oplata VARCHAR(75) null,soputstvujuwie_uslovija VARCHAR(75) null,sozdal LONG,spisok_lotov_id LONG not null primary key,srok_dejstvija VARCHAR(75) null,srok_ispolnenija_zajavki VARCHAR(75) null,srok_obespechenija_zajavki VARCHAR(75) null,srok_postavki VARCHAR(75) null,zakazchik VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sapp.spisok_lotov (cena_kontrakta DOUBLE,cena_postavki VARCHAR(75) null,data_izmenenija DATE null,data_sozdanija DATE null,id_jebk LONG,istochnik_finansirovanija_id LONG,izmenil LONG,izvewenie_id LONG,klassifikacija_po_jekb VARCHAR(75) null,kod_jekb VARCHAR(75) null,kod_zakazchika VARCHAR(75) null,mesto_postavki VARCHAR(75) null,naimenovanie_lota VARCHAR(75) null,nomer_lota LONG,obespechenie_ispolnenija LONG,obespechenie_ispolnenija_v_procentah DOUBLE,obespechenie_v_procentah DOUBLE,obespechenie_zajavki LONG,oplata VARCHAR(75) null,soputstvujuwie_uslovija VARCHAR(75) null,sozdal LONG,spisok_lotov_id LONG not null primary key,srok_dejstvija VARCHAR(75) null,srok_ispolnenija_zajavki VARCHAR(75) null,srok_obespechenija_zajavki VARCHAR(75) null,srok_postavki VARCHAR(75) null,zakazchik VARCHAR(75) null,required_documents VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.spisok_lotov";
 	public static final String ORDER_BY_JPQL = " ORDER BY spisoklotov.spisok_lotov_id ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sapp.spisok_lotov.spisok_lotov_id ASC";
@@ -211,6 +213,7 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 			getSrok_obespechenija_zajavki());
 		attributes.put("srok_postavki", getSrok_postavki());
 		attributes.put("zakazchik", getZakazchik());
+		attributes.put("required_documents", getRequired_documents());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -388,6 +391,12 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 
 		if (zakazchik != null) {
 			setZakazchik(zakazchik);
+		}
+
+		String required_documents = (String)attributes.get("required_documents");
+
+		if (required_documents != null) {
+			setRequired_documents(required_documents);
 		}
 	}
 
@@ -740,6 +749,21 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 		_zakazchik = zakazchik;
 	}
 
+	@Override
+	public String getRequired_documents() {
+		if (_required_documents == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _required_documents;
+		}
+	}
+
+	@Override
+	public void setRequired_documents(String required_documents) {
+		_required_documents = required_documents;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -798,6 +822,7 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 		spisoklotovImpl.setSrok_obespechenija_zajavki(getSrok_obespechenija_zajavki());
 		spisoklotovImpl.setSrok_postavki(getSrok_postavki());
 		spisoklotovImpl.setZakazchik(getZakazchik());
+		spisoklotovImpl.setRequired_documents(getRequired_documents());
 
 		spisoklotovImpl.resetOriginalValues();
 
@@ -1021,12 +1046,20 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 			spisoklotovCacheModel.zakazchik = null;
 		}
 
+		spisoklotovCacheModel.required_documents = getRequired_documents();
+
+		String required_documents = spisoklotovCacheModel.required_documents;
+
+		if ((required_documents != null) && (required_documents.length() == 0)) {
+			spisoklotovCacheModel.required_documents = null;
+		}
+
 		return spisoklotovCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{cena_kontrakta=");
 		sb.append(getCena_kontrakta());
@@ -1082,6 +1115,8 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 		sb.append(getSrok_postavki());
 		sb.append(", zakazchik=");
 		sb.append(getZakazchik());
+		sb.append(", required_documents=");
+		sb.append(getRequired_documents());
 		sb.append("}");
 
 		return sb.toString();
@@ -1089,7 +1124,7 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(85);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("tj.spisoklotov.model.Spisoklotov");
@@ -1203,6 +1238,10 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 			"<column><column-name>zakazchik</column-name><column-value><![CDATA[");
 		sb.append(getZakazchik());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>required_documents</column-name><column-value><![CDATA[");
+		sb.append(getRequired_documents());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1242,6 +1281,7 @@ public class SpisoklotovModelImpl extends BaseModelImpl<Spisoklotov>
 	private String _srok_obespechenija_zajavki;
 	private String _srok_postavki;
 	private String _zakazchik;
+	private String _required_documents;
 	private long _columnBitmask;
 	private Spisoklotov _escapedModel;
 }

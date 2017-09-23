@@ -31,5 +31,9 @@
        		<finder-column name="lot_id"></finder-column>
         	<finder-column name="postavwik_id"></finder-column>
         </finder>
+        
+        <finder return-type="Collection" name="IzvewenieId">
+          <finder-column name="izvewenie_id"></finder-column>
+        </finder>
     </entity>
 </service-builder>

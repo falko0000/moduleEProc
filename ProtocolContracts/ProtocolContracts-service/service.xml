@@ -30,4 +30,19 @@
 		
 	</entity>
 	
+		<entity local-service="true" name="ProtocolEvaluate" remote-service="false" uuid="false" cache-enabled="false" table="sapp.protocol_evaluate">
+
+          <column name="protocol_evaluate_id" type="long" primary="true" id-type="sequence" id-param="sapp.protocol_evaluate_id_seq"></column>
+          <column name="izvewenie_id" type="long"></column>
+          <column name="created" type="Date"></column>
+          <column name="updated" type="Date"></column>
+          <column name="userid" type="long"></column>
+          
+          <finder return-type="ProtocolEvaluate" name="IzvewenieId">
+                 <finder-column name="izvewenie_id"></finder-column>
+          </finder>
+		
+	</entity>
+	
+	
 </service-builder>

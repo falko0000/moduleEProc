@@ -1,32 +1,46 @@
 package tj.module.equotation.portlet;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 //import javax.mail.internet.AddressException;
 //import javax.mail.internet.InternetAddress;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.Position;
 
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import tj.bid.queue.model.Bidqueue;
 import tj.bid.queue.service.BidqueueLocalServiceUtil;
+import tj.commission.positions.model.CommissionPosition;
+import tj.commission.positions.service.CommissionPositionLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.equotation.constants.EQuotationConstants;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
+import tj.system.config.service.SystemConfigLocalServiceUtil;
 
 
 @Component(
@@ -148,23 +162,57 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 				bidqueue.setState(EQuotationConstants.STATE_BID_SUBMISSION_OF_PROPOSALS);
 			    bidqueue.setStatus(EQuotationConstants.STATUS_BID_SUBMISSION_OF_PROPOSALS);
 				BidqueueLocalServiceUtil.addBidqueue(bidqueue);
+		
 				
-          List<User> users = UserLocalServiceUtil.getUserGroupUsers(izvewenija.getUserGroupId());
+		  long usergroupId = izvewenija.getUserGroupId();	
+          
+		  List<User> users = UserLocalServiceUtil.getUserGroupUsers(usergroupId);
+          
+         
           
               for(User user : users)
               {
             	if(user.isEmailAddressVerified())
             	{
             		String email = user.getEmailAddress();
+            		StringBuilder builder = new StringBuilder();
             		
-            		 String  subject = "Open tender commission";
-            		  String body = "You are invited to evaluate supplier proposal";
-            		   IzvewenijaLocalServiceUtil.sendEmailMessage("admin@zakupki.gov.tj", email, subject, body, false);	
+            		CommissionPosition commissionPosition = CommissionPositionLocalServiceUtil.getCommissionPosition(usergroupId, user.getUserId()); 
+            	
+            	if(Validator.isNotNull(commissionPosition))
+            	{
+            		Role role = RoleLocalServiceUtil.getRole(commissionPosition.getRoleId());  
+            		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            		HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
+            		String email_key = "EMAIL_AFTER_PUBLICATION";
+            		String body = SystemConfigLocalServiceUtil.getSystemConfig(email_key).getValue();
             		
+            	    String[] param = new String[]{"[$FULLNAME$]", "[$POSITION$]", "[$BIDNUMBER$]", "[$OPENING$]"};
+            		String[] paramValue = new String[param.length];
+            		
+            		paramValue[0] = user.getFullName();
+            		paramValue[1] = LanguageUtil.get(httpRequest, "role."+role.getName().toLowerCase()).toLowerCase();
+            		paramValue[2] = String.valueOf(izvewenija_id);
+            		paramValue[3] = dateFormat.format(closing_date);
+            		
+            		 String  subject = "Электронные закупки Республики Таджикистан";
+            		 
+            		 body = StringUtil.replace(body, param, paramValue);
+            		
+            		  
+            		
+            		 
+            		  boolean sendM = IzvewenijaLocalServiceUtil.sendEmailMessage("admin@zakupki.gov.tj", email, subject, body, true);	
+            	
+            		  if(sendM)
+            			  System.out.println("messages to the address "+ email+ " sent successfully!");
+            		  else
+            			  System.out.println("messages to the address "+ email+ " sent failed!");
+            	}	
             	}
               }
 			  } catch (PortalException e) {
-				
+				e.getStackTrace();
 			}
 		  }
 		  

@@ -60,6 +60,8 @@ public class InformacijaORazmeweniiSoap implements Serializable {
 		soapModel.setSrok_obespechenija_zajavki(model.getSrok_obespechenija_zajavki());
 		soapModel.setSrok_postavki(model.getSrok_postavki());
 		soapModel.setSrok_postavki_dlja_zakaza(model.getSrok_postavki_dlja_zakaza());
+		soapModel.setRequired_documents_dlja_zakaza(model.getRequired_documents_dlja_zakaza());
+		soapModel.setRequired_documents(model.getRequired_documents());
 
 		return soapModel;
 	}
@@ -327,6 +329,23 @@ public class InformacijaORazmeweniiSoap implements Serializable {
 		_srok_postavki_dlja_zakaza = srok_postavki_dlja_zakaza;
 	}
 
+	public int getRequired_documents_dlja_zakaza() {
+		return _required_documents_dlja_zakaza;
+	}
+
+	public void setRequired_documents_dlja_zakaza(
+		int required_documents_dlja_zakaza) {
+		_required_documents_dlja_zakaza = required_documents_dlja_zakaza;
+	}
+
+	public String getRequired_documents() {
+		return _required_documents;
+	}
+
+	public void setRequired_documents(String required_documents) {
+		_required_documents = required_documents;
+	}
+
 	private String _cena_postavki;
 	private double _cena_postavki_dlja_zakaza;
 	private Date _data_izmenenija;
@@ -353,4 +372,6 @@ public class InformacijaORazmeweniiSoap implements Serializable {
 	private String _srok_obespechenija_zajavki;
 	private String _srok_postavki;
 	private long _srok_postavki_dlja_zakaza;
+	private int _required_documents_dlja_zakaza;
+	private String _required_documents;
 }

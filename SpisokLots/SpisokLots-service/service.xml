@@ -31,6 +31,8 @@
         <column name="srok_obespechenija_zajavki" type="String"></column>
         <column name="srok_postavki" type="String"></column>
         <column name="zakazchik" type="String"></column>
+  
+        <column name="required_documents" type="String"></column>
         
         <finder return-type="Collection" name="IzvewenieID">
         	<finder-column name="izvewenie_id"></finder-column>

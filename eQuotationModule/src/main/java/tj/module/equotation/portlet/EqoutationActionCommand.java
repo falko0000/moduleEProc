@@ -1,65 +1,54 @@
 package tj.module.equotation.portlet;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.WindowState;
-import javax.portlet.WindowStateException;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.document.library.kernel.model.DLFolder;
+import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLAppServiceUtil;
+import com.liferay.dynamic.data.mapping.kernel.DDMStructureManagerUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.AddressWrapper;
 import com.liferay.portal.kernel.model.Country;
 import com.liferay.portal.kernel.model.CountryWrapper;
-import com.liferay.portal.kernel.model.Image;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.OrganizationWrapper;
 import com.liferay.portal.kernel.model.ResourcePermission;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.model.UserGroup;
-import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.service.AddressLocalServiceUtil;
 import com.liferay.portal.kernel.service.CountryServiceUtil;
-import com.liferay.portal.kernel.service.ImageLocalServiceUtil;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
-
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
-
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
-
+import tj.commission.positions.model.CommissionPosition;
+import tj.commission.positions.service.CommissionPositionLocalServiceUtil;
 import tj.criterias.model.Criteria;
 import tj.criterias.model.CriteriaDefaultValue;
 import tj.criterias.model.CriteriaTemplate;
@@ -68,47 +57,31 @@ import tj.criterias.service.CriteriaDefaultValueLocalServiceUtil;
 import tj.criterias.service.CriteriaLocalServiceUtil;
 import tj.criterias.service.CriteriaTemplateLocalServiceUtil;
 import tj.criterias.service.CriteriasWeightLocalServiceUtil;
-
 import tj.generate.document.GenerateDocument;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 import tj.informacija.razmewenii.model.InformacijaORazmeweniiWrapper;
 import tj.informacija.razmewenii.service.InformacijaORazmeweniiLocalServiceUtil;
 import tj.izvewenieput.model.IzveweniePut;
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
-import com.liferay.document.library.kernel.model.DLFolder;
-import com.liferay.document.library.kernel.model.DLFolderConstants;
-
-import com.liferay.document.library.kernel.service.DLAppServiceUtil;
-
-
 import tj.izvewenieput.service.IzveweniePutLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.model.IzvewenijaWrapper;
-
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
-
 import tj.module.equotation.constants.EQuotationConstants;
-
 import tj.obwaja.informacija.model.ObwajaInformacija;
 import tj.obwaja.informacija.service.ObwajaInformacijaLocalServiceUtil;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissii;
 import tj.porjadok.raboty.komissii.model.PorjadokRabotyKomissiiWrapper;
 import tj.porjadok.raboty.komissii.service.PorjadokRabotyKomissiiLocalServiceUtil;
-
 import tj.spisok.tovarov.model.SpisokTovarov;
 import tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
-
 import tj.spisoklotov.model.SpisoklotovWrapper;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
-
 import tj.system.config.exception.NoSuchSystemConfigException;
 import tj.system.config.model.SystemConfig;
 import tj.system.config.model.SystemConfigWrapper;
-
 import tj.system.config.service.SystemConfigLocalServiceUtil;
 import tj.tipy.izvewenij.model.TipyIzvewenij;
-
 import tj.tipy.izvewenij.service.TipyIzvewenijLocalServiceUtil;
 
 
@@ -187,6 +160,8 @@ public class EqoutationActionCommand extends BaseMVCActionCommand  {
 	   
 	   if(form_name.equals("criteria_default"))
 		   criteriaDefaultValue(actionRequest,actionResponse);
+	   
+	   
 	}
 
 
@@ -304,7 +279,7 @@ private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse)
 		   
 		   InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(oldIzvewenija.getIzvewenija_id());
 		   informacijaORazmewenii.setInformacija_o_razmewenii_id(0);
-		   informacijaORazmewenii.setInformacija_o_razmewenii_id(newIzvewenija.getIzvewenija_id());
+		   informacijaORazmewenii.setIzvewenie_id(newIzvewenija.getIzvewenija_id());
 		   informacijaORazmewenii.setData_izmenenija(new Date());
 		   informacijaORazmewenii.setData_izmenenija(new Date());
 		   
@@ -384,8 +359,19 @@ private void copyBid(ActionRequest actionRequest, ActionResponse actionResponse)
 			 ResourcePermissionLocalServiceUtil.setResourcePermissions(permission.getCompanyId(), "tj.izvewenija.model.Izvewenija", permission.getScope(),String.valueOf(newIzvewenija.getIzvewenija_id()), permission.getRoleId(), actionId);
 		 }
 		 
+		  List<CommissionPosition> commissionPositions = CommissionPositionLocalServiceUtil.getCommissionPositionByUserGroupId(oldIzvewenija.getUserGroupId());
+	
+		  for(CommissionPosition commissionPosition : commissionPositions)
+		  {
+			  CommissionPosition position = CommissionPositionLocalServiceUtil.createCommissionPosition(0);
+		     
+			 position.setUsergroupId(newIzvewenija.getUserGroupId());
+		     position.setUserId(commissionPosition.getUserId());
+		     position.setRoleId(commissionPosition.getRoleId());
+		     
+		     CommissionPositionLocalServiceUtil.addCommissionPosition(position);
+		  }
 		  
-		   
 		  } catch (PortalException  e) {
 			
 			e.printStackTrace();
@@ -407,7 +393,7 @@ private void generateDocument(ActionRequest actionRequest, ActionResponse action
 	  
 	   String ROOT_FOLDER_NAME_FTL = EQuotationConstants.TEMPLATE_FTL_FOLDER_NAME;
 	   String ROOT_FOLDER_NAME_OUT_HTML = EQuotationConstants.OUT_HTML;
-	   String template_file_name = ParamUtil.get(actionRequest, "template_file_name", "")+".ftl";
+	   String template_file_name = ParamUtil.get(actionRequest, "template_file_name", "SDB")+".ftl";
 	   String langId = ParamUtil.getString(actionRequest, "languageId");
 	   long izvewenija_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 	  
@@ -476,6 +462,9 @@ private void generateDocument(ActionRequest actionRequest, ActionResponse action
 	    	  inputs  = new HashMap<String, Object>();
         
        PorjadokRabotyKomissiiWrapper porjadokRabotyKomissiiWrapper = new PorjadokRabotyKomissiiWrapper(porjadokRabotyKomissii);
+       ArrayList<SpisokTovarov> spisokTovarovs = new ArrayList<SpisokTovarov>();
+       
+       spisokTovarovs.addAll(SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(slotov.getSpisok_lotov_id()));
        
        Map<String, Object> attributes = porjadokRabotyKomissiiWrapper.getModelAttributes();
        
@@ -504,7 +493,7 @@ private void generateDocument(ActionRequest actionRequest, ActionResponse action
        inputs.put("country", countryWrapper.getModelAttributes());
        
        inputs.put("informacija_o_razmewenii", informacijaORazmeweniiWrapper.getModelAttributes());
-       
+       inputs.put("spisokTovarovs", spisokTovarovs);
               
       String outfilename = slotov.getNaimenovanie_lota() + "_nomer_"+String.valueOf(slotov.getNomer_lota());
        
@@ -853,7 +842,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		long izvewenie_id = ParamUtil.getLong(actionRequest, "izvewenie_id");
 		User user=(User) actionRequest.getAttribute(WebKeys.USER);
 		String redirect = ParamUtil.getString(actionRequest,"redirect");
-		
+	
 		
 		//generalinfo
 	    //Number nomer_lota = ParamUtil.getNumber(actionRequest, "number_of_lot");
@@ -895,6 +884,8 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		String cena_postavki = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
 		String soputstvujuwie_uslovija = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
 	   
+		String requiredDoc = ParamUtil.getString(actionRequest, "requiredDoc");
+		
 	     long spisok_lotov_id = CounterLocalServiceUtil.increment(Spisoklotov.class.toString());
 	     
 		
@@ -935,7 +926,7 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	    spisoklotov.setSoputstvujuwie_uslovija(soputstvujuwie_uslovija);
 	    
 	    spisoklotov.setId_jebk(id_jebk);
-	    
+	    spisoklotov.setRequired_documents(requiredDoc);
 	  
 	/*		try {
 				actionResponse.setWindowState(WindowState.NORMAL);
@@ -1002,6 +993,9 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		int validity_tenders = ParamUtil.getInteger(actionRequest, "validity_tenders");
 		String bid_validity_tenders = ParamUtil.getString(actionRequest, "bid_validity_tenders");
 		
+		int required_documents = ParamUtil.getInteger(actionRequest, "required_documents");
+		String requiredDoc = ParamUtil.getString(actionRequest, "requiredDoc");
+		
 		InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
 		
 		// general info
@@ -1039,6 +1033,9 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		
 		informacijaORazmewenii.setSrok_dejstvija_dlja_zakaza(validity_tenders);
 		informacijaORazmewenii.setSrok_dejstvija(bid_validity_tenders);
+		
+		informacijaORazmewenii.setRequired_documents_dlja_zakaza(required_documents);
+		informacijaORazmewenii.setRequired_documents(requiredDoc);
 		
 		 String param = "_edit_tab=";
 			
@@ -1400,6 +1397,9 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		int validity_tenders = ParamUtil.getInteger(actionRequest, "validity_tenders");
 		String bid_validity_tenders = ParamUtil.getString(actionRequest, "bid_validity_tenders");
 		
+		int required_documents = ParamUtil.getInteger(actionRequest, "required_documents");
+		String requiredDoc = ParamUtil.getString(actionRequest, "requiredDoc");
+		
 		InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenie_id);
 		
 		// general info
@@ -1437,6 +1437,9 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		
 		informacijaORazmewenii.setSrok_dejstvija_dlja_zakaza(validity_tenders);
 		informacijaORazmewenii.setSrok_dejstvija(bid_validity_tenders);
+		
+		informacijaORazmewenii.setRequired_documents_dlja_zakaza(required_documents);
+		informacijaORazmewenii.setRequired_documents(requiredDoc);
 		
 		 String param = "_edit_tab=";
 			
@@ -1503,6 +1506,8 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 		String cena_postavki = ParamUtil.getString(actionRequest, "bid_assignment_lot_delivery");
 		String soputstvujuwie_uslovija = ParamUtil.getString(actionRequest, "bid_assignment_lot_conditions");
 	   
+		String requiredDoc = ParamUtil.getString(actionRequest, "requiredDoc");
+		
 		Spisoklotov spisoklotov = null;
 		try {
 			spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);
@@ -1542,15 +1547,9 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	    spisoklotov.setSoputstvujuwie_uslovija(soputstvujuwie_uslovija);
 	    
 	    spisoklotov.setId_jebk(id_jebk);
-	    
+	    spisoklotov.setRequired_documents(requiredDoc);
 	  
-		/*	try {
-				actionResponse.setWindowState(WindowState.NORMAL);
-			  //sendRedirect(actionRequest, actionResponse, redirect);
-			} catch (IOException | WindowStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} */
+		
       
 	    
 	    spisoklotov = SpisoklotovLocalServiceUtil.updateSpisoklotov(spisoklotov);

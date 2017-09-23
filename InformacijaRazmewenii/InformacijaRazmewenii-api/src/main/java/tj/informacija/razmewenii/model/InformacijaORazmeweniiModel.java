@@ -438,6 +438,36 @@ public interface InformacijaORazmeweniiModel extends BaseModel<InformacijaORazme
 	 */
 	public void setSrok_postavki_dlja_zakaza(long srok_postavki_dlja_zakaza);
 
+	/**
+	 * Returns the required_documents_dlja_zakaza of this informacija o razmewenii.
+	 *
+	 * @return the required_documents_dlja_zakaza of this informacija o razmewenii
+	 */
+	public int getRequired_documents_dlja_zakaza();
+
+	/**
+	 * Sets the required_documents_dlja_zakaza of this informacija o razmewenii.
+	 *
+	 * @param required_documents_dlja_zakaza the required_documents_dlja_zakaza of this informacija o razmewenii
+	 */
+	public void setRequired_documents_dlja_zakaza(
+		int required_documents_dlja_zakaza);
+
+	/**
+	 * Returns the required_documents of this informacija o razmewenii.
+	 *
+	 * @return the required_documents of this informacija o razmewenii
+	 */
+	@AutoEscape
+	public String getRequired_documents();
+
+	/**
+	 * Sets the required_documents of this informacija o razmewenii.
+	 *
+	 * @param required_documents the required_documents of this informacija o razmewenii
+	 */
+	public void setRequired_documents(String required_documents);
+
 	@Override
 	public boolean isNew();
 

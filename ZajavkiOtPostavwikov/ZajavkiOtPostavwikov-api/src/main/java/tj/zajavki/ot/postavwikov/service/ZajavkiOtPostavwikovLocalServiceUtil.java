@@ -68,6 +68,10 @@ public class ZajavkiOtPostavwikovLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static double getTotalPrice(long lot_id, long postavwik_id) {
+		return getService().getTotalPrice(lot_id, postavwik_id);
+	}
+
 	public static int getCountLotId(long lot_id) {
 		return getService().getCountLotId(lot_id);
 	}

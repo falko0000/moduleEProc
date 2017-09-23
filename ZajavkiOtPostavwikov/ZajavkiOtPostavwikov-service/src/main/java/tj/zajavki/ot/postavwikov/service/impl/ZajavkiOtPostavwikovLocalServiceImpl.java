@@ -73,4 +73,16 @@ public class ZajavkiOtPostavwikovLocalServiceImpl
 		return zajavkiOtPostavwikovPersistence.countByLotId(lot_id);
 	}
 	
+	public double getTotalPrice(long lot_id, long postavwik_id)
+	{
+		double totalPrice = 0.0;
+		
+		
+		List<ZajavkiOtPostavwikov> otPostavwikovs = getZajavkiOtPostavwikovs(lot_id, postavwik_id);
+		
+		for (ZajavkiOtPostavwikov zajavkiOtPostavwikov : otPostavwikovs) 
+			totalPrice += zajavkiOtPostavwikov.getItogo_za_tovar();
+		
+		return totalPrice;
+	}
 }

@@ -95,6 +95,9 @@ public class InformacijaORazmeweniiWrapper implements InformacijaORazmewenii,
 		attributes.put("srok_postavki", getSrok_postavki());
 		attributes.put("srok_postavki_dlja_zakaza",
 			getSrok_postavki_dlja_zakaza());
+		attributes.put("required_documents_dlja_zakaza",
+			getRequired_documents_dlja_zakaza());
+		attributes.put("required_documents", getRequired_documents());
 
 		return attributes;
 	}
@@ -270,6 +273,19 @@ public class InformacijaORazmeweniiWrapper implements InformacijaORazmewenii,
 		if (srok_postavki_dlja_zakaza != null) {
 			setSrok_postavki_dlja_zakaza(srok_postavki_dlja_zakaza);
 		}
+
+		Integer required_documents_dlja_zakaza = (Integer)attributes.get(
+				"required_documents_dlja_zakaza");
+
+		if (required_documents_dlja_zakaza != null) {
+			setRequired_documents_dlja_zakaza(required_documents_dlja_zakaza);
+		}
+
+		String required_documents = (String)attributes.get("required_documents");
+
+		if (required_documents != null) {
+			setRequired_documents(required_documents);
+		}
 	}
 
 	@Override
@@ -333,6 +349,16 @@ public class InformacijaORazmeweniiWrapper implements InformacijaORazmewenii,
 		return _informacijaORazmewenii.compareTo(informacijaORazmewenii);
 	}
 
+	/**
+	* Returns the required_documents_dlja_zakaza of this informacija o razmewenii.
+	*
+	* @return the required_documents_dlja_zakaza of this informacija o razmewenii
+	*/
+	@Override
+	public int getRequired_documents_dlja_zakaza() {
+		return _informacijaORazmewenii.getRequired_documents_dlja_zakaza();
+	}
+
 	@Override
 	public int hashCode() {
 		return _informacijaORazmewenii.hashCode();
@@ -376,6 +402,16 @@ public class InformacijaORazmeweniiWrapper implements InformacijaORazmewenii,
 	@Override
 	public java.lang.String getOplata() {
 		return _informacijaORazmewenii.getOplata();
+	}
+
+	/**
+	* Returns the required_documents of this informacija o razmewenii.
+	*
+	* @return the required_documents of this informacija o razmewenii
+	*/
+	@Override
+	public java.lang.String getRequired_documents() {
+		return _informacijaORazmewenii.getRequired_documents();
 	}
 
 	/**
@@ -825,6 +861,27 @@ public class InformacijaORazmeweniiWrapper implements InformacijaORazmewenii,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_informacijaORazmewenii.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the required_documents of this informacija o razmewenii.
+	*
+	* @param required_documents the required_documents of this informacija o razmewenii
+	*/
+	@Override
+	public void setRequired_documents(java.lang.String required_documents) {
+		_informacijaORazmewenii.setRequired_documents(required_documents);
+	}
+
+	/**
+	* Sets the required_documents_dlja_zakaza of this informacija o razmewenii.
+	*
+	* @param required_documents_dlja_zakaza the required_documents_dlja_zakaza of this informacija o razmewenii
+	*/
+	@Override
+	public void setRequired_documents_dlja_zakaza(
+		int required_documents_dlja_zakaza) {
+		_informacijaORazmewenii.setRequired_documents_dlja_zakaza(required_documents_dlja_zakaza);
 	}
 
 	/**

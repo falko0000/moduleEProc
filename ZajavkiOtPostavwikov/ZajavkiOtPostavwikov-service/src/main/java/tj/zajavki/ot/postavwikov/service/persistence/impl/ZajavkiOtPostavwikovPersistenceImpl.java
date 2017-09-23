@@ -2171,8 +2171,37 @@ public class ZajavkiOtPostavwikovPersistenceImpl extends BasePersistenceImpl<Zaj
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew || !ZajavkiOtPostavwikovModelImpl.COLUMN_BITMASK_ENABLED) {
+		if (!ZajavkiOtPostavwikovModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+		else
+		 if (isNew) {
+			Object[] args = new Object[] {
+					zajavkiOtPostavwikovModelImpl.getTovar_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_TOVARID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOVARID,
+				args);
+
+			args = new Object[] { zajavkiOtPostavwikovModelImpl.getLot_id() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_LOTID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTID,
+				args);
+
+			args = new Object[] {
+					zajavkiOtPostavwikovModelImpl.getLot_id(),
+					zajavkiOtPostavwikovModelImpl.getPostavwik_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_LOTIDPOSTAVWIKID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LOTIDPOSTAVWIKID,
+				args);
+
+			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
+				FINDER_ARGS_EMPTY);
 		}
 
 		else {
@@ -2427,7 +2456,7 @@ public class ZajavkiOtPostavwikovPersistenceImpl extends BasePersistenceImpl<Zaj
 		query.append(_SQL_SELECT_ZAJAVKIOTPOSTAVWIKOV_WHERE_PKS_IN);
 
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
-			query.append(String.valueOf(primaryKey));
+			query.append((long)primaryKey);
 
 			query.append(StringPool.COMMA);
 		}

@@ -1,9 +1,48 @@
 
+<%@page import="tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil"%>
+<%@page import="tj.supplier.request.lot.model.SupplierRequestLot"%>
+<%@page import="tj.log.evaluated.service.LogEvaluatedLocalServiceUtil"%>
+<%@page import="tj.log.evaluated.model.LogEvaluated"%>
+<%@page import="tj.spisoklotov.model.Spisoklotov"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Collection"%>
+<%@page import="tj.protocol.contracts.model.ProtocolOpening"%>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Organization"%>
+<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
+<%@page import="tj.protocol.contracts.service.ProtocolOpeningLocalServiceUtil"%>
+<%@page import="tj.result.opening.service.ResultOpeningLocalServiceUtil"%>
+<%@page import="tj.result.opening.model.ResultOpening"%>
+<%@page import="java.util.List"%>
+
+<%@page import="tj.lots.winner.model.LotsWinner"%>
+<%@page import="javax.portlet.PortletURL"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%
    
    List<LotsWinner> lotsWinners =  LotsWinnerLocalServiceUtil.getSerialWinners(spisoklotov.getSpisok_lotov_id());
    long orgWinner = 0;
+   
+   System.out.println("Version 6 list supplier");
+   
+
+   ProtocolOpening protocol_opening = ProtocolOpeningLocalServiceUtil.getProtocolOpeningByBid(izvewenija.getIzvewenija_id());
+   
+   List<LogEvaluated> evaluateds = Collections.EMPTY_LIST;
+   List<SupplierRequestLot> requestLots = Collections.EMPTY_LIST;
+   
+   if(Validator.isNotNull(protocol_opening))
+	   evaluateds = LogEvaluatedLocalServiceUtil.getLogEvaluation(spisoklotov.getSpisok_lotov_id(), user.getUserId());
+	
+   if(evaluateds.isEmpty())
+	   requestLots = SupplierRequestLotLocalServiceUtil.getBySpisokLotovId(spisoklotov.getSpisok_lotov_id());
+ 
+   int k = 1;
+   
+   String currentURL = themeDisplay.getURLCurrent();
+   
+   request.setAttribute("redirect", currentURL);
    
 %>
 <div class="table-responsive">
@@ -13,42 +52,105 @@
     	<tr>
     		<th><%=LanguageUtil.get(request, "number") %></th>
     		<th><%=LanguageUtil.get(request, "name-and-address") %></th>
-    		<th><%=LanguageUtil.format(request, "price-for-lot", lotInfo[0])%>
-    		<th><%=LanguageUtil.get(request, "conformity-check") %></th>
+    		<th><%=LanguageUtil.format(request, "price-for-lot", lotInfo[0])%></th>
+    		
+    		<c:if test="<%=!evaluateds.isEmpty() %>">
+    			<th><%=LanguageUtil.get(request, "conformity-check") %></th>
+    		</c:if>
     		
     	</tr>
       </thead>
       
       <tbody>	
-		<% for(LotsWinner lotw : lotsWinners){
+      
+		<%
+		
+		 for(LogEvaluated evaluated : evaluateds){
 		    
-			Organization org = OrganizationLocalServiceUtil.getOrganization(lotw.getOrganization_id());
+			 String tolerance = "conditionally-admitted";
+			 
+			 if(evaluated.getOpening_status() == 2)
+				 tolerance = "l-approved";
+			 if(evaluated.getOpening_status() == 0)
+				 tolerance = "l-rejected";
+			
+			 double totalPrice = ZajavkiOtPostavwikovLocalServiceUtil.getTotalPrice(evaluated.getSpisok_lotov_id(), evaluated.getOrganization_id());
+			 
+			  PortletURL supTolerance = renderResponse.createRenderURL();
+			  supTolerance.setParameter("mvcPath", CommissionConstants.PAGE_SUPPLIER);
+			  supTolerance.setParameter("organization_id", String.valueOf(evaluated.getOrganization_id()));
+			  supTolerance.setParameter("spisok_lotov_id", String.valueOf(evaluated.getSpisok_lotov_id()));
+			  supTolerance.setParameter("izvewenie_id", String.valueOf(izvewenija.getIzvewenija_id()));
+			  supTolerance.setParameter("result_status", "0");
+			  
+			  
+			  PortletURL LinkEvaluate = renderResponse.createRenderURL();
+			  LinkEvaluate.setParameter("mvcPath", CommissionConstants.PAGE_SUPPLIER);
+			  supTolerance.setParameter("organization_id", String.valueOf(evaluated.getOrganization_id()));
+			  supTolerance.setParameter("spisok_lotov_id", String.valueOf(evaluated.getSpisok_lotov_id()));
+			  LinkEvaluate.setParameter("izvewenie_id", String.valueOf(izvewenija.getIzvewenija_id()));
+			  LinkEvaluate.setParameter("result_status", "2");
 	
-			if(lotw.getAttribute().equals("W"))
-				orgWinner = org.getOrganizationId();
+			Organization org = OrganizationLocalServiceUtil.getOrganization(evaluated.getOrganization_id());
+	
+		
 			
 			String name_address = org.getName()+", ";
 			Address address = org.getAddress();
 			name_address += LanguageUtil.get(request, "country."+address.getCountry().getName())+" "+address.getCity()+" "+address.getStreet1(); 
-		    
-		
-			double priceTotal = lotw.getTotal_price();
-			
-			
 		  
 			%>
     
       		<tr>
       		  
-      		   <td><%=lotw.getSerial_number() %></td>
+      		   <td><%= k %></td>
       		   <td><%= name_address%></td>
-      		    <td><%= priceTotal%></td>
-      		   <td><%=LanguageUtil.get(request, "Approved") %></td>
-      	
-      	
+      		    <td><%= totalPrice%></td>
+      		  
+      		
+      		   		<td>
+      		   			<aui:a href="<%=supTolerance.toString() %>" label="<%=tolerance %>"></aui:a>
+      		   			
+      		   			<c:if test="<%=evaluated.getOpening_status() == 2 %>">
+      		   				<aui:a href="<%=LinkEvaluate.toString() %>" label="l-evaluate"></aui:a>
+      		   			</c:if>
+      		   		</td>
+      	     
       		</tr>   
         
-		<%}%>
+		<%
+		k++;
+			}
+		
+		for(SupplierRequestLot requestLot : requestLots)
+		{
+      
+		  if(requestLot.getSub_application())
+		  {
+			
+			  double totalPrice = ZajavkiOtPostavwikovLocalServiceUtil.getTotalPrice(requestLot.getSpisok_lotov_id(), requestLot.getOrganization_id());
+			  
+			Organization org = OrganizationLocalServiceUtil.getOrganization(requestLot.getOrganization_id());
+            String name_address = org.getName()+", ";
+			Address address = org.getAddress();
+			name_address += LanguageUtil.get(request, "country."+address.getCountry().getName())+" "+address.getCity()+" "+address.getStreet1(); 
+		  
+		
+		
+		%>
+		<tr>
+      		  
+      		   <td><%= k %></td>
+      		   <td><%= name_address%></td>
+      		    <td><%= totalPrice%></td>
+      		  
+      	     
+      		</tr>   
+      		<%
+      		k++;
+		  }
+		}
+      		%>
       </tbody>
   </table>
   </div class="table-responsive">

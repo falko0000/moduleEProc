@@ -62,6 +62,8 @@
  
        <% for( Spisoklotov spisoklotov : spisoklotovs) {
         
+    	   
+    	   
         Object lotInfo[] = {spisoklotov.getNomer_lota(), spisoklotov.getNaimenovanie_lota(), spisoklotov.getCena_kontrakta()}; 
         String zak_vbk = spisoklotov.getZakazchik();
         String zakazchik = zak_vbk.substring(zak_vbk.indexOf(" "));

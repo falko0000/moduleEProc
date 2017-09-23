@@ -29,5 +29,6 @@
 		<field name="srok_obespechenija_zajavki" type="String" />
 		<field name="srok_postavki" type="String" />
 		<field name="zakazchik" type="String" />
+		<field name="required_documents" type="String" />
 	</model>
 </model-hints>

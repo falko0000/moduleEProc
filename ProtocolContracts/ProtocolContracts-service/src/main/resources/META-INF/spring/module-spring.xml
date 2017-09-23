@@ -3,6 +3,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean class="tj.protocol.contracts.service.impl.ProtocolContractsLocalServiceImpl" id="tj.protocol.contracts.service.ProtocolContractsLocalService" />
 	<bean class="tj.protocol.contracts.service.persistence.impl.ProtocolContractsPersistenceImpl" id="tj.protocol.contracts.service.persistence.ProtocolContractsPersistence" parent="basePersistence" />
+	<bean class="tj.protocol.contracts.service.impl.ProtocolEvaluateLocalServiceImpl" id="tj.protocol.contracts.service.ProtocolEvaluateLocalService" />
+	<bean class="tj.protocol.contracts.service.persistence.impl.ProtocolEvaluatePersistenceImpl" id="tj.protocol.contracts.service.persistence.ProtocolEvaluatePersistence" parent="basePersistence" />
 	<bean class="tj.protocol.contracts.service.impl.ProtocolOpeningLocalServiceImpl" id="tj.protocol.contracts.service.ProtocolOpeningLocalService" />
 	<bean class="tj.protocol.contracts.service.persistence.impl.ProtocolOpeningPersistenceImpl" id="tj.protocol.contracts.service.persistence.ProtocolOpeningPersistence" parent="basePersistence" />
 </beans>

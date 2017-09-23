@@ -553,8 +553,14 @@ public class ProtocolOpeningPersistenceImpl extends BasePersistenceImpl<Protocol
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew || !ProtocolOpeningModelImpl.COLUMN_BITMASK_ENABLED) {
+		if (!ProtocolOpeningModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+		else
+		 if (isNew) {
+			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
+				FINDER_ARGS_EMPTY);
 		}
 
 		entityCache.putResult(ProtocolOpeningModelImpl.ENTITY_CACHE_ENABLED,
@@ -736,7 +742,7 @@ public class ProtocolOpeningPersistenceImpl extends BasePersistenceImpl<Protocol
 		query.append(_SQL_SELECT_PROTOCOLOPENING_WHERE_PKS_IN);
 
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
-			query.append(String.valueOf(primaryKey));
+			query.append((long)primaryKey);
 
 			query.append(StringPool.COMMA);
 		}

@@ -35,5 +35,6 @@
 		<property name="srok_obespechenija_zajavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="srok_postavki" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zakazchik" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="required_documents" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

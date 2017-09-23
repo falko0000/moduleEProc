@@ -82,6 +82,9 @@ public interface ZajavkiOtPostavwikovLocalService extends BaseLocalService,
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public double getTotalPrice(long lot_id, long postavwik_id);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCountLotId(long lot_id);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

@@ -1,0 +1,9 @@
+Bundle-Name: LogEvaluated-api
+Bundle-SymbolicName: tj.log.evaluated.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.log.evaluated.exception,\
+	tj.log.evaluated.model,\
+	tj.log.evaluated.service,\
+	tj.log.evaluated.service.persistence
+-includeresource: META-INF/service.xml=../LogEvaluated-service/service.xml

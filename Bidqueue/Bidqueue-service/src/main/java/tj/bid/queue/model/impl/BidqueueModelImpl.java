@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -81,8 +82,8 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 	public static final String TABLE_SQL_CREATE = "create table sapp.bid_queue (bid_queue_id LONG not null primary key,izvewenija_id LONG,closing_date DATE null,closing_by_minutes LONG,state_ INTEGER,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table sapp.bid_queue";
-	public static final String ORDER_BY_JPQL = " ORDER BY bidqueue.closing_by_minutes ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY sapp.bid_queue.closing_by_minutes ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY bidqueue.closing_date ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY sapp.bid_queue.closing_date ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -97,7 +98,7 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 			true);
 	public static final long STATE_COLUMN_BITMASK = 1L;
 	public static final long STATUS_COLUMN_BITMASK = 2L;
-	public static final long CLOSING_BY_MINUTES_COLUMN_BITMASK = 4L;
+	public static final long CLOSING_DATE_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(tj.bid.queue.service.util.ServiceProps.get(
 				"lock.expiration.time.tj.bid.queue.model.Bidqueue"));
 
@@ -217,6 +218,8 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 	@Override
 	public void setClosing_date(Date closing_date) {
+		_columnBitmask = -1L;
+
 		_closing_date = closing_date;
 	}
 
@@ -227,8 +230,6 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 
 	@Override
 	public void setClosing_by_minutes(long closing_by_minutes) {
-		_columnBitmask = -1L;
-
 		_closing_by_minutes = closing_by_minutes;
 	}
 
@@ -323,15 +324,7 @@ public class BidqueueModelImpl extends BaseModelImpl<Bidqueue>
 	public int compareTo(Bidqueue bidqueue) {
 		int value = 0;
 
-		if (getClosing_by_minutes() < bidqueue.getClosing_by_minutes()) {
-			value = -1;
-		}
-		else if (getClosing_by_minutes() > bidqueue.getClosing_by_minutes()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = DateUtil.compareTo(getClosing_date(), bidqueue.getClosing_date());
 
 		if (value != 0) {
 			return value;

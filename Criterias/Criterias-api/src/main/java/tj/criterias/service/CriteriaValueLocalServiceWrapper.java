@@ -162,6 +162,12 @@ public class CriteriaValueLocalServiceWrapper
 		return _criteriaValueLocalService.getCriteriaValues(start, end);
 	}
 
+	@Override
+	public java.util.List<tj.criterias.model.CriteriaValue> getCriteriaValues(
+		long criteria_id) {
+		return _criteriaValueLocalService.getCriteriaValues(criteria_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

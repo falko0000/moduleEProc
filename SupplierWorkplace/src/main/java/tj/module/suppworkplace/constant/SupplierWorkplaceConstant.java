@@ -2,6 +2,8 @@ package tj.module.suppworkplace.constant;
 
 import javax.servlet.SessionTrackingMode;
 
+import com.liferay.portal.kernel.json.JSONObject;
+
 public interface SupplierWorkplaceConstant {
 	
 	//Component property

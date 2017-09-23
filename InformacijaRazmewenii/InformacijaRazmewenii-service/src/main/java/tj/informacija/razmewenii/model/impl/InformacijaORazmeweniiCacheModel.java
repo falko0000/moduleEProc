@@ -66,7 +66,7 @@ public class InformacijaORazmeweniiCacheModel implements CacheModel<InformacijaO
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{cena_postavki=");
 		sb.append(cena_postavki);
@@ -120,6 +120,10 @@ public class InformacijaORazmeweniiCacheModel implements CacheModel<InformacijaO
 		sb.append(srok_postavki);
 		sb.append(", srok_postavki_dlja_zakaza=");
 		sb.append(srok_postavki_dlja_zakaza);
+		sb.append(", required_documents_dlja_zakaza=");
+		sb.append(required_documents_dlja_zakaza);
+		sb.append(", required_documents=");
+		sb.append(required_documents);
 		sb.append("}");
 
 		return sb.toString();
@@ -223,6 +227,14 @@ public class InformacijaORazmeweniiCacheModel implements CacheModel<InformacijaO
 		}
 
 		informacijaORazmeweniiImpl.setSrok_postavki_dlja_zakaza(srok_postavki_dlja_zakaza);
+		informacijaORazmeweniiImpl.setRequired_documents_dlja_zakaza(required_documents_dlja_zakaza);
+
+		if (required_documents == null) {
+			informacijaORazmeweniiImpl.setRequired_documents(StringPool.BLANK);
+		}
+		else {
+			informacijaORazmeweniiImpl.setRequired_documents(required_documents);
+		}
 
 		informacijaORazmeweniiImpl.resetOriginalValues();
 
@@ -273,6 +285,9 @@ public class InformacijaORazmeweniiCacheModel implements CacheModel<InformacijaO
 		srok_postavki = objectInput.readUTF();
 
 		srok_postavki_dlja_zakaza = objectInput.readLong();
+
+		required_documents_dlja_zakaza = objectInput.readInt();
+		required_documents = objectInput.readUTF();
 	}
 
 	@Override
@@ -367,6 +382,15 @@ public class InformacijaORazmeweniiCacheModel implements CacheModel<InformacijaO
 		}
 
 		objectOutput.writeLong(srok_postavki_dlja_zakaza);
+
+		objectOutput.writeInt(required_documents_dlja_zakaza);
+
+		if (required_documents == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(required_documents);
+		}
 	}
 
 	public String cena_postavki;
@@ -395,4 +419,6 @@ public class InformacijaORazmeweniiCacheModel implements CacheModel<InformacijaO
 	public String srok_obespechenija_zajavki;
 	public String srok_postavki;
 	public long srok_postavki_dlja_zakaza;
+	public int required_documents_dlja_zakaza;
+	public String required_documents;
 }

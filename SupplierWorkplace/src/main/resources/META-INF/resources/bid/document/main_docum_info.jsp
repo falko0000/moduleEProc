@@ -27,7 +27,7 @@ String[] downloaddocuments = new String[]{"download_documents"};
 
 <liferay-ui:tabs names="list_docum">
 
-<jsp:include page="<%=SupplierWorkplaceConstant.SEARCH_CONTENER %>"></jsp:include>
+
 
 
 
@@ -46,7 +46,7 @@ String[] downloaddocuments = new String[]{"download_documents"};
  categorySections="<%= CAT_SECTION %>"
  jspPath="/bid/document/"
  markupView="lexicon"
- 
+  showButtons="false"
  />
 </aui:form>
 </liferay-ui:tabs>

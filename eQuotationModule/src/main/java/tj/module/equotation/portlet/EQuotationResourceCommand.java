@@ -136,6 +136,7 @@ public class EQuotationResourceCommand implements MVCResourceCommand {
 		                         
 		 for(Okgz okgz : okgzList){
 			 okgzJSON=JSONFactoryUtil.createJSONObject();
+			 
 			 okgzJSON.put("okgz_id", okgz.getOkgz_id());
 			 okgzJSON.put("kod",okgz.getKod());
 			 okgzJSON.put("nazvanie",okgz.getNaimenovanie());
@@ -143,6 +144,7 @@ public class EQuotationResourceCommand implements MVCResourceCommand {
 			 
 			 okgzsJSONArray.put(okgzJSON);
 		 }
+		
 		 } catch (Exception e) {
 		 }
 		 PrintWriter out = null;

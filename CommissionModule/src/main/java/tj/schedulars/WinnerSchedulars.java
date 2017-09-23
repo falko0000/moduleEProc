@@ -41,9 +41,12 @@ import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
 import tj.module.commission.constants.CommissionConstants;
 import tj.protocol.contracts.model.ProtocolContracts;
+import tj.protocol.contracts.model.ProtocolEvaluate;
 import tj.protocol.contracts.model.ProtocolOpening;
 import tj.protocol.contracts.service.ProtocolContractsLocalServiceUtil;
+import tj.protocol.contracts.service.ProtocolEvaluateLocalServiceUtil;
 import tj.protocol.contracts.service.ProtocolOpeningLocalServiceUtil;
+import tj.system.config.exception.NoSuchSystemConfigException;
 import tj.system.config.service.SystemConfigLocalServiceUtil;
 
 
@@ -58,7 +61,7 @@ public class WinnerSchedulars extends BaseMessageListener  {
 	 @Override
 	  protected void doReceive(Message message)  {
 
-		 List<Bidqueue> bidqueues = BidqueueLocalServiceUtil.getBidqueue(CommissionConstants.STATE_BID_COMPLETED_TENDERS, 
+		/* List<Bidqueue> bidqueues = BidqueueLocalServiceUtil.getBidqueue(CommissionConstants.STATE_BID_COMPLETED_TENDERS, 
 				 															CommissionConstants.STATUS_BID_AT_DETERMINING_WINNER);
 		 
 		Date date = new Date();
@@ -70,16 +73,16 @@ public class WinnerSchedulars extends BaseMessageListener  {
 		for( Bidqueue bidqueue : bidqueues)
 		{
 				long izvewenija_id = bidqueue.getIzvewenija_id();
-				ProtocolOpening opening = ProtocolOpeningLocalServiceUtil.getProtocolOpeningByBid(izvewenija_id);
+				ProtocolEvaluate evaluate = ProtocolEvaluateLocalServiceUtil.getProtocolEvaluateByBid(izvewenija_id);
 				
-				 System.out.println(date+"<="+ bidqueue.getClosing_date());
+				
 				
 			if(date.after(bidqueue.getClosing_date()) || date.equals(bidqueue.getClosing_date()))
 			{
-				boolean isNullOpening = Validator.isNull(opening);
+				boolean isNullEvaluate = Validator.isNull(evaluate);
 			
 				try {
-					 if(isNullOpening)
+					 if(isNullEvaluate)
 					 {
 					
 			        
@@ -88,23 +91,23 @@ public class WinnerSchedulars extends BaseMessageListener  {
 					   if(Validator.isNotNull(winner) )
 					   {
 						
-							if(Validator.isNotNull(opening))
+							if(Validator.isNotNull(evaluate))
 							{
-								opening.setUpdated(new Date());
+								evaluate.setUpdated(new Date());
 								
 							}
 							else
 							{    
-								 long protocol_opening_id =  CounterLocalServiceUtil.increment(ProtocolOpening.class.toString());
-								 opening = ProtocolOpeningLocalServiceUtil.createProtocolOpening(protocol_opening_id);
+								 long protocol_evaluate_id =  CounterLocalServiceUtil.increment(ProtocolEvaluate.class.toString());
+								 evaluate = ProtocolEvaluateLocalServiceUtil.createProtocolEvaluate(protocol_evaluate_id);
 								
-								 opening.setIzvewenie_id(izvewenija_id);
-								 opening.setCreated(new Date());
-								 opening.setUpdated(new Date());
+								 evaluate.setIzvewenie_id(izvewenija_id);
+								 evaluate.setCreated(new Date());
+								 evaluate.setUpdated(new Date());
 								
 							}
 							
-							ProtocolOpeningLocalServiceUtil.updateProtocolOpening(opening);
+							ProtocolEvaluateLocalServiceUtil.updateProtocolEvaluate(evaluate);
 							
 							Calendar cal = CalendarFactoryUtil.getCalendar();
 						    cal.setTime(bidqueue.getClosing_date());
@@ -150,7 +153,7 @@ public class WinnerSchedulars extends BaseMessageListener  {
 				
 			}
 		
-		}
+		}*/
 		
 	  }
 

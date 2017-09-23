@@ -66,7 +66,7 @@ public class SpisoklotovCacheModel implements CacheModel<Spisoklotov>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{cena_kontrakta=");
 		sb.append(cena_kontrakta);
@@ -122,6 +122,8 @@ public class SpisoklotovCacheModel implements CacheModel<Spisoklotov>,
 		sb.append(srok_postavki);
 		sb.append(", zakazchik=");
 		sb.append(zakazchik);
+		sb.append(", required_documents=");
+		sb.append(required_documents);
 		sb.append("}");
 
 		return sb.toString();
@@ -252,6 +254,13 @@ public class SpisoklotovCacheModel implements CacheModel<Spisoklotov>,
 			spisoklotovImpl.setZakazchik(zakazchik);
 		}
 
+		if (required_documents == null) {
+			spisoklotovImpl.setRequired_documents(StringPool.BLANK);
+		}
+		else {
+			spisoklotovImpl.setRequired_documents(required_documents);
+		}
+
 		spisoklotovImpl.resetOriginalValues();
 
 		return spisoklotovImpl;
@@ -297,6 +306,7 @@ public class SpisoklotovCacheModel implements CacheModel<Spisoklotov>,
 		srok_obespechenija_zajavki = objectInput.readUTF();
 		srok_postavki = objectInput.readUTF();
 		zakazchik = objectInput.readUTF();
+		required_documents = objectInput.readUTF();
 	}
 
 	@Override
@@ -419,6 +429,13 @@ public class SpisoklotovCacheModel implements CacheModel<Spisoklotov>,
 		else {
 			objectOutput.writeUTF(zakazchik);
 		}
+
+		if (required_documents == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(required_documents);
+		}
 	}
 
 	public double cena_kontrakta;
@@ -448,4 +465,5 @@ public class SpisoklotovCacheModel implements CacheModel<Spisoklotov>,
 	public String srok_obespechenija_zajavki;
 	public String srok_postavki;
 	public String zakazchik;
+	public String required_documents;
 }

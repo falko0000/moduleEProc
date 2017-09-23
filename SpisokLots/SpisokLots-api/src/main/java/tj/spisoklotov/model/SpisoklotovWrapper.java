@@ -25,7 +25,6 @@ import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -42,7 +41,7 @@ import java.util.Objects;
 public class SpisoklotovWrapper implements Spisoklotov,
 	ModelWrapper<Spisoklotov> {
 	public SpisoklotovWrapper(Spisoklotov spisoklotov) {
-		_spisoklotov = (Spisoklotov) spisoklotov;
+		_spisoklotov = spisoklotov;
 	}
 
 	@Override
@@ -89,6 +88,7 @@ public class SpisoklotovWrapper implements Spisoklotov,
 			getSrok_obespechenija_zajavki());
 		attributes.put("srok_postavki", getSrok_postavki());
 		attributes.put("zakazchik", getZakazchik());
+		attributes.put("required_documents", getRequired_documents());
 
 		return attributes;
 	}
@@ -264,6 +264,12 @@ public class SpisoklotovWrapper implements Spisoklotov,
 		if (zakazchik != null) {
 			setZakazchik(zakazchik);
 		}
+
+		String required_documents = (String)attributes.get("required_documents");
+
+		if (required_documents != null) {
+			setRequired_documents(required_documents);
+		}
 	}
 
 	@Override
@@ -409,6 +415,16 @@ public class SpisoklotovWrapper implements Spisoklotov,
 	@Override
 	public java.lang.String getOplata() {
 		return _spisoklotov.getOplata();
+	}
+
+	/**
+	* Returns the required_documents of this spisoklotov.
+	*
+	* @return the required_documents of this spisoklotov
+	*/
+	@Override
+	public java.lang.String getRequired_documents() {
+		return _spisoklotov.getRequired_documents();
 	}
 
 	/**
@@ -848,6 +864,16 @@ public class SpisoklotovWrapper implements Spisoklotov,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_spisoklotov.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the required_documents of this spisoklotov.
+	*
+	* @param required_documents the required_documents of this spisoklotov
+	*/
+	@Override
+	public void setRequired_documents(java.lang.String required_documents) {
+		_spisoklotov.setRequired_documents(required_documents);
 	}
 
 	/**

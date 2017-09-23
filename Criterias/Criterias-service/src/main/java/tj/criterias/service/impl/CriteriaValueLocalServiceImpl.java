@@ -56,4 +56,9 @@ public class CriteriaValueLocalServiceImpl
 		
 		return criteriaValue;
 	}
+	
+	public List<CriteriaValue> getCriteriaValues(long criteria_id) {
+		
+		return criteriaValuePersistence.findByCriteriaId(criteria_id);
+	}
 }

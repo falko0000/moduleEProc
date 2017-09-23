@@ -94,7 +94,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 	String current = themeDisplay.getURLCurrent();
  		int bindex = current.indexOf(sgroup)+sgroup.length();
 
- 
+
     String UserGroupId = "";
  
  for( int i = bindex; i < current.length(); i++)

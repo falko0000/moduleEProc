@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.result.opening.model.ResultOpening" />
+	<class name="tj.result.opening.model.impl.ResultOpeningImpl" table="sapp.result_opening">
+		<id name="result_opening_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.result_opening_id_seq</param>
+			</generator>
+		</id>
+		<property name="spisok_lotov_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="protocol_opening_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="postavwik_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
