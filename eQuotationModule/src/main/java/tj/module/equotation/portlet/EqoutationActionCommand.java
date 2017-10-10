@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -20,6 +21,7 @@ import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.dynamic.data.mapping.kernel.DDMStructureManagerUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.AddressWrapper;
 import com.liferay.portal.kernel.model.Country;
@@ -43,6 +45,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -57,6 +60,8 @@ import tj.criterias.service.CriteriaDefaultValueLocalServiceUtil;
 import tj.criterias.service.CriteriaLocalServiceUtil;
 import tj.criterias.service.CriteriaTemplateLocalServiceUtil;
 import tj.criterias.service.CriteriasWeightLocalServiceUtil;
+import tj.edinicy.izmerenija.model.EdinicyIzmerenija;
+import tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil;
 import tj.generate.document.GenerateDocument;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
 import tj.informacija.razmewenii.model.InformacijaORazmeweniiWrapper;
@@ -423,8 +428,26 @@ private void generateDocument(ActionRequest actionRequest, ActionResponse action
 		
 
 		List<Spisoklotov> spisoklotov = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija_id);
-	
-		
+	   
+		 List<EdinicyIzmerenija> edinicyIzmerenijas = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijas(-1, -1);
+		  List<Country> countries = CountryServiceUtil.getCountries();
+		  
+		  
+		  Map<Long, String> unites = new HashMap<Long, String>();
+		  Map<Long, String> countMap = new HashMap<Long, String>();
+		  
+		  for(EdinicyIzmerenija izmerenija : edinicyIzmerenijas)
+		      unites.put(izmerenija.getEdinicy_izmerenija_id(), izmerenija.getNazvanie());
+         
+		  HttpServletRequest request = PortalUtil.getHttpServletRequest(actionRequest);
+		  
+		  countMap.put((long) 0, "-");
+		  
+		  for(Country c : countries)
+		  {
+			  countMap.put(c.getCountryId(), LanguageUtil.get(request, "country."+c.getName()));
+		  }
+		  
 		Country country = CountryServiceUtil.getCountry(organization.getCountryId()); 
 		country.setNameCurrentLanguageId(langId);
 		
@@ -442,6 +465,8 @@ private void generateDocument(ActionRequest actionRequest, ActionResponse action
 		
 		
 		CountryWrapper countryWrapper = new CountryWrapper(country);
+		
+		
 		
 		InformacijaORazmeweniiWrapper informacijaORazmeweniiWrapper = new InformacijaORazmeweniiWrapper(informacijaORazmewenii);
 		
@@ -462,11 +487,15 @@ private void generateDocument(ActionRequest actionRequest, ActionResponse action
 	    	  inputs  = new HashMap<String, Object>();
         
        PorjadokRabotyKomissiiWrapper porjadokRabotyKomissiiWrapper = new PorjadokRabotyKomissiiWrapper(porjadokRabotyKomissii);
-       ArrayList<SpisokTovarov> spisokTovarovs = new ArrayList<SpisokTovarov>();
+      
        
-       spisokTovarovs.addAll(SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(slotov.getSpisok_lotov_id()));
+       List<SpisokTovarov> spTovarovs = SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(slotov.getSpisok_lotov_id());
+       
+      
        
        Map<String, Object> attributes = porjadokRabotyKomissiiWrapper.getModelAttributes();
+       
+      
        
        attributes.put("podacha", cal.getTime());
        
@@ -493,8 +522,10 @@ private void generateDocument(ActionRequest actionRequest, ActionResponse action
        inputs.put("country", countryWrapper.getModelAttributes());
        
        inputs.put("informacija_o_razmewenii", informacijaORazmeweniiWrapper.getModelAttributes());
-       inputs.put("spisokTovarovs", spisokTovarovs);
-              
+       inputs.put("spisokTovarovs", spTovarovs);
+       inputs.put("units", unites);
+       inputs.put("countries", countMap);
+       
       String outfilename = slotov.getNaimenovanie_lota() + "_nomer_"+String.valueOf(slotov.getNomer_lota());
        
       String foldersaved[] = {EQuotationConstants.FOLDER_BID,

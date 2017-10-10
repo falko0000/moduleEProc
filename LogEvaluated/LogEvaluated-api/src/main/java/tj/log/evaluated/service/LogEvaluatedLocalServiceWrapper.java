@@ -175,6 +175,13 @@ public class LogEvaluatedLocalServiceWrapper implements LogEvaluatedLocalService
 			result_opening_id);
 	}
 
+	@Override
+	public java.util.List<tj.log.evaluated.model.LogEvaluated> getLogOpeningEvaluationBySpIdOrgId(
+		long spisok_lotov_id, long organization_id) {
+		return _logEvaluatedLocalService.getLogOpeningEvaluationBySpIdOrgId(spisok_lotov_id,
+			organization_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

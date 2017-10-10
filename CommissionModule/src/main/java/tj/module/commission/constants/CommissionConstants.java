@@ -86,4 +86,6 @@ public interface CommissionConstants {
 	    static final String ROLE_DEPUTY = "Deputy";
 	    static final String ROLE_MEMBER = "Member";
 	    static final String ROLE_SECRETARY = "Secretary";
+	    
+	    static final String JUSTIFICATION_PASSING_SCORE = "JUSTIFICATION_PASSING_SCORE";
  }

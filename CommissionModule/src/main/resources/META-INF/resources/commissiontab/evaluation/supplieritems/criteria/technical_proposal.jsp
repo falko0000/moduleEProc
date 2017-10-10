@@ -1,4 +1,6 @@
 
+<%@page import="tj.criterias.service.CriteriasWeightLocalServiceUtil"%>
+<%@page import="tj.criterias.model.CriteriasWeight"%>
 <%@page import="com.liferay.document.library.kernel.service.DLAppServiceUtil"%>
 <%@page import="tj.criterias.model.Criteria"%>
 <%@ include file="/init.jsp" %>
@@ -53,13 +55,15 @@
          
     	 criteriaValue = CriteriaValueLocalServiceUtil.getCriteriaValue(criteria.getCriteria_id(), user.getUserId(), organization_id);
     	 
+    	 CriteriasWeight criteriasWeight = CriteriasWeightLocalServiceUtil.getCriteriasWeight(spisok_lotov_id, criteria.getCriteria_category_id());
+    	 
     String nvalue = StringPool.BLANK;
     boolean bvalue = false;
     	 
-    if(criteria.getCriteria_type_id() == 1 && Validator.isNotNull(criteriaValue))
+    if(criteriasWeight.getPassing_score() > 0.0 && Validator.isNotNull(criteriaValue))
     	nvalue = String.valueOf(criteriaValue.getValue());
     
-    else if(criteria.getCriteria_type_id() == 2 && Validator.isNotNull(criteriaValue))
+    else if(Validator.isNotNull(criteriaValue))
 
     	bvalue = (criteriaValue.getValue() == 1.0)? true : false;
     

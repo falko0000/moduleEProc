@@ -167,6 +167,13 @@ public class LogEvaluatedLocalServiceUtil {
 		return getService().getLogOpeningEvaluation(userid, result_opening_id);
 	}
 
+	public static java.util.List<tj.log.evaluated.model.LogEvaluated> getLogOpeningEvaluationBySpIdOrgId(
+		long spisok_lotov_id, long organization_id) {
+		return getService()
+				   .getLogOpeningEvaluationBySpIdOrgId(spisok_lotov_id,
+			organization_id);
+	}
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

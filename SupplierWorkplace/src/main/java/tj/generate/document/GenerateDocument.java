@@ -71,6 +71,7 @@ public class GenerateDocument {
 			  cfg.setDirectoryForTemplateLoading(new File(getTemplate().getParent()));
 			  cfg.setDefaultEncoding("UTF-8");
 		      cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+		      cfg.setAPIBuiltinEnabled(true);
 		      
 		      Template template=null;
 		       template = cfg.getTemplate(this.version);

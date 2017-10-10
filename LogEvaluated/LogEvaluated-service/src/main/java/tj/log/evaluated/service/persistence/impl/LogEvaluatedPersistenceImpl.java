@@ -1958,6 +1958,554 @@ public class LogEvaluatedPersistenceImpl extends BasePersistenceImpl<LogEvaluate
 
 	private static final String _FINDER_COLUMN_USERIDROID_USERID_2 = "logEvaluated.userid = ? AND ";
 	private static final String _FINDER_COLUMN_USERIDROID_RESULT_OPENING_ID_2 = "logEvaluated.result_opening_id = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SPIDORGID =
+		new FinderPath(LogEvaluatedModelImpl.ENTITY_CACHE_ENABLED,
+			LogEvaluatedModelImpl.FINDER_CACHE_ENABLED, LogEvaluatedImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBySpIdOrgId",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SPIDORGID =
+		new FinderPath(LogEvaluatedModelImpl.ENTITY_CACHE_ENABLED,
+			LogEvaluatedModelImpl.FINDER_CACHE_ENABLED, LogEvaluatedImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySpIdOrgId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			LogEvaluatedModelImpl.SPISOK_LOTOV_ID_COLUMN_BITMASK |
+			LogEvaluatedModelImpl.ORGANIZATION_ID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_SPIDORGID = new FinderPath(LogEvaluatedModelImpl.ENTITY_CACHE_ENABLED,
+			LogEvaluatedModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBySpIdOrgId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @return the matching log evaluateds
+	 */
+	@Override
+	public List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id) {
+		return findBySpIdOrgId(spisok_lotov_id, organization_id,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link LogEvaluatedModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param start the lower bound of the range of log evaluateds
+	 * @param end the upper bound of the range of log evaluateds (not inclusive)
+	 * @return the range of matching log evaluateds
+	 */
+	@Override
+	public List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id, int start, int end) {
+		return findBySpIdOrgId(spisok_lotov_id, organization_id, start, end,
+			null);
+	}
+
+	/**
+	 * Returns an ordered range of all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link LogEvaluatedModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param start the lower bound of the range of log evaluateds
+	 * @param end the upper bound of the range of log evaluateds (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching log evaluateds
+	 */
+	@Override
+	public List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id, int start, int end,
+		OrderByComparator<LogEvaluated> orderByComparator) {
+		return findBySpIdOrgId(spisok_lotov_id, organization_id, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link LogEvaluatedModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param start the lower bound of the range of log evaluateds
+	 * @param end the upper bound of the range of log evaluateds (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching log evaluateds
+	 */
+	@Override
+	public List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id, int start, int end,
+		OrderByComparator<LogEvaluated> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SPIDORGID;
+			finderArgs = new Object[] { spisok_lotov_id, organization_id };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_SPIDORGID;
+			finderArgs = new Object[] {
+					spisok_lotov_id, organization_id,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<LogEvaluated> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<LogEvaluated>)finderCache.getResult(finderPath,
+					finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (LogEvaluated logEvaluated : list) {
+					if ((spisok_lotov_id != logEvaluated.getSpisok_lotov_id()) ||
+							(organization_id != logEvaluated.getOrganization_id())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_LOGEVALUATED_WHERE);
+
+			query.append(_FINDER_COLUMN_SPIDORGID_SPISOK_LOTOV_ID_2);
+
+			query.append(_FINDER_COLUMN_SPIDORGID_ORGANIZATION_ID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(LogEvaluatedModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				qPos.add(organization_id);
+
+				if (!pagination) {
+					list = (List<LogEvaluated>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<LogEvaluated>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching log evaluated
+	 * @throws NoSuchLogEvaluatedException if a matching log evaluated could not be found
+	 */
+	@Override
+	public LogEvaluated findBySpIdOrgId_First(long spisok_lotov_id,
+		long organization_id, OrderByComparator<LogEvaluated> orderByComparator)
+		throws NoSuchLogEvaluatedException {
+		LogEvaluated logEvaluated = fetchBySpIdOrgId_First(spisok_lotov_id,
+				organization_id, orderByComparator);
+
+		if (logEvaluated != null) {
+			return logEvaluated;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("spisok_lotov_id=");
+		msg.append(spisok_lotov_id);
+
+		msg.append(", organization_id=");
+		msg.append(organization_id);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchLogEvaluatedException(msg.toString());
+	}
+
+	/**
+	 * Returns the first log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching log evaluated, or <code>null</code> if a matching log evaluated could not be found
+	 */
+	@Override
+	public LogEvaluated fetchBySpIdOrgId_First(long spisok_lotov_id,
+		long organization_id, OrderByComparator<LogEvaluated> orderByComparator) {
+		List<LogEvaluated> list = findBySpIdOrgId(spisok_lotov_id,
+				organization_id, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching log evaluated
+	 * @throws NoSuchLogEvaluatedException if a matching log evaluated could not be found
+	 */
+	@Override
+	public LogEvaluated findBySpIdOrgId_Last(long spisok_lotov_id,
+		long organization_id, OrderByComparator<LogEvaluated> orderByComparator)
+		throws NoSuchLogEvaluatedException {
+		LogEvaluated logEvaluated = fetchBySpIdOrgId_Last(spisok_lotov_id,
+				organization_id, orderByComparator);
+
+		if (logEvaluated != null) {
+			return logEvaluated;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("spisok_lotov_id=");
+		msg.append(spisok_lotov_id);
+
+		msg.append(", organization_id=");
+		msg.append(organization_id);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchLogEvaluatedException(msg.toString());
+	}
+
+	/**
+	 * Returns the last log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching log evaluated, or <code>null</code> if a matching log evaluated could not be found
+	 */
+	@Override
+	public LogEvaluated fetchBySpIdOrgId_Last(long spisok_lotov_id,
+		long organization_id, OrderByComparator<LogEvaluated> orderByComparator) {
+		int count = countBySpIdOrgId(spisok_lotov_id, organization_id);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<LogEvaluated> list = findBySpIdOrgId(spisok_lotov_id,
+				organization_id, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the log evaluateds before and after the current log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param log_evaluated_id the primary key of the current log evaluated
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next log evaluated
+	 * @throws NoSuchLogEvaluatedException if a log evaluated with the primary key could not be found
+	 */
+	@Override
+	public LogEvaluated[] findBySpIdOrgId_PrevAndNext(long log_evaluated_id,
+		long spisok_lotov_id, long organization_id,
+		OrderByComparator<LogEvaluated> orderByComparator)
+		throws NoSuchLogEvaluatedException {
+		LogEvaluated logEvaluated = findByPrimaryKey(log_evaluated_id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			LogEvaluated[] array = new LogEvaluatedImpl[3];
+
+			array[0] = getBySpIdOrgId_PrevAndNext(session, logEvaluated,
+					spisok_lotov_id, organization_id, orderByComparator, true);
+
+			array[1] = logEvaluated;
+
+			array[2] = getBySpIdOrgId_PrevAndNext(session, logEvaluated,
+					spisok_lotov_id, organization_id, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected LogEvaluated getBySpIdOrgId_PrevAndNext(Session session,
+		LogEvaluated logEvaluated, long spisok_lotov_id, long organization_id,
+		OrderByComparator<LogEvaluated> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_LOGEVALUATED_WHERE);
+
+		query.append(_FINDER_COLUMN_SPIDORGID_SPISOK_LOTOV_ID_2);
+
+		query.append(_FINDER_COLUMN_SPIDORGID_ORGANIZATION_ID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(LogEvaluatedModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(spisok_lotov_id);
+
+		qPos.add(organization_id);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(logEvaluated);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<LogEvaluated> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63; from the database.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 */
+	@Override
+	public void removeBySpIdOrgId(long spisok_lotov_id, long organization_id) {
+		for (LogEvaluated logEvaluated : findBySpIdOrgId(spisok_lotov_id,
+				organization_id, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(logEvaluated);
+		}
+	}
+
+	/**
+	 * Returns the number of log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	 *
+	 * @param spisok_lotov_id the spisok_lotov_id
+	 * @param organization_id the organization_id
+	 * @return the number of matching log evaluateds
+	 */
+	@Override
+	public int countBySpIdOrgId(long spisok_lotov_id, long organization_id) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_SPIDORGID;
+
+		Object[] finderArgs = new Object[] { spisok_lotov_id, organization_id };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_LOGEVALUATED_WHERE);
+
+			query.append(_FINDER_COLUMN_SPIDORGID_SPISOK_LOTOV_ID_2);
+
+			query.append(_FINDER_COLUMN_SPIDORGID_ORGANIZATION_ID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(spisok_lotov_id);
+
+				qPos.add(organization_id);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_SPIDORGID_SPISOK_LOTOV_ID_2 = "logEvaluated.spisok_lotov_id = ? AND ";
+	private static final String _FINDER_COLUMN_SPIDORGID_ORGANIZATION_ID_2 = "logEvaluated.organization_id = ?";
 
 	public LogEvaluatedPersistenceImpl() {
 		setModelClass(LogEvaluated.class);
@@ -2249,6 +2797,15 @@ public class LogEvaluatedPersistenceImpl extends BasePersistenceImpl<LogEvaluate
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERIDROID,
 				args);
 
+			args = new Object[] {
+					logEvaluatedModelImpl.getSpisok_lotov_id(),
+					logEvaluatedModelImpl.getOrganization_id()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_SPIDORGID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SPIDORGID,
+				args);
+
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
@@ -2311,6 +2868,27 @@ public class LogEvaluatedPersistenceImpl extends BasePersistenceImpl<LogEvaluate
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERIDROID, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERIDROID,
+					args);
+			}
+
+			if ((logEvaluatedModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SPIDORGID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						logEvaluatedModelImpl.getOriginalSpisok_lotov_id(),
+						logEvaluatedModelImpl.getOriginalOrganization_id()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_SPIDORGID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SPIDORGID,
+					args);
+
+				args = new Object[] {
+						logEvaluatedModelImpl.getSpisok_lotov_id(),
+						logEvaluatedModelImpl.getOrganization_id()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_SPIDORGID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SPIDORGID,
 					args);
 			}
 		}

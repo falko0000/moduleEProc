@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -54,6 +55,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import tj.balans.postavwika.model.BalansPostavwika;
 import tj.balans.postavwika.service.BalansPostavwikaLocalServiceUtil;
+import tj.edinicy.izmerenija.model.EdinicyIzmerenija;
 import tj.edinicy.izmerenija.service.EdinicyIzmerenijaLocalServiceUtil;
 import tj.generate.document.GenerateDocument;
 import tj.informacija.razmewenii.model.InformacijaORazmewenii;
@@ -392,48 +394,51 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 			Spisoklotov spisoklotov = SpisoklotovLocalServiceUtil.getSpisoklotov(spisok_lotov_id);
 		
 			
-			Country country = CountryServiceUtil.getCountry(organization.getCountryId()); 
+		int countTemp =	ZajavkiOtPostavwikovTempLocalServiceUtil.getCountZajavkiOtPostavwikovs(spisok_lotov_id, orgSupplier.getOrganizationId());
+		
+		Map<Long, ZajavkiOtPostavwikovTemp> zajavkaT = null;
+		Map<Long, ZajavkiOtPostavwikov> zajavka = null;
+		
+		 if(countTemp > 0)
+			 zajavkaT = ZajavkiOtPostavwikovTempLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id,  orgSupplier.getOrganizationId());
+		 else
+			 zajavka = ZajavkiOtPostavwikovLocalServiceUtil.getMapZajavkiOtPostavwikovs(spisok_lotov_id, orgSupplier.getOrganizationId());
+		 
+		 Country country = CountryServiceUtil.getCountry(organization.getCountryId()); 
 			country.setNameCurrentLanguageId(langId);
 			
-
+			 List<EdinicyIzmerenija> edinicyIzmerenijas = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijas(-1, -1);
+			  List<Country> countries = CountryServiceUtil.getCountries();
+			  
+			  
+			  Map<Long, String> unites = new HashMap<Long, String>();
+			  Map<Long, String> countMap = new HashMap<Long, String>();
+			  
+			  for(EdinicyIzmerenija izmerenija : edinicyIzmerenijas)
+			      unites.put(izmerenija.getEdinicy_izmerenija_id(), izmerenija.getNazvanie());
+	         
+			  HttpServletRequest request = PortalUtil.getHttpServletRequest(actionRequest);
+			  
+			  countMap.put((long) 0, "-");
+			  
+			  for(Country c : countries)
+			  {
+				  countMap.put(c.getCountryId(), LanguageUtil.get(request, "country."+c.getName()));
+			  }
+    
 			
 			InformacijaORazmewenii informacijaORazmewenii = InformacijaORazmeweniiLocalServiceUtil.getInfRazmeweniiByIzvewenija(izvewenija_id);
 			        
 			
 			List<ZajavkiOtPostavwikov> zajavkiOtPostavwikovs = ZajavkiOtPostavwikovLocalServiceUtil.getZajavkiOtPostavwikovs(spisok_lotov_id, orgSupplier.getOrganizationId());
+		
 			ArrayList<ZajavkiOtPostavwikov> czajavkiOtPostavwikovs = new ArrayList<ZajavkiOtPostavwikov>();
 		
 			List<SpisokTovarov> tovarovs = SpisokTovarovLocalServiceUtil.getSpisokTovarovByLotId(spisok_lotov_id);
 			 
 			 Map<Long, String> opisanie = new HashMap<Long, String>();
 			
-			 for(ZajavkiOtPostavwikov otPostavwikov : zajavkiOtPostavwikovs)
-				{
-				   for(SpisokTovarov sp : tovarovs)
-				   {
-					  
-					   if(sp.getSpisok_tovarov_id() == otPostavwikov.getTovar_id())
-					   {
-						   String countryKey = StranyLocalServiceUtil.getStrany(otPostavwikov.getKod_strany_proizvoditelja()).getKey();
-						   String countrys = LanguageUtil.get(PortalUtil.getHttpServletRequest(actionRequest), countryKey);
-						   String  edinica = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenija(sp.getEdinica_izmerenija_id()).getNazvanie();
-						   
-						   otPostavwikov.setOpisanie_tovara(countrys+"|"+edinica);
-						    czajavkiOtPostavwikovs.add(otPostavwikov);
-					   }	
-						   
-						  
-						   
-					   }
-				   
-			
-				
-			}
-			
-			
-			
-				   
-				   
+			   
 			OrganizationWrapper organizationWrapper = new OrganizationWrapper(organization);
 			
 			OrganizationWrapper orgSupplierWrapper = new OrganizationWrapper(orgSupplier);
@@ -489,8 +494,21 @@ public class WSupplierActionCommand extends BaseMVCActionCommand{
 	       inputs.put("country", countryWrapper.getModelAttributes());
 	       
 	       inputs.put("informacija_o_razmewenii", informacijaORazmeweniiWrapper.getModelAttributes());
+	       inputs.put("units", unites);
+	       inputs.put("countries", countMap);
+	       inputs.put("tovarovs", tovarovs);
 	       
-
+	    /*   for(SpisokTovarov tovarov : tovarovs)
+             System.out.println(tovarov.toString());	       
+	      */
+	       
+	        if(Validator.isNotNull(zajavkaT))
+	    	   inputs.put("zajavki",zajavkaT);
+	       else
+	    	   inputs.put("zajavki",zajavka);
+	        
+	        
+	        
 	           String foldersaved[] = {SupplierWorkplaceConstant.FOLDER_BID,
 	        		   					String.valueOf(izvewenija_id),
 	        		   					String.valueOf(spisok_lotov_id),

@@ -47,5 +47,10 @@
             <finder-column name="result_opening_id"></finder-column>
          </finder>
          
+         <finder return-type="Collection" name="SpIdOrgId">
+         	<finder-column name="spisok_lotov_id"></finder-column>
+         	<finder-column name="organization_id"></finder-column>
+          </finder>
+         
 	</entity>
 </service-builder>

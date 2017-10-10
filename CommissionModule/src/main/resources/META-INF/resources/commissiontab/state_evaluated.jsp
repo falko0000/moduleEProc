@@ -1,3 +1,6 @@
+<%@page import="com.liferay.portal.kernel.service.OrganizationLocalServiceUtil"%>
+<%@page import="tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil"%>
+<%@page import="tj.supplier.request.lot.model.SupplierRequestLot"%>
 <%@page import="com.liferay.portal.kernel.model.Phone"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
@@ -16,14 +19,29 @@
     
     boolean showGenerateProtocol = true;
 
-%>
+    System.out.println("State evaluated version 3");
+    
+    for(Spisoklotov spisoklotov : spisoklotovs){
+    	List<SupplierRequestLot> requestLots = SupplierRequestLotLocalServiceUtil.getBySpisokLotovId(spisoklotov.getSpisok_lotov_id());
+    	%>
+    	 <h4><%=LanguageUtil.get(request, "lot-only-number")+spisoklotov.getNomer_lota()%></h4>
+  <% 
+   	for(SupplierRequestLot requestLot: requestLots) 
+    {
+    	
+     if(requestLot.getSub_application())
+     {
+     
+    	 %>
 
     <div class="table-responsive">
+   
+     <h5><%=OrganizationLocalServiceUtil.getOrganization(requestLot.getOrganization_id()).getName() %></h5>
    <table class="table table-bordered table-hover">
       
       <thead>
     	<tr>
-    		<th><%=LanguageUtil.get(request, "lot-only-number") %></th>
+    		
     		<th><%=LanguageUtil.get(request, "full-name") %></th>
     		<th><%=LanguageUtil.get(request, "contact-information")%></th>
     		<th><%=LanguageUtil.get(request, " opening-status") %></th>
@@ -35,19 +53,19 @@
       
       <tbody>	
       
-      <%for(Spisoklotov spisoklotov : spisoklotovs){
+      <%
     	  
-    	 List<LogEvaluated> evaluateds = LogEvaluatedLocalServiceUtil.getLogEvaluation(spisoklotov.getSpisok_lotov_id()); 
-    	 
+    	 List<LogEvaluated> evaluateds = LogEvaluatedLocalServiceUtil.getLogOpeningEvaluationBySpIdOrgId(spisoklotov.getSpisok_lotov_id(), requestLot.getOrganization_id());
+    	
     	 for(LogEvaluated evaluated : evaluateds){
     	 
     		 User usr = UserLocalServiceUtil.getUser(evaluated.getUserid());
     		 
-    		 StringBuilder contact = new StringBuilder();
+    		 StringBuilder usercontact = new StringBuilder();
     		 
-    		 contact.append(LanguageUtil.get(request, "emails")+": ");
-    		 contact.append(usr.getEmailAddress()+"<br>");
-    		 contact.append(LanguageUtil.get(request, "phones")+": ");
+    		 usercontact.append(LanguageUtil.get(request, "emails")+": ");
+    		 usercontact.append(usr.getEmailAddress()+"<br>");
+    		 usercontact.append(LanguageUtil.get(request, "phones")+": ");
     		 List<Phone> phones = usr.getPhones();
     		 
     		 String sPhones = "";
@@ -56,7 +74,7 @@
     		 {
     			 sPhones = phone.getNumber()+";";
     		 }
-    		 contact.append(sPhones);
+    		 usercontact.append(sPhones);
     		 
             String tolerance = "conditionally-admitted";
 			 
@@ -69,9 +87,9 @@
 			
 			if(evaluated.getStatus() == 1)
 				rated = "rated";
-			else if(evaluated.getStatus() > 0 && evaluated.getStatus()%2==0)
-				rated = " not-overrated";
-			else
+			if(evaluated.getStatus() > 0 && evaluated.getStatus()%2==0)
+				rated = "not-overrated";
+			if(evaluated.getStatus() > 1 && evaluated.getStatus()%2==1)
 				rated = "overrated";
 			 
 			if(evaluated.getOpening_status() > 0 && evaluated.getStatus()%2 == 0)
@@ -80,29 +98,35 @@
       
       
       <tr>
-        <%=spisoklotov.getNomer_lota() %>
-      </tr>
-      <tr>
-      <%=usr.getFullName() %>
-      </tr>
-      <tr>
-      <%=contact.toString() %>
-      </tr>
-      <tr>
-             <%=tolerance%>
-      </tr>
-          <%=rated %>
-       <tr>
-          
+     	
+      		<td>
+      			<%=usr.getFullName() %>
+      		</td>
+      		<td>
+      			<%=usercontact.toString() %>
+      		</td>
+     		 <td>
+            	 <%=LanguageUtil.get(request, tolerance)%>
+      		</td>
+          	<td>
+          		<%=LanguageUtil.get(request, rated) %>
+       		</td>
        </tr>
+          
+      
       
       
       <%
       }
-      }
     	 %>
-    	 </tbody>
+     </tbody>
     	 </table>
+    	</div>
+    <%
+      }
+    }
+    }
+    	 %>
     	 
     	<c:if test="<%=showGenerateProtocol %>">
     	

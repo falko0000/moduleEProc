@@ -65,4 +65,8 @@ public class LogEvaluatedLocalServiceImpl
 		return logEvaluatedPersistence.findByUserIdROId(userid, result_opening_id);
 	}
 	
+	public List<LogEvaluated>  getLogOpeningEvaluationBySpIdOrgId(long spisok_lotov_id, long organization_id)
+	{
+		return logEvaluatedPersistence.findBySpIdOrgId(spisok_lotov_id, organization_id);
+	}
 }

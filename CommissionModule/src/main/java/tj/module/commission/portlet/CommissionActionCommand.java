@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -18,6 +19,8 @@ import com.liferay.document.library.kernel.model.DLFolder;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
@@ -37,8 +40,10 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import tj.criterias.model.Criteria;
 import tj.criterias.model.CriteriaValue;
+import tj.criterias.model.CriteriasWeight;
 import tj.criterias.service.CriteriaLocalServiceUtil;
 import tj.criterias.service.CriteriaValueLocalServiceUtil;
+import tj.criterias.service.CriteriasWeightLocalServiceUtil;
 import tj.log.evaluated.model.LogEvaluated;
 import tj.log.evaluated.service.LogEvaluatedLocalService;
 import tj.log.evaluated.service.LogEvaluatedLocalServiceUtil;
@@ -48,6 +53,9 @@ import tj.result.opening.service.ResultOpeningLocalServiceUtil;
 import tj.schedulars.Winner;
 import tj.supplier.criteria.model.SupplirCriteria;
 import tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil;
+import tj.system.config.exception.NoSuchSystemConfigException;
+import tj.system.config.model.SystemConfig;
+import tj.system.config.service.SystemConfigLocalServiceUtil;
 
 
 
@@ -103,6 +111,61 @@ public class CommissionActionCommand extends BaseMVCActionCommand{
 		
 		 if(Validator.isNotNull(logEvaluated))
 		 {
+				List<Criteria> criterias = CriteriaLocalServiceUtil.getCriterias(spisok_lotov_id);
+	        	SystemConfig config = null;
+	        try {
+				 config =	SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.JUSTIFICATION_PASSING_SCORE);
+			} catch (NoSuchSystemConfigException e) {
+			
+			}
+	        int[] sing = {0, 1, 1, 1, 1};
+	        String[] description = {"", "","","",""};
+	        int[] index = {0, 1, 1, 1, 1};
+	        double[] value = {0.0, 0.0, 0.0, 0.0, 0.0};
+	        
+	        for(int i = 1; i <= 4; i++)
+	        {
+	        	CriteriasWeight criteriasWeight = CriteriasWeightLocalServiceUtil.getCriteriasWeight(spisok_lotov_id, i);
+	        	
+	        	if(Validator.isNotNull(criteriasWeight))
+	        		sing[i] = (criteriasWeight.getPassing_score() > 0.0)?-1:1;
+	      
+	        		value[i] = criteriasWeight.getPassing_score();
+	        }
+	        
+	        for(Criteria criteria : criterias)
+	        {
+	        	CriteriaValue criteriaValue = CriteriaValueLocalServiceUtil.getCriteriaValue(criteria.getCriteria_id(), userid, organization_id);
+	       
+	        	 if(Validator.isNotNull(criteriaValue))
+	        	 {
+	        		value[criteria.getCriteria_category_id()] += sing[criteria.getCriteria_category_id()]*criteriaValue.getValue();
+	        		  
+	        		if(sing[criteria.getCriteria_category_id()] == 1 && criteriaValue.getValue() == 0.0)
+	        		{
+	        			description[criteria.getCriteria_category_id()] += String.valueOf(index[criteria.getCriteria_category_id()])+". "+criteriaValue.getDescription()+"<br>";
+	        		    index[criteria.getCriteria_category_id()]++;
+	        		}
+	        			
+	        	 }
+	        
+	        }
+	        for(int i = 1; i <= 4; i++)
+	        {
+	        	if((sing[i] == -1 && value[i] > 0.0) && Validator.isNotNull(config))
+	        		description[i] += String.valueOf(index[i]) +". "+config.getValue();
+	        }
+	        
+	        JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+	        
+	        for(int i = 1; i <= 4; i++)
+	        {
+	        	if(!description[i].equals(""))
+	        		jsonObject.put(String.valueOf(i), description[i]);
+	        	else 
+	        		jsonObject.put(String.valueOf(i), value[i]*sing[i] + CriteriasWeightLocalServiceUtil.getCriteriasWeight(spisok_lotov_id, i).getPassing_score());
+	        }
+	        logEvaluated.setEvaluated_des(jsonObject.toJSONString());	
 			 logEvaluated.setStatus(logEvaluated.getStatus()+1);
 			 LogEvaluatedLocalServiceUtil.updateLogEvaluated(logEvaluated);
 		 }
@@ -141,6 +204,7 @@ public class CommissionActionCommand extends BaseMVCActionCommand{
         	evaluated.setOpening_status(tolerance);
         	evaluated.setOpening_des(tolerance_description);
         	
+        
         	LogEvaluatedLocalServiceUtil.updateLogEvaluated(evaluated);
         	
         }
@@ -201,8 +265,8 @@ public class CommissionActionCommand extends BaseMVCActionCommand{
             			    double mark = 0.0;
             		
             			    Criteria criteria = CriteriaLocalServiceUtil.getCriteria(ids[field]);
-            			    
-            			     if( criteria.getCriteria_type_id() == 1)
+            			    CriteriasWeight criteriasWeight = CriteriasWeightLocalServiceUtil.getCriteriasWeight(spisok_lotov_id, criteria.getCriteria_category_id());
+            			     if( criteriasWeight.getPassing_score() > 0.0)
             			    	 mark = ParamUtil.getDouble(actionRequest, prefixes[p]+"mark"+String.valueOf(field) );
             			    
             			     else

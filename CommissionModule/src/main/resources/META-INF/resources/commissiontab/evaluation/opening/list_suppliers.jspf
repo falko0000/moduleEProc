@@ -86,8 +86,8 @@
 			  
 			  PortletURL LinkEvaluate = renderResponse.createRenderURL();
 			  LinkEvaluate.setParameter("mvcPath", CommissionConstants.PAGE_SUPPLIER);
-			  supTolerance.setParameter("organization_id", String.valueOf(evaluated.getOrganization_id()));
-			  supTolerance.setParameter("spisok_lotov_id", String.valueOf(evaluated.getSpisok_lotov_id()));
+			  LinkEvaluate.setParameter("organization_id", String.valueOf(evaluated.getOrganization_id()));
+			  LinkEvaluate.setParameter("spisok_lotov_id", String.valueOf(evaluated.getSpisok_lotov_id()));
 			  LinkEvaluate.setParameter("izvewenie_id", String.valueOf(izvewenija.getIzvewenija_id()));
 			  LinkEvaluate.setParameter("result_status", "2");
 	

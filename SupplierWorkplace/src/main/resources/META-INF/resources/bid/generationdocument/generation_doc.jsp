@@ -1,3 +1,6 @@
+<%@page import="tj.spisok.tovarov.service.SpisokTovarovLocalServiceUtil"%>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovLocalServiceUtil"%>
+<%@page import="tj.zajavki.ot.postavwikov.service.ZajavkiOtPostavwikovTempLocalServiceUtil"%>
 <%@page import="java.util.Collections"%>
 <%@page import="com.liferay.portal.kernel.service.ServiceContext"%>
 <%@page import="com.liferay.portal.kernel.service.ServiceContextFactory"%>
@@ -49,7 +52,10 @@
 	  if( isExists)
 	  fileEntries = DLAppServiceUtil.getFileEntries(themeDisplay.getScopeGroupId(), folder.getFolderId());
 
-	 
+	int countTemp =  ZajavkiOtPostavwikovTempLocalServiceUtil.getCountZajavkiOtPostavwikovs(spisok_lotov_id, user.getOrganizationIds()[0]);
+	int count = ZajavkiOtPostavwikovLocalServiceUtil.getCountZajavkiOtPostavwikovs(spisok_lotov_id, user.getOrganizationIds()[0]);
+	
+	int countTovarov = SpisokTovarovLocalServiceUtil.getCountSpisokTovarovByLotId(spisok_lotov_id);
 %>
 
 <liferay-portlet:actionURL name="<%=SupplierWorkplaceConstant.ACTION_COMMAND_NAME_EDIT%>" var="forming_temp">
@@ -107,8 +113,10 @@
    
  <aui:button-row>
 	
+	<c:if test="<%=(countTemp == countTovarov || count > 0) %>">
 		<aui:button id="pay_now" name="save" value="generating_docum" type="submit" />
-  
+   </c:if>
+   
   </aui:button-row>
 
 

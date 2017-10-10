@@ -158,6 +158,10 @@ public interface LogEvaluatedLocalService extends BaseLocalService,
 	public List<LogEvaluated> getLogOpeningEvaluation(long userid,
 		long result_opening_id);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<LogEvaluated> getLogOpeningEvaluationBySpIdOrgId(
+		long spisok_lotov_id, long organization_id);
+
 	/**
 	* Returns the number of rows matching the dynamic query.
 	*

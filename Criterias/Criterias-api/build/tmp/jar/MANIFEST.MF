@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Criterias-api
 Bundle-SymbolicName: tj.criterias.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_92 (Oracle Corporation)
+Created-By: 1.8.0_144 (Oracle Corporation)
 Export-Package: tj.criterias.exception;uses:="com.liferay.portal.kerne
  l.exception";version="1.0.0",tj.criterias.model;uses:="com.liferay.ex
  pando.kernel.model,com.liferay.portal.kernel.annotation,com.liferay.p
@@ -31,6 +31,6 @@ Import-Package: com.liferay.expando.kernel.model;version="[1.0,2)",com
  as.exception,tj.criterias.model
 Javac-Debug: on
 Javac-Deprecation: off
-Javac-Encoding: Cp1252
+Javac-Encoding: Cp1251
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Tool: Bnd-3.2.0.201605172007

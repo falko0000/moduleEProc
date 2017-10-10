@@ -527,6 +527,154 @@ public interface LogEvaluatedPersistence extends BasePersistence<LogEvaluated> {
 	public int countByUserIdROId(long userid, long result_opening_id);
 
 	/**
+	* Returns all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @return the matching log evaluateds
+	*/
+	public java.util.List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id);
+
+	/**
+	* Returns a range of all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link LogEvaluatedModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param start the lower bound of the range of log evaluateds
+	* @param end the upper bound of the range of log evaluateds (not inclusive)
+	* @return the range of matching log evaluateds
+	*/
+	public java.util.List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id, int start, int end);
+
+	/**
+	* Returns an ordered range of all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link LogEvaluatedModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param start the lower bound of the range of log evaluateds
+	* @param end the upper bound of the range of log evaluateds (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching log evaluateds
+	*/
+	public java.util.List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<LogEvaluated> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link LogEvaluatedModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param start the lower bound of the range of log evaluateds
+	* @param end the upper bound of the range of log evaluateds (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching log evaluateds
+	*/
+	public java.util.List<LogEvaluated> findBySpIdOrgId(long spisok_lotov_id,
+		long organization_id, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<LogEvaluated> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching log evaluated
+	* @throws NoSuchLogEvaluatedException if a matching log evaluated could not be found
+	*/
+	public LogEvaluated findBySpIdOrgId_First(long spisok_lotov_id,
+		long organization_id,
+		com.liferay.portal.kernel.util.OrderByComparator<LogEvaluated> orderByComparator)
+		throws NoSuchLogEvaluatedException;
+
+	/**
+	* Returns the first log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching log evaluated, or <code>null</code> if a matching log evaluated could not be found
+	*/
+	public LogEvaluated fetchBySpIdOrgId_First(long spisok_lotov_id,
+		long organization_id,
+		com.liferay.portal.kernel.util.OrderByComparator<LogEvaluated> orderByComparator);
+
+	/**
+	* Returns the last log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching log evaluated
+	* @throws NoSuchLogEvaluatedException if a matching log evaluated could not be found
+	*/
+	public LogEvaluated findBySpIdOrgId_Last(long spisok_lotov_id,
+		long organization_id,
+		com.liferay.portal.kernel.util.OrderByComparator<LogEvaluated> orderByComparator)
+		throws NoSuchLogEvaluatedException;
+
+	/**
+	* Returns the last log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching log evaluated, or <code>null</code> if a matching log evaluated could not be found
+	*/
+	public LogEvaluated fetchBySpIdOrgId_Last(long spisok_lotov_id,
+		long organization_id,
+		com.liferay.portal.kernel.util.OrderByComparator<LogEvaluated> orderByComparator);
+
+	/**
+	* Returns the log evaluateds before and after the current log evaluated in the ordered set where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param log_evaluated_id the primary key of the current log evaluated
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next log evaluated
+	* @throws NoSuchLogEvaluatedException if a log evaluated with the primary key could not be found
+	*/
+	public LogEvaluated[] findBySpIdOrgId_PrevAndNext(long log_evaluated_id,
+		long spisok_lotov_id, long organization_id,
+		com.liferay.portal.kernel.util.OrderByComparator<LogEvaluated> orderByComparator)
+		throws NoSuchLogEvaluatedException;
+
+	/**
+	* Removes all the log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63; from the database.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	*/
+	public void removeBySpIdOrgId(long spisok_lotov_id, long organization_id);
+
+	/**
+	* Returns the number of log evaluateds where spisok_lotov_id = &#63; and organization_id = &#63;.
+	*
+	* @param spisok_lotov_id the spisok_lotov_id
+	* @param organization_id the organization_id
+	* @return the number of matching log evaluateds
+	*/
+	public int countBySpIdOrgId(long spisok_lotov_id, long organization_id);
+
+	/**
 	* Caches the log evaluated in the entity cache if it is enabled.
 	*
 	* @param logEvaluated the log evaluated

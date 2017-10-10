@@ -1,3 +1,9 @@
+<%@page import="tj.supplier.criteria.model.SupplirCriteria"%>
+<%@page import="tj.criterias.model.Criteria"%>
+<%@page import="tj.criterias.service.CriteriaLocalServiceUtil"%>
+<%@page import="tj.supplier.criteria.service.SupplirCriteriaLocalServiceUtil"%>
+<%@page import="tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil"%>
+<%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
 <%@page import="tj.module.suppworkplace.constant.SupplierWorkplaceConstant"%>
 <%@page import="java.util.Map"%>
 <%@page import="tj.zajavki.ot.postavwikov.model.ZajavkiOtPostavwikov"%>
@@ -49,8 +55,17 @@
     
 	int countSpisokTovarov =	SpisokTovarovLocalServiceUtil.getCountSpisokTovarovByLotId(spisok_lotov_id);
 	int countZajavk        =    ZajavkiOtPostavwikovTempLocalServiceUtil.getCountZajavkiOtPostavwikovs(spisok_lotov_id , organization_id);
-
-
+     
+	ProchajaInformacijaDljaZajavki dljaZajavki = ProchajaInformacijaDljaZajavkiLocalServiceUtil.getProchajaInformacijaDljaZajavki(spisok_lotov_id, organization_id);
+    Criteria criteria = CriteriaLocalServiceUtil.getCriterias(spisok_lotov_id).get(0);
+    
+    SupplirCriteria supplierCriteria = SupplirCriteriaLocalServiceUtil.getSupplierCriteria(criteria.getCriteria_id(), organization_id);
+	
+	boolean showFilingApplication = ((countSpisokTovarov == countZajavk) && (Validator.isNotNull(dljaZajavki) && Validator.isNotNull(supplierCriteria)));
+	
+	
+	
+	
         String peredlojenie = "peredlojenie";
         String opisanie = "opisanie";
         String country  = "Country";
@@ -133,7 +148,7 @@
 				 <%
 				    String Naimenovanie_tovara = spisok_tovarov.getNaimenovanie_tovara();
 				    String Opisanie_tovara = spisok_tovarov.getOpisanie_tovara();
-				    long strany_id = 44;
+				    long strany_id = 205;
 				    double pricevalue = 0;
 				    double totalsvalue = 0;
 				     
@@ -267,7 +282,7 @@
  	   
     <c:when  test="<%=!sub_application %>">	
  	
- 	 <c:if test="<%=countSpisokTovarov == countZajavk %>" >   
+ 	 <c:if test="<%=showFilingApplication %>" >   
 		  <aui:button 
  	        id="filing_an_application" 
  	        name="filing_an_application" 
@@ -343,7 +358,7 @@ AUI().use('event', 'node', function(A) {
 
 
 
-<c:if test="<%=!sub_application && countSpisokTovarov == countZajavk %>" >   
+<c:if test="<%=!sub_application && showFilingApplication %>" >   
 
        <aui:script>
      	Liferay.provide(
