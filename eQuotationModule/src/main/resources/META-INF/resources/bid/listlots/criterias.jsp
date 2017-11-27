@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@page import="tj.criterias.service.CriteriaLocalServiceUtil"%>
 <%@page import="tj.criterias.service.CriteriaTemplateLocalServiceUtil"%>
 <%@page import="tj.criterias.model.CriteriaTemplate"%>
@@ -37,7 +38,9 @@ String qualification[] = new String[CAT_NAMES.length+1];
  String[][] CAT_SECTION = {qualification};
  
 
+ String redirect = ParamUtil.getString(request, "redirect");
  String currentURL = themeDisplay.getURLCurrent();
+ 
 %>
   <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="defaultCriteria">
 		  
@@ -77,7 +80,7 @@ String qualification[] = new String[CAT_NAMES.length+1];
  categorySections="<%= CAT_SECTION %>"
  jspPath="/bid/listlots/criterias/"
  markupView="lexicon"
- 
+  backURL="<%=redirect%>"
  />
  
  

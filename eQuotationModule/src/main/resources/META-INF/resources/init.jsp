@@ -183,6 +183,8 @@
 <portlet:defineObjects />
 
 <%
+
+
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
 
 boolean filterManageableOrganizations = true;

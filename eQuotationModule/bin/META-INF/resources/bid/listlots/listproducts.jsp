@@ -16,7 +16,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
  productUrl.setParameter(Constants.CMD,cmd);
  String displayStyle = ParamUtil.getString(request, "displayStyle");
 
- 
+ int k = 1;
 %>
 
 <liferay-frontend:management-bar
@@ -34,7 +34,7 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 	
 	
 	%>
-	    <liferay-frontend:management-bar-button href="<%= editProducts%>" icon="icon-edit" id="editProduct" label="edit"/>
+	    <liferay-frontend:management-bar-button href="<%= editProducts%>" icon="edit" id="editProduct" label="edit"/>
 		<liferay-frontend:management-bar-button href="<%=removeProducts %>" icon="trash" id="removeProduct" label="remove" />
 	
 	</liferay-frontend:management-bar-action-buttons>
@@ -69,8 +69,10 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 				 	
 				 <liferay-ui:search-container-column-text 
 				 	
-				 	property="spisok_tovarov_id" 
+				 	
 				 	name="id_bid"  
+				 	
+				 	value = "<%=String.valueOf(k++)%>"
 				 	orderable="<%= true %>"  		 	
 				 /> 
 			  			
@@ -216,6 +218,11 @@ String cmd = ParamUtil.getString(request,Constants.CMD);
 		}
 		
 		
-		
+		Liferay.provide(window,'<portlet:namespace/>closePopUp', function(dialogId) {
+			
+			var A = AUI(); var dialog = Liferay.Util.Window.getById(dialogId); 
+			dialog.destroy();
+		},
+		['liferay-util-window'] ); 
 		</aui:script>
 		

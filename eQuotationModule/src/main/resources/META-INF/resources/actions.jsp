@@ -1,4 +1,5 @@
 
+<%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@page import="com.liferay.portal.kernel.security.permission.ActionKeys"%>
 <%@ include file="/init.jsp" %>
 
@@ -81,7 +82,7 @@
         <liferay-ui:icon iconCssClass="icon-info-sign" message="info" url="<%= info.toString() %>" />
       </c:if>
        
-      <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, ActionKeys.DELETE) %>"> 
+      <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, ActionKeys.DELETE) && tab.equals(EQuotationConstants.TAB_PREPARATION) %>"> 
         <liferay-ui:icon iconCssClass="icon-trash" message="action.DELETE" url="<%= deleteURL.toString() %>" />
      </c:if>   
         <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, ActionKeys.PERMISSIONS ) %>"> 
@@ -90,11 +91,11 @@
        
        </c:if>
     
-    <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, actionPublishId ) %>">
+    <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, actionPublishId ) && tab.equals(EQuotationConstants.TAB_PREPARATION)%>">
          <liferay-ui:icon   message="publish" url="<%=publication.toString()%>"/>
     </c:if>
     
-    <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, actionApproveId ) %>">
+    <c:if test="<%= ResourcePermissionLocalServiceUtil.hasResourcePermission(companyId, portlet, 4, primKey , role, actionApproveId ) && tab.equals(EQuotationConstants.TAB_PREPARATION)%>">
          <liferay-ui:icon   message="approve" url="<%=approve.toString()%>"/>
     </c:if>
     

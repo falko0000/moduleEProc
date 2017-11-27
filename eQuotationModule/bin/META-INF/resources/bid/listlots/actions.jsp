@@ -1,6 +1,7 @@
 
 
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@page import="tj.module.equotation.constants.EQuotationConstants"%>
 <%@ include file="/init.jsp" %>
 
@@ -13,6 +14,13 @@
    String tab =(String)  ParamUtil.get(request, "izvewenija_tab", EQuotationConstants.TAB_PREPARATION);
    String izvewenie_id = (String)ParamUtil.getString(request,"izvewenie_id","0");
         
+   String redirect = themeDisplay.getURLCurrent();
+   String param = "_edit_tab=";
+
+   int indextab = redirect.indexOf(param)+param.length();
+	int indexamp = redirect.indexOf(StringPool.AMPERSAND, indextab);
+	
+	redirect = redirect.substring(0, indextab)+EQuotationConstants.TAB_BID_LISTLOTS+redirect.substring(indexamp);
   
    %>
         
@@ -27,8 +35,9 @@
 			 <portlet:param name="mvcRenderCommandName" value="<%=EQuotationConstants.RENDER_COMMAND_NAME_EDIT%>" />
              <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
              <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
+		     <portlet:param name="redirect" value="<%=redirect%>"/>
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=EQuotationConstants.ACTION_COMMAND_NAME_ADDPRODUCT%>" />
-		    
+		     
 		</portlet:renderURL>
 	 
 	 <portlet:renderURL var="info">
@@ -43,7 +52,9 @@
 		    <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
              <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
 		     <portlet:param name="criteria_type_id" value="2" /> 
+			<portlet:param name="redirect" value="<%=redirect%>"/>
 		 <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.ADD%>" />
+	 
 	 </portlet:renderURL>
 	 
 	  <portlet:renderURL var="criteriaB"  > 
@@ -51,6 +62,7 @@
 		    <portlet:param name="izvewenie_id" value="<%=izvewenie_id%>" /> 
              <portlet:param name="spisok_lotov_id" value="<%=Long.toString(spisoklotov.getSpisok_lotov_id())%>" /> 
 		     <portlet:param name="criteria_type_id" value="1" /> 
+		 	<portlet:param name="redirect" value="<%=redirect%>"/>
 		 <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.ADD%>" />
 	 </portlet:renderURL>
 	 
@@ -108,7 +120,7 @@
 					
 				},
 				id: '<portlet:namespace/>newlot',
-				title: 'Edit lot number '+nomer_lota,
+				title: '<%=LanguageUtil.get(request, "edit-lot-number")+spisoklotov.getNomer_lota()%>',
 				uri: editLots
 			});
 		}

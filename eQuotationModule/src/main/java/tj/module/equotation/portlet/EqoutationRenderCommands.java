@@ -90,11 +90,8 @@ public class EqoutationRenderCommands implements MVCRenderCommand {
 		String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 		
 		if(cmd.equals(EQuotationConstants.ACTION_COMMAND_NAME_ADDPRODUCT))
-		{
-
-			 System.out.println("Country in Strany");
-			return EQuotationConstants.PAGE_ADDPRODUCTS;
-		}	
+	 		return EQuotationConstants.PAGE_ADDPRODUCTS;
+		
 		if(cmd.equals(EQuotationConstants.ACTION_COMMAND_NAME_EDIT_LOT))
 			return EQuotationConstants.PAGE_NEWLOT;
 	    

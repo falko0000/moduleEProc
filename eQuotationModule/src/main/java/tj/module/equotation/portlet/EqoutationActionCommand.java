@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.WindowState;
+import javax.portlet.WindowStateException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
@@ -959,14 +961,22 @@ private void insertProduct(ActionRequest actionRequest, ActionResponse actionRes
 	    spisoklotov.setId_jebk(id_jebk);
 	    spisoklotov.setRequired_documents(requiredDoc);
 	  
-	/*		try {
-				actionResponse.setWindowState(WindowState.NORMAL);
-			  sendRedirect(actionRequest, actionResponse, redirect);
-			} catch (IOException | WindowStateException e) {
+/*
+				try {
+					SessionMessages.add(actionRequest, "success");
+					actionResponse.setWindowState(WindowState.NORMAL);
+				} catch (WindowStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			  try {
+				sendRedirect(actionRequest, actionResponse, redirect);
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
-	*/
+			}
+		*/	
+	
 	    spisoklotov = SpisoklotovLocalServiceUtil.addSpisoklotov(spisoklotov); 
 	    Folder folder = null;
 		

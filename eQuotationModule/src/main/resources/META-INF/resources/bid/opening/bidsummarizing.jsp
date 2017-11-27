@@ -1,7 +1,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-Calendar cal = CalendarFactoryUtil.getCalendar();
+Calendar cal = CalendarFactoryUtil.getCalendar(locale);
 Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 PorjadokRabotyKomissii porjadok_raboty_komissii = null;
 porjadok_raboty_komissii =PorjadokRabotyKomissiiLocalServiceUtil.getPRKbyIzvewenieId(IzvewenijaID);

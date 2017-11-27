@@ -2,7 +2,7 @@
 
 <%
 
-	Calendar cal = CalendarFactoryUtil.getCalendar();
+	Calendar cal = CalendarFactoryUtil.getCalendar(locale);
 
 	Long IzvewenijaID = (Long) ParamUtil.getLong(request,"izvewenie_id");
 	
@@ -20,10 +20,11 @@
 
 	int startHour = ParamUtil.get(request, "publication_hour", cal.get(Calendar.HOUR_OF_DAY));
 
-	if (DateUtil.isFormatAmPm(locale)) {
+	System.out.println("startHour = "+startHour);
+	/*if (DateUtil.isFormatAmPm(locale)) {
 		startHour = ParamUtil.get(request, "publication_hour", cal.get(Calendar.HOUR));
 	}	
-
+*/
 	int startMinute = ParamUtil.get(request, "publication_minute", cal.get(Calendar.MINUTE));
 	int startMonth = ParamUtil.get(request, "publication_month", cal.get(Calendar.MONTH));
 	int startYear = ParamUtil.get(request, "publication_year", cal.get(Calendar.YEAR));
@@ -31,6 +32,7 @@
 	String cmd = (String) ParamUtil.get(request, Constants.CMD, " ");
 
 	Boolean disabled = (cmd.equals(Constants.VIEW))? true : false;
+	System.out.println("publication date version 1");
 %>
 
 <aui:field-wrapper label="bid_date_publication">

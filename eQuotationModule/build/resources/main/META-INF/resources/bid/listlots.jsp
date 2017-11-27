@@ -1,4 +1,5 @@
 
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@ include file="/init.jsp" %>
 
 
@@ -90,7 +91,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 		</liferay-ui:search-container>
 
 
-<aui:button id="addLot" name="addLot" value="Add new lot" />
+<aui:button id="addLot" name="addLot" value="<%=LanguageUtil.get(request,"add-new-lot", "Add New Lot") %>" />
 
 <aui:script use="liferay-util-window">
 
@@ -112,7 +113,7 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 				
 			},
 			id: '<portlet:namespace/>newlot',
-			title: 'Add lot number <%=number%>',
+			title: '<%=LanguageUtil.get(request,"add-lot-number")+number%>',
 			uri: '<%=addLots %>'
 		});
 	});
@@ -126,4 +127,17 @@ String[] CAT_NAMES = new String[]{ "generalinfo"
 	dialog.destroy();
 },
 ['liferay-util-window'] ); 
+	
+	Liferay.provide(
+	        window,
+	        '<portlet:namespace />refreshPortlet',
+	        function() {
+
+	           
+	            var curPortletBoundaryId = '#p_p_id<portlet:namespace />';
+
+	            Liferay.Portlet.refresh(curPortletBoundaryId);
+	        },
+	        ['aui-dialog','aui-dialog-iframe']
+	    );
 </aui:script> 

@@ -23,7 +23,8 @@
 
 	 
     <liferay-ui:icon-menu>
-    
+        
+        
 
       
     	<liferay-ui:icon iconCssClass="icon-edit" message="forming_application" url="<%= edit.toString() %>" />

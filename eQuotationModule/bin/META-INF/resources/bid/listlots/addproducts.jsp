@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@ include file="/init.jsp" %>
 
 <%
@@ -12,7 +13,8 @@ String[] CAT_NAMES = new String[]{ "listproducts"
  Izvewenija izvewenija = (Izvewenija) request.getAttribute("izvewenija");
  Long izvewenie_id =  ParamUtil.getLong(request,"izvewenie_id");
  Long spisok_lotov_id = ParamUtil.getLong(request,"spisok_lotov_id");
-  %>
+  String redirect = ParamUtil.getString(request, "redirect");
+ %>
   
 
   <liferay-portlet:actionURL name="<%=EQuotationConstants.ACTION_COMMAND_NAME_EDIT%>" var="listlots">
@@ -41,7 +43,7 @@ String[] CAT_NAMES = new String[]{ "listproducts"
  <aui:button-row>
 		
 		
-        <aui:button id="add_product_cancel" name="add_product_cancel" type="cancel" value="back"/>
+        <aui:button id="add_product_cancel" name="add_product_cancel" type="cancel" value="back" href="<%=redirect%>" />
   
   </aui:button-row>
   
