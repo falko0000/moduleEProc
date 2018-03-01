@@ -190,6 +190,7 @@ public class GenerateDocument {
 		Folder folder = null;
 		try {
 			folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, folderName);
+		
 		} catch (Exception e) {	
 			try {
 				folder =  DLAppServiceUtil.addFolder(themeDisplay.getScopeGroupId(),  DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, folderName, folderName, serviceContext);
@@ -203,6 +204,7 @@ public class GenerateDocument {
 	
 	private Folder getFolder(long parentFolderId, String folderName, ServiceContext serviceContext){
 		
+		
 		Folder folder = null;
 		try {
 			folder =DLAppServiceUtil.getFolder(themeDisplay.getScopeGroupId(), parentFolderId , folderName);
@@ -210,7 +212,8 @@ public class GenerateDocument {
 			try {
 				folder =  DLAppServiceUtil.addFolder(themeDisplay.getScopeGroupId(), parentFolderId, folderName, folderName, serviceContext);
 			} catch (PortalException e1) {
-				System.out.println("folder not created");
+				System.out.println(themeDisplay.getScopeGroupId());
+				System.out.println("parentID="+parentFolderId+"  name="+folderName + " folder not created");
 			}
 		}
 		

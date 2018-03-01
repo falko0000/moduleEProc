@@ -1,4 +1,6 @@
 
+<%@page import="tj.protocol.contracts.model.ProtocolEvaluate"%>
+<%@page import="tj.protocol.contracts.service.ProtocolEvaluateLocalServiceUtil"%>
 <%@page import="tj.prochaja.informacija.dlja.zajavki.model.ProchajaInformacijaDljaZajavki"%>
 <%@page import="com.liferay.portal.kernel.service.persistence.CountryUtil"%>
 <%@page import="tj.prochaja.informacija.dlja.zajavki.service.ProchajaInformacijaDljaZajavkiLocalServiceUtil"%>
@@ -73,10 +75,10 @@
 		     <portlet:param name="<%=Constants.CMD %>" value="<%=Constants.VIEW%>" /> 
    </portlet:renderURL>
 <%
-  System.out.println("version 21");
+  System.out.println("version 22");
 
- 	File file = DLFileEntryLocalServiceUtil.getFile(119372, "1.0", false);
-
+ 	File file = DLFileEntryLocalServiceUtil.getFile(72776, "1.0", false);
+ 	
 	Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
 
 	 List<Spisoklotov> spisoklotovs = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(izvewenija.getIzvewenija_id());
@@ -85,8 +87,10 @@
 	 List<CommissionPosition> commissionPositions = CommissionPositionLocalServiceUtil.getCommissionPositionByUserGroupId(izvewenija.getUserGroupId());
 	 List<CommissionPosition> newcommissionPositions = new ArrayList<CommissionPosition>();
 	 List<EdinicyIzmerenija> units = EdinicyIzmerenijaLocalServiceUtil.getEdinicyIzmerenijas(-1, -1);
-	 
-		SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.ORGANIZATION_HEAD_ID);
+	//int number
+	ProtocolEvaluate pro = ProtocolEvaluateLocalServiceUtil.getProtocolEvaluateByBid(izvewenija.getIzvewenija_id());
+	long number = pro.getProtocol_evaluate_id();
+	 SystemConfig systemConfig = SystemConfigLocalServiceUtil.getSystemConfig(CommissionConstants.ORGANIZATION_HEAD_ID);
 		
 		List<SystemConfig> systemConfigs = SystemConfigLocalServiceUtil.getSystemConfigs(-1, -1);
 		
@@ -156,7 +160,7 @@
 	
 	
 	
-	template = cfg.getTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(119372).getVersion());
+	template = cfg.getTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(72776).getVersion());
 	
 	StringWriter outs = new StringWriter();
 	
@@ -298,7 +302,7 @@
 	param.put("fullname", fullname);
 	param.put("head", userHead.getFullName());
 	param.put("fromDate", komissii.getData_sozdanija());
-	param.put("numberProtocol", "1");
+	param.put("numberProtocol", number);
 	param.put("listlots", spisoklotovs);
 	param.put("listproduct", spisokTovarovs);
     param.put("orgNumDoc",1);

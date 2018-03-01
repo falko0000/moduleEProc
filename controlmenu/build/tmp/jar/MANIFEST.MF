@@ -3,14 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: controlmenu
 Bundle-SymbolicName: tj.controlmenu
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_92 (Oracle Corporation)
+Created-By: 1.8.0_131 (Oracle Corporation)
 Import-Package: com.liferay.portal.kernel.exception;version="[7.0,8)",
  com.liferay.portal.kernel.language;version="[7.0,8)",com.liferay.port
  al.kernel.util;version="[7.0,8)",com.liferay.product.navigation.contr
  ol.menu;version="[2.0,3)",javax.servlet.http;version="[3.0,4)"
 Javac-Debug: on
 Javac-Deprecation: off
-Javac-Encoding: Cp1252
+Javac-Encoding: Cp1251
 Private-Package: content,tj.controlmenu.control.menu
 Provide-Capability: osgi.service;objectClass:List<String>="com.liferay
  .product.navigation.control.menu.ProductNavigationControlMenuEntry",l

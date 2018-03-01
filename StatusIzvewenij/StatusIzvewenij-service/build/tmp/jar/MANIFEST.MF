@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: StatusIzvewenij-service
 Bundle-SymbolicName: tj.status.izvewenij.service
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_92 (Oracle Corporation)
+Created-By: 1.8.0_131 (Oracle Corporation)
 Import-Package: com.liferay.counter.kernel.service;version="[1.0,2)",c
  om.liferay.expando.kernel.model;version="[1.0,2)",com.liferay.expando
  .kernel.util;version="[1.0,2)",com.liferay.portal.kernel.bean;version
@@ -26,7 +26,7 @@ Import-Package: com.liferay.counter.kernel.service;version="[1.0,2)",c
  1)"
 Javac-Debug: on
 Javac-Deprecation: off
-Javac-Encoding: Cp1252
+Javac-Encoding: Cp1251
 Liferay-Require-SchemaVersion: 1.0.0
 Liferay-Service: true
 Liferay-Spring-Context: META-INF/spring

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: UploadFile
 Bundle-SymbolicName: UploadFile
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_92 (Oracle Corporation)
+Created-By: 1.8.0_131 (Oracle Corporation)
 Import-Package: com.liferay.document.library.kernel.model;version="[1.
  0,2)",com.liferay.document.library.kernel.service;version="[1.0,2)",c
  om.liferay.document.library.kernel.store;version="[1.0,2)",com.lifera
@@ -21,7 +21,7 @@ Import-Package: com.liferay.document.library.kernel.model;version="[1.
  j.izvewenija.service;version="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
-Javac-Encoding: Cp1252
+Javac-Encoding: Cp1251
 Private-Package: UploadFile.portlet,content
 Provide-Capability: osgi.service;objectClass:List<String>="javax.portl
  et.Portlet",liferay.resource.bundle;bundle.symbolic.name=UploadFile;r

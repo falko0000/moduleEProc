@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: StatusIzvewenij-api
 Bundle-SymbolicName: tj.status.izvewenij.api
 Bundle-Version: 1.0.0
-Created-By: 1.8.0_144 (Oracle Corporation)
+Created-By: 1.8.0_131 (Oracle Corporation)
 Export-Package: tj.status.izvewenij.exception;uses:="com.liferay.porta
  l.kernel.exception";version="1.0.0",tj.status.izvewenij.model;uses:="
  com.liferay.expando.kernel.model,com.liferay.portal.kernel.annotation
