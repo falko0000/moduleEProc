@@ -28,6 +28,9 @@ public interface CommissionConstants {
     static final String PAGE_DOCUMENTATION = "/commissiontab/evaluation/supplieritems/documentation.jsp";
     static final String PAGE_CRITERIA = "/commissiontab/evaluation/supplieritems/criteria.jsp";
     static final String PAGE_PRINT_PROTOCOL_CONTRACT = "/commissiontab/evaluation/print/protocol_contract.jsp";
+    // TRS 02/03/18 begin
+    static final String PAGE_PRINT_PROTOCOL_EVALUATION = "/commissiontab/evaluation/print/protocol_evaluation.jsp";
+    // TRS 02/03/18 end
     static final String PAGE_PRINT_PROTOCOL_OPENING = "/commissiontab/evaluation/print/protocol_opening.jsp";
     //actions
 	

@@ -1,0 +1,9 @@
+Bundle-Name: Polzovateli-api
+Bundle-SymbolicName: tj.polzovateli.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.polzovateli.exception,\
+	tj.polzovateli.model,\
+	tj.polzovateli.service,\
+	tj.polzovateli.service.persistence
+-includeresource: META-INF/service.xml=../Polzovateli-service/service.xml

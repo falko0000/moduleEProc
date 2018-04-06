@@ -180,7 +180,7 @@ public class GenerateDocument {
 					 DLAppServiceUtil.addFileEntry(folder.getRepositoryId(), folder.getFolderId(), title, mimeType, 
 							         	           this.outfilename, "", "", is, file.length(), fserviceContext);
 			} catch (PortalException | FileNotFoundException e) {
-				
+				e.printStackTrace();
 			}
 	}
 		}

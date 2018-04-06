@@ -1,0 +1,1 @@
+create sequence sapp.polzovateli_seq;

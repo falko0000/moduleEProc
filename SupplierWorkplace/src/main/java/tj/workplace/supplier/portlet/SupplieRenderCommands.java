@@ -6,8 +6,11 @@ import javax.xml.bind.Validator;
 
 import org.osgi.service.component.annotations.Component;
 
-
+import com.liferay.document.library.kernel.service.DLAppServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.service.UserGroupServiceUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -53,7 +56,8 @@ public class SupplieRenderCommands implements MVCRenderCommand {
 		if(actions_item.equals(SupplierWorkplaceConstant.ACTIONS_ITEM_REFUSE_PARTICIPATE))
 			return SupplierWorkplaceConstant.PAGE_REFUSE_PARTICIPATE;
 		
-		
+	 
+	    
 
 		
 		return SupplierWorkplaceConstant.PAGE_LISTLOTS;

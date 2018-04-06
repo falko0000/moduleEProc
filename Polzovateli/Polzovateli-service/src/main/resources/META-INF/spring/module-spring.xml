@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="tj.polzovateli.service.impl.PolzovateliLocalServiceImpl" id="tj.polzovateli.service.PolzovateliLocalService" />
+	<bean class="tj.polzovateli.service.persistence.impl.PolzovateliPersistenceImpl" id="tj.polzovateli.service.persistence.PolzovateliPersistence" parent="basePersistence" />
+</beans>

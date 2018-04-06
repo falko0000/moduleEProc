@@ -17,7 +17,7 @@
     String prefix = "financial";
 
     SupplirCriteria supplirCriteria = null;
-CriteriaValue criteriaValue = null;
+    CriteriaValue criteriaValue = null;
 
     Organization organization = OrganizationLocalServiceUtil.getOrganization(organization_id);
  
@@ -27,7 +27,7 @@ CriteriaValue criteriaValue = null;
    
     System.out.println(repositoryId);
     
-   Folder  folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, CommissionConstants.FOLDER_BID);
+    Folder  folder = DLAppServiceUtil.getFolder(repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, CommissionConstants.FOLDER_BID);
 	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(izvewenie_id));
 	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), String.valueOf(spisok_lotov_id));
 	folder = DLAppServiceUtil.getFolder(repositoryId, folder.getFolderId(), CommissionConstants.FOLDER_CRITERIA);

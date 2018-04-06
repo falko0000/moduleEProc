@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="tj.polzovateli.model.Polzovateli" />
+	<class name="tj.polzovateli.model.impl.PolzovateliImpl" table="sapp.polzovateli">
+		<id name="polzovateli_id" type="long">
+			<generator class="sequence">
+				<param name="sequence">sapp.polzovateli_seq</param>
+			</generator>
+		</id>
+		<property name="organizacija_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tip_organizacii_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="rol_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="imja_polzovatelja" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="parol" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="aktivnost" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="sozdal" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="izmenil" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="data_sozdanija" type="org.hibernate.type.TimestampType" />
+		<property name="data_izmenenija" type="org.hibernate.type.TimestampType" />
+		<property name="podrazdelenije_id" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+</hibernate-mapping>

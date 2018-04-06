@@ -15,6 +15,7 @@ public interface SupplierWorkplaceConstant {
 	
 	//Path  pages  jsp 
     //main
+	
 	static final String PAGE_OPENING_ACTIONS = "/tabiteams/actions.jsp";
 	static final String PAGE_ACTIONS = "/actions.jsp";
 	static final String PAGE_ACTIONS_LOTS = "/bid/actions.jsp";

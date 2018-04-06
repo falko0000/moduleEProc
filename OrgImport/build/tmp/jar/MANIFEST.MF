@@ -9,8 +9,12 @@ Import-Package: com.liferay.portal.kernel.exception;version="[7.0,8)",
  kernel.portlet.bridges.mvc;version="[1.0,2)",com.liferay.portal.kerne
  l.service;version="[1.0,2)",com.liferay.portal.kernel.util;version="[
  7.0,8)",javax.portlet;version="[2.0,3)",javax.servlet;version="[3.0,4
- )",javax.servlet.http;version="[3.0,4)",tj.vbk.model;version="[1.0,2)
- ",tj.vbk.service;version="[1.0,2)"
+ )",javax.servlet.http;version="[3.0,4)",tj.polzovateli.model;version=
+ "[1.0,2)",tj.polzovateli.service;version="[1.0,2)",tj.postavwiki.mode
+ l;version="[1.0,2)",tj.postavwiki.service;version="[1.0,2)",tj.profil
+ .polzovatelej.model;version="[1.0,2)",tj.profil.polzovatelej.service;
+ version="[1.0,2)",tj.vbk.model;version="[1.0,2)",tj.vbk.service;versi
+ on="[1.0,2)"
 Javac-Debug: on
 Javac-Deprecation: off
 Javac-Encoding: Cp1251

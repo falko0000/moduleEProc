@@ -19,7 +19,8 @@
 			
 			<portlet:param name="izvewenija_id" value="<%= String.valueOf(izvewenija.getIzvewenija_id()) %>" />
 			<portlet:param name="viewMode" value="<%= Constants.PRINT %>" />
-			<portlet:param name="mvcPath"     value="<%=(commission_tab.equals("protocol"))?CommissionConstants.PAGE_PRINT_PROTOCOL_CONTRACT : CommissionConstants.PAGE_PRINT_PROTOCOL_OPENING  %>"/>
+		
+			<portlet:param name="mvcPath"     value="<%=(commission_tab.equals("protocol-evaluate"))?CommissionConstants.PAGE_PRINT_PROTOCOL_EVALUATION : CommissionConstants.PAGE_PRINT_PROTOCOL_OPENING  %>"/>
 		</portlet:renderURL>
 
 <% String popupURL="javascript:showPopup('" + printPageURL + "'" + ",'" + LanguageUtil.get(request, "title") +"');";%>

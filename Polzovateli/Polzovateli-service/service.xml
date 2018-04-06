@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+
+<service-builder package-path="tj.polzovateli">
+	<namespace>FOO</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="Polzovateli" remote-service="false" uuid="false" cache-enabled="false" table="sapp.polzovateli">
+	
+	<column name="polzovateli_id" type="long" primary="true" id-type="sequence" id-param="sapp.polzovateli_seq"></column>
+	<column name="organizacija_id" type="long"></column>
+	<column name="tip_organizacii_id" type="int"></column>
+	<column name="rol_id" type="int"></column>
+	<column name="imja_polzovatelja" type="String"></column>
+	<column name="parol" type="String"></column>
+	<column name="aktivnost" type="int"></column>
+	<column name="sozdal" type="long"></column>
+	<column name="izmenil" type="long"></column>
+	<column name="data_sozdanija" type="Date"></column>
+	<column name="data_izmenenija" type="Date"></column>
+	<column name="podrazdelenije_id" type="int"></column>
+	
+	</entity>
+</service-builder>

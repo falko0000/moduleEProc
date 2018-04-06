@@ -16,11 +16,12 @@ import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.User;
 
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
-
+import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
-
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import tj.commission.positions.service.CommissionPositionLocalServiceUtil;
 import tj.criterias.model.Criteria;
 
 import tj.criterias.model.CriteriaValue;
@@ -30,6 +31,8 @@ import tj.criterias.service.CriteriaValueLocalServiceUtil;
 import tj.criterias.service.CriteriasWeightLocalServiceUtil;
 import tj.izvewenija.model.Izvewenija;
 import tj.izvewenija.service.IzvewenijaLocalServiceUtil;
+import tj.log.evaluated.model.LogEvaluated;
+import tj.log.evaluated.service.LogEvaluatedLocalServiceUtil;
 import tj.lots.winner.model.LotsWinner;
 import tj.lots.winner.service.LotsWinnerLocalServiceUtil;
 import tj.module.commission.constants.CommissionConstants;
@@ -37,6 +40,8 @@ import tj.protocol.contracts.model.ProtocolContracts;
 import tj.protocol.contracts.model.ProtocolEvaluate;
 import tj.protocol.contracts.service.ProtocolContractsLocalServiceUtil;
 import tj.protocol.contracts.service.ProtocolEvaluateLocalServiceUtil;
+import tj.result.opening.model.ResultOpening;
+import tj.result.opening.service.ResultOpeningLocalServiceUtil;
 import tj.spisoklotov.model.Spisoklotov;
 import tj.spisoklotov.service.SpisoklotovLocalServiceUtil;
 import tj.supplier.request.lot.service.SupplierRequestLotLocalServiceUtil;
@@ -51,6 +56,7 @@ public class Winner {
 	private List<Spisoklotov> spisoklotovs = new ArrayList<>();
 	private List<User> users = new ArrayList<>();
 	private HashMap<Long, List<Double[]>> orgPoints = new HashMap<Long, List<Double[]>>(); 
+	private Map<Long, Double> orgEval = new HashMap<Long, Double>(); 
 	private double minTotalPrice;
 	
 	
@@ -61,7 +67,7 @@ public class Winner {
 		this.izvewenie_id = izvewenie_id;
 		this.userId = userId;
 		init();
-		
+		System.out.println("Winner version 15!");
 	}
 
 	private void init() throws PortalException {
@@ -70,16 +76,61 @@ public class Winner {
 		this.spisoklotovs = SpisoklotovLocalServiceUtil.getLotsByIzvewenijaID(this.izvewenie_id);
 		this.users = UserLocalServiceUtil.getUserGroupUsers(izvewenija.getUserGroupId());
 		
+	int userIndex = -1;
+	long secUserId = -1;
+	
+	long secRoleId = RoleLocalServiceUtil.getRole(izvewenija.getCompanyId(), CommissionConstants.ROLE_SECRETARY).getRoleId();
+	
+	for(int i = 0; i < users.size(); i++)
+	{
+		
+		long roleId = CommissionPositionLocalServiceUtil.getCommissionPosition(izvewenija.getUserGroupId(), users.get(i).getUserId()).getRoleId();
+		
+		if(roleId == secRoleId)
+		{
+			userIndex = i;
+			secUserId = users.get(i).getUserId();
+			break;
+		}
+		
+	}
+	users.remove(userIndex);
+	
+	
+	
 
 		    	for( Spisoklotov spisoklotov : this.spisoklotovs)
 		    	{
 	              
-				long organizationIds[] = SupplierRequestLotLocalServiceUtil.getOraganizationIds(spisoklotov.getSpisok_lotov_id());
-                      	              
-	              List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(organizationIds);
+		    		ArrayList<Long> organizationIds = new ArrayList<Long>();
+               
+	             List<LogEvaluated> evaluateds = LogEvaluatedLocalServiceUtil.getLogEvaluation(spisoklotov.getSpisok_lotov_id());
+	          
+	             Map<Long, Integer> accept = new HashMap();
+	     
+	              int k = 0;
+	              int g = users.size()/2+1;
 	              
-	              for(Organization organization : organizations)
-	            	  System.out.println(organization.getName());
+	              	for(LogEvaluated evaluated : evaluateds)
+	              	{
+	              		
+	              		if( evaluated.getUserid()!= secUserId )
+	              		{
+	              		
+	              		if(accept.containsKey(evaluated.getOrganization_id()))
+	              		
+	              			accept.replace(evaluated.getOrganization_id(), accept.get(evaluated.getOrganization_id()) + evaluated.getOpening_status());
+	              		
+	              		else
+	              			accept.put(evaluated.getOrganization_id(), evaluated.getOpening_status());
+	              		}	
+	              	}
+	              	
+	              	for(Map.Entry<Long, Integer> entry : accept.entrySet())
+	              	{
+	              		if(entry.getValue() >= g*2)
+	              			organizationIds.add(entry.getKey());
+	              	}
 	              
 	              List<Criteria> criterias = CriteriaLocalServiceUtil.getCriterias(spisoklotov.getSpisok_lotov_id());
 	         	 
@@ -87,28 +138,51 @@ public class Winner {
 	              
 	              for( User user : this.users)
 	         	 {
-	              for( int i = 0; i < organizationIds.length; i++ )
+	              for( int i = 0; i < organizationIds.size(); i++ )
 	              {
-	            	  double totalPrice = totalPrice(spisoklotov.getSpisok_lotov_id(), organizationIds[i]);
+	            	  double totalPrice = totalPrice(spisoklotov.getSpisok_lotov_id(), organizationIds.get(i));
+	            	
 	            	
 	            	  
-	            	  if( totalPrice <= spisoklotov.getCena_kontrakta() && totalPrice != 0)
-	            	  {
 	            	  setMinTotalPrice(totalPrice);
-	            	      point( user.getUserId(), organizationIds[i], criterias);
-	            	  
-	            	  }
+            	 //   point( user.getUserId(), organizationIds.get(i), criterias);
 	            	  
 	              }
 	            	  
 		    	
 		    	}
 	             
-	              ñheckVoting(spisoklotov.getSpisok_lotov_id());
-	              System.out.println("minimum="+getMinTotalPrice());
+	              //ñheckVoting(spisoklotov.getSpisok_lotov_id());
+	              //System.out.println("minimum="+getMinTotalPrice());
 	              
+	          
+	              
+	              for( User user : this.users)
+		         	 {
+		              for( int i = 0; i < organizationIds.size(); i++ )
+		              {
+		            	  
+		            	  if(orgEval.containsKey(organizationIds.get(i)))
+		            	  {
+		            		  double s = orgEval.get(organizationIds.get(i)) + eval(organizationIds.get(i), spisoklotov.getSpisok_lotov_id(), user.getUserId() )  ;
+		            		  
+		            		  orgEval.remove(organizationIds.get(i));
+		            		  
+		            		  orgEval.put(organizationIds.get(i), s);
+		            	  }
+		            	  else
+		            	  {
+		            		  double s = eval(organizationIds.get(i), spisoklotov.getSpisok_lotov_id(), user.getUserId() )  ;
+		            		  orgEval.put(organizationIds.get(i), s);
+		            	  }
+		            	  
+		              }
+		              
+		              }
 	              determiningWinner(spisoklotov.getSpisok_lotov_id());
+	              
 		    }
+		    	  
 	}
 
 
@@ -124,7 +198,7 @@ public class Winner {
 			if(Validator.isNull(criteriaValue))
 				criteriaValue = appreciateAutomatic(userId, organizationId, criteria);
 			
-			point[criteria.getCriteria_category_id()] += criteriaValue.getValue();  
+		/*	point[criteria.getCriteria_category_id()] += criteriaValue.getValue();  
 		}
 		 if(orgPoints.containsKey(organizationId))
 			  orgPoints.get(organizationId).add(point);
@@ -133,18 +207,21 @@ public class Winner {
 			 List<Double[]> p = new ArrayList<Double[]>();
 			 p.add(point);
 			 orgPoints.put(organizationId, p);
-		 }
+		 }*/
+	}
 	}
 	
 	private CriteriaValue appreciateAutomatic(long userId, long organizationId, Criteria criteria) {
 		
 		long criteria_value_id = CounterLocalServiceUtil.increment(CriteriaValue.class.toString());
 		
+		ResultOpening opening = ResultOpeningLocalServiceUtil.getResultOpening(criteria.getSpisok_lotov_id(), organizationId);
+		
 		CriteriaValue criteriaValue = CriteriaValueLocalServiceUtil.createCriteriaValue(criteria_value_id);
        
 		double value = 1.0;
 		
-		if( criteria.getMax_weight() != 0 )
+		/*if( criteria.getMax_weight() != 0 )
 		{
 			List<Criteria> criterias = CriteriaLocalServiceUtil.getCriteria(criteria.getSpisok_lotov_id(), criteria.getCriteria_category_id());
 	        int criteriaCount = criterias.size();
@@ -166,15 +243,19 @@ public class Winner {
 	        	}
 	        }
 		value = passingScore / criteriaCount;
-		}
+		}*/
 		
 		criteriaValue.setCreated(new Date());
 		criteriaValue.setCreatedby(userId);
 		criteriaValue.setUpdated(new Date());
 		criteriaValue.setUpdatedby(userId);
 		criteriaValue.setCriteria_id(criteria.getCriteria_id());
-		criteriaValue.setValue(value);
-		criteriaValue.setDescription(criteria.getCriteria_description());
+		/*criteriaValue.setValue(value);
+		criteriaValue.setDescription(criteria.getCriteria_description());*/
+		
+		criteriaValue.setValue(0);
+		criteriaValue.setDescription(opening.getDescription());
+		
 		criteriaValue.setUserid(userId);
 		criteriaValue.setOrganization_id(organizationId);
 		
@@ -257,28 +338,21 @@ public class Winner {
 		
 	
 	private void determiningWinner(long spisok_lotov_id) {
+	
 		
-		double T = 0.5;
-		double F = 0.5;
+	
 		
-		long winnerOrgId = 0;
-		double ws = 0.0;
-		double worgPrice = 0.0;
 		
-		long sec_winnerOrgId = 0;
-		double sec_ws = 0.0;
-		double sec_worgPrice = 0.0;
-		
-		Map<Double, LotsWinner> listSupplier =new TreeMap<Double, LotsWinner>(); 
 		long lot_winner_id = CounterLocalServiceUtil.increment(LotsWinner.class.getName());
 	
-		for(Map.Entry<Long, List<Double[]>> entry : orgPoints.entrySet())
+		ArrayList<LotsWinner> arrayList = new ArrayList<>();
+		for(Map.Entry<Long, Double> entry : orgEval.entrySet())
 		{
-			List<Double[]> points = entry.getValue();
+			//List<Double[]> points = entry.getValue();
 			
 			long organizationId = entry.getKey();
 			
-			double TS = 0.0; 
+		/*	double TS = 0.0; 
 			for(Double[] point : points)
 			{
 				TS += point[CommissionConstants.CRITERIA_TECHNICAL];
@@ -294,50 +368,76 @@ public class Winner {
 			double FS = 100*getMinTotalPrice()/orgPrice;
 			
 			double s = (FS*F)/100 + (TS*T)/100;
-	
+	*/
 			System.out.println("lot_winner_id= "+lot_winner_id);
+			double orgPrice = totalPrice(spisok_lotov_id, organizationId);
 			
+			
+			
+		if(isCondidat(organizationId, spisok_lotov_id))
+		{
+			
+			System.out.println("is condidat = "+organizationId);
 		LotsWinner lotsWinner = LotsWinnerLocalServiceUtil.createLotsWinner(lot_winner_id);
 		lotsWinner.setAttribute("C");
 		lotsWinner.setOrganization_id(organizationId);
 		lotsWinner.setSpisok_lotov_id(spisok_lotov_id);
 		lotsWinner.setSerial_number(0);
-		lotsWinner.setPoint(s);
+		lotsWinner.setPoint(entry.getValue());
 		lotsWinner.setTotal_price(orgPrice);
 			
-		System.out.println(lotsWinner);
-		listSupplier.put(s, lotsWinner);
+		arrayList.add(lotsWinner);
+		}
 		}
 		
-		int serialNumber = 1;
+		LotsWinner lotsWinner[] = new LotsWinner[arrayList.size()];
+		arrayList.toArray(lotsWinner);
 		
-		for(Map.Entry<Double, LotsWinner> entry : listSupplier.entrySet())
+		for(int i = 0; i<lotsWinner.length; i++ )
 		{
-			LotsWinner lotWinner = LotsWinnerLocalServiceUtil.getSerialWinner(spisok_lotov_id, serialNumber);
-			System.out.println(entry.getValue());
-			long winnerId = lot_winner_id;
+			for(int j = 0; j < lotsWinner.length-1; j++ )
+			{
+				if(lotsWinner[j].getPoint() < lotsWinner[j+1].getPoint())
+				{
+					LotsWinner winner = lotsWinner[j];
+					lotsWinner[j] = lotsWinner[j+1];
+					lotsWinner[j+1] = winner;
+				}
+				System.out.println(j);
+			}
+		}
+		
+		
+		
+	
+		for(int i = 0; i<lotsWinner.length; i++ )
+			System.out.println(lotsWinner[i]);
+		
+		
+	    for(int i = 0; i <lotsWinner.length ; i++)
+	    {
+	    	LotsWinner lotWinner = LotsWinnerLocalServiceUtil.getSerialWinner(spisok_lotov_id, i+1);
+           long winnerId = lot_winner_id;
 			
 			if(Validator.isNotNull(lotWinner))
 			
 				winnerId = lotWinner.getLot_winner_id(); 
-			   
+			
 			else
 				
-				lotWinner = entry.getValue();
+				lotWinner = lotsWinner[i];
 				
-		 if( serialNumber == 1)
+		 if( i == 0)
             lotWinner.setAttribute("W");
 		 
-		     lotWinner.setSerial_number(serialNumber);
+		     lotWinner.setSerial_number(i+1);
 		      lotWinner.setPrimaryKey(winnerId);
 		 
 		 LotsWinnerLocalServiceUtil.updateLotsWinner(lotWinner);     
-			    System.out.println("serialNumber = "+ serialNumber);
-			serialNumber++;
-		}
-		
-	
+			    System.out.println("serialNumber = "+ i+1);
 			
+	    }
+		orgEval.clear();
  		orgPoints.clear();
  		createProtocolEvaluated();
 	}
@@ -368,5 +468,59 @@ public class Winner {
 			
 				if(this.minTotalPrice > minTotalPrice)
 						this.minTotalPrice = minTotalPrice;
+	}
+	
+	private boolean isCondidat(long organizationid, long lotid) 
+	{
+		boolean condidat = true;
+		int countCommision = users.size()/2 + 1;
+		
+		for(int i = 0; i > users.size();i++)
+		{
+			List<Criteria> criterias = CriteriaLocalServiceUtil.getCriteria(lotid, CommissionConstants.CRITERIA_QUALIFICATION);
+		
+			for(Criteria criteria : criterias)
+			{
+				CriteriaValue criteriaValue = CriteriaValueLocalServiceUtil.getCriteriaValue(criteria.getCriteria_id(), users.get(i).getUserId(), organizationid);
+				if(criteriaValue.getValue() == 0)
+				{
+					countCommision--;
+					break;
+				}
+			}
+		  if(countCommision == 0)
+		  {
+			  condidat = false;
+			  break;
+		  }
+		
+		
+		}
+	return condidat;	
+	}
+	
+	private double eval(long organizationid, long lotid, long userId)
+	{
+		double eval = 0.0;
+		double T = 0.1;
+		double F = 0.5;
+		
+		
+		List<Criteria> criterias = CriteriaLocalServiceUtil.getCriteria(lotid, CommissionConstants.CRITERIA_TECHNICAL);
+		for(Criteria criteria : criterias)
+		{
+			CriteriaValue criteriaValue = CriteriaValueLocalServiceUtil.getCriteriaValue(criteria.getCriteria_id(), userId, organizationid);
+			if(criteriaValue.getValue() == 0)
+			{
+				eval += criteriaValue.getValue();
+			}
+		}
+		double orgPrice = totalPrice(lotid, organizationid);
+		
+		double FS = 100*getMinTotalPrice()/orgPrice;
+		
+		double s = (FS*F)/100 + (eval*T)/100;
+		
+		return s;
 	}
 }

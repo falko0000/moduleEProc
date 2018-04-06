@@ -1,0 +1,9 @@
+Bundle-Name: ProfilPolzovatelej-api
+Bundle-SymbolicName: tj.profil.polzovatelej.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	tj.profil.polzovatelej.exception,\
+	tj.profil.polzovatelej.model,\
+	tj.profil.polzovatelej.service,\
+	tj.profil.polzovatelej.service.persistence
+-includeresource: META-INF/service.xml=../ProfilPolzovatelej-service/service.xml

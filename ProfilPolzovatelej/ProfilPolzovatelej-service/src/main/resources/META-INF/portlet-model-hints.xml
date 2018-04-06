@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="tj.profil.polzovatelej.model.profil_polzovatelej">
+		<field name="profil_polzovatelej_id" type="long" />
+		<field name="polzovatel_id" type="long" />
+		<field name="inicialy" type="String" />
+		<field name="kontaktnyj_telefon" type="String" />
+		<field name="je_pochta" type="String" />
+		<field name="sozdal" type="long" />
+		<field name="izmenil" type="long" />
+		<field name="data_sozdanija" type="Date" />
+		<field name="data_izmenenija" type="Date" />
+	</model>
+</model-hints>

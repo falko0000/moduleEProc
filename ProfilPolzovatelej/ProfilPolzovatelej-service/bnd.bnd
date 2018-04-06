@@ -1,0 +1,5 @@
+Bundle-Name: ProfilPolzovatelej-service
+Bundle-SymbolicName: tj.profil.polzovatelej.service
+Bundle-Version: 1.0.0
+Liferay-Require-SchemaVersion: 1.0.0
+Liferay-Service: true
